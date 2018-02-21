@@ -6,14 +6,14 @@ highlighter:      rouge
 permalink:        pretty
 
 # Setup
-title:            MinChun Shih
+title:            M.C. Shih
 tagline:          ''
 description:      ''
-url:              https://shihs.github.io/
-baseurl:          /blog/
+url:              https://shihs.github.io/blog
+baseurl:          /
 
 author:
-  name:           'MinChun Shih'
+  name:           'MC Shih'
   url:            
 
 paginate:         5
@@ -22,7 +22,7 @@ paginate:         5
 version:          2.1.0
 
 github:
-  repo:           https://github.com/Isweet/isweet.github.io
+  repo:           https://github.com/shihs/blog
 
 
 plugins:
