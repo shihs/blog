@@ -1,26 +1,25 @@
 # Dependencies
-markdown            : kramdown
-redcarpet:
-  extensions        : ["tables", "autolink", "strikethrough", "space_after_headers", "with_toc_data", "fenced_code_blocks"]
-highlighter         : rouge
-gems                : ["jekyll-paginate"]
+markdown:         kramdown
+highlighter:      rouge
 
 # Permalinks
-permalink           : pretty
+permalink:        pretty
 
 # Setup
-title               : Rhadow's Tech Note
-tagline             : 'JavaScript, front-end, and web development articles'
-description         : 'News, articles and reviews of a variety of web development frameworks and modules.'
-baseurl             : /blog
+title:            MinChun Shih
+tagline:          ''
+description:      ''
+url:              https://shihs.github.io
+baseurl:          /blog
 
-author              : Howard Chang
-name                : 'Howard Chang'
-url                 : https://rhadow.github.io/
+author:
+  name:           'MinChun Shih'
+  url:            
 
-paginate            : 5
+paginate:         5
 
 # Custom vars
-version             : 0.1.0
-twitter_username    : Rhadow3433
-github_username     : Rhadow
+version:          2.1.0
+
+github:
+  repo:           https://github.com/Isweet/isweet.github.io
