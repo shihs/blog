@@ -1,37 +1,26 @@
-title: Hello, world! I'm David Freeman
-description: > # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
-permalink: ':title/'
-baseurl: "/blog" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-site-twitter: #if your site has a twitter account, enter it here
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
 
-# Author Settings
-author: David Freeman # add your name
-author-img: david-freeman.jpg # add your photo
-about-author: I am a web developer focusing on front-end development. Always hungry to keep learning. # add description
-social-twitter: # add your Twitter handle
-social-facebook: # add your Facebook handle
-social-github: artemsheludko # add your Github handle
-social-linkedin: # add your Linkedin handle
-social-email: # add your Email address
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
 
-# Disqus
-discus-identifier: mr-brown # add your discus identifier
+# Setup
+title:            Hyde
+tagline:          'A Jekyll theme'
+description:      'A brazen two-column <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:              http://hyde.getpoole.com
+baseurl:          /blog
 
-# Tracker
-analytics: # Google Analytics
+author:
+  name:           'Mark Otto'
+  url:            https://twitter.com/mdo
 
-# Build Settings
-markdown: kramdown
-plugins:
-  - jekyll-sitemap
-  - jekyll-paginate
-  - jemoji
+paginate:         5
 
-paginate: 8
-paginate_path: "/page/:num"
+# Custom vars
+version:          2.1.0
 
-exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock"]
+github:
+  repo:           https://github.com/poole/hyde
