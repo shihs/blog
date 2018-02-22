@@ -75,6 +75,10 @@
       
         
       
+        
+          
+        
+      
 
       <a class="sidebar-nav-item" href="https://github.com/shihs/blog/archive/v2.1.0.zip">Download</a>
       <a class="sidebar-nav-item" href="https://github.com/shihs/blog">GitHub project</a>
@@ -91,84 +95,149 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2017/02/22/%E4%B8%AD%E6%96%87/">
-        中文
+      <a href="/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">
+        [r]設定r圖形字體
       </a>
     </h1>
 
-    <span class="post-date">22 Feb 2017</span>
+    <span class="post-date">24 Aug 2016</span>
 
-    <p>每天都會收到信並且要利用信中的附件整理資料，
-但這樣我在跑程式前還要手動去下載檔案，
-覺得實在太麻煩，
-所以找到了這個辦法！</p>
+    <p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
+以下的解法是針對windows方能使用。</p>
 
-<p>因為我的mail是gamil，
-所以以下的程式碼是針對gmail，
-在執行前要先<a href="http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/">打開imap</a>
-我主要是參考<a href="https://gist.github.com/jasonrdsouza/1674794">這裡</a></p>
+<p>1.使用windowsFonts函數將要使用的字體賦予一個值。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowsFonts</span><span class="p">(</span><span class="n">BL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowsFont</span><span class="p">(</span><span class="s2">"微軟正黑體"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">imaplib</span><span class="p">,</span> <span class="n">inspect</span>
-<span class="kn">import</span> <span class="nn">email</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">decode_header</span>
+<p>2.在圖形中設定family。
+(1)使用par()在最一開始設定。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
+</span><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
+     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
 
-<span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
-<span class="c">#與IMAP4 server連線，gmail要開啟IMAP</span>
-<span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
-<span class="c">#登入</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
-<span class="c">#選擇信箱標籤</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
-<span class="c">#找所有mail</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
+<p>(2)在plot中設定</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
+     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
 
-<span class="c">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
+<p>(3)在ggplot中設定</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"取值"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"頻數"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
 
-<span class="n">emailbody</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
-
-<span class="c">#找出含有附件的部分</span>
-<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
-		<span class="k">continue</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="k">continue</span>
-
-	<span class="c">#附件檔名</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>  
-	<span class="c">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-	<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
-		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
-
-		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
-			<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-			<span class="k">print</span> <span class="s">"attachement is downloaded!"</span>
-		<span class="k">else</span><span class="p">:</span>
-			<span class="k">print</span> <span class="s">"file is already exist!"</span>
-			
-<span class="c">#關閉連線與登出</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
-
-
-</code></pre></div></div>
+<p>其實，family後是可以直接放要設定的字體完整名稱，
+不需定windowsFonts，
+只是假如字體名稱很長，
+便不需要一再地打上那麼長的名稱，
+如此以來便也適用mac。</p>
 
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2017/02/22/test/">
-        Test
+      <a href="/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
+        Windows7自動排程
       </a>
     </h1>
 
-    <span class="post-date">22 Feb 2017</span>
+    <span class="post-date">17 Jul 2016</span>
+
+    <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8">工作排程，讓程式自動執行</a></p>
+
+<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
+
+<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
+        [r]使用r發送email
+      </a>
+    </h1>
+
+    <span class="post-date">17 Jul 2016</span>
+
+    <p>使用mailR package寫一個R的script，自動發信。</p>
+
+<p>以下幾個步驟，
+1.<a href="https://www.google.com/settings/security/lesssecureapps">啟用安全性較低的應用程式存取</a></p>
+
+<p>2.<a href="https://github.com/rpremraj/mailR">使用mailR package</a></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
+
+</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
+          </span><span class="c1">#收件者</span><span class="w">
+          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
+                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
+          </span><span class="c1">#標題</span><span class="w">
+          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
+          </span><span class="c1">#內文</span><span class="w">
+          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
+          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
+          </span><span class="c1">#夾帶檔案</span><span class="w">
+          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
+          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
+          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>另外，
+我其實還有查到gmailr這個package，
+但它有些bug，
+無法同時有信件內文又有夾帶檔案，
+所以目前找到最好的方式還是使用mailR。</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/07/17/R-R-batch/">
+        [r]r batch
+      </a>
+    </h1>
+
+    <span class="post-date">17 Jul 2016</span>
+
+    <p><a href="http://www.statmethods.net/interface/batch.html">R batch</a></p>
+
+<p>因為.R檔無法點兩下就能執行，
+所以儲存一個R batch，再使用工作排程設定時間，
+就可以在固定時間自動執行程式。</p>
+
+<p>以下是在windows中的寫法，
+必須要先給R儲存的位置。</p>
+
+<pre><code class="language-cmd">C:\Program Files\R\R-3.2.5\bin\R.exe" CMD BATCH "C:\Users\mypc\Desktop\myrscript.R"
+</code></pre>
+<p>將上面的程式碼貼在記事本，
+在將記事本副檔名存成.bat 就完成了。</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
+        [r]在r中使用system呼叫python
+      </a>
+    </h1>
+
+    <span class="post-date">08 Jul 2016</span>
 
     <p>我個人比較偏好使用R做所有的事情，
 但某些時候還是需要使用到python，
@@ -188,80 +257,11 @@
 
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2013/12/28/introducing-hyde/">
-        Introducing Hyde
-      </a>
-    </h1>
-
-    <span class="post-date">28 Dec 2013</span>
-
-    <p>Hyde is a brazen two-column <a href="http://jekyllrb.com">Jekyll</a> theme that pairs a prominent sidebar with uncomplicated content. It’s based on <a href="http://getpoole.com">Poole</a>, the Jekyll butler.</p>
-
-<h3 id="built-on-poole">Built on Poole</h3>
-
-<p>Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by <a href="https://twitter.com/mdo">@mdo</a>. Poole, and every theme built on it (like Hyde here) includes the following:</p>
-
-<ul>
-  <li>Complete Jekyll setup included (layouts, config, <a href="/404">404</a>, <a href="/atom.xml">RSS feed</a>, posts, and <a href="/about">example page</a>)</li>
-  <li>Mobile friendly design and development</li>
-  <li>Easily scalable text and component sizing with <code class="highlighter-rouge">rem</code> units in the CSS</li>
-  <li>Support for a wide gamut of HTML elements</li>
-  <li>Related posts (time-based, because Jekyll) below each post</li>
-  <li>Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)</li>
-</ul>
-
-<h3 id="hyde-features">Hyde features</h3>
-
-<p>In addition to the features of Poole, Hyde adds the following:</p>
-
-<ul>
-  <li>Sidebar includes support for textual modules and a dynamically generated navigation with active link support</li>
-  <li>Two orientations for content and sidebar, default (left sidebar) and <a href="https://github.com/poole/lanyon#reverse-layout">reverse</a> (right sidebar), available via <code class="highlighter-rouge">&lt;body&gt;</code> classes</li>
-  <li><a href="https://github.com/poole/hyde#themes">Eight optional color schemes</a>, available via <code class="highlighter-rouge">&lt;body&gt;</code> classes</li>
-</ul>
-
-<p><a href="https://github.com/poole/hyde#readme">Head to the readme</a> to learn more.</p>
-
-<h3 id="browser-support">Browser support</h3>
-
-<p>Hyde is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.</p>
-
-<h3 id="download">Download</h3>
-
-<p>Hyde is developed on and hosted with GitHub. Head to the <a href="https://github.com/poole/hyde">GitHub repository</a> for downloads, bug reports, and features requests.</p>
-
-<p>Thanks!</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2012/02/06/whats-jekyll/">
-        What's Jekyll?
-      </a>
-    </h1>
-
-    <span class="post-date">06 Feb 2012</span>
-
-    <p><a href="http://jekyllrb.com">Jekyll</a> is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From <a href="https://github.com/mojombo/jekyll/blob/master/README.markdown">the project’s readme</a>:</p>
-
-<blockquote>
-  <p>Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.</p>
-</blockquote>
-
-<p>It’s an immensely useful tool and one we encourage you to use here with Hyde.</p>
-
-<p>Find out more by <a href="https://github.com/mojombo/jekyll">visiting the project on GitHub</a>.</p>
-
-  </div>
-  
 </div>
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="/page2">Older</a>
   
   
     <span class="pagination-item newer">Newer</span>
