@@ -83,13 +83,13 @@ html {
   font-size: 2.7rem;
 }
 .lead {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /* Sidebar nav */
 .sidebar-nav {
   margin-bottom: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .sidebar-nav-item {
   display: block;
@@ -110,6 +110,7 @@ a.sidebar-nav-item:focus {
 .rights {
   font-size: 0.6rem;
 }
+
 
 /* Sticky sidebar
  *
