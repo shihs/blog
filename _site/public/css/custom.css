@@ -1,7 +1,11 @@
 /* Archives */
+.archive h3 {
+    margin-top: 1.2rem;
+}
 .archive li {
     list-style: none;
     padding: 0 0 15px 0;
+    margin-bottom: -.3rem;
 }
 .archive div {
     display: inline-block;
@@ -30,16 +34,5 @@
 .archive a:hover {
     color: #bf4d28;
     text-decoration: none;
-}
-.tag-cloud {
-    list-style: none;
-    padding: 0;
-    padding-left: 40px;
-    text-align: justify;
-    font-size: 16px;
-}
-.tag-cloud li {
-    display: inline-block;
-    margin: 0 12px 12px 0;
 }
 /* End of Archive */
