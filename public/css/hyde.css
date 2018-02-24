@@ -82,6 +82,9 @@ html {
   font-family: "Abril Fatface", serif;
   font-size: 2.5rem;
 }
+.lead {
+  font-size: 20px;
+}
 
 /* Sidebar nav */
 .sidebar-nav {
