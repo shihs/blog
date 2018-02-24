@@ -88,15 +88,15 @@ h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
 }
 h1 {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 h2 {
   margin-top: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 h3 {
   margin-top: 1.5rem;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 h4, h5, h6 {
   margin-top: 1rem;
@@ -137,7 +137,7 @@ hr {
 }
 
 abbr {
-  font-size: 85%;
+  font-size: 80%;
   font-weight: bold;
   color: #555;
   text-transform: uppercase;
@@ -154,7 +154,7 @@ pre {
 }
 code {
   padding: .25em .5em;
-  font-size: 85%;
+  font-size: .9rem;
   color: #bf616a;
   background-color: #f9f9f9;
   border-radius: 3px;
@@ -314,7 +314,7 @@ tbody tr:nth-child(odd) th {
   color: #505050;
 }
 .masthead-title small {
-  font-size: 75%;
+  font-size: 70%;
   font-weight: 400;
   color: #c0c0c0;
   letter-spacing: 0;
@@ -331,6 +331,7 @@ tbody tr:nth-child(odd) th {
 .page,
 .post {
   margin-bottom: 4em;
+  font-size: .9rem;
 }
 
 /* Blog post or page title */
@@ -347,9 +348,10 @@ tbody tr:nth-child(odd) th {
 /* Meta data line below post title */
 .post-date {
   display: block;
-  margin-top: -.5rem;
+  margin-top: -.3rem;
   margin-bottom: 1rem;
   color: #9a9a9a;
+  font-size: .8rem;
 }
 
 /* Related posts */

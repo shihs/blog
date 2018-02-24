@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "[R]在R中使用system呼叫python"
+title: "[R]在 R 中使用 system 呼叫 python"
+author: "Shihs"
 ---
 
 我個人比較偏好使用R做所有的事情，

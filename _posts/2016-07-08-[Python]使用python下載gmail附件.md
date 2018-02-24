@@ -1,6 +1,7 @@
 ---
 layout: post
-title: "[Python]使用python下載gmail"
+title: "[Python]使用 python 下載 gmail 附件"
+author: "Shihs"
 ---
 
 每天都會收到信並且要利用信中的附件整理資料，
