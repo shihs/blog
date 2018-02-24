@@ -1,3 +1,8 @@
+---
+layout: post
+title: "[R]在R中使用system呼叫python"
+---
+
 我個人比較偏好使用R做所有的事情，
 但某些時候還是需要使用到python，
 所以希望可以在R上呼叫python程式碼。

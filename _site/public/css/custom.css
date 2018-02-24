@@ -1,0 +1,45 @@
+/* Archives */
+.archive li {
+    list-style: none;
+    padding: 0 0 15px 0;
+}
+.archive div {
+    display: inline-block;
+}
+.archive .month {
+    width: 10%;
+    vertical-align: top;
+    color: #9a9a9a;
+}
+.archive .archive-post-title {
+    width: 88%;
+    line-height: 25px;
+}
+@media screen and (max-width: 480px) {
+    .archive .month {
+        width: 10%;
+        margin-right: 4%;
+    }
+    .archive .archive-post-title {
+        width: 84%;
+    }
+}
+.archive a {
+    color: #2a363b;
+}
+.archive a:hover {
+    color: #bf4d28;
+    text-decoration: none;
+}
+.tag-cloud {
+    list-style: none;
+    padding: 0;
+    padding-left: 40px;
+    text-align: justify;
+    font-size: 16px;
+}
+.tag-cloud li {
+    display: inline-block;
+    margin: 0 12px 12px 0;
+}
+/* End of Archive */
