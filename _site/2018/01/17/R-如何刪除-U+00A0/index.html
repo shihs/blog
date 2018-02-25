@@ -11,7 +11,7 @@
 
   <title>
     
-      About &middot; M.C. Shih
+      [R]如何刪除 <\U+00A0> &middot; M.C. Shih
     
   </title>
 
@@ -68,7 +68,7 @@
       
         
           
-            <a class="sidebar-nav-item active" href="/blog/about/">About</a>
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
           
         
       
@@ -112,38 +112,55 @@
 
 
     <div class="content container">
-      <div class="page">
-  <h1 class="page-title">About</h1>
-  <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+      <div class="post">
+  <h1 class="post-title">[R]如何刪除 <\U+00A0></h1>
+  <span class="post-date">January 17, 2018</span>
+  <p>在資料中有些含有空白的文字讀進R後會變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
+</code></pre></div></div>
+<p>而且不管用什麼方式都取代不了這個符號，
+這時候該怎麼辦呢？</p>
 
-<p>In the novel, <em>The Strange Case of Dr. Jeykll and Mr. Hyde</em>, Mr. Poole is Dr. Jekyll’s virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It’s made by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+<p>其實只要使用 “\U00A0”就可以了</p>
 
-<p>There are currently two themes built on Poole:</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
 
-<ul>
-  <li><a href="http://hyde.getpoole.com">Hyde</a></li>
-  <li><a href="http://lanyon.getpoole.com">Lanyon</a></li>
-</ul>
+</div>
 
-<p>Learn more and contribute on <a href="https://github.com/poole">GitHub</a>.</p>
-
-<h2 id="setup">Setup</h2>
-
-<p>Some fun facts about the setup of this project include:</p>
-
-<ul>
-  <li>Built for <a href="http://jekyllrb.com">Jekyll</a></li>
-  <li>Developed on GitHub and hosted for free on <a href="https://pages.github.com">GitHub Pages</a></li>
-  <li>Coded with <a href="http://sublimetext.com">Sublime Text 2</a>, an amazing code editor</li>
-  <li>Designed and developed while listening to music like <a href="https://soundcloud.com/maddecent/sets/blood-bros-series">Blood Bros Trilogy</a></li>
-</ul>
-
-<p>Have questions or suggestions? Feel free to <a href="https://github.com/poole/issues/new">open an issue on GitHub</a> or <a href="https://twitter.com/mdo">ask me on Twitter</a>.</p>
-
-<p>Thanks for reading!</p>
-
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/24/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
+            <small>February 24, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>February 17, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+            [Python][爬蟲]防止被ban，代理IP怎麼用?
+            <small>February 7, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
 
     </div>

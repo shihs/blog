@@ -92,6 +92,14 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
 
       <!-- <a class="sidebar-nav-item" href="https://github.com/shihs/blog/archive/v2.1.0.zip">Download</a>
       <a class="sidebar-nav-item" href="https://github.com/shihs/blog">GitHub project</a> -->
@@ -108,145 +116,240 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
-        [R]使用 R 發送gmail Email
+      <a href="/blog/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
+        [Tutorial]Computer Networking筆記(16-21)
       </a>
     </h1>
 
-    <!-- <span class="post-date">17 Jul 2016</span> -->
-    <span class="post-date">Posted by Shihs on July 17, 2016</span>
-    <p>使用mailR package寫一個R的script，自動發信。</p>
+    <!-- <span class="post-date">24 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 24, 2018</span>
+    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
-<p>以下幾個步驟，<br />
-1.<a href="https://www.google.com/settings/security/lesssecureapps">啟用安全性較低的應用程式存取</a><br />
-2.<a href="https://github.com/rpremraj/mailR">使用mailR package</a></p>
+<h2 id="osi-model"><strong>OSI Model</strong></h2>
+<p><a href="https://zh.wikipedia.org/wiki/OSI模型">OSI Model- Open System Interconnection Reference Model</a><br />
+總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
+<p><a href="https://tw.voicetube.com/videos/20018">這有另外一個我覺得還不錯的影片</a></p>
 
-</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
-          </span><span class="c1">#收件者</span><span class="w">
-          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
-                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
-          </span><span class="c1">#標題</span><span class="w">
-          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
-          </span><span class="c1">#內文</span><span class="w">
-          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
-          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
-          </span><span class="c1">#夾帶檔案</span><span class="w">
-          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
-          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
-          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+<h2 id="modem"><strong>Modem</strong></h2>
+<p>Modem就是我們說的<a href="https://zh.wikipedia.org/wiki/调制解调器">數據機</a>。<br />
+It’s device that connects the network to the Internet.<br />
+It converges digital signals from router(or any other devices) to analog signals.<br />
+簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br />
+電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br /></p>
 
-</span></code></pre></div></div>
+<h2 id="router"><strong>Router</strong></h2>
+<p>Router是<a href="https://zh.wikipedia.org/wiki/路由器">路由器</a>。<br />
+Router joins network together.<br /></p>
 
-<p>另外，
-我其實還有查到gmailr這個package，
-但它有些bug，
-無法同時有信件內文又有夾帶檔案，
-所以目前找到最好的方式還是使用mailR。</p>
+<h2 id="switch"><strong>Switch</strong></h2>
+<p>Switch是分享器。<br />
+假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br /></p>
+
+<p><a href="https://www.mobile01.com/topicdetail.php?f=507&amp;t=1631479">路由器和分享器差在哪</a></p>
+
+<h2 id="repeaterextender"><strong>Repeater/Extender</strong></h2>
+<p>Repeater/Extender是中繼器。<br />
+在一個比較大的空間裡，路由器的信號會因為距離而所差別，<br />
+這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。<br />
+即便是接網路線，如果網路線過長，訊號也會變差，<br />
+所以如果使用中繼器可以解決距離較遠的問題。<br />
+而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
+
 
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/">
-        [Python]使用 python 下載 gmail 附件
+      <a href="/blog/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">
+        [[Tutorial]Computer Networking筆記(12-15)
       </a>
     </h1>
 
-    <!-- <span class="post-date">08 Jul 2016</span> -->
-    <span class="post-date">Posted by Shihs on July 8, 2016</span>
-    <p>每天都會收到信並且要利用信中的附件整理資料，
-但這樣我在跑程式前還要手動去下載檔案，
-覺得實在太麻煩，
-所以找到了這個辦法！</p>
+    <!-- <span class="post-date">20 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 20, 2018</span>
+    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
-<p>因為我的mail是gamil，
-所以以下的程式碼是針對gmail，
-在執行前要先<a href="http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/">打開imap</a>
-我主要是參考<a href="https://gist.github.com/jasonrdsouza/1674794">這裡</a></p>
+<h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
+<p><a href="https://zh.wikipedia.org/wiki/网络拓扑">Topology/Layout</a>是網路之間連接的方式，wiki上翻成「網路拓樸」。<br />
+每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">imaplib</span><span class="p">,</span> <span class="n">inspect</span>
-<span class="kn">import</span> <span class="nn">email</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">decode_header</span>
+<p>這個課程介紹三種方式：</p>
+<ol>
+  <li>Bus Topology(Tutorial 12)</li>
+  <li>Ring Topology(Tutorial 13)</li>
+  <li>Star Topology(Tutorial 14)</li>
+</ol>
 
-<span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
-<span class="c">#與IMAP4 server連線，gmail要開啟IMAP</span>
-<span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
-<span class="c">#登入</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
-<span class="c">#選擇信箱標籤</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
-<span class="c">#找所有mail</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
+<p><strong>1. Bus Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/匯流排拓撲">Bus Topology</a>是最簡單的一種連接方式，最主要中間有一條主幹，<br />
+其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br />
+才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br /></p>
 
-<span class="c">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
+<p>這樣的優點就是，簡單而且便宜，<br />
+適合使用在小範圍的網絡內。<br /></p>
 
-<span class="n">emailbody</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
+<p>但缺點是，只有主幹上出了問題，整個網路可能就會出問題。<br /></p>
 
-<span class="c">#找出含有附件的部分</span>
-<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
-		<span class="k">continue</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="k">continue</span>
+<p><strong>2. Ring Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/環狀拓撲">Ring Topology</a>與Bus Topology不同的是，它是一個沒有終端環狀，<br />
+所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br />
+一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br /></p>
 
-	<span class="c">#附件檔名</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>  
-	<span class="c">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-	<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
-		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+<p>這樣的優點就是，它不需要Bus Topology必須的terminator，<br />
+而且如果是雙環，也比較不會有主幹出問題，<br />
+整個網路就壞掉的問題。<br /></p>
 
-		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
-			<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-			<span class="k">print</span> <span class="s">"attachement is downloaded!"</span>
-		<span class="k">else</span><span class="p">:</span>
-			<span class="k">print</span> <span class="s">"file is already exist!"</span>
-			
-<span class="c">#關閉連線與登出</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+<p>但缺點是，<br />
+它比Bus Topology貴。<br /></p>
+
+<p><strong>3. Star Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/星型网">Star Topology</a>可能是家裡最常見的一種連結方式。<br />
+Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br />
+例如，如果中心是rounter，它會在連結internet。<br /></p>
+
+<p>這種topology的優點是，價格低、easy to expand。<br />
+另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。<br /></p>
+
+<p>但缺點是，因為所有nodes都連結中心，<br />
+也就是所有的nodes全部都必須要依賴中心，<br />
+所以只要中心的device壞掉，整個連線就會全部失效。<br /></p>
+
+<p><strong>4.Mesh Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/网状网络">Mesh Topology</a>所有nodes之間都互相連結，就像個網狀。<br />
+這種方式比較會在MAN或WAN見到，不會在LAN使用。<br /></p>
+
+<p>優點是，因為每個node之間都互相連結，<br />
+所以假如有兩個nodes之間的連結出了問題，<br />
+還可以透過其他nodes傳遞訊號，<br />
+這樣在傳送訊息上也比較保險。<br /></p>
+
+<p>缺點是，因為每個node之間都要連接，就會需要有很多的cable，<br />
+這時候成本就會提高。有越多的node，成本就會越高。<br />
+另一方面，因為一個node需要和其他所有nodes連結，<br />
+這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，<br />
+且每一次增加node可能都需要增加NIC。<br /></p>
 
 
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
+        [R]read.csv出現編碼錯誤訊息
+      </a>
+    </h1>
+
+    <!-- <span class="post-date">17 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 17, 2018</span>
+    <p>在讀取csv檔案時出現錯誤訊息</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+ 
+</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>會出現這樣的錯誤訊息通常是因為編碼問題。</p>
+
+<p>先將這份檔案丟到Notepad++，
+可以看到右下方顯示這份檔案的編碼，
+(這份檔案是UTF-8)
+所以只要加上
+<strong>fileEncoding =”UTF-8”</strong>
+就可以解決這個問題了。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">
+        [R]如何刪除 <\U+00A0>
+      </a>
+    </h1>
+
+    <!-- <span class="post-date">17 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 17, 2018</span>
+    <p>在資料中有些含有空白的文字讀進R後會變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
+<p>而且不管用什麼方式都取代不了這個符號，
+這時候該怎麼辦呢？</p>
+
+<p>其實只要使用 “\U00A0”就可以了</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
 
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
-        [R]在 R 中使用 system 呼叫 python
+      <a href="/blog/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">
+        [[Tutorial]Computer Networking筆記(9-11)
       </a>
     </h1>
 
-    <!-- <span class="post-date">08 Jul 2016</span> -->
-    <span class="post-date">Posted by Shihs on July 8, 2016</span>
-    <p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
+    <!-- <span class="post-date">15 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 15, 2018</span>
+    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
-<p>一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
+<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
+(just google it, you can find tons of pictures of NIC)</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
+<p>字典翻譯的意思是，協議草案、禮儀。<br />
+在network裡，protocol是「網路傳輸協定」。</p>
 
-<p>這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！</p>
+<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
+他用男生想要認識一個女生來舉例。</p>
+
+<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
+<ul>
+  <li>Hey  -&gt;</li>
+  <li>&lt;-  Hello</li>
+  <li>Can I get your number?   -&gt;</li>
+  <li>&lt;- 1234-567</li>
+</ul>
+
+<p>這樣的對話中會有幾個規則，</p>
+<ol>
+  <li>一次只會有一個人說話</li>
+  <li>男生說話以後，會預期女生會回話</li>
+  <li>問句會有預期的回答(specific messages receive specific responses)<br />
+符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
+</ol>
+
+<p>同樣的，用在computer commnication也要有一些規則。<br />
+Protocol are the rules for successful communication among two parties.</p>
+
+<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
+<ul>
+  <li>Can I connect to you?   -&gt;</li>
+  <li>&lt;-   Yes, you have my permission.</li>
+  <li>GET file google.com   -&gt;</li>
+  <li>&lt;-  sends file</li>
+</ul>
+
+<p>在computer networking裡，最重要的protocol是<br />
+<strong>format</strong>和<strong>order</strong> of massage<br />
+就像是上面的請求順序，<br />
+如果在mac還沒提出request，<br />
+sever就送出網頁，這肯定很怪的吧！<br /></p>
+
+<p>protocol有很多種，
+但我們先來看以下這個例子。<br />
+這是個網址，<br />
+http:// www.thenewboston.org /index.php</p>
+
+<ul>
+  <li><strong>http</strong>: protocol</li>
+  <li><strong>www.thenewboston.org</strong>: sever name</li>
+  <li><strong>index.php</strong>: file</li>
+</ul>
 
 
   </div>
@@ -255,7 +358,7 @@
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="/blog/page3">Older</a>
   
   
     

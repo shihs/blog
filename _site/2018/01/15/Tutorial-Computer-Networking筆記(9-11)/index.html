@@ -11,7 +11,7 @@
 
   <title>
     
-      About &middot; M.C. Shih
+      [[Tutorial]Computer Networking筆記(9-11) &middot; M.C. Shih
     
   </title>
 
@@ -68,7 +68,7 @@
       
         
           
-            <a class="sidebar-nav-item active" href="/blog/about/">About</a>
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
           
         
       
@@ -112,38 +112,101 @@
 
 
     <div class="content container">
-      <div class="page">
-  <h1 class="page-title">About</h1>
-  <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+      <div class="post">
+  <h1 class="post-title">[[Tutorial]Computer Networking筆記(9-11)</h1>
+  <span class="post-date">January 15, 2018</span>
+  <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
-<p>In the novel, <em>The Strange Case of Dr. Jeykll and Mr. Hyde</em>, Mr. Poole is Dr. Jekyll’s virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It’s made by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
+<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
+(just google it, you can find tons of pictures of NIC)</p>
 
-<p>There are currently two themes built on Poole:</p>
+<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
+<p>字典翻譯的意思是，協議草案、禮儀。<br />
+在network裡，protocol是「網路傳輸協定」。</p>
 
+<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
+他用男生想要認識一個女生來舉例。</p>
+
+<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
 <ul>
-  <li><a href="http://hyde.getpoole.com">Hyde</a></li>
-  <li><a href="http://lanyon.getpoole.com">Lanyon</a></li>
+  <li>Hey  -&gt;</li>
+  <li>&lt;-  Hello</li>
+  <li>Can I get your number?   -&gt;</li>
+  <li>&lt;- 1234-567</li>
 </ul>
 
-<p>Learn more and contribute on <a href="https://github.com/poole">GitHub</a>.</p>
+<p>這樣的對話中會有幾個規則，</p>
+<ol>
+  <li>一次只會有一個人說話</li>
+  <li>男生說話以後，會預期女生會回話</li>
+  <li>問句會有預期的回答(specific messages receive specific responses)<br />
+符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
+</ol>
 
-<h2 id="setup">Setup</h2>
+<p>同樣的，用在computer commnication也要有一些規則。<br />
+Protocol are the rules for successful communication among two parties.</p>
 
-<p>Some fun facts about the setup of this project include:</p>
-
+<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
 <ul>
-  <li>Built for <a href="http://jekyllrb.com">Jekyll</a></li>
-  <li>Developed on GitHub and hosted for free on <a href="https://pages.github.com">GitHub Pages</a></li>
-  <li>Coded with <a href="http://sublimetext.com">Sublime Text 2</a>, an amazing code editor</li>
-  <li>Designed and developed while listening to music like <a href="https://soundcloud.com/maddecent/sets/blood-bros-series">Blood Bros Trilogy</a></li>
+  <li>Can I connect to you?   -&gt;</li>
+  <li>&lt;-   Yes, you have my permission.</li>
+  <li>GET file google.com   -&gt;</li>
+  <li>&lt;-  sends file</li>
 </ul>
 
-<p>Have questions or suggestions? Feel free to <a href="https://github.com/poole/issues/new">open an issue on GitHub</a> or <a href="https://twitter.com/mdo">ask me on Twitter</a>.</p>
+<p>在computer networking裡，最重要的protocol是<br />
+<strong>format</strong>和<strong>order</strong> of massage<br />
+就像是上面的請求順序，<br />
+如果在mac還沒提出request，<br />
+sever就送出網頁，這肯定很怪的吧！<br /></p>
 
-<p>Thanks for reading!</p>
+<p>protocol有很多種，
+但我們先來看以下這個例子。<br />
+這是個網址，<br />
+http:// www.thenewboston.org /index.php</p>
 
+<ul>
+  <li><strong>http</strong>: protocol</li>
+  <li><strong>www.thenewboston.org</strong>: sever name</li>
+  <li><strong>index.php</strong>: file</li>
+</ul>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/24/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
+            <small>February 24, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>February 17, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+            [Python][爬蟲]防止被ban，代理IP怎麼用?
+            <small>February 7, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
 
     </div>

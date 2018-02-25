@@ -11,7 +11,7 @@
 
   <title>
     
-      Windows7 自動排程 &middot; M.C. Shih
+      [Python][爬蟲]防止被ban，代理IP怎麼用? &middot; M.C. Shih
     
   </title>
 
@@ -113,13 +113,83 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">Windows7 自動排程</h1>
-  <span class="post-date">July 17, 2016</span>
-  <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8">工作排程，讓程式自動執行</a></p>
+  <h1 class="post-title">[Python][爬蟲]防止被ban，代理IP怎麼用?</h1>
+  <span class="post-date">February 7, 2018</span>
+  <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
 
-<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
+<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests">參考</a><br />
+這裡主要介紹如何使用IP代理。</p>
 
-<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
+<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
+<p><a href="http://gohom.win/2016/01/20/proxy-type/">參考</a></p>
+<ol>
+  <li>
+    <p>透明代理(Transparent Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Your IP</p>
+  </li>
+  <li>
+    <p>匿名代理(Anonymous Proxy)<br />
+REMOTE_ADDR = proxy IP<br />
+HTTP_VIA = proxy IP<br />
+HTTP_X_FORWARDED_FOR = proxy IP</p>
+  </li>
+  <li>
+    <p>混淆代理(Distorting Proxies)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Random IP address</p>
+  </li>
+  <li>
+    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = not determined<br />
+HTTP_X_FORWARDED_FOR = not determined<br /></p>
+  </li>
+</ol>
+
+<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
+<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
+<ol>
+  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
+  <li>http://www.proxyserverlist24.top/<br /></li>
+</ol>
+
+<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py">程式碼</a></p>
+
+<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
+<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+
+<span class="p">}</span>
+<span class="c">###注意</span>
+<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
+<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
+
+
+</code></pre></div></div>
+
+<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
+要爬取網站的時候，先讀取該檔案，
+只要被擋，就random使用proxy替換proxies。</p>
+
+<p>如果所有proxy都用完再重新爬取，
+網站上的proxy都會不停更換，
+所以只要更新proxy庫就好。</p>
 
 
 </div>
@@ -148,9 +218,9 @@
     
       <li>
         <h3>
-          <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-            [Python][爬蟲]防止被ban，代理IP怎麼用?
-            <small>February 7, 2018</small>
+          <a href="/blog/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
+            [Python]呼叫其他.py的function
+            <small>February 2, 2018</small>
           </a>
         </h3>
       </li>

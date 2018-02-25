@@ -92,6 +92,14 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
 
       <!-- <a class="sidebar-nav-item" href="https://github.com/shihs/blog/archive/v2.1.0.zip">Download</a>
       <a class="sidebar-nav-item" href="https://github.com/shihs/blog">GitHub project</a> -->
@@ -108,19 +116,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2018/02/25/Python-%E6%B8%AC%E8%A9%A6/">
-        [Python]測試
-      </a>
-    </h1>
-
-    <!-- <span class="post-date">25 Feb 2018</span> -->
-    <span class="post-date">Posted by Shihs on February 25, 2018</span>
-    
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/blog/2018/02/24/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
         [R]使用 R 寄Outlook Email
       </a>
@@ -134,90 +129,271 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">
-        [R]設定 R 圖形字體
+      <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+        [Python][爬蟲]requests 的編碼
       </a>
     </h1>
 
-    <!-- <span class="post-date">24 Aug 2016</span> -->
-    <span class="post-date">Posted by Shihs on August 24, 2016</span>
-    <p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
-以下的解法是針對windows方能使用。</p>
+    <!-- <span class="post-date">17 Feb 2018</span> -->
+    <span class="post-date">Posted by Shihs on February 17, 2018</span>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
 
-<p>1.使用windowsFonts函數將要使用的字體賦予一個值。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowsFonts</span><span class="p">(</span><span class="n">BL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowsFont</span><span class="p">(</span><span class="s2">"微軟正黑體"</span><span class="p">))</span><span class="w">
-</span></code></pre></div></div>
-
-<p>2.在圖形中設定family。<br />
-(1)使用par()在最一開始設定。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>(2)在plot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>(3)在ggplot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"取值"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"頻數"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">))</span><span class="w">
-</span></code></pre></div></div>
-
-<p>其實，family後是可以直接放要設定的字體完整名稱，
-不需定windowsFonts，
-只是假如字體名稱很長，
-便不需要一再地打上那麼長的名稱，
-如此以來便也適用mac。</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2016/07/17/R-R-batch/">
-        [R]R batch
-      </a>
-    </h1>
-
-    <!-- <span class="post-date">17 Jul 2016</span> -->
-    <span class="post-date">Posted by Shihs on July 17, 2016</span>
-    <p><a href="http://www.statmethods.net/interface/batch.html">R batch</a></p>
-
-<p>因為.R檔無法點兩下就能執行，
-所以儲存一個R batch，再使用工作排程設定時間，
-就可以在固定時間自動執行程式。</p>
-
-<p>以下是在windows中的寫法，
-必須要先給R儲存的位置，後面放R script的位置。</p>
-
-<pre><code class="language-cmd">C:\Program Files\R\R-3.2.5\bin\R.exe" CMD BATCH "C:\Users\mypc\Desktop\myrscript.R"
-</code></pre>
-<p>將上面的程式碼貼在記事本(確認R的版本和位置)，
-再將記事本副檔名存成.bat 就完成了。</p>
+<p><strong>rep.text    ： unicode 型別</strong><br />
+1.是由 requests 以 rep.encoding 自動轉換的！<br />
+2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
 
 
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
-        Windows7 自動排程
+      <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+        [Python][爬蟲]防止被ban，代理IP怎麼用?
       </a>
     </h1>
 
-    <!-- <span class="post-date">17 Jul 2016</span> -->
-    <span class="post-date">Posted by Shihs on July 17, 2016</span>
-    <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8">工作排程，讓程式自動執行</a></p>
+    <!-- <span class="post-date">07 Feb 2018</span> -->
+    <span class="post-date">Posted by Shihs on February 7, 2018</span>
+    <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
 
-<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
+<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests">參考</a><br />
+這裡主要介紹如何使用IP代理。</p>
 
-<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
+<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
+<p><a href="http://gohom.win/2016/01/20/proxy-type/">參考</a></p>
+<ol>
+  <li>
+    <p>透明代理(Transparent Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Your IP</p>
+  </li>
+  <li>
+    <p>匿名代理(Anonymous Proxy)<br />
+REMOTE_ADDR = proxy IP<br />
+HTTP_VIA = proxy IP<br />
+HTTP_X_FORWARDED_FOR = proxy IP</p>
+  </li>
+  <li>
+    <p>混淆代理(Distorting Proxies)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Random IP address</p>
+  </li>
+  <li>
+    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = not determined<br />
+HTTP_X_FORWARDED_FOR = not determined<br /></p>
+  </li>
+</ol>
+
+<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
+<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
+<ol>
+  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
+  <li>http://www.proxyserverlist24.top/<br /></li>
+</ol>
+
+<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py">程式碼</a></p>
+
+<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
+<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+
+<span class="p">}</span>
+<span class="c">###注意</span>
+<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
+<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
+
+
+</code></pre></div></div>
+
+<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
+要爬取網站的時候，先讀取該檔案，
+只要被擋，就random使用proxy替換proxies。</p>
+
+<p>如果所有proxy都用完再重新爬取，
+網站上的proxy都會不停更換，
+所以只要更新proxy庫就好。</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
+        [Python]呼叫其他.py的function
+      </a>
+    </h1>
+
+    <!-- <span class="post-date">02 Feb 2018</span> -->
+    <span class="post-date">Posted by Shihs on February 2, 2018</span>
+    <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
+<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
+	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
+
+</code></pre></div></div>
+
+<p>有兩種情況，<br />
+<strong>1. 這兩個檔案在同一個folder底下</strong><br />
+—main.py<br />
+—fun.py<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
+<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
+想要呼叫的fun.py在function這個folder底下<br />
+—main.py<br />
+—function—fun.py<br /></p>
+
+<p>這時候main.py可以有兩種寫法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
+<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
+<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
+<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
+<span class="c"># it's true, it's empty. But it's still important!</span>
+</code></pre></div></div>
+
+<p>那如果今天fun.py在function的下一層folder呢?<br />
+—main.py<br />
+—function—another—fun.py<br />
+只要把main.py改成<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
+<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+
+<span class="c">#或者也可以這樣寫</span>
+
+<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但最重要的是，<br />
+<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
+        [Tutorial]Computer Networking筆記(22-26)
+      </a>
+    </h1>
+
+    <!-- <span class="post-date">25 Jan 2018</span> -->
+    <span class="post-date">Posted by Shihs on January 25, 2018</span>
+    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">詳細範例</a><br /></p>
 
 
   </div>
