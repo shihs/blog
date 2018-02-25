@@ -16,7 +16,7 @@ title: Archives
     {% endunless %}
 
     <li>    
-        <div class="month">{{ post.date | date:"%b" }}</div>
+        <div class="month">{{ post.date | date:"%b %-d" }}</div>
         <div class="archive-post-title"><a href="{{ post.url | relative_url}}">{{ post.title }}</a></div>
     </li>
   {% endfor %}

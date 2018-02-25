@@ -4,13 +4,22 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-02-24T21:56:14+08:00</updated>
+ <updated>2018-02-25T19:55:08+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
-   <name>MC Shih</name>
+   <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[Python]測試</title>
+   <link href="http://localhost:4000/2018/02/25/Python-%E6%B8%AC%E8%A9%A6/"/>
+   <updated>2018-02-25T19:43:00+08:00</updated>
+   <id>http://localhost:4000/2018/02/25/[Python]測試</id>
+   <content type="html">
+</content>
+ </entry>
  
  <entry>
    <title>[R]使用 R 寄Outlook Email</title>
@@ -24,7 +33,7 @@
  <entry>
    <title>[R]設定 R 圖形字體</title>
    <link href="http://localhost:4000/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/"/>
-   <updated>2016-08-24T00:00:00+08:00</updated>
+   <updated>2016-08-24T15:31:00+08:00</updated>
    <id>http://localhost:4000/2016/08/24/[R]設定R圖形字體</id>
    <content type="html">&lt;p&gt;一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
 以下的解法是針對windows方能使用。&lt;/p&gt;
@@ -64,9 +73,31 @@
  </entry>
  
  <entry>
+   <title>[R]R batch</title>
+   <link href="http://localhost:4000/2016/07/17/R-R-batch/"/>
+   <updated>2016-07-17T11:11:00+08:00</updated>
+   <id>http://localhost:4000/2016/07/17/[R]R batch</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.statmethods.net/interface/batch.html&quot;&gt;R batch&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;因為.R檔無法點兩下就能執行，
+所以儲存一個R batch，再使用工作排程設定時間，
+就可以在固定時間自動執行程式。&lt;/p&gt;
+
+&lt;p&gt;以下是在windows中的寫法，
+必須要先給R儲存的位置，後面放R script的位置。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;C:\Program Files\R\R-3.2.5\bin\R.exe&quot; CMD BATCH &quot;C:\Users\mypc\Desktop\myrscript.R&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;將上面的程式碼貼在記事本(確認R的版本和位置)，
+再將記事本副檔名存成.bat 就完成了。&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
    <title>Windows7 自動排程</title>
    <link href="http://localhost:4000/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/"/>
-   <updated>2016-07-17T00:00:00+08:00</updated>
+   <updated>2016-07-17T11:06:00+08:00</updated>
    <id>http://localhost:4000/2016/07/17/windows7自動排程</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8&quot;&gt;工作排程，讓程式自動執行&lt;/a&gt;&lt;/p&gt;
 
@@ -80,7 +111,7 @@
  <entry>
    <title>[R]使用 R 發送gmail Email</title>
    <link href="http://localhost:4000/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/"/>
-   <updated>2016-07-17T00:00:00+08:00</updated>
+   <updated>2016-07-17T10:58:00+08:00</updated>
    <id>http://localhost:4000/2016/07/17/[R]使用R發送email</id>
    <content type="html">&lt;p&gt;使用mailR package寫一個R的script，自動發信。&lt;/p&gt;
 
@@ -120,54 +151,9 @@
  </entry>
  
  <entry>
-   <title>[R]R batch</title>
-   <link href="http://localhost:4000/2016/07/17/R-R-batch/"/>
-   <updated>2016-07-17T00:00:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/17/[R]R batch</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.statmethods.net/interface/batch.html&quot;&gt;R batch&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;因為.R檔無法點兩下就能執行，
-所以儲存一個R batch，再使用工作排程設定時間，
-就可以在固定時間自動執行程式。&lt;/p&gt;
-
-&lt;p&gt;以下是在windows中的寫法，
-必須要先給R儲存的位置，後面放R script的位置。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;C:\Program Files\R\R-3.2.5\bin\R.exe&quot; CMD BATCH &quot;C:\Users\mypc\Desktop\myrscript.R&quot;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;將上面的程式碼貼在記事本(確認R的版本和位置)，
-再將記事本副檔名存成.bat 就完成了。&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>[R]在 R 中使用 system 呼叫 python</title>
-   <link href="http://localhost:4000/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/"/>
-   <updated>2016-07-08T00:00:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/08/[R]在R中使用system呼叫python</id>
-   <content type="html">&lt;p&gt;我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。&lt;/p&gt;
-
-&lt;p&gt;一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！&lt;/p&gt;
-
-&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
    <title>[Python]使用 python 下載 gmail 附件</title>
    <link href="http://localhost:4000/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/"/>
-   <updated>2016-07-08T00:00:00+08:00</updated>
+   <updated>2016-07-08T21:02:00+08:00</updated>
    <id>http://localhost:4000/2016/07/08/[Python]使用python下載gmail附件</id>
    <content type="html">&lt;p&gt;每天都會收到信並且要利用信中的附件整理資料，
 但這樣我在跑程式前還要手動去下載檔案，
@@ -229,6 +215,29 @@
 
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]在 R 中使用 system 呼叫 python</title>
+   <link href="http://localhost:4000/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/"/>
+   <updated>2016-07-08T20:36:00+08:00</updated>
+   <id>http://localhost:4000/2016/07/08/[R]在R中使用system呼叫python</id>
+   <content type="html">&lt;p&gt;我個人比較偏好使用R做所有的事情，
+但某些時候還是需要使用到python，
+所以希望可以在R上呼叫python程式碼。&lt;/p&gt;
+
+&lt;p&gt;一開始我找到了rPython這個library，
+但它似乎無法在windows上使用……
+所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這個辦法是呼叫系統函數，
+就像是在cmd上面打的指令一樣，
+而且在mac上也可以執行！&lt;/p&gt;
+
 </content>
  </entry>
  

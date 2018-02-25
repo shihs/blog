@@ -52,7 +52,7 @@
           M.C. Shih
         </a>
       </h1>
-      <p class="lead"></p>
+      <p class="lead">I share some stuff.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -108,27 +108,47 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
-        [R]在 R 中使用 system 呼叫 python
+      <a href="/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
+        [R]使用 R 發送gmail Email
       </a>
     </h1>
 
-    <span class="post-date">Posted by Shihs on 08 Jul 2016</span>
-    <p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
+    <!-- <span class="post-date">17 Jul 2016</span> -->
+    <span class="post-date">Posted by Shihs on July 17, 2016</span>
+    <p>使用mailR package寫一個R的script，自動發信。</p>
 
-<p>一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+<p>以下幾個步驟，<br />
+1.<a href="https://www.google.com/settings/security/lesssecureapps">啟用安全性較低的應用程式存取</a><br />
+2.<a href="https://github.com/rpremraj/mailR">使用mailR package</a></p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
+
+</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
+          </span><span class="c1">#收件者</span><span class="w">
+          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
+                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
+          </span><span class="c1">#標題</span><span class="w">
+          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
+          </span><span class="c1">#內文</span><span class="w">
+          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
+          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
+          </span><span class="c1">#夾帶檔案</span><span class="w">
+          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
+          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
+                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
+          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
+          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
 </span></code></pre></div></div>
 
-<p>這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！</p>
-
+<p>另外，
+我其實還有查到gmailr這個package，
+但它有些bug，
+無法同時有信件內文又有夾帶檔案，
+所以目前找到最好的方式還是使用mailR。</p>
 
   </div>
   
@@ -139,7 +159,8 @@
       </a>
     </h1>
 
-    <span class="post-date">Posted by Shihs on 08 Jul 2016</span>
+    <!-- <span class="post-date">08 Jul 2016</span> -->
+    <span class="post-date">Posted by Shihs on July 8, 2016</span>
     <p>每天都會收到信並且要利用信中的附件整理資料，
 但這樣我在跑程式前還要手動去下載檔案，
 覺得實在太麻煩，
@@ -200,6 +221,33 @@
 
 
 </code></pre></div></div>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
+        [R]在 R 中使用 system 呼叫 python
+      </a>
+    </h1>
+
+    <!-- <span class="post-date">08 Jul 2016</span> -->
+    <span class="post-date">Posted by Shihs on July 8, 2016</span>
+    <p>我個人比較偏好使用R做所有的事情，
+但某些時候還是需要使用到python，
+所以希望可以在R上呼叫python程式碼。</p>
+
+<p>一開始我找到了rPython這個library，
+但它似乎無法在windows上使用……
+所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>這個辦法是呼叫系統函數，
+就像是在cmd上面打的指令一樣，
+而且在mac上也可以執行！</p>
+
 
   </div>
   
