@@ -11,7 +11,7 @@
 
   <title>
     
-      [Python][爬蟲]requests 的編碼 &middot; M.C. Shih
+      [R]使用 R 寄Outlook Email &middot; M.C. Shih
     
   </title>
 
@@ -113,16 +113,52 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[Python][爬蟲]requests 的編碼</h1>
-  <span class="post-date">February 17, 2018</span>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
+  <h1 class="post-title">[R]使用 R 寄Outlook Email</h1>
+  <span class="post-date">February 26, 2018</span>
+  <p>之前有介紹過使用mailR這個套件夾帶檔案使用gmail信箱發送信件，<br />
+<a href="https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">看這裡</a>。</p>
 
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
+<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
+<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook">參考</a></p>
 
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
+</span><span class="c1">## init com api</span><span class="w">
+</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## create an email </span><span class="w">
+</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
+</span><span class="c1">## configure  email parameter </span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
+</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
+</span><span class="c1"># First:text</span><span class="w">
+</span><span class="c1"># outMail[["body"]] = </span><span class="w">
+</span><span class="c1"># "Dear reciever,</span><span class="w">
+</span><span class="c1">#                      </span><span class="w">
+</span><span class="c1"># Please see attached.</span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># Best regards,</span><span class="w">
+</span><span class="c1"># Sender"</span><span class="w">
+
+</span><span class="c1"># Second:html text</span><span class="w">
+</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+</span><span class="s1">'
+&lt;p&gt;Dear reciever,&lt;/p&gt;
+&lt;p&gt;Please see attached.&lt;/p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;p&gt;Best regards,
+&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
+
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
+
+</span><span class="c1"># attachment</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## send it                     </span><span class="w">
+</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
+
+
+</span></code></pre></div></div>
 
 </div>
 
@@ -141,9 +177,9 @@
     
       <li>
         <h3>
-          <a href="/blog/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
-            [R]使用 R 寄Outlook Email
-            <small>Feb 26, 2018</small>
+          <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>Feb 17, 2018</small>
           </a>
         </h3>
       </li>

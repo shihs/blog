@@ -11,7 +11,7 @@
 
   <title>
     
-      M.C. Shih &middot; Quirky
+      [R]如何讀取Excel檔案 &middot; M.C. Shih
     
   </title>
 
@@ -56,7 +56,7 @@
     </div>
 
     <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active" href="/blog/">Home</a>
+      <a class="sidebar-nav-item" href="/blog/">Home</a>
 
       
 
@@ -112,17 +112,10 @@
 
 
     <div class="content container">
-      <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
-        [R]如何讀取Excel檔案
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on February 26, 2018</span>
-    <p>很多資料會使用excel檔案儲存，<br />
+      <div class="post">
+  <h1 class="post-title">[R]如何讀取Excel檔案</h1>
+  <span class="post-date">February 26, 2018</span>
+  <p>很多資料會使用excel檔案儲存，<br />
 這邊介紹主要三種常用的附檔名。<br /></p>
 <ol>
   <li>csv</li>
@@ -260,261 +253,42 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
 
 <p>其他更多 library 的 function 都可以去CRAN找哦！</p>
 
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
-        [R]使用 R 寄Outlook Email
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on February 26, 2018</span>
-    <p>之前有介紹過使用mailR這個套件夾帶檔案使用gmail信箱發送信件，<br />
-<a href="https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">看這裡</a>。</p>
-
-<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
-<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook">參考</a></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
-</span><span class="c1">## init com api</span><span class="w">
-</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## create an email </span><span class="w">
-</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="c1">## configure  email parameter </span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
-</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
-</span><span class="c1"># First:text</span><span class="w">
-</span><span class="c1"># outMail[["body"]] = </span><span class="w">
-</span><span class="c1"># "Dear reciever,</span><span class="w">
-</span><span class="c1">#                      </span><span class="w">
-</span><span class="c1"># Please see attached.</span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># Best regards,</span><span class="w">
-</span><span class="c1"># Sender"</span><span class="w">
-
-</span><span class="c1"># Second:html text</span><span class="w">
-</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
-</span><span class="s1">'
-&lt;p&gt;Dear reciever,&lt;/p&gt;
-&lt;p&gt;Please see attached.&lt;/p&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;p&gt;Best regards,
-&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
-
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
-
-</span><span class="c1"># attachment</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## send it                     </span><span class="w">
-</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
-
-
-</span></code></pre></div></div>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
-        [Python][爬蟲]requests 的編碼
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on February 17, 2018</span>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
-
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
-
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-        [Python][爬蟲]防止被ban，代理IP怎麼用?
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on February 7, 2018</span>
-    <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-<!--break-->
-
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
-
-<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
-<p><a href="http://gohom.win/2016/01/20/proxy-type/">參考</a></p>
-<ol>
-  <li>
-    <p>透明代理(Transparent Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Your IP</p>
-  </li>
-  <li>
-    <p>匿名代理(Anonymous Proxy)<br />
-REMOTE_ADDR = proxy IP<br />
-HTTP_VIA = proxy IP<br />
-HTTP_X_FORWARDED_FOR = proxy IP</p>
-  </li>
-  <li>
-    <p>混淆代理(Distorting Proxies)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Random IP address</p>
-  </li>
-  <li>
-    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = not determined<br />
-HTTP_X_FORWARDED_FOR = not determined<br /></p>
-  </li>
-</ol>
-
-<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
-<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
-<ol>
-  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
-  <li>http://www.proxyserverlist24.top/<br /></li>
-</ol>
-
-<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py">程式碼</a></p>
-
-<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-
-<span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
-
-</code></pre></div></div>
-
-<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
-要爬取網站的時候，先讀取該檔案，
-只要被擋，就random使用proxy替換proxies。</p>
-
-<p>如果所有proxy都用完再重新爬取，
-網站上的proxy都會不停更換，
-所以只要更新proxy庫就好。</p>
-
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
-        [Python]呼叫其他.py的function
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on February 2, 2018</span>
-    <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
-<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
-	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
-
-</code></pre></div></div>
-
-<p>有兩種情況，<br />
-<strong>1. 這兩個檔案在同一個folder底下</strong><br />
-—main.py<br />
-—fun.py<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
-<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-
-</code></pre></div></div>
-
-<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
-想要呼叫的fun.py在function這個folder底下<br />
-—main.py<br />
-—function—fun.py<br /></p>
-
-<p>這時候main.py可以有兩種寫法</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
-<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
-<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
-<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
-<span class="c"># it's true, it's empty. But it's still important!</span>
-</code></pre></div></div>
-
-<p>那如果今天fun.py在function的下一層folder呢?<br />
-—main.py<br />
-—function—another—fun.py<br />
-只要把main.py改成<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
-<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-
-<span class="c">#或者也可以這樣寫</span>
-
-<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-<p>但最重要的是，<br />
-<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
-
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/blog/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>Feb 17, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+            [Python][爬蟲]防止被ban，代理IP怎麼用?
+            <small>Feb 7, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
+
     </div>
 
   </body>

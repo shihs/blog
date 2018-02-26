@@ -4,8 +4,7 @@ title: Home
 ---
 
 <div class="posts">
-  <!-- {% for post in paginator.posts %} -->
-  {% for post in site.posts limit:5 %}
+  {% for post in paginator.posts %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ post.url | relative_url }}">
@@ -14,11 +13,7 @@ title: Home
     </h1>
 
     <span class="post-date">Posted by {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}</span>
-    <!--{{ post.content }} -->
-      {{ post.content | split:'<!--break-->' | first }}
-      {% if post.content contains '<!--break-->' %}
-        <a href="{{ post.url | relative_url }}">read more</a>
-    {% endif %}
+    {{ post.content }}
   </div>
   {% endfor %}
 </div>

@@ -5,7 +5,7 @@ date: 2018-02-07 11:47
 author: "Shihs"
 ---
 
-<!--break-->
+
 
 ## **如何讓爬蟲程式不被ban?**
 1. 動態設置user agent

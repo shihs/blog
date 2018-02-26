@@ -116,46 +116,93 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
+        [Tutorial]Computer Networking筆記(22-26)
+      </a>
+    </h1>
+
+    <span class="post-date">Posted by Shihs on January 25, 2018</span>
+    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">詳細範例</a><br /></p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
         [Tutorial]Computer Networking筆記(16-21)
       </a>
     </h1>
 
     <span class="post-date">Posted by Shihs on January 24, 2018</span>
-    <!--<p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
-
-<h2 id="osi-model"><strong>OSI Model</strong></h2>
-<p><a href="https://zh.wikipedia.org/wiki/OSI模型">OSI Model- Open System Interconnection Reference Model</a><br />
-總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。</p>
-
-<p><a href="https://tw.voicetube.com/videos/20018">這有另外一個我覺得還不錯的影片</a></p>
-
-<h2 id="modem"><strong>Modem</strong></h2>
-<p>Modem就是我們說的<a href="https://zh.wikipedia.org/wiki/调制解调器">數據機</a>。<br />
-It’s device that connects the network to the Internet.<br />
-It converges digital signals from router(or any other devices) to analog signals.<br />
-簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br />
-電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br /></p>
-
-<h2 id="router"><strong>Router</strong></h2>
-<p>Router是<a href="https://zh.wikipedia.org/wiki/路由器">路由器</a>。<br />
-Router joins network together.<br /></p>
-
-<h2 id="switch"><strong>Switch</strong></h2>
-<p>Switch是分享器。<br />
-假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br /></p>
-
-<p><a href="https://www.mobile01.com/topicdetail.php?f=507&amp;t=1631479">路由器和分享器差在哪</a></p>
-
-<h2 id="repeaterextender"><strong>Repeater/Extender</strong></h2>
-<p>Repeater/Extender是中繼器。<br />
-在一個比較大的空間裡，路由器的信號會因為距離而所差別，<br />
-這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。<br />
-即便是接網路線，如果網路線過長，訊號也會變差，<br />
-所以如果使用中繼器可以解決距離較遠的問題。<br />
-而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
-
- -->
     <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
 <h2 id="osi-model"><strong>OSI Model</strong></h2>
@@ -190,7 +237,6 @@ Router joins network together.<br /></p>
 而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
 
 
-    
   </div>
   
   <div class="post">
@@ -201,69 +247,6 @@ Router joins network together.<br /></p>
     </h1>
 
     <span class="post-date">Posted by Shihs on January 20, 2018</span>
-    <!--<p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
-
-<h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
-<p><a href="https://zh.wikipedia.org/wiki/网络拓扑">Topology/Layout</a>是網路之間連接的方式，wiki上翻成「網路拓樸」。<br />
-每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。</p>
-
-<p>這個課程介紹三種方式：</p>
-<ol>
-  <li>Bus Topology(Tutorial 12)</li>
-  <li>Ring Topology(Tutorial 13)</li>
-  <li>Star Topology(Tutorial 14)</li>
-</ol>
-
-<p><strong>1. Bus Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/匯流排拓撲">Bus Topology</a>是最簡單的一種連接方式，最主要中間有一條主幹，<br />
-其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br />
-才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br /></p>
-
-<p>這樣的優點就是，簡單而且便宜，<br />
-適合使用在小範圍的網絡內。<br /></p>
-
-<p>但缺點是，只有主幹上出了問題，整個網路可能就會出問題。<br /></p>
-
-<p><strong>2. Ring Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/環狀拓撲">Ring Topology</a>與Bus Topology不同的是，它是一個沒有終端環狀，<br />
-所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br />
-一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br /></p>
-
-<p>這樣的優點就是，它不需要Bus Topology必須的terminator，<br />
-而且如果是雙環，也比較不會有主幹出問題，<br />
-整個網路就壞掉的問題。<br /></p>
-
-<p>但缺點是，<br />
-它比Bus Topology貴。<br /></p>
-
-<p><strong>3. Star Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/星型网">Star Topology</a>可能是家裡最常見的一種連結方式。<br />
-Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br />
-例如，如果中心是rounter，它會在連結internet。<br /></p>
-
-<p>這種topology的優點是，價格低、easy to expand。<br />
-另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。<br /></p>
-
-<p>但缺點是，因為所有nodes都連結中心，<br />
-也就是所有的nodes全部都必須要依賴中心，<br />
-所以只要中心的device壞掉，整個連線就會全部失效。<br /></p>
-
-<p><strong>4.Mesh Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/网状网络">Mesh Topology</a>所有nodes之間都互相連結，就像個網狀。<br />
-這種方式比較會在MAN或WAN見到，不會在LAN使用。<br /></p>
-
-<p>優點是，因為每個node之間都互相連結，<br />
-所以假如有兩個nodes之間的連結出了問題，<br />
-還可以透過其他nodes傳遞訊號，<br />
-這樣在傳送訊息上也比較保險。<br /></p>
-
-<p>缺點是，因為每個node之間都要連接，就會需要有很多的cable，<br />
-這時候成本就會提高。有越多的node，成本就會越高。<br />
-另一方面，因為一個node需要和其他所有nodes連結，<br />
-這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，<br />
-且每一次增加node可能都需要增加NIC。<br /></p>
-
- -->
     <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
 <h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
@@ -327,7 +310,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 且每一次增加node可能都需要增加NIC。<br /></p>
 
 
-    
   </div>
   
   <div class="post">
@@ -338,24 +320,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
     </h1>
 
     <span class="post-date">Posted by Shihs on January 17, 2018</span>
-    <!--<p>在讀取csv檔案時出現錯誤訊息</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
- 
-</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
-</span></code></pre></div></div>
-
-<p>會出現這樣的錯誤訊息通常是因為編碼問題。</p>
-
-<p>先將這份檔案丟到Notepad++，
-可以看到右下方顯示這份檔案的編碼，
-(這份檔案是UTF-8)
-所以只要加上
-<strong>fileEncoding =”UTF-8”</strong>
-就可以解決這個問題了。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-
- -->
     <p>在讀取csv檔案時出現錯誤訊息</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
  
@@ -374,7 +338,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 </span></code></pre></div></div>
 
 
-    
   </div>
   
   <div class="post">
@@ -385,18 +348,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
     </h1>
 
     <span class="post-date">Posted by Shihs on January 17, 2018</span>
-    <!--<p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
-</code></pre></div></div>
-<p>而且不管用什麼方式都取代不了這個符號，
-這時候該怎麼辦呢？</p>
-
-<p>其實只要使用 “\U00A0”就可以了</p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
- -->
     <p>在資料中有些含有空白的文字讀進R後會變成</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
@@ -409,134 +360,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">
-        [[Tutorial]Computer Networking筆記(9-11)
-      </a>
-    </h1>
-
-    <span class="post-date">Posted by Shihs on January 15, 2018</span>
-    <!--<p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
-
-<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
-<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
-(just google it, you can find tons of pictures of NIC)</p>
-
-<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
-<p>字典翻譯的意思是，協議草案、禮儀。<br />
-在network裡，protocol是「網路傳輸協定」。</p>
-
-<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
-他用男生想要認識一個女生來舉例。</p>
-
-<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
-<ul>
-  <li>Hey  -&gt;</li>
-  <li>&lt;-  Hello</li>
-  <li>Can I get your number?   -&gt;</li>
-  <li>&lt;- 1234-567</li>
-</ul>
-
-<p>這樣的對話中會有幾個規則，</p>
-<ol>
-  <li>一次只會有一個人說話</li>
-  <li>男生說話以後，會預期女生會回話</li>
-  <li>問句會有預期的回答(specific messages receive specific responses)<br />
-符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
-</ol>
-
-<p>同樣的，用在computer commnication也要有一些規則。<br />
-Protocol are the rules for successful communication among two parties.</p>
-
-<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
-<ul>
-  <li>Can I connect to you?   -&gt;</li>
-  <li>&lt;-   Yes, you have my permission.</li>
-  <li>GET file google.com   -&gt;</li>
-  <li>&lt;-  sends file</li>
-</ul>
-
-<p>在computer networking裡，最重要的protocol是<br />
-<strong>format</strong>和<strong>order</strong> of massage<br />
-就像是上面的請求順序，<br />
-如果在mac還沒提出request，<br />
-sever就送出網頁，這肯定很怪的吧！<br /></p>
-
-<p>protocol有很多種，
-但我們先來看以下這個例子。<br />
-這是個網址，<br />
-http:// www.thenewboston.org /index.php</p>
-
-<ul>
-  <li><strong>http</strong>: protocol</li>
-  <li><strong>www.thenewboston.org</strong>: sever name</li>
-  <li><strong>index.php</strong>: file</li>
-</ul>
-
- -->
-    <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
-
-<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
-<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
-(just google it, you can find tons of pictures of NIC)</p>
-
-<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
-<p>字典翻譯的意思是，協議草案、禮儀。<br />
-在network裡，protocol是「網路傳輸協定」。</p>
-
-<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
-他用男生想要認識一個女生來舉例。</p>
-
-<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
-<ul>
-  <li>Hey  -&gt;</li>
-  <li>&lt;-  Hello</li>
-  <li>Can I get your number?   -&gt;</li>
-  <li>&lt;- 1234-567</li>
-</ul>
-
-<p>這樣的對話中會有幾個規則，</p>
-<ol>
-  <li>一次只會有一個人說話</li>
-  <li>男生說話以後，會預期女生會回話</li>
-  <li>問句會有預期的回答(specific messages receive specific responses)<br />
-符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
-</ol>
-
-<p>同樣的，用在computer commnication也要有一些規則。<br />
-Protocol are the rules for successful communication among two parties.</p>
-
-<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
-<ul>
-  <li>Can I connect to you?   -&gt;</li>
-  <li>&lt;-   Yes, you have my permission.</li>
-  <li>GET file google.com   -&gt;</li>
-  <li>&lt;-  sends file</li>
-</ul>
-
-<p>在computer networking裡，最重要的protocol是<br />
-<strong>format</strong>和<strong>order</strong> of massage<br />
-就像是上面的請求順序，<br />
-如果在mac還沒提出request，<br />
-sever就送出網頁，這肯定很怪的吧！<br /></p>
-
-<p>protocol有很多種，
-但我們先來看以下這個例子。<br />
-這是個網址，<br />
-http:// www.thenewboston.org /index.php</p>
-
-<ul>
-  <li><strong>http</strong>: protocol</li>
-  <li><strong>www.thenewboston.org</strong>: sever name</li>
-  <li><strong>index.php</strong>: file</li>
-</ul>
-
-
-    
   </div>
   
 </div>
