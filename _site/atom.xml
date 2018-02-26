@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-02-26T07:52:57+08:00</updated>
+ <updated>2018-02-26T08:04:12+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -45,11 +45,11 @@
    <content type="html">&lt;h2 id=&quot;如何讓爬蟲程式不被ban&quot;&gt;&lt;strong&gt;如何讓爬蟲程式不被ban?&lt;/strong&gt;&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;動態設置user agent&lt;/li&gt;
-  &lt;li&gt;使用代理IP&lt;/li&gt;
+  &lt;li&gt;使用代理IP
+&lt;!--break--&gt;
+&lt;a href=&quot;http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;
+這裡主要介紹如何使用IP代理。&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;
-這裡主要介紹如何使用IP代理。&lt;/p&gt;
 
 &lt;h2 id=&quot;proxy代理類型&quot;&gt;&lt;strong&gt;proxy代理類型&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;http://gohom.win/2016/01/20/proxy-type/&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;

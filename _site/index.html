@@ -121,10 +121,12 @@
       </a>
     </h1>
 
-    <!-- <span class="post-date">24 Feb 2018</span> -->
     <span class="post-date">Posted by Shihs on February 24, 2018</span>
+    <!--<p>之前介紹過用</p>
+ -->
     <p>之前介紹過用</p>
 
+    
   </div>
   
   <div class="post">
@@ -134,8 +136,16 @@
       </a>
     </h1>
 
-    <!-- <span class="post-date">17 Feb 2018</span> -->
     <span class="post-date">Posted by Shihs on February 17, 2018</span>
+    <!--<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
+
+<p><strong>rep.text    ： unicode 型別</strong><br />
+1.是由 requests 以 rep.encoding 自動轉換的！<br />
+2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
+
+ -->
     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
 </code></pre></div></div>
 <p><strong>rep.content ： bytes 型別</strong></p>
@@ -145,6 +155,7 @@
 2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
 
 
+    
   </div>
   
   <div class="post">
@@ -154,16 +165,15 @@
       </a>
     </h1>
 
-    <!-- <span class="post-date">07 Feb 2018</span> -->
     <span class="post-date">Posted by Shihs on February 7, 2018</span>
-    <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+    <!--<h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
 <ol>
   <li>動態設置user agent</li>
-  <li>使用代理IP</li>
+  <li>使用代理IP
+<!--break-->
+<a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests">參考</a><br />
+這裡主要介紹如何使用IP代理。</li>
 </ol>
-
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
 
 <h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
 <p><a href="http://gohom.win/2016/01/20/proxy-type/">參考</a></p>
@@ -232,7 +242,15 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
 網站上的proxy都會不停更換，
 所以只要更新proxy庫就好。</p>
 
+ -->
+    <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP
 
+    
+      <a href="/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">read more</a>
+    
   </div>
   
   <div class="post">
@@ -242,8 +260,77 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
       </a>
     </h1>
 
-    <!-- <span class="post-date">02 Feb 2018</span> -->
     <span class="post-date">Posted by Shihs on February 2, 2018</span>
+    <!--<p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
+<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
+	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
+
+</code></pre></div></div>
+
+<p>有兩種情況，<br />
+<strong>1. 這兩個檔案在同一個folder底下</strong><br />
+—main.py<br />
+—fun.py<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
+<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
+想要呼叫的fun.py在function這個folder底下<br />
+—main.py<br />
+—function—fun.py<br /></p>
+
+<p>這時候main.py可以有兩種寫法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
+<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
+<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
+<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
+<span class="c"># it's true, it's empty. But it's still important!</span>
+</code></pre></div></div>
+
+<p>那如果今天fun.py在function的下一層folder呢?<br />
+—main.py<br />
+—function—another—fun.py<br />
+只要把main.py改成<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
+<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+
+<span class="c">#或者也可以這樣寫</span>
+
+<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但最重要的是，<br />
+<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+
+ -->
     <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
 要怎麼做呢？</p>
 
@@ -314,6 +401,7 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
 <strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
 
 
+    
   </div>
   
   <div class="post">
@@ -323,8 +411,78 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
       </a>
     </h1>
 
-    <!-- <span class="post-date">25 Jan 2018</span> -->
     <span class="post-date">Posted by Shihs on January 25, 2018</span>
+    <!--<p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">詳細範例</a><br /></p>
+
+ -->
     <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Newworking筆記</a></p>
 
 <h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
@@ -396,6 +554,7 @@ device不只傳送自己的ip，也傳送subnet mask來表示network id和host i
 <a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">詳細範例</a><br /></p>
 
 
+    
   </div>
   
 </div>

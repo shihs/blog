@@ -5,9 +5,13 @@ date: 2018-02-07 11:47
 author: "Shihs"
 ---
 
+<!--break-->
+
 ## **如何讓爬蟲程式不被ban?**
 1. 動態設置user agent
 2. 使用代理IP
+
+<!--break-->
 
 [參考](http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests)<br>
 這裡主要介紹如何使用IP代理。
