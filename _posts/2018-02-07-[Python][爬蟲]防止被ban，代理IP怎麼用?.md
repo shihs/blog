@@ -11,7 +11,6 @@ author: "Shihs"
 1. 動態設置user agent
 2. 使用代理IP
 
-<!--break-->
 
 [參考](http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests)<br>
 這裡主要介紹如何使用IP代理。

@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-02-26T19:20:10+08:00</updated>
+ <updated>2018-02-28T16:54:15+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -144,7 +144,7 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
 
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;3xls&quot;&gt;&lt;em&gt;3.xls&lt;/em&gt;&lt;br /&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;3xls&quot;&gt;3.xls&lt;br /&gt;&lt;/h2&gt;
 &lt;p&gt;xls用的是&lt;a href=&quot;https://cran.r-project.org/web/packages/readxl/readxl.pdf&quot;&gt;readxl&lt;/a&gt;套件，是R界有名的ggplot2作者&lt;a href=&quot;http://hadley.nz/&quot;&gt;Hadley Wickham&lt;/a&gt;所寫。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;下載完後只要一行指令就好，&lt;/p&gt;
@@ -235,8 +235,6 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
   &lt;li&gt;動態設置user agent&lt;/li&gt;
   &lt;li&gt;使用代理IP&lt;/li&gt;
 &lt;/ol&gt;
-
-&lt;!--break--&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;
 這裡主要介紹如何使用IP代理。&lt;/p&gt;
@@ -508,7 +506,7 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>[[Tutorial]Computer Networking筆記(12-15)</title>
+   <title>[Tutorial]Computer Networking筆記(12-15)</title>
    <link href="http://localhost:4000/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/"/>
    <updated>2018-01-20T16:26:00+08:00</updated>
    <id>http://localhost:4000/2018/01/20/[Tutorial]Computer Networking筆記(12-15)</id>
@@ -622,7 +620,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
  </entry>
  
  <entry>
-   <title>[[Tutorial]Computer Networking筆記(9-11)</title>
+   <title>[Tutorial]Computer Networking筆記(9-11)</title>
    <link href="http://localhost:4000/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/"/>
    <updated>2018-01-15T22:40:00+08:00</updated>
    <id>http://localhost:4000/2018/01/15/[Tutorial]Computer Networking筆記(9-11)</id>
@@ -687,7 +685,7 @@ http:// www.thenewboston.org /index.php&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>[Python]Google翻譯API接口-library googletrnas</title>
+   <title>[Python]Google 翻譯 API 接口 googletrnas</title>
    <link href="http://localhost:4000/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/"/>
    <updated>2018-01-15T22:00:00+08:00</updated>
    <id>http://localhost:4000/2018/01/15/[Python]Google翻譯API接口-library googletrnas</id>
@@ -720,6 +718,694 @@ sudo pip install googletrans
 &lt;p&gt;根據說明文件，這個套件可能會有不穩定的問題
 找到有人&lt;a href=&quot;https://hk.saowen.com/a/4c76af2381e3a60e86f7c4b934a21faebad8b2e7b4a4131cb7c2889afcea6479&quot;&gt;直接爬google翻譯的程式碼&lt;/a&gt;
 但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Tutorial]Computer Networking筆記(1-8)</title>
+   <link href="http://localhost:4000/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/"/>
+   <updated>2018-01-09T15:27:00+08:00</updated>
+   <id>http://localhost:4000/2018/01/09/[Tutorial]Computer Networking筆記(1-8)</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;1what-is-computer-networking&quot;&gt;&lt;strong&gt;1.What is Computer Networking?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;各裝置(&lt;em&gt;devices&lt;/em&gt;)之間的連結&lt;br /&gt;
+裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個&lt;strong&gt;&lt;em&gt;Node&lt;/em&gt;&lt;/strong&gt;。&lt;br /&gt;
+連結：可以使用cable、wireless、copper wire等等，可以稱為&lt;strong&gt;&lt;em&gt;communications media&lt;/em&gt;&lt;/strong&gt;。&lt;br /&gt;
+Internet(網路)就是一種computer network&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;computer nework的目的是為了要資料傳輸、資料交換，&lt;br /&gt;
+這裡的資料可以是，documents、pictures、videos等等。&lt;/p&gt;
+
+&lt;p&gt;computer newworking的兩個重點就是，&lt;strong&gt;&lt;em&gt;Nodes&lt;/em&gt;&lt;/strong&gt;和&lt;strong&gt;&lt;em&gt;Communications Media&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2types-of-networks&quot;&gt;&lt;strong&gt;2.Types of Networks&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;LAN&lt;/em&gt;&lt;/strong&gt;(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;MAN&lt;/em&gt;&lt;/strong&gt;(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市&lt;br /&gt;
+&lt;strong&gt;&lt;em&gt;WAN&lt;/em&gt;&lt;/strong&gt;(Wide Area Network)：&amp;gt;30 miles的網絡連結，整個國家之間、跨國之間的連結&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3how-the-internet-works&quot;&gt;&lt;strong&gt;3.How the Internet works?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？&lt;br /&gt;
+如果以上面computer network的邏輯來看，&lt;br /&gt;
+其他電腦可以連結到我的電腦，看到我的個人網站。&lt;br /&gt;
+但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，&lt;br /&gt;
+所以實際上，要連到個人網站是透過&lt;strong&gt;&lt;em&gt;server&lt;/em&gt;&lt;/strong&gt;。&lt;br /&gt;
+server is a special computer that everyone can access it.&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;我將個人網站建置(store)在server，&lt;br /&gt;
+其他人要看到我的網站，&lt;br /&gt;
+會在browser上打上網址，&lt;br /&gt;
+這時候就會向server提出request，&lt;br /&gt;
+sever接受到request會回傳data，這些data會是程式碼，&lt;br /&gt;
+而browser會將這些程式碼轉成我們看得懂的網站。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;通常建置網頁這樣的server我們稱為，&lt;strong&gt;&lt;em&gt;web server&lt;/em&gt;&lt;/strong&gt;。&lt;br /&gt;
+像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，&lt;br /&gt;
+所以這個server就必須要有很大的memory，&lt;br /&gt;
+才能負荷這樣的使用流量。&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;4client-and-host&quot;&gt;&lt;strong&gt;4.Client and Host&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;根據上面提到的例子，&lt;br /&gt;
+使用PC的browser向sever提出request，&lt;br /&gt;
+然後server會提供給data給PC的browser。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;PC接收資料，而server提供資料，&lt;br /&gt;
+PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向</title>
+   <link href="http://localhost:4000/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/"/>
+   <updated>2018-01-08T15:12:00+08:00</updated>
+   <id>http://localhost:4000/2018/01/08/[Python][爬蟲]URL沒有HTTP:HTTPS與網址重新導向</id>
+   <content type="html">&lt;p&gt;這次要爬的網址長得像這樣&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;hazyfairyland.blogspot.tw&lt;/li&gt;
+  &lt;li&gt;cartersoshkosh.tw&lt;/li&gt;
+  &lt;li&gt;yungmaun.com.tw&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;沒有www也沒有&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE&quot;&gt;http/https&lt;/a&gt;，&lt;br /&gt;
+如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，&lt;br /&gt;
+但如果是使用request就會產生錯誤訊息。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;這時候該怎麼辦呢？&lt;/p&gt;
+
+&lt;p&gt;其實只要在前方加上”http://”就行了，&lt;br /&gt;
+若其實該網址是”https//”， request也會自動重新導向。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;假如所有的網址都是沒有www，&lt;br /&gt;
+就直接在所有url前方加上”http://”就好了。&lt;br /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;cartersoshkosh.tw&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;timeout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;		
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+			
+    &lt;span class=&quot;c&quot;&gt;# catch requests.exceptions.MissingSchema error, add &quot;http://&quot; in the front&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;exceptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MissingSchema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;
+       
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# print the final url&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;history&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# print how many redirections it has gone throgh&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python]Read and Write CSV file</title>
+   <link href="http://localhost:4000/2018/01/08/Python-Read-and-Write-CSV-file/"/>
+   <updated>2018-01-08T11:32:00+08:00</updated>
+   <id>http://localhost:4000/2018/01/08/[Python] Read and Write CSV file</id>
+   <content type="html">&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;csv&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# read csv file&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;rb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;
+    
+
+
+
+&lt;span class=&quot;c&quot;&gt;# write csv file&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;data1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;data3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;data4&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# list &lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;file.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writerows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]如何爬取網頁中js生成的部分</title>
+   <link href="http://localhost:4000/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/"/>
+   <updated>2017-08-18T11:14:00+08:00</updated>
+   <id>http://localhost:4000/2017/08/18/[Python][爬蟲]如何爬取網頁中js生成的部分</id>
+   <content type="html">&lt;p&gt;這次想要爬取的是&lt;a href=&quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot;&gt;2017年汽車技術展會&lt;/a&gt;的參展廠商名單。&lt;/p&gt;
+
+&lt;p&gt;網頁長得像這樣，
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/nYLZLEUgSQKEr6NcE1lI_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在load網頁的時候可以發現，「AUTOMOTIVE WORLD」這個框框會比較慢才跑出來，(可以按重新整裡查看)
+這時候就可以猜測網頁的這個部份是js生成的。&lt;/p&gt;
+
+&lt;p&gt;同樣的，使用右鍵「檢查元素」來查看在load這個網頁的過程發生了什麼事。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/larcwggRn6FbWCLYL1rA_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;一般來說Network的第一個就會是我們要找的內容，
+這裡是「Exhibitor/」，查看Headers的General，
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/QUmMTlxTwmt8yAQAVlxb_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;
+可以發現就是url就是原本的頁面。&lt;/p&gt;
+
+&lt;p&gt;如果去抓取網頁，&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;會發現完全抓不到廠商名單的tag，
+這就是因為，
+那一個區塊是js另外生成的，
+所以要去找另外生成的頁面。&lt;/p&gt;
+
+&lt;p&gt;回到「檢查元素」的Network，
+看看有沒有什麼可疑對象，
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/YHWc9omST2SYb4hBRXmF_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這時候發現一個type是document的ExhiList，
+點進去發現長得像這樣，
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/Yg3xAxdQAaq1yslM19XG_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;將&lt;a href=&quot;http://jan2017.tems-system.com/ExhiSearch/AUTO/eng/ExhiList&quot;&gt;網址&lt;/a&gt;丟到網址列，
+果然，就得到了我們要的部分了！&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/tree/master/2017%E5%B9%B4%E6%B1%BD%E8%BB%8A%E6%8A%80%E8%A1%93%E5%B1%95%E6%9C%83&quot;&gt;完整程式碼&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Git] 提交一個更新</title>
+   <link href="http://localhost:4000/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/"/>
+   <updated>2017-07-26T15:25:00+08:00</updated>
+   <id>http://localhost:4000/2017/07/26/[Git] 提交一個更新</id>
+   <content type="html">&lt;p&gt;以下要介紹最基本的同步，
+檔案在本機被修改或是增加後push到github。&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;1.檢視所有檔案狀態&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;$ git status  #修改或是增加的檔案會呈現紅字
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;2.告知git需要commit的檔案&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;$ git add &amp;lt;file&amp;gt;  #提交一個新增加的檔案
+$ git add -A  #stages All
+$ git add .  #stages new and modified, without deleted
+$ git add -u  #stages modified and deleted, without new
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;add完後用 &lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt; 會發現原本的紅字變成綠字
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;3.commit變化&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;$ git commit
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;這時候需要記錄提交的訊息
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;4.push同步&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;$ git push
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;主要流程，
+&lt;code class=&quot;highlighter-rouge&quot;&gt;增加、修改檔案&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git push&lt;/code&gt;
+透過&lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;可以查看目前的狀態&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]如何下載 zip 檔</title>
+   <link href="http://localhost:4000/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/"/>
+   <updated>2017-07-25T11:17:00+08:00</updated>
+   <id>http://localhost:4000/2017/07/25/[Python][爬蟲]如何下載zip檔</id>
+   <content type="html">&lt;p&gt;這裡要示範使用三個不同的package下載zip檔。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib2&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'http://www.blog.pythonlibrary.org/wp-content/uploads/2012/06/wxDbViewer.zip'&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;downloading with urllib&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;urllib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlretrieve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;code.zip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;downloading with urllib2&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;code2.zip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;downloading with requests&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;code3.zip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wb&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://dzone.com/articles/how-download-file-python&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Excel][VBA]寄出內文含圖檔的outlook信件</title>
+   <link href="http://localhost:4000/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/"/>
+   <updated>2017-07-05T16:12:00+08:00</updated>
+   <id>http://localhost:4000/2017/07/05/[Excel][VBA]outlook信件內文含圖檔</id>
+   <content type="html">&lt;p&gt;這裡要介紹如何使用Excel VBA&lt;br /&gt;
+在信件內容包含截取sheet中的特定欄位區塊，&lt;br /&gt;
+並將此區塊變為圖檔包含在內文中寄出。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;現在要截取一份長這樣的檔案&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2007909/E6x1745kT82DMCqRbLq2_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;
+有兩種方法。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;第一種方法是，&lt;br /&gt;
+先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。&lt;br /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-VBA&quot;&gt;Sub PrintScreen()
+
+      '複製工作表要存圖檔的範圍
+        Sheets(&quot;Sheet1&quot;).Select
+        Set rng = Range(&quot;A1:B3&quot;)
+        rng.CopyPicture
+
+      ' Excel 存圖檔的精簡程式碼。
+        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  '新增 圖表
+            .Chart.Paste                                                '貼上 圖片
+            .Chart.Export Filename:=&quot;test.PNG&quot;, Filtername:=&quot;PNG&quot; '匯出 圖片
+            .Delete                                                     '刪除 圖表
+        End With
+
+End Sub
+
+Sub SendMail_1()
+    
+    Dim objOutlook As Object
+    Dim objMail As Object
+    
+    Set objOutlook = CreateObject(&quot;Outlook.Application&quot;)
+    Set objMail = objOutlook.CreateItem(0)
+    
+    With objMail
+        .to = &quot;address@email.com&quot;
+        .Subject = &quot;Subject&quot;
+        .Body = &quot;mail body&quot;
+        .HTMLbody = .HTMLbody &amp;amp; &quot;&amp;lt;br&amp;gt;&amp;lt;B&amp;gt;Embedded Image:&amp;lt;/B&amp;gt;&amp;lt;br&amp;gt;&quot; _
+                &amp;amp; &quot;&amp;lt;img src='test.PNG'&quot; &amp;amp; &quot;width='250' height='100'&amp;gt;&amp;lt;br&amp;gt;&quot; _
+                &amp;amp; &quot;&amp;lt;br&amp;gt;Best Regards, &amp;lt;br&amp;gt;Sumit&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;&quot;
+       ' objMail.Attachments.Add &quot;test.PNG&quot;       ' 使用附件檔案
+       '.Display     ' 可以編輯郵件內容，再按下 傳送 鍵。
+       '.Save         ' to save a copy in the drafts folder
+        .Send        ' 直接送出郵件
+        
+    End With       
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+    
+End Sub
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第二種方法是，&lt;br /&gt;
+直接截取區要的區塊，變成圖檔，然後貼到信件內容。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-VBA&quot;&gt;Sub SendMail_2()
+
+    Set objOutlook = CreateObject(&quot;Outlook.Application&quot;)
+    Set objMail = objOutlook.CreateItem(0)
+
+    ' mail body
+    strbody = &quot;mail body&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&quot;
+
+    'Copy range of interest
+    Dim r As Range
+    Set r = Sheets(&quot;Sheet1&quot;).Range(&quot;A1:B3&quot;)
+    r.Copy
+
+    'Paste as picture in sheet and cut immediately
+    Dim p As Picture
+    Set p = ActiveSheet.Pictures.Paste
+    p.Cut
+        
+    With objMail
+        .to = &quot;address@email.com&quot;
+        '.cc =
+        '.bcc = &quot;&quot;
+        .Subject = &quot;Subject&quot;
+        .HTMLbody = strbody
+        '.Display
+        
+    End With
+
+
+    'Get its Word editor
+    objMail.Display
+    Dim wordDoc As Object
+    Set wordDoc = objMail.GetInspector.WordEditor
+
+    'Paste picture
+    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste
+    
+    'send mail
+    objMail.Send
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+
+End Sub
+
+&lt;/code&gt;&lt;/pre&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]不同的 Content-Type (multipart/form-data)</title>
+   <link href="http://localhost:4000/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
+   <updated>2017-06-30T10:26:00+08:00</updated>
+   <id>http://localhost:4000/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
+   <content type="html">&lt;p&gt;這次要爬的目標是&lt;a href=&quot;http://www.taiwanexcellence.org/index.php/awards/now/cross/1&quot;&gt;台灣精品獎得獎名單&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;我想要爬取的條件是，
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這時候會猜測這應該是個post的requests。&lt;/p&gt;
+
+&lt;p&gt;果然，在按下查詢後，&lt;br /&gt;
+出現了一個cross_list的可疑人物，&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/iJbMP5kdRba31P5IoKG0_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因為是post，&lt;br /&gt;
+所以會期望在headers裡找到 “Form Data”，&lt;br /&gt;
+這裡面應會藏著post需要的參數。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;但不幸的是，什麼也沒有，&lt;br /&gt;
+只找到長得像這樣的”Request Payload”&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG&quot; alt=&quot;payload.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後Content-Type是multipart/form-data&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/SEe7tcApQfCSkEeYEgml_content-type.PNG&quot; alt=&quot;content-type.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其實，我們平常需要的data form裡的資料就藏在Request Payload裡。&lt;br /&gt;
+抓取的方式是，&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG&quot; alt=&quot;payload.PNG&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以這行為例，&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;------WebKitFormBoundaryTaDJAA82fTd3ug3W
+Content-Disposition: form-data; name=&quot;awards[]&quot;
+
+1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;name後的 “award[]” 就會是dictionary的key，
+底下的 1 ，就會是value，
+所以就會變成&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;&quot;awards[]&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;所以就把Request Payload所有的資訊寫成&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;keyword&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;years[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2017&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;years[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;F&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;G&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;H&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;I&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;J&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;K&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;L&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Z&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;但這樣寫完會覺得非常不合理，&lt;br /&gt;
+因為會有一堆同樣的key但給予不同的value，&lt;br /&gt;
+也就是說會key會一直被新的value取代。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;我當時的想法是，&lt;br /&gt;
+看到 [] 就會很想要在裡面塞數字順位，&lt;br /&gt;
+果然，從0開始，將相同的key編號，&lt;br /&gt;
+就成功了。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以這樣送出requests，&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#爬取台灣精品得獎名單http://www.taiwanexcellence.org/index.php/awards/now/cross_list/1/2017/2/1&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bs4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
+
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://www.taiwanexcellence.org/index.php/awards/now/send_search/1/2017/2/1/cross_list&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;keyword&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[0]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[1]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;awards[2]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;years[0]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2017&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;years[1]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2016&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[0]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[1]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[2]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;C&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[3]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;D&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[4]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;E&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[5]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;F&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[6]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;G&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[7]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;H&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[8]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;I&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[9]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;J&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[10]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;K&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[11]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;L&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+	&lt;span class=&quot;s&quot;&gt;&quot;industry[12]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Z&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Session&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py&quot;&gt;完整的代碼&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]顯示完整數字，不顯示科學記號</title>
+   <link href="http://localhost:4000/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/"/>
+   <updated>2017-06-27T11:05:00+08:00</updated>
+   <id>http://localhost:4000/2017/06/27/[R]顯示完整數字，不顯示科學記號</id>
+   <content type="html">&lt;p&gt;只要輸入，調整可顯示的位數&lt;/p&gt;
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scipen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;就可以改為顯示完整數字&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]Error when saving xlsx workbook with package openxlsx</title>
+   <link href="http://localhost:4000/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/"/>
+   <updated>2017-06-22T11:55:00+08:00</updated>
+   <id>http://localhost:4000/2017/06/22/[R]Error when saving xlsx workbook with package openxlsx</id>
+   <content type="html">&lt;p&gt;如果在windows系統使用saveWorkbook()出現以下錯誤訊息&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = &quot;dq&quot;, overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;1.&lt;a href=&quot;https://cran.r-project.org/bin/windows/Rtools/&quot;&gt;安裝Rtools.exe&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2.找到Rtools底下的zip.exe路徑，
+並設定rools的zip.exe路徑即可解決此問題&lt;/p&gt;
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;Sys.setenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;R_ZIPCMD&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;C:/Rtools/bin/zip.exe&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## path to zip.exe&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]利用python下載zip檔並解壓縮</title>
+   <link href="http://localhost:4000/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/"/>
+   <updated>2017-05-18T16:19:00+08:00</updated>
+   <id>http://localhost:4000/2017/05/18/[Python][爬蟲]利用python下載zip檔並解壓縮</id>
+   <content type="html">&lt;p&gt;下載檔案是使用package urllib2&lt;br /&gt;
+解壓縮檔案則是使用package zipfile&lt;br /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib2&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#urllib2.urlopen &lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;zipfile&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#zipfile.ZipFile&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;DownloadTWCompany&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;# 檔案下載&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;下載全國營業(稅籍)登記資料集壓縮擋...&quot;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;downloadurl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;urllib2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;urlopen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.fia.gov.tw/opendata/bgmopen1.zip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;zipcontent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;downloadurl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;TWRAW.zip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'wb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+	    &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zipcontent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;下載完成!&quot;&lt;/span&gt;
+	
+	&lt;span class=&quot;c&quot;&gt;# 解壓縮檔案&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;資料解壓縮...&quot;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;with&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zipfile&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ZipFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'TWRAW.zip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'rb'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extractall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;.&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;1234&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# 解壓縮密碼1234&lt;/span&gt;
+	
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;解壓縮完成!&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;DownloadTWCompany&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]如何刪除網頁中的&nbsp</title>
+   <link href="http://localhost:4000/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/"/>
+   <updated>2017-05-17T15:23:00+08:00</updated>
+   <id>http://localhost:4000/2017/05/17/[Python][爬蟲]如何刪除網頁中的&nbsp;</id>
+   <content type="html">&lt;p&gt;在爬取網頁時偶爾會碰到&lt;br /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;而且怎麼樣都刪不掉也取代不掉，&lt;br /&gt;
+使用strip()仍然會有空白。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;「&amp;amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;假如現在有一個網頁內容包含&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;td&amp;gt;&lt;/span&gt;
+	E601010&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;
+	電器承裝業
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;
+	E601020&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;
+	電器安裝業
+	&lt;span class=&quot;nt&quot;&gt;&amp;lt;br&amp;gt;&lt;/span&gt;													
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;已經抓出td tag，&lt;br /&gt;
+接著可以使用&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;td&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;td&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;formatter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;這時候td type會變成str，&lt;br /&gt;
+再使用replace取代就可以刪除空白了。&lt;br /&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python][爬蟲]不同的 Content-Type (application/json)</title>
+   <link href="http://localhost:4000/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/"/>
+   <updated>2017-05-05T15:45:00+08:00</updated>
+   <id>http://localhost:4000/2017/05/05/[Python][爬蟲]不同的Content-Type-application:json</id>
+   <content type="html">&lt;p&gt;目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp&lt;br /&gt;
+所有的行業代碼與中文名稱。&lt;/p&gt;
+
+&lt;p&gt;按下一頁發現會load一個post的網址&lt;br /&gt;
+&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1792968/fSvGMaRQRCfVLL1T7SMz_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%883.47.28.png&quot; alt=&quot;螢幕快照 2017-05-10 下午3.47.28.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著想要在headers裡找到 “Form Data”，&lt;br /&gt;
+這裡面應會藏著post需要的參數。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;可是，這時候卻只有找到 “Requests Payload”，&lt;br /&gt;
+這個看起來很像payload的東西，&lt;br /&gt;
+它看起來是個json，&lt;br /&gt;
+且Response Headers的Content-Type正是application/json。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1792968/qomn6tsmQcaYV27GsYea_content%20type.png&quot; alt=&quot;content type.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;所以我將 “Requests Payload”按下view source後的結果直接複製，&lt;br /&gt;
+然後requests結果再用json.loads就可以得到想要的結果了。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;程式碼如下，&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding:utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;json&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# payload for requests&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'{&quot;Cond&quot;:{&quot;KeyWord&quot;:&quot;&quot;,&quot;Paging&quot;:{&quot;Size&quot;:519,&quot;Current&quot;:1,&quot;Count&quot;:52,&quot;RecordCount&quot;:519,&quot;CanPrev&quot;:false,&quot;CanNext&quot;:true}}}'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+		  &lt;span class=&quot;s&quot;&gt;&quot;Referer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation&quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;js&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;loads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;js&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;d&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Result&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Code&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;ignore&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;code&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]在R中使用system呼叫python-給予參數</title>
+   <link href="http://localhost:4000/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/"/>
+   <updated>2017-04-24T11:22:00+08:00</updated>
+   <id>http://localhost:4000/2017/04/24/[R]在R中使用system呼叫python-給予參數</id>
+   <content type="html">&lt;p&gt;之前介紹過&lt;a href=&quot;https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/&quot;&gt;在R中使用system呼叫python&lt;/a&gt;。&lt;/p&gt;
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;假如現在我想要帶入參數給python script要怎麼做呢？&lt;/p&gt;
+
+&lt;p&gt;首先，&lt;br /&gt;
+在python程式碼的部分，&lt;br /&gt;
+要使用 &lt;strong&gt;sys.arg[]&lt;/strong&gt; 讓python程式獲取參數。&lt;/p&gt;
+
+&lt;p&gt;還有，在 &lt;strong&gt;sys.arg[0]&lt;/strong&gt; 表示的是程式名稱，&lt;br /&gt;
+所以要使用 &lt;strong&gt;sys.arg[1]&lt;/strong&gt; 才是表示要讀取的第一個參數。&lt;/p&gt;
+
+&lt;p&gt;假如今天有支 &lt;em&gt;python_script.py&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# -*- coding: utf-8 -*-&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在cmf中呼叫這支python程式&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python python_script.py world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;R裡的system()要打的指令就是cmf中打的指令。&lt;br /&gt;
+所以在R中就會變成，&lt;br /&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;結果就會變成&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Hello, world
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最後，&lt;br /&gt;
+在使用system()必須要先setwd將路徑設成python_script.py所在位置。&lt;/p&gt;
 
 </content>
  </entry>

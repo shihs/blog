@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[[Tutorial]Computer Networking筆記(12-15)"
+title: "[Tutorial]Computer Networking筆記(12-15)"
 date: 2018-01-20 16:26
 author: "Shihs"
 ---

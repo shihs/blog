@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[Python]Google翻譯API接口-library googletrnas"
+title: "[Python]Google 翻譯 API 接口 googletrnas"
 date: 2018-01-15 22:00
 author: "Shihs"
 ---
