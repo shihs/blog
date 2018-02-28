@@ -140,6 +140,11 @@
 
 <p>就可以改為顯示完整數字</p>
  -->
+    <p>只要輸入，調整可顯示的位數</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+
   </div>
   
   <div class="post">
@@ -168,6 +173,17 @@ Try installr::install.rtools() on Windows.
 </span></code></pre></div></div>
 
  -->
+    <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+
   </div>
   
   <div class="post">
@@ -206,6 +222,10 @@ Try installr::install.rtools() on Windows.
 </code></pre></div></div>
 
  -->
+    <p>下載檔案是使用package urllib2<br />
+解壓縮檔案則是使用package zipfile<br /></p>
+
+
   </div>
   
   <div class="post">
@@ -248,6 +268,9 @@ Try installr::install.rtools() on Windows.
 再使用replace取代就可以刪除空白了。<br /></p>
 
  -->
+    <p>在爬取網頁時偶爾會碰到<br /></p>
+
+
   </div>
   
   <div class="post">
@@ -304,6 +327,10 @@ Try installr::install.rtools() on Windows.
 
 </code></pre></div></div>
  -->
+    <p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
+所有的行業代碼與中文名稱。</p>
+
+
   </div>
   
 </div>

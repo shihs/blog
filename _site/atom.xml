@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-02-28T18:01:52+08:00</updated>
+ <updated>2018-02-28T18:49:32+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -689,9 +689,7 @@ http:// www.thenewboston.org /index.php&lt;/p&gt;
    <link href="http://localhost:4000/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/"/>
    <updated>2018-01-15T22:00:00+08:00</updated>
    <id>http://localhost:4000/2018/01/15/[Python]Google翻譯API接口-library googletrnas</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://py-googletrans.readthedocs.io/en/latest/&quot;&gt;關於這個套件&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;使用前，先安裝googletrans&lt;/p&gt;
+   <content type="html">&lt;p&gt;使用前，先安裝&lt;a href=&quot;https://py-googletrans.readthedocs.io/en/latest/&quot;&gt;googletrans&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;# windows
 pip install googletrans
 &lt;/code&gt;&lt;/pre&gt;

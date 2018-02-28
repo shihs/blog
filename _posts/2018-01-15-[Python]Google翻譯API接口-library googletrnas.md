@@ -5,9 +5,7 @@ date: 2018-01-15 22:00
 author: "Shihs"
 ---
 
-[關於這個套件](https://py-googletrans.readthedocs.io/en/latest/)
-
-使用前，先安裝googletrans
+使用前，先安裝[googletrans](https://py-googletrans.readthedocs.io/en/latest/)
 ```cmd
 # windows
 pip install googletrans
