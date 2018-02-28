@@ -334,6 +334,12 @@ tbody tr:nth-child(odd) th {
   font-size: .9rem;
 }
 
+.post {
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 30px 0;
+}
+
 /* Blog post or page title */
 .page-title,
 .post-title,
