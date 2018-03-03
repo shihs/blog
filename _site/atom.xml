@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-03-03T18:38:43+08:00</updated>
+ <updated>2018-03-03T18:43:53+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -162,8 +162,7 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
    <link href="http://localhost:4000/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/"/>
    <updated>2018-02-26T18:45:00+08:00</updated>
    <id>http://localhost:4000/2018/02/26/[R]使用R寄Outlook Email</id>
-   <content type="html">&lt;p&gt;之前有介紹過使用mailR這個套件夾帶檔案使用gmail信箱發送信件，&lt;br /&gt;
-&lt;a href=&quot;https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/&quot;&gt;看這裡&lt;/a&gt;。&lt;/p&gt;
+   <content type="html">&lt;p&gt;之前有介紹過使用mailR這個套件夾帶檔案&lt;a href=&quot;https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/&quot;&gt;使用gmail信箱發送信件&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。&lt;br /&gt;
 &lt;a href=&quot;https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
