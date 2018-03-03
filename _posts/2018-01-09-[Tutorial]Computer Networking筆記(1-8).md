@@ -5,7 +5,7 @@ date: 2018-01-09 15:27
 author: "Shihs"
 ---
 
-[Computer Newworking筆記](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
 
 ## **1.What is Computer Networking?**
 各裝置(*devices*)之間的連結<br>

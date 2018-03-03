@@ -5,7 +5,7 @@ date: 2018-01-24 21:46
 author: "Shihs"
 ---
 
-[Computer Newworking筆記](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
 
 ## **OSI Model**
 [OSI Model- Open System Interconnection Reference Model](https://zh.wikipedia.org/wiki/OSI模型)<br>

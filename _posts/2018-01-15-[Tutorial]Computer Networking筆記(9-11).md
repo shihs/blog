@@ -5,7 +5,7 @@ date: 2018-01-15 22:40
 author: "Shihs"
 ---
 
-[Computer Newworking筆記](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
 
 ## **1.What is NIC(Network Interface Card)?**
 NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br>

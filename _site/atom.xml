@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-03-03T17:25:57+08:00</updated>
+ <updated>2018-03-03T17:41:08+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -391,7 +391,7 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
    <link href="http://localhost:4000/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/"/>
    <updated>2018-01-25T20:29:00+08:00</updated>
    <id>http://localhost:4000/2018/01/25/[Tutorial]Computer Networking筆記(22-26)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-binary-code-works&quot;&gt;&lt;strong&gt;How Binary Code Works?&lt;/strong&gt;&lt;/h2&gt;
 &lt;ul&gt;
@@ -469,7 +469,7 @@ device不只傳送自己的ip，也傳送subnet mask來表示network id和host i
    <link href="http://localhost:4000/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/"/>
    <updated>2018-01-24T21:46:00+08:00</updated>
    <id>http://localhost:4000/2018/01/24/[Tutorial]Computer Networking筆記(16-21)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;osi-model&quot;&gt;&lt;strong&gt;OSI Model&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/OSI模型&quot;&gt;OSI Model- Open System Interconnection Reference Model&lt;/a&gt;&lt;br /&gt;
@@ -510,7 +510,7 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
    <link href="http://localhost:4000/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/"/>
    <updated>2018-01-20T16:26:00+08:00</updated>
    <id>http://localhost:4000/2018/01/20/[Tutorial]Computer Networking筆記(12-15)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;topologylayout&quot;&gt;&lt;strong&gt;Topology/Layout&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/网络拓扑&quot;&gt;Topology/Layout&lt;/a&gt;是網路之間連接的方式，wiki上翻成「網路拓樸」。&lt;br /&gt;
@@ -624,7 +624,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
    <link href="http://localhost:4000/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/"/>
    <updated>2018-01-15T22:40:00+08:00</updated>
    <id>http://localhost:4000/2018/01/15/[Tutorial]Computer Networking筆記(9-11)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-nicnetwork-interface-card&quot;&gt;&lt;strong&gt;1.What is NIC(Network Interface Card)?&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;NIC就是網卡，所有電腦都必須要有網卡才能連上網路。&lt;br /&gt;
@@ -725,7 +725,7 @@ sudo pip install googletrans
    <link href="http://localhost:4000/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/"/>
    <updated>2018-01-09T15:27:00+08:00</updated>
    <id>http://localhost:4000/2018/01/09/[Tutorial]Computer Networking筆記(1-8)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Newworking筆記&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-computer-networking&quot;&gt;&lt;strong&gt;1.What is Computer Networking?&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;各裝置(&lt;em&gt;devices&lt;/em&gt;)之間的連結&lt;br /&gt;

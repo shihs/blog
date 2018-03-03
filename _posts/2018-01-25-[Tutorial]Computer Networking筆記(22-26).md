@@ -5,7 +5,7 @@ date: 2018-01-25 20:29
 author: "Shihs"
 ---
 
-[Computer Newworking筆記](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
 
 ## **How Binary Code Works?**
 - bit = binary digit
