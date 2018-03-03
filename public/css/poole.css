@@ -359,6 +359,10 @@ tbody tr:nth-child(odd) th {
   color: #9a9a9a;
   font-size: .8rem;
 }
+.tags {
+  color: #9a9a9a;
+  font-size: .8rem;
+}
 
 /* Related posts */
 .related {
