@@ -41,11 +41,13 @@
 
 
 
-
 .headshot {
   width: 7.8rem;
   height: 7.8rem;
   border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -khtml-border-radius: 50%;
   margin-top: 0.5%; 
   margin-bottom: 0.5%; 
 }
