@@ -3,6 +3,7 @@ layout: post
 title: "[Python]Google 翻譯 API 接口 googletrnas"
 date: 2018-01-15 22:00
 author: "Shihs"
+category: Python
 ---
 
 使用前，先安裝[googletrans](https://py-googletrans.readthedocs.io/en/latest/)

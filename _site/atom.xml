@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-03-03T19:00:36+08:00</updated>
+ <updated>2018-03-08T00:02:16+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>[R]如何讀取Excel檔案</title>
-   <link href="http://localhost:4000/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/"/>
+   <link href="http://localhost:4000/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/"/>
    <updated>2018-02-26T18:54:00+08:00</updated>
-   <id>http://localhost:4000/2018/02/26/[R]如何讀取Excel檔案</id>
+   <id>http://localhost:4000/r/2018/02/26/[R]如何讀取Excel檔案</id>
    <content type="html">&lt;p&gt;很多資料會使用excel檔案儲存，&lt;br /&gt;
 這邊介紹主要三種常用的附檔名。&lt;br /&gt;&lt;/p&gt;
 &lt;ol&gt;
@@ -159,9 +159,9 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
  
  <entry>
    <title>[R]使用 R 寄Outlook Email</title>
-   <link href="http://localhost:4000/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/"/>
+   <link href="http://localhost:4000/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/"/>
    <updated>2018-02-26T18:45:00+08:00</updated>
-   <id>http://localhost:4000/2018/02/26/[R]使用R寄Outlook Email</id>
+   <id>http://localhost:4000/r/2018/02/26/[R]使用R寄Outlook Email</id>
    <content type="html">&lt;p&gt;之前有介紹過使用mailR這個套件夾帶檔案&lt;a href=&quot;https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/&quot;&gt;使用gmail信箱發送信件&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。&lt;br /&gt;
@@ -210,9 +210,9 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
  
  <entry>
    <title>[Python][爬蟲]requests 的編碼</title>
-   <link href="http://localhost:4000/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/"/>
+   <link href="http://localhost:4000/python/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/"/>
    <updated>2018-02-17T19:01:00+08:00</updated>
-   <id>http://localhost:4000/2018/02/17/[Python][爬蟲]requests 的編碼</id>
+   <id>http://localhost:4000/python/2018/02/17/[Python][爬蟲]requests 的編碼</id>
    <content type="html">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rep = requests.get(url)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;rep.content ： bytes 型別&lt;/strong&gt;&lt;/p&gt;
@@ -226,9 +226,9 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
  
  <entry>
    <title>[Python][爬蟲]防止被ban，代理IP怎麼用?</title>
-   <link href="http://localhost:4000/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/"/>
+   <link href="http://localhost:4000/python/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/"/>
    <updated>2018-02-07T11:47:00+08:00</updated>
-   <id>http://localhost:4000/2018/02/07/[Python][爬蟲]防止被ban，代理IP怎麼用?</id>
+   <id>http://localhost:4000/python/2018/02/07/[Python][爬蟲]防止被ban，代理IP怎麼用?</id>
    <content type="html">&lt;h2 id=&quot;如何讓爬蟲程式不被ban&quot;&gt;&lt;strong&gt;如何讓爬蟲程式不被ban?&lt;/strong&gt;&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;動態設置user agent&lt;/li&gt;
@@ -310,9 +310,9 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Python]呼叫其他.py的function</title>
-   <link href="http://localhost:4000/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/"/>
+   <link href="http://localhost:4000/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/"/>
    <updated>2018-02-02T16:56:00+08:00</updated>
-   <id>http://localhost:4000/2018/02/02/[Python]呼叫其他py的function</id>
+   <id>http://localhost:4000/python/2018/02/02/[Python]呼叫其他py的function</id>
    <content type="html">&lt;p&gt;假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
 要怎麼做呢？&lt;/p&gt;
 
@@ -387,9 +387,9 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Tutorial]Computer Networking筆記(22-26)</title>
-   <link href="http://localhost:4000/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/"/>
+   <link href="http://localhost:4000/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/"/>
    <updated>2018-01-25T20:29:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/25/[Tutorial]Computer Networking筆記(22-26)</id>
+   <id>http://localhost:4000/tutorial/2018/01/25/[Tutorial]Computer Networking筆記(22-26)</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-binary-code-works&quot;&gt;&lt;strong&gt;How Binary Code Works?&lt;/strong&gt;&lt;/h2&gt;
@@ -465,9 +465,9 @@ device不只傳送自己的ip，也傳送subnet mask來表示network id和host i
  
  <entry>
    <title>[Tutorial]Computer Networking筆記(16-21)</title>
-   <link href="http://localhost:4000/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/"/>
+   <link href="http://localhost:4000/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/"/>
    <updated>2018-01-24T21:46:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/24/[Tutorial]Computer Networking筆記(16-21)</id>
+   <id>http://localhost:4000/tutorial/2018/01/24/[Tutorial]Computer Networking筆記(16-21)</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;osi-model&quot;&gt;&lt;strong&gt;OSI Model&lt;/strong&gt;&lt;/h2&gt;
@@ -506,9 +506,9 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Tutorial]Computer Networking筆記(12-15)</title>
-   <link href="http://localhost:4000/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/"/>
+   <link href="http://localhost:4000/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/"/>
    <updated>2018-01-20T16:26:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/20/[Tutorial]Computer Networking筆記(12-15)</id>
+   <id>http://localhost:4000/tutorial/2018/01/20/[Tutorial]Computer Networking筆記(12-15)</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;topologylayout&quot;&gt;&lt;strong&gt;Topology/Layout&lt;/strong&gt;&lt;/h2&gt;
@@ -576,9 +576,9 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
  
  <entry>
    <title>[R]read.csv出現編碼錯誤訊息</title>
-   <link href="http://localhost:4000/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/"/>
+   <link href="http://localhost:4000/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/"/>
    <updated>2018-01-17T10:19:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/17/[R]read.csv出現編碼錯誤訊息</id>
+   <id>http://localhost:4000/r/2018/01/17/[R]read.csv出現編碼錯誤訊息</id>
    <content type="html">&lt;p&gt;在讀取csv檔案時出現錯誤訊息&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read.csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;file.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringsAsFactors&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
  
@@ -601,9 +601,9 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
  
  <entry>
    <title>[R]如何刪除 <\U+00A0></title>
-   <link href="http://localhost:4000/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/"/>
+   <link href="http://localhost:4000/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/"/>
    <updated>2018-01-17T09:15:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/17/[R]如何刪除 <U+00A0></id>
+   <id>http://localhost:4000/r/2018/01/17/[R]如何刪除 <U+00A0></id>
    <content type="html">&lt;p&gt;在資料中有些含有空白的文字讀進R後會變成&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;U+00A0&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -620,9 +620,9 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
  
  <entry>
    <title>[Tutorial]Computer Networking筆記(9-11)</title>
-   <link href="http://localhost:4000/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/"/>
+   <link href="http://localhost:4000/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/"/>
    <updated>2018-01-15T22:40:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/15/[Tutorial]Computer Networking筆記(9-11)</id>
+   <id>http://localhost:4000/tutorial/2018/01/15/[Tutorial]Computer Networking筆記(9-11)</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-nicnetwork-interface-card&quot;&gt;&lt;strong&gt;1.What is NIC(Network Interface Card)?&lt;/strong&gt;&lt;/h2&gt;
@@ -685,9 +685,9 @@ http:// www.thenewboston.org /index.php&lt;/p&gt;
  
  <entry>
    <title>[Python]Google 翻譯 API 接口 googletrnas</title>
-   <link href="http://localhost:4000/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/"/>
+   <link href="http://localhost:4000/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/"/>
    <updated>2018-01-15T22:00:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/15/[Python]Google翻譯API接口-library googletrnas</id>
+   <id>http://localhost:4000/python/2018/01/15/[Python]Google翻譯API接口-library googletrnas</id>
    <content type="html">&lt;p&gt;使用前，先安裝&lt;a href=&quot;https://py-googletrans.readthedocs.io/en/latest/&quot;&gt;googletrans&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;# windows
 pip install googletrans
@@ -721,9 +721,9 @@ sudo pip install googletrans
  
  <entry>
    <title>[Tutorial]Computer Networking筆記(1-8)</title>
-   <link href="http://localhost:4000/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/"/>
+   <link href="http://localhost:4000/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/"/>
    <updated>2018-01-09T15:27:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/09/[Tutorial]Computer Networking筆記(1-8)</id>
+   <id>http://localhost:4000/tutorial/2018/01/09/[Tutorial]Computer Networking筆記(1-8)</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-computer-networking&quot;&gt;&lt;strong&gt;1.What is Computer Networking?&lt;/strong&gt;&lt;/h2&gt;
@@ -775,9 +775,9 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向</title>
-   <link href="http://localhost:4000/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/"/>
+   <link href="http://localhost:4000/python/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/"/>
    <updated>2018-01-08T15:12:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/08/[Python][爬蟲]URL沒有HTTP:HTTPS與網址重新導向</id>
+   <id>http://localhost:4000/python/2018/01/08/[Python][爬蟲]URL沒有HTTP:HTTPS與網址重新導向</id>
    <content type="html">&lt;p&gt;這次要爬的網址長得像這樣&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;hazyfairyland.blogspot.tw&lt;/li&gt;
@@ -817,9 +817,9 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Python]Read and Write CSV file</title>
-   <link href="http://localhost:4000/2018/01/08/Python-Read-and-Write-CSV-file/"/>
+   <link href="http://localhost:4000/python/2018/01/08/Python-Read-and-Write-CSV-file/"/>
    <updated>2018-01-08T11:32:00+08:00</updated>
-   <id>http://localhost:4000/2018/01/08/[Python] Read and Write CSV file</id>
+   <id>http://localhost:4000/python/2018/01/08/[Python] Read and Write CSV file</id>
    <content type="html">&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;csv&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# read csv file&lt;/span&gt;
@@ -842,9 +842,9 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Python][爬蟲]如何爬取網頁中js生成的部分</title>
-   <link href="http://localhost:4000/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/"/>
+   <link href="http://localhost:4000/python/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/"/>
    <updated>2017-08-18T11:14:00+08:00</updated>
-   <id>http://localhost:4000/2017/08/18/[Python][爬蟲]如何爬取網頁中js生成的部分</id>
+   <id>http://localhost:4000/python/2017/08/18/[Python][爬蟲]如何爬取網頁中js生成的部分</id>
    <content type="html">&lt;p&gt;這次想要爬取的是&lt;a href=&quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot;&gt;2017年汽車技術展會&lt;/a&gt;的參展廠商名單。&lt;/p&gt;
 
 &lt;p&gt;網頁長得像這樣，
@@ -890,9 +890,9 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
  
  <entry>
    <title>[Git] 提交一個更新</title>
-   <link href="http://localhost:4000/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/"/>
+   <link href="http://localhost:4000/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/"/>
    <updated>2017-07-26T15:25:00+08:00</updated>
-   <id>http://localhost:4000/2017/07/26/[Git] 提交一個更新</id>
+   <id>http://localhost:4000/git/2017/07/26/[Git] 提交一個更新</id>
    <content type="html">&lt;p&gt;以下要介紹最基本的同步，
 檔案在本機被修改或是增加後push到github。&lt;/p&gt;
 
@@ -932,9 +932,9 @@ $ git add -u  #stages modified and deleted, without new
  
  <entry>
    <title>[Python][爬蟲]如何下載 zip 檔</title>
-   <link href="http://localhost:4000/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/"/>
+   <link href="http://localhost:4000/python/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/"/>
    <updated>2017-07-25T11:17:00+08:00</updated>
-   <id>http://localhost:4000/2017/07/25/[Python][爬蟲]如何下載zip檔</id>
+   <id>http://localhost:4000/python/2017/07/25/[Python][爬蟲]如何下載zip檔</id>
    <content type="html">&lt;p&gt;這裡要示範使用三個不同的package下載zip檔。&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;urllib&lt;/span&gt;
@@ -965,9 +965,9 @@ $ git add -u  #stages modified and deleted, without new
  
  <entry>
    <title>[Excel][VBA]寄出內文含圖檔的outlook信件</title>
-   <link href="http://localhost:4000/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/"/>
+   <link href="http://localhost:4000/excel/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/"/>
    <updated>2017-07-05T16:12:00+08:00</updated>
-   <id>http://localhost:4000/2017/07/05/[Excel][VBA]outlook信件內文含圖檔</id>
+   <id>http://localhost:4000/excel/2017/07/05/[Excel][VBA]outlook信件內文含圖檔</id>
    <content type="html">&lt;p&gt;這裡要介紹如何使用Excel VBA&lt;br /&gt;
 在信件內容包含截取sheet中的特定欄位區塊，&lt;br /&gt;
 並將此區塊變為圖檔包含在內文中寄出。&lt;br /&gt;&lt;/p&gt;
@@ -1079,9 +1079,9 @@ End Sub
  
  <entry>
    <title>[Python][爬蟲]不同的 Content-Type (multipart/form-data)</title>
-   <link href="http://localhost:4000/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
+   <link href="http://localhost:4000/r/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
    <updated>2017-06-30T10:26:00+08:00</updated>
-   <id>http://localhost:4000/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
+   <id>http://localhost:4000/r/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
    <content type="html">&lt;p&gt;這次要爬的目標是&lt;a href=&quot;http://www.taiwanexcellence.org/index.php/awards/now/cross/1&quot;&gt;台灣精品獎得獎名單&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;我想要爬取的條件是，
@@ -1199,9 +1199,9 @@ Content-Disposition: form-data; name=&quot;awards[]&quot;
  
  <entry>
    <title>[R]顯示完整數字，不顯示科學記號</title>
-   <link href="http://localhost:4000/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/"/>
+   <link href="http://localhost:4000/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/"/>
    <updated>2017-06-27T11:05:00+08:00</updated>
-   <id>http://localhost:4000/2017/06/27/[R]顯示完整數字，不顯示科學記號</id>
+   <id>http://localhost:4000/r/2017/06/27/[R]顯示完整數字，不顯示科學記號</id>
    <content type="html">&lt;p&gt;只要輸入，調整可顯示的位數&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scipen&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;999&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1212,9 +1212,9 @@ Content-Disposition: form-data; name=&quot;awards[]&quot;
  
  <entry>
    <title>[R]Error when saving xlsx workbook with package openxlsx</title>
-   <link href="http://localhost:4000/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/"/>
+   <link href="http://localhost:4000/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/"/>
    <updated>2017-06-22T11:55:00+08:00</updated>
-   <id>http://localhost:4000/2017/06/22/[R]Error when saving xlsx workbook with package openxlsx</id>
+   <id>http://localhost:4000/r/2017/06/22/[R]Error when saving xlsx workbook with package openxlsx</id>
    <content type="html">&lt;p&gt;如果在windows系統使用saveWorkbook()出現以下錯誤訊息&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
 Try installr::install.rtools() on Windows.
@@ -1237,9 +1237,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[Python][爬蟲]利用python下載zip檔並解壓縮</title>
-   <link href="http://localhost:4000/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/"/>
+   <link href="http://localhost:4000/python/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/"/>
    <updated>2017-05-18T16:19:00+08:00</updated>
-   <id>http://localhost:4000/2017/05/18/[Python][爬蟲]利用python下載zip檔並解壓縮</id>
+   <id>http://localhost:4000/python/2017/05/18/[Python][爬蟲]利用python下載zip檔並解壓縮</id>
    <content type="html">&lt;p&gt;下載檔案是使用package urllib2&lt;br /&gt;
 解壓縮檔案則是使用package zipfile&lt;br /&gt;&lt;/p&gt;
 
@@ -1272,9 +1272,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[Python][爬蟲]如何刪除網頁中的&nbsp</title>
-   <link href="http://localhost:4000/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/"/>
+   <link href="http://localhost:4000/python/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/"/>
    <updated>2017-05-17T15:23:00+08:00</updated>
-   <id>http://localhost:4000/2017/05/17/[Python][爬蟲]如何刪除網頁中的&nbsp;</id>
+   <id>http://localhost:4000/python/2017/05/17/[Python][爬蟲]如何刪除網頁中的&nbsp;</id>
    <content type="html">&lt;p&gt;在爬取網頁時偶爾會碰到&lt;br /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ni&quot;&gt;&amp;amp;nbsp;&lt;/span&gt;
@@ -1311,9 +1311,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[Python][爬蟲]不同的 Content-Type (application/json)</title>
-   <link href="http://localhost:4000/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/"/>
+   <link href="http://localhost:4000/python/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/"/>
    <updated>2017-05-05T15:45:00+08:00</updated>
-   <id>http://localhost:4000/2017/05/05/[Python][爬蟲]不同的Content-Type-application:json</id>
+   <id>http://localhost:4000/python/2017/05/05/[Python][爬蟲]不同的Content-Type-application:json</id>
    <content type="html">&lt;p&gt;目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp&lt;br /&gt;
 所有的行業代碼與中文名稱。&lt;/p&gt;
 
@@ -1364,9 +1364,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[R]在R中使用system呼叫python-給予參數</title>
-   <link href="http://localhost:4000/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/"/>
+   <link href="http://localhost:4000/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/"/>
    <updated>2017-04-24T11:22:00+08:00</updated>
-   <id>http://localhost:4000/2017/04/24/[R]在R中使用system呼叫python-給予參數</id>
+   <id>http://localhost:4000/r/2017/04/24/[R]在R中使用system呼叫python-給予參數</id>
    <content type="html">&lt;p&gt;之前介紹過&lt;a href=&quot;https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/&quot;&gt;在R中使用system呼叫python&lt;/a&gt;。&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1409,9 +1409,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[R]設定 R 圖形字體</title>
-   <link href="http://localhost:4000/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/"/>
+   <link href="http://localhost:4000/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/"/>
    <updated>2016-08-24T15:31:00+08:00</updated>
-   <id>http://localhost:4000/2016/08/24/[R]設定R圖形字體</id>
+   <id>http://localhost:4000/r/2016/08/24/[R]設定R圖形字體</id>
    <content type="html">&lt;p&gt;一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
 以下的解法是針對windows方能使用。&lt;/p&gt;
 
@@ -1454,9 +1454,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[R]R batch</title>
-   <link href="http://localhost:4000/2016/07/17/R-R-batch/"/>
+   <link href="http://localhost:4000/r/2016/07/17/R-R-batch/"/>
    <updated>2016-07-17T11:11:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/17/[R]R batch</id>
+   <id>http://localhost:4000/r/2016/07/17/[R]R batch</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.statmethods.net/interface/batch.html&quot;&gt;R batch&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;因為.R檔無法點兩下就能執行，
@@ -1476,9 +1476,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>Windows7 自動排程</title>
-   <link href="http://localhost:4000/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/"/>
+   <link href="http://localhost:4000/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/"/>
    <updated>2016-07-17T11:06:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/17/windows7自動排程</id>
+   <id>http://localhost:4000/others/2016/07/17/windows7自動排程</id>
    <content type="html">&lt;p&gt;&lt;a href=&quot;http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8&quot;&gt;工作排程，讓程式自動執行&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;開始 =&amp;gt; 附屬應用程式 =&amp;gt; 系統工具 =&amp;gt; 工作排程器&lt;/p&gt;
@@ -1490,9 +1490,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[R]使用 R 發送gmail Email</title>
-   <link href="http://localhost:4000/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/"/>
+   <link href="http://localhost:4000/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/"/>
    <updated>2016-07-17T10:58:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/17/[R]使用R發送email</id>
+   <id>http://localhost:4000/r/2016/07/17/[R]使用R發送email</id>
    <content type="html">&lt;p&gt;使用mailR package寫一個R的script，自動發信。&lt;/p&gt;
 
 &lt;p&gt;以下幾個步驟，&lt;br /&gt;
@@ -1532,9 +1532,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[Python]使用 python 下載 gmail 附件</title>
-   <link href="http://localhost:4000/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/"/>
+   <link href="http://localhost:4000/python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/"/>
    <updated>2016-07-08T21:02:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/08/[Python]使用python下載gmail附件</id>
+   <id>http://localhost:4000/python/2016/07/08/[Python]使用python下載gmail附件</id>
    <content type="html">&lt;p&gt;每天都會收到信並且要利用信中的附件整理資料，
 但這樣我在跑程式前還要手動去下載檔案，
 覺得實在太麻煩，
@@ -1600,9 +1600,9 @@ Try installr::install.rtools() on Windows.
  
  <entry>
    <title>[R]在 R 中使用 system 呼叫 python</title>
-   <link href="http://localhost:4000/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/"/>
+   <link href="http://localhost:4000/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/"/>
    <updated>2016-07-08T20:36:00+08:00</updated>
-   <id>http://localhost:4000/2016/07/08/[R]在R中使用system呼叫python</id>
+   <id>http://localhost:4000/r/2016/07/08/[R]在R中使用system呼叫python</id>
    <content type="html">&lt;p&gt;我個人比較偏好使用R做所有的事情，
 但某些時候還是需要使用到python，
 所以希望可以在R上呼叫python程式碼。&lt;/p&gt;

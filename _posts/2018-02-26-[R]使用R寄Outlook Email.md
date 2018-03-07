@@ -3,6 +3,7 @@ layout: post
 title: "[R]使用 R 寄Outlook Email"
 date: 2018-02-26 18:45
 author: "Shihs"
+category: R
 ---
 
 之前有介紹過使用mailR這個套件夾帶檔案[使用gmail信箱發送信件](https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/)。<br>

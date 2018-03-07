@@ -3,6 +3,7 @@ layout: post
 title: "[Python]呼叫其他.py的function"
 date: 2018-02-02 16:56
 author: "Shihs"
+category: Python
 ---
 假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
 要怎麼做呢？

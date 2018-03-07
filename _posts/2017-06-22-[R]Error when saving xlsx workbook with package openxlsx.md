@@ -3,6 +3,7 @@ layout: post
 title: "[R]Error when saving xlsx workbook with package openxlsx"
 date: 2017-06-22 11:55
 author: "Shihs"
+category: R
 ---
 
 如果在windows系統使用saveWorkbook()出現以下錯誤訊息

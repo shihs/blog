@@ -3,6 +3,7 @@ layout: post
 title: "[Python]使用 python 下載 gmail 附件"
 date: 2016-07-08 21:02
 author: "Shihs"
+category: Python
 ---
 
 每天都會收到信並且要利用信中的附件整理資料，

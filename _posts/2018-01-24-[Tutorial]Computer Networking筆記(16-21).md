@@ -3,6 +3,7 @@ layout: post
 title: "[Tutorial]Computer Networking筆記(16-21)"
 date: 2018-01-24 21:46
 author: "Shihs"
+category: Tutorial
 ---
 
 [Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)

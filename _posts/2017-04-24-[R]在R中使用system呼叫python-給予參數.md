@@ -3,6 +3,7 @@ layout: post
 title: "[R]在R中使用system呼叫python-給予參數"
 date: 2017-04-24 11:22
 author: "Shihs"
+category: R
 ---
 
 之前介紹過[在R中使用system呼叫python](https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/)。

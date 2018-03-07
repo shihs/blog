@@ -2,9 +2,11 @@
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
       <h1>
+        
         <a href="{{ "/" | relative_url }}">
           {{ site.title }}
         </a>
+        <img src="{{ "/img/headshot.png" | relative_url }}" alt="Author Image" class="headshot">
       </h1>
       <p class="lead">{{ site.description }}</p>
     </div>
@@ -26,9 +28,6 @@
         {% endif %}
       {% endfor %}
 
-      <!-- <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
-      <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a> -->
-      <!-- <span class="sidebar-nav-item">Currently v{{ site.version }}</span> -->
     </nav>
 
     <p class = "rights">&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>

@@ -15,17 +15,15 @@ title: Home
     <span class="post-date">Posted by {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}</span>
     <!-- {{ post.content }} -->
     {{ post.excerpt }}
-    <div class="tags">
-      <i class="fas fa-tag"></i>
-      <span>
-        Tags :{% for tag in post.tags %} 
-        <a class="tag-wrapper" href="/tags/{{ tag }}" rel="tooltip" title="View posts tagged with &quot;{{ tag }}&quot;">
-          <span class="tags">{{ tag }}</span>
-        </a>  
-          {% if forloop.last != true %} 
-          {% endif %} 
-        {% endfor %}
-      </span>
+    <div class="bookmark">
+      <i class="far fa-comments"></i>
+
+        
+        <!-- <a class="tag-wrapper" href="/tags/{{ tag }}" rel="tooltip" title="View posts tagged with &quot;{{ tag }}&quot;">
+          <span class="tags">{{ post.category }}</span>
+        </a> -->
+       
+
     </div>
     
   </div>

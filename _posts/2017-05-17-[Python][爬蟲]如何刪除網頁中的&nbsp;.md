@@ -3,6 +3,7 @@ layout: post
 title: "[Python][爬蟲]如何刪除網頁中的&nbsp"
 date: 2017-05-17 15:23
 author: "Shihs"
+category: Python
 ---
 
 
