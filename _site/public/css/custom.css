@@ -40,7 +40,6 @@
 
 
 
-
 .headshot {
   width: 7.8rem;
   height: 7.8rem;
@@ -48,7 +47,21 @@
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   -khtml-border-radius: 50%;
-  margin-top: 0.5%; 
-  margin-bottom: 0.5%; 
+  display: block;
+  margin: 0 auto;
+  /*margin-top: 0.5%; 
+  margin-bottom: 0.5%;*/
 }
 
+
+@media (min-width: 48em) {
+  .headshot {
+    margin-left: 0;
+    width: 7.8rem;
+    height: 7.8rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -khtml-border-radius: 50%;
+  }
+}
