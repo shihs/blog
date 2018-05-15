@@ -1,37 +1,37 @@
 /* Archives */
-.archive h3 {
+#group h3 {
     margin-top: 1.2rem;
 }
-.archive li {
+#group li {
     list-style: none;
     padding: 0 0 15px 0;
     margin-bottom: -.3rem;
 }
-.archive div {
+#group div {
     display: inline-block;
 }
-.archive .month {
+#group .month {
     width: 10%;
     vertical-align: top;
     color: #9a9a9a;
 }
-.archive .archive-post-title {
+#group .post-title {
     width: 88%;
     line-height: 25px;
 }
 @media screen and (max-width: 480px) {
-    .archive .month {
+    #group .month {
         width: 10%;
         margin-right: 4%;
     }
-    .archive .archive-post-title {
+    #group .post-title {
         width: 84%;
     }
 }
-.archive a {
+#group a {
     color: #2a363b;
 }
-.archive a:hover {
+#group a:hover {
     color: #bf4d28;
     text-decoration: none;
 }

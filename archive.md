@@ -2,9 +2,8 @@
 layout: page
 title: Archives
 ---
-<ul class="archive">
+<ul class="archive" id="group">
   {% for post in site.posts %}
-
     {% unless post.next %}
       <h3>{{ post.date | date: '%Y' }}</h3>
     {% else %}
@@ -17,7 +16,7 @@ title: Archives
 
     <li>    
         <div class="month">{{ post.date | date:"%b %-d" }}</div>
-        <div class="archive-post-title"><a href="{{ post.url | relative_url}}">{{ post.title }}</a></div>
+        <div class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
     </li>
   {% endfor %}
 </ul>
