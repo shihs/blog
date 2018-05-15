@@ -3,7 +3,7 @@ layout: post
 title: "[Python][爬蟲]利用python下載zip檔並解壓縮"
 date: 2017-05-18 16:19
 author: "Shihs"
-category: Python
+category: [Python, 爬蟲]
 ---
 
 下載檔案是使用package urllib2<br>

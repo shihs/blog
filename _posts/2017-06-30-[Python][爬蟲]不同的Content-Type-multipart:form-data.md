@@ -3,7 +3,7 @@ layout: post
 title: "[Python][爬蟲]不同的 Content-Type (multipart/form-data)"
 date: 2017-06-30 10:26
 author: "Shihs"
-category: Python
+category: [Python, 爬蟲]
 ---
 
 這次要爬的目標是[台灣精品獎得獎名單](http://www.taiwanexcellence.org/index.php/awards/now/cross/1)。<br>

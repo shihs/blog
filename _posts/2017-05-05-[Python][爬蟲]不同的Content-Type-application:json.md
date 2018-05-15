@@ -3,7 +3,7 @@ layout: post
 title: "[Python][爬蟲]不同的 Content-Type (application/json)"
 date: 2017-05-05 15:45
 author: "Shihs"
-category: Python
+category: [Python, 爬蟲]
 ---
 
 目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br>

@@ -27,11 +27,11 @@ title: Category
     {% assign remain = temp | modulo: 4 %}
 
     {% if category[1].size == max %}
-      {% assign size = base | plus: 5 %}
+      {% assign size = base | plus: 6 %}
     {% elsif remain == 0 %}
-      {% assign size = base | plus: 8 %}
+      {% assign size = base | plus: 7 %}
     {% elsif remain == 1 or remain == 2 %}
-      {% assign size = base | plus: 6 | append: '.5' %}
+      {% assign size = base | plus: 7 | append: '.5' %}
     {% else %}
       {% assign size = base | plus: 6 %}
     {% endif %}

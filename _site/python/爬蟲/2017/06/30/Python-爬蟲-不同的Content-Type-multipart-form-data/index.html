@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">I share some stuff.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p class = "rights">&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[Python][爬蟲]不同的 Content-Type (multipart/form-data)</h1>
+  <span class="post-date">June 30, 2017</span>
+  <p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1">台灣精品獎得獎名單</a>。<br /></p>
+
+<p>我想要爬取的條件是，
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+
+<p>這時候會猜測這應該是個post的requests。</p>
+
+<p>果然，在按下查詢後，<br />
+出現了一個cross_list的可疑人物，<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/iJbMP5kdRba31P5IoKG0_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+
+<p>因為是post，<br />
+所以會期望在headers裡找到 “Form Data”，<br />
+這裡面應會藏著post需要的參數。<br /></p>
+
+<p>但不幸的是，什麼也沒有，<br />
+只找到長得像這樣的”Request Payload”<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+
+<p>然後Content-Type是multipart/form-data<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/SEe7tcApQfCSkEeYEgml_content-type.PNG" alt="content-type.PNG" /></p>
+
+<p>其實，我們平常需要的data form裡的資料就藏在Request Payload裡。<br />
+抓取的方式是，<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+
+<p>以這行為例，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>------WebKitFormBoundaryTaDJAA82fTd3ug3W
+Content-Disposition: form-data; name="awards[]"
+
+1
+</code></pre></div></div>
+<p>name後的 “award[]” 就會是dictionary的key，
+底下的 1 ，就會是value，
+所以就會變成</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+<span class="s">"awards[]"</span> <span class="o">=</span> <span class="s">"1"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>所以就把Request Payload所有的資訊寫成</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
+	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
+	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"Z"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>但這樣寫完會覺得非常不合理，<br />
+因為會有一堆同樣的key但給予不同的value，<br />
+也就是說會key會一直被新的value取代。<br /></p>
+
+<p>我當時的想法是，<br />
+看到 [] 就會很想要在裡面塞數字順位，<br />
+果然，從0開始，將相同的key編號，<br />
+就成功了。<br /></p>
+
+<p>所以這樣送出requests，</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#爬取台灣精品得獎名單http://www.taiwanexcellence.org/index.php/awards/now/cross_list/1/2017/2/1</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.taiwanexcellence.org/index.php/awards/now/send_search/1/2017/2/1/cross_list"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
+	<span class="s">"awards[0]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
+	<span class="s">"awards[1]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+	<span class="s">"awards[2]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
+	<span class="s">"years[0]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
+	<span class="s">"years[1]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
+	<span class="s">"industry[0]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
+	<span class="s">"industry[1]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
+	<span class="s">"industry[2]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
+	<span class="s">"industry[3]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
+	<span class="s">"industry[4]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
+	<span class="s">"industry[5]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
+	<span class="s">"industry[6]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
+	<span class="s">"industry[7]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
+	<span class="s">"industry[8]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
+	<span class="s">"industry[9]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
+	<span class="s">"industry[10]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
+	<span class="s">"industry[11]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
+	<span class="s">"industry[12]"</span><span class="p">:</span><span class="s">"Z"</span>
+<span class="p">}</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p><a href="https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py">完整的代碼</a></p>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
+            [R]如何讀取Excel檔案
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>Feb 17, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

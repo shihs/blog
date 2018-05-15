@@ -3,7 +3,7 @@ layout: post
 title: "[Excel][VBA]寄出內文含圖檔的outlook信件"
 date: 2017-07-05 16:12
 author: "Shihs"
-category: Excel
+category: [Excel, VBA]
 ---
 
 這裡要介紹如何使用Excel VBA<br>

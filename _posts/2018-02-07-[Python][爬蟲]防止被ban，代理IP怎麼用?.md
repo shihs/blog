@@ -3,7 +3,7 @@ layout: post
 title: "[Python][爬蟲]防止被ban，代理IP怎麼用?"
 date: 2018-02-07 11:47
 author: "Shihs"
-category: Python
+category: [Python, 爬蟲]
 ---
 
 

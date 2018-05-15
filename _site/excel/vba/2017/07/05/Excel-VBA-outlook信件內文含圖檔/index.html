@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">I share some stuff.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+
+    <p class = "rights">&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[Excel][VBA]寄出內文含圖檔的outlook信件</h1>
+  <span class="post-date">July 5, 2017</span>
+  <p>這裡要介紹如何使用Excel VBA<br />
+在信件內容包含截取sheet中的特定欄位區塊，<br />
+並將此區塊變為圖檔包含在內文中寄出。<br /></p>
+
+<p>現在要截取一份長這樣的檔案<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/2007909/E6x1745kT82DMCqRbLq2_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" />
+有兩種方法。<br /></p>
+
+<p>第一種方法是，<br />
+先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。<br /></p>
+
+<pre><code class="language-VBA">Sub PrintScreen()
+
+      '複製工作表要存圖檔的範圍
+        Sheets("Sheet1").Select
+        Set rng = Range("A1:B3")
+        rng.CopyPicture
+
+      ' Excel 存圖檔的精簡程式碼。
+        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  '新增 圖表
+            .Chart.Paste                                                '貼上 圖片
+            .Chart.Export Filename:="test.PNG", Filtername:="PNG" '匯出 圖片
+            .Delete                                                     '刪除 圖表
+        End With
+
+End Sub
+
+Sub SendMail_1()
+    
+    Dim objOutlook As Object
+    Dim objMail As Object
+    
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+    
+    With objMail
+        .to = "address@email.com"
+        .Subject = "Subject"
+        .Body = "mail body"
+        .HTMLbody = .HTMLbody &amp; "&lt;br&gt;&lt;B&gt;Embedded Image:&lt;/B&gt;&lt;br&gt;" _
+                &amp; "&lt;img src='test.PNG'" &amp; "width='250' height='100'&gt;&lt;br&gt;" _
+                &amp; "&lt;br&gt;Best Regards, &lt;br&gt;Sumit&lt;/font&gt;&lt;/span&gt;"
+       ' objMail.Attachments.Add "test.PNG"       ' 使用附件檔案
+       '.Display     ' 可以編輯郵件內容，再按下 傳送 鍵。
+       '.Save         ' to save a copy in the drafts folder
+        .Send        ' 直接送出郵件
+        
+    End With       
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+    
+End Sub
+
+</code></pre>
+
+<p>第二種方法是，<br />
+直接截取區要的區塊，變成圖檔，然後貼到信件內容。</p>
+
+<pre><code class="language-VBA">Sub SendMail_2()
+
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+
+    ' mail body
+    strbody = "mail body&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"
+
+    'Copy range of interest
+    Dim r As Range
+    Set r = Sheets("Sheet1").Range("A1:B3")
+    r.Copy
+
+    'Paste as picture in sheet and cut immediately
+    Dim p As Picture
+    Set p = ActiveSheet.Pictures.Paste
+    p.Cut
+        
+    With objMail
+        .to = "address@email.com"
+        '.cc =
+        '.bcc = ""
+        .Subject = "Subject"
+        .HTMLbody = strbody
+        '.Display
+        
+    End With
+
+
+    'Get its Word editor
+    objMail.Display
+    Dim wordDoc As Object
+    Set wordDoc = objMail.GetInspector.WordEditor
+
+    'Paste picture
+    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste
+    
+    'send mail
+    objMail.Send
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+
+End Sub
+
+</code></pre>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
+            [R]如何讀取Excel檔案
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>Feb 17, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>
