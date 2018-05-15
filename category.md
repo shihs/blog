@@ -42,7 +42,7 @@ title: Category
       {% assign color = 8 | minus: base %}
     {% endif %}
     
-    <a href="#{{ category[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ category | first }} ({{ category | last | size }})</a>
+    <a href="#{{ category[0] }}"  onMouseOver="this.style.color='#bf4d28'" onMouseOut="this.style.color='#{{ color }}{{ color }}{{ color }}'" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ category | first }} ({{ category | last | size }})</a>
     <!-- <a href="#{{ category[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ category[0].}} ({{ category[-1].size }})</a> -->
   {% endfor %}
 </div>

@@ -1,4 +1,4 @@
-/* Archives */
+/* Group */
 #group {
     margin-left: -3%;
 }
@@ -38,6 +38,12 @@
     color: #bf4d28;
     text-decoration: none;
 }
+
+#cloud a:hover {
+    color: #bf4d28;
+    text-decoration: none;
+}
+
 /* End of Archive */
 
 
@@ -68,3 +74,16 @@
     -khtml-border-radius: 50%;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
