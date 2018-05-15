@@ -132,8 +132,20 @@
     <div class="content container">
       <div class="post">
   <h1 class="post-title">[R]如何刪除 <\U+00A0></h1>
-  <span class="post-date">January 17, 2018</span>
-  <p>在資料中有些含有空白的文字讀進R後會變成</p>
+  <div>
+    <span class="post-date">January 17, 2018</span>
+    
+    <span class="post-categories">
+      <i class="fas fa-tag"></i>
+      
+      
+        <a href="/blog/category/#R">R</a>
+        
+      
+    </span>
+  </div>
+  <div>
+    <p>在資料中有些含有空白的文字讀進R後會變成</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
 <p>而且不管用什麼方式都取代不了這個符號，
@@ -145,6 +157,7 @@
 </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
+  </div>
 </div>
 
 <div class="related">
