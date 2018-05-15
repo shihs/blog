@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-15T14:15:23+08:00</updated>
+ <updated>2018-05-15T14:22:17+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -1079,9 +1079,9 @@ End Sub
  
  <entry>
    <title>[Python][爬蟲]不同的 Content-Type (multipart/form-data)</title>
-   <link href="http://localhost:4000/r/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
+   <link href="http://localhost:4000/python/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
    <updated>2017-06-30T10:26:00+08:00</updated>
-   <id>http://localhost:4000/r/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
+   <id>http://localhost:4000/python/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
    <content type="html">&lt;p&gt;這次要爬的目標是&lt;a href=&quot;http://www.taiwanexcellence.org/index.php/awards/now/cross/1&quot;&gt;台灣精品獎得獎名單&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;我想要爬取的條件是，
