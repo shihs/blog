@@ -1,4 +1,7 @@
 /* Archives */
+#group {
+    margin-left: -3%;
+}
 #group h3 {
     margin-top: 1.2rem;
 }
@@ -11,9 +14,10 @@
     display: inline-block;
 }
 #group .month {
-    width: 10%;
+    width: 11%;
     vertical-align: top;
     color: #9a9a9a;
+    /*margin-right: 2%;*/
 }
 #group .post-title {
     width: 88%;
