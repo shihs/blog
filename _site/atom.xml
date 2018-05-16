@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-16T19:18:17+08:00</updated>
+ <updated>2018-05-16T20:32:18+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -13,12 +13,12 @@
 
  
  <entry>
-   <title>[R]如何讀取Excel檔案</title>
+   <title>[R]如何使用R讀取Excel檔案</title>
    <link href="http://localhost:4000/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/"/>
    <updated>2018-02-26T18:54:00+08:00</updated>
    <id>http://localhost:4000/r/2018/02/26/[R]如何讀取Excel檔案</id>
    <content type="html">&lt;p&gt;很多資料會使用excel檔案儲存，&lt;br /&gt;
-這邊介紹主要三種常用的附檔名。&lt;br /&gt;&lt;/p&gt;
+這邊介紹如何使用R讀取主要三種常用的附檔名。&lt;br /&gt;&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;csv&lt;/li&gt;
   &lt;li&gt;xlsx&lt;/li&gt;
