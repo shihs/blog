@@ -353,12 +353,16 @@ tbody tr:nth-child(odd) th {
 
 /* Meta data line below post title */
 .post-date {
-  display: block;
-  margin-top: -.3rem;
-  margin-bottom: 1rem;
-  color: #9a9a9a;
-  font-size: .8rem;
+  margin-right: 1.2%;
 }
+
+.post-info {
+  margin-top: 1%;
+  margin-bottom: 2.8%;
+    color: #9a9a9a;
+    font-size: .8rem;
+}
+
 .bookmark {
   color: #9a9a9a;
   font-size: .8rem;
