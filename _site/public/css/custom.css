@@ -3,7 +3,8 @@
     margin-left: -3%;
 }
 #group h3 {
-    margin-top: 1.2rem;
+    /*margin-top: 1.2rem;*/
+    margin-top: 2%
 }
 #group li {
     list-style: none;
@@ -38,7 +39,9 @@
     color: #bf4d28;
     text-decoration: none;
 }
-
+#cloud {
+  margin-top: 1.5%;
+}
 #cloud a:hover {
     color: #bf4d28;
     text-decoration: none;
