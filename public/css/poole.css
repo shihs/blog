@@ -358,7 +358,9 @@ tbody tr:nth-child(odd) th {
   /*color: #9a9a9a;
   font-size: .8rem;*/
 }
-
+.comment-count {
+  padding-right: 1.8%;
+}
 .post-info {
   margin-top: 1%;
   margin-bottom: 2.8%;
