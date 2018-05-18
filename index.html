@@ -35,12 +35,7 @@ title: Home
     <div class="post-excerpt">{{ post.excerpt }}</div>
     <div class="bookmark">
       <i class="far fa-comments"></i>
-
-        
-        <!-- <a class="tag-wrapper" href="/tags/{{ tag }}" rel="tooltip" title="View posts tagged with &quot;{{ tag }}&quot;">
-          <span class="tags">{{ post.category }}</span>
-        </a> -->
-       
+      <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}">{% include comment_count.html %}</a>  
 
     </div>
     
