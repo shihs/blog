@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+comments: true
 ---
 
 <div class="posts">
@@ -34,8 +35,14 @@ title: Home
     <!-- {{ post.content }} -->
     <div class="post-excerpt">{{ post.excerpt }}</div>
     <div class="bookmark">
-      <i class="far fa-comments"></i>
-      <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}">{% include comment_count.html %}</a>  
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+
+      
+        {% include comments_count.html %}
+      <span>
+        <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">  0 comments</a>
+      </span>
 
     </div>
     

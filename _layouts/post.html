@@ -6,7 +6,11 @@ comments: true
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <div class="post-info">
-    <span class="post-date">{{ page.date | date: "%B %-d, %Y" }}</span>   
+    <span class="post-date">{{ page.date | date: "%B %-d, %Y" }}</span> 
+    <!-- <span>
+      <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">0 comments</a>
+    </span> -->
+  
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <i class="far fa-book"></i>
