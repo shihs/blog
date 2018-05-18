@@ -1,16 +1,15 @@
 ---
 layout: default
-comments: true
 ---
 
 <div class="post">
   <h1 class="post-title">{{ page.title }}</h1>
   <div class="post-info">
     <span class="post-date">{{ page.date | date: "%B %-d, %Y" }}</span> 
-    <!-- <span>
-      <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">0 comments</a>
-    </span> -->
-  
+    <span>
+        <i class="fas fa-comments"></i>
+        <a href="{{ site.baseurl }}/{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">0 comments</a>
+    </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <i class="far fa-book"></i>
@@ -20,7 +19,7 @@ comments: true
         {% assign categories = page.categories %}
       {% endif %}
       {% for category in categories %}
-        <a href="{{site.baseurl}}/category/#{{category|slugize}}">{{category}}</a>
+        <a href="{{ site.baseurl }}/category/#{{ category|slugize }}">{{category}}</a>
         {% unless forloop.last %}&nbsp;{% endunless %}
       {% endfor %}
     </span>

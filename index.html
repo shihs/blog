@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Home
-comments: true
 ---
 
 <div class="posts">
@@ -37,11 +36,9 @@ comments: true
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
-
-      
-        {% include comments_count.html %}
       <span>
-        <a href="{{site.baseurl}}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">  0 comments</a>
+        {% include comments_count.html %}
+        <a href="{{ site.baseurl }}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}">0 comments</a>
       </span>
 
     </div>
