@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[R]使用 R 寄Outlook Email"
 date: 2018-02-26 18:45
 author: "Shihs"
