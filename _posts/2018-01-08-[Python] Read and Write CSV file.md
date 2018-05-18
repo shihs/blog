@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python]Read and Write CSV file"
 date: 2018-01-08 11:32
 author: "Shihs"

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]不同的 Content-Type (multipart/form-data)"
 date: 2017-06-30 10:26
 author: "Shihs"

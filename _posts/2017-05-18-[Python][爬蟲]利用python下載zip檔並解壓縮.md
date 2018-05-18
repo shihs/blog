@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]利用python下載zip檔並解壓縮"
 date: 2017-05-18 16:19
 author: "Shihs"

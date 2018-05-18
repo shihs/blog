@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Excel][VBA]寄出內文含圖檔的outlook信件"
 date: 2017-07-05 16:12
 author: "Shihs"

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]不同的 Content-Type (application/json)"
 date: 2017-05-05 15:45
 author: "Shihs"

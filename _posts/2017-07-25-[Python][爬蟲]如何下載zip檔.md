@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]如何下載 zip 檔"
 date: 2017-07-25 11:17
 author: "Shihs"

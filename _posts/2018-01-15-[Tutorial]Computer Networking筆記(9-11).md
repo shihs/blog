@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Tutorial]Computer Networking筆記(9-11)"
 date: 2018-01-15 22:40
 author: "Shihs"

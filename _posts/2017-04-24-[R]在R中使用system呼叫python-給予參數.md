@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[R]在R中使用system呼叫python-給予參數"
 date: 2017-04-24 11:22
 author: "Shihs"

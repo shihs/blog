@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python]使用 python 下載 gmail 附件"
 date: 2016-07-08 21:02
 author: "Shihs"

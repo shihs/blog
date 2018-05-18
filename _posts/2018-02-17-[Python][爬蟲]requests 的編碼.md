@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]requests 的編碼"
 date: 2018-02-17 19:01
 author: "Shihs"

@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向"
 date: 2018-01-08 15:12
 author: "Shihs"

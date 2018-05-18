@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[Python]呼叫其他.py的function"
 date: 2018-02-02 16:56
 author: "Shihs"

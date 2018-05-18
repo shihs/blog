@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: "[R]Error when saving xlsx workbook with package openxlsx"
 date: 2017-06-22 11:55
 author: "Shihs"
