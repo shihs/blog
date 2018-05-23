@@ -4,13 +4,23 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-20T12:27:57+08:00</updated>
+ <updated>2018-05-23T15:09:45+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title></title>
+   <link href="http://localhost:4000/2018/05/23/2018-05-23-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/"/>
+   <updated>2018-05-23T15:09:45+08:00</updated>
+   <id>http://localhost:4000/2018/05/23/2018-05-23-下載與安裝Python及pip套件</id>
+   <content type="html">&lt;p&gt;Python[https://zh.wikipedia.org/wiki/Python]是一個&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>[R]如何使用R讀取Excel檔案</title>
