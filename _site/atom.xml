@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-23T16:11:36+08:00</updated>
+ <updated>2018-05-23T18:11:22+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -17,9 +17,9 @@
    <link href="http://localhost:4000/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/"/>
    <updated>2018-05-23T15:25:00+08:00</updated>
    <id>http://localhost:4000/python/2018/05/23/[Python]下載與安裝Python及pip套件</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/Python&quot;&gt;Python&lt;/a&gt; 是&lt;/p&gt;
+   <content type="html">&lt;p&gt;安裝前可以先認識 &lt;a href=&quot;https://zh.wikipedia.org/wiki/Python&quot;&gt;Python&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件&lt;/p&gt;
+&lt;p&gt;這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。&lt;/p&gt;
 
 &lt;p&gt;主要步驟其實就是四個：&lt;/p&gt;
 &lt;ol&gt;
@@ -31,11 +31,62 @@
 
 &lt;h3 id=&quot;1下載-python27&quot;&gt;1.下載 Python2.7&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.python.org/downloads/release/python-2714/&quot;&gt;Python2.7.14載點&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.python.org/downloads/release/python-2714/&quot;&gt;Python2.7.14載點&lt;/a&gt;
+根據自己電腦是32位元還是64位元選擇要下載的檔案
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20downloads.jpg&quot; alt=&quot;python downloads.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下載下來後的檔案（我的電腦是32位元）
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20installation.jpg&quot; alt=&quot;python installation.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;點兩下安裝，就是一直按下一步就對了
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20install%20step.jpg&quot; alt=&quot;python install step.jpg&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;2設定環境變數&quot;&gt;2.設定環境變數&lt;/h3&gt;
-&lt;h3 id=&quot;3下載get-pippy&quot;&gt;3.下載get-pip.py&lt;/h3&gt;
+&lt;p&gt;設定環境變數的目的是，在執行 Python 時讓系統可以根據環境變數底下的路徑依序去找 Python 程式，而不會不知道要如何執行 Python。&lt;/p&gt;
+
+&lt;p&gt;設定環境變數步驟，&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;電腦(右鍵)-&amp;gt;內容
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/environment.jpg&quot; alt=&quot;environment.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;1.進階系統設定 -&amp;gt; 2.環境變數 -&amp;gt; 3.點選PATH-&amp;gt;編輯
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/environment%20variable.jpg&quot; alt=&quot;environment variable.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在變數最後加上安裝路徑「;C:\Python27」（這是預設的安裝路徑，如果安裝過程中有更改位置，這邊要改成安裝的路徑）
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20path.jpg&quot; alt=&quot;python path.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上步驟完成之後在 cmd 輸入 python，就開始執行 Python 了！ 
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20test.jpg&quot; alt=&quot;python test.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 用來下載其他套件非常好用的工具。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;當我們要下載完 pip 後，
+未來要下載套件只需要在 cmd 輸入指令&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install packagename
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;也許現在還是會有點困惑，但未來真正開始寫 Python 就會明白為什麼大家下載完 Python 都會接著安裝 pip 了。&lt;/p&gt;
+
+&lt;h3 id=&quot;3下載-get-pippy&quot;&gt;3.下載 get-pip.py&lt;/h3&gt;
+&lt;p&gt;先下載 &lt;a href=&quot;http://localhost:4000/blog/downloads/get-pip.py&quot;&gt;get-pip.py&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;接著開啟 cmd，使用 cd 將目前位置移到 get-pip.py 的路徑底下，並輸入&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python get-pip.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/run%20pip_get.jpg&quot; alt=&quot;run pip_get.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這時候只差最後一步了&lt;/p&gt;
+
 &lt;h3 id=&quot;4設定環境變數&quot;&gt;4.設定環境變數&lt;/h3&gt;
+&lt;p&gt;這個步驟與剛剛第2個步驟一樣，不過現在要加上的路徑是「;C:\Python27\Script」
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/python%20script%20path.jpg&quot; alt=&quot;python script path.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;
+接著可以使用 pip install 安裝看看套件，如果沒有問題，一切就大功告成！&lt;/p&gt;
 
 </content>
  </entry>
