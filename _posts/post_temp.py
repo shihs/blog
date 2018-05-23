@@ -5,7 +5,7 @@ import datetime
 
 title = raw_input("標題：")
 date = str(datetime.datetime.now())[:16]
-temp = "---\nlayout: post\ncomments: true\ntitle: " + '"' + title + '"'+ "\ndate: " + date + '\nauthor: "Shihs"' + "\nCategroy:[]\n---"
+temp = "---\nlayout: post\ncomments: true\ntitle: " + '"' + title + '"'+ "\ndate: " + date + '\nauthor: "Shihs"' + "\ncategory: []\n---"
 
 print temp
 

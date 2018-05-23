@@ -138,58 +138,25 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[Git] 提交一個更新</h1>
+  <h1 class="post-title">[Python]下載與安裝Python及pip套件</h1>
   <div class="post-info">
-    <span class="post-date">July 26, 2017</span> 
+    <span class="post-date">May 23, 2018</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/#disqus_thread" data-disqus-identifier="/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/">0 Comments</a>
+        <a class="comment-count" href="/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread" data-disqus-identifier="/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <i class="far fa-book"></i>
       
       
-        <a target="_blank" href="/blog/category/#Git">Git</a>
+        <a target="_blank" href="/blog/category/#Python">Python</a>
         
       
     </span>
   </div>
   <div>
-    <p>以下要介紹最基本的同步，
-檔案在本機被修改或是增加後push到github。</p>
-
-<p><b>1.檢視所有檔案狀態</b></p>
-<pre><code class="language-git">$ git status  #修改或是增加的檔案會呈現紅字
-</code></pre>
-<p><br /></p>
-
-<p><b>2.告知git需要commit的檔案</b></p>
-<pre><code class="language-git">$ git add &lt;file&gt;  #提交一個新增加的檔案
-$ git add -A  #stages All
-$ git add .  #stages new and modified, without deleted
-$ git add -u  #stages modified and deleted, without new
-</code></pre>
-<p>add完後用 <code class="highlighter-rouge">git status</code> 會發現原本的紅字變成綠字
-<br /></p>
-
-<p><b>3.commit變化</b></p>
-<pre><code class="language-git">$ git commit
-</code></pre>
-<p>這時候需要記錄提交的訊息
-<br /></p>
-
-<p><b>4.push同步</b></p>
-<pre><code class="language-git">$ git push
-</code></pre>
-<p><br /></p>
-
-<p>主要流程，
-<code class="highlighter-rouge">增加、修改檔案</code> &gt; <code class="highlighter-rouge">git add</code> &gt; <code class="highlighter-rouge">git commit</code> &gt; <code class="highlighter-rouge">git push</code>
-透過<code class="highlighter-rouge">git status</code>可以查看目前的狀態</p>
-
-<p><a href="https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html">參考</a></p>
-
+    
 
   </div>
 </div>
@@ -210,7 +177,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/';
+        this.page.identifier = '/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -230,15 +197,6 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
-            [Python]下載與安裝Python及pip套件
-            <small>May 23, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
             [R]如何使用R讀取Excel檔案
             <small>Feb 26, 2018</small>
@@ -251,6 +209,15 @@ s.setAttribute('data-timestamp', +new Date());
           <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
             [R]使用 R 寄Outlook Email
             <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+            [Python][爬蟲]requests 的編碼
+            <small>Feb 17, 2018</small>
           </a>
         </h3>
       </li>
