@@ -172,7 +172,7 @@
 <p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
 </code></pre></div></div>
-<p>那就是碰上了<a href="https://shihs.github.io/blog/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">編碼錯誤</a>，<br />
+<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/">編碼錯誤</a>，<br />
 這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
@@ -253,11 +253,11 @@
 <p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
 發現可以讀的檔案是<em>Macintosh(CR)</em></p>
 
-<p><img src="http://localhost:4000/blog/img/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
+<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
 
 <p>不能讀的檔案是<em>Unix(LF)</em></p>
 
-<p><img src="http://localhost:4000/blog/img/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
+<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
 
 <p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
 openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
@@ -334,7 +334,7 @@ s.setAttribute('data-timestamp', +new Date());
       <li>
         <h3>
           <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
-            [Python]下載與安裝Python及pip套件
+            [Python]下載與安裝 Python2.7 及 pip 套件
             <small>May 23, 2018</small>
           </a>
         </h3>
