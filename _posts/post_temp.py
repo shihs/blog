@@ -9,7 +9,7 @@ temp = "---\nlayout: post\ncomments: true\ntitle: " + '"' + title + '"'+ "\ndate
 
 print temp
 
-with open(date[:10]+ "-" + title + ".md", "w") as f:
+with open("/Users/minchunshih/Documents/My Page/blog/_posts/" + date[:10]+ "-" + title + ".md", "w") as f:
 	f.write(temp)
 
 
