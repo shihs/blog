@@ -59,10 +59,10 @@ category: [Python]
 <br>
 基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？<br>
 
-Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 用來下載其他套件非常好用的工具。<br>
+Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 是用來下載其他套件非常好用的工具。<br>
 
-當我們要下載完 pip 後，
-未來要下載套件只需要在 cmd 輸入指令 
+當我們下載完 pip 後，
+未來下載套件只需要在 cmd 輸入指令就能搞定。
 ```
 pip install packagename
 ```
@@ -90,10 +90,11 @@ python get-pip.py
 
 <br>
 <br>
-接著可以使用 pip install 安裝看看套件，如果沒有問題，一切就大功告成！
-
-
-
+接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件
+```
+pip install requests
+```
+如果沒有問題，一切就大功告成！<br>
 
 
 

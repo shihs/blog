@@ -141,6 +141,183 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">
+        [Excel][VBA]寄出內文含圖檔的outlook信件
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 5, 2017</span> -->
+      <span class="post-date">July 5, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <i class="far fa-book"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Excel">Excel</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#VBA">VBA</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這裡要介紹如何使用Excel VBA<br />
+在信件內容包含截取sheet中的特定欄位區塊，<br />
+並將此區塊變為圖檔包含在內文中寄出。<br /></p>
+
+<p>現在要截取一份長這樣的檔案<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/2007909/E6x1745kT82DMCqRbLq2_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" />
+有兩種方法。<br /></p>
+
+<p>第一種方法是，<br />
+先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。<br /></p>
+
+<pre><code class="language-VBA">Sub PrintScreen()
+
+      '複製工作表要存圖檔的範圍
+        Sheets("Sheet1").Select
+        Set rng = Range("A1:B3")
+        rng.CopyPicture
+
+      ' Excel 存圖檔的精簡程式碼。
+        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  '新增 圖表
+            .Chart.Paste                                                '貼上 圖片
+            .Chart.Export Filename:="test.PNG", Filtername:="PNG" '匯出 圖片
+            .Delete                                                     '刪除 圖表
+        End With
+
+End Sub
+
+Sub SendMail_1()
+    
+    Dim objOutlook As Object
+    Dim objMail As Object
+    
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+    
+    With objMail
+        .to = "address@email.com"
+        .Subject = "Subject"
+        .Body = "mail body"
+        .HTMLbody = .HTMLbody &amp; "&lt;br&gt;&lt;B&gt;Embedded Image:&lt;/B&gt;&lt;br&gt;" _
+                &amp; "&lt;img src='test.PNG'" &amp; "width='250' height='100'&gt;&lt;br&gt;" _
+                &amp; "&lt;br&gt;Best Regards, &lt;br&gt;Sumit&lt;/font&gt;&lt;/span&gt;"
+       ' objMail.Attachments.Add "test.PNG"       ' 使用附件檔案
+       '.Display     ' 可以編輯郵件內容，再按下 傳送 鍵。
+       '.Save         ' to save a copy in the drafts folder
+        .Send        ' 直接送出郵件
+        
+    End With       
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+    
+End Sub
+
+</code></pre>
+
+<p>第二種方法是，<br />
+直接截取區要的區塊，變成圖檔，然後貼到信件內容。</p>
+
+<pre><code class="language-VBA">Sub SendMail_2()
+
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+
+    ' mail body
+    strbody = "mail body&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"
+
+    'Copy range of interest
+    Dim r As Range
+    Set r = Sheets("Sheet1").Range("A1:B3")
+    r.Copy
+
+    'Paste as picture in sheet and cut immediately
+    Dim p As Picture
+    Set p = ActiveSheet.Pictures.Paste
+    p.Cut
+        
+    With objMail
+        .to = "address@email.com"
+        '.cc =
+        '.bcc = ""
+        .Subject = "Subject"
+        .HTMLbody = strbody
+        '.Display
+        
+    End With
+
+
+    'Get its Word editor
+    objMail.Display
+    Dim wordDoc As Object
+    Set wordDoc = objMail.GetInspector.WordEditor
+
+    'Paste picture
+    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste
+    
+    'send mail
+    objMail.Send
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+
+End Sub
+
+</code></pre>
+
+ -->
+    <div class="post-excerpt"><p>這裡要介紹如何使用Excel VBA<br />
+在信件內容包含截取sheet中的特定欄位區塊，<br />
+並將此區塊變為圖檔包含在內文中寄出。<br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread" data-disqus-identifier="/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">
         [Python][爬蟲]不同的 Content-Type (multipart/form-data)
       </a>
@@ -575,106 +752,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/">
-        [Python][爬蟲]如何刪除網頁中的&nbsp
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 17, 2017</span> -->
-      <span class="post-date">May 17, 2017</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <i class="far fa-book"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>在爬取網頁時偶爾會碰到<br /></p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ni">&amp;nbsp;</span>
-</code></pre></div></div>
-
-<p>而且怎麼樣都刪不掉也取代不掉，<br />
-使用strip()仍然會有空白。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
-</code></pre></div></div>
-
-<p>假如現在有一個網頁內容包含</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;td&gt;</span>
-	E601010<span class="ni">&amp;nbsp;</span>
-	電器承裝業
-	<span class="nt">&lt;br&gt;</span>
-	E601020<span class="ni">&amp;nbsp;</span>
-	電器安裝業
-	<span class="nt">&lt;br&gt;</span>													
-<span class="nt">&lt;/td&gt;</span>
-</code></pre></div></div>
-
-<p>已經抓出td tag，<br />
-接著可以使用</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這時候td type會變成str，<br />
-再使用replace取代就可以刪除空白了。<br /></p>
-
- -->
-    <div class="post-excerpt"><p>在爬取網頁時偶爾會碰到<br /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/">0 Comments</a>
       </span>
 
     </div>

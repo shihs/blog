@@ -4,13 +4,90 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-23T18:11:22+08:00</updated>
+ <updated>2018-05-24T12:13:41+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[Python]使用 pyinstaller 套件打包 .py 檔</title>
+   <link href="http://localhost:4000/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/"/>
+   <updated>2018-05-24T11:05:00+08:00</updated>
+   <id>http://localhost:4000/python/2018/05/24/[Python]使用pyinstaller套件打包.py檔</id>
+   <content type="html">&lt;p&gt;當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用這在他們的電腦下載 Python 等執行檔案時需要的套件，但是，&lt;strong&gt;很麻煩！！！&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會乾脆放棄，這也減少了讓妳/你的程式給更多人使用的機會。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;而 &lt;strong&gt;pyinstaller&lt;/strong&gt; 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
+&lt;p&gt;pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;安裝&quot;&gt;安裝&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install pyinstaller
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Mac&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip install pyinstaller
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;但我這邊在安裝時出現了一大串的錯誤，但內容包括 
+&lt;em&gt;[Errno 1] Operation not permitted&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;後來我參考&lt;a href=&quot;https://blog.csdn.net/helloxiaozhe/article/details/78603183&quot;&gt;這裡&lt;/a&gt;把指令改成&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip install pyinstaller --upgrade --ignore-installed
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;就成功安裝了。&lt;br /&gt;
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;打包-py-檔&quot;&gt;打包 .py 檔&lt;/h2&gt;
+&lt;p&gt;假如現在要打包一個 test.py 檔
+&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyinstall -F test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;完成後會產生三個檔案，&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;build 資料夾&lt;/li&gt;
+  &lt;li&gt;dist 資料夾&lt;/li&gt;
+  &lt;li&gt;test.spec 檔&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。&lt;br /&gt;
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Mac&lt;/strong&gt;&lt;br /&gt;
+Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyinstall -F test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;打包完後產生出來的檔案也會一樣。&lt;br /&gt;
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/&lt;em&gt;yourusername&lt;/em&gt; 底下。&lt;br /&gt;
+&lt;br /&gt;
+可以試試看在 .py 檔裡增加一行&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;print os.getcwd()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;會發現使用 .exe 執行的結果就會是 /Users/&lt;em&gt;yourusername&lt;/em&gt;，所以檔案才會直接產生在這路徑底下。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;但我想要讓檔案直接產生在桌面，因此我的方法是加上這行&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;os.chdir('/Users/'+os.getlogin()+'/Desktop')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;常用參數&quot;&gt;常用參數&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;pyinstaller -h 查看參數&lt;/li&gt;
+  &lt;li&gt;-F 打包成一個exe文件&lt;/li&gt;
+  &lt;li&gt;–icon=圖標路徑&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;
+關於 pyinstaller 套件，這個&lt;a href=&quot;http://legendtkl.com/2015/11/06/pyinstaller/&quot;&gt;部落格&lt;/a&gt;我覺得說明蠻詳細的。&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>[Python]下載與安裝 Python2.7 及 pip 套件</title>
@@ -61,10 +138,10 @@
 &lt;p&gt;&lt;br /&gt;
 基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 用來下載其他套件非常好用的工具。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 是用來下載其他套件非常好用的工具。&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;當我們要下載完 pip 後，
-未來要下載套件只需要在 cmd 輸入指令&lt;/p&gt;
+&lt;p&gt;當我們下載完 pip 後，
+未來下載套件只需要在 cmd 輸入指令就能搞定。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install packagename
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -86,7 +163,10 @@
 
 &lt;p&gt;&lt;br /&gt;
 &lt;br /&gt;
-接著可以使用 pip install 安裝看看套件，如果沒有問題，一切就大功告成！&lt;/p&gt;
+接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install requests
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果沒有問題，一切就大功告成！&lt;br /&gt;&lt;/p&gt;
 
 </content>
  </entry>

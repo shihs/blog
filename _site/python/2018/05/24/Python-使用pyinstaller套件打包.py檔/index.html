@@ -138,38 +138,92 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[R]在 R 中使用 system 呼叫 python</h1>
+  <h1 class="post-title">[Python]使用 pyinstaller 套件打包 .py 檔</h1>
   <div class="post-info">
-    <span class="post-date">July 8, 2016</span> 
+    <span class="post-date">May 24, 2018</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread" data-disqus-identifier="/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">0 Comments</a>
+        <a class="comment-count" href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <i class="far fa-book"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Python">Python</a>
         
       
     </span>
   </div>
   <div>
-    <p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
+    <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用這在他們的電腦下載 Python 等執行檔案時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
 
-<p>一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會乾脆放棄，這也減少了讓妳/你的程式給更多人使用的機會。<br /></p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
+<br /></p>
 
-<p>這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！</p>
+<h2 id="前提">前提</h2>
+<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
+
+<h2 id="安裝">安裝</h2>
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+</code></pre></div></div>
+
+<p><strong>Mac</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+</code></pre></div></div>
+<p>但我這邊在安裝時出現了一大串的錯誤，但內容包括 
+<em>[Errno 1] Operation not permitted</em></p>
+
+<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183">這裡</a>把指令改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+</code></pre></div></div>
+<p>就成功安裝了。<br />
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
+
+<h2 id="打包-py-檔">打包 .py 檔</h2>
+<p>假如現在要打包一個 test.py 檔
+<strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
+</code></pre></div></div>
+<p>完成後會產生三個檔案，</p>
+<ol>
+  <li>build 資料夾</li>
+  <li>dist 資料夾</li>
+  <li>test.spec 檔</li>
+</ol>
+
+<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
+
+<p><strong>Mac</strong><br />
+Mac的操作基本上和 Windows 指令一樣，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
+</code></pre></div></div>
+<p>打包完後產生出來的檔案也會一樣。<br />
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
+<br />
+可以試試看在 .py 檔裡增加一行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+</code></pre></div></div>
+<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
+
+<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+</code></pre></div></div>
+<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
+
+<h2 id="常用參數">常用參數</h2>
+<ol>
+  <li>pyinstaller -h 查看參數</li>
+  <li>-F 打包成一個exe文件</li>
+  <li>–icon=圖標路徑</li>
+</ol>
+
+<p><br />
+關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/">部落格</a>我覺得說明蠻詳細的。</p>
 
 
   </div>
@@ -191,7 +245,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/';
+        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -211,15 +265,6 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
-            [Python]使用 pyinstaller 套件打包 .py 檔
-            <small>May 24, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
             [Python]下載與安裝 Python2.7 及 pip 套件
             <small>May 23, 2018</small>
@@ -231,6 +276,15 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
             [R]如何使用R讀取Excel檔案
+            <small>Feb 26, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+            [R]使用 R 寄Outlook Email
             <small>Feb 26, 2018</small>
           </a>
         </h3>
