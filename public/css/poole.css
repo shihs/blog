@@ -370,14 +370,15 @@ tbody tr:nth-child(odd) th {
   padding-right: 1.8%;
 }
 .post-info {
-  margin-top: 1%;
-  margin-bottom: 2.8%;
+  margin-top: 1.8%;
+  margin-bottom: 3.2%;
   color: #9a9a9a;
   font-size: .8rem;
 }
 .bookmark {
   color: #9a9a9a;
   font-size: .8rem;
+  margin-top: 5%;
 }
 
 /* Related posts */
