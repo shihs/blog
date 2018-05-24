@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-24T15:34:17+08:00</updated>
+ <updated>2018-05-25T02:57:30+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -89,7 +89,7 @@
 &lt;p&gt;&lt;strong&gt;Mac&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip install pyinstaller
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;但我這邊在安裝時出現了一大串的錯誤，但內容包括 
+&lt;p&gt;但我這邊在安裝時出現了一大串的錯誤，其中內容包括&lt;br /&gt; 
 &lt;em&gt;[Errno 1] Operation not permitted&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;後來我參考&lt;a href=&quot;https://blog.csdn.net/helloxiaozhe/article/details/78603183&quot; target=&quot;_blank&quot;&gt;這裡&lt;/a&gt;把指令改成&lt;/p&gt;
@@ -99,8 +99,9 @@
 安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;打包-py-檔&quot;&gt;打包 .py 檔&lt;/h2&gt;
-&lt;p&gt;假如現在要打包一個 test.py 檔
-&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假如現在要打包一個 test.py 檔&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pyinstall -F test.py
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;完成後會產生三個檔案，&lt;/p&gt;

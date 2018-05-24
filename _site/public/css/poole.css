@@ -332,6 +332,7 @@ tbody tr:nth-child(odd) th {
 .post {
   margin-bottom: 4em;
   font-size: .9rem;
+  padding-top: 1.6%;
 }
 
 .post {
