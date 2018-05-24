@@ -340,6 +340,13 @@ tbody tr:nth-child(odd) th {
     margin-right: -10%;
     padding: 30px 0;
 }
+@media (max-width: 768px) {
+  .post {
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 30px 0;
+}
+}
 
 /* Blog post or page title */
 .page-title,
