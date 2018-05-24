@@ -45,6 +45,7 @@ sudo pip install pyinstaller --upgrade --ignore-installed
 
 ## 打包 .py 檔
 假如現在要打包一個 test.py 檔<br>
+
 **Windows**
 ```
 pyinstall -F test.py
