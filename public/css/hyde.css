@@ -112,6 +112,22 @@ a.sidebar-nav-item:focus {
 .rights {
   font-size: 0.6rem;
 }
+.links {  
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 3%;
+  margin-bottom: -10%;
+  display:block;
+}
+.links img {
+  width: 13%;
+  height: 13%;
+  display: inline;
+}
+.links ul li {
+  display: inline;
+  margin-right:8%;
+}
 
 
 /* Sticky sidebar
