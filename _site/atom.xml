@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-24T12:41:09+08:00</updated>
+ <updated>2018-05-24T12:43:52+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -17,9 +17,9 @@
    <link href="http://localhost:4000/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/"/>
    <updated>2018-05-24T11:05:00+08:00</updated>
    <id>http://localhost:4000/python/2018/05/24/[Python]使用pyinstaller套件打包.py檔</id>
-   <content type="html">&lt;p&gt;當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用這在他們的電腦下載 Python 等執行檔案時需要的套件，但是，&lt;strong&gt;很麻煩！！！&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，&lt;strong&gt;很麻煩！！！&lt;/strong&gt; &lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會乾脆放棄，這也減少了讓妳/你的程式給更多人使用的機會。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;而 &lt;strong&gt;pyinstaller&lt;/strong&gt; 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。&lt;br /&gt;
 &lt;br /&gt;&lt;/p&gt;
