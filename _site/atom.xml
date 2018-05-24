@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2018-05-24T15:08:48+08:00</updated>
+ <updated>2018-05-24T15:25:04+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -19,7 +19,7 @@
    <id>http://localhost:4000/web/css/2018/05/24/[Web][CSS]在不同螢幕解析度下調整css</id>
    <content type="html">&lt;p&gt;除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html&quot;&gt;參考網站&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html&quot; target=&quot;_blank&quot;&gt;參考網站&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;解析度可以這樣區分&quot;&gt;解析度可以這樣區分&lt;/h2&gt;
 &lt;ol&gt;
@@ -92,7 +92,7 @@
 &lt;p&gt;但我這邊在安裝時出現了一大串的錯誤，但內容包括 
 &lt;em&gt;[Errno 1] Operation not permitted&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;後來我參考&lt;a href=&quot;https://blog.csdn.net/helloxiaozhe/article/details/78603183&quot;&gt;這裡&lt;/a&gt;把指令改成&lt;/p&gt;
+&lt;p&gt;後來我參考&lt;a href=&quot;https://blog.csdn.net/helloxiaozhe/article/details/78603183&quot; target=&quot;_blank&quot;&gt;這裡&lt;/a&gt;把指令改成&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip install pyinstaller --upgrade --ignore-installed
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;就成功安裝了。&lt;br /&gt;
@@ -138,7 +138,7 @@ Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;br /&gt;
-關於 pyinstaller 套件，這個&lt;a href=&quot;http://legendtkl.com/2015/11/06/pyinstaller/&quot;&gt;部落格&lt;/a&gt;我覺得說明蠻詳細的。&lt;/p&gt;
+關於 pyinstaller 套件，這個&lt;a href=&quot;http://legendtkl.com/2015/11/06/pyinstaller/&quot; target=&quot;_blank&quot;&gt;部落格&lt;/a&gt;我覺得說明蠻詳細的。&lt;/p&gt;
 
 </content>
  </entry>
@@ -148,7 +148,7 @@ Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
    <link href="http://localhost:4000/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/"/>
    <updated>2018-05-23T15:25:00+08:00</updated>
    <id>http://localhost:4000/python/2018/05/23/[Python]下載與安裝Python及pip套件</id>
-   <content type="html">&lt;p&gt;安裝前可以先認識 &lt;a href=&quot;https://zh.wikipedia.org/wiki/Python&quot;&gt;Python&lt;/a&gt;。&lt;/p&gt;
+   <content type="html">&lt;p&gt;安裝前可以先認識 &lt;a href=&quot;https://zh.wikipedia.org/wiki/Python&quot; target=&quot;_blank&quot;&gt;Python&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。&lt;/p&gt;
 
@@ -246,7 +246,7 @@ Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
 &lt;p&gt;假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&amp;lt;e8&amp;gt;&amp;lt;8a&amp;gt;&amp;lt;b1&amp;gt;?&amp;lt;ae&amp;gt;'
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;那就是碰上了&lt;a href=&quot;https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/&quot;&gt;編碼錯誤&lt;/a&gt;，&lt;br /&gt;
+&lt;p&gt;那就是碰上了&lt;a href=&quot;https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/&quot; target=&quot;_blank&quot;&gt;編碼錯誤&lt;/a&gt;，&lt;br /&gt;
 這時候別緊張，只要加上&lt;strong&gt;fileEncoding&lt;/strong&gt;這個參數就好，&lt;br /&gt;&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read.csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;file.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stringsAsFactors&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileEncoding&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -255,8 +255,8 @@ Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
 &lt;h2 id=&quot;2xlsx&quot;&gt;&lt;strong&gt;2.xlsx&lt;/strong&gt;&lt;br /&gt;&lt;/h2&gt;
 &lt;p&gt;讀取xlsx檔案時依據情況，有兩個套件我會使用，&lt;br /&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf&quot;&gt;openxlsx&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf&quot;&gt;XLConnect&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf&quot; target=&quot;_blank&quot;&gt;openxlsx&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf&quot; target=&quot;_blank&quot;&gt;XLConnect&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;這兩個套件都可以儲存多個sheet，&lt;br /&gt;
@@ -306,7 +306,7 @@ Mac的操作基本上和 Windows 指令一樣，&lt;/p&gt;
 &lt;p&gt;至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。&lt;/p&gt;
 
 &lt;p&gt;一開始想要直接使用openxlsx的dataValidation function，&lt;br /&gt;
-但一直失敗，且找到&lt;a href=&quot;https://rdrr.io/cran/openxlsx/man/dataValidation.html&quot;&gt;這裡&lt;/a&gt;說明 list 這個功能無法發揮，&lt;br /&gt;
+但一直失敗，且找到&lt;a href=&quot;https://rdrr.io/cran/openxlsx/man/dataValidation.html&quot; target=&quot;_blank&quot;&gt;這裡&lt;/a&gt;說明 list 這個功能無法發揮，&lt;br /&gt;
 所以我想到先儲存一個 template，將我需要的資料驗證清單做好，&lt;br /&gt;
 再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。&lt;/p&gt;
 
@@ -358,13 +358,13 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;3xls&quot;&gt;3.xls&lt;br /&gt;&lt;/h2&gt;
-&lt;p&gt;xls用的是&lt;a href=&quot;https://cran.r-project.org/web/packages/readxl/readxl.pdf&quot;&gt;readxl&lt;/a&gt;套件，是R界有名的ggplot2作者&lt;a href=&quot;http://hadley.nz/&quot;&gt;Hadley Wickham&lt;/a&gt;所寫。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;xls用的是&lt;a href=&quot;https://cran.r-project.org/web/packages/readxl/readxl.pdf&quot; target=&quot;_blank&quot;&gt;readxl&lt;/a&gt;套件，是R界有名的ggplot2作者&lt;a href=&quot;http://hadley.nz/&quot; target=&quot;_blank&quot;&gt;Hadley Wickham&lt;/a&gt;所寫。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;下載完後只要一行指令就好，&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readxl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;saleslead&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_excel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;paste0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2018 sales lead report (for TM only).xls&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Raw Data&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;但要注意的是&lt;a href=&quot;http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types&quot;&gt;屬性問題&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;但要注意的是&lt;a href=&quot;http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types&quot; target=&quot;_blank&quot;&gt;屬性問題&lt;/a&gt;。&lt;/p&gt;
 
 &lt;p&gt;其他更多 library 的 function 都可以去CRAN找哦！&lt;/p&gt;
 </content>
@@ -375,10 +375,10 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
    <link href="http://localhost:4000/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/"/>
    <updated>2018-02-26T18:45:00+08:00</updated>
    <id>http://localhost:4000/r/2018/02/26/[R]使用R寄Outlook Email</id>
-   <content type="html">&lt;p&gt;之前有介紹過使用mailR這個套件夾帶檔案&lt;a href=&quot;https://shihs.github.io/blog/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/&quot;&gt;使用gmail信箱發送信件&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;之前有介紹過使用mailR這個套件夾帶檔案&lt;a href=&quot;https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/&quot; target=&quot;_blank&quot;&gt;使用gmail信箱發送信件&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。&lt;br /&gt;
-&lt;a href=&quot;https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook&quot; target=&quot;_blank&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RDCOMClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## init com api&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
@@ -448,11 +448,11 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，&lt;br /&gt;
   &lt;li&gt;使用代理IP&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests&quot; target=&quot;_blank&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;
 這裡主要介紹如何使用IP代理。&lt;/p&gt;
 
 &lt;h2 id=&quot;proxy代理類型&quot;&gt;&lt;strong&gt;proxy代理類型&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;http://gohom.win/2016/01/20/proxy-type/&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://gohom.win/2016/01/20/proxy-type/&quot; target=&quot;_blank&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;透明代理(Transparent Proxy)&lt;br /&gt;
@@ -487,7 +487,7 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
   &lt;li&gt;http://www.proxyserverlist24.top/&lt;br /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/proxy/blob/master/get_proxies.py&quot;&gt;程式碼&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/proxy/blob/master/get_proxies.py&quot; target=&quot;_blank&quot;&gt;程式碼&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;如何確定真的使用代理ip了&quot;&gt;&lt;strong&gt;如何確定真的使用代理IP了？&lt;/strong&gt;&lt;/h2&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
@@ -603,7 +603,7 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
    <link href="http://localhost:4000/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/"/>
    <updated>2018-01-25T20:29:00+08:00</updated>
    <id>http://localhost:4000/tutorial/2018/01/25/[Tutorial]Computer Networking筆記(22-26)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-binary-code-works&quot;&gt;&lt;strong&gt;How Binary Code Works?&lt;/strong&gt;&lt;/h2&gt;
 &lt;ul&gt;
@@ -664,14 +664,14 @@ HTTP_X_FORWARDED_FOR = not determined&lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;所以這時有人提出了一個辦法，&lt;br /&gt;
 我們應該要用一個方法表示出Network ID和Host ID的長度。&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=D0a9hTEW48Y&quot;&gt;&lt;em&gt;Subnet mask(子網路遮罩)&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=D0a9hTEW48Y&quot; target=&quot;_blank&quot;&gt;&lt;em&gt;Subnet mask(子網路遮罩)&lt;/em&gt;&lt;/a&gt;&lt;br /&gt;
 當今天在傳送訊息時，&lt;br /&gt;
 device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;subnet mask一樣是一個32 bits的2進位數字，&lt;br /&gt;
 1表示network id，0表示host id。&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=FM169QUIQco&amp;amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;amp;index=25&quot;&gt;(這裡看影片應該會比較好理解)&lt;/a&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;amp;index=26&amp;amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;詳細範例&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=FM169QUIQco&amp;amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;amp;index=25&quot; target=&quot;_blank&quot;&gt;(這裡看影片應該會比較好理解)&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;amp;index=26&amp;amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;詳細範例&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
 
 </content>
  </entry>
@@ -681,30 +681,30 @@ device不只傳送自己的ip，也傳送subnet mask來表示network id和host i
    <link href="http://localhost:4000/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/"/>
    <updated>2018-01-24T21:46:00+08:00</updated>
    <id>http://localhost:4000/tutorial/2018/01/24/[Tutorial]Computer Networking筆記(16-21)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;osi-model&quot;&gt;&lt;strong&gt;OSI Model&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/OSI模型&quot;&gt;OSI Model- Open System Interconnection Reference Model&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/OSI模型&quot; target=&quot;_blank&quot;&gt;OSI Model- Open System Interconnection Reference Model&lt;/a&gt;&lt;br /&gt;
 總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://tw.voicetube.com/videos/20018&quot;&gt;這有另外一個我覺得還不錯的影片&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://tw.voicetube.com/videos/20018&quot; target=&quot;_blank&quot;&gt;這有另外一個我覺得還不錯的影片&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;modem&quot;&gt;&lt;strong&gt;Modem&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;Modem就是我們說的&lt;a href=&quot;https://zh.wikipedia.org/wiki/调制解调器&quot;&gt;數據機&lt;/a&gt;。&lt;br /&gt;
+&lt;p&gt;Modem就是我們說的&lt;a href=&quot;https://zh.wikipedia.org/wiki/调制解调器&quot; target=&quot;_blank&quot;&gt;數據機&lt;/a&gt;。&lt;br /&gt;
 It’s device that connects the network to the Internet.&lt;br /&gt;
 It converges digital signals from router(or any other devices) to analog signals.&lt;br /&gt;
 簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，&lt;br /&gt;
 電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;router&quot;&gt;&lt;strong&gt;Router&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;Router是&lt;a href=&quot;https://zh.wikipedia.org/wiki/路由器&quot;&gt;路由器&lt;/a&gt;。&lt;br /&gt;
+&lt;p&gt;Router是&lt;a href=&quot;https://zh.wikipedia.org/wiki/路由器&quot; target=&quot;_blank&quot;&gt;路由器&lt;/a&gt;。&lt;br /&gt;
 Router joins network together.&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;switch&quot;&gt;&lt;strong&gt;Switch&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Switch是分享器。&lt;br /&gt;
 假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.mobile01.com/topicdetail.php?f=507&amp;amp;t=1631479&quot;&gt;路由器和分享器差在哪&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.mobile01.com/topicdetail.php?f=507&amp;amp;t=1631479&quot; target=&quot;_blank&quot;&gt;路由器和分享器差在哪&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;repeaterextender&quot;&gt;&lt;strong&gt;Repeater/Extender&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;Repeater/Extender是中繼器。&lt;br /&gt;
@@ -722,10 +722,10 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
    <link href="http://localhost:4000/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/"/>
    <updated>2018-01-20T16:26:00+08:00</updated>
    <id>http://localhost:4000/tutorial/2018/01/20/[Tutorial]Computer Networking筆記(12-15)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;topologylayout&quot;&gt;&lt;strong&gt;Topology/Layout&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/网络拓扑&quot;&gt;Topology/Layout&lt;/a&gt;是網路之間連接的方式，wiki上翻成「網路拓樸」。&lt;br /&gt;
+&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/网络拓扑&quot; target=&quot;_blank&quot;&gt;Topology/Layout&lt;/a&gt;是網路之間連接的方式，wiki上翻成「網路拓樸」。&lt;br /&gt;
 每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。&lt;/p&gt;
 
 &lt;p&gt;這個課程介紹三種方式：&lt;/p&gt;
@@ -736,7 +736,7 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;&lt;strong&gt;1. Bus Topology&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zh.wikipedia.org/wiki/匯流排拓撲&quot;&gt;Bus Topology&lt;/a&gt;是最簡單的一種連接方式，最主要中間有一條主幹，&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/匯流排拓撲&quot; target=&quot;_blank&quot;&gt;Bus Topology&lt;/a&gt;是最簡單的一種連接方式，最主要中間有一條主幹，&lt;br /&gt;
 其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，&lt;br /&gt;
 才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。&lt;br /&gt;&lt;/p&gt;
 
@@ -746,7 +746,7 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;但缺點是，只有主幹上出了問題，整個網路可能就會出問題。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;2. Ring Topology&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zh.wikipedia.org/wiki/環狀拓撲&quot;&gt;Ring Topology&lt;/a&gt;與Bus Topology不同的是，它是一個沒有終端環狀，&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/環狀拓撲&quot; target=&quot;_blank&quot;&gt;Ring Topology&lt;/a&gt;與Bus Topology不同的是，它是一個沒有終端環狀，&lt;br /&gt;
 所有node與該環狀線連結，訊號會順著同一個方向傳遞。&lt;br /&gt;
 一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。&lt;br /&gt;&lt;/p&gt;
 
@@ -758,7 +758,7 @@ Router joins network together.&lt;br /&gt;&lt;/p&gt;
 它比Bus Topology貴。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;3. Star Topology&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zh.wikipedia.org/wiki/星型网&quot;&gt;Star Topology&lt;/a&gt;可能是家裡最常見的一種連結方式。&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/星型网&quot; target=&quot;_blank&quot;&gt;Star Topology&lt;/a&gt;可能是家裡最常見的一種連結方式。&lt;br /&gt;
 Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。&lt;br /&gt;
 例如，如果中心是rounter，它會在連結internet。&lt;br /&gt;&lt;/p&gt;
 
@@ -770,7 +770,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 所以只要中心的device壞掉，整個連線就會全部失效。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;4.Mesh Topology&lt;/strong&gt;&lt;br /&gt;
-&lt;a href=&quot;https://zh.wikipedia.org/wiki/网状网络&quot;&gt;Mesh Topology&lt;/a&gt;所有nodes之間都互相連結，就像個網狀。&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/网状网络&quot; target=&quot;_blank&quot;&gt;Mesh Topology&lt;/a&gt;所有nodes之間都互相連結，就像個網狀。&lt;br /&gt;
 這種方式比較會在MAN或WAN見到，不會在LAN使用。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;優點是，因為每個node之間都互相連結，&lt;br /&gt;
@@ -836,7 +836,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
    <link href="http://localhost:4000/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/"/>
    <updated>2018-01-15T22:40:00+08:00</updated>
    <id>http://localhost:4000/tutorial/2018/01/15/[Tutorial]Computer Networking筆記(9-11)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-nicnetwork-interface-card&quot;&gt;&lt;strong&gt;1.What is NIC(Network Interface Card)?&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;NIC就是網卡，所有電腦都必須要有網卡才能連上網路。&lt;br /&gt;
@@ -901,7 +901,7 @@ http:// www.thenewboston.org /index.php&lt;/p&gt;
    <link href="http://localhost:4000/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/"/>
    <updated>2018-01-15T22:00:00+08:00</updated>
    <id>http://localhost:4000/python/2018/01/15/[Python]Google翻譯API接口-library googletrnas</id>
-   <content type="html">&lt;p&gt;使用前，先安裝&lt;a href=&quot;https://py-googletrans.readthedocs.io/en/latest/&quot;&gt;googletrans&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;使用前，先安裝&lt;a href=&quot;https://py-googletrans.readthedocs.io/en/latest/&quot; target=&quot;_blank&quot;&gt;googletrans&lt;/a&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-cmd&quot;&gt;# windows
 pip install googletrans
 &lt;/code&gt;&lt;/pre&gt;
@@ -926,7 +926,7 @@ sudo pip install googletrans
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;根據說明文件，這個套件可能會有不穩定的問題
-找到有人&lt;a href=&quot;https://hk.saowen.com/a/4c76af2381e3a60e86f7c4b934a21faebad8b2e7b4a4131cb7c2889afcea6479&quot;&gt;直接爬google翻譯的程式碼&lt;/a&gt;
+找到有人&lt;a href=&quot;https://hk.saowen.com/a/4c76af2381e3a60e86f7c4b934a21faebad8b2e7b4a4131cb7c2889afcea6479&quot; target=&quot;_blank&quot;&gt;直接爬google翻譯的程式碼&lt;/a&gt;
 但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。&lt;/p&gt;
 
 </content>
@@ -937,7 +937,7 @@ sudo pip install googletrans
    <link href="http://localhost:4000/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/"/>
    <updated>2018-01-09T15:27:00+08:00</updated>
    <id>http://localhost:4000/tutorial/2018/01/09/[Tutorial]Computer Networking筆記(1-8)</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&quot; target=&quot;_blank&quot;&gt;Computer Networking Tutorial&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1what-is-computer-networking&quot;&gt;&lt;strong&gt;1.What is Computer Networking?&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;各裝置(&lt;em&gt;devices&lt;/em&gt;)之間的連結&lt;br /&gt;
@@ -998,7 +998,7 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
   &lt;li&gt;yungmaun.com.tw&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;沒有www也沒有&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE&quot;&gt;http/https&lt;/a&gt;，&lt;br /&gt;
+&lt;p&gt;沒有www也沒有&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE&quot; target=&quot;_blank&quot;&gt;http/https&lt;/a&gt;，&lt;br /&gt;
 如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，&lt;br /&gt;
 但如果是使用request就會產生錯誤訊息。&lt;br /&gt;&lt;/p&gt;
 
@@ -1058,7 +1058,7 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
    <link href="http://localhost:4000/python/%E7%88%AC%E8%9F%B2/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/"/>
    <updated>2017-08-18T11:14:00+08:00</updated>
    <id>http://localhost:4000/python/%E7%88%AC%E8%9F%B2/2017/08/18/[Python][爬蟲]如何爬取網頁中js生成的部分</id>
-   <content type="html">&lt;p&gt;這次想要爬取的是&lt;a href=&quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot;&gt;2017年汽車技術展會&lt;/a&gt;的參展廠商名單。&lt;/p&gt;
+   <content type="html">&lt;p&gt;這次想要爬取的是&lt;a href=&quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot; target=&quot;_blank&quot;&gt;2017年汽車技術展會&lt;/a&gt;的參展廠商名單。&lt;/p&gt;
 
 &lt;p&gt;網頁長得像這樣，
 &lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/2185818/nYLZLEUgSQKEr6NcE1lI_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
@@ -1096,7 +1096,7 @@ PC就是client，sever就是host。&lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;將&lt;a href=&quot;http://jan2017.tems-system.com/ExhiSearch/AUTO/eng/ExhiList&quot;&gt;網址&lt;/a&gt;丟到網址列，
 果然，就得到了我們要的部分了！&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/tree/master/2017%E5%B9%B4%E6%B1%BD%E8%BB%8A%E6%8A%80%E8%A1%93%E5%B1%95%E6%9C%83&quot;&gt;完整程式碼&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/tree/master/2017%E5%B9%B4%E6%B1%BD%E8%BB%8A%E6%8A%80%E8%A1%93%E5%B1%95%E6%9C%83&quot; target=&quot;_blank&quot;&gt;完整程式碼&lt;/a&gt;&lt;/p&gt;
 
 </content>
  </entry>
@@ -1138,7 +1138,7 @@ $ git add -u  #stages modified and deleted, without new
 &lt;code class=&quot;highlighter-rouge&quot;&gt;增加、修改檔案&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git add&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git commit&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;git push&lt;/code&gt;
 透過&lt;code class=&quot;highlighter-rouge&quot;&gt;git status&lt;/code&gt;可以查看目前的狀態&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html&quot; target=&quot;_blank&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
 
 </content>
  </entry>
@@ -1172,7 +1172,7 @@ $ git add -u  #stages modified and deleted, without new
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://dzone.com/articles/how-download-file-python&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dzone.com/articles/how-download-file-python&quot; target=&quot;_blank&quot;&gt;參考&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -1295,7 +1295,7 @@ End Sub
    <link href="http://localhost:4000/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/"/>
    <updated>2017-06-30T10:26:00+08:00</updated>
    <id>http://localhost:4000/python/%E7%88%AC%E8%9F%B2/2017/06/30/[Python][爬蟲]不同的Content-Type-multipart:form-data</id>
-   <content type="html">&lt;p&gt;這次要爬的目標是&lt;a href=&quot;http://www.taiwanexcellence.org/index.php/awards/now/cross/1&quot;&gt;台灣精品獎得獎名單&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;這次要爬的目標是&lt;a href=&quot;http://www.taiwanexcellence.org/index.php/awards/now/cross/1&quot; target=&quot;_blank&quot;&gt;台灣精品獎得獎名單&lt;/a&gt;。&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;我想要爬取的條件是，
 &lt;img src=&quot;http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG&quot; alt=&quot;擷取.PNG&quot; /&gt;&lt;/p&gt;
@@ -1405,7 +1405,7 @@ Content-Disposition: form-data; name=&quot;awards[]&quot;
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py&quot;&gt;完整的代碼&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py&quot; target=&quot;_blank&quot;&gt;完整的程式碼&lt;/a&gt;&lt;/p&gt;
 
 </content>
  </entry>
@@ -1438,7 +1438,7 @@ Error: zipping up workbook failed. Please make sure Rtools is installed or a zip
 Try installr::install.rtools() on Windows.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;1.&lt;a href=&quot;https://cran.r-project.org/bin/windows/Rtools/&quot;&gt;安裝Rtools.exe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;1.&lt;a href=&quot;https://cran.r-project.org/bin/windows/Rtools/&quot; target=&quot;_blank&quot;&gt;安裝Rtools.exe&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;2.找到Rtools底下的zip.exe路徑，
 並設定rools的zip.exe路徑即可解決此問題&lt;/p&gt;
@@ -1580,7 +1580,7 @@ Try installr::install.rtools() on Windows.
    <link href="http://localhost:4000/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/"/>
    <updated>2017-04-24T11:22:00+08:00</updated>
    <id>http://localhost:4000/r/2017/04/24/[R]在R中使用system呼叫python-給予參數</id>
-   <content type="html">&lt;p&gt;之前介紹過&lt;a href=&quot;https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/&quot;&gt;在R中使用system呼叫python&lt;/a&gt;。&lt;/p&gt;
+   <content type="html">&lt;p&gt;之前介紹過&lt;a href=&quot;https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/&quot; target=&quot;_blank&quot;&gt;在R中使用system呼叫python&lt;/a&gt;。&lt;/p&gt;
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;python python_script.py&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1670,7 +1670,7 @@ Try installr::install.rtools() on Windows.
    <link href="http://localhost:4000/r/2016/07/17/R-R-batch/"/>
    <updated>2016-07-17T11:11:00+08:00</updated>
    <id>http://localhost:4000/r/2016/07/17/[R]R batch</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.statmethods.net/interface/batch.html&quot;&gt;R batch&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.statmethods.net/interface/batch.html&quot; target=&quot;_blank&quot;&gt;R batch&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;因為.R檔無法點兩下就能執行，
 所以儲存一個R batch，再使用工作排程設定時間，
@@ -1692,7 +1692,7 @@ Try installr::install.rtools() on Windows.
    <link href="http://localhost:4000/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/"/>
    <updated>2016-07-17T11:06:00+08:00</updated>
    <id>http://localhost:4000/others/2016/07/17/windows7自動排程</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8&quot;&gt;工作排程，讓程式自動執行&lt;/a&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;a href=&quot;http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8&quot; target=&quot;_blank&quot;&gt;工作排程，讓程式自動執行&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;開始 =&amp;gt; 附屬應用程式 =&amp;gt; 系統工具 =&amp;gt; 工作排程器&lt;/p&gt;
 
@@ -1709,8 +1709,8 @@ Try installr::install.rtools() on Windows.
    <content type="html">&lt;p&gt;使用mailR package寫一個R的script，自動發信。&lt;/p&gt;
 
 &lt;p&gt;以下幾個步驟，&lt;br /&gt;
-1.&lt;a href=&quot;https://www.google.com/settings/security/lesssecureapps&quot;&gt;啟用安全性較低的應用程式存取&lt;/a&gt;&lt;br /&gt;
-2.&lt;a href=&quot;https://github.com/rpremraj/mailR&quot;&gt;使用mailR package&lt;/a&gt;&lt;/p&gt;
+1.&lt;a href=&quot;https://www.google.com/settings/security/lesssecureapps&quot; target=&quot;_blank&quot;&gt;啟用安全性較低的應用程式存取&lt;/a&gt;&lt;br /&gt;
+2.&lt;a href=&quot;https://github.com/rpremraj/mailR&quot; target=&quot;_blank&quot;&gt;使用mailR package&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mailR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 
@@ -1755,8 +1755,8 @@ Try installr::install.rtools() on Windows.
 
 &lt;p&gt;因為我的mail是gamil，
 所以以下的程式碼是針對gmail，
-在執行前要先&lt;a href=&quot;http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/&quot;&gt;打開imap&lt;/a&gt;
-我主要是參考&lt;a href=&quot;https://gist.github.com/jasonrdsouza/1674794&quot;&gt;這裡&lt;/a&gt;&lt;/p&gt;
+在執行前要先&lt;a href=&quot;http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/&quot; target=&quot;_blank&quot;&gt;打開imap&lt;/a&gt;
+我主要是參考&lt;a href=&quot;https://gist.github.com/jasonrdsouza/1674794&quot; target=&quot;_blank&quot;&gt;這裡&lt;/a&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;imaplib&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inspect&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;email&lt;/span&gt;

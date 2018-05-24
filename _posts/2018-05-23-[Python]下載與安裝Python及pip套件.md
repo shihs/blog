@@ -7,7 +7,7 @@ author: "Shihs"
 category: [Python]
 ---
 
-安裝前可以先認識 [Python](https://zh.wikipedia.org/wiki/Python)。
+安裝前可以先認識 [Python](https://zh.wikipedia.org/wiki/Python){:target="_blank"}。
 
 
 這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。

@@ -7,32 +7,32 @@ author: "Shihs"
 category: Tutorial
 ---
 
-[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO){:target="_blank"}
 
 ## **OSI Model**
-[OSI Model- Open System Interconnection Reference Model](https://zh.wikipedia.org/wiki/OSI模型)<br>
+[OSI Model- Open System Interconnection Reference Model](https://zh.wikipedia.org/wiki/OSI模型){:target="_blank"}<br>
 總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。
 
-[這有另外一個我覺得還不錯的影片](https://tw.voicetube.com/videos/20018)
+[這有另外一個我覺得還不錯的影片](https://tw.voicetube.com/videos/20018){:target="_blank"}
 
 
 
 ## **Modem**
-Modem就是我們說的[數據機](https://zh.wikipedia.org/wiki/调制解调器)。<br>
+Modem就是我們說的[數據機](https://zh.wikipedia.org/wiki/调制解调器){:target="_blank"}。<br>
 It's device that connects the network to the Internet.<br>
 It converges digital signals from router(or any other devices) to analog signals.<br>
 簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br>
 電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br>
 
 ## **Router**
-Router是[路由器](https://zh.wikipedia.org/wiki/路由器)。<br>
+Router是[路由器](https://zh.wikipedia.org/wiki/路由器){:target="_blank"}。<br>
 Router joins network together.<br>
 
 ## **Switch**
 Switch是分享器。<br>
 假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br>
 
-[路由器和分享器差在哪](https://www.mobile01.com/topicdetail.php?f=507&t=1631479)
+[路由器和分享器差在哪](https://www.mobile01.com/topicdetail.php?f=507&t=1631479){:target="_blank"}
 
 ## **Repeater/Extender**
 Repeater/Extender是中繼器。<br>

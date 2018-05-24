@@ -14,8 +14,8 @@ category: Python
 
 因為我的mail是gamil，
 所以以下的程式碼是針對gmail，
-在執行前要先[打開imap](http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/)
-我主要是參考[這裡](https://gist.github.com/jasonrdsouza/1674794)
+在執行前要先[打開imap](http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/){:target="_blank"}
+我主要是參考[這裡](https://gist.github.com/jasonrdsouza/1674794){:target="_blank"}
 
 
 ```python

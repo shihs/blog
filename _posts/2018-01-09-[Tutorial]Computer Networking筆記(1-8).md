@@ -7,7 +7,7 @@ author: "Shihs"
 category: Tutorial
 ---
 
-[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO){:target="_blank"}
 
 ## **1.What is Computer Networking?**
 各裝置(*devices*)之間的連結<br>

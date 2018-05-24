@@ -7,10 +7,10 @@ author: "Shihs"
 category: Tutorial
 ---
 
-[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO){:target="_blank"}
 
 ## **Topology/Layout**
-[Topology/Layout](https://zh.wikipedia.org/wiki/网络拓扑)是網路之間連接的方式，wiki上翻成「網路拓樸」。<br>
+[Topology/Layout](https://zh.wikipedia.org/wiki/网络拓扑){:target="_blank"}是網路之間連接的方式，wiki上翻成「網路拓樸」。<br>
 每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。
 
 這個課程介紹三種方式：
@@ -21,7 +21,7 @@ category: Tutorial
 
 
 **1. Bus Topology**<br>
-[Bus Topology](https://zh.wikipedia.org/wiki/匯流排拓撲)是最簡單的一種連接方式，最主要中間有一條主幹，<br>
+[Bus Topology](https://zh.wikipedia.org/wiki/匯流排拓撲){:target="_blank"}是最簡單的一種連接方式，最主要中間有一條主幹，<br>
 其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br>
 才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br>
 
@@ -32,7 +32,7 @@ category: Tutorial
 
 
 **2. Ring Topology**<br>
-[Ring Topology](https://zh.wikipedia.org/wiki/環狀拓撲)與Bus Topology不同的是，它是一個沒有終端環狀，<br>
+[Ring Topology](https://zh.wikipedia.org/wiki/環狀拓撲){:target="_blank"}與Bus Topology不同的是，它是一個沒有終端環狀，<br>
 所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br>
 一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br>
 
@@ -45,7 +45,7 @@ category: Tutorial
 
 
 **3. Star Topology**<br>
-[Star Topology](https://zh.wikipedia.org/wiki/星型网)可能是家裡最常見的一種連結方式。<br>
+[Star Topology](https://zh.wikipedia.org/wiki/星型网){:target="_blank"}可能是家裡最常見的一種連結方式。<br>
 Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br>
 例如，如果中心是rounter，它會在連結internet。<br>
 
@@ -58,7 +58,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 
 
 **4.Mesh Topology**<br>
-[Mesh Topology](https://zh.wikipedia.org/wiki/网状网络)所有nodes之間都互相連結，就像個網狀。<br>
+[Mesh Topology](https://zh.wikipedia.org/wiki/网状网络){:target="_blank"}所有nodes之間都互相連結，就像個網狀。<br>
 這種方式比較會在MAN或WAN見到，不會在LAN使用。<br>
 
 優點是，因為每個node之間都互相連結，<br>

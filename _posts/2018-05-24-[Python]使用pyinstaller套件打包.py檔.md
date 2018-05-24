@@ -33,7 +33,7 @@ sudo pip install pyinstaller
 但我這邊在安裝時出現了一大串的錯誤，但內容包括 
 *[Errno 1] Operation not permitted*
 
-後來我參考[這裡](https://blog.csdn.net/helloxiaozhe/article/details/78603183)把指令改成
+後來我參考[這裡](https://blog.csdn.net/helloxiaozhe/article/details/78603183){:target="_blank"}把指令改成
 ```
 sudo pip install pyinstaller --upgrade --ignore-installed
 ```
@@ -95,7 +95,7 @@ os.chdir('/Users/'+os.getlogin()+'/Desktop')
 
 
 <br>
-關於 pyinstaller 套件，這個[部落格](http://legendtkl.com/2015/11/06/pyinstaller/)我覺得說明蠻詳細的。
+關於 pyinstaller 套件，這個[部落格](http://legendtkl.com/2015/11/06/pyinstaller/){:target="_blank"}我覺得說明蠻詳細的。
 
 
 

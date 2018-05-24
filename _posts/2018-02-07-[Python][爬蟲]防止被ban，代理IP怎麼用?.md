@@ -14,11 +14,11 @@ category: [Python, 爬蟲]
 2. 使用代理IP
 
 
-[參考](http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests)<br>
+[參考](http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests){:target="_blank"}<br>
 這裡主要介紹如何使用IP代理。
 
 ## **proxy代理類型** 
-[參考](http://gohom.win/2016/01/20/proxy-type/)
+[參考](http://gohom.win/2016/01/20/proxy-type/){:target="_blank"}
 1. 透明代理(Transparent Proxy)<br>
 REMOTE_ADDR = Proxy IP<br>
 HTTP_VIA = Proxy IP<br>
@@ -47,7 +47,7 @@ HTTP_X_FORWARDED_FOR = not determined<br>
 1. http://www.goubanjia.com/free/index.shtml<br>
 2. http://www.proxyserverlist24.top/<br>
 
-[程式碼](https://github.com/shihs/proxy/blob/master/get_proxies.py)
+[程式碼](https://github.com/shihs/proxy/blob/master/get_proxies.py){:target="_blank"}
 
 
 ## **如何確定真的使用代理IP了？**

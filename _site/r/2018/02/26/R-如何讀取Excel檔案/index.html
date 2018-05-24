@@ -173,7 +173,7 @@
 <p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
 </code></pre></div></div>
-<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/">編碼錯誤</a>，<br />
+<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
 這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
@@ -182,8 +182,8 @@
 <h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
 <p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
 <ul>
-  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf">openxlsx</a><br /></li>
-  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf">XLConnect</a><br /></li>
+  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
+  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
 </ul>
 
 <p>這兩個套件都可以儲存多個sheet，<br />
@@ -233,7 +233,7 @@
 <p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
 
 <p>一開始想要直接使用openxlsx的dataValidation function，<br />
-但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html">這裡</a>說明 list 這個功能無法發揮，<br />
+但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
 所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
 再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
 
@@ -285,13 +285,13 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
 </span></code></pre></div></div>
 
 <h2 id="3xls">3.xls<br /></h2>
-<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/">Hadley Wickham</a>所寫。<br /></p>
+<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
 
 <p>下載完後只要一行指令就好，</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
 </span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types">屬性問題</a>。</p>
+<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
 
 <p>其他更多 library 的 function 都可以去CRAN找哦！</p>
 

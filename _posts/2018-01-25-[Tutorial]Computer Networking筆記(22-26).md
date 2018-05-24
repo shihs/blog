@@ -7,7 +7,7 @@ author: "Shihs"
 category: Tutorial
 ---
 
-[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)
+[Computer Networking Tutorial](https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO){:target="_blank"}
 
 ## **How Binary Code Works?**
 - bit = binary digit
@@ -68,13 +68,13 @@ The Internet is a network of networks.
 所以這時有人提出了一個辦法，<br>
 我們應該要用一個方法表示出Network ID和Host ID的長度。<br>
 
-[*Subnet mask(子網路遮罩)*](https://www.youtube.com/watch?v=D0a9hTEW48Y)<br>
+[*Subnet mask(子網路遮罩)*](https://www.youtube.com/watch?v=D0a9hTEW48Y){:target="_blank"}<br>
 當今天在傳送訊息時，<br>
 device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br>
 
 subnet mask一樣是一個32 bits的2進位數字，<br>
 1表示network id，0表示host id。<br>
-[(這裡看影片應該會比較好理解)](https://www.youtube.com/watch?v=FM169QUIQco&list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&index=25)<br>
-[詳細範例](https://www.youtube.com/watch?v=Upk5MU7vGAg&index=26&list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO)<br>
+[(這裡看影片應該會比較好理解)](https://www.youtube.com/watch?v=FM169QUIQco&list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&index=25){:target="_blank"}<br>
+[詳細範例](https://www.youtube.com/watch?v=Upk5MU7vGAg&index=26&list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO){:target="_blank"}<br>
 
 

@@ -18,7 +18,7 @@ Error: zipping up workbook failed. Please make sure Rtools is installed or a zip
 Try installr::install.rtools() on Windows.
 ```
 
-1.[安裝Rtools.exe](https://cran.r-project.org/bin/windows/Rtools/)
+1.[安裝Rtools.exe](https://cran.r-project.org/bin/windows/Rtools/){:target="_blank"}
 
 2.找到Rtools底下的zip.exe路徑，
 並設定rools的zip.exe路徑即可解決此問題

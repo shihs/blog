@@ -32,4 +32,4 @@ with open("code3.zip", "wb") as code:
 
 ```
 
-[參考](https://dzone.com/articles/how-download-file-python)
+[參考](https://dzone.com/articles/how-download-file-python){:target="_blank"}

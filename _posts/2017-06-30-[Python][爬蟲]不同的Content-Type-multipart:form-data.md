@@ -7,7 +7,7 @@ author: "Shihs"
 category: [Python, 爬蟲]
 ---
 
-這次要爬的目標是[台灣精品獎得獎名單](http://www.taiwanexcellence.org/index.php/awards/now/cross/1)。<br>
+這次要爬的目標是[台灣精品獎得獎名單](http://www.taiwanexcellence.org/index.php/awards/now/cross/1){:target="_blank"}。<br>
 
 我想要爬取的條件是，
 ![擷取.PNG](http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG)
@@ -123,7 +123,7 @@ res = s.post(url, data = payload)
 
 ```
 
-[完整的代碼](https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py)
+[完整的程式碼](https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py){:target="_blank"}
 
 
 

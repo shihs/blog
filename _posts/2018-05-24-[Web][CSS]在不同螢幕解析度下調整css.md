@@ -10,7 +10,7 @@ category: [Web, CSS]
 
 除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。
 
-[參考網站](http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html)
+[參考網站](http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html){:target="_blank"}
 
 ## 解析度可以這樣區分
 1. 手機：解析度為0px~320px<br>

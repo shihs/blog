@@ -7,7 +7,7 @@ author: "Shihs"
 category: R
 ---
 
-之前介紹過[在R中使用system呼叫python](https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/)。
+之前介紹過[在R中使用system呼叫python](https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/){:target="_blank"}。
 ```R
 system("python python_script.py")
 ```
