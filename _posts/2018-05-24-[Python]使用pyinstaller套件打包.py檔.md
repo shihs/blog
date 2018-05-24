@@ -30,7 +30,7 @@ pip install pyinstaller
 ```
 sudo pip install pyinstaller
 ```
-但我這邊在安裝時出現了一大串的錯誤，但內容包括 
+但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br> 
 *[Errno 1] Operation not permitted*
 
 後來我參考[這裡](https://blog.csdn.net/helloxiaozhe/article/details/78603183){:target="_blank"}把指令改成
@@ -44,7 +44,7 @@ sudo pip install pyinstaller --upgrade --ignore-installed
 
 
 ## 打包 .py 檔
-假如現在要打包一個 test.py 檔
+假如現在要打包一個 test.py 檔<br>
 **Windows**
 ```
 pyinstall -F test.py
