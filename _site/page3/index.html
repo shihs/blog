@@ -141,6 +141,135 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">
+        [Tutorial]Computer Networking筆記(12-15)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 20, 2018</span> -->
+      <span class="post-date">January 20, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Networking Tutorial</a></p>
+
+<h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
+<p><a href="https://zh.wikipedia.org/wiki/网络拓扑">Topology/Layout</a>是網路之間連接的方式，wiki上翻成「網路拓樸」。<br />
+每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。</p>
+
+<p>這個課程介紹三種方式：</p>
+<ol>
+  <li>Bus Topology(Tutorial 12)</li>
+  <li>Ring Topology(Tutorial 13)</li>
+  <li>Star Topology(Tutorial 14)</li>
+</ol>
+
+<p><strong>1. Bus Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/匯流排拓撲">Bus Topology</a>是最簡單的一種連接方式，最主要中間有一條主幹，<br />
+其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br />
+才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br /></p>
+
+<p>這樣的優點就是，簡單而且便宜，<br />
+適合使用在小範圍的網絡內。<br /></p>
+
+<p>但缺點是，只有主幹上出了問題，整個網路可能就會出問題。<br /></p>
+
+<p><strong>2. Ring Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/環狀拓撲">Ring Topology</a>與Bus Topology不同的是，它是一個沒有終端環狀，<br />
+所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br />
+一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br /></p>
+
+<p>這樣的優點就是，它不需要Bus Topology必須的terminator，<br />
+而且如果是雙環，也比較不會有主幹出問題，<br />
+整個網路就壞掉的問題。<br /></p>
+
+<p>但缺點是，<br />
+它比Bus Topology貴。<br /></p>
+
+<p><strong>3. Star Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/星型网">Star Topology</a>可能是家裡最常見的一種連結方式。<br />
+Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br />
+例如，如果中心是rounter，它會在連結internet。<br /></p>
+
+<p>這種topology的優點是，價格低、easy to expand。<br />
+另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。<br /></p>
+
+<p>但缺點是，因為所有nodes都連結中心，<br />
+也就是所有的nodes全部都必須要依賴中心，<br />
+所以只要中心的device壞掉，整個連線就會全部失效。<br /></p>
+
+<p><strong>4.Mesh Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/网状网络">Mesh Topology</a>所有nodes之間都互相連結，就像個網狀。<br />
+這種方式比較會在MAN或WAN見到，不會在LAN使用。<br /></p>
+
+<p>優點是，因為每個node之間都互相連結，<br />
+所以假如有兩個nodes之間的連結出了問題，<br />
+還可以透過其他nodes傳遞訊號，<br />
+這樣在傳送訊息上也比較保險。<br /></p>
+
+<p>缺點是，因為每個node之間都要連接，就會需要有很多的cable，<br />
+這時候成本就會提高。有越多的node，成本就會越高。<br />
+另一方面，因為一個node需要和其他所有nodes連結，<br />
+這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，<br />
+且每一次增加node可能都需要增加NIC。<br /></p>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Networking Tutorial</a></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
         [R]read.csv出現編碼錯誤訊息
       </a>
@@ -528,119 +657,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/#disqus_thread" data-disqus-identifier="/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">
-        [Tutorial]Computer Networking筆記(1-8)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 9, 2018</span> -->
-      <span class="post-date">January 9, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Networking Tutorial</a></p>
-
-<h2 id="1what-is-computer-networking"><strong>1.What is Computer Networking?</strong></h2>
-<p>各裝置(<em>devices</em>)之間的連結<br />
-裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個<strong><em>Node</em></strong>。<br />
-連結：可以使用cable、wireless、copper wire等等，可以稱為<strong><em>communications media</em></strong>。<br />
-Internet(網路)就是一種computer network<br /></p>
-
-<p>computer nework的目的是為了要資料傳輸、資料交換，<br />
-這裡的資料可以是，documents、pictures、videos等等。</p>
-
-<p>computer newworking的兩個重點就是，<strong><em>Nodes</em></strong>和<strong><em>Communications Media</em></strong></p>
-
-<h2 id="2types-of-networks"><strong>2.Types of Networks</strong></h2>
-<p><strong><em>LAN</em></strong>(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡<br />
-<strong><em>MAN</em></strong>(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市<br />
-<strong><em>WAN</em></strong>(Wide Area Network)：&gt;30 miles的網絡連結，整個國家之間、跨國之間的連結<br /></p>
-
-<h2 id="3how-the-internet-works"><strong>3.How the Internet works?</strong></h2>
-<p>以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？<br />
-如果以上面computer network的邏輯來看，<br />
-其他電腦可以連結到我的電腦，看到我的個人網站。<br />
-但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，<br />
-所以實際上，要連到個人網站是透過<strong><em>server</em></strong>。<br />
-server is a special computer that everyone can access it.<br /></p>
-
-<p>我將個人網站建置(store)在server，<br />
-其他人要看到我的網站，<br />
-會在browser上打上網址，<br />
-這時候就會向server提出request，<br />
-sever接受到request會回傳data，這些data會是程式碼，<br />
-而browser會將這些程式碼轉成我們看得懂的網站。<br /></p>
-
-<p>通常建置網頁這樣的server我們稱為，<strong><em>web server</em></strong>。<br />
-像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，<br />
-所以這個server就必須要有很大的memory，<br />
-才能負荷這樣的使用流量。<br /></p>
-
-<h2 id="4client-and-host"><strong>4.Client and Host</strong></h2>
-<p>根據上面提到的例子，<br />
-使用PC的browser向sever提出request，<br />
-然後server會提供給data給PC的browser。<br /></p>
-
-<p>PC接收資料，而server提供資料，<br />
-PC就是client，sever就是host。<br /></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO">Computer Networking Tutorial</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">0 Comments</a>
       </span>
 
     </div>

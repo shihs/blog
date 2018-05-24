@@ -141,6 +141,104 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">
+        [Python][爬蟲]利用python下載zip檔並解壓縮
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on May 18, 2017</span> -->
+      <span class="post-date">May 18, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>下載檔案是使用package urllib2<br />
+解壓縮檔案則是使用package zipfile<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400</span>
+<span class="kn">import</span> <span class="nn">urllib2</span> <span class="c">#urllib2.urlopen </span>
+<span class="kn">import</span> <span class="nn">zipfile</span> <span class="c">#zipfile.ZipFile</span>
+
+<span class="k">def</span> <span class="nf">DownloadTWCompany</span><span class="p">():</span>
+	<span class="c"># 檔案下載</span>
+	<span class="k">print</span> <span class="s">"下載全國營業(稅籍)登記資料集壓縮擋..."</span>
+	<span class="n">downloadurl</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://www.fia.gov.tw/opendata/bgmopen1.zip'</span><span class="p">)</span>
+	<span class="n">zipcontent</span><span class="o">=</span> <span class="n">downloadurl</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"TWRAW.zip"</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+	    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipcontent</span><span class="p">)</span>
+	<span class="k">print</span> <span class="s">"下載完成!"</span>
+	
+	<span class="c"># 解壓縮檔案</span>
+	<span class="k">print</span> <span class="s">"資料解壓縮..."</span>
+	<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'TWRAW.zip'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s">"."</span><span class="p">,</span> <span class="n">pwd</span> <span class="o">=</span> <span class="s">"1234"</span><span class="p">)</span>  <span class="c"># 解壓縮密碼1234</span>
+	
+	<span class="k">print</span> <span class="s">"解壓縮完成!"</span>
+
+<span class="n">DownloadTWCompany</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>下載檔案是使用package urllib2<br />
+解壓縮檔案則是使用package zipfile<br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84&nbsp;/">
         [Python][爬蟲]如何刪除網頁中的&nbsp
       </a>
@@ -561,87 +659,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread" data-disqus-identifier="/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-R-batch/">
-        [R]R batch
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="http://www.statmethods.net/interface/batch.html">R batch</a></p>
-
-<p>因為.R檔無法點兩下就能執行，
-所以儲存一個R batch，再使用工作排程設定時間，
-就可以在固定時間自動執行程式。</p>
-
-<p>以下是在windows中的寫法，
-必須要先給R儲存的位置，後面放R script的位置。</p>
-
-<pre><code class="language-cmd">C:\Program Files\R\R-3.2.5\bin\R.exe" CMD BATCH "C:\Users\mypc\Desktop\myrscript.R"
-</code></pre>
-<p>將上面的程式碼貼在記事本(確認R的版本和位置)，
-再將記事本副檔名存成.bat 就完成了。</p>
-
- -->
-    <div class="post-excerpt"><p><a href="http://www.statmethods.net/interface/batch.html">R batch</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-R-batch/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-R-batch/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/07/17/R-R-batch/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-R-batch/">0 Comments</a>
       </span>
 
     </div>
