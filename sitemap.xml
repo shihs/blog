@@ -6,12 +6,12 @@ title : Sitemap
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {% for post in site.posts %}
     <url>
-        <loc>{{site.url}}{{ post.url | replace_first:'/', '' }}</loc>
+        <loc>{{site.url}}/blog/{{ post.url | replace_first:'/', '' }}</loc>
     </url>
 {% endfor %}
 {% for page in site.pages %}
     <url>
-        <loc>{{site.url}}{{ page.url | replace_first:'/', '' }}</loc>
+        <loc>{{site.url}}/blog/{{ page.url | replace_first:'/', '' }}</loc>
     </url>
 {% endfor %}
 </urlset>
