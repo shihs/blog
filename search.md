@@ -2,21 +2,19 @@
 layout: page
 title: Search
 ---
-<ul class="archive" id="group">
+<ul class="search" id="group">
   
 
-  
-
-  
-  <h1 class="page-title"><i class="fa fa-search" style="font-size:1em;"></i>&nbsp;Search</h1>
-
-
+   
+<!-- <center><h1> -->
 <br/>&nbsp;
+
 <form action="get" id="site_search" autocomplete="on">
-<center>
-  <input style="font-size:20px;" type="text" id="search_box">
-  <input style="font-size:20px;" type="submit" value="Go!">
-</center>
+  <center>
+	<i class="fa fa-search" style="font-size:1.5em;"></i>&nbsp;&nbsp;
+  	<input style="font-size:20px;" type="text" id="search_box">
+  	<input style="font-size:20px;" type="submit" value="Go!">
+  </center>
 </form>
 <br/>&nbsp;
 <br/>&nbsp;
