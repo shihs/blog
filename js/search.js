@@ -10,8 +10,6 @@ jQuery(function() {
 
   // Get the generated search_data.json file so lunr.js can search it locally.
   window.data = $.getJSON('../search_data.json');
-  // window.data = $.getJSON('https://rawgit.com/manbearwolf/77f7495c80acb8948d6ec2d9bcf57dc1/raw/3fe5e6c853ea6af1c8c5b72b26ff84f72eed43e9/roughdraft.json');
-
 
   // Wait for the data to load and add it to lunr
   window.data.then(function(loaded_data){
@@ -32,8 +30,7 @@ jQuery(function() {
 
   function display_search_results(results) {
     var $search_results = $("#search_results");
-    // window.alert("test")
-
+    
     // Wait for data to load
     window.data.then(function(loaded_data) {
         
