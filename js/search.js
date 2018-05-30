@@ -10,6 +10,8 @@ jQuery(function() {
 
   // Get the generated search_data.json file so lunr.js can search it locally.
   window.data = $.getJSON('../search_data.json');
+  // window.data = $.getJSON('https://rawgit.com/manbearwolf/77f7495c80acb8948d6ec2d9bcf57dc1/raw/3fe5e6c853ea6af1c8c5b72b26ff84f72eed43e9/roughdraft.json');
+
 
   // Wait for the data to load and add it to lunr
   window.data.then(function(loaded_data){
@@ -44,7 +46,7 @@ jQuery(function() {
           var item = loaded_data[result.ref];
 
           // Build a snippet of HTML for this result
-          var appendString = '<li><a href="' + item.url + '">' + item.title + '</a></li>';
+          var appendString = '<li><a href="/blog' + item.url.replace(' ','') + '">' + item.title + '</a></li>';
 
           // Add the snippet to the collection of results.
           $search_results.append(appendString);
