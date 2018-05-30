@@ -99,7 +99,7 @@
       
         
           
-            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+            <a class="sidebar-nav-item active" href="/blog/search/">Search</a>
           
         
       
@@ -150,103 +150,34 @@
 
 
     <div class="content container">
-      <div class="post">
-  <h1 class="post-title">[R]如何刪除 <\U+00A0></h1>
-  <div class="post-info">
-    <span class="post-date">January 17, 2018</span> 
-    <span>
-        <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">0 Comments</a>
-    </span>
-    <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-  </div>
-  <div>
-    <p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
-</code></pre></div></div>
-<p>而且不管用什麼方式都取代不了這個符號，
-這時候該怎麼辦呢？</p>
+      <div class="page" id="begin">
+  <h1 class="page-title">Search</h1>
+  <ul class="archive" id="group">
+  
 
-<p>其實只要使用 “\U00A0”就可以了</p>
+  
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-  </div>
-</div>
+  
+  <h1 class="page-title"><i class="fa fa-search" style="font-size:1em;"></i>&nbsp;Search</h1>
 
 
-<a name="comments"></a>
-<div id="disqus_thread"></div>
-<script>
+<br />&nbsp;
+<form action="get" id="site_search">
+<center>
+  <input style="font-size:20px;" type="text" id="search_box" />
+  <input style="font-size:20px;" type="submit" value="Go!" />
+</center>
+</form>
+<br />&nbsp;
+<br />&nbsp;
 
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/';
-};
+<ul id="search_results"></ul>
 
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script src="/blog/js/lunr.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/blog/js/search.js"></script>
+</ul>
 
-
-
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
-    
-      <li>
-        <h3>
-          <a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">
-            [Web][CSS]在不同螢幕解析度下調整css
-            <small>May 24, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
-            [Python]使用 pyinstaller 套件打包 .py 檔
-            <small>May 24, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
-            [Python]下載與安裝 Python2.7 及 pip 套件
-            <small>May 23, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-  </ul>
 </div>
 
     </div>
