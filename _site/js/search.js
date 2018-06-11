@@ -3,7 +3,7 @@ jQuery(function() {
   window.idx = lunr(function () {
     this.field('id');
     this.field('title');
-    this.field('content', { boost: 10 });
+    this.field('content', { boost: 1000 });
     this.field('author');
     this.field('categories');
   });
@@ -33,7 +33,7 @@ jQuery(function() {
     
     // Wait for data to load
     window.data.then(function(loaded_data) {
-        
+        // window.alert(results.length)
       // Are there any results?
       if (results.length) {
         $search_results.empty(); // Clear any old results

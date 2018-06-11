@@ -154,15 +154,19 @@
 
 
     <div class="content container">
-      <div class="post">
-  <h1 class="post-title">[R]在R中使用system呼叫python-給予參數</h1>
-  <div class="post-info">
-    <span class="post-date">April 24, 2017</span> 
-    <span>
-        <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/#disqus_thread" data-disqus-identifier="/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">0 Comments</a>
-    </span>
-    <span class="post-categories">
+      <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
+        [R]在 R 中使用 system 呼叫 python
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 8, 2016</span> -->
+      <span class="post-date">July 8, 2016</span>
+      <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
@@ -172,52 +176,37 @@
         
       
     </span>
-  </div>
-  <div>
-    <p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
+
+
+    </div>
+    <!-- <p>我個人比較偏好使用R做所有的事情，
+但某些時候還是需要使用到python，
+所以希望可以在R上呼叫python程式碼。</p>
+
+<p>一開始我找到了rPython這個library，
+但它似乎無法在windows上使用……
+所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p>假如現在我想要帶入參數給python script要怎麼做呢？</p>
+<p>這個辦法是呼叫系統函數，
+就像是在cmd上面打的指令一樣，
+而且在mac上也可以執行！</p>
 
-<p>首先，<br />
-在python程式碼的部分，<br />
-要使用 <strong>sys.arg[]</strong> 讓python程式獲取參數。</p>
+ -->
+    <div class="post-excerpt"><p>我個人比較偏好使用R做所有的事情，
+但某些時候還是需要使用到python，
+所以希望可以在R上呼叫python程式碼。</p>
 
-<p>還有，在 <strong>sys.arg[0]</strong> 表示的是程式名稱，<br />
-所以要使用 <strong>sys.arg[1]</strong> 才是表示要讀取的第一個參數。</p>
-
-<p>假如今天有支 <em>python_script.py</em></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="n">string</span> <span class="o">=</span> <span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">string</span>
-</code></pre></div></div>
-
-<p>在cmf中呼叫這支python程式</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python python_script.py world
-</code></pre></div></div>
-
-<p>R裡的system()要打的指令就是cmf中打的指令。<br />
-所以在R中就會變成，<br /></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py world"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>結果就會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, world
-</code></pre></div></div>
-
-<p>最後，<br />
-在使用system()必須要先setwd將路徑設成python_script.py所在位置。</p>
-
-
-  </div>
 </div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
 
 
-<a name="comments"></a>
-<div id="disqus_thread"></div>
 <script>
 
 /**
@@ -230,8 +219,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/';
+        // this.page.url = '/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread';
+        this.page.identifier = '/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -241,44 +230,28 @@ s.setAttribute('data-timestamp', +new Date());
 (d.head || d.body).appendChild(s);
 })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
 
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
+        <a href="/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread" data-disqus-identifier="/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">0 Comments</a>
+      </span>
+
+    </div>
     
-      <li>
-        <h3>
-          <a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">
-            [Web][CSS]如何刪除 nav tag 底色兩邊的空白？
-            <small>Jun 11, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">
-            [Web][CSS]在不同螢幕解析度下調整css
-            <small>May 24, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
-            [Python]使用 pyinstaller 套件打包 .py 檔
-            <small>May 24, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-  </ul>
+  </div>
+  
 </div>
 
+<div class="pagination">
+  
+    <span class="pagination-item older">Older</span>
+  
+  
+    
+      <a class="pagination-item newer" href="/blog/page7">Newer</a>
+    
+  
+</div>
     </div>
     <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
   </body>
