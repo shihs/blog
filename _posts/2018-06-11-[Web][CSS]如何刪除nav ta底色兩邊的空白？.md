@@ -21,12 +21,12 @@ category: [Web, CSS]
 ```html
 <!-- html -->
 <body>
-	<nav class="wrapper-nav" id="nav">
-    	<ul>
-        	<li><a href="#about">About</a></li>    
-        	<li><a href="#contact">Contact Me</a></li>
-    	</ul>           
-	</nav>
+  <nav class="wrapper-nav" id="nav">
+    <ul>
+      <li><a href="#about">About</a></li>    
+      <li><a href="#contact">Contact Me</a></li>
+    </ul>           
+  </nav>
 </body>
 ```
 
