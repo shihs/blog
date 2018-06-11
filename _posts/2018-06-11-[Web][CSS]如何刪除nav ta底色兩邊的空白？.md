@@ -8,7 +8,7 @@ category: [Web, CSS]
 ---
 
 
-## nav tag 的作用
+##  `<nav>`的作用
 
 1. `<nav>` 為 HTML 文件的區域元素 (element)，`<nav>`用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。
 2. `<nav>` 除了全域屬性外，沒有定義其他屬性 (attribute) 。
