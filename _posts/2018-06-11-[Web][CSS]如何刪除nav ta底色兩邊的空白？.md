@@ -8,7 +8,7 @@ category: [Web, CSS]
 ---
 
 
-##  `<nav>`的作用
+###  `<nav>`的作用
 
 1. `<nav>` 為 HTML 文件的區域元素 (element)，`<nav>`用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。
 2. `<nav>` 除了全域屬性外，沒有定義其他屬性 (attribute) 。
@@ -39,7 +39,7 @@ nav {
 
 <br>
 
-## 如何刪除 `<nav>` 背景的空白 How to remove the space on both sides of navbar
+### 如何刪除 `<nav>` 背景的空白 How to remove the space on both sides of navbar
 若使用上面的程式碼會發現 `nav` 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在`<body>`這個 tag 上面做些調整
 
 1. 

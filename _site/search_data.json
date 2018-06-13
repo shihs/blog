@@ -1,6 +1,16 @@
 {
   
 
+    "python-2018-06-13-python-args-e5-92-8c-kwargs": {
+      "title": "[Python]Python 中的 *args 和 *kwargs",
+      "content"	 : "簡單來說，*args和**kwargs是 function 的參數，在不確定會有多少參數時使用。args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。如果 *args和**kwargs 同時使用，*args必需在**kwargs之前。先簡單看以下的例子def test(*args, **kwargs):    for i in args:        print &quot;agrs=&quot; + str(i)    for j in kwargs:        print &quot;kwargs=&quot; + jtest(1, 2, 3, 4, first = &quot;a&quot;, second = &quot;b&quot;, third = &quot;c&quot;)結果agrs=1agrs=2agrs=3agrs=4kwargs=secondkwargs=thirdkwargs=firstargs 和 kwargs 不是重點，* 才是args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 *。所以，if you like 其實參數也可以寫成 *var 和 **vars，*args 和 **kwargs 只是一個大家使用的習慣。*args 的用法first_arg = &quot;this is first arguments&quot;def arg_test(first_arg, *args):    print &quot;first_arg=&quot; + first_arg    if args is not None:        print &quot;other *args...&quot;        for i in args:            print &quot;agrs=&quot; + str(i)    arg_test(first_arg, 1, 2, 3, 4)結果first_arg=this is first argumentsother *args...agrs=1agrs=2agrs=3agrs=4*kwargs 的用法def greet_me(**kwargs):    if kwargs is not None:        for key, value in kwargs.iteritems():            print &quot;%s == %s&quot; %(key,value) greet_me(name=&quot;yasoob&quot;)name == yasoob從以上兩個範例可以看出 args 和 kwargs 用法的差異。使用 list 和 dictionary 當參數def test_arg(arg1, arg2, arg3):    print arg1    print arg2    print arg3#===args===========args = [1, 2, 3]test_arg(*args)# resultarg1=1arg2=2arg3=3#===kwargs===========kwargs = {    &quot;arg3&quot;:1,    &quot;arg2&quot;:2,    &quot;arg1&quot;:3}test_arg(**kwargs)# resultarg1=3arg2=2arg3=1根據以上範例，可以發現*arg print 的順序就是 list 的順序，但 **kwargs 會根據 dictionary 的 key 來賦予 value。參考",
+      "url": " /python/2018/06/13/Python-args-%E5%92%8C-kwargs/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
     "web-css-2018-06-11-web-css-e5-a6-82-e4-bd-95-e5-88-aa-e9-99-a4nav-ta-e5-ba-95-e8-89-b2-e5-85-a9-e9-82-8a-e7-9a-84-e7-a9-ba-e7-99-bd": {
       "title": "[Web][CSS]如何刪除 nav tag 底色兩邊的空白？",
       "content"	 : "&amp;lt;nav&amp;gt;的作用  &amp;lt;nav&amp;gt; 為 HTML 文件的區域元素 (element)，&amp;lt;nav&amp;gt;用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。  &amp;lt;nav&amp;gt; 除了全域屬性外，沒有定義其他屬性 (attribute) 。參考像我的網頁上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 &amp;lt;nav&amp;gt;裡。&amp;lt;!-- html --&amp;gt;&amp;lt;body&amp;gt;  &amp;lt;nav class=&quot;wrapper-nav&quot; id=&quot;nav&quot;&amp;gt;    &amp;lt;ul&amp;gt;      &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#about&quot;&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;          &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#contact&quot;&amp;gt;Contact Me&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;    &amp;lt;/ul&amp;gt;             &amp;lt;/nav&amp;gt;&amp;lt;/body&amp;gt;/* css */nav {  background-color: black;}如何刪除 &amp;lt;nav&amp;gt; 背景的空白 How to remove the space on both sides of navbar若使用上面的程式碼會發現 nav 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在&amp;lt;body&amp;gt;這個 tag 上面做些調整      /* css */body{  margin-left:auto;  margin-right:auto;}             /* css */body{  width: 100%;  margin: auto;}       ",

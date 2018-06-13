@@ -158,6 +158,216 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
+        [R]如何使用R讀取Excel檔案
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
+      <span class="post-date">February 26, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>很多資料會使用excel檔案儲存，<br />
+這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
+<ol>
+  <li>csv</li>
+  <li>xlsx</li>
+  <li>xls</li>
+</ol>
+
+<h2 id="1csv"><strong>1.csv</strong><br /></h2>
+<p>csv是最簡單的，不需要install任何package，<strong>read.csv</strong></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
+</code></pre></div></div>
+<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
+這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>問題應該就可以被解決了。<br /></p>
+
+<h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
+<p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
+<ul>
+  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
+  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
+</ul>
+
+<p>這兩個套件都可以儲存多個sheet，<br />
+對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。</p>
+
+<h3 id="1openxlsx"><strong>(1)openxlsx</strong></h3>
+
+<p><em>讀檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 可以使用sheet參數選擇要的sheet，預設是第一個sheet</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.xlsx</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheetName</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><em>寫檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好</span><span class="w">
+</span><span class="n">write.xlsx</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">### 有多個sheet要寫入檔案，或是要調整sheet的style</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createWorkbook</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># 增加sheet</span><span class="w">
+</span><span class="n">addWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"sheetName"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設定欄位寬度</span><span class="w">
+</span><span class="n">setColWidths</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 增加style</span><span class="w">
+</span><span class="n">headerStyle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createStyle</span><span class="p">(</span><span class="n">fgFill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TopBottomLeftRight"</span><span class="p">,</span><span class="w"> </span><span class="n">halign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="n">textDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+
+</span><span class="n">addStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">headerStyle</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">gridExpand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 加上filter</span><span class="w">
+</span><span class="n">addFilter</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 寫檔</span><span class="w">
+</span><span class="n">writeData</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2xlconnect"><strong>(2)XLConnect</strong><br /></h3>
+<p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
+
+<p>一開始想要直接使用openxlsx的dataValidation function，<br />
+但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
+所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
+再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
+
+<p>原本是直接使用 openxlsx 這個 library 的 loadWorkbook，<br />
+但在調整顏色時一直會有 error 無法解決，<br />
+在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。<br /></p>
+
+<p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
+使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
+  invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
+</code></pre></div></div>
+
+<p>看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，<br />
+後來我甚至存一份空白的excel檔案都還是會有錯誤。</p>
+
+<p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
+發現可以讀的檔案是<em>Macintosh(CR)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
+
+<p>不能讀的檔案是<em>Unix(LF)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
+
+<p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
+openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
+而 XLConnect 的錯誤則解除了。</p>
+
+<p>程式碼範例，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XLConnect</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 讀取template</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loadWorkbook</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># d是要儲存的dataframe，getSheets(wb)是sheet的名稱</span><span class="w">
+</span><span class="n">writeWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">startRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">startCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設style</span><span class="w">
+</span><span class="n">cs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span><span class="w">
+</span><span class="c1"># 邊框</span><span class="w">
+</span><span class="n">setBorder</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"all"</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XLC</span><span class="o">$</span><span class="s2">"BORDER.THIN"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">XLC</span><span class="o">$</span><span class="s2">"COLOR.BLACK"</span><span class="p">))</span><span class="w">
+</span><span class="n">setCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="p">(</span><span class="m">7</span><span class="o">+</span><span class="n">nrow</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cellstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"savefile.xlsx"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="3xls">3.xls<br /></h2>
+<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
+
+<p>下載完後只要一行指令就好，</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
+
+<p>其他更多 library 的 function 都可以去CRAN找哦！</p>
+ -->
+    <div class="post-excerpt"><p>很多資料會使用excel檔案儲存，<br />
+這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
+<ol>
+  <li>csv</li>
+  <li>xlsx</li>
+  <li>xls</li>
+</ol>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread';
+        this.page.identifier = '/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
         [R]使用 R 寄Outlook Email
       </a>
@@ -627,143 +837,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
-        [Tutorial]Computer Networking筆記(22-26)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
-      <span class="post-date">January 25, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
-<ul>
-  <li>bit = binary digit</li>
-  <li>8-bit system 最高到2^8</li>
-</ul>
-
-<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
-2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
- 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
-
-<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
-也就是，111111111<br /></p>
-
-<p>所以如果今天有更多的bits就可以儲存更多的data，
-這也就是為什麼更大的bits功能較強大了。</p>
-
-<h2 id="ip-address"><strong>IP Address</strong></h2>
-<p>每個device都有ip address。</p>
-
-<p>IP是一個32 bits的2進位表示的數字，<br />
-中間以「.」隔開成四組號碼。<br />
-像這樣:xxx.xxx.xxx.xxx<br />
-每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
-所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
-而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
-
-<p>這樣的方式就可以讓每個device表達它的位置。</p>
-
-<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
-<p>The Internet is a network of networks.</p>
-
-<p>影片舉了一個例子：
-想像網路其實是聚集了所有的網絡。
-例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
-而這三個網絡又都可以連到網路上。</p>
-
-<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
-這時候server收到訊息後，會再傳回response，
-可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
-
-<p>所以其實IP裡頭包含兩個訊息，</p>
-<ol>
-  <li>Newwork ID</li>
-  <li>Host ID</li>
-</ol>
-
-<p>但是，重點來了！<br />
-那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
-如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
-這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
-但這時候有人說，那萬一某個network的host很少，<br />
-那豈不是浪費了很多host的位址嗎！<br />
-但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
-這時候大家有點爭論不休，<br />
-到底該如何解決呢？<br /></p>
-
-<p>所以這時有人提出了一個辦法，<br />
-我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
-
-<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
-當今天在傳送訊息時，<br />
-device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
-
-<p>subnet mask一樣是一個32 bits的2進位數字，<br />
-1表示network id，0表示host id。<br />
-<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
-<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
       </span>
 
     </div>
