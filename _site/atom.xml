@@ -4,13 +4,98 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2018-06-14T04:37:17+08:00</updated>
+ <updated>2018-06-15T16:32:18+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[SQL][psql]基本指令</title>
+   <link href="http://localhost:4000blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/"/>
+   <updated>2018-06-15T14:32:00+08:00</updated>
+   <id>http://localhost:4000/sql/psql/2018/06/15/[psql]基本指令</id>
+   <content type="html">&lt;p&gt;這篇是整理一些 psql 的一些基本指令，&lt;br /&gt;
+內容來自 Udacity 上 &lt;a href=&quot;https://www.udacity.com/course/intro-to-relational-databases--ud197&quot;&gt;Intro to Relational Databases&lt;/a&gt; 的免費課程。&lt;/p&gt;
+
+&lt;h3 id=&quot;basic-commands&quot;&gt;BASIC COMMANDS&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Connect to psql&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ psql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Quit psql&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ \q
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;List all databases&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ \list
+# or
+$ \l
+
+#  exit from query result viewer
+$ q
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;List all datatables in current database&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# connect to the database
+$ \connect dbname
+# or
+$ \c dbname
+
+# list all tables 
+$ \dt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;sql-commands&quot;&gt;SQL COMMANDS&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Create and Drop DATABASE&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE DATABASE dbname;
+DROP DATABASE dbname;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Create and Drop TABLE&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Example: Create a table with a text column and a serial column
+CREATE TABLE dtname (
+	id serial,
+	name text
+);
+
+# drop table dtname
+DROP TABLE dtname;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Insert values&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;INSERT INTO dtname VALUES('This is a test');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Show all data in a table&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;TABLE dtname
+# or
+SELECT * FROM dtname
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Set primary key&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# signal column primary key
+CREATE TABLE dtname (
+	id serial primary key,
+	name text,
+	birthday date
+);
+
+# multiple columns primary key
+CREATE TABLE postal_places (
+	postal_code text,
+	country text,
+	name text,
+	primary key (postal_code, country)
+);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Declaring relationships&lt;/strong&gt;
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg&quot; alt=&quot;Declaring relationships.jpg&quot; /&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE TABLE sales (
+	sku text references products,
+	sale_date date,
+	count integer
+);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>[Python]Python 中的 *args 和 *kwargs</title>

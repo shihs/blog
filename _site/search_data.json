@@ -1,6 +1,16 @@
 {
   
 
+    "sql-psql-2018-06-15-psql-e5-9f-ba-e6-9c-ac-e6-8c-87-e4-bb-a4": {
+      "title": "[SQL][psql]基本指令",
+      "content"	 : "這篇是整理一些 psql 的一些基本指令，內容來自 Udacity 上 Intro to Relational Databases 的免費課程。BASIC COMMANDSConnect to psql$ psqlQuit psql$ qList all databases$ list# or$ l#  exit from query result viewer$ qList all datatables in current database# connect to the database$ connect dbname# or$ c dbname# list all tables $ dtSQL COMMANDSCreate and Drop DATABASECREATE DATABASE dbname;DROP DATABASE dbname;Create and Drop TABLE# Example: Create a table with a text column and a serial columnCREATE TABLE dtname (id serial,name text);# drop table dtnameDROP TABLE dtname;Insert valuesINSERT INTO dtname VALUES(&#39;This is a test&#39;);Show all data in a tableTABLE dtname# orSELECT * FROM dtnameSet primary key# signal column primary keyCREATE TABLE dtname (id serial primary key,name text,birthday date);# multiple columns primary keyCREATE TABLE postal_places (postal_code text,country text,name text,primary key (postal_code, country));Declaring relationshipsCREATE TABLE sales (sku text references products,sale_date date,count integer);",
+      "url": " /sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/",
+      "author": "Shihs",
+      "categories": "SQL, psql"
+    }
+    ,
+  
+
     "python-2018-06-13-python-args-e5-92-8c-kwargs": {
       "title": "[Python]Python 中的 *args 和 *kwargs",
       "content"	 : "簡單來說，*args和**kwargs是 function 的參數，在不確定會有多少參數時使用。args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。如果 *args和**kwargs 同時使用，*args必需在**kwargs之前。先簡單看以下的例子def test(*args, **kwargs):    for i in args:        print &quot;agrs=&quot; + str(i)    for j in kwargs:        print &quot;kwargs=&quot; + jtest(1, 2, 3, 4, first = &quot;a&quot;, second = &quot;b&quot;, third = &quot;c&quot;)結果agrs=1agrs=2agrs=3agrs=4kwargs=secondkwargs=thirdkwargs=firstargs 和 kwargs 不是重點，* 才是args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 *。所以，if you like 其實參數也可以寫成 *var 和 **vars，*args 和 **kwargs 只是一個大家使用的習慣。*args 的用法first_arg = &quot;this is first arguments&quot;def arg_test(first_arg, *args):    print &quot;first_arg=&quot; + first_arg    if args is not None:        print &quot;other *args...&quot;        for i in args:            print &quot;agrs=&quot; + str(i)    arg_test(first_arg, 1, 2, 3, 4)結果first_arg=this is first argumentsother *args...agrs=1agrs=2agrs=3agrs=4*kwargs 的用法def greet_me(**kwargs):    if kwargs is not None:        for key, value in kwargs.iteritems():            print &quot;%s == %s&quot; %(key,value) greet_me(name=&quot;yasoob&quot;)name == yasoob從以上兩個範例可以看出 args 和 kwargs 用法的差異。使用 list 和 dictionary 當參數def test_arg(arg1, arg2, arg3):    print arg1    print arg2    print arg3#===args===========args = [1, 2, 3]test_arg(*args)# resultarg1=1arg2=2arg3=3#===kwargs===========kwargs = {    &quot;arg3&quot;:1,    &quot;arg2&quot;:2,    &quot;arg1&quot;:3}test_arg(**kwargs)# resultarg1=3arg2=2arg3=1根據以上範例，可以發現*arg print 的順序就是 list 的順序，但 **kwargs 會根據 dictionary 的 key 來賦予 value。參考",
