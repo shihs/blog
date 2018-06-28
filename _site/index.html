@@ -158,8 +158,137 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
+        Google Map API - Geocoding 地址經緯度
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 28, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 28, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+<p>這次要介紹<code class="highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+</code></pre></div></div>
+<p>簡單來說，你可以<strong>根據地址找到該地址在地理上的座標（經緯度）</strong>，方便應用在地圖上標記位置。</p>
+
+<p>根據<code class="highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
+來看文件上給的一個輸出 json 格式的範例，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
+</code></pre></div></div>
+<p>看起來這個 API 是需要 API KEY 。</p>
+
+<p>但其實，這個 API 是可以不需要 KEY 的。（我不知道為什麼 XD）
+而且使用 API 還有限制一天可以搜尋的數量……</p>
+
+<p>所以其實上面的例子只要這樣就好，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+</code></pre></div></div>
+<p>當然也可以搜尋中文地址，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
+</code></pre></div></div>
+<p>就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。
+其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。</p>
+
+<h3 id="使用-python-快速爬取-api-內容">使用 python 快速爬取 API 內容</h3>
+<p>這邊我寫了一個簡單的 python 程式可以快速地使用這個 API 獲得地址的經緯度。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">get_latitude_longtitude</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="c"># decode url</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://maps.googleapis.com/maps/api/geocode/json?address="</span> <span class="o">+</span> <span class="n">address</span>
+    
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">js</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span> <span class="o">!=</span> <span class="s">"OVER_QUERY_LIMIT"</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s">"results"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"geometry"</span><span class="p">][</span><span class="s">"location"</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lat"</span><span class="p">]</span>
+    <span class="n">lng</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lng"</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+
+
+
+<span class="n">address</span> <span class="o">=</span> <span class="s">"重慶南路一段122號"</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latitude_longtitude</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread';
+        this.page.identifier = '/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread" data-disqus-identifier="/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
-        [SQL][psql]基本指令
+        [SQL][psql]基本指令(1)
       </a>
     </h1>
 
@@ -183,7 +312,7 @@
 
 
     </div>
-    <!-- <p>這篇是整理一些 psql 的一些基本指令，<br />
+    <!-- <p>這篇是整理一些 psql 的基本指令，<br />
 內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
 
 <h3 id="basic-commands">BASIC COMMANDS</h3>
@@ -236,7 +365,7 @@ DROP TABLE dtname;
 SELECT * FROM dtname
 </code></pre></div></div>
 <p><strong>Set primary key</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># signal column primary key
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
 CREATE TABLE dtname (
 	id serial primary key,
 	name text,
@@ -261,7 +390,7 @@ CREATE TABLE postal_places (
 </code></pre></div></div>
 
  -->
-    <div class="post-excerpt"><p>這篇是整理一些 psql 的一些基本指令，<br />
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本指令，<br />
 內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
 
 </div>
@@ -715,144 +844,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread" data-disqus-identifier="/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
-        [Python]使用 pyinstaller 套件打包 .py 檔
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 24, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
-
-<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。<br /></p>
-
-<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
-<br /></p>
-
-<h2 id="前提">前提</h2>
-<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
-
-<h2 id="安裝">安裝</h2>
-<p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
-</code></pre></div></div>
-
-<p><strong>Mac</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
-</code></pre></div></div>
-<p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
-<em>[Errno 1] Operation not permitted</em></p>
-
-<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
-</code></pre></div></div>
-<p>就成功安裝了。<br />
-安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
-
-<h2 id="打包-py-檔">打包 .py 檔</h2>
-<p>假如現在要打包一個 test.py 檔<br /></p>
-
-<p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
-</code></pre></div></div>
-<p>完成後會產生三個檔案，</p>
-<ol>
-  <li>build 資料夾</li>
-  <li>dist 資料夾</li>
-  <li>test.spec 檔</li>
-</ol>
-
-<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
-如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
-
-<p><strong>Mac</strong><br />
-Mac的操作基本上和 Windows 指令一樣，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
-</code></pre></div></div>
-<p>打包完後產生出來的檔案也會一樣。<br />
-但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
-<br />
-可以試試看在 .py 檔裡增加一行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
-</code></pre></div></div>
-<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
-
-<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
-</code></pre></div></div>
-<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
-
-<h2 id="常用參數">常用參數</h2>
-<ol>
-  <li>pyinstaller -h 查看參數</li>
-  <li>-F 打包成一個exe文件</li>
-  <li>–icon=圖標路徑</li>
-</ol>
-
-<p><br />
-關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/" target="_blank">部落格</a>我覺得說明蠻詳細的。</p>
-
- -->
-    <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread';
-        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
       </span>
 
     </div>
