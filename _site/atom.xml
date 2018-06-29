@@ -4,13 +4,55 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2018-06-28T14:36:52+08:00</updated>
+ <updated>2018-06-29T15:04:48+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[SQL][psql]基本觀念(2)</title>
+   <link href="http://localhost:4000blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/"/>
+   <updated>2018-06-29T13:52:00+08:00</updated>
+   <id>http://localhost:4000/sql/psql/2018/06/29/[SQL][psql]基本令與(2)</id>
+   <content type="html">&lt;p&gt;這篇是整理一些 psql 的基本觀念，&lt;br /&gt;
+內容來自 Udacity 上 &lt;a href=&quot;https://www.udacity.com/course/intro-to-relational-databases--ud197&quot;&gt;Intro to Relational Databases&lt;/a&gt; 的免費課程與我自己整理的資訊。&lt;/p&gt;
+
+&lt;h3 id=&quot;normalized-design&quot;&gt;Normalized Design&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;What is Normalized Design?&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Every row has the same number of columns. &lt;br /&gt;
+每一列都必須有同樣的行數。&lt;/li&gt;
+  &lt;li&gt;There is a &lt;strong&gt;unique key&lt;/strong&gt;, and everything in a row says something about the key. &lt;br /&gt;
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。&lt;/li&gt;
+  &lt;li&gt;Facts that don’t relate to the key belong in different tables. &lt;br /&gt;
+與 unique key 無關的訊息要放在另一個 table。&lt;/li&gt;
+  &lt;li&gt;Table shouldn’t imply relationships that don’t exist. &lt;br /&gt;
+行之間不存在關係的資料不能產生會讓人誤會訊息。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;More about Normalization:&lt;br /&gt;
+William Kent’s paper &lt;a href=&quot;http://www.bkent.net/Doc/simple5.htm&quot;&gt;A Simple Guide to Five Normal Forms in Relational Database Theory&lt;/a&gt;&lt;br /&gt;
+Wikipedia’s article on &lt;a href=&quot;https://en.wikipedia.org/wiki/Database_normalization&quot;&gt;database normalization&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;unique-key-vs-foreign-key&quot;&gt;Unique Key v.s. Foreign Key&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;What is Unique Key?&lt;/strong&gt;&lt;br /&gt;
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。&lt;br /&gt;
+另外還有一個和 unique key 很像的東西，叫 &lt;strong&gt;primary key&lt;/strong&gt;。它同樣必需要是唯一值不能重複，但他們的差別在於，&lt;strong&gt;unique key 可以有 null，但 primary key 不能有 null&lt;/strong&gt;。&lt;br /&gt;
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。&lt;br /&gt;
+詳細說明可以看&lt;a href=&quot;https://www.youtube.com/watch?v=7_9Jb9Fi9nI&quot;&gt;這裡&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is Foreign Key?&lt;/strong&gt;&lt;br /&gt;
+對照到另一個資料表的 primary key。&lt;br /&gt;
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png&quot; alt=&quot;primary key vs unique key.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Google Map API - Geocoding 地址經緯度</title>
@@ -154,7 +196,7 @@ CREATE TABLE postal_places (
 &lt;p&gt;&lt;strong&gt;Declaring relationships&lt;/strong&gt;
 &lt;img src=&quot;http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg&quot; alt=&quot;Declaring relationships.jpg&quot; /&gt;&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;CREATE TABLE sales (
-	sku text references products,
+	sku text references products (sku),
 	sale_date date,
 	count integer
 );

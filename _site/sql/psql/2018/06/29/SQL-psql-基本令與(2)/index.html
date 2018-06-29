@@ -155,13 +155,13 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[R]使用 R 寄Outlook Email</h1>
+  <h1 class="post-title">[SQL][psql]基本觀念(2)</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">February 26, 2018</span> 
+    <span class="post-date">June 29, 2018</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
+        <a class="comment-count" href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
@@ -169,55 +169,49 @@
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
         
       
     </span>
   </div>
   <div>
-    <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
+    <p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
 
-<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
-<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
+<h3 id="normalized-design">Normalized Design</h3>
+<p><strong>What is Normalized Design?</strong></p>
+<ol>
+  <li>Every row has the same number of columns. <br />
+每一列都必須有同樣的行數。</li>
+  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
+  <li>Facts that don’t relate to the key belong in different tables. <br />
+與 unique key 無關的訊息要放在另一個 table。</li>
+  <li>Table shouldn’t imply relationships that don’t exist. <br />
+行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+</ol>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
-</span><span class="c1">## init com api</span><span class="w">
-</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## create an email </span><span class="w">
-</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="c1">## configure  email parameter </span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
-</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
-</span><span class="c1"># First:text</span><span class="w">
-</span><span class="c1"># outMail[["body"]] = </span><span class="w">
-</span><span class="c1"># "Dear reciever,</span><span class="w">
-</span><span class="c1">#                      </span><span class="w">
-</span><span class="c1"># Please see attached.</span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># Best regards,</span><span class="w">
-</span><span class="c1"># Sender"</span><span class="w">
+<p>More about Normalization:<br />
+William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
+Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
 
-</span><span class="c1"># Second:html text</span><span class="w">
-</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
-</span><span class="s1">'
-&lt;p&gt;Dear reciever,&lt;/p&gt;
-&lt;p&gt;Please see attached.&lt;/p&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;p&gt;Best regards,
-&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
+<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
+<p><strong>What is Unique Key?</strong><br />
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
+另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
+詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
 
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
+<p><strong>What is Foreign Key?</strong><br />
+對照到另一個資料表的 primary key。<br />
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
 
-</span><span class="c1"># attachment</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## send it                     </span><span class="w">
-</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
+<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
 
-
-</span></code></pre></div></div>
 
   </div>
 </div>
@@ -238,7 +232,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
+        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -258,15 +252,6 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
-            [SQL][psql]基本觀念(2)
-            <small>Jun 29, 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
             Google Map API - Geocoding 地址經緯度
             <small>Jun 28, 2018</small>
@@ -279,6 +264,15 @@ s.setAttribute('data-timestamp', +new Date());
           <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
             [SQL][psql]基本指令(1)
             <small>Jun 15, 2018</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">
+            [Python]Python 中的 *args 和 *kwargs
+            <small>Jun 13, 2018</small>
           </a>
         </h3>
       </li>

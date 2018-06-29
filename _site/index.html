@@ -158,6 +158,112 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
+        [SQL][psql]基本觀念(2)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 29, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 29, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+<h3 id="normalized-design">Normalized Design</h3>
+<p><strong>What is Normalized Design?</strong></p>
+<ol>
+  <li>Every row has the same number of columns. <br />
+每一列都必須有同樣的行數。</li>
+  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
+  <li>Facts that don’t relate to the key belong in different tables. <br />
+與 unique key 無關的訊息要放在另一個 table。</li>
+  <li>Table shouldn’t imply relationships that don’t exist. <br />
+行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+</ol>
+
+<p>More about Normalization:<br />
+William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
+Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
+
+<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
+<p><strong>What is Unique Key?</strong><br />
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
+另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
+詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
+
+<p><strong>What is Foreign Key?</strong><br />
+對照到另一個資料表的 primary key。<br />
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
+
+<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
+
+ -->
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
         Google Map API - Geocoding 地址經緯度
       </a>
@@ -383,7 +489,7 @@ CREATE TABLE postal_places (
 <p><strong>Declaring relationships</strong>
 <img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
-	sku text references products,
+	sku text references products (sku),
 	sale_date date,
 	count integer
 );
@@ -727,123 +833,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread" data-disqus-identifier="/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">
-        [Web][CSS]在不同螢幕解析度下調整css
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 24, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Web">Web</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#CSS">CSS</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。</p>
-
-<p><a href="http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html" target="_blank">參考網站</a></p>
-
-<h2 id="解析度可以這樣區分">解析度可以這樣區分</h2>
-<ol>
-  <li>手機：解析度為0px~320px<br /></li>
-  <li>平板電腦：解析度為320px~768px<br /></li>
-  <li>桌上型電腦：大於768px<br /></li>
-</ol>
-
-<p><br /></p>
-
-<h2 id="在-css-上調整">在 CSS 上調整</h2>
-
-<p>使用<em>@media</em></p>
-
-<p><strong>設定 Max Width</strong></p>
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 768px以下(包含)都適用，手機和平板會符合這個設定 */</span>
-<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span> <span class="m">768px</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nc">.class</span> <span class="p">{</span>
-		<span class="nl">background</span><span class="p">:</span> <span class="m">#ccc</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>設定 Min Width</strong></p>
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 329px以上(包含)都適用，平板和電腦會符合這個設定 */</span>
-<span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span> <span class="m">320px</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nc">.class</span> <span class="p">{</span>
-		<span class="nl">background</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>設定 Max Width and Min Width</strong></p>
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 介於768px與979px間適用 */</span>
-<span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">979px</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nc">.class</span> <span class="p">{</span>
-		<span class="nl">background</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>如此就可以依據螢幕的寬度來顯示適合的方式了。</p>
-
- -->
-    <div class="post-excerpt"><p>除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread';
-        this.page.identifier = '/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread" data-disqus-identifier="/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">0 Comments</a>
       </span>
 
     </div>
