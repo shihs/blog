@@ -137,6 +137,10 @@
           
         
       
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -155,6 +159,97 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
+        [Python][SQL]Python 連接 SQLite
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 30, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
+
+<span class="c"># 要下的 SQL 指令</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="s">"select host_key from cookies limit 10;"</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
+</code></pre></div></div>
+ -->
+    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
+        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -709,130 +804,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread" data-disqus-identifier="/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">
-        [Web][CSS]如何刪除 nav tag 底色兩邊的空白？
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 11, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 11, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Web">Web</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#CSS">CSS</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h3 id="nav的作用"><code class="highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
-
-<ol>
-  <li><code class="highlighter-rouge">&lt;nav&gt;</code> 為 HTML 文件的區域元素 (element)，<code class="highlighter-rouge">&lt;nav&gt;</code>用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。</li>
-  <li><code class="highlighter-rouge">&lt;nav&gt;</code> 除了全域屬性外，沒有定義其他屬性 (attribute) 。
-<a href="https://pydoing.blogspot.com/2012/01/html-5-nav.html">參考</a></li>
-</ol>
-
-<p>像我的<a href="https://shihs.github.io/">網頁</a>上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 <code class="highlighter-rouge">&lt;nav&gt;</code>裡。</p>
-
-<p><br /></p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- html --&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"wrapper-nav"</span> <span class="na">id=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;ul&gt;</span>
-      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>    
-      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span><span class="nt">&gt;</span>Contact Me<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
-    <span class="nt">&lt;/ul&gt;</span>           
-  <span class="nt">&lt;/nav&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-</code></pre></div></div>
-
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">nav</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h3 id="如何刪除-nav-背景的空白-how-to-remove-the-space-on-both-sides-of-navbar">如何刪除 <code class="highlighter-rouge">&lt;nav&gt;</code> 背景的空白 How to remove the space on both sides of navbar</h3>
-<p>若使用上面的程式碼會發現 <code class="highlighter-rouge">nav</code> 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在<code class="highlighter-rouge">&lt;body&gt;</code>這個 tag 上面做些調整</p>
-
-<ol>
-  <li>
-    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">body</span><span class="p">{</span>
-  <span class="nl">margin-left</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
-  <span class="nl">margin-right</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
-<span class="p">}</span> 
-</code></pre></div>    </div>
-  </li>
-  <li>
-    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">body</span><span class="p">{</span>
-  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-  <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
-<span class="p">}</span> 
-</code></pre></div>    </div>
-  </li>
-</ol>
-
- -->
-    <div class="post-excerpt"><h3 id="nav的作用"><code class="highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread';
-        this.page.identifier = '/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread" data-disqus-identifier="/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">0 Comments</a>
       </span>
 
     </div>

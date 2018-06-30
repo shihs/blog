@@ -137,6 +137,10 @@
           
         
       
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -155,6 +159,112 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">
+        [R]設定 R 圖形字體
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 24, 2016</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 24, 2016</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
+以下的解法是針對windows方能使用。</p>
+
+<ol>
+  <li>使用windowsFonts函數將要使用的字體賦予一個值。
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowsFonts</span><span class="p">(</span><span class="n">BL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowsFont</span><span class="p">(</span><span class="s2">"微軟正黑體"</span><span class="p">))</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>在圖形中設定family。</li>
+</ol>
+
+<p>(1)使用par()在最一開始設定。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
+</span><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
+     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>(2) 在plot中設定</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
+     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>(3) 在ggplot中設定</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"取值"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"頻數"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p>其實，family後是可以直接放要設定的字體完整名稱，
+不需定windowsFonts，
+只是假如字體名稱很長，
+便不需要一再地打上那麼長的名稱，
+如此以來便也適用mac。</p>
+ -->
+    <div class="post-excerpt"><p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
+以下的解法是針對windows方能使用。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread';
+        this.page.identifier = '/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread" data-disqus-identifier="/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -545,96 +655,11 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
-        [R]在 R 中使用 system 呼叫 python
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 8, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 8, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
-
-<p>一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！</p>
-
- -->
-    <div class="post-excerpt"><p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread';
-        this.page.identifier = '/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread" data-disqus-identifier="/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
 </div>
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="/blog/page9">Older</a>
   
   
     

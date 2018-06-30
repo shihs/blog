@@ -1,6 +1,16 @@
 {
   
 
+    "python-sql-2018-06-30-python-sql-pytho-e6-8e-a5-sqlite": {
+      "title": "[Python][SQL]Python 連接 SQLite",
+      "content"	 : "這篇是 Python 連接 SQL 的一些基本語法，內容來自 Udacity 上 Intro to Relational Databases 的免費課程與我自己整理的資訊。import sqlite3conn = sqlite3.connect(&quot;Cookies&quot;) # 連接 SQLite 資料庫cursor = conn.cursor() # 獲得連接的游標# 要下的 SQL 指令cursor.execute(    &quot;select host_key from cookies limit 10;&quot;)results = cursor.fetchall()print resutls # 結果為 turpleconn.close() # 每次都要記得 close 連線",
+      "url": " /python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/",
+      "author": "Shihs",
+      "categories": "Python, SQL"
+    }
+    ,
+  
+
     "sql-psql-2018-06-29-sql-psql-e5-9f-ba-e6-9c-ac-e4-bb-a4-e8-88-87-2": {
       "title": "[SQL][psql]基本觀念(2)",
       "content"	 : "這篇是整理一些 psql 的基本觀念，內容來自 Udacity 上 Intro to Relational Databases 的免費課程與我自己整理的資訊。Normalized DesignWhat is Normalized Design?  Every row has the same number of columns. 每一列都必須有同樣的行數。  There is a unique key, and everything in a row says something about the key. 每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。  Facts that don’t relate to the key belong in different tables. 與 unique key 無關的訊息要放在另一個 table。  Table shouldn’t imply relationships that don’t exist. 行之間不存在關係的資料不能產生會讓人誤會訊息。More about Normalization:William Kent’s paper A Simple Guide to Five Normal Forms in Relational Database TheoryWikipedia’s article on database normalizationUnique Key v.s. Foreign KeyWhat is Unique Key?唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。另外還有一個和 unique key 很像的東西，叫 primary key。它同樣必需要是唯一值不能重複，但他們的差別在於，unique key 可以有 null，但 primary key 不能有 null。譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。詳細說明可以看這裡。What is Foreign Key?對照到另一個資料表的 primary key。譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。",
@@ -401,6 +411,8 @@
     
   
 
+  
+    
   
     
   
