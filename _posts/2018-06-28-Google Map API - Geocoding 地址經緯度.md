@@ -22,8 +22,8 @@ https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Park
 ```
 看起來這個 API 是需要 API KEY 。
 
-但其實，這個 API 是可以不需要 KEY 的。（我不知道為什麼 XD）
-而且使用 API 還有限制一天可以搜尋的數量......
+但其實，這個 API 是可以不需要 KEY 的（我不知道為什麼 XD）。
+而且使用 API key 反而還會被限制一天可以搜尋的數量......
 
 所以其實上面的例子只要這樣就好，
 ```
