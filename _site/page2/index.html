@@ -162,6 +162,181 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">
+        [Python]Python 中的 *args 和 *kwargs
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 13, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 13, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
+args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
+如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
+
+<p>先簡單看以下的例子</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"kwargs="</span> <span class="o">+</span> <span class="n">j</span>
+		
+<span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="s">"a"</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="s">"b"</span><span class="p">,</span> <span class="n">third</span> <span class="o">=</span> <span class="s">"c"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>結果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agrs=1
+agrs=2
+agrs=3
+agrs=4
+kwargs=second
+kwargs=third
+kwargs=first
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="args-和-kwargs-不是重點-才是">args 和 kwargs 不是重點，* 才是</h3>
+
+<p>args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 <code class="highlighter-rouge">*</code>。<br />
+所以，if you like 其實參數也可以寫成 <code class="highlighter-rouge">*var</code> 和 <code class="highlighter-rouge">**vars</code>，<code class="highlighter-rouge">*args</code> 和 <code class="highlighter-rouge">**kwargs</code> 只是一個大家使用的習慣。</p>
+
+<h3 id="args-的用法">*args 的用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">first_arg</span> <span class="o">=</span> <span class="s">"this is first arguments"</span>
+
+<span class="k">def</span> <span class="nf">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"first_arg="</span> <span class="o">+</span> <span class="n">first_arg</span>
+
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"other *args..."</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>結果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first_arg=this is first arguments
+other *args...
+agrs=1
+agrs=2
+agrs=3
+agrs=4
+</code></pre></div></div>
+
+<h3 id="kwargs-的用法">*kwargs 的用法</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s == </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+ 
+<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"yasoob"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name == yasoob
+</code></pre></div></div>
+<p>從以上兩個範例可以看出 args 和 kwargs 用法的差異。</p>
+
+<h3 id="使用-list-和-dictionary-當參數">使用 list 和 dictionary 當參數</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">test_arg</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">arg1</span>
+    <span class="k">print</span> <span class="n">arg2</span>
+    <span class="k">print</span> <span class="n">arg3</span>
+
+
+<span class="c">#===args===========</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">test_arg</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="c"># result</span>
+<span class="n">arg1</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">arg3</span><span class="o">=</span><span class="mi">3</span>
+
+<span class="c">#===kwargs===========</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"arg3"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s">"arg2"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s">"arg1"</span><span class="p">:</span><span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">test_arg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c"># result</span>
+<span class="n">arg1</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">arg3</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>根據以上範例，可以發現<code class="highlighter-rouge">*arg</code> print 的順序就是 list 的順序，但 <code class="highlighter-rouge">**kwargs</code> 會根據 dictionary 的 key 來賦予 value。</p>
+
+<p><br /></p>
+
+<p><a href="https://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/">參考</a></p>
+
+ -->
+    <div class="post-excerpt"><p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
+args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
+如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread';
+        this.page.identifier = '/python/2018/06/13/Python-args-%E5%92%8C-kwargs/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread" data-disqus-identifier="/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">
         [Web][CSS]如何刪除 nav tag 底色兩邊的空白？
       </a>
@@ -675,217 +850,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread" data-disqus-identifier="/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
-        [R]如何使用R讀取Excel檔案
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 26, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>很多資料會使用excel檔案儲存，<br />
-這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
-<ol>
-  <li>csv</li>
-  <li>xlsx</li>
-  <li>xls</li>
-</ol>
-
-<h2 id="1csv"><strong>1.csv</strong><br /></h2>
-<p>csv是最簡單的，不需要install任何package，<strong>read.csv</strong></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-<p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
-</code></pre></div></div>
-<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
-這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-<p>問題應該就可以被解決了。<br /></p>
-
-<h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
-<p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
-<ul>
-  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
-  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
-</ul>
-
-<p>這兩個套件都可以儲存多個sheet，<br />
-對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。</p>
-
-<h3 id="1openxlsx"><strong>(1)openxlsx</strong></h3>
-
-<p><em>讀檔</em></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 可以使用sheet參數選擇要的sheet，預設是第一個sheet</span><span class="w">
-</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.xlsx</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheetName</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p><em>寫檔</em></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
-
-</span><span class="c1">### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好</span><span class="w">
-</span><span class="n">write.xlsx</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
-
-
-</span><span class="c1">### 有多個sheet要寫入檔案，或是要調整sheet的style</span><span class="w">
-</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createWorkbook</span><span class="p">()</span><span class="w">
-
-</span><span class="c1"># 增加sheet</span><span class="w">
-</span><span class="n">addWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"sheetName"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 設定欄位寬度</span><span class="w">
-</span><span class="n">setColWidths</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w">
-
-</span><span class="c1"># 增加style</span><span class="w">
-</span><span class="n">headerStyle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createStyle</span><span class="p">(</span><span class="n">fgFill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TopBottomLeftRight"</span><span class="p">,</span><span class="w"> </span><span class="n">halign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="n">textDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
-
-</span><span class="n">addStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">headerStyle</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">gridExpand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 加上filter</span><span class="w">
-</span><span class="n">addFilter</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
-
-</span><span class="c1"># 寫檔</span><span class="w">
-</span><span class="n">writeData</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 存檔</span><span class="w">
-</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="2xlconnect"><strong>(2)XLConnect</strong><br /></h3>
-<p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
-
-<p>一開始想要直接使用openxlsx的dataValidation function，<br />
-但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
-所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
-再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
-
-<p>原本是直接使用 openxlsx 這個 library 的 loadWorkbook，<br />
-但在調整顏色時一直會有 error 無法解決，<br />
-在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。<br /></p>
-
-<p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
-使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
-  invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
-</code></pre></div></div>
-
-<p>看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，<br />
-後來我甚至存一份空白的excel檔案都還是會有錯誤。</p>
-
-<p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
-發現可以讀的檔案是<em>Macintosh(CR)</em></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
-
-<p>不能讀的檔案是<em>Unix(LF)</em></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
-
-<p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
-openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
-而 XLConnect 的錯誤則解除了。</p>
-
-<p>程式碼範例，<br /></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XLConnect</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 讀取template</span><span class="w">
-</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loadWorkbook</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># d是要儲存的dataframe，getSheets(wb)是sheet的名稱</span><span class="w">
-</span><span class="n">writeWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">startRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">startCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 設style</span><span class="w">
-</span><span class="n">cs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span><span class="w">
-</span><span class="c1"># 邊框</span><span class="w">
-</span><span class="n">setBorder</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"all"</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XLC</span><span class="o">$</span><span class="s2">"BORDER.THIN"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">XLC</span><span class="o">$</span><span class="s2">"COLOR.BLACK"</span><span class="p">))</span><span class="w">
-</span><span class="n">setCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="p">(</span><span class="m">7</span><span class="o">+</span><span class="n">nrow</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cellstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 存檔</span><span class="w">
-</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"savefile.xlsx"</span><span class="p">)</span><span class="w">
-
-</span></code></pre></div></div>
-
-<h2 id="3xls">3.xls<br /></h2>
-<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
-
-<p>下載完後只要一行指令就好，</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
-</span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
-
-<p>其他更多 library 的 function 都可以去CRAN找哦！</p>
- -->
-    <div class="post-excerpt"><p>很多資料會使用excel檔案儲存，<br />
-這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
-<ol>
-  <li>csv</li>
-  <li>xlsx</li>
-  <li>xls</li>
-</ol>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
       </span>
 
     </div>

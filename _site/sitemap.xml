@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/</loc>
     </url>
 
