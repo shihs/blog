@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2018-07-03T16:52:03+08:00</updated>
+ <updated>2018-07-04T14:25:58+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -17,7 +17,7 @@
    <link href="http://localhost:4000blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/"/>
    <updated>2018-07-03T16:00:00+08:00</updated>
    <id>http://localhost:4000/python/%E7%88%AC%E8%9F%B2/2018/07/03/[Python]讀取驗證碼</id>
-   <content type="html">&lt;p&gt;當爬網站時碰到需要讀取驗證碼的網站時可以使用
+   <content type="html">&lt;p&gt;當爬網站碰到需要讀取驗證碼的網站時可以使用
 &lt;strong&gt;pytesseract&lt;/strong&gt; 與 &lt;strong&gt;Image&lt;/strong&gt; 套件來讀取圖片上的數字與英文。&lt;/p&gt;
 
 &lt;p&gt;基本流程：&lt;/p&gt;
@@ -30,7 +30,9 @@
 
 &lt;p&gt;以
 &lt;a href=&quot;https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do&quot;&gt;經濟部公司及分公司基本資料查詢系統&lt;/a&gt;
-為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的&lt;a href=&quot;https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg&quot;&gt;網址&lt;/a&gt;同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。&lt;/p&gt;
+為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
+&lt;a href=&quot;https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg&quot;&gt;網址&lt;/a&gt;
+同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。&lt;/p&gt;
 
 &lt;p&gt;所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。&lt;/p&gt;
 
@@ -122,7 +124,11 @@ TypeError: int() argument must be a string or a number, not 'tuple'
 
 &lt;p&gt;基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;經濟部公司及分公司基本資料查詢系統&lt;/strong&gt;爬蟲網站&lt;a href=&quot;https://github.com/shihs/Taiwan-Company-info-crawler&quot;&gt;完整程式碼&lt;/a&gt;。或是，另外比較複雜的驗證碼可以參考我的&lt;a href=&quot;https://github.com/shihs/read-captcha&quot;&gt;github&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;經濟部公司及分公司基本資料查詢系統&lt;/strong&gt;爬蟲網站
+&lt;a href=&quot;https://github.com/shihs/Taiwan-Company-info-crawler&quot;&gt;完整程式碼&lt;/a&gt;
+。或是，另外比較複雜的驗證碼可以參考我的
+&lt;a href=&quot;https://github.com/shihs/read-captcha&quot;&gt;github&lt;/a&gt;
+。&lt;/p&gt;
 
 </content>
  </entry>

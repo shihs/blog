@@ -187,7 +187,7 @@
 
 
     </div>
-    <!-- <p>當爬網站時碰到需要讀取驗證碼的網站時可以使用
+    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
 <strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
 
 <p>基本流程：</p>
@@ -200,7 +200,9 @@
 
 <p>以
 <a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
-為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
+為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
+<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
+同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
 
 <p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
 
@@ -292,10 +294,14 @@ TypeError: int() argument must be a string or a number, not 'tuple'
 
 <p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
 
-<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>。或是，另外比較複雜的驗證碼可以參考我的<a href="https://github.com/shihs/read-captcha">github</a>。</p>
+<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
+<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
+。或是，另外比較複雜的驗證碼可以參考我的
+<a href="https://github.com/shihs/read-captcha">github</a>
+。</p>
 
  -->
-    <div class="post-excerpt"><p>當爬網站時碰到需要讀取驗證碼的網站時可以使用
+    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
 <strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
 
 </div>
