@@ -48,7 +48,7 @@ sudo pip install pyinstaller --upgrade --ignore-installed
 
 **Windows**
 ```
-pyinstall -F test.py
+pyinstaller -F test.py
 ```
 完成後會產生三個檔案，
 1. build 資料夾
@@ -62,7 +62,7 @@ pyinstall -F test.py
 **Mac**<br>
 Mac的操作基本上和 Windows 指令一樣，
 ```
-pyinstall -F test.py
+pyinstaller -F test.py
 ```
 打包完後產生出來的檔案也會一樣。<br>
 但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/*yourusername* 底下。<br>
