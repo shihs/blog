@@ -162,6 +162,155 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
+        [SQL][psql]基本指令(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 15, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 15, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+<h3 id="basic-commands">BASIC COMMANDS</h3>
+<p><strong>Connect to psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
+</code></pre></div></div>
+<p><strong>Quit psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
+</code></pre></div></div>
+<p><strong>List all databases</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
+# or
+$ \l
+
+#  exit from query result viewer
+$ q
+</code></pre></div></div>
+<p><strong>List all datatables in current database</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
+$ \connect dbname
+# or
+$ \c dbname
+
+# list all tables 
+$ \dt
+</code></pre></div></div>
+<p><br />
+<br /></p>
+<h3 id="sql-commands">SQL COMMANDS</h3>
+<p><strong>Create and Drop DATABASE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
+DROP DATABASE dbname;
+</code></pre></div></div>
+<p><strong>Create and Drop TABLE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
+CREATE TABLE dtname (
+	id serial,
+	name text
+);
+
+# drop table dtname
+DROP TABLE dtname;
+</code></pre></div></div>
+<p><strong>Insert values</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
+</code></pre></div></div>
+<p><strong>Show all data in a table</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
+# or
+SELECT * FROM dtname
+</code></pre></div></div>
+<p><strong>Set primary key</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
+CREATE TABLE dtname (
+	id serial primary key,
+	name text,
+	birthday date
+);
+
+# multiple columns primary key
+CREATE TABLE postal_places (
+	postal_code text,
+	country text,
+	name text,
+	primary key (postal_code, country)
+);
+</code></pre></div></div>
+<p><strong>Declaring relationships</strong>
+<img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
+	sku text references products (sku),
+	sale_date date,
+	count integer
+);
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">
         [Python]Python 中的 *args 和 *kwargs
       </a>
@@ -631,7 +780,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>假如現在要打包一個 test.py 檔<br /></p>
 
 <p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>完成後會產生三個檔案，</p>
 <ol>
@@ -645,7 +794,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>Mac</strong><br />
 Mac的操作基本上和 Windows 指令一樣，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstall -F test.py
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>打包完後產生出來的檔案也會一樣。<br />
 但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
@@ -708,148 +857,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
-        [Python]下載與安裝 Python2.7 及 pip 套件
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 23, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 23, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>安裝前可以先認識 <a href="https://zh.wikipedia.org/wiki/Python" target="_blank">Python</a>。</p>
-
-<p>這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。</p>
-
-<p>主要步驟其實就是四個：</p>
-<ol>
-  <li>下載Python</li>
-  <li>設定環境變數</li>
-  <li>下載get-pip.py</li>
-  <li>設定環境變數</li>
-</ol>
-
-<h3 id="1下載-python27">1.下載 Python2.7</h3>
-
-<p><a href="https://www.python.org/downloads/release/python-2714/">Python2.7.14載點</a>
-根據自己電腦是32位元還是64位元選擇要下載的檔案
-<img src="http://localhost:4000/blog/img/posts/python%20downloads.jpg" alt="python downloads.jpg" /></p>
-
-<p>下載下來後的檔案（我的電腦是32位元）
-<img src="http://localhost:4000/blog/img/posts/python%20installation.jpg" alt="python installation.jpg" /></p>
-
-<p>點兩下安裝，就是一直按下一步就對了
-<img src="http://localhost:4000/blog/img/posts/python%20install%20step.jpg" alt="python install step.jpg" /></p>
-
-<h3 id="2設定環境變數">2.設定環境變數</h3>
-<p>設定環境變數的目的是，在執行 Python 時讓系統可以根據環境變數底下的路徑依序去找 Python 程式，而不會不知道要如何執行 Python。</p>
-
-<p>設定環境變數步驟，<br /></p>
-
-<p>電腦(右鍵)-&gt;內容
-<img src="http://localhost:4000/blog/img/posts/environment.jpg" alt="environment.jpg" /></p>
-
-<p>1.進階系統設定 -&gt; 2.環境變數 -&gt; 3.點選PATH-&gt;編輯
-<img src="http://localhost:4000/blog/img/posts/environment%20variable.jpg" alt="environment variable.jpg" /></p>
-
-<p>在變數最後加上安裝路徑「;C:\Python27」（這是預設的安裝路徑，如果安裝過程中有更改位置，這邊要改成安裝的路徑）
-<img src="http://localhost:4000/blog/img/posts/python%20path.jpg" alt="python path.jpg" /></p>
-
-<p>以上步驟完成之後在 cmd 輸入 python，就開始執行 Python 了！ 
-<img src="http://localhost:4000/blog/img/posts/python%20test.jpg" alt="python test.jpg" /></p>
-
-<p><br />
-基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？<br /></p>
-
-<p>Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 是用來下載其他套件非常好用的工具。<br /></p>
-
-<p>當我們下載完 pip 後，
-未來下載套件只需要在 cmd 輸入指令就能搞定。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install packagename
-</code></pre></div></div>
-
-<p>也許現在還是會有點困惑，但未來真正開始寫 Python 就會明白為什麼大家下載完 Python 都會接著安裝 pip 了。</p>
-
-<h3 id="3下載-get-pippy">3.下載 get-pip.py</h3>
-<p>先下載 <a href="http://localhost:4000/blog/downloads/get-pip.py">get-pip.py</a></p>
-
-<p>接著開啟 cmd，使用 cd 將目前位置移到 get-pip.py 的路徑底下，並輸入</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python get-pip.py
-</code></pre></div></div>
-<p><img src="http://localhost:4000/blog/img/posts/run%20pip_get.jpg" alt="run pip_get.jpg" /></p>
-
-<p>這時候只差最後一步了</p>
-
-<h3 id="4設定環境變數">4.設定環境變數</h3>
-<p>這個步驟與剛剛第2個步驟一樣，不過現在要加上的路徑是「;C:\Python27\Script」
-<img src="http://localhost:4000/blog/img/posts/python%20script%20path.jpg" alt="python script path.jpg" /></p>
-
-<p><br />
-<br />
-接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install requests
-</code></pre></div></div>
-<p>如果沒有問題，一切就大功告成！<br /></p>
-
- -->
-    <div class="post-excerpt"><p>安裝前可以先認識 <a href="https://zh.wikipedia.org/wiki/Python" target="_blank">Python</a>。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread';
-        this.page.identifier = '/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread" data-disqus-identifier="/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">0 Comments</a>
       </span>
 
     </div>
