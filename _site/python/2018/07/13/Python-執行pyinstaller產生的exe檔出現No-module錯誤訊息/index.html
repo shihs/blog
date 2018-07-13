@@ -159,13 +159,13 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[Python][爬蟲]requests 的編碼</h1>
+  <h1 class="post-title">[Python]執行pyinstaller產生的執行檔出現No module錯誤訊息</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">February 17, 2018</span> 
+    <span class="post-date">July 13, 2018</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
+        <a class="comment-count" href="/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
@@ -174,21 +174,42 @@
       
       
         <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
         
       
     </span>
   </div>
   <div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
+    <p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
 
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
+<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
+執行在 dist 資料夾底下的檔案，卻出現
+`
+no module named ‘somepackagename’
+`
+的錯誤訊息。</p>
+
+<p>這表示，在打包這支程式時，並未把需要的套件打包進去？ <br />
+但是我使用 .py 執行時並沒有這樣的問題啊？ <br />
+表示我的電腦確實是有安裝該套件才是。</p>
+
+<p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
+所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
+
+<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
+
+<p>只要將原本的 <br />
+<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
+
+<p>改成 <br />
+<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
+
+<p>就好了。 <br /></p>
+
+<p>可以用， <br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</code></pre></div></div>
+<p>查看系統路徑，就可以知道套件可能的位置。</p>
 
 
   </div>
@@ -210,7 +231,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
+        this.page.identifier = '/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -230,15 +251,6 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
-            [Python]執行pyinstaller產生的執行檔出現No module錯誤訊息        
-          </a>
-            <small>Jul 13, 2018</small>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/blog/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">
             [Python]彈出視窗 alert box        
           </a>
@@ -252,6 +264,15 @@ s.setAttribute('data-timestamp', +new Date());
             [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼        
           </a>
             <small>Jul 3, 2018</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
+            [Python][SQL]Python 連接 SQLite        
+          </a>
+            <small>Jun 30, 2018</small>
         </h3>
       </li>
     

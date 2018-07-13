@@ -162,6 +162,144 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
+        [Python]使用 pyinstaller 套件打包 .py 檔
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">May 24, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。<br /></p>
+
+<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
+<br /></p>
+
+<h2 id="前提">前提</h2>
+<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
+
+<h2 id="安裝">安裝</h2>
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+</code></pre></div></div>
+
+<p><strong>Mac</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+</code></pre></div></div>
+<p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
+<em>[Errno 1] Operation not permitted</em></p>
+
+<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+</code></pre></div></div>
+<p>就成功安裝了。<br />
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
+
+<h2 id="打包-py-檔">打包 .py 檔</h2>
+<p>假如現在要打包一個 test.py 檔<br /></p>
+
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>完成後會產生三個檔案，</p>
+<ol>
+  <li>build 資料夾</li>
+  <li>dist 資料夾</li>
+  <li>test.spec 檔</li>
+</ol>
+
+<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
+
+<p><strong>Mac</strong><br />
+Mac的操作基本上和 Windows 指令一樣，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>打包完後產生出來的檔案也會一樣。<br />
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
+<br />
+可以試試看在 .py 檔裡增加一行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+</code></pre></div></div>
+<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
+
+<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+</code></pre></div></div>
+<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
+
+<h2 id="常用參數">常用參數</h2>
+<ol>
+  <li>pyinstaller -h 查看參數</li>
+  <li>-F 打包成一個exe文件</li>
+  <li>–icon=圖標路徑</li>
+</ol>
+
+<p><br />
+關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/" target="_blank">部落格</a>我覺得說明蠻詳細的。</p>
+
+ -->
+    <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
         [Python]下載與安裝 Python2.7 及 pip 套件
       </a>
@@ -699,157 +837,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-        [Python][爬蟲]防止被ban，代理IP怎麼用?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 7, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
-
-<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
-<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
-<ol>
-  <li>
-    <p>透明代理(Transparent Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Your IP</p>
-  </li>
-  <li>
-    <p>匿名代理(Anonymous Proxy)<br />
-REMOTE_ADDR = proxy IP<br />
-HTTP_VIA = proxy IP<br />
-HTTP_X_FORWARDED_FOR = proxy IP</p>
-  </li>
-  <li>
-    <p>混淆代理(Distorting Proxies)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Random IP address</p>
-  </li>
-  <li>
-    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = not determined<br />
-HTTP_X_FORWARDED_FOR = not determined<br /></p>
-  </li>
-</ol>
-
-<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
-<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
-<ol>
-  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
-  <li>http://www.proxyserverlist24.top/<br /></li>
-</ol>
-
-<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
-
-<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-
-<span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
-
-</code></pre></div></div>
-
-<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
-要爬取網站的時候，先讀取該檔案，
-只要被擋，就random使用proxy替換proxies。</p>
-
-<p>如果所有proxy都用完再重新爬取，
-網站上的proxy都會不停更換，
-所以只要更新proxy庫就好。</p>
-
- -->
-    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
       </span>
 
     </div>

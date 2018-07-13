@@ -1,6 +1,16 @@
 {
   
 
+    "python-2018-07-13-python-e5-9f-b7-e8-a1-8cpyinstaller-e7-94-a2-e7-94-9f-e7-9a-84exe-e6-aa-94-e5-87-ba-e7-8f-beno-module-e9-8c-af-e8-aa-a4-e8-a8-8a-e6-81-af": {
+      "title": "[Python]執行pyinstaller產生的執行檔出現No module錯誤訊息",
+      "content"	 : "前面介紹過使用 pyinstaller 將 .py 打包成執行檔，方便使用者執行程式。我在 mac 終端機輸入 pyinstaller -F pyscript.py 後， 執行在 dist 資料夾底下的檔案，卻出現`no module named ‘somepackagename’`的錯誤訊息。這表示，在打包這支程式時，並未把需要的套件打包進去？ 但是我使用 .py 執行時並沒有這樣的問題啊？ 表示我的電腦確實是有安裝該套件才是。原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， 所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 假如缺少的套件在 /usr/local/lib/python2.7/site-packages， 只要將原本的 pyinstaller -F pyscript.py 改成 pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py 就好了。 可以用， import sysprint sys.path查看系統路徑，就可以知道套件可能的位置。",
+      "url": " /python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
     "python-2018-07-05-python-e5-bd-88-e5-87-ba-e8-a6-96-e7-aa-97alert-box": {
       "title": "[Python]彈出視窗 alert box",
       "content"	 : "介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。以下會分為 mac 和 windows 兩個系統來討論。Mac1. easygui 套件# 記得先安裝 easygui 套件from easygui import msgboxmsgbox(&#39;Stuff&#39;)這個套件基本上蠻簡單的，只要使用msgbox()就好，如果只是要在跑程式的時候使用沒有太大問題，更多 easygui 套件 的介紹但如果要把程式碼打包時（pyinstaller套件） 這個方法就會失效，會出現錯誤訊息ImportError: No module named easygui[3310] Failed to execute script alterwindow所以如果要讓程式碼打包後可以出現彈跳視窗可以使用內建的 system。2. os.system()import osos.system(&quot;osascript -e &#39;Tell application &quot;System Events&quot; to display dialog &quot;&quot;+&quot;Some Funky Message&quot;+&quot;&quot;&#39;&quot;)這方法其實就是使用 python 執行系統命令。也就是，其實把 os.system() 括號裡的東西osascript -e &#39;Tell application &quot;System Events&quot; to display dialog &quot;Some Funky Message&quot;&#39;打在 terminal 裡會執行的東西。將以上命令打在 terminal 會發現出現一個彈跳視窗，內容是 Some Funcky Message。所以在 python 裡面同樣執行會產生同樣的結果。而這個方法將程式打包後可以正確執行。Windows1. easygui 套件# 記得先安裝 easygui 套件from easygui import msgboxmsgbox(&#39;Stuff&#39;)基本上和 mac 一樣，將程式碼打包後也無法正常執行。2. ctypes 套件# 不需另外安裝import ctypesctypes.windll.user32.MessageBoxA(0, &quot;Your text&quot;, &quot;Your title&quot;, 1)# 或著你可以定義一個 functiondef Mbox(title, text, style):    return ctypes.windll.user32.MessageBoxA(0, text, title, style)Mbox(&#39;Your title&#39;, &#39;Your text&#39;, 1)# 如果是要輸出中文，記得重新 encodectypes.windll.user32.MessageBoxA(0, &quot;內容&quot;.decode(&quot;utf-8&quot;).encode(&quot;big5&quot;), &quot;標題&quot;.decode(&quot;utf-8&quot;).encode(&quot;big5&quot;), 1)這個方法也可以打包後執行。另外，會看到有些地方使用ctypes.windll.user32.MessageBoxW()而不是ctypes.windll.user32.MessageBoxA()但執行後會發現，ctypes.windll.user32.MessageBoxW()這個方法會出現亂碼。這兩個的差別在MessageBoxW要使用 unicode 編碼，而MessageBoxA是 ascii 編碼。有人回答這個問題。這邊 mac 和 windows 各介紹了兩種方法，其實還有很多方法啦，只要能符合需求的都是好方法！",
