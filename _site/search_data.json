@@ -1,6 +1,16 @@
 {
   
 
+    "r-2018-08-27-r-e5-a6-82-e4-bd-95-e4-bf-ae-e7-95-8c-e9-9d-a2-e8-aa-9e-e8-a8-80-e7-9a-84-e8-a8-ad-e5-ae-9a": {
+      "title": "[R]如何修界面語言的設定",
+      "content"	 : "當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？以下為 mac 的 ios 系統解法，system(&quot;defaults write org.R-project.R force.LANG en_US.UTF-8&quot;)然後關閉 R 再重新打開就會改為英文介面囉！",
+      "url": " /r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
     "python-2018-07-13-python-e5-9f-b7-e8-a1-8cpyinstaller-e7-94-a2-e7-94-9f-e7-9a-84exe-e6-aa-94-e5-87-ba-e7-8f-beno-module-e9-8c-af-e8-aa-a4-e8-a8-8a-e6-81-af": {
       "title": "[Python]執行pyinstaller產生的執行檔出現No module錯誤訊息",
       "content"	 : "前面介紹過使用 pyinstaller 將 .py 打包成執行檔，方便使用者執行程式。我在 mac 終端機輸入 pyinstaller -F pyscript.py 後， 執行在 dist 資料夾底下的檔案，卻出現`no module named ‘somepackagename’`的錯誤訊息。這表示，在打包這支程式時，並未把需要的套件打包進去？ 但是我使用 .py 執行時並沒有這樣的問題啊？ 表示我的電腦確實是有安裝該套件才是。原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， 所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 假如缺少的套件在 /usr/local/lib/python2.7/site-packages， 只要將原本的 pyinstaller -F pyscript.py 改成 pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py 就好了。 可以用， import sysprint sys.path查看系統路徑，就可以知道套件可能的位置。",
