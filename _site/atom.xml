@@ -4,13 +4,114 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2018-09-01T12:31:22+02:00</updated>
+ <updated>2018-09-02T01:06:51+02:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[統計]離散型(Discrete)隨機變數與其機率分佈(1)</title>
+   <link href="http://localhost:4000blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/"/>
+   <updated>2018-09-01T19:28:00+02:00</updated>
+   <id>http://localhost:4000/%E7%B5%B1%E8%A8%88/2018/09/01/[統計]離散型(Discrete)隨機變數與其機率分佈(1)</id>
+   <content type="html">&lt;p&gt;這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 &lt;br /&gt;
+Mathematical Statistics with Applications, 7th edition 這本書為主，&lt;br /&gt;
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。&lt;/p&gt;
+
+&lt;p&gt;這篇內容在書中的第三章，Discrete Random Variable and Their Probability Distributions。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;在開始前，何謂「隨機變數」？&lt;/p&gt;
+&lt;h3 id=&quot;隨機變數-random-variable&quot;&gt;隨機變數 Random Variable&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 &lt;a href=&quot;http://ccckmit.wikidot.com/st:randomvariable&quot;&gt;Source&lt;/a&gt;&lt;br /&gt;&lt;/li&gt;
+  &lt;li&gt;A random variable \(X\) is a funcion from sample space to real number. &lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) &lt;br /&gt;
+\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;而隨機變數又分為 1. &lt;em&gt;離散型&lt;/em&gt; 與 2. &lt;em&gt;連續型&lt;/em&gt;，這一章節我們只會討論離散型。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;離散型隨機變數-discrete-random-variable&quot;&gt;離散型隨機變數 Discrete Random Variable&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)&lt;/li&gt;
+  &lt;li&gt;\(X\) is a discrete random variable, if its range is countable. &lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。&lt;/p&gt;
+
+&lt;p&gt;所以像是擲銅板或是擲骰子就會是離散型隨機變數。&lt;/p&gt;
+
+&lt;p&gt;以擲一顆骰子為例，其樣本空間為 \(s\)&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;\( s = \{1, 2, 3, 4, 5, 6\}  \) &lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;機率質量函數-probability-mass-function-pmf&quot;&gt;機率質量函數 Probability Mass Function (PMF)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;is called the probability mass function (PMF) of \(X\). &lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。&lt;/p&gt;
+
+&lt;p&gt;譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;\( P(X = 1) = 1/6  \)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;另外，\( P_X(x) \)還有兩個很重要的性質 &lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php&quot;&gt;Source&lt;/a&gt;，&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)&lt;/li&gt;
+  &lt;li&gt;\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;簡單來說就是，&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;任何事件發生的機率都只會介於 0 和 1 之間&lt;/li&gt;
+  &lt;li&gt;所有事件機率總和等於 1&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;參考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.probabilitycourse.com&quot;&gt;Introduce To Proability, Statistics and Random Process&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ccckmit.wikidot.com/st:main&quot;&gt;陳鍾誠的網站&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bmalone.weebly.com/uploads/2/2/3/9/22391186/bluman_statistics_book.pdf&quot;&gt;Allan G. Bluman Elementary Statistics – a step by step approach&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>[R]如何更改R介面語言的設定</title>

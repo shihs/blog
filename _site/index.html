@@ -144,6 +144,10 @@
           
         
       
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -162,6 +166,170 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 1, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 1, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+<p>這篇內容在書中的第三章，Discrete Random Variable and Their Probability Distributions。</p>
+
+<hr />
+
+<p>在開始前，何謂「隨機變數」？</p>
+<h3 id="隨機變數-random-variable">隨機變數 Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 <a href="http://ccckmit.wikidot.com/st:randomvariable">Source</a><br /></li>
+  <li>A random variable \(X\) is a funcion from sample space to real number. <a href="https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php">Source</a></li>
+</ul>
+
+<blockquote>
+
+  <p>\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) <br />
+\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)</p>
+</blockquote>
+
+<p>而隨機變數又分為 1. <em>離散型</em> 與 2. <em>連續型</em>，這一章節我們只會討論離散型。</p>
+
+<hr />
+
+<h3 id="離散型隨機變數-discrete-random-variable">離散型隨機變數 Discrete Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)</li>
+  <li>\(X\) is a discrete random variable, if its range is countable. <a href="https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php">Source</a></li>
+</ul>
+
+<p>根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。</p>
+
+<p>所以像是擲銅板或是擲骰子就會是離散型隨機變數。</p>
+
+<p>以擲一顆骰子為例，其樣本空間為 \(s\)</p>
+
+<blockquote>
+
+  <p>\( s = \{1, 2, 3, 4, 5, 6\}  \) <br /></p>
+</blockquote>
+
+<hr />
+
+<h3 id="機率質量函數-probability-mass-function-pmf">機率質量函數 Probability Mass Function (PMF)</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
+</ul>
+
+<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
+
+<ul>
+  <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
+</ul>
+
+<p>機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。</p>
+
+<p>譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，</p>
+
+<blockquote>
+
+  <p>\( P(X = 1) = 1/6  \)</p>
+</blockquote>
+
+<p>另外，\( P_X(x) \)還有兩個很重要的性質 <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a>，</p>
+
+<ul>
+  <li>\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)</li>
+  <li>\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)</li>
+</ul>
+
+<p>簡單來說就是，</p>
+<ol>
+  <li>任何事件發生的機率都只會介於 0 和 1 之間</li>
+  <li>所有事件機率總和等於 1</li>
+</ol>
+
+<hr />
+
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+  <li><a href="https://bmalone.weebly.com/uploads/2/2/3/9/22391186/bluman_statistics_book.pdf">Allan G. Bluman Elementary Statistics – a step by step approach</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -666,97 +834,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
-        [Python][SQL]Python 連接 SQLite
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 30, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
-
-<span class="c"># 要下的 SQL 指令</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s">"select host_key from cookies limit 10;"</span>
-<span class="p">)</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-
-<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
-
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
-</code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
-        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
       </span>
 
     </div>

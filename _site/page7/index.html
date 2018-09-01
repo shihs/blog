@@ -144,6 +144,10 @@
           
         
       
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -162,6 +166,109 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/">
+        [Git] 提交一個更新
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 26, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 26, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Git">Git</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>以下要介紹最基本的同步，
+檔案在本機被修改或是增加後push到github。</p>
+
+<p><b>1.檢視所有檔案狀態</b></p>
+<pre><code class="language-git">$ git status  #修改或是增加的檔案會呈現紅字
+</code></pre>
+<p><br /></p>
+
+<p><b>2.告知git需要commit的檔案</b></p>
+<pre><code class="language-git">$ git add &lt;file&gt;  #提交一個新增加的檔案
+$ git add -A  #stages All
+$ git add .  #stages new and modified, without deleted
+$ git add -u  #stages modified and deleted, without new
+</code></pre>
+<p>add完後用 <code class="highlighter-rouge">git status</code> 會發現原本的紅字變成綠字
+<br /></p>
+
+<p><b>3.commit變化</b></p>
+<pre><code class="language-git">$ git commit
+</code></pre>
+<p>這時候需要記錄提交的訊息
+<br /></p>
+
+<p><b>4.push同步</b></p>
+<pre><code class="language-git">$ git push
+</code></pre>
+<p><br /></p>
+
+<p>主要流程，
+<code class="highlighter-rouge">增加、修改檔案</code> &gt; <code class="highlighter-rouge">git add</code> &gt; <code class="highlighter-rouge">git commit</code> &gt; <code class="highlighter-rouge">git push</code>
+透過<code class="highlighter-rouge">git status</code>可以查看目前的狀態</p>
+
+<p><a href="https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html" target="_blank">參考</a></p>
+
+ -->
+    <div class="post-excerpt"><p>以下要介紹最基本的同步，
+檔案在本機被修改或是增加後push到github。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/#disqus_thread';
+        this.page.identifier = '/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/#disqus_thread" data-disqus-identifier="/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -690,99 +797,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread" data-disqus-identifier="/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
-        [R]Error when saving xlsx workbook with package openxlsx
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 22, 2017</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 22, 2017</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
-
-<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
-
-<p>2.找到Rtools底下的zip.exe路徑，
-並設定rools的zip.exe路徑即可解決此問題</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
-</span></code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread';
-        this.page.identifier = '/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread" data-disqus-identifier="/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">0 Comments</a>
       </span>
 
     </div>
