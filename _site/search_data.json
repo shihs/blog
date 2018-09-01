@@ -2,7 +2,7 @@
   
 
     "r-2018-08-27-r-e5-a6-82-e4-bd-95-e4-bf-ae-e7-95-8c-e9-9d-a2-e8-aa-9e-e8-a8-80-e7-9a-84-e8-a8-ad-e5-ae-9a": {
-      "title": "[R]如何修界面語言的設定",
+      "title": "[R]如何更改R介面語言的設定",
       "content"	 : "當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？以下為 mac 的 ios 系統解法，system(&quot;defaults write org.R-project.R force.LANG en_US.UTF-8&quot;)然後關閉 R 再重新打開就會改為英文介面囉！",
       "url": " /r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/",
       "author": "Shihs",
