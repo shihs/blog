@@ -166,13 +166,13 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[統計]離散型(Discrete)隨機變數與其機率分佈(1)</h1>
+  <h1 class="post-title">[統計]離散型(Discrete)隨機變數與其機率分佈(2)</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">September 1, 2018</span> 
+    <span class="post-date">September 2, 2018</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">0 Comments</a>
+        <a class="comment-count" href="/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
@@ -191,88 +191,159 @@ Wackerley, Mendenhall and Scheaffer 的 <br />
 Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
 有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
 
-<p>這篇內容為書中的 3.1 與 3.2。</p>
+<p>這篇關於期望值的介紹在書中的 3.3，但這篇內容有很大部分也來自 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
 
 <hr />
-
-<p>在開始前，何謂「隨機變數」？</p>
-<h3 id="隨機變數-random-variable">隨機變數 Random Variable</h3>
+<h3 id="期望值-expectation">期望值 Expectation</h3>
 <p><strong>定義 Definition</strong></p>
 
 <ul>
-  <li>隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 <a href="http://ccckmit.wikidot.com/st:randomvariable">Source</a><br /></li>
-  <li>A random variable \(X\) is a funcion from sample space to real number. <a href="https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php">Source</a></li>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as</li>
 </ul>
+
+<script type="math/tex; mode=display">E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)</script>
+
+<p>且期望值 \(E(X)\) 會等於平均數 \(\mu\)</p>
+
+<script type="math/tex; mode=display">E(X) = \mu</script>
+
+<p>說明：</p>
 
 <blockquote>
 
-  <p>\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) <br />
-\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)</p>
+  <p>There is a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \). Suppose that we repeat this experiment a very large number of times \(N\), and that the trials are independent. Let \(N_1\) be the number of times we observe \(x_1\), \(N_2\) be the number of times we observe \(x_2, ….\), \(N_k\) be the number of times we observe \(x_k\).</p>
 </blockquote>
 
-<p>而隨機變數又分為 1. <em>離散型</em> 與 2. <em>連續型</em>，這一章節我們只會討論離散型。</p>
+<script type="math/tex; mode=display">P_X(x_1) \approx\frac{N_1}{N} \\
+P_X(x_2) \approx\frac{N_2}{N} \\
+\cdots\\
+P_X(x_k) \approx\frac{N_k}{N} \\
+\cdots</script>
+
+<blockquote>
+
+  <p>從以上式子我們可以得到 \(N_k = NP_X(x_k)\)</p>
+</blockquote>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\mu & = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
+& \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
+& = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
+& = E(X)
+\end{align} %]]></script>
+
+<p>以上就是 \(E(X) = \mu\) 的說明。</p>
+
+<p>另外，可能會看到一些不同的寫法表示期望值</p>
+
+<script type="math/tex; mode=display">E(X)=E[X]=EX=\mu=\mu_X</script>
+
+<p>這部分內容主要來源為 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
 
 <hr />
+<h3 id="law-of-the-unconscious-statistician-lotus">Law of the unconscious statistician (LOTUS)</h3>
+<p><strong>THEOREM 3.2</strong></p>
+<ul>
+  <li>Let \(X\) be a discrete random variable with probability function \(P(x)\) and \(g(X)\) be a real-valued function of \(Y\). Then the expected value of \(g(X)\) is given by</li>
+</ul>
 
-<h3 id="離散型隨機變數-discrete-random-variable">離散型隨機變數 Discrete Random Variable</h3>
+<script type="math/tex; mode=display">E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)</script>
+
+<p><strong>Example:</strong> <br />
+<a href="https://www.probabilitycourse.com/chapter3/3_2_3_functions_random_var.php">Source</a></p>
+<blockquote>
+
+  <p>Let \(X\) be a discrete random variable with range \(R_X = \{ 0, \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \pi… \} \), such that \(P_X(0)=P_X(\frac{\pi}{4})=P_X(\frac{\pi}{2})=P_X(\frac{3\pi}{4})=P_X(\pi)=\frac{1}{5}\).  Find \(E[sin(X)]\).</p>
+</blockquote>
+
+<p>Solution:</p>
+
+<blockquote>
+
+  <p>根據 LOTUS，
+<script type="math/tex">% <![CDATA[
+\begin{align}
+E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
+& = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
+& = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
+& = \frac{\sqrt{2} + 1}{2}
+\end{align} %]]></script></p>
+</blockquote>
+
+<hr />
+<h3 id="變異數-variance">變異數 Variance</h3>
 <p><strong>定義 Definition</strong></p>
 
 <ul>
-  <li>A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)</li>
-  <li>\(X\) is a discrete random variable, if its range is countable. <a href="https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php">Source</a></li>
+  <li>If \(X\) is a random variable with mean \(E[X] = \mu\), the variance of \(X\) is defined as</li>
 </ul>
 
-<p>根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。</p>
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2]</script>
 
-<p>所以像是擲銅板或是擲骰子就會是離散型隨機變數。</p>
+<ul>
+  <li>且根據 LOTUS，這個式子可以再寫成</li>
+</ul>
 
-<p>以擲一顆骰子一次為例，其可能值為 \(\{1, 2, 3, 4, 5, 6\}\), 我們用 \(X\)來表示其隨機變數，<br />
-但因為隨機變數為 function，所以我們可以用 \(R_X\)來表示它的範圍，</p>
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(X - \mu)^2P(x)</script>
+
+<hr />
+<h3 id="期望值的運算">期望值的運算</h3>
+<p><strong>THEOREM 3.3</strong></p>
+
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(c\) be a constant. Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E(c) = c.</script>
+
+<p><strong>THEOREM 3.4</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g(X)\) be a function of X, and c be as constant. Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E[cg(X)] = cE[g(X)].</script>
+
+<p><strong>THEOREM 3.5</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g_1(X), g_2(X), …, g_k(X)\) be \(k\) functions of \(X\). Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]</script>
+
+<p>根據以上定理，可以再產生</p>
+
+<p><strong>THEOREM 3.6</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and mean \(E(X) = \mu\). Then</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+V(X) = \sigma^2 & = E[(X - \mu)^2] \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
+
+<p>證明：</p>
 
 <blockquote>
 
-  <p>\( Range(X) = R_X = \{1, 2, 3, 4, 5, 6\}  \) <br /></p>
+  <script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\sigma^2 & = E[(X - \mu)^2] & \\
+& = E[(X^2 - 2\mu X + \mu^2] \\
+& = E(X^2) - E(2\mu X) + E(\mu^2) \\
+& = E(X^2) - 2\mu E(X) + \mu^2 \\
+& = E(X^2) - 2\mu^2 + \mu^2 \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
 </blockquote>
 
 <hr />
 
-<h3 id="機率質量函數-probability-mass-function-pmf">機率質量函數 Probability Mass Function (PMF)</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
-</ul>
-
-<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
-
-<ul>
-  <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
-</ul>
-
-<p>機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。</p>
-
-<p>譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，</p>
-
-<blockquote>
-
-  <p>\( P(X = 1) = 1/6  \)</p>
-</blockquote>
-
-<p>另外，\( P_X(x) \)還有兩個很重要的<strong>性質</strong> <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a>，</p>
-
-<ul>
-  <li>\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)</li>
-  <li>\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)</li>
-</ul>
-
-<p>簡單來說就是，</p>
-<ol>
-  <li>任何事件發生的機率都只會介於 0 和 1 之間</li>
-  <li>所有事件機率總和等於 1</li>
-</ol>
-
 <hr />
-
 <p>參考：</p>
 
 <ul>
@@ -280,6 +351,7 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
   <li><a href="https://bmalone.weebly.com/uploads/2/2/3/9/22391186/bluman_statistics_book.pdf">Allan G. Bluman Elementary Statistics – a step by step approach</a></li>
 </ul>
+
 
   </div>
 </div>
@@ -300,7 +372,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -320,10 +392,10 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
-            [統計]離散型(Discrete)隨機變數與其機率分佈(2)        
+          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+            [統計]離散型(Discrete)隨機變數與其機率分佈(1)        
           </a>
-            <small>Sep 2, 2018</small>
+            <small>Sep 1, 2018</small>
         </h3>
       </li>
     

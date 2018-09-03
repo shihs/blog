@@ -169,6 +169,191 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
+        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+
+<p>基本流程：</p>
+<ol>
+  <li>找到圖片的來源網址</li>
+  <li>下載圖片</li>
+  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
+  <li>帶入參數</li>
+</ol>
+
+<p>以
+<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
+為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
+<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
+同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
+
+<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
+
+<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="c"># 1. 找到圖片的來源網址</span>
+<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c"># 2. 下載圖片</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
+
+<h4 id="session">session()</h4>
+<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
+
+<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">captcha</span>
+</code></pre></div></div>
+
+<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
+
+<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
+
+<p><br /></p>
+<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
+
+<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
+像是被調整過後的圖片變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
+</code></pre></div></div>
+<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
+
+<p>會碰到錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
+  "for transparency")
+
+---省略--
+
+TypeError: int() argument must be a string or a number, not 'tuple'
+</code></pre></div></div>
+
+<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
+</code></pre></div></div>
+
+<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+<span class="c"># print image</span>
+</code></pre></div></div>
+<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
+
+<p><br /></p>
+
+<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
+
+<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
+<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
+。或是，另外比較複雜的驗證碼可以參考我的
+<a href="https://github.com/shihs/read-captcha">github</a>
+。</p>
+
+ -->
+    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
         [Python][SQL]Python 連接 SQLite
       </a>
@@ -636,181 +821,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">
-        [Python]Python 中的 *args 和 *kwargs
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 13, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 13, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
-args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
-如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
-
-<p>先簡單看以下的例子</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">"kwargs="</span> <span class="o">+</span> <span class="n">j</span>
-		
-<span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="s">"a"</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="s">"b"</span><span class="p">,</span> <span class="n">third</span> <span class="o">=</span> <span class="s">"c"</span><span class="p">)</span>
-</code></pre></div></div>
-<p>結果</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agrs=1
-agrs=2
-agrs=3
-agrs=4
-kwargs=second
-kwargs=third
-kwargs=first
-</code></pre></div></div>
-
-<p><br /></p>
-
-<h3 id="args-和-kwargs-不是重點-才是">args 和 kwargs 不是重點，* 才是</h3>
-
-<p>args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 <code class="highlighter-rouge">*</code>。<br />
-所以，if you like 其實參數也可以寫成 <code class="highlighter-rouge">*var</code> 和 <code class="highlighter-rouge">**vars</code>，<code class="highlighter-rouge">*args</code> 和 <code class="highlighter-rouge">**kwargs</code> 只是一個大家使用的習慣。</p>
-
-<h3 id="args-的用法">*args 的用法</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">first_arg</span> <span class="o">=</span> <span class="s">"this is first arguments"</span>
-
-<span class="k">def</span> <span class="nf">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="k">print</span> <span class="s">"first_arg="</span> <span class="o">+</span> <span class="n">first_arg</span>
-
-    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s">"other *args..."</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-            <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-
-    <span class="n">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-
-</code></pre></div></div>
-<p>結果</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first_arg=this is first arguments
-other *args...
-agrs=1
-agrs=2
-agrs=3
-agrs=4
-</code></pre></div></div>
-
-<h3 id="kwargs-的用法">*kwargs 的用法</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s == </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
- 
-<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"yasoob"</span><span class="p">)</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name == yasoob
-</code></pre></div></div>
-<p>從以上兩個範例可以看出 args 和 kwargs 用法的差異。</p>
-
-<h3 id="使用-list-和-dictionary-當參數">使用 list 和 dictionary 當參數</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="k">def</span> <span class="nf">test_arg</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">):</span>
-    <span class="k">print</span> <span class="n">arg1</span>
-    <span class="k">print</span> <span class="n">arg2</span>
-    <span class="k">print</span> <span class="n">arg3</span>
-
-
-<span class="c">#===args===========</span>
-<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">test_arg</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
-
-<span class="c"># result</span>
-<span class="n">arg1</span><span class="o">=</span><span class="mi">1</span>
-<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
-<span class="n">arg3</span><span class="o">=</span><span class="mi">3</span>
-
-<span class="c">#===kwargs===========</span>
-<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">"arg3"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-    <span class="s">"arg2"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
-    <span class="s">"arg1"</span><span class="p">:</span><span class="mi">3</span>
-<span class="p">}</span>
-
-<span class="n">test_arg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="c"># result</span>
-<span class="n">arg1</span><span class="o">=</span><span class="mi">3</span>
-<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
-<span class="n">arg3</span><span class="o">=</span><span class="mi">1</span>
-</code></pre></div></div>
-
-<p>根據以上範例，可以發現<code class="highlighter-rouge">*arg</code> print 的順序就是 list 的順序，但 <code class="highlighter-rouge">**kwargs</code> 會根據 dictionary 的 key 來賦予 value。</p>
-
-<p><br /></p>
-
-<p><a href="https://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/">參考</a></p>
-
- -->
-    <div class="post-excerpt"><p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
-args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
-如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread';
-        this.page.identifier = '/python/2018/06/13/Python-args-%E5%92%8C-kwargs/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread" data-disqus-identifier="/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">0 Comments</a>
       </span>
 
     </div>
