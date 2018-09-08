@@ -66,7 +66,7 @@ Build > Configure public Tools > Git/SVN
 
 然後在 Shell 裡輸入，
 ``` git
-git remote add origin https://github.com/shihs/LiUAdRLab3.git
+git remote add origin https://github.com/你的github帳號/你的專案名稱.git
 git push -u origin master
 ```
 
