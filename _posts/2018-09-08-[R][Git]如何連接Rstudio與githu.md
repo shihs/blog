@@ -18,7 +18,7 @@ category: [R, Git]
 ## 前置作業 ##
 **設置 SSH RSA key**
 
-1.複製 public key
+1.複製 public key<br>
 Tool > Global Options > Git/SVN > Create RSA Key > View public key <br>
 點開 View public key 後，複製裡頭所有的東西。
 
@@ -43,7 +43,7 @@ Tool > Global Options > Git/SVN > Create RSA Key > View public key <br>
 
 **在本機建立 repository**
 
-Build > Configure public Tools > Git/SVN
+Build > Configure public Tools > Git/SVN<br>
 將 Version control system 由 None 改為 Git
 
 ![version control system.png]({{ "/img/posts/version control system.png" | absolute_url }}) 
