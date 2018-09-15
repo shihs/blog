@@ -39,7 +39,7 @@ devtools::test()
 devtools::use_coverage()
 ```
 
-跑文後會出現以下的步驟提示，
+跑完後會出現以下的步驟提示，
 
 ```
 * Creating `codecov.yml` from template.
@@ -51,7 +51,7 @@ after_success:
   - Rscript -e 'covr::codecov()'
 ```
 
-基本上就一部一部照著做就對了，前面兩件事程式已經幫你處理好了，<br>
+基本上就一步一步照著做就對了，前面兩件事程式已經幫你處理好了，<br>
 從第三步開始就行。
 
 
