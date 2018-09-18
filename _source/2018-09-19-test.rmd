@@ -1,8 +1,10 @@
 ---
 layout: post
+comments: true
 title:  "Hello, R Markdown!"
-date:   2018-09-19 23:00:40 +0100
-categories: r jekyll
+date:   2018-09-19 23:00:40
+author: "Shihs"
+category: [R, jekyll]
 ---
 
 You’ll find this post in your `_source` directory. Unlike the other example post on this blog (found in `_posts`), this one was written in R Markdown.
