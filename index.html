@@ -1,0 +1,67 @@
+---
+layout: default
+title: Home
+---
+
+<div class="posts" id="begin">
+  {% for post in paginator.posts %}
+  <div class="post">
+    <h1 class="post-title">
+      <a href="{{ post.url | relative_url }}">
+        {{ post.title }}
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by {{ post.author }} on {{ post.date | date: "%B %-d, %Y" }}</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">{{ post.date | date: "%B %-d, %Y" }}</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      {% if post %}
+       {% assign categories = post.categories %}
+      {% else %}
+        {% assign categories = page.categories %}
+      {% endif %}
+      {% for category in categories %}
+        <a target="_blank" href="{{site.baseurl}}/category/#{{category|slugize}}">{{category}}</a>
+        {% unless forloop.last %}&nbsp;{% endunless %}
+      {% endfor %}
+    </span>
+
+
+    </div>
+    <!-- {{ post.content }} -->
+    <div class="post-excerpt">{{ post.excerpt }}</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        {% include comments_count.html %}
+        <a href="{{ site.baseurl }}/{{ post.url }}#disqus_thread" data-disqus-identifier="{{ post.url }}">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  {% endfor %}
+</div>
+
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ "/" | relative_url }}page{{paginator.next_page}}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+      <a class="pagination-item newer" href="{{ "/" | relative_url }}">Newer</a>
+    {% else %}
+      <a class="pagination-item newer" href="{{ "/" | relative_url }}page{{paginator.previous_page}}">Newer</a>
+    {% endif %}
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
+  {% endif %}
+</div>

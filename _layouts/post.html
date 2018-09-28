@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<div class="post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-info">
+    <i class="fas fa-calendar-alt"></i>
+    <span class="post-date">{{ page.date | date: "%B %-d, %Y" }}</span> 
+    <span>
+        <i class="fas fa-comments"></i>
+        <a class="comment-count" href="{{ site.baseurl }}/{{ page.url }}#disqus_thread" data-disqus-identifier="{{ page.url }}">0 Comments</a>
+    </span>
+    <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      {% if post %}
+       {% assign categories = post.categories %}
+      {% else %}
+        {% assign categories = page.categories %}
+      {% endif %}
+      {% for category in categories %}
+        <a target="_blank" href="{{ site.baseurl }}/category/#{{ category|slugize }}">{{category}}</a>
+        {% unless forloop.last %}&nbsp;{% endunless %}
+      {% endfor %}
+    </span>
+  </div>
+  <div>
+    {{ content }}
+  </div>
+</div>
+
+{% include comments.html %}
+
+<div class="related">
+  <h2>Latest Posts</h2>
+  <ul class="related-posts">
+    {% for post in site.related_posts limit:3 %}
+      <li>
+        <h3>
+          <a href="{{ post.url | relative_url}}">
+            {{ post.title }}        
+          </a>
+            <small>{{ post.date | date: "%b %-d, %Y" }}</small>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

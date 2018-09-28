@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <!-- 數學符號 -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+  	
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">I share some stuff.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+    <div class="links">
+      <ul>
+        <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
+        <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>            
+      </ul>
+    </div>
+    
+
+    <p class = "rights">&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[R]如何使用R讀取Excel檔案</h1>
+  <div class="post-info">
+    <i class="fas fa-calendar-alt"></i>
+    <span class="post-date">February 26, 2018</span> 
+    <span>
+        <i class="fas fa-comments"></i>
+        <a class="comment-count" href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
+    </span>
+    <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+  </div>
+  <div>
+    <p>很多資料會使用excel檔案儲存，<br />
+這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
+<ol>
+  <li>csv</li>
+  <li>xlsx</li>
+  <li>xls</li>
+</ol>
+
+<h2 id="1csv"><strong>1.csv</strong><br /></h2>
+<p>csv是最簡單的，不需要install任何package，<strong>read.csv</strong></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
+</code></pre></div></div>
+<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
+這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>問題應該就可以被解決了。<br /></p>
+
+<h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
+<p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
+<ul>
+  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
+  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
+</ul>
+
+<p>這兩個套件都可以儲存多個sheet，<br />
+對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。</p>
+
+<h3 id="1openxlsx"><strong>(1)openxlsx</strong></h3>
+
+<p><em>讀檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 可以使用sheet參數選擇要的sheet，預設是第一個sheet</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.xlsx</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheetName</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><em>寫檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好</span><span class="w">
+</span><span class="n">write.xlsx</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">### 有多個sheet要寫入檔案，或是要調整sheet的style</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createWorkbook</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># 增加sheet</span><span class="w">
+</span><span class="n">addWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"sheetName"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設定欄位寬度</span><span class="w">
+</span><span class="n">setColWidths</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 增加style</span><span class="w">
+</span><span class="n">headerStyle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createStyle</span><span class="p">(</span><span class="n">fgFill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TopBottomLeftRight"</span><span class="p">,</span><span class="w"> </span><span class="n">halign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="n">textDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+
+</span><span class="n">addStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">headerStyle</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">gridExpand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 加上filter</span><span class="w">
+</span><span class="n">addFilter</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 寫檔</span><span class="w">
+</span><span class="n">writeData</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2xlconnect"><strong>(2)XLConnect</strong><br /></h3>
+<p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
+
+<p>一開始想要直接使用openxlsx的dataValidation function，<br />
+但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
+所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
+再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
+
+<p>原本是直接使用 openxlsx 這個 library 的 loadWorkbook，<br />
+但在調整顏色時一直會有 error 無法解決，<br />
+在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。<br /></p>
+
+<p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
+使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
+  invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
+</code></pre></div></div>
+
+<p>看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，<br />
+後來我甚至存一份空白的excel檔案都還是會有錯誤。</p>
+
+<p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
+發現可以讀的檔案是<em>Macintosh(CR)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
+
+<p>不能讀的檔案是<em>Unix(LF)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
+
+<p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
+openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
+而 XLConnect 的錯誤則解除了。</p>
+
+<p>程式碼範例，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XLConnect</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 讀取template</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loadWorkbook</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># d是要儲存的dataframe，getSheets(wb)是sheet的名稱</span><span class="w">
+</span><span class="n">writeWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">startRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">startCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設style</span><span class="w">
+</span><span class="n">cs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span><span class="w">
+</span><span class="c1"># 邊框</span><span class="w">
+</span><span class="n">setBorder</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"all"</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XLC</span><span class="o">$</span><span class="s2">"BORDER.THIN"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">XLC</span><span class="o">$</span><span class="s2">"COLOR.BLACK"</span><span class="p">))</span><span class="w">
+</span><span class="n">setCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="p">(</span><span class="m">7</span><span class="o">+</span><span class="n">nrow</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cellstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"savefile.xlsx"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="3xls">3.xls<br /></h2>
+<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
+
+<p>下載完後只要一行指令就好，</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
+
+<p>其他更多 library 的 function 都可以去CRAN找哦！</p>
+
+  </div>
+</div>
+
+
+<a name="comments"></a>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog/#disqus_thread';
+        this.page.identifier = '/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="related">
+  <h2>Latest Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
+            [統計]離散型(Discrete)隨機變數與其機率分佈(2)        
+          </a>
+            <small>Sep 2, 2018</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+            [統計]離散型(Discrete)隨機變數與其機率分佈(1)        
+          </a>
+            <small>Sep 1, 2018</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">
+            [R]如何更改R介面語言的設定        
+          </a>
+            <small>Aug 27, 2018</small>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+    <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
+  </body>
+</html>

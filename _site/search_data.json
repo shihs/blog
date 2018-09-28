@@ -1,0 +1,513 @@
+{
+  
+
+    "e7-b5-b1-e8-a8-88-2018-09-02-e7-b5-b1-e8-a8-88-e9-9b-a2-e6-95-a3-e5-9e-8b-discrete-e9-9a-a8-e6-a9-9f-e8-ae-8a-e6-95-b8-e8-88-87-e5-85-b6-e6-a9-9f-e7-8e-87-e5-88-86-e4-bd-88-2": {
+      "title": "[統計]離散型(Discrete)隨機變數與其機率分佈(2)",
+      "content"	 : "這一系列我是以 Wackerley, Mendenhall and Scheaffer 的 Mathematical Statistics with Applications, 7th edition 這本書為主，有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。這篇關於期望值的介紹在書中的 3.3，但這篇內容有很大部分也來自 Source期望值 Expectation定義 Definition  Let (X) be a discrete random variable with range (R_X = { x_1, x_2, x_3,… } )(finite or countably infinite). The expectation of (X) is defined as且期望值 (E(X)) 會等於平均數 (mu)說明：  There is a discrete random variable with range (R_X = { x_1, x_2, x_3,… } ). Suppose that we repeat this experiment a very large number of times (N), and that the trials are independent. Let (N_1) be the number of times we observe (x_1), (N_2) be the number of times we observe (x_2, ….), (N_k) be the number of times we observe (x_k).  從以上式子我們可以得到 (N_k = NP_X(x_k))以上就是 (E(X) = mu) 的說明。另外，可能會看到一些不同的寫法表示期望值這部分內容主要來源為 SourceLaw of the unconscious statistician (LOTUS)THEOREM 3.2  Let (X) be a discrete random variable with probability function (P(x)) and (g(X)) be a real-valued function of (Y). Then the expected value of (g(X)) is given byExample: Source  Let (X) be a discrete random variable with range (R_X = { 0, frac{pi}{4}, frac{pi}{2}, frac{3pi}{4}, pi… } ), such that (P_X(0)=P_X(frac{pi}{4})=P_X(frac{pi}{2})=P_X(frac{3pi}{4})=P_X(pi)=frac{1}{5}).  Find (E[sin(X)]).Solution:  根據 LOTUS，變異數 Variance定義 Definition  If (X) is a random variable with mean (E[X] = mu), the variance of (X) is defined as  且根據 LOTUS，這個式子可以再寫成期望值的運算THEOREM 3.3  Let X be a discrete random variable with probability function (p(x)) and (c) be a constant. ThenTHEOREM 3.4  Let X be a discrete random variable with probability function (p(x)) and (g(X)) be a function of X, and c be as constant. ThenTHEOREM 3.5  Let X be a discrete random variable with probability function (p(x)) and (g_1(X), g_2(X), …, g_k(X)) be (k) functions of (X). Then根據以上定理，可以再產生THEOREM 3.6  Let X be a discrete random variable with probability function (p(x)) and mean (E(X) = mu). Then證明：  參考：  Introduce To Proability, Statistics and Random Process  陳鍾誠的網站  Allan G. Bluman Elementary Statistics – a step by step approach",
+      "url": " /%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/",
+      "author": "Shihs",
+      "categories": "統計"
+    }
+    ,
+  
+
+    "e7-b5-b1-e8-a8-88-2018-09-01-e7-b5-b1-e8-a8-88-e9-9b-a2-e6-95-a3-e5-9e-8b-discrete-e9-9a-a8-e6-a9-9f-e8-ae-8a-e6-95-b8-e8-88-87-e5-85-b6-e6-a9-9f-e7-8e-87-e5-88-86-e4-bd-88-1": {
+      "title": "[統計]離散型(Discrete)隨機變數與其機率分佈(1)",
+      "content"	 : "這一系列我是以 Wackerley, Mendenhall and Scheaffer 的 Mathematical Statistics with Applications, 7th edition 這本書為主，有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。這篇內容為書中的 3.1 與 3.2。在開始前，何謂「隨機變數」？隨機變數 Random Variable定義 Definition  隨機變數 (X) 是一個以樣本空間 (S) 為定義域（Domain）的實數值函數。 Source  A random variable (X) is a funcion from sample space to real number. Source  ( X: S  to {Bbb R},  S  is  sample  space  ) ( i.e.  forall  s in S,  X(s) in {Bbb R}  )而隨機變數又分為 1. 離散型 與 2. 連續型，這一章節我們只會討論離散型。離散型隨機變數 Discrete Random Variable定義 Definition  A random variable (Y) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)  (X) is a discrete random variable, if its range is countable. Source根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。所以像是擲銅板或是擲骰子就會是離散型隨機變數。以擲一顆骰子一次為例，其可能值為 ({1, 2, 3, 4, 5, 6}), 我們用 (X)來表示其隨機變數，但因為隨機變數為 function，所以我們可以用 (R_X)來表示它的範圍，  ( Range(X) = R_X = {1, 2, 3, 4, 5, 6}  ) 機率質量函數 Probability Mass Function (PMF)定義 Definition  Let (X) be a discrete random variable with range (R_X = { x_1, x_2, x_3,… } ) (finite or countably infinite). The function  is called the probability mass function (PMF) of (X). Source機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，  ( P(X = 1) = 1/6  )另外，( P_X(x) )還有兩個很重要的性質 Source，  ( 0 leqslant P_X(x) leqslant 1 , forall x )  ( sum_{substack{x in R_X}}P_X(x) = 1 )簡單來說就是，  任何事件發生的機率都只會介於 0 和 1 之間  所有事件機率總和等於 1參考：  Introduce To Proability, Statistics and Random Process  陳鍾誠的網站  Allan G. Bluman Elementary Statistics – a step by step approach",
+      "url": " /%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/",
+      "author": "Shihs",
+      "categories": "統計"
+    }
+    ,
+  
+
+    "r-2018-08-27-r-e5-a6-82-e4-bd-95-e4-bf-ae-e7-95-8c-e9-9d-a2-e8-aa-9e-e8-a8-80-e7-9a-84-e8-a8-ad-e5-ae-9a": {
+      "title": "[R]如何更改R介面語言的設定",
+      "content"	 : "當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？以下為 mac 的 ios 系統解法，system(&quot;defaults write org.R-project.R force.LANG en_US.UTF-8&quot;)然後關閉 R 再重新打開就會改為英文介面囉！",
+      "url": " /r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "python-2018-07-13-python-e5-9f-b7-e8-a1-8cpyinstaller-e7-94-a2-e7-94-9f-e7-9a-84exe-e6-aa-94-e5-87-ba-e7-8f-beno-module-e9-8c-af-e8-aa-a4-e8-a8-8a-e6-81-af": {
+      "title": "[Python]執行pyinstaller產生的執行檔出現No module錯誤訊息",
+      "content"	 : "前面介紹過使用 pyinstaller 將 .py 打包成執行檔，方便使用者執行程式。我在 mac 終端機輸入 pyinstaller -F pyscript.py 後， 執行在 dist 資料夾底下的檔案，卻出現`no module named ‘somepackagename’`的錯誤訊息。這表示，在打包這支程式時，並未把需要的套件打包進去？ 但是我使用 .py 執行時並沒有這樣的問題啊？ 表示我的電腦確實是有安裝該套件才是。原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， 所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 假如缺少的套件在 /usr/local/lib/python2.7/site-packages， 只要將原本的 pyinstaller -F pyscript.py 改成 pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py 就好了。 可以用， import sysprint sys.path查看系統路徑，就可以知道套件可能的位置。",
+      "url": " /python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "python-2018-07-05-python-e5-bd-88-e5-87-ba-e8-a6-96-e7-aa-97alert-box": {
+      "title": "[Python]彈出視窗 alert box",
+      "content"	 : "介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。以下會分為 mac 和 windows 兩個系統來討論。Mac1. easygui 套件# 記得先安裝 easygui 套件from easygui import msgboxmsgbox(&#39;Stuff&#39;)這個套件基本上蠻簡單的，只要使用msgbox()就好，如果只是要在跑程式的時候使用沒有太大問題，更多 easygui 套件 的介紹但如果要把程式碼打包時（pyinstaller套件） 這個方法就會失效，會出現錯誤訊息ImportError: No module named easygui[3310] Failed to execute script alterwindow所以如果要讓程式碼打包後可以出現彈跳視窗可以使用內建的 system。2. os.system()import osos.system(&quot;osascript -e &#39;Tell application &quot;System Events&quot; to display dialog &quot;&quot;+&quot;Some Funky Message&quot;+&quot;&quot;&#39;&quot;)這方法其實就是使用 python 執行系統命令。也就是，其實把 os.system() 括號裡的東西osascript -e &#39;Tell application &quot;System Events&quot; to display dialog &quot;Some Funky Message&quot;&#39;打在 terminal 裡會執行的東西。將以上命令打在 terminal 會發現出現一個彈跳視窗，內容是 Some Funcky Message。所以在 python 裡面同樣執行會產生同樣的結果。而這個方法將程式打包後可以正確執行。Windows1. easygui 套件# 記得先安裝 easygui 套件from easygui import msgboxmsgbox(&#39;Stuff&#39;)基本上和 mac 一樣，將程式碼打包後也無法正常執行。2. ctypes 套件# 不需另外安裝import ctypesctypes.windll.user32.MessageBoxA(0, &quot;Your text&quot;, &quot;Your title&quot;, 1)# 或著你可以定義一個 functiondef Mbox(title, text, style):    return ctypes.windll.user32.MessageBoxA(0, text, title, style)Mbox(&#39;Your title&#39;, &#39;Your text&#39;, 1)# 如果是要輸出中文，記得重新 encodectypes.windll.user32.MessageBoxA(0, &quot;內容&quot;.decode(&quot;utf-8&quot;).encode(&quot;big5&quot;), &quot;標題&quot;.decode(&quot;utf-8&quot;).encode(&quot;big5&quot;), 1)這個方法也可以打包後執行。另外，會看到有些地方使用ctypes.windll.user32.MessageBoxW()而不是ctypes.windll.user32.MessageBoxA()但執行後會發現，ctypes.windll.user32.MessageBoxW()這個方法會出現亂碼。這兩個的差別在MessageBoxW要使用 unicode 編碼，而MessageBoxA是 ascii 編碼。有人回答這個問題。這邊 mac 和 windows 各介紹了兩種方法，其實還有很多方法啦，只要能符合需求的都是好方法！",
+      "url": " /python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2018-07-03-python-e8-ae-80-e5-8f-96-e9-a9-97-e8-ad-89-e7-a2-bc": {
+      "title": "[Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼",
+      "content"	 : "當爬網站碰到需要讀取驗證碼的網站時可以使用pytesseract 與 Image 套件來讀取圖片上的數字與英文。基本流程：  找到圖片的來源網址  下載圖片  調整圖片、解析圖片，獲得圖片上的數字與英文  帶入參數以經濟部公司及分公司基本資料查詢系統為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的網址同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。解析驗證碼完整程式碼s = requests.Session()# 1. 找到圖片的來源網址img_url = &quot;https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg&quot;res = s.get(img_url, stream = True, verify = True, timeout = 30)# 2. 下載圖片with open(&#39;pic.jpg&#39;,&#39;wb&#39;) as f:    f.write(res.content)# 3. 調整圖片、解析圖片，獲得圖片上的數字與英文image = Image.open(&#39;pic.jpg&#39;)# adjust pitcure size, it would read more correctlyimage.resize((150, 50),Image.ANTIALIAS).save(&quot;pic.jpg&quot;)image = Image.open(&quot;pic.jpg&quot;)captcha = pytesseract.image_to_string(image).replace(&quot; &quot;, &quot;&quot;).replace(&quot;-&quot;, &quot;&quot;).replace(&quot;$&quot;, &quot;&quot;)程式碼步驟解析session()這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。s = requests.Session()找到圖片的來源網址與存檔img_url = &quot;https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg&quot;res = s.get(img_url, stream = True, verify = True, timeout = 30)with open(&#39;pic.jpg&#39;,&#39;wb&#39;) as f:    f.write(res.content)這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。調整圖片、解析圖片，獲得圖片上的數字與英文image = Image.open(&#39;pic.jpg&#39;)print image# adjust pitcure size, it would read more correctlyimage.resize((150, 50),Image.ANTIALIAS).save(&quot;pic.jpg&quot;)image = Image.open(&quot;pic.jpg&quot;)print imagecaptcha = pytesseract.image_to_string(image).replace(&quot; &quot;, &quot;&quot;).replace(&quot;-&quot;, &quot;&quot;).replace(&quot;$&quot;, &quot;&quot;)print captcha有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。圖片的 mode 必須要為 RGB另外，可以使用print image看 open() 後的圖片的資訊。像是被調整過後的圖片變成&amp;lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&amp;gt;圖片的尺寸(size)變成 150x50，mode 為 RGB。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 pytesseract.image_to_string()解析圖片。會碰到錯誤訊息/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn&#39;t allocate palette entry for transparency  &quot;for transparency&quot;)---省略--TypeError: int() argument must be a string or a number, not &#39;tuple&#39;譬如我曾經抓到一個圖片，print 出來的圖片資訊是&amp;lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&amp;gt;這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，image = Image.open(&#39;pic.gif&#39;)image = image.convert(&#39;RGB&#39;)# print image這是後print image會發現 mode 已被改為 RGB，且可以正確執行了。基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。經濟部公司及分公司基本資料查詢系統爬蟲網站完整程式碼。或是，另外比較複雜的驗證碼可以參考我的github。",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-sql-2018-06-30-python-sql-pytho-e6-8e-a5-sqlite": {
+      "title": "[Python][SQL]Python 連接 SQLite",
+      "content"	 : "這篇是 Python 連接 SQL 的一些基本語法，內容來自 Udacity 上 Intro to Relational Databases 的免費課程與我自己整理的資訊。import sqlite3conn = sqlite3.connect(&quot;Cookies&quot;) # 連接 SQLite 資料庫cursor = conn.cursor() # 獲得連接的游標# 要下的 SQL 指令cursor.execute(    &quot;select host_key from cookies limit 10;&quot;)results = cursor.fetchall()print resutls # 結果為 turpleconn.close() # 每次都要記得 close 連線",
+      "url": " /python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/",
+      "author": "Shihs",
+      "categories": "Python, SQL"
+    }
+    ,
+  
+
+    "sql-psql-2018-06-29-sql-psql-e5-9f-ba-e6-9c-ac-e4-bb-a4-e8-88-87-2": {
+      "title": "[SQL][psql]基本觀念(2)",
+      "content"	 : "這篇是整理一些 psql 的基本觀念，內容來自 Udacity 上 Intro to Relational Databases 的免費課程與我自己整理的資訊。Normalized DesignWhat is Normalized Design?  Every row has the same number of columns. 每一列都必須有同樣的行數。  There is a unique key, and everything in a row says something about the key. 每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。  Facts that don’t relate to the key belong in different tables. 與 unique key 無關的訊息要放在另一個 table。  Table shouldn’t imply relationships that don’t exist. 行之間不存在關係的資料不能產生會讓人誤會訊息。More about Normalization:William Kent’s paper A Simple Guide to Five Normal Forms in Relational Database TheoryWikipedia’s article on database normalizationUnique Key v.s. Foreign KeyWhat is Unique Key?唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。另外還有一個和 unique key 很像的東西，叫 primary key。它同樣必需要是唯一值不能重複，但他們的差別在於，unique key 可以有 null，但 primary key 不能有 null。譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。詳細說明可以看這裡。What is Foreign Key?對照到另一個資料表的 primary key。譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。",
+      "url": " /sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/",
+      "author": "Shihs",
+      "categories": "SQL, psql"
+    }
+    ,
+  
+
+    "others-python-2018-06-28-google-map-api-geocoding-e5-9c-b0-e5-9d-80-e7-b6-93-e7-b7-af-e5-ba-a6": {
+      "title": "Google Map API - Geocoding 地址經緯度",
+      "content"	 : "Google Map 提供了很多 API，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。這次要介紹Geocoding這個 API 。 根據說明文件上的介紹Geocoding is the process of converting addresses (like &quot;1600 Amphitheatre Parkway, Mountain View, CA&quot;) into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.簡單來說，你可以根據地址找到該地址在地理上的座標（經緯度），方便應用在地圖上標記位置。根據Geocoding說明文件，這個 API 的 format 有 json 和 xml 兩種格式。來看文件上給的一個輸出 json 格式的範例，https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;amp;key=YOUR_API_KEY看起來這個 API 是需要 API KEY 。但其實，這個 API 是可以不需要 KEY 的（我不知道為什麼 XD）。而且使用 API key 反而還會被限制一天可以搜尋的數量……所以其實上面的例子只要這樣就好，https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA當然也可以搜尋中文地址，https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。使用 python 快速爬取 API 內容這邊我寫了一個簡單的 python 程式可以快速地使用這個 API 獲得地址的經緯度。import requestsimport urllibimport jsondef get_latitude_longtitude(address):    # decode url    address = urllib.quote(address)    url = &quot;https://maps.googleapis.com/maps/api/geocode/json?address=&quot; + address        while True:        res = requests.get(url)        js = json.loads(res.text)        if js[&quot;status&quot;] != &quot;OVER_QUERY_LIMIT&quot;:            time.sleep(1)            break    result = js[&quot;results&quot;][0][&quot;geometry&quot;][&quot;location&quot;]    lat = result[&quot;lat&quot;]    lng = result[&quot;lng&quot;]    return lat, lngaddress = &quot;重慶南路一段122號&quot;lat, lng = get_latitude_longtitude()",
+      "url": " /others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/",
+      "author": "Shihs",
+      "categories": "Others, Python"
+    }
+    ,
+  
+
+    "sql-psql-2018-06-15-psql-e5-9f-ba-e6-9c-ac-e6-8c-87-e4-bb-a4": {
+      "title": "[SQL][psql]基本指令(1)",
+      "content"	 : "這篇是整理一些 psql 的基本指令，內容來自 Udacity 上 Intro to Relational Databases 的免費課程。BASIC COMMANDSConnect to psql$ psqlQuit psql$ qList all databases$ list# or$ l#  exit from query result viewer$ qList all datatables in current database# connect to the database$ connect dbname# or$ c dbname# list all tables $ dtSQL COMMANDSCreate and Drop DATABASECREATE DATABASE dbname;DROP DATABASE dbname;Create and Drop TABLE# Example: Create a table with a text column and a serial columnCREATE TABLE dtname (id serial,name text);# drop table dtnameDROP TABLE dtname;Insert valuesINSERT INTO dtname VALUES(&#39;This is a test&#39;);Show all data in a tableTABLE dtname# orSELECT * FROM dtnameSet primary key# single column primary keyCREATE TABLE dtname (id serial primary key,name text,birthday date);# multiple columns primary keyCREATE TABLE postal_places (postal_code text,country text,name text,primary key (postal_code, country));Declaring relationshipsCREATE TABLE sales (sku text references products (sku),sale_date date,count integer);",
+      "url": " /sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/",
+      "author": "Shihs",
+      "categories": "SQL, psql"
+    }
+    ,
+  
+
+    "python-2018-06-13-python-args-e5-92-8c-kwargs": {
+      "title": "[Python]Python 中的 *args 和 *kwargs",
+      "content"	 : "簡單來說，*args和**kwargs是 function 的參數，在不確定會有多少參數時使用。args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。如果 *args和**kwargs 同時使用，*args必需在**kwargs之前。先簡單看以下的例子def test(*args, **kwargs):    for i in args:        print &quot;agrs=&quot; + str(i)    for j in kwargs:        print &quot;kwargs=&quot; + jtest(1, 2, 3, 4, first = &quot;a&quot;, second = &quot;b&quot;, third = &quot;c&quot;)結果agrs=1agrs=2agrs=3agrs=4kwargs=secondkwargs=thirdkwargs=firstargs 和 kwargs 不是重點，* 才是args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 *。所以，if you like 其實參數也可以寫成 *var 和 **vars，*args 和 **kwargs 只是一個大家使用的習慣。*args 的用法first_arg = &quot;this is first arguments&quot;def arg_test(first_arg, *args):    print &quot;first_arg=&quot; + first_arg    if args is not None:        print &quot;other *args...&quot;        for i in args:            print &quot;agrs=&quot; + str(i)    arg_test(first_arg, 1, 2, 3, 4)結果first_arg=this is first argumentsother *args...agrs=1agrs=2agrs=3agrs=4*kwargs 的用法def greet_me(**kwargs):    if kwargs is not None:        for key, value in kwargs.iteritems():            print &quot;%s == %s&quot; %(key,value) greet_me(name=&quot;yasoob&quot;)name == yasoob從以上兩個範例可以看出 args 和 kwargs 用法的差異。使用 list 和 dictionary 當參數def test_arg(arg1, arg2, arg3):    print arg1    print arg2    print arg3#===args===========args = [1, 2, 3]test_arg(*args)# resultarg1=1arg2=2arg3=3#===kwargs===========kwargs = {    &quot;arg3&quot;:1,    &quot;arg2&quot;:2,    &quot;arg1&quot;:3}test_arg(**kwargs)# resultarg1=3arg2=2arg3=1根據以上範例，可以發現*arg print 的順序就是 list 的順序，但 **kwargs 會根據 dictionary 的 key 來賦予 value。參考",
+      "url": " /python/2018/06/13/Python-args-%E5%92%8C-kwargs/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "web-css-2018-06-11-web-css-e5-a6-82-e4-bd-95-e5-88-aa-e9-99-a4nav-ta-e5-ba-95-e8-89-b2-e5-85-a9-e9-82-8a-e7-9a-84-e7-a9-ba-e7-99-bd": {
+      "title": "[Web][CSS]如何刪除 nav tag 底色兩邊的空白？",
+      "content"	 : "&amp;lt;nav&amp;gt;的作用  &amp;lt;nav&amp;gt; 為 HTML 文件的區域元素 (element)，&amp;lt;nav&amp;gt;用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。  &amp;lt;nav&amp;gt; 除了全域屬性外，沒有定義其他屬性 (attribute) 。參考像我的網頁上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 &amp;lt;nav&amp;gt;裡。&amp;lt;!-- html --&amp;gt;&amp;lt;body&amp;gt;  &amp;lt;nav class=&quot;wrapper-nav&quot; id=&quot;nav&quot;&amp;gt;    &amp;lt;ul&amp;gt;      &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#about&quot;&amp;gt;About&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;          &amp;lt;li&amp;gt;&amp;lt;a href=&quot;#contact&quot;&amp;gt;Contact Me&amp;lt;/a&amp;gt;&amp;lt;/li&amp;gt;    &amp;lt;/ul&amp;gt;             &amp;lt;/nav&amp;gt;&amp;lt;/body&amp;gt;/* css */nav {  background-color: black;}如何刪除 &amp;lt;nav&amp;gt; 背景的空白 How to remove the space on both sides of navbar若使用上面的程式碼會發現 nav 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在&amp;lt;body&amp;gt;這個 tag 上面做些調整      /* css */body{  margin-left:auto;  margin-right:auto;}             /* css */body{  width: 100%;  margin: auto;}       ",
+      "url": " /web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/",
+      "author": "Shihs",
+      "categories": "Web, CSS"
+    }
+    ,
+  
+
+    "web-css-2018-05-24-web-css-e5-9c-a8-e4-b8-8d-e5-90-8c-e8-9e-a2-e5-b9-95-e8-a7-a3-e6-9e-90-e5-ba-a6-e4-b8-8b-e8-aa-bf-e6-95-b4css": {
+      "title": "[Web][CSS]在不同螢幕解析度下調整css",
+      "content"	 : "除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。參考網站解析度可以這樣區分  手機：解析度為0px~320px  平板電腦：解析度為320px~768px  桌上型電腦：大於768px在 CSS 上調整使用@media設定 Max Width/* 768px以下(包含)都適用，手機和平板會符合這個設定 */@media (max-width 768px) {.class {background: #ccc;}}設定 Min Width/* 329px以上(包含)都適用，平板和電腦會符合這個設定 */@media (min-width 320px) {.class {background: #666;}}設定 Max Width and Min Width/* 介於768px與979px間適用 */@media (min-width: 768px) and (max-width: 979px) {.class {background: #666;}}如此就可以依據螢幕的寬度來顯示適合的方式了。",
+      "url": " /web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/",
+      "author": "Shihs",
+      "categories": "Web, CSS"
+    }
+    ,
+  
+
+    "python-2018-05-24-python-e4-bd-bf-e7-94-a8pyinstaller-e5-a5-97-e4-bb-b6-e6-89-93-e5-8c-85-py-e6-aa-94": {
+      "title": "[Python]使用 pyinstaller 套件打包 .py 檔",
+      "content"	 : "當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，很麻煩！！！ 不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。而 pyinstaller 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。前提pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。安裝Windowspip install pyinstallerMacsudo pip install pyinstaller但我這邊在安裝時出現了一大串的錯誤，其中內容包括 [Errno 1] Operation not permitted後來我參考這裡把指令改成sudo pip install pyinstaller --upgrade --ignore-installed就成功安裝了。安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。打包 .py 檔假如現在要打包一個 test.py 檔Windowspyinstaller -F test.py完成後會產生三個檔案，  build 資料夾  dist 資料夾  test.spec 檔而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。MacMac的操作基本上和 Windows 指令一樣，pyinstaller -F test.py打包完後產生出來的檔案也會一樣。但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/yourusername 底下。可以試試看在 .py 檔裡增加一行print os.getcwd()會發現使用 .exe 執行的結果就會是 /Users/yourusername，所以檔案才會直接產生在這路徑底下。但我想要讓檔案直接產生在桌面，因此我的方法是加上這行os.chdir(&#39;/Users/&#39;+os.getlogin()+&#39;/Desktop&#39;)讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。常用參數  pyinstaller -h 查看參數  -F 打包成一個exe文件  –icon=圖標路徑關於 pyinstaller 套件，這個部落格我覺得說明蠻詳細的。",
+      "url": " /python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "python-2018-05-23-python-e4-b8-8b-e8-bc-89-e8-88-87-e5-ae-89-e8-a3-9dpython-e5-8f-8apip-e5-a5-97-e4-bb-b6": {
+      "title": "[Python]下載與安裝 Python2.7 及 pip 套件",
+      "content"	 : "安裝前可以先認識 Python。這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。主要步驟其實就是四個：  下載Python  設定環境變數  下載get-pip.py  設定環境變數1.下載 Python2.7Python2.7.14載點根據自己電腦是32位元還是64位元選擇要下載的檔案下載下來後的檔案（我的電腦是32位元）點兩下安裝，就是一直按下一步就對了2.設定環境變數設定環境變數的目的是，在執行 Python 時讓系統可以根據環境變數底下的路徑依序去找 Python 程式，而不會不知道要如何執行 Python。設定環境變數步驟，電腦(右鍵)-&amp;gt;內容1.進階系統設定 -&amp;gt; 2.環境變數 -&amp;gt; 3.點選PATH-&amp;gt;編輯在變數最後加上安裝路徑「;C:Python27」（這是預設的安裝路徑，如果安裝過程中有更改位置，這邊要改成安裝的路徑）以上步驟完成之後在 cmd 輸入 python，就開始執行 Python 了！ 基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 是用來下載其他套件非常好用的工具。當我們下載完 pip 後，未來下載套件只需要在 cmd 輸入指令就能搞定。pip install packagename也許現在還是會有點困惑，但未來真正開始寫 Python 就會明白為什麼大家下載完 Python 都會接著安裝 pip 了。3.下載 get-pip.py先下載 get-pip.py接著開啟 cmd，使用 cd 將目前位置移到 get-pip.py 的路徑底下，並輸入python get-pip.py這時候只差最後一步了4.設定環境變數這個步驟與剛剛第2個步驟一樣，不過現在要加上的路徑是「;C:Python27Script」接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件pip install requests如果沒有問題，一切就大功告成！",
+      "url": " /python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "r-2018-02-26-r-e5-a6-82-e4-bd-95-e8-ae-80-e5-8f-96excel-e6-aa-94-e6-a1-88": {
+      "title": "[R]如何使用R讀取Excel檔案",
+      "content"	 : "很多資料會使用excel檔案儲存，這邊介紹如何使用R讀取主要三種常用的excel附檔名。  csv  xlsx  xls1.csvcsv是最簡單的，不需要install任何package，read.csvd &amp;lt;- read.csv(&quot;file.csv&quot;, stringsAsFactors = FALSE) 假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at &#39;&amp;lt;e8&amp;gt;&amp;lt;8a&amp;gt;&amp;lt;b1&amp;gt;?&amp;lt;ae&amp;gt;&#39;那就是碰上了編碼錯誤，這時候別緊張，只要加上fileEncoding這個參數就好，d &amp;lt;- read.csv(paste0(&quot;file.csv&quot;), stringsAsFactors = FALSE, fileEncoding = &quot;UTF-8&quot;) 問題應該就可以被解決了。2.xlsx讀取xlsx檔案時依據情況，有兩個套件我會使用，  openxlsx  XLConnect這兩個套件都可以儲存多個sheet，對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。(1)openxlsx讀檔library(openxlsx)# 可以使用sheet參數選擇要的sheet，預設是第一個sheetd &amp;lt;- read.xlsx(&quot;file.xlsx&quot;, sheet = sheetName)寫檔library(openxlsx)### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好write.xlsx(d, file = &quot;file.xlsx&quot;)### 有多個sheet要寫入檔案，或是要調整sheet的stylewb &amp;lt;- createWorkbook()# 增加sheetaddWorksheet(wb, &quot;sheetName&quot;)# 設定欄位寬度setColWidths(wb, sheet, cols = c(1:4), widths = c(rep(25, 3), 30))# 增加styleheaderStyle &amp;lt;- createStyle(fgFill = &quot;yellow&quot;, border = &quot;TopBottomLeftRight&quot;, halign = &quot;center&quot;, textDecoration = &quot;bold&quot;, fontSize = 12)addStyle(wb, sheet = sheet, headerStyle, row = 1, cols = 4, gridExpand = TRUE, stack = TRUE)# 加上filteraddFilter(wb, 1, row = 1, cols = 1:ncol(d))# 寫檔writeData(wb, sheet = sheet, d)# 存檔saveWorkbook(wb, &quot;file.xlsx&quot;, overwrite = TRUE)(2)XLConnect至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。一開始想要直接使用openxlsx的dataValidation function，但一直失敗，且找到這裡說明 list 這個功能無法發揮，所以我想到先儲存一個 template，將我需要的資料驗證清單做好，再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。原本是直接使用 openxlsx 這個 library 的 loadWorkbook，但在調整顏色時一直會有 error 無法解決，在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。另外一個碰到的狀況是我也是要使用一份 template 的樣式，使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤Error in substring(x[ind], so, eo) :   invalid multibyte string at &#39;&amp;lt;e6&amp;gt;&amp;lt;96&amp;gt;&amp;lt;b0&amp;gt;蝝唳&amp;lt;98&amp;gt;&amp;lt;ab&amp;gt;&amp;lt;94&amp;gt;&quot;/&amp;gt;&#39;看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，後來我甚至存一份空白的excel檔案都還是會有錯誤。我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，發現可以讀的檔案是Macintosh(CR)不能讀的檔案是Unix(LF)但是，將 template 儲存成 Macintosh(CR) 後，openxlsx的 loadWorkbook function 還是有同樣的 error，而 XLConnect 的錯誤則解除了。程式碼範例，library(XLConnect)# 讀取templatewb &amp;lt;- loadWorkbook(&quot;file.xlsx&quot;)# d是要儲存的dataframe，getSheets(wb)是sheet的名稱writeWorksheet(wb, d, getSheets(wb), startRow = 7, startCol = 1, header = FALSE)# 設stylecs &amp;lt;- createCellStyle(wb)# 邊框setBorder(cs, side = c(&quot;all&quot;), type = XLC$&quot;BORDER.THIN&quot;, color = c(XLC$&quot;COLOR.BLACK&quot;))setCellStyle(wb, sheet = getSheets(wb), row = 7:(7+nrow(d)), col = 1, cellstyle = cs)# 存檔saveWorkbook(wb, file = &quot;savefile.xlsx&quot;)3.xlsxls用的是readxl套件，是R界有名的ggplot2作者Hadley Wickham所寫。下載完後只要一行指令就好，library(readxl)saleslead &amp;lt;- read_excel(paste0(PATH, &quot;2018 sales lead report (for TM only).xls&quot;), sheet = &quot;Raw Data&quot;)但要注意的是屬性問題。其他更多 library 的 function 都可以去CRAN找哦！",
+      "url": " /r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "r-2018-02-26-r-e4-bd-bf-e7-94-a8r-e5-af-84outlook-email": {
+      "title": "[R]使用 R 寄Outlook Email",
+      "content"	 : "之前有介紹過使用mailR這個套件夾帶檔案使用gmail信箱發送信件。這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。參考library(RDCOMClient)## init com apiOutApp &amp;lt;- COMCreate(&quot;Outlook.Application&quot;)## create an email outMail = OutApp$CreateItem(0)## configure  email parameter outMail[[&quot;To&quot;]] = &quot;reciever@mail.com&quot;outMail[[&quot;subject&quot;]] = &quot;subject&quot;# There are two ways you can write for mail body# First:text# outMail[[&quot;body&quot;]] = # &quot;Dear reciever,#                      # Please see attached.# # # Best regards,# Sender&quot;# Second:html textbody &amp;lt;- &#39;&amp;lt;p&amp;gt;Dear reciever,&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;Please see attached.&amp;lt;/p&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;p&amp;gt;Best regards,&amp;lt;p&amp;gt;Sender&amp;lt;/p&amp;gt;&#39;outMail[[&quot;HTMLbody&quot;]] = body# attachmentoutMail[[&quot;Attachments&quot;]]$Add(&quot;path of your attachment&quot;)## send it                     outMail$Send()",
+      "url": " /r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2018-02-17-python-e7-88-ac-e8-9f-b2-requests-e7-9a-84-e7-b7-a8-e7-a2-bc": {
+      "title": "[Python][爬蟲]requests 的編碼",
+      "content"	 : "rep = requests.get(url)rep.content ： bytes 型別rep.text    ： unicode 型別1.是由 requests 以 rep.encoding 自動轉換的！2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2018-02-07-python-e7-88-ac-e8-9f-b2-e9-98-b2-e6-ad-a2-e8-a2-abban-e4-bb-a3-e7-90-86ip-e6-80-8e-e9-ba-bc-e7-94-a8": {
+      "title": "[Python][爬蟲]防止被ban，代理IP怎麼用?",
+      "content"	 : "如何讓爬蟲程式不被ban?  動態設置user agent  使用代理IP參考這裡主要介紹如何使用IP代理。proxy代理類型參考      透明代理(Transparent Proxy)REMOTE_ADDR = Proxy IPHTTP_VIA = Proxy IPHTTP_X_FORWARDED_FOR = Your IP        匿名代理(Anonymous Proxy)REMOTE_ADDR = proxy IPHTTP_VIA = proxy IPHTTP_X_FORWARDED_FOR = proxy IP        混淆代理(Distorting Proxies)REMOTE_ADDR = Proxy IPHTTP_VIA = Proxy IPHTTP_X_FORWARDED_FOR = Random IP address        高匿代理(Elite proxy或High Anonymity Proxy)REMOTE_ADDR = Proxy IPHTTP_VIA = not determinedHTTP_X_FORWARDED_FOR = not determined  代理proxy哪裡找？這裡提供兩個我覺得品質比較好的proxy代理  http://www.goubanjia.com/free/index.shtml  http://www.proxyserverlist24.top/程式碼如何確定真的使用代理IP了？import requests# 隨便google可以找到可以查詢自己IP的網站url = &quot;http://icanhazip.com/&quot;  # 這個網站可以知道目前瀏覽的IPproxies = {&quot;http&quot;:&quot;http://xx.xx.xxx:xxxx&quot;,&quot;https&quot;:&quot;https://xx.xx.xxx:xxxx&quot;,}###注意#要爬取的網站是使用什麼協定？http？https？#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔res = requests.get(url, proxies = proxies)print res.text  # 如果這個網站print出來的和proxies一樣，那就表示成功了抓完proxy後，我將所有proxy儲存在csv檔案中，要爬取網站的時候，先讀取該檔案，只要被擋，就random使用proxy替換proxies。如果所有proxy都用完再重新爬取，網站上的proxy都會不停更換，所以只要更新proxy庫就好。",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-2018-02-02-python-e5-91-bc-e5-8f-ab-e5-85-b6-e4-bb-96py-e7-9a-84function": {
+      "title": "[Python]呼叫其他.py的function",
+      "content"	 : "假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，要怎麼做呢？### 這是fun.pydef itsafunction():print &quot;This is a function that I want to call.&quot;有兩種情況，1. 這兩個檔案在同一個folder底下—main.py—fun.py### 這是 main.pyfrom fun import itsafunction# 使用fun.py的itsafunction()itsafunction()2. 這兩個檔案在不同folder底下想要呼叫的fun.py在function這個folder底下—main.py—function—fun.py這時候main.py可以有兩種寫法### 這是main1.pyfrom function import fun# 使用fun.py的itsafunction()fun.itsafunction()### 這是main2.pyfrom function.fun import itsafunction# 使用fun.py的itsafunction()itsafunction()但還有一件很重要的事，要在function這個folder裡加”__init__.py”這個檔案### 這是__init___.py# 什麼都不用寫，沒錯，就是一個空白的.py檔# it&#39;s true, it&#39;s empty. But it&#39;s still important!那如果今天fun.py在function的下一層folder呢?—main.py—function—another—fun.py只要把main.py改成### 這是main.pyfrom function.another import fun# 使用fun.py的itsafunction()fun.itsafunction()#或者也可以這樣寫from function.another.fun import itsafunction# 使用fun.py的itsafunction()itsafunction()但最重要的是，function和another這兩個folder裡面都要加上”__init__.py”這個檔案!",
+      "url": " /python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "tutorial-2018-01-25-tutorial-computer-networking-e7-ad-86-e8-a8-98-22-26": {
+      "title": "[Tutorial]Computer Networking筆記(22-26)",
+      "content"	 : "Computer Networking TutorialHow Binary Code Works?  bit = binary digit  8-bit system 最高到2^8舉例，如果今天我們要表示19這個數字，那就會是2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1在8 bits的系統裡，可以表示從0到255的數字。也就是，111111111所以如果今天有更多的bits就可以儲存更多的data，這也就是為什麼更大的bits功能較強大了。IP Address每個device都有ip address。IP是一個32 bits的2進位表示的數字，中間以「.」隔開成四組號碼。像這樣:xxx.xxx.xxx.xxx每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，所以，每一組有2^8(256)個數字，總共就會有2^82^82^8*2^組IP。而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。這樣的方式就可以讓每個device表達它的位置。IP Addressing IssuesThe Internet is a network of networks.影片舉了一個例子：想像網路其實是聚集了所有的網絡。例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，而這三個網絡又都可以連到網路上。當今天，公司裡有台電腦送了requests到網路另一端的server，這時候server收到訊息後，會再傳回response，可是它要如何透過IP知道到底找到這個送出requests的裝置呢？所以其實IP裡頭包含兩個訊息，  Newwork ID  Host ID但是，重點來了！那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，這樣就可以有65,536個Newwork ID配上Host ID的組合。但這時候有人說，那萬一某個network的host很少，那豈不是浪費了很多host的位址嗎！但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，這時候大家有點爭論不休，到底該如何解決呢？所以這時有人提出了一個辦法，我們應該要用一個方法表示出Network ID和Host ID的長度。Subnet mask(子網路遮罩)當今天在傳送訊息時，device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，subnet mask一樣是一個32 bits的2進位數字，1表示network id，0表示host id。(這裡看影片應該會比較好理解)詳細範例",
+      "url": " /tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/",
+      "author": "Shihs",
+      "categories": "Tutorial"
+    }
+    ,
+  
+
+    "tutorial-2018-01-24-tutorial-computer-networking-e7-ad-86-e8-a8-98-16-21": {
+      "title": "[Tutorial]Computer Networking筆記(16-21)",
+      "content"	 : "Computer Networking TutorialOSI ModelOSI Model- Open System Interconnection Reference Model總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。這有另外一個我覺得還不錯的影片ModemModem就是我們說的數據機。It’s device that connects the network to the Internet.It converges digital signals from router(or any other devices) to analog signals.簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。RouterRouter是路由器。Router joins network together.SwitchSwitch是分享器。假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。路由器和分享器差在哪Repeater/ExtenderRepeater/Extender是中繼器。在一個比較大的空間裡，路由器的信號會因為距離而所差別，這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。即便是接網路線，如果網路線過長，訊號也會變差，所以如果使用中繼器可以解決距離較遠的問題。而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。",
+      "url": " /tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/",
+      "author": "Shihs",
+      "categories": "Tutorial"
+    }
+    ,
+  
+
+    "tutorial-2018-01-20-tutorial-computer-networking-e7-ad-86-e8-a8-98-12-15": {
+      "title": "[Tutorial]Computer Networking筆記(12-15)",
+      "content"	 : "Computer Networking TutorialTopology/LayoutTopology/Layout是網路之間連接的方式，wiki上翻成「網路拓樸」。每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。這個課程介紹三種方式：  Bus Topology(Tutorial 12)  Ring Topology(Tutorial 13)  Star Topology(Tutorial 14)1. Bus TopologyBus Topology是最簡單的一種連接方式，最主要中間有一條主幹，其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。這樣的優點就是，簡單而且便宜，適合使用在小範圍的網絡內。但缺點是，只有主幹上出了問題，整個網路可能就會出問題。2. Ring TopologyRing Topology與Bus Topology不同的是，它是一個沒有終端環狀，所有node與該環狀線連結，訊號會順著同一個方向傳遞。一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。這樣的優點就是，它不需要Bus Topology必須的terminator，而且如果是雙環，也比較不會有主幹出問題，整個網路就壞掉的問題。但缺點是，它比Bus Topology貴。3. Star TopologyStar Topology可能是家裡最常見的一種連結方式。Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。例如，如果中心是rounter，它會在連結internet。這種topology的優點是，價格低、easy to expand。另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。但缺點是，因為所有nodes都連結中心，也就是所有的nodes全部都必須要依賴中心，所以只要中心的device壞掉，整個連線就會全部失效。4.Mesh TopologyMesh Topology所有nodes之間都互相連結，就像個網狀。這種方式比較會在MAN或WAN見到，不會在LAN使用。優點是，因為每個node之間都互相連結，所以假如有兩個nodes之間的連結出了問題，還可以透過其他nodes傳遞訊號，這樣在傳送訊息上也比較保險。缺點是，因為每個node之間都要連接，就會需要有很多的cable，這時候成本就會提高。有越多的node，成本就會越高。另一方面，因為一個node需要和其他所有nodes連結，這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，且每一次增加node可能都需要增加NIC。",
+      "url": " /tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/",
+      "author": "Shihs",
+      "categories": "Tutorial"
+    }
+    ,
+  
+
+    "r-2018-01-17-r-read-csv-e5-87-ba-e7-8f-be-e7-b7-a8-e7-a2-bc-e9-8c-af-e8-aa-a4-e8-a8-8a-e6-81-af": {
+      "title": "[R]read.csv出現編碼錯誤訊息",
+      "content"	 : "在讀取csv檔案時出現錯誤訊息 d &amp;lt;- read.csv(&quot;file.csv&quot;), stringsAsFactors = FALSE) # Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at &#39;&amp;lt;e8&amp;gt;&amp;lt;8a&amp;gt;&amp;lt;b1&amp;gt;?&amp;lt;ae&amp;gt;&#39;會出現這樣的錯誤訊息通常是因為編碼問題。先將這份檔案丟到Notepad++，可以看到右下方顯示這份檔案的編碼，(這份檔案是UTF-8)所以只要加上fileEncoding =”UTF-8”就可以解決這個問題了。 d &amp;lt;- read.csv(paste0(&quot;file.csv&quot;), stringsAsFactors = FALSE, fileEncoding =&quot;UTF-8&quot;) ",
+      "url": " /r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "r-2018-01-17-r-e5-a6-82-e4-bd-95-e5-88-aa-e9-99-a4-u-00a0": {
+      "title": "[R]如何刪除 U+00A0",
+      "content"	 : "在資料中有些含有空白的文字讀進R後會變成&amp;lt;U+00A0&amp;gt;而且不管用什麼方式都取代不了這個符號，這時候該怎麼辦呢？其實只要使用 “U00A0”就可以了# t是含有&quot;&amp;lt;U+00A0&amp;gt;&quot;的字串t &amp;lt;- gsub(&quot;U00A0&quot;, &quot;&quot;, t)",
+      "url": " /r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "tutorial-2018-01-15-tutorial-computer-networking-e7-ad-86-e8-a8-98-9-11": {
+      "title": "[Tutorial]Computer Networking筆記(9-11)",
+      "content"	 : "Computer Networking Tutorial1.What is NIC(Network Interface Card)?NIC就是網卡，所有電腦都必須要有網卡才能連上網路。(just google it, you can find tons of pictures of NIC)2.What is a Protocol?字典翻譯的意思是，協議草案、禮儀。在network裡，protocol是「網路傳輸協定」。這裡作者先不講定義，先講一個communication會有什麼要件，他用男生想要認識一個女生來舉例。一開始男生要搭訕女生他們可能會有像這樣的對話  Hey  -&amp;gt;  &amp;lt;-  Hello  Can I get your number?   -&amp;gt;  &amp;lt;- 1234-567這樣的對話中會有幾個規則，  一次只會有一個人說話  男生說話以後，會預期女生會回話  問句會有預期的回答(specific messages receive specific responses)符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。同樣的，用在computer commnication也要有一些規則。Protocol are the rules for successful communication among two parties.如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？  Can I connect to you?   -&amp;gt;  &amp;lt;-   Yes, you have my permission.  GET file google.com   -&amp;gt;  &amp;lt;-  sends file在computer networking裡，最重要的protocol是format和order of massage就像是上面的請求順序，如果在mac還沒提出request，sever就送出網頁，這肯定很怪的吧！protocol有很多種，但我們先來看以下這個例子。這是個網址，http:// www.thenewboston.org /index.php  http: protocol  www.thenewboston.org: sever name  index.php: file",
+      "url": " /tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/",
+      "author": "Shihs",
+      "categories": "Tutorial"
+    }
+    ,
+  
+
+    "python-2018-01-15-python-google-e7-bf-bb-e8-ad-afapi-e6-8e-a5-e5-8f-a3-library-googletrnas": {
+      "title": "[Python]Google 翻譯 API 接口 googletrnas",
+      "content"	 : "使用前，先安裝googletrans# windowspip install googletrans# macsudo pip install googletrans程式碼# -*- coding: utf-8 -*-from googletrans import Translatorimport sys# 這兩行很重要，不然會有編碼問題reload(sys)sys.setdefaultencoding( &quot;utf-8&quot; )translator = Translator()# src來源語言，dest要翻譯語言，如果要找其他語言可以參考說明文件print translator.translate(&#39;고마워&#39;, src = &quot;ko&quot;, dest = &quot;zh-TW&quot;)根據說明文件，這個套件可能會有不穩定的問題找到有人直接爬google翻譯的程式碼但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。",
+      "url": " /python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "tutorial-2018-01-09-tutorial-computer-networking-e7-ad-86-e8-a8-98-1-8": {
+      "title": "[Tutorial]Computer Networking筆記(1-8)",
+      "content"	 : "Computer Networking Tutorial1.What is Computer Networking?各裝置(devices)之間的連結裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個Node。連結：可以使用cable、wireless、copper wire等等，可以稱為communications media。Internet(網路)就是一種computer networkcomputer nework的目的是為了要資料傳輸、資料交換，這裡的資料可以是，documents、pictures、videos等等。computer newworking的兩個重點就是，Nodes和Communications Media2.Types of NetworksLAN(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡MAN(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市WAN(Wide Area Network)：&amp;gt;30 miles的網絡連結，整個國家之間、跨國之間的連結3.How the Internet works?以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？如果以上面computer network的邏輯來看，其他電腦可以連結到我的電腦，看到我的個人網站。但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，所以實際上，要連到個人網站是透過server。server is a special computer that everyone can access it.我將個人網站建置(store)在server，其他人要看到我的網站，會在browser上打上網址，這時候就會向server提出request，sever接受到request會回傳data，這些data會是程式碼，而browser會將這些程式碼轉成我們看得懂的網站。通常建置網頁這樣的server我們稱為，web server。像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，所以這個server就必須要有很大的memory，才能負荷這樣的使用流量。4.Client and Host根據上面提到的例子，使用PC的browser向sever提出request，然後server會提供給data給PC的browser。PC接收資料，而server提供資料，PC就是client，sever就是host。",
+      "url": " /tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/",
+      "author": "Shihs",
+      "categories": "Tutorial"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2018-01-08-python-e7-88-ac-e8-9f-b2-url-e6-b2-92-e6-9c-89http-https-e8-88-87-e7-b6-b2-e5-9d-80-e9-87-8d-e6-96-b0-e5-b0-8e-e5-90-91": {
+      "title": "[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向",
+      "content"	 : "這次要爬的網址長得像這樣  hazyfairyland.blogspot.tw  cartersoshkosh.tw  yungmaun.com.tw沒有www也沒有http/https，如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，但如果是使用request就會產生錯誤訊息。這時候該怎麼辦呢？其實只要在前方加上”http://”就行了，若其實該網址是”https//”， request也會自動重新導向。假如所有的網址都是沒有www，就直接在所有url前方加上”http://”就好了。url = &quot;cartersoshkosh.tw&quot;while True:    try:        res = requests.get(url, timeout = 30)        break    # catch requests.exceptions.MissingSchema error, add &quot;http://&quot; in the front    except requests.exceptions.MissingSchema:        url = &quot;http://&quot; + url           print res.url  # print the final url    print res.history  # print how many redirections it has gone throgh",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-2018-01-08-python-read-and-write-csv-file": {
+      "title": "[Python]Read and Write CSV file",
+      "content"	 : "import csv# read csv filewith open(&quot;file.csv&quot;, &quot;rb&quot;) as f:    for row in csv.reader(f):        print row    # write csv filedata = [[&quot;data1&quot;, &quot;data2&quot;], [&quot;data3&quot;, &quot;data4&quot;]]  # list with open(&quot;file.csv&quot;, &quot;wb&quot;) as f:    w = csv.writer(f)    w.writerows(data)",
+      "url": " /python/2018/01/08/Python-Read-and-Write-CSV-file/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-08-18-python-e7-88-ac-e8-9f-b2-e5-a6-82-e4-bd-95-e7-88-ac-e5-8f-96-e7-b6-b2-e9-a0-81-e4-b8-adjs-e7-94-9f-e6-88-90-e7-9a-84-e9-83-a8-e5-88-86": {
+      "title": "[Python][爬蟲]如何爬取網頁中js生成的部分",
+      "content"	 : "這次想要爬取的是2017年汽車技術展會的參展廠商名單。網頁長得像這樣，在load網頁的時候可以發現，「AUTOMOTIVE WORLD」這個框框會比較慢才跑出來，(可以按重新整裡查看)這時候就可以猜測網頁的這個部份是js生成的。同樣的，使用右鍵「檢查元素」來查看在load這個網頁的過程發生了什麼事。一般來說Network的第一個就會是我們要找的內容，這裡是「Exhibitor/」，查看Headers的General，可以發現就是url就是原本的頁面。如果去抓取網頁，url = &quot;http://www.automotiveworld.jp/en/To-Visit/Exhibitor/&quot;res = requests.get(url)print res.text.encode(&quot;utf-8&quot;)會發現完全抓不到廠商名單的tag，這就是因為，那一個區塊是js另外生成的，所以要去找另外生成的頁面。回到「檢查元素」的Network，看看有沒有什麼可疑對象，這時候發現一個type是document的ExhiList，點進去發現長得像這樣，將網址丟到網址列，果然，就得到了我們要的部分了！完整程式碼",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "git-2017-07-26-git-e6-8f-90-e4-ba-a4-e4-b8-80-e5-80-8b-e6-9b-b4-e6-96-b0": {
+      "title": "[Git] 提交一個更新",
+      "content"	 : "以下要介紹最基本的同步，檔案在本機被修改或是增加後push到github。1.檢視所有檔案狀態$ git status  #修改或是增加的檔案會呈現紅字2.告知git需要commit的檔案$ git add &amp;lt;file&amp;gt;  #提交一個新增加的檔案$ git add -A  #stages All$ git add .  #stages new and modified, without deleted$ git add -u  #stages modified and deleted, without newadd完後用 git status 會發現原本的紅字變成綠字3.commit變化$ git commit這時候需要記錄提交的訊息4.push同步$ git push主要流程，增加、修改檔案 &amp;gt; git add &amp;gt; git commit &amp;gt; git push透過git status可以查看目前的狀態參考",
+      "url": " /git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/",
+      "author": "Shihs",
+      "categories": "Git"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-07-25-python-e7-88-ac-e8-9f-b2-e5-a6-82-e4-bd-95-e4-b8-8b-e8-bc-89zip-e6-aa-94": {
+      "title": "[Python][爬蟲]如何下載 zip 檔",
+      "content"	 : "這裡要示範使用三個不同的package下載zip檔。import urllibimport urllib2import requestsurl = &#39;http://www.blog.pythonlibrary.org/wp-content/uploads/2012/06/wxDbViewer.zip&#39;print &quot;downloading with urllib&quot;urllib.urlretrieve(url, &quot;code.zip&quot;)print &quot;downloading with urllib2&quot;f = urllib2.urlopen(url)data = f.read()with open(&quot;code2.zip&quot;, &quot;wb&quot;) as code:    code.write(data)print &quot;downloading with requests&quot;r = requests.get(url)with open(&quot;code3.zip&quot;, &quot;wb&quot;) as code:    code.write(r.content)參考",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "excel-vba-2017-07-05-excel-vba-outlook-e4-bf-a1-e4-bb-b6-e5-85-a7-e6-96-87-e5-90-ab-e5-9c-96-e6-aa-94": {
+      "title": "[Excel][VBA]寄出內文含圖檔的outlook信件",
+      "content"	 : "這裡要介紹如何使用Excel VBA在信件內容包含截取sheet中的特定欄位區塊，並將此區塊變為圖檔包含在內文中寄出。現在要截取一份長這樣的檔案有兩種方法。第一種方法是，先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。Sub PrintScreen()      &#39;複製工作表要存圖檔的範圍        Sheets(&quot;Sheet1&quot;).Select        Set rng = Range(&quot;A1:B3&quot;)        rng.CopyPicture      &#39; Excel 存圖檔的精簡程式碼。        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  &#39;新增 圖表            .Chart.Paste                                                &#39;貼上 圖片            .Chart.Export Filename:=&quot;test.PNG&quot;, Filtername:=&quot;PNG&quot; &#39;匯出 圖片            .Delete                                                     &#39;刪除 圖表        End WithEnd SubSub SendMail_1()        Dim objOutlook As Object    Dim objMail As Object        Set objOutlook = CreateObject(&quot;Outlook.Application&quot;)    Set objMail = objOutlook.CreateItem(0)        With objMail        .to = &quot;address@email.com&quot;        .Subject = &quot;Subject&quot;        .Body = &quot;mail body&quot;        .HTMLbody = .HTMLbody &amp;amp; &quot;&amp;lt;br&amp;gt;&amp;lt;B&amp;gt;Embedded Image:&amp;lt;/B&amp;gt;&amp;lt;br&amp;gt;&quot; _                &amp;amp; &quot;&amp;lt;img src=&#39;test.PNG&#39;&quot; &amp;amp; &quot;width=&#39;250&#39; height=&#39;100&#39;&amp;gt;&amp;lt;br&amp;gt;&quot; _                &amp;amp; &quot;&amp;lt;br&amp;gt;Best Regards, &amp;lt;br&amp;gt;Sumit&amp;lt;/font&amp;gt;&amp;lt;/span&amp;gt;&quot;       &#39; objMail.Attachments.Add &quot;test.PNG&quot;       &#39; 使用附件檔案       &#39;.Display     &#39; 可以編輯郵件內容，再按下 傳送 鍵。       &#39;.Save         &#39; to save a copy in the drafts folder        .Send        &#39; 直接送出郵件            End With               Set objOutlook = Nothing    Set objMail = Nothing    End Sub第二種方法是，直接截取區要的區塊，變成圖檔，然後貼到信件內容。Sub SendMail_2()    Set objOutlook = CreateObject(&quot;Outlook.Application&quot;)    Set objMail = objOutlook.CreateItem(0)    &#39; mail body    strbody = &quot;mail body&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&amp;lt;br&amp;gt;&quot;    &#39;Copy range of interest    Dim r As Range    Set r = Sheets(&quot;Sheet1&quot;).Range(&quot;A1:B3&quot;)    r.Copy    &#39;Paste as picture in sheet and cut immediately    Dim p As Picture    Set p = ActiveSheet.Pictures.Paste    p.Cut            With objMail        .to = &quot;address@email.com&quot;        &#39;.cc =        &#39;.bcc = &quot;&quot;        .Subject = &quot;Subject&quot;        .HTMLbody = strbody        &#39;.Display            End With    &#39;Get its Word editor    objMail.Display    Dim wordDoc As Object    Set wordDoc = objMail.GetInspector.WordEditor    &#39;Paste picture    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste        &#39;send mail    objMail.Send        Set objOutlook = Nothing    Set objMail = NothingEnd Sub",
+      "url": " /excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/",
+      "author": "Shihs",
+      "categories": "Excel, VBA"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-06-30-python-e7-88-ac-e8-9f-b2-e4-b8-8d-e5-90-8c-e7-9a-84content-type-multipart-form-data": {
+      "title": "[Python][爬蟲]不同的 Content-Type (multipart/form-data)",
+      "content"	 : "這次要爬的目標是台灣精品獎得獎名單。我想要爬取的條件是，這時候會猜測這應該是個post的requests。果然，在按下查詢後，出現了一個cross_list的可疑人物，因為是post，所以會期望在headers裡找到 “Form Data”，這裡面應會藏著post需要的參數。但不幸的是，什麼也沒有，只找到長得像這樣的”Request Payload”然後Content-Type是multipart/form-data其實，我們平常需要的data form裡的資料就藏在Request Payload裡。抓取的方式是，以這行為例，------WebKitFormBoundaryTaDJAA82fTd3ug3WContent-Disposition: form-data; name=&quot;awards[]&quot;1name後的 “award[]” 就會是dictionary的key，底下的 1 ，就會是value，所以就會變成{&quot;awards[]&quot; = &quot;1&quot;}所以就把Request Payload所有的資訊寫成payload = {&quot;keyword&quot;:&quot;&quot;,&quot;awards[]&quot;:&quot;1&quot;,&quot;awards[]&quot;:&quot;2&quot;,&quot;awards[]&quot;:&quot;3&quot;,&quot;years[]&quot;:&quot;2017&quot;,&quot;years[]&quot;:&quot;2016&quot;,&quot;industry[]&quot;:&quot;A&quot;,&quot;industry[]&quot;:&quot;B&quot;,&quot;industry[]&quot;:&quot;C&quot;,&quot;industry[]&quot;:&quot;D&quot;,&quot;industry[]&quot;:&quot;E&quot;,&quot;industry[]&quot;:&quot;F&quot;,&quot;industry[]&quot;:&quot;G&quot;,&quot;industry[]&quot;:&quot;H&quot;,&quot;industry[]&quot;:&quot;I&quot;,&quot;industry[]&quot;:&quot;J&quot;,&quot;industry[]&quot;:&quot;K&quot;,&quot;industry[]&quot;:&quot;L&quot;,&quot;industry[]&quot;:&quot;Z&quot;}但這樣寫完會覺得非常不合理，因為會有一堆同樣的key但給予不同的value，也就是說會key會一直被新的value取代。我當時的想法是，看到 [] 就會很想要在裡面塞數字順位，果然，從0開始，將相同的key編號，就成功了。所以這樣送出requests，# -*- coding: utf-8 -*-#爬取台灣精品得獎名單http://www.taiwanexcellence.org/index.php/awards/now/cross_list/1/2017/2/1from bs4 import BeautifulSoupimport requestsimport mathurl = &quot;http://www.taiwanexcellence.org/index.php/awards/now/send_search/1/2017/2/1/cross_list&quot;payload = {&quot;keyword&quot;:&quot;&quot;,&quot;awards[0]&quot;:&quot;1&quot;,&quot;awards[1]&quot;:&quot;2&quot;,&quot;awards[2]&quot;:&quot;3&quot;,&quot;years[0]&quot;:&quot;2017&quot;,&quot;years[1]&quot;:&quot;2016&quot;,&quot;industry[0]&quot;:&quot;A&quot;,&quot;industry[1]&quot;:&quot;B&quot;,&quot;industry[2]&quot;:&quot;C&quot;,&quot;industry[3]&quot;:&quot;D&quot;,&quot;industry[4]&quot;:&quot;E&quot;,&quot;industry[5]&quot;:&quot;F&quot;,&quot;industry[6]&quot;:&quot;G&quot;,&quot;industry[7]&quot;:&quot;H&quot;,&quot;industry[8]&quot;:&quot;I&quot;,&quot;industry[9]&quot;:&quot;J&quot;,&quot;industry[10]&quot;:&quot;K&quot;,&quot;industry[11]&quot;:&quot;L&quot;,&quot;industry[12]&quot;:&quot;Z&quot;}s = requests.Session()res = s.post(url, data = payload)完整的程式碼",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "r-2017-06-27-r-e9-a1-af-e7-a4-ba-e5-ae-8c-e6-95-b4-e6-95-b8-e5-ad-97-e4-b8-8d-e9-a1-af-e7-a4-ba-e7-a7-91-e5-ad-b8-e8-a8-98-e8-99-9f": {
+      "title": "[R]顯示完整數字，不顯示科學記號",
+      "content"	 : "只要輸入，調整可顯示的位數options(scipen = 999)就可以改為顯示完整數字",
+      "url": " /r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "r-2017-06-22-r-error-when-saving-xlsx-workbook-with-package-openxlsx": {
+      "title": "[R]Error when saving xlsx workbook with package openxlsx",
+      "content"	 : "如果在windows系統使用saveWorkbook()出現以下錯誤訊息Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.Try installr::install.rtools() on Windows.installr::install.rtools()No need to install Rtools - You&#39;ve got the relevant version of Rtools installedsaveWorkbook(wb, file = &quot;dq&quot;, overwrite = TRUE)Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.Try installr::install.rtools() on Windows.1.安裝Rtools.exe2.找到Rtools底下的zip.exe路徑，並設定rools的zip.exe路徑即可解決此問題Sys.setenv(&quot;R_ZIPCMD&quot; = &quot;C:/Rtools/bin/zip.exe&quot;) ## path to zip.exe",
+      "url": " /r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-05-18-python-e7-88-ac-e8-9f-b2-e5-88-a9-e7-94-a8python-e4-b8-8b-e8-bc-89zip-e6-aa-94-e4-b8-a6-e8-a7-a3-e5-a3-93-e7-b8-ae": {
+      "title": "[Python][爬蟲]利用python下載zip檔並解壓縮",
+      "content"	 : "下載檔案是使用package urllib2解壓縮檔案則是使用package zipfile# 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400import urllib2 #urllib2.urlopen import zipfile #zipfile.ZipFiledef DownloadTWCompany():# 檔案下載print &quot;下載全國營業(稅籍)登記資料集壓縮擋...&quot;downloadurl = urllib2.urlopen(&#39;http://www.fia.gov.tw/opendata/bgmopen1.zip&#39;)zipcontent= downloadurl.read()with open(&quot;TWRAW.zip&quot;, &#39;wb&#39;) as f:    f.write(zipcontent)print &quot;下載完成!&quot;# 解壓縮檔案print &quot;資料解壓縮...&quot;with zipfile.ZipFile(open(&#39;TWRAW.zip&#39;, &#39;rb&#39;)) as f:f.extractall(&quot;.&quot;, pwd = &quot;1234&quot;)  # 解壓縮密碼1234print &quot;解壓縮完成!&quot;DownloadTWCompany()",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-05-17-python-e7-88-ac-e8-9f-b2-e5-a6-82-e4-bd-95-e5-88-aa-e9-99-a4-e7-b6-b2-e9-a0-81-e4-b8-ad-e7-9a-84": {
+      "title": "[Python][爬蟲]如何刪除網頁中的 &amp; nbsp;",
+      "content"	 : "在爬取網頁時偶爾會碰到&amp;amp;nbsp;而且怎麼樣都刪不掉也取代不掉，使用strip()仍然會有空白。「&amp;amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」假如現在有一個網頁內容包含&amp;lt;td&amp;gt;E601010&amp;amp;nbsp;電器承裝業&amp;lt;br&amp;gt;E601020&amp;amp;nbsp;電器安裝業&amp;lt;br&amp;gt;&amp;lt;/td&amp;gt;已經抓出td tag，接著可以使用td = td.encode(formatter=&quot;html&quot;)這時候td type會變成str，再使用replace取代就可以刪除空白了。",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "python-e7-88-ac-e8-9f-b2-2017-05-05-python-e7-88-ac-e8-9f-b2-e4-b8-8d-e5-90-8c-e7-9a-84content-type-application-json": {
+      "title": "[Python][爬蟲]不同的 Content-Type (application/json)",
+      "content"	 : "目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp所有的行業代碼與中文名稱。按下一頁發現會load一個post的網址接著想要在headers裡找到 “Form Data”，這裡面應會藏著post需要的參數。可是，這時候卻只有找到 “Requests Payload”，這個看起來很像payload的東西，它看起來是個json，且Response Headers的Content-Type正是application/json。所以我將 “Requests Payload”按下view source後的結果直接複製，然後requests結果再用json.loads就可以得到想要的結果了。程式碼如下，# -*- coding:utf-8 -*-# 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)import requestsimport json# payload for requestspayload = &#39;{&quot;Cond&quot;:{&quot;KeyWord&quot;:&quot;&quot;,&quot;Paging&quot;:{&quot;Size&quot;:519,&quot;Current&quot;:1,&quot;Count&quot;:52,&quot;RecordCount&quot;:519,&quot;CanPrev&quot;:false,&quot;CanNext&quot;:true}}}&#39;headers = {&quot;Content-Type&quot;:&quot;application/json&quot;,   &quot;Referer&quot;:&quot;http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp&quot;}url = &quot;http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation&quot;res = requests.post(url, data = payload, headers = headers)js = json.loads(res.text)for i in js[&quot;d&quot;][&quot;Result&quot;]:code = i[&quot;Code&quot;]name = i[&quot;Name&quot;].encode(&quot;utf-8&quot;, &quot;ignore&quot;)print code",
+      "url": " /python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/",
+      "author": "Shihs",
+      "categories": "Python, 爬蟲"
+    }
+    ,
+  
+
+    "r-2017-04-24-r-e5-9c-a8r-e4-b8-ad-e4-bd-bf-e7-94-a8system-e5-91-bc-e5-8f-abpython-e7-b5-a6-e4-ba-88-e5-8f-83-e6-95-b8": {
+      "title": "[R]在R中使用system呼叫python-給予參數",
+      "content"	 : "之前介紹過在R中使用system呼叫python。system(&quot;python python_script.py&quot;)假如現在我想要帶入參數給python script要怎麼做呢？首先，在python程式碼的部分，要使用 sys.arg[] 讓python程式獲取參數。還有，在 sys.arg[0] 表示的是程式名稱，所以要使用 sys.arg[1] 才是表示要讀取的第一個參數。假如今天有支 python_script.py# -*- coding: utf-8 -*-import sysstring = &quot;Hello, &quot; + sys.argv[1]print string在cmf中呼叫這支python程式python python_script.py worldR裡的system()要打的指令就是cmf中打的指令。所以在R中就會變成，system(&quot;python python_script.py world&quot;)結果就會變成Hello, world最後，在使用system()必須要先setwd將路徑設成python_script.py所在位置。",
+      "url": " /r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "r-2016-08-24-r-e8-a8-ad-e5-ae-9ar-e5-9c-96-e5-bd-a2-e5-ad-97-e9-ab-94": {
+      "title": "[R]設定 R 圖形字體",
+      "content"	 : "一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，以下的解法是針對windows方能使用。  使用windowsFonts函數將要使用的字體賦予一個值。    windowsFonts(BL = windowsFont(&quot;微軟正黑體&quot;))        在圖形中設定family。(1)使用par()在最一開始設定。par(family = &quot;BL&quot;)sales &amp;lt;- c(11, 13, 16, 10, 19)plot(sales, main = &quot;RWEPA公司102年1月至6月銷售統計圖&quot;,      type = &quot;b&quot;, xlab = &quot;月份&quot;, ylab = &quot;銷售金額（萬元)&quot;)(2) 在plot中設定sales &amp;lt;- c(11, 13, 16, 10, 19)plot(sales, main = &quot;RWEPA公司102年1月至6月銷售統計圖&quot;,      type = &quot;b&quot;, xlab = &quot;月份&quot;, ylab = &quot;銷售金額（萬元)&quot;, family = &quot;BL&quot;)(3) 在ggplot中設定library(ggplot2)ggplot(data.frame(x = rnorm(100))) +    geom_histogram(aes(x), fill = &quot;purple&quot;, alpha = 0.6) +    labs(x = &quot;取值&quot;, y = &quot;頻數&quot;) +    theme(text = element_text(family = &quot;BL&quot;))其實，family後是可以直接放要設定的字體完整名稱，不需定windowsFonts，只是假如字體名稱很長，便不需要一再地打上那麼長的名稱，如此以來便也適用mac。",
+      "url": " /r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "r-2016-07-17-r-r-batch": {
+      "title": "[R]R batch",
+      "content"	 : "R batch因為.R檔無法點兩下就能執行，所以儲存一個R batch，再使用工作排程設定時間，就可以在固定時間自動執行程式。以下是在windows中的寫法，必須要先給R儲存的位置，後面放R script的位置。C:Program FilesRR-3.2.5binR.exe&quot; CMD BATCH &quot;C:UsersmypcDesktopmyrscript.R&quot;將上面的程式碼貼在記事本(確認R的版本和位置)，再將記事本副檔名存成.bat 就完成了。",
+      "url": " /r/2016/07/17/R-R-batch/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "others-2016-07-17-windows7-e8-87-aa-e5-8b-95-e6-8e-92-e7-a8-8b": {
+      "title": "Windows7 自動排程",
+      "content"	 : "工作排程，讓程式自動執行開始 =&amp;gt; 附屬應用程式 =&amp;gt; 系統工具 =&amp;gt; 工作排程器建立基本工作 =&amp;gt; 建立基本工作、觸發程序、執行、完成",
+      "url": " /others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/",
+      "author": "Shihs",
+      "categories": "Others"
+    }
+    ,
+  
+
+    "r-2016-07-17-r-e4-bd-bf-e7-94-a8r-e7-99-bc-e9-80-81email": {
+      "title": "[R]使用 R 發送gmail Email",
+      "content"	 : "使用mailR package寫一個R的script，自動發信。以下幾個步驟，1.啟用安全性較低的應用程式存取2.使用mailR packagelibrary(mailR)send.mail(from = &quot;mymail@gmail.com&quot;,  # 寄件者          #收件者          to = c(&quot;receive1@gmail.com&quot;,                  &quot;receive2@gmail.com&quot;),          #標題          subject = &quot;測試&quot;,          #內文          body = &quot;這是一個測試&quot;,           encoding = &quot;utf-8&quot;,  # 編碼          #夾帶檔案          attach.files = c(&quot;attach.xlsx&quot;),          smtp = list(host.name = &quot;smtp.gmail.com&quot;,                       port = 465,                       user.name = &quot;mymail@gmail.com&quot;,                       passwd = &quot;mypasswd&quot;,                       ssl = TRUE),          authenticate = TRUE,          send = TRUE)另外，我其實還有查到gmailr這個package，但它有些bug，無法同時有信件內文又有夾帶檔案，所以目前找到最好的方式還是使用mailR。",
+      "url": " /r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    ,
+  
+
+    "python-2016-07-08-python-e4-bd-bf-e7-94-a8python-e4-b8-8b-e8-bc-89gmail-e9-99-84-e4-bb-b6": {
+      "title": "[Python]使用 python 下載 gmail 附件",
+      "content"	 : "每天都會收到信並且要利用信中的附件整理資料，但這樣我在跑程式前還要手動去下載檔案，覺得實在太麻煩，所以找到了這個辦法！因為我的mail是gamil，所以以下的程式碼是針對gmail，在執行前要先打開imap我主要是參考這裡import imaplib, inspectimport emailimport osfrom datetime import datetimefrom email.header import decode_headerinspect.getmro(imaplib.IMAP4_SSL)#與IMAP4 server連線，gmail要開啟IMAPimap = imaplib.IMAP4_SSL(&#39;imap.gmail.com&#39;) #登入imap.login(&#39;mymailaddress@gmail.com&#39;, &#39;mypasswd&#39;)#選擇信箱標籤imap.select(&quot;label&quot;)#找所有mailresp, mails = imap.search(None, &quot;ALL&quot;)#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)resp, data = imap.fetch(mails[0].split()[len(mails[0].split())-1], &#39;(RFC822)&#39;)emailbody = data[0][1]mail = email.message_from_string(emailbody)#找出含有附件的部分for part in mail.walk():if part.get_content_maintype() == &#39;multipart&#39;:continueif part.get(&#39;Content-Disposition&#39;) is None:continue#附件檔名fileName = part.get_filename()  #修改檔名編碼&amp;lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&amp;gt;fileName = str(datetime.now().year - 1911) + str(decode_header(fileName)[0][0]).decode(decode_header(fileName)[0][1])if bool(fileName):filePath = os.path.join(&quot;C:UsersmypcDesktopdata&quot;, fileName)if not os.path.isfile(filePath) :fp = open(filePath, &#39;wb&#39;)fp.write(part.get_payload(decode=True))fp.close()print &quot;attachement is downloaded!&quot;else:print &quot;file is already exist!&quot;#關閉連線與登出imap.close()imap.logout()",
+      "url": " /python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/",
+      "author": "Shihs",
+      "categories": "Python"
+    }
+    ,
+  
+
+    "r-2016-07-08-r-e5-9c-a8r-e4-b8-ad-e4-bd-bf-e7-94-a8system-e5-91-bc-e5-8f-abpython": {
+      "title": "[R]在 R 中使用 system 呼叫 python",
+      "content"	 : "我個人比較偏好使用R做所有的事情，但某些時候還是需要使用到python，所以希望可以在R上呼叫python程式碼。一開始我找到了rPython這個library，但它似乎無法在windows上使用……所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！system(&quot;python python_script.py&quot;)這個辦法是呼叫系統函數，就像是在cmd上面打的指令一樣，而且在mac上也可以執行！",
+      "url": " /r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/",
+      "author": "Shihs",
+      "categories": "R"
+    }
+    
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+}

@@ -1,0 +1,68 @@
+---
+layout: page
+title: Category
+---
+<ul class="category" id="group">
+
+<!-- 分類雲 -->
+<div id="cloud">
+  <!-- 分類雲字體大小設定 -->
+  {% assign first = site.categories.first %}
+  {% assign max = first[1].size %}
+  {% assign min = max %}
+
+  {% for category in site.categories offset:1 %}
+    {% if category[1].size > max %}
+      {% assign max = category[1].size %}
+    {% elsif category[1].size < min %}
+      {% assign min = category[1].size %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign diff = max | minus: min %}
+
+  {% for category in site.categories %}
+    {% assign temp = category[1].size | minus: min | times: 36 | divided_by: diff %}
+    {% assign base = temp | divided_by: 4 %}
+    {% assign remain = temp | modulo: 4 %}
+
+    {% if category[1].size == max %}
+      {% assign size = base | plus: 6 %}
+    {% elsif remain == 0 %}
+      {% assign size = base | plus: 7 %}
+    {% elsif remain == 1 or remain == 2 %}
+      {% assign size = base | plus: 7 | append: '.5' %}
+    {% else %}
+      {% assign size = base | plus: 6 %}
+    {% endif %}
+
+    {% if remain == 0 or remain == 1 %}
+      {% assign color = 9 | minus: base %}
+    {% else %}
+      {% assign color = 8 | minus: base %}
+    {% endif %}
+    
+    <a href="#{{ category[0] }}"  onMouseOver="this.style.color='#bf4d28'" onMouseOut="this.style.color='#{{ color }}{{ color }}{{ color }}'" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ category | first }} ({{ category | last | size }})</a>
+    <!-- <a href="#{{ category[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ category[0]}} ({{ category[-1].size }})</a> -->
+  {% endfor %}
+</div>
+
+<!-- 依類別分類 -->
+{% for category in site.categories %}
+  <h3 id="{{ category[0] }}">{{ category | first }}</h3> 
+    {% for posts in category %}
+      {% for post in posts %}
+      	{% if post.url %}
+        <li>    
+          <div class="month">{{ post.date | date:"%Y %b" }}</div>
+          <div class="post-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+        </li>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    
+  
+{% endfor %}
+</ul>
+
+

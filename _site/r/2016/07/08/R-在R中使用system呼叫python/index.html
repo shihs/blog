@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <!-- 數學符號 -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+  	
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">I share some stuff.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+    <div class="links">
+      <ul>
+        <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
+        <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>            
+      </ul>
+    </div>
+    
+
+    <p class = "rights">&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[R]在 R 中使用 system 呼叫 python</h1>
+  <div class="post-info">
+    <i class="fas fa-calendar-alt"></i>
+    <span class="post-date">July 8, 2016</span> 
+    <span>
+        <i class="fas fa-comments"></i>
+        <a class="comment-count" href="/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread" data-disqus-identifier="/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">0 Comments</a>
+    </span>
+    <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+  </div>
+  <div>
+    <p>我個人比較偏好使用R做所有的事情，
+但某些時候還是需要使用到python，
+所以希望可以在R上呼叫python程式碼。</p>
+
+<p>一開始我找到了rPython這個library，
+但它似乎無法在windows上使用……
+所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>這個辦法是呼叫系統函數，
+就像是在cmd上面打的指令一樣，
+而且在mac上也可以執行！</p>
+
+
+  </div>
+</div>
+
+
+<a name="comments"></a>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog/#disqus_thread';
+        this.page.identifier = '/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="related">
+  <h2>Latest Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
+            [統計]離散型(Discrete)隨機變數與其機率分佈(2)        
+          </a>
+            <small>Sep 2, 2018</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+            [統計]離散型(Discrete)隨機變數與其機率分佈(1)        
+          </a>
+            <small>Sep 1, 2018</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">
+            [R]如何更改R介面語言的設定        
+          </a>
+            <small>Aug 27, 2018</small>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+    <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
+  </body>
+</html>

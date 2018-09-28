@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <!-- 數學符號 -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+  	
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">I share some stuff.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+    <div class="links">
+      <ul>
+        <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
+        <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>            
+      </ul>
+    </div>
+    
+
+    <p class = "rights">&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
+        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+
+<p>基本流程：</p>
+<ol>
+  <li>找到圖片的來源網址</li>
+  <li>下載圖片</li>
+  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
+  <li>帶入參數</li>
+</ol>
+
+<p>以
+<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
+為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
+<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
+同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
+
+<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
+
+<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="c"># 1. 找到圖片的來源網址</span>
+<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c"># 2. 下載圖片</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
+
+<h4 id="session">session()</h4>
+<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
+
+<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">captcha</span>
+</code></pre></div></div>
+
+<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
+
+<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
+
+<p><br /></p>
+<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
+
+<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
+像是被調整過後的圖片變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
+</code></pre></div></div>
+<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
+
+<p>會碰到錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
+  "for transparency")
+
+---省略--
+
+TypeError: int() argument must be a string or a number, not 'tuple'
+</code></pre></div></div>
+
+<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
+</code></pre></div></div>
+
+<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+<span class="c"># print image</span>
+</code></pre></div></div>
+<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
+
+<p><br /></p>
+
+<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
+
+<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
+<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
+。或是，另外比較複雜的驗證碼可以參考我的
+<a href="https://github.com/shihs/read-captcha">github</a>
+。</p>
+
+ -->
+    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
+        [Python][SQL]Python 連接 SQLite
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 30, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
+
+<span class="c"># 要下的 SQL 指令</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="s">"select host_key from cookies limit 10;"</span>
+<span class="p">)</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
+</code></pre></div></div>
+ -->
+    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
+        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
+        [SQL][psql]基本觀念(2)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 29, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 29, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+<h3 id="normalized-design">Normalized Design</h3>
+<p><strong>What is Normalized Design?</strong></p>
+<ol>
+  <li>Every row has the same number of columns. <br />
+每一列都必須有同樣的行數。</li>
+  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
+  <li>Facts that don’t relate to the key belong in different tables. <br />
+與 unique key 無關的訊息要放在另一個 table。</li>
+  <li>Table shouldn’t imply relationships that don’t exist. <br />
+行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+</ol>
+
+<p>More about Normalization:<br />
+William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
+Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
+
+<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
+<p><strong>What is Unique Key?</strong><br />
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
+另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
+詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
+
+<p><strong>What is Foreign Key?</strong><br />
+對照到另一個資料表的 primary key。<br />
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
+
+<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
+
+ -->
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
+        Google Map API - Geocoding 地址經緯度
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 28, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 28, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+<p>這次要介紹<code class="highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+</code></pre></div></div>
+<p>簡單來說，你可以<strong>根據地址找到該地址在地理上的座標（經緯度）</strong>，方便應用在地圖上標記位置。</p>
+
+<p>根據<code class="highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
+來看文件上給的一個輸出 json 格式的範例，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
+</code></pre></div></div>
+<p>看起來這個 API 是需要 API KEY 。</p>
+
+<p>但其實，這個 API 是可以不需要 KEY 的（我不知道為什麼 XD）。
+而且使用 API key 反而還會被限制一天可以搜尋的數量……</p>
+
+<p>所以其實上面的例子只要這樣就好，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+</code></pre></div></div>
+<p>當然也可以搜尋中文地址，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
+</code></pre></div></div>
+<p>就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。
+其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。</p>
+
+<h3 id="使用-python-快速爬取-api-內容">使用 python 快速爬取 API 內容</h3>
+<p>這邊我寫了一個簡單的 python 程式可以快速地使用這個 API 獲得地址的經緯度。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">get_latitude_longtitude</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="c"># decode url</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://maps.googleapis.com/maps/api/geocode/json?address="</span> <span class="o">+</span> <span class="n">address</span>
+    
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">js</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span> <span class="o">!=</span> <span class="s">"OVER_QUERY_LIMIT"</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s">"results"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"geometry"</span><span class="p">][</span><span class="s">"location"</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lat"</span><span class="p">]</span>
+    <span class="n">lng</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lng"</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+
+
+
+<span class="n">address</span> <span class="o">=</span> <span class="s">"重慶南路一段122號"</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latitude_longtitude</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread';
+        this.page.identifier = '/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread" data-disqus-identifier="/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
+        [SQL][psql]基本指令(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 15, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 15, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+<h3 id="basic-commands">BASIC COMMANDS</h3>
+<p><strong>Connect to psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
+</code></pre></div></div>
+<p><strong>Quit psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
+</code></pre></div></div>
+<p><strong>List all databases</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
+# or
+$ \l
+
+#  exit from query result viewer
+$ q
+</code></pre></div></div>
+<p><strong>List all datatables in current database</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
+$ \connect dbname
+# or
+$ \c dbname
+
+# list all tables 
+$ \dt
+</code></pre></div></div>
+<p><br />
+<br /></p>
+<h3 id="sql-commands">SQL COMMANDS</h3>
+<p><strong>Create and Drop DATABASE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
+DROP DATABASE dbname;
+</code></pre></div></div>
+<p><strong>Create and Drop TABLE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
+CREATE TABLE dtname (
+	id serial,
+	name text
+);
+
+# drop table dtname
+DROP TABLE dtname;
+</code></pre></div></div>
+<p><strong>Insert values</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
+</code></pre></div></div>
+<p><strong>Show all data in a table</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
+# or
+SELECT * FROM dtname
+</code></pre></div></div>
+<p><strong>Set primary key</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
+CREATE TABLE dtname (
+	id serial primary key,
+	name text,
+	birthday date
+);
+
+# multiple columns primary key
+CREATE TABLE postal_places (
+	postal_code text,
+	country text,
+	name text,
+	primary key (postal_code, country)
+);
+</code></pre></div></div>
+<p><strong>Declaring relationships</strong>
+<img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
+	sku text references products (sku),
+	sale_date date,
+	count integer
+);
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <a class="pagination-item older" href="/blog/page3">Older</a>
+  
+  
+    
+      <a class="pagination-item newer" href="/blog/">Newer</a>
+    
+  
+</div>
+    </div>
+    <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
+  </body>
+</html>
