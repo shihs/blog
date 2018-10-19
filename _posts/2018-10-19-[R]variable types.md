@@ -7,11 +7,11 @@ author: "Shihs"
 category: [R]
 ---
 
-We know is there are several common types in R, such as, vector, list, matrix, and data.frame.
+We know there are several common types in R, such as, vector, list, matrix, and data.frame.
 <br>
 Here I'm going to see these 4 types more details. 
 
-1. What are the different between vector, list, matrix, and data.frame?
+1. What are the differences between vector, list, matrix, and data.frame?
 2. What are the outputs of `is.atomic()` and `is.vector()`? 
 3. What are the outputs of `typeof()`?
 
@@ -22,7 +22,7 @@ Here I'm going to see these 4 types more details.
 
 We can seperate these four types to two groups from different aspects.
 
-**(a) Elements types aspect**
+**(a) Elements type aspect**
 - Homogeneous data: *vector*, *matrix*
 - Heterogeneous data: *list*, *data.frame*
 
@@ -30,6 +30,8 @@ Which means all elements in *vector* and *matrix* have to be the same type (inte
 But elements in *list* and *data.frame* can be different types.
 
 For example:
+<br>
+Vector has same type of elements
 ```r
 # vector
 v <- 1:4
@@ -40,13 +42,13 @@ v_ch <- c("a", "b", "c")
 # v_ch
 # [1] "a" "b" "c"
 ```
-What if we give different types?
+What if we give a vector different type of elements?
 ```r
 v <- c(1, "2")
 # v
 #[1] "1" "2"
 ```
-As you can see, R will force 1 to be character.
+As you can see, R forces 1 to be character.
 
 But what is the priority? Why not "2" become numeric?
 
@@ -127,26 +129,29 @@ df <- data.frame(a = 1, b = 2)
 ```
 Let's see the results,
 ```r
+# ---vector-------------
 # > typeof(v)
 # [1] "integer"
 # > typeof(v_ch)
 # [1] "character"
-# ----------------
+# ---list-------------
 # > typeof(l)
 # [1] "list"
 # > typeof(l_ch)
 # [1] "list"
-# ----------------
+# ---matrix-------------
 # > typeof(mat)
 # [1] "integer"
 # > typeof(mat_ch)
 # [1] "character"
-# ----------------
+# ---data.frame-------------
 # > typeof(df)
 # [1] "list"
 ```
 
-We can find out if the object is *Homogeneous data*, then `typeof()` will show the type of elements.
+From the result of ouputs, we can see it checks if the object is *Homogeneous data* or not.
+<br>
+If it is *Homogeneous data* then `typeof()` will show the type of elements.
 <br>
 But if the object is *Hetergeneous data*, it will give only *list* as output result.
 
