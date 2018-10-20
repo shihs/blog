@@ -18,7 +18,7 @@ Here I'm going to see these 4 types more details.
 ***
 
 
-### 1. What are the different between *vector*, *list*, *matrix*, and *data.frame*?
+### 1. What are the differences between *vector*, *list*, *matrix*, and *data.frame*?
 
 We can seperate these four types to two groups from different aspects.
 
