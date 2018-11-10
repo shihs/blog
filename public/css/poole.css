@@ -427,7 +427,7 @@ tbody tr:nth-child(odd) th {
 /* Pagination items can be `span`s or `a`s */
 .pagination-item {
   display: block;
-  padding: 1rem;
+  padding: 0.8rem;
   border: 1px solid #eee;
 }
 .pagination-item:first-child {
