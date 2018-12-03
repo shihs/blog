@@ -11,7 +11,7 @@ category: [Machine Learning]
 
 Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 [bagging](https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/) 這篇提到的方法有點類似，但有些小差異。
 
-使用的方法是 bagging（結合多個弱分類器），所以這也是 Ensemble learning。
+使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。
 
 ***
 
