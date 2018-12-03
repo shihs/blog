@@ -127,10 +127,6 @@ Reference:
 <br>
 [[資料分析&機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林](https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda)
 <br>
-[機器學習: Ensemble learning之Bagging、Boosting和AdaBoost](https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3)
-<br>
-[随机森林（Random Forest）算法原理](https://blog.csdn.net/edogawachia/article/details/79357844)
-<br>
 [StatQuest: Decision Trees](https://www.youtube.com/watch?v=7VeUPuFGJHk)
 <br>
 The Elements of Statistical Learning
