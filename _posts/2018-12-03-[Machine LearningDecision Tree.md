@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "[Machine Learning] Random Forest"
+title: "[Machine Learning]Random Forest"
 date: 2018-12-03 14:07
 author: "Shihs"
 category: [Machine Learning]
