@@ -14,25 +14,27 @@ category: [Machine Learning]
 ）。
 ![splines line.png]({{ "/img/posts/splines line.png" | absolute_url }}){:height="380px" width="600px"}
 
-我們可以將擬合的方程式寫成，
+我們可以將擬合的多項式方程式（polynomial function）寫成，
 
-\\(y = f(x) + \epsilon\\)
+\\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + ... + \beta_n x^n + \epsilon\\)
 
-\\(y\\): 要預測的結果
-<br>
-\\(f(x)\\): \\(\beta_0 + \beta_1 x^1 + \beta_2 x^2 + ... + \beta_n x^n\\)
-<br>
-\\(\epsilon\\): noise
+但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。
 
-但這樣的方式吻合結果並不完美，且如果只是不斷提高多項式的次方，還會導致 overfitting 的問題，在 testing data 上的結果也不會太好。
-
-這時候我們可以使用 Regression splines 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。
+這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。
 
 ***
 
-**piecewise function**
+**Basis function**
 
-將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式。
+\\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + ... + \beta_n b_n(x_i) + \epsilon_i\\)
+
+透過 \\(b_1(X)\\)、\\(b_2(X)\\)、......、\\(b_n(X)\\) 可以將非線性的自變量轉換成線性。
+
+***
+
+**Piecewise Function**
+
+將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。
 
 如下圖每個區段都是用一次方程式去擬合。\\(\xi\\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。
 
@@ -45,7 +47,7 @@ From: 《Elements of Statistical Learning》
 
 ***
 
-**cubic spline**
+**Cubic Spline**
 
 這裡則是使用三次方程式。
 
@@ -113,4 +115,5 @@ Reference:
 [wikipedia - 樣條函數](https://zh.wikipedia.org/wiki/样条函数)
 <br>
 [Cubic and Smoothing Splines in R](https://datascienceplus.com/cubic-and-smoothing-splines-in-r/)
-
+<br>
+[《An Introduction to Statistical Learning with Applications in R》](http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf)
