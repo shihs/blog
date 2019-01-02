@@ -163,13 +163,13 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[Python]讀取與寫入xlsx檔案</h1>
+  <h1 class="post-title">[Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
     <span class="post-date">January 2, 2019</span> 
     <span>
         <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">0 Comments</a>
+        <a class="comment-count" href="/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">0 Comments</a>
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
@@ -183,76 +183,32 @@
     </span>
   </div>
   <div>
-    <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
+    <p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
+<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
 
-<p>在開始前請先安裝 pandas 套件，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
+<p>根據<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>的討論串，有人回答</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
 </code></pre></div></div>
 
-<hr />
+<p>我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。</p>
 
-<p><strong>讀取檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
-
-<span class="c"># 獲取列數</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 獲取儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 修改儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
-<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
-<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
+<p>先檢查一下 pandas 版本</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
 </code></pre></div></div>
 
-<p>若在執行以上程式碼時產生錯誤訊息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
+<p>將版本降至 0.20.3</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
 </code></pre></div></div>
 
-<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>寫入檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-
-<span class="c"># Create a Pandas dataframe from some data.</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
-
-<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
-
-<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
-
-<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
-<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
-
-<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
-</code></pre></div></div>
-<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
+<p>這時候打包完後執行應該就不會有問題了！</p>
 
 <hr />
 
 <p>Reference:
 <br />
-<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
+<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>
 <br />
-<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
-<br />
-<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
-<br />
-<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
-
+<a href="https://blog.csdn.net/qq_41185868/article/details/80601983">成功解决pyinstaller打包AttributeError:type object pandas.<em>TSObject has no attribute _reduce_cython</em></a></p>
 
   </div>
 </div>
@@ -273,7 +229,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/';
+        this.page.identifier = '/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -293,8 +249,8 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">
-            [Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_        
+          <a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">
+            [Python]讀取與寫入xlsx檔案        
           </a>
             <small>Jan 2, 2019</small>
         </h3>
