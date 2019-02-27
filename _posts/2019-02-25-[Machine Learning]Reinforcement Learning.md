@@ -97,6 +97,7 @@ Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到�
 ## Value function
 
 **Value function - How good is a policy?**
+
 定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。
 
 $$V_\pi(s)$$ 表示的是策略 $$\pi$$，狀態 s 的長期期望收益。$$Q_\pi(s, a)$$ 是策略 $$\pi$$ 在狀態 s 下，採取動作 a 的長期期望收益。
