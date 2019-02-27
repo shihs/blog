@@ -144,22 +144,19 @@
           
         
       
-        
-          
-        
-      
 
     </nav>
     <div class="links">
       <ul>
         <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
         <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
-        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>            
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
       </ul>
     </div>
     
 
-    <p class = "rights">&copy; 2018. All rights reserved.</p>
+    <p class = "rights">&copy; 2019. All rights reserved.</p>
   </div>
 </div>
 
@@ -169,173 +166,197 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
-        [R]如何使用R讀取Excel檔案
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(2)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 2, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 26, 2018</span>
+      <span class="post-date">September 2, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#統計">統計</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>很多資料會使用excel檔案儲存，<br />
-這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
-<ol>
-  <li>csv</li>
-  <li>xlsx</li>
-  <li>xls</li>
-</ol>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
 
-<h2 id="1csv"><strong>1.csv</strong><br /></h2>
-<p>csv是最簡單的，不需要install任何package，<strong>read.csv</strong></p>
+<p>這篇關於期望值的介紹在書中的 3.3，但這篇內容有很大部分也來自 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-<p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
-</code></pre></div></div>
-<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
-這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-<p>問題應該就可以被解決了。<br /></p>
+<hr />
+<h3 id="期望值-expectation">期望值 Expectation</h3>
+<p><strong>定義 Definition</strong></p>
 
-<h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
-<p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
 <ul>
-  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
-  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as</li>
 </ul>
 
-<p>這兩個套件都可以儲存多個sheet，<br />
-對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。</p>
+<script type="math/tex; mode=display">E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)</script>
 
-<h3 id="1openxlsx"><strong>(1)openxlsx</strong></h3>
+<p>且期望值 \(E(X)\) 會等於平均數 \(\mu\)</p>
 
-<p><em>讀檔</em></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+<script type="math/tex; mode=display">E(X) = \mu</script>
 
-</span><span class="c1"># 可以使用sheet參數選擇要的sheet，預設是第一個sheet</span><span class="w">
-</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.xlsx</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheetName</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>說明：</p>
 
-<p><em>寫檔</em></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+<blockquote>
 
-</span><span class="c1">### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好</span><span class="w">
-</span><span class="n">write.xlsx</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+  <p>There is a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \). Suppose that we repeat this experiment a very large number of times \(N\), and that the trials are independent. Let \(N_1\) be the number of times we observe \(x_1\), \(N_2\) be the number of times we observe \(x_2, ….\), \(N_k\) be the number of times we observe \(x_k\).</p>
+</blockquote>
 
+<script type="math/tex; mode=display">P_X(x_1) \approx\frac{N_1}{N} \\
+P_X(x_2) \approx\frac{N_2}{N} \\
+\cdots\\
+P_X(x_k) \approx\frac{N_k}{N} \\
+\cdots</script>
 
-</span><span class="c1">### 有多個sheet要寫入檔案，或是要調整sheet的style</span><span class="w">
-</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createWorkbook</span><span class="p">()</span><span class="w">
+<blockquote>
 
-</span><span class="c1"># 增加sheet</span><span class="w">
-</span><span class="n">addWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"sheetName"</span><span class="p">)</span><span class="w">
+  <p>從以上式子我們可以得到 \(N_k = NP_X(x_k)\)</p>
+</blockquote>
 
-</span><span class="c1"># 設定欄位寬度</span><span class="w">
-</span><span class="n">setColWidths</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w">
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\mu & = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
+& \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
+& = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
+& = E(X)
+\end{align} %]]></script>
 
-</span><span class="c1"># 增加style</span><span class="w">
-</span><span class="n">headerStyle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createStyle</span><span class="p">(</span><span class="n">fgFill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TopBottomLeftRight"</span><span class="p">,</span><span class="w"> </span><span class="n">halign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="n">textDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+<p>以上就是 \(E(X) = \mu\) 的說明。</p>
 
-</span><span class="n">addStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">headerStyle</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">gridExpand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+<p>另外，可能會看到一些不同的寫法表示期望值</p>
 
-</span><span class="c1"># 加上filter</span><span class="w">
-</span><span class="n">addFilter</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
+<script type="math/tex; mode=display">E(X)=E[X]=EX=\mu=\mu_X</script>
 
-</span><span class="c1"># 寫檔</span><span class="w">
-</span><span class="n">writeData</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+<p>這部分內容主要來源為 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
 
-</span><span class="c1"># 存檔</span><span class="w">
-</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<hr />
+<h3 id="law-of-the-unconscious-statistician-lotus">Law of the unconscious statistician (LOTUS)</h3>
+<p><strong>THEOREM 3.2</strong></p>
+<ul>
+  <li>Let \(X\) be a discrete random variable with probability function \(P(x)\) and \(g(X)\) be a real-valued function of \(Y\). Then the expected value of \(g(X)\) is given by</li>
+</ul>
 
-<h3 id="2xlconnect"><strong>(2)XLConnect</strong><br /></h3>
-<p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
+<script type="math/tex; mode=display">E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)</script>
 
-<p>一開始想要直接使用openxlsx的dataValidation function，<br />
-但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
-所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
-再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
+<p><strong>Example:</strong> <br />
+<a href="https://www.probabilitycourse.com/chapter3/3_2_3_functions_random_var.php">Source</a></p>
+<blockquote>
 
-<p>原本是直接使用 openxlsx 這個 library 的 loadWorkbook，<br />
-但在調整顏色時一直會有 error 無法解決，<br />
-在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。<br /></p>
+  <p>Let \(X\) be a discrete random variable with range \(R_X = \{ 0, \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \pi… \} \), such that \(P_X(0)=P_X(\frac{\pi}{4})=P_X(\frac{\pi}{2})=P_X(\frac{3\pi}{4})=P_X(\pi)=\frac{1}{5}\).  Find \(E[sin(X)]\).</p>
+</blockquote>
 
-<p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
-使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
+<p>Solution:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
-  invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
-</code></pre></div></div>
+<blockquote>
 
-<p>看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，<br />
-後來我甚至存一份空白的excel檔案都還是會有錯誤。</p>
+  <p>根據 LOTUS，
+<script type="math/tex">% <![CDATA[
+\begin{align}
+E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
+& = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
+& = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
+& = \frac{\sqrt{2} + 1}{2}
+\end{align} %]]></script></p>
+</blockquote>
 
-<p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
-發現可以讀的檔案是<em>Macintosh(CR)</em></p>
+<hr />
+<h3 id="變異數-variance">變異數 Variance</h3>
+<p><strong>定義 Definition</strong></p>
 
-<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
+<ul>
+  <li>If \(X\) is a random variable with mean \(E[X] = \mu\), the variance of \(X\) is defined as</li>
+</ul>
 
-<p>不能讀的檔案是<em>Unix(LF)</em></p>
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2]</script>
 
-<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
+<ul>
+  <li>且根據 LOTUS，這個式子可以再寫成</li>
+</ul>
 
-<p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
-openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
-而 XLConnect 的錯誤則解除了。</p>
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)</script>
 
-<p>程式碼範例，<br /></p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XLConnect</span><span class="p">)</span><span class="w">
+<hr />
+<h3 id="期望值的運算">期望值的運算</h3>
+<p><strong>THEOREM 3.3</strong></p>
 
-</span><span class="c1"># 讀取template</span><span class="w">
-</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loadWorkbook</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(c\) be a constant. Then</li>
+</ul>
 
-</span><span class="c1"># d是要儲存的dataframe，getSheets(wb)是sheet的名稱</span><span class="w">
-</span><span class="n">writeWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">startRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">startCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+<script type="math/tex; mode=display">E(c) = c.</script>
 
-</span><span class="c1"># 設style</span><span class="w">
-</span><span class="n">cs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span><span class="w">
-</span><span class="c1"># 邊框</span><span class="w">
-</span><span class="n">setBorder</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"all"</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XLC</span><span class="o">$</span><span class="s2">"BORDER.THIN"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">XLC</span><span class="o">$</span><span class="s2">"COLOR.BLACK"</span><span class="p">))</span><span class="w">
-</span><span class="n">setCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="p">(</span><span class="m">7</span><span class="o">+</span><span class="n">nrow</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cellstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w">
+<p><strong>THEOREM 3.4</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g(X)\) be a function of X, and c be as constant. Then</li>
+</ul>
 
-</span><span class="c1"># 存檔</span><span class="w">
-</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"savefile.xlsx"</span><span class="p">)</span><span class="w">
+<script type="math/tex; mode=display">E[cg(X)] = cE[g(X)].</script>
 
-</span></code></pre></div></div>
+<p><strong>THEOREM 3.5</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g_1(X), g_2(X), …, g_k(X)\) be \(k\) functions of \(X\). Then</li>
+</ul>
 
-<h2 id="3xls">3.xls<br /></h2>
-<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
+<script type="math/tex; mode=display">E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]</script>
 
-<p>下載完後只要一行指令就好，</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
-</span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
+<p>根據以上定理，可以再產生</p>
 
-<p>其他更多 library 的 function 都可以去CRAN找哦！</p>
+<p><strong>THEOREM 3.6</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and mean \(E(X) = \mu\). Then</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+V(X) = \sigma^2 & = E[(X - \mu)^2] \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
+
+<p>證明：</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\sigma^2 & = E[(X - \mu)^2] & \\
+& = E[(X^2 - 2\mu X + \mu^2] \\
+& = E(X^2) - E(2\mu X) + E(\mu^2) \\
+& = E(X^2) - 2\mu E(X) + \mu^2 \\
+& = E(X^2) - 2\mu^2 + \mu^2 \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
+</blockquote>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
+
  -->
-    <div class="post-excerpt"><p>很多資料會使用excel檔案儲存，<br />
-這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
-<ol>
-  <li>csv</li>
-  <li>xlsx</li>
-  <li>xls</li>
-</ol>
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
 
 </div>
     <div class="bookmark">
@@ -357,8 +378,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/';
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -371,7 +392,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">0 Comments</a>
       </span>
 
     </div>
@@ -380,15 +401,207 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
-        [R]使用 R 寄Outlook Email
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(1)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 1, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 26, 2018</span>
+      <span class="post-date">September 1, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+<p>這篇內容為書中的 3.1 與 3.2。</p>
+
+<hr />
+
+<p>在開始前，何謂「隨機變數」？</p>
+<h3 id="隨機變數-random-variable">隨機變數 Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 <a href="http://ccckmit.wikidot.com/st:randomvariable">Source</a><br /></li>
+  <li>A random variable \(X\) is a funcion from sample space to real number. <a href="https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php">Source</a></li>
+</ul>
+
+<blockquote>
+
+  <p>\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) <br />
+\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)</p>
+</blockquote>
+
+<p><strong>Example:</strong></p>
+
+<blockquote>
+
+  <p>擲兩枚硬幣，其樣本空間為 \( R = \{HH, HT, TH, TT\}  \)，共有 \(2^2\) 種可能。 <br />
+若將 H 定義為 1，T 定義為 0，則其隨機變數 \(X\) 的值為 \( \{0, 1, 2\}\)</p>
+</blockquote>
+
+<p>而隨機變數又分為 1. <em>離散型</em> 與 2. <em>連續型</em>，這一章節我們只會討論離散型。</p>
+
+<hr />
+
+<h3 id="離散型隨機變數-discrete-random-variable">離散型隨機變數 Discrete Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)</li>
+  <li>\(X\) is a discrete random variable, if its range is countable. <a href="https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php">Source</a></li>
+</ul>
+
+<p>根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。</p>
+
+<p>所以像是擲銅板或是擲骰子就會是離散型隨機變數。</p>
+
+<p>以擲一顆骰子一次為例，其可能值為 \(\{1, 2, 3, 4, 5, 6\}\), 我們用 \(X\)來表示其隨機變數，<br />
+但因為隨機變數為 function，所以我們可以用 \(R_X\)來表示它的範圍，</p>
+
+<blockquote>
+
+  <p>\( Range(X) = R_X = \{1, 2, 3, 4, 5, 6\}  \) <br /></p>
+</blockquote>
+
+<hr />
+
+<h3 id="機率質量函數-probability-mass-function-pmf">機率質量函數 Probability Mass Function (PMF)</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
+</ul>
+
+<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
+
+<ul>
+  <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
+</ul>
+
+<p>機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。</p>
+
+<p>譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，</p>
+
+<blockquote>
+
+  <p>\( P(X = 1) = 1/6  \)</p>
+</blockquote>
+
+<p>另外，\( P_X(x) \)還有兩個很重要的<strong>性質</strong> <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a>，</p>
+
+<ul>
+  <li>\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)</li>
+  <li>\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)</li>
+</ul>
+
+<p>簡單來說就是，</p>
+<ol>
+  <li>任何事件發生的機率都只會介於 0 和 1 之間</li>
+  <li>所有事件機率總和等於 1</li>
+</ol>
+
+<p><strong>離散型 PMF 圖</strong></p>
+
+<p>擲兩枚硬幣，出現 head 為 1，tail 為 0 ，其 PMF 函數為</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,& \;for\; x = 0 \\
+1/2,& \;for\; x = 1 \\
+1/4,& \;for\; x = 2 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+</blockquote>
+
+<p>函數圖為，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
+
+<hr />
+
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">
+        [R]如何更改R介面語言的設定
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 27, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 27, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -402,51 +615,16 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
+    <!-- <p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
 
-<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
-<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
+<p>以下為 mac 的 ios 系統解法，</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
-</span><span class="c1">## init com api</span><span class="w">
-</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## create an email </span><span class="w">
-</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="c1">## configure  email parameter </span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
-</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
-</span><span class="c1"># First:text</span><span class="w">
-</span><span class="c1"># outMail[["body"]] = </span><span class="w">
-</span><span class="c1"># "Dear reciever,</span><span class="w">
-</span><span class="c1">#                      </span><span class="w">
-</span><span class="c1"># Please see attached.</span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># Best regards,</span><span class="w">
-</span><span class="c1"># Sender"</span><span class="w">
-
-</span><span class="c1"># Second:html text</span><span class="w">
-</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
-</span><span class="s1">'
-&lt;p&gt;Dear reciever,&lt;/p&gt;
-&lt;p&gt;Please see attached.&lt;/p&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;p&gt;Best regards,
-&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
-
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
-
-</span><span class="c1"># attachment</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## send it                     </span><span class="w">
-</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
-
-
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"defaults write org.R-project.R force.LANG en_US.UTF-8"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
+
+<p>然後關閉 R 再重新打開就會改為英文介面囉！</p>
  -->
-    <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
+    <div class="post-excerpt"><p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
 
 </div>
     <div class="bookmark">
@@ -468,8 +646,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
+        // this.page.url = '/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread';
+        this.page.identifier = '/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -482,7 +660,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
+        <a href="/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">0 Comments</a>
       </span>
 
     </div>
@@ -491,15 +669,263 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
-        [Python][爬蟲]requests 的編碼
+      <a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
+        [Python]執行pyinstaller產生的執行檔出現No module錯誤訊息
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 17, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on July 13, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 17, 2018</span>
+      <span class="post-date">July 13, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
+
+<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
+執行在 dist 資料夾底下的檔案，卻出現
+`
+no module named ‘somepackagename’
+`
+的錯誤訊息。</p>
+
+<p>這表示，在打包這支程式時，並未把需要的套件打包進去？ <br />
+但是我使用 .py 執行時並沒有這樣的問題啊？ <br />
+表示我的電腦確實是有安裝該套件才是。</p>
+
+<p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
+所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
+
+<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
+
+<p>只要將原本的 <br />
+<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
+
+<p>改成 <br />
+<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
+
+<p>就好了。 <br /></p>
+
+<p>可以用， <br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</code></pre></div></div>
+<p>查看系統路徑，就可以知道套件可能的位置。</p>
+
+ -->
+    <div class="post-excerpt"><p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
+        this.page.identifier = '/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">
+        [Python]彈出視窗 alert box
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 5, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 5, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
+以下會分為 mac 和 windows 兩個系統來討論。</p>
+
+<h2 id="mac">Mac</h2>
+
+<h3 id="1-easygui-套件">1. easygui 套件</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
+<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
+<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這個套件基本上蠻簡單的，只要使用<code class="highlighter-rouge">msgbox()</code>就好，<br />
+如果只是要在跑程式的時候使用沒有太大問題，<br /></p>
+
+<p>更多 <a href="https://blog.csdn.net/marksinoberg/article/details/51499909">easygui 套件</a> 的介紹</p>
+
+<p>但如果要把程式碼打包時（<a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller套件</a>） 這個方法就會失效，會出現錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ImportError: No module named easygui
+[3310] Failed to execute script alterwindow
+</code></pre></div></div>
+<p>所以如果要讓程式碼打包後可以出現彈跳視窗可以使用內建的 system。</p>
+
+<h3 id="2-ossystem">2. os.system()</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">"osascript -e 'Tell application </span><span class="se">\"</span><span class="s">System Events</span><span class="se">\"</span><span class="s"> to display dialog </span><span class="se">\"</span><span class="s">"</span><span class="o">+</span><span class="s">"Some Funky Message"</span><span class="o">+</span><span class="s">"</span><span class="se">\"</span><span class="s">'"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這方法其實就是使用 python 執行<strong>系統命令</strong>。
+也就是，其實把 os.system() 括號裡的東西</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>osascript -e 'Tell application "System Events" to display dialog "Some Funky Message"'
+</code></pre></div></div>
+<p>打在 terminal 裡會執行的東西。</p>
+
+<p>將以上命令打在 terminal 會發現出現一個彈跳視窗，內容是 Some Funcky Message。
+<img src="http://localhost:4000/blog/img/posts/system_msg.jpg" alt="system_msg.jpg" /></p>
+
+<p>所以在 python 裡面同樣執行會產生同樣的結果。</p>
+
+<p>而這個方法將程式打包後可以正確執行。
+<br />
+<br /></p>
+
+<h2 id="windows">Windows</h2>
+<h3 id="1-easygui-套件-1">1. easygui 套件</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
+<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
+<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>基本上和 mac 一樣，將程式碼打包後也無法正常執行。</p>
+
+<h3 id="2-ctypes-套件">2. ctypes 套件</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 不需另外安裝</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Your text"</span><span class="p">,</span> <span class="s">"Your title"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># 或著你可以定義一個 function</span>
+<span class="k">def</span> <span class="nf">Mbox</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">style</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
+<span class="n">Mbox</span><span class="p">(</span><span class="s">'Your title'</span><span class="p">,</span> <span class="s">'Your text'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># 如果是要輸出中文，記得重新 encode</span>
+<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"內容"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="s">"標題"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這個方法也可以打包後執行。</p>
+
+<p>另外，
+會看到有些地方使用</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxW()
+</code></pre></div></div>
+<p>而不是</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxA()
+</code></pre></div></div>
+<p>但執行後會發現，<code class="highlighter-rouge">ctypes.windll.user32.MessageBoxW()</code>這個方法會出現亂碼。</p>
+
+<p>這兩個的差別在<code class="highlighter-rouge">MessageBoxW</code>要使用 unicode 編碼，而<code class="highlighter-rouge">MessageBoxA</code>是 ascii 編碼。<br />
+<a href="https://stackoverflow.com/questions/20783046/python-program-displaying-messages-in-different-language-than-english">有人回答</a>這個問題	。</p>
+
+<p>這邊 mac 和 windows 各介紹了兩種方法，其實還有很多方法啦，只要能符合需求的都是好方法！</p>
+
+ -->
+    <div class="post-excerpt"><p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
+以下會分為 mac 和 windows 兩個系統來討論。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread';
+        this.page.identifier = '/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread" data-disqus-identifier="/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
+        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 3, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -516,18 +942,122 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
+    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
 
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
+<p>基本流程：</p>
+<ol>
+  <li>找到圖片的來源網址</li>
+  <li>下載圖片</li>
+  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
+  <li>帶入參數</li>
+</ol>
+
+<p>以
+<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
+為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
+<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
+同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
+
+<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
+
+<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+
+<span class="c"># 1. 找到圖片的來源網址</span>
+<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c"># 2. 下載圖片</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
+
+<h4 id="session">session()</h4>
+<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
+
+<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="c"># adjust pitcure size, it would read more correctly</span>
+<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">image</span>
+
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">captcha</span>
+</code></pre></div></div>
+
+<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
+
+<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
+
+<p><br /></p>
+<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
+
+<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
+像是被調整過後的圖片變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
+</code></pre></div></div>
+<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
+
+<p>會碰到錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
+  "for transparency")
+
+---省略--
+
+TypeError: int() argument must be a string or a number, not 'tuple'
+</code></pre></div></div>
+
+<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
+</code></pre></div></div>
+
+<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+<span class="c"># print image</span>
+</code></pre></div></div>
+<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
+
+<p><br /></p>
+
+<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
+
+<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
+<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
+。或是，另外比較複雜的驗證碼可以參考我的
+<a href="https://github.com/shihs/read-captcha">github</a>
+。</p>
 
  -->
-    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
+    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
 
 </div>
     <div class="bookmark">
@@ -549,8 +1079,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -563,7 +1093,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
       </span>
 
     </div>
@@ -572,15 +1102,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-        [Python][爬蟲]防止被ban，代理IP怎麼用?
+      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
+        [Python][SQL]Python 連接 SQLite
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 7, 2018</span>
+      <span class="post-date">June 30, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -590,95 +1120,35 @@ s.setAttribute('data-timestamp', +new Date());
         <a target="_blank" href="/blog/category/#Python">Python</a>
         &nbsp;
       
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
         
       
     </span>
 
 
     </div>
-    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
+    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
 
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
 
-<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
-<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
-<ol>
-  <li>
-    <p>透明代理(Transparent Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Your IP</p>
-  </li>
-  <li>
-    <p>匿名代理(Anonymous Proxy)<br />
-REMOTE_ADDR = proxy IP<br />
-HTTP_VIA = proxy IP<br />
-HTTP_X_FORWARDED_FOR = proxy IP</p>
-  </li>
-  <li>
-    <p>混淆代理(Distorting Proxies)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Random IP address</p>
-  </li>
-  <li>
-    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = not determined<br />
-HTTP_X_FORWARDED_FOR = not determined<br /></p>
-  </li>
-</ol>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
 
-<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
-<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
-<ol>
-  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
-  <li>http://www.proxyserverlist24.top/<br /></li>
-</ol>
+<span class="c"># 要下的 SQL 指令</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+    <span class="s">"select host_key from cookies limit 10;"</span>
+<span class="p">)</span>
 
-<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
 
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-
-<span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
-
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
 </code></pre></div></div>
-
-<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
-要爬取網站的時候，先讀取該檔案，
-只要被擋，就random使用proxy替換proxies。</p>
-
-<p>如果所有proxy都用完再重新爬取，
-網站上的proxy都會不停更換，
-所以只要更新proxy庫就好。</p>
-
  -->
-    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
+    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
 
 </div>
     <div class="bookmark">
@@ -700,8 +1170,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
+        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
+        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -714,7 +1184,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
+        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
       </span>
 
     </div>
@@ -723,100 +1193,68 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
-        [Python]呼叫其他.py的function
+      <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
+        [SQL][psql]基本觀念(2)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on June 29, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 2, 2018</span>
+      <span class="post-date">June 29, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
+    <!-- <p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
-<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
-	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
+<h3 id="normalized-design">Normalized Design</h3>
+<p><strong>What is Normalized Design?</strong></p>
+<ol>
+  <li>Every row has the same number of columns. <br />
+每一列都必須有同樣的行數。</li>
+  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
+  <li>Facts that don’t relate to the key belong in different tables. <br />
+與 unique key 無關的訊息要放在另一個 table。</li>
+  <li>Table shouldn’t imply relationships that don’t exist. <br />
+行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+</ol>
 
-</code></pre></div></div>
+<p>More about Normalization:<br />
+William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
+Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
 
-<p>有兩種情況，<br />
-<strong>1. 這兩個檔案在同一個folder底下</strong><br />
-—main.py<br />
-—fun.py<br /></p>
+<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
+<p><strong>What is Unique Key?</strong><br />
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
+另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
+詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
-<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+<p><strong>What is Foreign Key?</strong><br />
+對照到另一個資料表的 primary key。<br />
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
 
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-
-</code></pre></div></div>
-
-<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
-想要呼叫的fun.py在function這個folder底下<br />
-—main.py<br />
-—function—fun.py<br /></p>
-
-<p>這時候main.py可以有兩種寫法</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
-<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
-<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
-<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
-<span class="c"># it's true, it's empty. But it's still important!</span>
-</code></pre></div></div>
-
-<p>那如果今天fun.py在function的下一層folder呢?<br />
-—main.py<br />
-—function—another—fun.py<br />
-只要把main.py改成<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
-<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-
-<span class="c">#或者也可以這樣寫</span>
-
-<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-<p>但最重要的是，<br />
-<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
 
  -->
-    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
 
 </div>
     <div class="bookmark">
@@ -838,8 +1276,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
-        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
+        // this.page.url = '/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -852,7 +1290,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
+        <a href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
       </span>
 
     </div>
