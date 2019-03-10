@@ -36,6 +36,7 @@ Generate policies/strategies that lead to a (possibly delayed) reward. Learn by 
 1. Time! Reinforcement Learning 的學習時間會比 Supervised Learning 費時（當然要有缺點，不然大家幹嘛還要用 Supervised Learning），所以如果有 labels 通常還是會選用 Supervised Learning，但當事前沒有 labels，不知道結果的時候就可以使用 Reinforcement Learning。
 2. Can become better than the system designer, unlike a supervised system that can never become better than the teacher. 因為 Supervised Learning 是根據 system designer 給的 labels 下去計算，但 Reinforcement Learning 是機器自己學習所獲得的結果，就像是，雖然教練教學生打球，但學生的學習成果可能比教練還好。
 3. Feedback is usually not immediate but is given after many actions - delayed feedback! 像是下棋，要等到結果贏或輸才會知道是得到 positive reward 還是 negative reward。
+4. Feedback is given as a scalar reward, not as the correct action to make. Supervised Learning 的 feedback 是結果是否正確，但 Reinforcement Learning 得到的 feedback 是 reward（can be positive or negative）。
 
 - Difference to control theory
 1. No physical model of the world, e.g., in pole balancing
