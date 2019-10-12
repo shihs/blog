@@ -144,6 +144,10 @@
           
         
       
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -151,6 +155,7 @@
         <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
         <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
         <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.instagram.com/itakephotos_tw/" class="instagram" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-instagram-8-240.png"></a></li>
         <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
       </ul>
     </div>
@@ -163,6 +168,529 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">
+        [R][Git]如何在 Rstudio 上連接 R project 與 Github
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Git">Git</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
+
+<p>在進入主題前，請先安裝好 R、Rstudio 和 Git ，並且申請好 Github 帳號。</p>
+
+<hr />
+
+<h2 id="前置作業">前置作業</h2>
+<p><strong>設置 SSH RSA key</strong></p>
+
+<p>1.複製 public key<br />
+Tool &gt; Global Options &gt; Git/SVN &gt; Create RSA Key &gt; View public key <br />
+點開 View public key 後，複製裡頭所有的東西。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Rstudio%20SSH.png" alt="Rstudio SSH.png" /></p>
+
+<p>2.將 public key 貼到 github</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/github%20ssh.png" alt="github ssh.png" /></p>
+
+<hr />
+
+<h2 id="開始建立-connection">開始建立 connection</h2>
+
+<p><strong>建立專案</strong></p>
+
+<p>請先建立一個專案，這裡就不多加解釋了。</p>
+
+<p><strong>在本機建立 repository</strong></p>
+
+<p>Build &gt; Configure public Tools &gt; Git/SVN<br />
+將 Version control system 由 None 改為 Git</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/version%20control%20system.png" alt="version control system.png" /></p>
+
+<p>這時候就會發現 Rstudio 的視窗長得不太一樣了。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/rstudio%20git.png" alt="rstudio git.png" /></p>
+
+<p>下方視窗應該會有一些還未 commit 的檔案，但因為我都已經 commit 了，所以沒有內容。<br />
+且這時候 pull 和 push 鍵應該還無法操作。</p>
+
+<p><strong>Github 同步</strong></p>
+
+<p>終於來到最後一哩路。</p>
+
+<p>到 Github 上創建一個新的 repository，且名稱要和 project 相同，只要單純創建 repository 就好，什麼檔案都不要。</p>
+
+<p>最後，打開 Rstudio 工具列的， Tools &gt; Shell</p>
+
+<p>然後在 Shell 裡輸入，</p>
+<pre><code class="language-git">git remote add origin https://github.com/你的github帳號/你的專案名稱.git
+git push -u origin master
+</code></pre>
+
+<p>完成後就會發現專案已經和 Github 連結了！專案的檔案都出現在 Github 上了。<br />
+這時候 pull 和 push 鍵也已經可以操作了。</p>
+
+<p>未來只要更新專案內容，就可以直接在 Rstudio 上 commit 和 push 就好了！</p>
+
+<hr />
+
+<p><strong>補充</strong></p>
+
+<p>移除 project 與該 repository 的 connection <code class="highlighter-rouge">rm -rf .git</code></p>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li>Hadley Wickham 的 <a href="http://r-pkgs.had.co.nz/git.html">R Package Git 章節</a></li>
+</ul>
+
+ -->
+    <div class="post-excerpt"><p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread';
+        this.page.identifier = '/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread" data-disqus-identifier="/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">
+        [統計]什麼是 CDF (Cumulative Distribution Function)?
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 4, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
+
+<hr />
+
+<h3 id="cdf-cumulative-distribution-function">CDF (Cumulative Distribution Function)</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>The cumulative distribution function (CDF) of random variable \(X\) is defined as</li>
+</ul>
+
+<script type="math/tex; mode=display">F_X(x) = P(X \leq x), \forall x \in {\Bbb R}</script>
+
+<p><a href="https://www.probabilitycourse.com/chapter3/3_2_1_cdf.php">Source</a></p>
+
+<blockquote>
+
+  <p>Mathematical Statistics with Applications 這本書將 CDF 稱為 distribution function，<br />
+<a href="https://zh.wikipedia.org/wiki/累积分布函数">wikipedia</a> 則翻譯為<strong>累積分布函數</strong>。</p>
+</blockquote>
+
+<p>以下再分 <em>1.離散型函數</em> 與 <em>2.連續型函數</em> 來看，</p>
+
+<hr />
+<h3 id="離散型隨機變數的-cdf">離散型隨機變數的 CDF</h3>
+
+<p>以擲兩枚硬幣為例，出現 head 為 1，tail 為 0，<br />
+其隨機變數 \(X\) 的 PMF 函數為</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,& \;for\; x = 0 \\
+1/2,& \;for\; x = 1 \\
+1/4,& \;for\; x = 2 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<p>PMF 函數圖為，
+<img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
+
+<p>則它的 CDF 累積分佈函數為
+<script type="math/tex">% <![CDATA[
+F_X(x) = \left\{ \begin{array}{rcl}
+0,& &for\; x < 0 \\
+1/4,& &for\; 0 \leq x < 1 \\
+3/4,& &for\; 1 \leq x < 2 \\
+1,&  &for\; x \geq 2\\
+\end{array}\right. %]]></script></p>
+
+<p>CDF 函數圖為，
+<img src="http://localhost:4000/blog/img/posts/CDF_two%20coins.png" alt="CDF_two coins.png" /></p>
+
+<p>可以發現，離散型的 CDF \(F_X(x)\) 為不連續的函數圖。</p>
+
+<p>關於離散型的 CDF 這<a href="https://www.probabilitycourse.com/videos/chapter3/video3_5.php">影片</a>有更詳細的說明。</p>
+
+<hr />
+<h3 id="連續型隨機變數的-cdf">連續型隨機變數的 CDF</h3>
+
+<p>那如果今天有個隨機變數 \(X\)，它的 CDF \(F(X)\) 為連續函數呢？<br /></p>
+
+<p><strong>定義 Definition</strong></p>
+<ul>
+  <li>A random variable \(X\) with CDF \(F(X)\) is said to be continuous if \(F(X)\) is a continuous function for all \(X \in {\Bbb R} \). <a href="https://www.probabilitycourse.com/chapter4/4_1_0_continuous_random_vars_distributions.php">Source</a></li>
+</ul>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+</ul>
+
+<hr />
+ -->
+    <div class="post-excerpt"><p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(3)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 4, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+<p>這一篇要介紹常見的離散型分佈（Discrete Distribution），這篇主要是參考  <a href="https://www.probabilitycourse.com/chapter3/3_1_5_special_discrete_distr.php">Source</a></p>
+
+<hr />
+<h3 id="伯努利分佈-bernoulli-distribution">伯努利分佈 Bernoulli Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>bernoulli</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Bernoulli(p)\)</strong>, if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p,& \;for\; x = 1 \\
+1-p,& \;for\; x = 0 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
+
+<p>簡單來說，一個事件只有兩種可能。<br /></p>
+
+<p>生活中有非常多的例子都會是 Bernoulli Distribution，譬如，</p>
+<ol>
+  <li>考試有及格、不及格</li>
+  <li>丟擲一枚銅板有正面、反面</li>
+  <li>小孩子性別可能是男生、女生</li>
+</ol>
+
+<p><img src="http://localhost:4000/blog/img/posts/Bernoulli.png" alt="Bernoulli.png" /></p>
+
+<hr />
+<h3 id="幾何分布-geometric-distribution">幾何分布 Geometric Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>geometric</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Geometric(p)\)</strong>, if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
+
+<p>Geometric Distribution 的例子：擲一枚銅板，且此銅板擲到 Head 的機率為 \(p\)。今天擲這枚到出現第一個 Head 為止，則其機率分佈為 Geometric Distribution。<br />
+另外，每一次擲這枚銅板都會是獨立的 Bernoulli 試驗。</p>
+
+<p>所以，Geometric Distribution 就是很多次的 Bernoulli 試驗直到成功為止。</p>
+
+<p>以 \(p = 0.3\) 為例，其 Geometric Distribution 的 PMF 會是這樣，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Geometric.png" alt="Geometric.png" /></p>
+
+<hr />
+<h3 id="二項分布-binomial-distribution">二項分布 Binomial Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>binomial</em> random variable with peremeter \(n\) and \(p\), shown as <strong>\(X \sim Binomial(n, p)\)</strong>, if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},& \;for\; k = 0, 1, 2,..., n \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
+
+<p>Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。</p>
+
+<p>所以它的 PMF 會有 <script type="math/tex">\left( \begin{array}{c} n \\ k \end{array} \right)</script>，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
+
+<p>可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。</p>
+
+<p>以 \(n = 10,\; p = 0.3\) 為例，其 PMF 圖會是，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Binomial.png" alt="Binomial.png" /></p>
+
+<p><strong>Binomial random variable as a sum of Bernoulli random variables</strong></p>
+
+<ul>
+  <li>If \(X_1,\;X_2,\;X_3,…,\;X_n\) are independent \(Bernoulli(p)\) random variable,  then the random variable \(X\) defined by \(X = X_1 + X_2 + X_3 + … + X_n\) has a \(Binomial(n,p)\) distribution.</li>
+</ul>
+
+<p>也就是，二項分布可以看成是每個獨立的伯努利分佈的和。</p>
+
+<hr />
+<h3 id="布瓦松分布-poisson-distribution">布瓦松分布 Poisson Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>poisson</em> random variable with peremeter \(\lambda\), shown as <strong>\(X \sim Poisson(\lambda)\)</strong>, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\frac{e^{-\lambda} \lambda^k}{k!} ,& k \in R_X \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<p>Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。</p>
+
+<p>既然上面的式子為 PMF，那我們來檢驗
+<strong>\(\sum_{k \in R_X}{P_k(x)} = 1\)</strong>
+是否正確。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\sum_{k \in R_X}{P_k(x)} &= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+\end{align} %]]></script>
+
+<blockquote>
+
+  <p>Note: 根據 Taylor Series(泰勒展開式) <strong>\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)</strong>，上列式子可以寫成，</p>
+</blockquote>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&= e^{-\lambda} e^{\lambda} \\
+&= 1 \\
+\end{align} %]]></script>
+
+<p><strong>Example:</strong></p>
+
+<blockquote>
+
+  <p>The number of emails that I get in a weekday can be modeled by a Poisson distribution with an average of 0.2 emails per minute.</p>
+  <ol>
+    <li>What is the probability that I get no emails in an interval of length 5 minutes?</li>
+    <li>What is the probability that I get more than 3 emails in an interval of length 10 minutes?</li>
+  </ol>
+</blockquote>
+
+<p><strong>Poisson as an approximation for binomial</strong></p>
+<ul>
+  <li>Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have</li>
+</ul>
+
+<script type="math/tex; mode=display">\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}</script>
+
+<p>\(X \sim Poisson(\lambda = 5)\) 的函數圖形，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Poisson.png" alt="Poisson.png" /></p>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -909,388 +1437,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread" data-disqus-identifier="/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
-        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
-
-<p>基本流程：</p>
-<ol>
-  <li>找到圖片的來源網址</li>
-  <li>下載圖片</li>
-  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
-  <li>帶入參數</li>
-</ol>
-
-<p>以
-<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
-為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
-<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
-同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
-
-<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
-
-<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-
-<span class="c"># 1. 找到圖片的來源網址</span>
-<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
-
-<span class="c"># 2. 下載圖片</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
-
-<h4 id="session">session()</h4>
-<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-</code></pre></div></div>
-
-<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
-
-<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
-
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
-
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">captcha</span>
-</code></pre></div></div>
-
-<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
-
-<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
-
-<p><br /></p>
-<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
-
-<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
-像是被調整過後的圖片變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
-</code></pre></div></div>
-<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
-
-<p>會碰到錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
-  "for transparency")
-
----省略--
-
-TypeError: int() argument must be a string or a number, not 'tuple'
-</code></pre></div></div>
-
-<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
-</code></pre></div></div>
-
-<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
-<span class="c"># print image</span>
-</code></pre></div></div>
-<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
-
-<p><br /></p>
-
-<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
-
-<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
-<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
-。或是，另外比較複雜的驗證碼可以參考我的
-<a href="https://github.com/shihs/read-captcha">github</a>
-。</p>
-
- -->
-    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
-        [Python][SQL]Python 連接 SQLite
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 30, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
-
-<span class="c"># 要下的 SQL 指令</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s">"select host_key from cookies limit 10;"</span>
-<span class="p">)</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-
-<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
-
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
-</code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
-        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
-        [SQL][psql]基本觀念(2)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 29, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 29, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#psql">psql</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇是整理一些 psql 的基本觀念，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-<h3 id="normalized-design">Normalized Design</h3>
-<p><strong>What is Normalized Design?</strong></p>
-<ol>
-  <li>Every row has the same number of columns. <br />
-每一列都必須有同樣的行數。</li>
-  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
-每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
-  <li>Facts that don’t relate to the key belong in different tables. <br />
-與 unique key 無關的訊息要放在另一個 table。</li>
-  <li>Table shouldn’t imply relationships that don’t exist. <br />
-行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
-</ol>
-
-<p>More about Normalization:<br />
-William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
-Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
-
-<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
-<p><strong>What is Unique Key?</strong><br />
-唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
-另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
-譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
-詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
-
-<p><strong>What is Foreign Key?</strong><br />
-對照到另一個資料表的 primary key。<br />
-譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
-<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
-
-<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
-
- -->
-    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本觀念，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread';
-        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
       </span>
 
     </div>

@@ -154,7 +154,7 @@ pre {
 }
 code {
   padding: .25em .5em;
-  font-size: .9rem;
+  font-size: .8rem;
   color: #bf616a;
   background-color: #f9f9f9;
   border-radius: 3px;
@@ -427,7 +427,7 @@ tbody tr:nth-child(odd) th {
 /* Pagination items can be `span`s or `a`s */
 .pagination-item {
   display: block;
-  padding: 1rem;
+  padding: 0.8rem;
   border: 1px solid #eee;
 }
 .pagination-item:first-child {

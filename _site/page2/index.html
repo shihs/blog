@@ -154,12 +154,14 @@
       <ul>
         <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
         <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
-        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>            
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.instagram.com/itakephotos_tw/" class="instagram" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-instagram-8-240.png"></a></li>
+        <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
       </ul>
     </div>
     
 
-    <p class = "rights">&copy; 2018. All rights reserved.</p>
+    <p class = "rights">&copy; 2019. All rights reserved.</p>
   </div>
 </div>
 
@@ -169,15 +171,15 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
-        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
+      <a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">
+        [Python]讀取與寫入xlsx檔案
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 3, 2018</span>
+      <span class="post-date">January 2, 2019</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -185,131 +187,736 @@
       
       
         <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+    <!-- <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
 
-<p>基本流程：</p>
+<p>在開始前請先安裝 pandas 套件，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>讀取檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="c"># 獲取列數</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c"># 獲取儲存格內容</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c"># 修改儲存格內容</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
+<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
+<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
+</code></pre></div></div>
+
+<p>若在執行以上程式碼時產生錯誤訊息：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
+</code></pre></div></div>
+
+<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>寫入檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c"># Create a Pandas dataframe from some data.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
+
+<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
+
+<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
+
+<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
+
+<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
+</code></pre></div></div>
+<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
+<br />
+<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
+<br />
+<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
+<br />
+<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
+
+ -->
+    <div class="post-excerpt"><p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread';
+        this.page.identifier = '/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">
+        [Python]全形與半形轉換
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 2, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。</p>
+
+<p>例如，半形的驚嘆號（!）是 unicode 編碼是 33，則全形的驚嘆號（！）unicode 就會編碼是 33 + 65248 = 65281</p>
+
+<p>但要將數字解析成半形時是使用 <code class="highlighter-rouge">chr()</code> function，而全形則是使用 <code class="highlighter-rouge">unichr()</code> function。</p>
+
+<p>以下將 33~126 全部列出來，並轉換成全形。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">127</span><span class="p">):</span>
+	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>結果，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
+34 " 65282 ＂
+35 # 65283 ＃
+36 $ 65284 ＄
+37 % 65285 ％
+38 &amp; 65286 ＆
+39 ' 65287 ＇
+40 ( 65288 （
+41 ) 65289 ）
+42 * 65290 ＊
+43 + 65291 ＋
+44 , 65292 ，
+45 - 65293 －
+46 . 65294 ．
+47 / 65295 ／
+48 0 65296 ０
+49 1 65297 １
+50 2 65298 ２
+51 3 65299 ３
+52 4 65300 ４
+53 5 65301 ５
+54 6 65302 ６
+55 7 65303 ７
+56 8 65304 ８
+57 9 65305 ９
+58 : 65306 ：
+59 ; 65307 ；
+60 &lt; 65308 ＜
+61 = 65309 ＝
+62 &gt; 65310 ＞
+63 ? 65311 ？
+64 @ 65312 ＠
+65 A 65313 Ａ
+66 B 65314 Ｂ
+67 C 65315 Ｃ
+68 D 65316 Ｄ
+69 E 65317 Ｅ
+70 F 65318 Ｆ
+71 G 65319 Ｇ
+72 H 65320 Ｈ
+73 I 65321 Ｉ
+74 J 65322 Ｊ
+75 K 65323 Ｋ
+76 L 65324 Ｌ
+77 M 65325 Ｍ
+78 N 65326 Ｎ
+79 O 65327 Ｏ
+80 P 65328 Ｐ
+81 Q 65329 Ｑ
+82 R 65330 Ｒ
+83 S 65331 Ｓ
+84 T 65332 Ｔ
+85 U 65333 Ｕ
+86 V 65334 Ｖ
+87 W 65335 Ｗ
+88 X 65336 Ｘ
+89 Y 65337 Ｙ
+90 Z 65338 Ｚ
+91 [ 65339 ［
+92 \ 65340 ＼
+93 ] 65341 ］
+94 ^ 65342 ＾
+95 _ 65343 ＿
+96 ` 65344 ｀
+97 a 65345 ａ
+98 b 65346 ｂ
+99 c 65347 ｃ
+100 d 65348 ｄ
+101 e 65349 ｅ
+102 f 65350 ｆ
+103 g 65351 ｇ
+104 h 65352 ｈ
+105 i 65353 ｉ
+106 j 65354 ｊ
+107 k 65355 ｋ
+108 l 65356 ｌ
+109 m 65357 ｍ
+110 n 65358 ｎ
+111 o 65359 ｏ
+112 p 65360 ｐ
+113 q 65361 ｑ
+114 r 65362 ｒ
+115 s 65363 ｓ
+116 t 65364 ｔ
+117 u 65365 ｕ
+118 v 65366 ｖ
+119 w 65367 ｗ
+120 x 65368 ｘ
+121 y 65369 ｙ
+122 z 65370 ｚ
+123 { 65371 ｛
+124 | 65372 ｜
+125 } 65373 ｝
+126 ~ 65374 ～
+
+</code></pre></div></div>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://codertw.com/程式語言/367570/">Python實現全形半形字元互轉的方法</a></p>
+ -->
+    <div class="post-excerpt"><p>因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/#disqus_thread';
+        this.page.identifier = '/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/">
+        [Machine Learning]Linear Regression
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 27, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 27, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。</p>
+
+<hr />
+
+<h2 id="simple-linear-regression">Simple Linear Regression</h2>
+
+<p>Simple Linear Regression 假設 \(X, Y\) 存在線性關係，且可以使用以下的式子來表示 \(X, Y\)的關係。</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">Y \approx \beta_0 + \beta_1 X</script>
+</blockquote>
+
+<p>而現實中我們無法知道參數 \(\beta_0, \beta_1\)，這時候我們會使用 train data 找出估計參數 \(\hat{\beta_0}, \hat{\beta_1}\)。簡單線性回歸的估計式可以寫成，</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">\hat{y} = \hat{\beta_0} + \hat{\beta_1} x</script>
+</blockquote>
+
+<p>其中，\(\hat{y}\) 是當 \(X = x\) 時 \(Y\)的預測值。</p>
+
+<hr />
+
+<p><strong>Estimating the Coefficients</strong></p>
+
+<p>現在有一堆 data， \((x_i, y_i), \thinspace i = 1, 2, 3, …, n\)，根據上面的迴歸式可以將這些 data 表示成，</p>
+
+<script type="math/tex; mode=display">y_i \approx \hat{\beta_0} + \hat{\beta_1} x_i, \thinspace for \thinspace i = 1, 2, 3, ..., n</script>
+
+<p>已經知道迴歸模型可以用上面的式子表示，那現在的任務是要找到 \(\hat{\beta_0}\) 和 \(\hat{\beta_1}\)，只要找到這兩個參數就可以預測 \(y\) 了。</p>
+
+<p>找 \(\hat{\beta_0}, \hat{\beta_1}\) 的方法叫 <strong>The Least Square Method</strong>（最小平方法）。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/linear%20regression.png" alt="linear regression.png" height="450px" width="600px" /></p>
+
+<p>以上圖為例，紅色的點為 observations，深藍色的線是用最小平方法找到的迴歸線。</p>
+
+<hr />
+
+<p><strong>The Least Square Method 是什麼？</strong></p>
+
+<p>式子 \( \hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i \) 為 \(X = x_i\) 時 \(Y\) 的預測值。</p>
+
+<p>我們使用 Residual(殘差) 來看這個預測的結果與實際數值的差距，定義為 \(e_i = y_i - \hat{y_i}\) (上圖中紅點到深藍色線的灰色線段們)。</p>
+
+<p>將所有 Residual 相加便能</p>
+
+<p>RSS =</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning with Applications in R</a></p>
+
+ -->
+    <div class="post-excerpt"><p>Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">
+        [Machine Learning]Regression splines
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 9, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 9, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+
+<p>上圖是一個 x, y 的分佈圖，紅線是這些點分部的方程式。但現實中，我們並無法真的知道紅線的方程式，我們可能使用一次方程式、二次方程式甚至更高次方的方程式去嘗試（如下圖
+）。
+<img src="http://localhost:4000/blog/img/posts/splines%20line.png" alt="splines line.png" height="380px" width="600px" /></p>
+
+<p>我們可以將擬合的多項式方程式（polynomial function）寫成，</p>
+
+<p>\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + … + \beta_n x^n + \epsilon\)</p>
+
+<p>但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。</p>
+
+<p>這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。</p>
+
+<hr />
+
+<p><strong>Basis function</strong></p>
+
+<p>\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + … + \beta_n b_n(x_i) + \epsilon_i\)</p>
+
+<p>透過 \(b_1(X)\)、\(b_2(X)\)、……、\(b_n(X)\) 可以將非線性的自變量轉換成線性。</p>
+
+<hr />
+
+<p><strong>Piecewise Function</strong></p>
+
+<p>將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。</p>
+
+<p>如下圖每個區段都是用一次方程式去擬合。\(\xi\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20linear.png" alt="piecewise linear.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>但這些 piecewise function 是有條件的。
+<br />
+雖然 piecewise function 是每個區段各自擬合出來的 function，但所有區段 function 必須整個為連續，也就是在 \(\xi\) 的交界處的值必須相同。</p>
+
+<hr />
+
+<p><strong>Cubic Spline</strong></p>
+
+<p>這裡則是使用三次方程式。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20cubic%20polynomials.png" alt="piecewise cubic polynomials.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>cubic spline 除了邊界的值相同外，還必須要一階和二階倒數相同。</p>
+
+<p>看上圖左上的圖加上邊界連續後成為右上，雖然看起來是連續的函數，但並不是完美的曲線，如果再加上一階導數相同就變成左下，再加上二階導數就可以畫出右下的圖。</p>
+
+<hr />
+
+<p>這個 R code 是畫出最上面圖的程式碼，使用 <a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a> 裡頭的範例。</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># function</span><span class="w">
+</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">11</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">^</span><span class="m">6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w">
+</span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="n">eps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># epsilon</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="w">
+
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">,</span><span class="w">
+  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># plot</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">I</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3), se = FALSE, colour = "gold1") +</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = 'loess', se = FALSE, colour = "red") +</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://zhuanlan.zhihu.com/p/34825299">一文读懂回归样条（regression splines），附Python代码</a>
+<br />
+<a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a>
+<br />
+<a href="https://www.youtube.com/watch?v=V1JRs6AP1AI">Spline Regression | Non Linear Model | Polynomial Regression</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/样条函数">wikipedia - 樣條函數</a>
+<br />
+<a href="https://datascienceplus.com/cubic-and-smoothing-splines-in-r/">Cubic and Smoothing Splines in R</a>
+<br />
+<a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf">《An Introduction to Statistical Learning with Applications in R》</a></p>
+ -->
+    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">
+        [Machine Learning]Principal Component Analysis(PCA)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
+
+<p>From: «Pattern Recognition and Machine Learning» P.561</p>
+
+<hr />
+
+<p><strong>What is PCA?</strong></p>
+
+<p>Principal Component Analysis(PCA)，中文翻作「主成分分析」。</p>
+
+<p>PCA 是一種將多維度降維的方法。
+<br />
+一個變數其實可能是多個潛在變因（laten variables）組成，但我們無法實際測量出那些 laten variables，而 PCA 就是要拆解出影響較大的變因。使用較少的變數解釋多個 variables。</p>
+
+<p>舉個例子，股市的點數上上下下，我們所能觀測到的是點數這個變數，但其實影響點數變動的潛在變因可能包含了很多市場因素，且每個因素可能又是互相影響。</p>
+
+<p>如果用數學符號表示，\(x_i\) 是我們有的變數，\(z_i\) 是裡頭含有的潛在變因，\(x_i\) 是 \(z_i\) 的線性組合（linear combination）。
+<br />
+\(x_1 = a_{11} z_1 + a_{12} z_2 + a_{13} z_3 + \epsilon_1\)
+<br />
+\(x_2 = a_{21} z_1 + a_{22} z_2 + a_{23} z_3 + \epsilon_2\)
+<br />
+\(x_3 = a_{31} z_1 + a_{32} z_2 + a_{33} z_3 + \epsilon_3\)
+<br />
+……</p>
+
+<p>可以將上式改寫成，
+<br />
+\(z_1 = x_1 u_{i1} + x_2 u_{i2} + x_3 u_{i3}\)
+<br />
+……</p>
+
+<hr />
+
+<p><strong>如何降維？</strong></p>
+
+<p>根據 «Pattern Recognition and Machine Learning» 這本書第 561 頁給了 PCA 兩種定義</p>
 <ol>
-  <li>找到圖片的來源網址</li>
-  <li>下載圖片</li>
-  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
-  <li>帶入參數</li>
+  <li>PCA can be defined as the orthogonal projection of the data onto a lower dimensional linear space, known as the principal subspace, such that the variance of the projected data is maximized (Hotelling, 1933).</li>
+  <li>PCA can be defined as the linear projection that minimizes the average projection cost, defined as the mean squared distance tbtween the data points and their projections (Pearson, 1901).</li>
 </ol>
 
-<p>以
-<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
-為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
-<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
-同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
+<p>可以用上圖來理解，或是 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ#t=4m35s">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 這段。</p>
 
-<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
+<p>根據上面的定義，可以看到，降維的方法是要做 <a href="https://www.khanacademy.org/math/linear-algebra/alternate-bases/orthogonal-projections/v/linear-algebra-projections-onto-subspaces">orthogonal projection</a>，且找到投影向量讓投影後的資料變異量最大。</p>
 
-<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<p>這邊我使用 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 影片的內容來介紹。</p>
 
-<span class="c"># 1. 找到圖片的來源網址</span>
-<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<ul>
+  <li>maximized 什麼？
+<img src="http://localhost:4000/blog/img/posts/PCA_maximizing.png" alt="PCA_maximizing.png" height="320px" width="600px" /></li>
+</ul>
 
-<span class="c"># 2. 下載圖片</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<p>假如現在座標上有個綠色的點，以座標\((0, 0)\)原點，其長度為 a（影片沒有表示這是 a 向量，方便起見，後面以 a, b, c 向量表示），c 向量為 a 向量的投影方向與長度。根據畢氏定理，可以畫出一個正三角形，現在三角形的三邊長分別為 a, b, c（因為我懶得再圖上修正了，現在又變回長度）。而 PCA 要找的投影向量就是，最小化 \(b^2\) 的值，或是最大化 \(c^2\) 的值。</p>
 
-<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<ul>
+  <li>投影</li>
+</ul>
 
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-</code></pre></div></div>
+<p><img src="http://localhost:4000/blog/img/posts/PCA_projection.png" alt="PCA_projection.png" height="320px" width="600px" /></p>
 
-<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
+<p>根據上圖，這個二維座標上有好幾個點，我們現在就是要找到一條能讓投影後 variance 最大的投影向量（紅色虛線），如下圖。要找到 SS（eigenvalue） 最小的投影向量。</p>
 
-<h4 id="session">session()</h4>
-<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-</code></pre></div></div>
+<p><img src="http://localhost:4000/blog/img/posts/SS.png" alt="SS.png" height="320px" width="600px" /></p>
 
-<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
+<p>在投影前，我們會先將資料平移 \(x_i - \mu_i\)，也就是不改變點之間的相對位置，這樣不但不會影響找投影向量的結果，在計算上也比較容易。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<hr />
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
+<p><strong>Variation 變異量</strong></p>
 
-<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
+<p>變異量 = \(SS/(n-1), n \)是點的數量</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
+<p>有了變異量以後，我們通常會想要知道每個投影向量的變異量占比。</p>
 
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
+<p>假如現在有 PC1 其變異量為 15，PC2 的變異量為 3，則 PC1 與 PC2 的變異量總和為 18。</p>
 
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">captcha</span>
-</code></pre></div></div>
+<p>所以 PC1 = 15*100%/18 = 83%，PC2 = 3*100%/18 = 17%。</p>
 
-<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
+<p>在做 PCA 的時候，我們會根據轉換的 \(PC_i\) 的比重，來決定要考慮要使用幾個 \(PC_i\)。
+如果可以解釋百分之九十基本上就可以拿來使用。</p>
 
-<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
+<p>假如今天有一筆多維度的資料，但轉換後 PC1 與 PC2 可以表示百分之九十的變異量，那麼這時候只要使用 PC1 與 PC2 就好，且還可以在平面座標上看點的分佈。</p>
 
-<p><br /></p>
-<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
+<hr />
 
-<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
-像是被調整過後的圖片變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
-</code></pre></div></div>
-<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
+<p>基本上 PCA 就是在做座標變換，將原變數投影成新變數。接著以最少的新變數來代表原始資料最大的成分（variation 涵蓋量最大）。</p>
 
-<p>會碰到錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
-  "for transparency")
+<p>其原則如下</p>
+<ul>
+  <li>新變數是原變數的線性組合</li>
+  <li>保留原變數間的最大變異量（variance）</li>
+</ul>
 
----省略--
+<hr />
 
-TypeError: int() argument must be a string or a number, not 'tuple'
-</code></pre></div></div>
-
-<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
-</code></pre></div></div>
-
-<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
-<span class="c"># print image</span>
-</code></pre></div></div>
-<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
-
-<p><br /></p>
-
-<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
-
-<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
-<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
-。或是，另外比較複雜的驗證碼可以參考我的
-<a href="https://github.com/shihs/read-captcha">github</a>
-。</p>
-
+<p>Reference:
+<br />
+<a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a>
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器-統計學習-主成分分析-principle-component-analysis-pca-58229cd26e71">機器/統計學習:主成分分析(Principal Component Analysis, PCA)</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/主成分分析">wikipedia - 主成分分析</a>
+<br />
+The Elements of Statistical Learning
+<br />
+Pattern Recognition and Machine Learning</p>
  -->
-    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
 
 </div>
     <div class="bookmark">
@@ -331,8 +938,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
+        // this.page.url = '/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -345,7 +952,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
+        <a href="/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">0 Comments</a>
       </span>
 
     </div>
@@ -354,159 +961,107 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
-        [Python][SQL]Python 連接 SQLite
+      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">
+        [Machine Learning]Boosting and Adaboost
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 30, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 30, 2018</span>
+      <span class="post-date">December 3, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+    <!-- <h2 id="boosting">Boosting</h2>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<p><img src="http://localhost:4000/blog/img/posts/boosting.png" alt="boosting.png" height="230px" width="600px" /></p>
 
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
+<p>From: <a href="https://blog.bigml.com/2017/03/14/introduction-to-boosted-trees/">Introduction to Boosted Trees</a></p>
 
-<span class="c"># 要下的 SQL 指令</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
-    <span class="s">"select host_key from cookies limit 10;"</span>
-<span class="p">)</span>
+<p>Boosting 也是一種 Ensemble learning，它會結合多個弱分類器（weak classifiers）成為一個較準確的分類器，也可以應用在 regression 上。</p>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<hr />
 
-<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
+<p><strong>和 Bagging 有什麼不同？</strong></p>
 
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
-</code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>這篇是 Python 連接 SQL 的一些基本語法，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+<p>Bagging 各個 classifier 產生的過程是獨立的，但 Boosting 後產生的 classifier 與前面的 classifier 有關。也就是說，Bagging 的 classifier 可以並行產生，但 Boosting 必須要有順序的產生。所以時間上來說，Bagging 可以節省比較多的時間。</p>
 
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
+<hr />
 
+<p><strong>與前面的分類器有關？</strong></p>
 
-<script>
+<p>在 Boosting 中，每一次產生 classifier 後，後面的 classifier 會根據前面 classifier 的結果調整每個點的權重。</p>
 
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread';
-        this.page.identifier = '/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/';
-};
+<p>在前一個 classifier 分類錯誤後，在後一個 classifier 的權重會比較重，而表現較好的則會權重減少。這就是和 Bagging 最大的不同，Bagging 中所有的點都是隨機選取，且權重都是一樣的。</p>
 
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
+<p>簡單來說，Boosting learns features from data.</p>
 
+<hr />
 
+<p><strong>步驟</strong></p>
 
-        <a href="/blog//python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/#disqus_thread" data-disqus-identifier="/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">
-        [SQL][psql]基本觀念(2)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 29, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 29, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#psql">psql</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇是整理一些 psql 的基本觀念，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
-
-<h3 id="normalized-design">Normalized Design</h3>
-<p><strong>What is Normalized Design?</strong></p>
 <ol>
-  <li>Every row has the same number of columns. <br />
-每一列都必須有同樣的行數。</li>
-  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
-每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
-  <li>Facts that don’t relate to the key belong in different tables. <br />
-與 unique key 無關的訊息要放在另一個 table。</li>
-  <li>Table shouldn’t imply relationships that don’t exist. <br />
-行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+  <li>用最原始的 training data 跑一個 classifiers</li>
+  <li>利用這個 classifiers 提高分類錯誤的點的權重，降低分類正確的點的權重。</li>
+  <li>重複第二步驟 N 次，最後使用權重的平均值。</li>
 </ol>
 
-<p>More about Normalization:<br />
-William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
-Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
+<hr />
 
-<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
-<p><strong>What is Unique Key?</strong><br />
-唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
-另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
-譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
-詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
+<h2 id="adaboost">AdaBoost</h2>
 
-<p><strong>What is Foreign Key?</strong><br />
-對照到另一個資料表的 primary key。<br />
-譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
-<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
+<p><img src="http://localhost:4000/blog/img/posts/AdaBoost.png" alt="AdaBoost.png" height="350px" width="700px" /></p>
 
-<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
+<p>From: <a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a></p>
 
+<p>AdaBoost 應用了 boosting 的方法。</p>
+
+<p><strong>概念</strong></p>
+
+<p>假設現在有 n 個樣本，要執行 boosting T 次。</p>
+
+<p>第一次將所有樣本的權重都設為 \(\alpha_i\) = 1/n, i = 1, …, n</p>
+
+<p>對所有 t = 1, …, T</p>
+<ol>
+  <li>根據樣本的權重 \(\alpha_i\) 建立出 classifier \(f_t(x)\)</li>
+  <li>使用 \(f_t(x)\) 後計算 \(\epsilon_t\) 誤差</li>
+  <li>利用 \(\epsilon_t\) 算出係數 \(w_t\)</li>
+  <li>再重新計算 \(\alpha_i\)</li>
+</ol>
+
+<p>最後的 model 就會是：</p>
+
+<p>\(\hat{y} = sign \sum_{t=1}^{T} w_i f_t(x)\)</p>
+
+<p>AdaBoost 的優勢就是讓 model 能夠從錯中學，使用提升與降低權重的方式讓分類錯誤的點可以在下一次的 model 中被改進。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://leijun00.github.io/2014/10/decision-tree-2/">决策树（二）</a>
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
+<br />
+<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a>
+<br />
+<a href="https://www.coursera.org/learn/ml-classification/home/week/5">Machine Learning -  University of Washington</a>
+<br />
+<a href="https://blog.csdn.net/mach_learn/article/details/39501849">机器学习算法优缺点及其应用领域</a></p>
  -->
-    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本觀念，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+    <div class="post-excerpt"><h2 id="boosting">Boosting</h2>
 
 </div>
     <div class="bookmark">
@@ -528,8 +1083,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread';
-        this.page.identifier = '/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/';
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -542,7 +1097,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">0 Comments</a>
+        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">0 Comments</a>
       </span>
 
     </div>
@@ -551,91 +1106,79 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
-        Google Map API - Geocoding 地址經緯度
+      <a href="/blog/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">
+        [Machine Learning]Random Forest
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 28, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 28, 2018</span>
+      <span class="post-date">December 3, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Others">Others</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+    <!-- <p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
 
-<p>這次要介紹<code class="highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
-</code></pre></div></div>
-<p>簡單來說，你可以<strong>根據地址找到該地址在地理上的座標（經緯度）</strong>，方便應用在地圖上標記位置。</p>
+<p>Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 <a href="https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">bagging</a> 這篇提到的方法有點類似，但有些小差異。</p>
 
-<p>根據<code class="highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
-來看文件上給的一個輸出 json 格式的範例，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
-</code></pre></div></div>
-<p>看起來這個 API 是需要 API KEY 。</p>
+<p>使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。</p>
 
-<p>但其實，這個 API 是可以不需要 KEY 的（我不知道為什麼 XD）。
-而且使用 API key 反而還會被限制一天可以搜尋的數量……</p>
+<hr />
 
-<p>所以其實上面的例子只要這樣就好，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
-</code></pre></div></div>
-<p>當然也可以搜尋中文地址，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
-</code></pre></div></div>
-<p>就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。
-其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。</p>
+<p><strong>Random Forest步驟</strong></p>
 
-<h3 id="使用-python-快速爬取-api-內容">使用 python 快速爬取 API 內容</h3>
-<p>這邊我寫了一個簡單的 python 程式可以快速地使用這個 API 獲得地址的經緯度。</p>
+<p>假如有一 training data，有 N 個樣本，p 個features。
+<br />
+今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">urllib</span>
-<span class="kn">import</span> <span class="nn">json</span>
+<ol>
+  <li>使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data</li>
+  <li>在這組 data 中隨機從 p 個 featrues 中選取 m (m &lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node</li>
+  <li>重複步驟 2，直到完成這個 model 為止</li>
+  <li>重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹</li>
+</ol>
 
-<span class="k">def</span> <span class="nf">get_latitude_longtitude</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
-    <span class="c"># decode url</span>
-    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://maps.googleapis.com/maps/api/geocode/json?address="</span> <span class="o">+</span> <span class="n">address</span>
-    
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<p>最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。</p>
 
-        <span class="k">if</span> <span class="n">js</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span> <span class="o">!=</span> <span class="s">"OVER_QUERY_LIMIT"</span><span class="p">:</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="k">break</span>
+<hr />
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s">"results"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"geometry"</span><span class="p">][</span><span class="s">"location"</span><span class="p">]</span>
-    <span class="n">lat</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lat"</span><span class="p">]</span>
-    <span class="n">lng</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lng"</span><span class="p">]</span>
+<ul>
+  <li>因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。</li>
+  <li>Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。</li>
+  <li>因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。</li>
+  <li>
+    <p>Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。</p>
+  </li>
+  <li>優點：
+    <ol>
+      <li>不用做特徵（feature）選擇。</li>
+      <li>訓練完後可以知道哪些 feature 比較重要。</li>
+    </ol>
+  </li>
+</ul>
 
-    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+<hr />
 
-
-
-<span class="n">address</span> <span class="o">=</span> <span class="s">"重慶南路一段122號"</span>
-<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latitude_longtitude</span><span class="p">()</span>
-
-</code></pre></div></div>
-
+<p>Reference:
+<br />
+<a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ">StatQuest: Random Forests Part 1 - Building, Using and Evaluating</a>
+<br />
+<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
+<br />
+<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a></p>
  -->
-    <div class="post-excerpt"><p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+    <div class="post-excerpt"><p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
 
 </div>
     <div class="bookmark">
@@ -657,8 +1200,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread';
-        this.page.identifier = '/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/';
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -671,7 +1214,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread" data-disqus-identifier="/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">0 Comments</a>
+        <a href="/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">0 Comments</a>
       </span>
 
     </div>
@@ -680,111 +1223,84 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
-        [SQL][psql]基本指令(1)
+      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">
+        [Machine Learning]Bagging
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 15, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 15, 2018</span>
+      <span class="post-date">December 3, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#psql">psql</a>
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>這篇是整理一些 psql 的基本指令，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+    <!-- <h2 id="bagging">Bagging</h2>
 
-<h3 id="basic-commands">BASIC COMMANDS</h3>
-<p><strong>Connect to psql</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
-</code></pre></div></div>
-<p><strong>Quit psql</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
-</code></pre></div></div>
-<p><strong>List all databases</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
-# or
-$ \l
+<p><img src="http://localhost:4000/blog/img/posts/bagging.png" alt="bagging.png" height="450px" width="500px" /></p>
 
-#  exit from query result viewer
-$ q
-</code></pre></div></div>
-<p><strong>List all datatables in current database</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
-$ \connect dbname
-# or
-$ \c dbname
+<p>From: Hastie, T., Tibshirani, R. and Friedman, J. The Elements of Statistical Learning. Springer, 2009. p.285</p>
 
-# list all tables 
-$ \dt
-</code></pre></div></div>
-<p><br />
-<br /></p>
-<h3 id="sql-commands">SQL COMMANDS</h3>
-<p><strong>Create and Drop DATABASE</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
-DROP DATABASE dbname;
-</code></pre></div></div>
-<p><strong>Create and Drop TABLE</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
-CREATE TABLE dtname (
-	id serial,
-	name text
-);
+<hr />
 
-# drop table dtname
-DROP TABLE dtname;
-</code></pre></div></div>
-<p><strong>Insert values</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
-</code></pre></div></div>
-<p><strong>Show all data in a table</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
-# or
-SELECT * FROM dtname
-</code></pre></div></div>
-<p><strong>Set primary key</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
-CREATE TABLE dtname (
-	id serial primary key,
-	name text,
-	birthday date
-);
+<p><strong>Bagging 是什麼？</strong></p>
 
-# multiple columns primary key
-CREATE TABLE postal_places (
-	postal_code text,
-	country text,
-	name text,
-	primary key (postal_code, country)
-);
-</code></pre></div></div>
-<p><strong>Declaring relationships</strong>
-<img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
-	sku text references products (sku),
-	sale_date date,
-	count integer
-);
-</code></pre></div></div>
+<p>Bootstrap aggregating (bagging) is a machine learning ensemble meta-algorithm to improve classification and regression models in terms of stability and classification accuracy. It also reduces variance and helps to avoid ‘overfitting’. Although it is usually applied to decision tree models, it can be used with any type of model. (<a href="https://docs.rapidminer.com/latest/studio/operators/modeling/predictive/trees/parallel_decision_tree.html">Decision Tree - Bagging</a>)</p>
+
+<p>簡單來說，Bagging是一種 Ensemble learning方法，它集結一些 model 來做最後的決策。通常會是集結表現沒那麼好的 model，讓這些 model 一起做決定，一種三個臭皮匠勝過一個諸葛亮的感覺。</p>
+
+<p>Decision tree 是一個常見的 weak classifier，所以如果在 decision tree 上使用 bagging，可以讓最後表現結果比較好，也避免 overfitting 的情況。</p>
+
+<hr />
+
+<p><strong>Boostrap</strong></p>
+
+<p>在開始說明 bagging 步驟前先介紹 bootstrap。</p>
+
+<p>bootstrap 是一種抽樣方法。假設今天有一組資料，裡頭共有 N 個樣本，我們想要有 m 個大小為 N 的樣本作為訓練資料。方法是，每次從這 N 個樣本隨機抽取，且每次都是取後放回(也就是有些樣本可能被抽到一次以上，有些樣本可能沒被抽到)，同樣的方法重複 m 次，這樣我們就會有 m 組樣本數為 N 的 y 資料集。</p>
+
+<p>這樣的方法在樣本數量少時很有用。如果樣本小，但我們用 train-validation-test 這樣的方式訓練資料，訓練的樣本資料非常小，會造成 bias 較大的問題。而使用 bootstrap 不會減少樣本的數量，也能保留 test data。</p>
+
+<hr />
+
+<p><strong>如何操作？</strong></p>
+
+<ol>
+  <li>使用 boostrap 方法從 training data 中採集 B 組樣本數與 training data 相同的資料集。</li>
+  <li>這 B 組資料集都建立一個 model， \(f_b(x)\)，共產生 B 個 model。</li>
+  <li>最後預測的結果就是將這 B 個 model 做統合。在分類問題上，可以平均各個 model 的 posterior class probabilities，或是使用 majority voting。（選機率比較大的結果或是多數決）；在回歸上，則取平均值。</li>
+</ol>
+
+<p>從最上圖可以看到，不論是使用機率或是投票決定，bagging 選出的結果的 test error 都要比個別的 model 表現較好。</p>
+
+<hr />
+
+<p>除了 Bagging 外，Ensemble learning 還有另一種常見的方法 Boosting，這篇先到這裡之後繼續介紹。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
+<br />
+<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
+<br />
+The Elements of Statistical Learning
+<br />
+Pattern Recognition and Machine Learning</p>
 
  -->
-    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本指令，<br />
-內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+    <div class="post-excerpt"><h2 id="bagging">Bagging</h2>
 
 </div>
     <div class="bookmark">
@@ -806,8 +1322,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread';
-        this.page.identifier = '/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/';
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Bagging/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -820,7 +1336,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">0 Comments</a>
+        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Bagging/">0 Comments</a>
       </span>
 
     </div>

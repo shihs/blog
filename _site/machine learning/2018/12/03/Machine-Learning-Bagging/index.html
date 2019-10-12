@@ -140,6 +140,14 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -147,12 +155,13 @@
         <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
         <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
         <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.instagram.com/itakephotos_tw/" class="instagram" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-instagram-8-240.png"></a></li>
         <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
       </ul>
     </div>
     
 
-    <p class = "rights">&copy; 2018. All rights reserved.</p>
+    <p class = "rights">&copy; 2019. All rights reserved.</p>
   </div>
 </div>
 
@@ -181,11 +190,45 @@
   <div>
     <h2 id="bagging">Bagging</h2>
 
+<p><img src="http://localhost:4000/blog/img/posts/bagging.png" alt="bagging.png" height="450px" width="500px" /></p>
+
+<p>From: Hastie, T., Tibshirani, R. and Friedman, J. The Elements of Statistical Learning. Springer, 2009. p.285</p>
+
+<hr />
+
 <p><strong>Bagging 是什麼？</strong></p>
 
 <p>Bootstrap aggregating (bagging) is a machine learning ensemble meta-algorithm to improve classification and regression models in terms of stability and classification accuracy. It also reduces variance and helps to avoid ‘overfitting’. Although it is usually applied to decision tree models, it can be used with any type of model. (<a href="https://docs.rapidminer.com/latest/studio/operators/modeling/predictive/trees/parallel_decision_tree.html">Decision Tree - Bagging</a>)</p>
 
-<p>簡單來說，Bagging 就是集結</p>
+<p>簡單來說，Bagging是一種 Ensemble learning方法，它集結一些 model 來做最後的決策。通常會是集結表現沒那麼好的 model，讓這些 model 一起做決定，一種三個臭皮匠勝過一個諸葛亮的感覺。</p>
+
+<p>Decision tree 是一個常見的 weak classifier，所以如果在 decision tree 上使用 bagging，可以讓最後表現結果比較好，也避免 overfitting 的情況。</p>
+
+<hr />
+
+<p><strong>Boostrap</strong></p>
+
+<p>在開始說明 bagging 步驟前先介紹 bootstrap。</p>
+
+<p>bootstrap 是一種抽樣方法。假設今天有一組資料，裡頭共有 N 個樣本，我們想要有 m 個大小為 N 的樣本作為訓練資料。方法是，每次從這 N 個樣本隨機抽取，且每次都是取後放回(也就是有些樣本可能被抽到一次以上，有些樣本可能沒被抽到)，同樣的方法重複 m 次，這樣我們就會有 m 組樣本數為 N 的 y 資料集。</p>
+
+<p>這樣的方法在樣本數量少時很有用。如果樣本小，但我們用 train-validation-test 這樣的方式訓練資料，訓練的樣本資料非常小，會造成 bias 較大的問題。而使用 bootstrap 不會減少樣本的數量，也能保留 test data。</p>
+
+<hr />
+
+<p><strong>如何操作？</strong></p>
+
+<ol>
+  <li>使用 boostrap 方法從 training data 中採集 B 組樣本數與 training data 相同的資料集。</li>
+  <li>這 B 組資料集都建立一個 model， \(f_b(x)\)，共產生 B 個 model。</li>
+  <li>最後預測的結果就是將這 B 個 model 做統合。在分類問題上，可以平均各個 model 的 posterior class probabilities，或是使用 majority voting。（選機率比較大的結果或是多數決）；在回歸上，則取平均值。</li>
+</ol>
+
+<p>從最上圖可以看到，不論是使用機率或是投票決定，bagging 選出的結果的 test error 都要比個別的 model 表現較好。</p>
+
+<hr />
+
+<p>除了 Bagging 外，Ensemble learning 還有另一種常見的方法 Boosting，這篇先到這裡之後繼續介紹。</p>
 
 <hr />
 
@@ -239,28 +282,28 @@ s.setAttribute('data-timestamp', +new Date());
     
       <li>
         <h3>
-          <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">
-            [Machine Learning]Decision Tree        
+          <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
+            [Machine Learning]Markov Chain Monte Carlo (MCMC)        
           </a>
-            <small>Dec 3, 2018</small>
+            <small>Mar 12, 2019</small>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/blog/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/">
-            [R]如何在 ggplot2 圖形上希臘字母？        
+          <a href="/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">
+            [Machine Learning]Covolutional Neural Networks(CNN)(2)        
           </a>
-            <small>Nov 10, 2018</small>
+            <small>Mar 2, 2019</small>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/blog/r/2018/10/20/R-Environment/">
-            [R]Environments (1)        
+          <a href="/blog/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">
+            [Algorithm]基因演算法Genetic Algorithm        
           </a>
-            <small>Oct 20, 2018</small>
+            <small>Mar 2, 2019</small>
         </h3>
       </li>
     

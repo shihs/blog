@@ -4,13 +4,2532 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2018-09-03T09:27:02+02:00</updated>
+ <updated>2019-03-13T21:40:15+01:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[Machine Learning]Markov Chain Monte Carlo (MCMC)</title>
+   <link href="http://localhost:4000blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/"/>
+   <updated>2019-03-12T14:58:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2019/03/12/[Machine Learning]Markov chain Monte Carlo (MCMC)</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;MCMC 是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Markov Chain Monte Carlo （MCMC）是一種抽樣方法，用來解決無法直接抽樣的分佈的隨機抽樣問題。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The Goal of MCMC&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We want to sample from some distribution p, or approximate an &lt;script type=&quot;math/tex&quot;&gt;E[f(x)] ~ where ~ (X \sim p)&lt;/script&gt;
+&lt;br /&gt;
+通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;為什麼要使用 MCMC？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在 Baysian Inference 中常使用到這個公式&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}&lt;/script&gt;
+
+&lt;p&gt;或是，它的參數 &lt;script type=&quot;math/tex&quot;&gt;\theta&lt;/script&gt; 的貝式估計&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}&lt;/script&gt;
+
+&lt;p&gt;其中的 &lt;script type=&quot;math/tex&quot;&gt;p(\theta)&lt;/script&gt; 為先驗機率 (prior probability)，基本上我們無法獲得 &lt;script type=&quot;math/tex&quot;&gt;p(\theta)&lt;/script&gt; 的值，這時候就需要 MCMC。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;MCMC 由兩部分的觀念 (步驟) 組成, 一個是 「Markov Chain」 ，另一個則是「Monte Carlo integration」，接下來將說明這兩個部分。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Monte Carlo Integration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)&lt;/script&gt;
+
+&lt;p&gt;也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。&lt;/p&gt;
+
+&lt;p&gt;這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 &lt;script type=&quot;math/tex&quot;&gt;p(\theta \mid y)&lt;/script&gt; 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。&lt;/p&gt;
+
+&lt;p&gt;所以說，哪有這麼好的事？&lt;/p&gt;
+
+&lt;p&gt;這時候可以採用其他的抽樣方法，譬如，&lt;em&gt;rejection sampling&lt;/em&gt;, &lt;em&gt;importance sampling&lt;/em&gt; 和本文的重點 &lt;em&gt;MCMC&lt;/em&gt;。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Markov Chain&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Markov Chain (馬可夫鍊)：A Markov chain is a sequence &lt;script type=&quot;math/tex&quot;&gt;X_0, X_1, ...&lt;/script&gt; of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 &lt;script type=&quot;math/tex&quot;&gt;X_0, X_1, ...&lt;/script&gt;，且每一個變數只和前一個變數有關，也就是 &lt;script type=&quot;math/tex&quot;&gt;X_{t+1}&lt;/script&gt; 來自 &lt;script type=&quot;math/tex&quot;&gt;p(X_{t+1} \mid X_t)&lt;/script&gt;，像這樣的數列我們就稱為馬可夫鍊。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;p(X_{t+1} \mid X_t)&lt;/script&gt; 被稱為這個馬可夫鍊的轉換核心 (transition kernel)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A Markov chain is stationary, with stationary distribution &lt;script type=&quot;math/tex&quot;&gt;Φ, if ~\forall k ~ X_k  \sim Φ&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;One shows (not trivial in general) that under &lt;em&gt;certain&lt;/em&gt; conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 &lt;script type=&quot;math/tex&quot;&gt;\pi(·)&lt;/script&gt; 並且與 &lt;script type=&quot;math/tex&quot;&gt;X_0&lt;/script&gt; 的選擇無關。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Monte Carlo Integration&lt;/em&gt;可以看&lt;a href=&quot;https://www.youtube.com/watch?v=MKnjsqYVG4Y&quot;&gt;這裡&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=3ZmW_7NXVvk&quot;&gt;(ML 18.1) Markov chain Monte Carlo (MCMC) introduction-12eZWG0Z5gY.mp4&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://web.ntpu.edu.tw/~ccw/statmath/M_mcmc.pdf&quot;&gt;The Markov Chain Monte Carlo Simulations&lt;/a&gt;
+&lt;br /&gt; 
+Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
+&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/25610149&quot;&gt;[数据分析] Markov Chain Monte Carlo&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=s8w8AsFK77c&amp;amp;list=PLyAft-JyjIYq2SLTHO2ptmx-cChbE5GBm&quot;&gt;徐亦达机器学习课程 Markov Chain Monte Carlo&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://www.cnblogs.com/pinard/p/6625739.html&quot;&gt;MCMC(一)蒙特卡罗方法&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Covolutional Neural Networks(CNN)(2)</title>
+   <link href="http://localhost:4000blog//machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/"/>
+   <updated>2019-03-02T17:40:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2019/03/02/[Machine Learning]Covolutional Neural Networks(CNN)(2)</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/&quot;&gt;前面&lt;/a&gt;介紹了 Convolution operation。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Padding&lt;/li&gt;
+  &lt;li&gt;Strided Convolution&lt;/li&gt;
+  &lt;li&gt;Convolutions Over Volume
+***&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;padding&quot;&gt;Padding&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;為什麼需要 Padding?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/padding.png&quot; alt=&quot;padding.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Convolution operation 的缺點：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;經過 convolution fitler 後原始圖將變小。如果有很多層 convolutional layer，資訊在每次運算後不斷損失。&lt;/li&gt;
+  &lt;li&gt;最邊緣的 pixel 只會被使用到一次，但中間的 pixel 會使用到較多次。也就是說，會有邊緣的很多資訊缺失。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所以為了解決以上的缺點，我們將 input 的圖的邊緣加上一個 pixel，這樣經過卷積運算後的圖像仍和原圖一樣大。邊緣也是可以加 2 pixel 的。&lt;/p&gt;
+
+&lt;p&gt;以上圖為例，原本為 6x6(nxn) 的圖，經過 3x3(fxf) 的 filter 做卷積運算後，變為 (n-f+1)x(n-f+1) 的圖。&lt;/p&gt;
+
+&lt;p&gt;但如果今天邊緣加上 p pixel，最後圖檔就會變為 (n+2p-f+1)x(n+2p-f+1) 的圖。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;The choice of padding - Vaild and Same convolutions&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Vaild - No padding&lt;/li&gt;
+  &lt;li&gt;Same - Pad so that output size is the same as the input size
+&lt;br /&gt;
+根據上面的公式，如果在 input 圖邊緣加上 pixel 後經過卷積運算要和原始圖檔大小ㄧ樣，那要符合 n+2p-f+1 = n，那就會得到 p = (f-1)/2&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For computer vision, usually f is odd. 3 by 3 filters are very common.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;strided-convolution&quot;&gt;Strided Convolution&lt;/h2&gt;
+
+&lt;p&gt;前面我們在做 convolution 時 filter 都是一次跳一格計算，strided 則是一次跳不只一格。&lt;/p&gt;
+
+&lt;p&gt;如下圖，這時候最後結果的 pixel 也會不同，計算公式就會是 ((n+2p-f)/2)+1 取 floor。
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/strided.png&quot; alt=&quot;strided.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;cross-correlation vs. convolution&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;cross-correlation：數學家喜歡將 convolutional operation 稱為 cross-correlation。在做運算時會將 filter 做水平與垂直翻轉，如下圖。&lt;/li&gt;
+  &lt;li&gt;convolution：在 deep learning 通常都稱為 convolution，且不會將 filter 做鏡射的動作。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/cross-correlation.png&quot; alt=&quot;cross-correlation.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;那這樣幹嘛要翻轉？因為在做訊號處理時，翻轉後會有一些好的特性可以拿來使用。但在做 deep learning 時基本上沒有影響，所以做 deep learning 時不會翻轉 filter。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;convolutions-over-volume&quot;&gt;Convolutions Over Volume&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Convolutions on RGB impages&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;前面舉的例子都是在 2D 上計算 convolution，現在要來看如何在 3D 上實現 convolution。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.coursera.org/learn/convolutional-neural-networks/home/welcome&quot;&gt;Coursera - Convolutional Neural Networks(deeplearning.ai)&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Algorithm]基因演算法Genetic Algorithm</title>
+   <link href="http://localhost:4000blog//algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/"/>
+   <updated>2019-03-02T15:58:00+01:00</updated>
+   <id>http://localhost:4000/algorithm/2019/03/02/Algorithm]基因演算法Genetic Algorithm</id>
+   <content type="html">&lt;p&gt;基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。&lt;/p&gt;
+
+&lt;p&gt;它的想法是來自於基因遺傳，透過細胞分裂將好的基因保留，不好的基因淘汰，一代傳一代，最後留下最適合生存的物種，所謂「適者生存」。
+實現的方式就像基因的機制那樣，透過&lt;em&gt;隨機&lt;/em&gt;選擇後，再進行 crossover 和 mutation，經過多次迭代後，最後結果將會收斂到一個最佳解。但這最佳解不ㄧ定是 global maximum（minimum），通常是 local maximum（minimum）。&lt;/p&gt;
+
+&lt;p&gt;（但其實這與基因的真實行為完全無關，就像是 Neural Network 和人類神經反應的真實行為無關一樣。）&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;演算法流程圖&quot;&gt;演算法流程圖&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/genetic%20algorithm.gif&quot; alt=&quot;genetic algorithm.gif&quot; height=&quot;380px&quot; width=&quot;600px&quot; /&gt;
+&lt;a href=&quot;https://dotblogs.com.tw/dragon229/2013/01/03/86692&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一開始隨機產生n個變數 (n由使用者決定)&lt;/li&gt;
+  &lt;li&gt;利用適應函數（fitness function）計算所有變數的適應值&lt;/li&gt;
+  &lt;li&gt;依每個的適應值進行「選擇、複製」&lt;/li&gt;
+  &lt;li&gt;對留下的變數進行交配（crossover）及突變（mutation）的動作&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;範例&quot;&gt;範例&lt;/h3&gt;
+
+&lt;p&gt;以下範例是來自&lt;a href=&quot;http://www.csie.ntnu.edu.tw/~u91029/Optimization.html&quot;&gt;演算法筆記的 Optimization&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;1.
+[初始化]
+一開始先隨便弄出幾個x。本例是四個。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1010101010
+1011001011
+1110101011
+0010101000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;2.
+[fitness function]
+根據問題特性，定義好壞程度。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;f(1010101010) = 678
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;3.
+[selection]
+隨便找個位置切一刀，每個x都被分成兩段。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1010101  010
+1011001  011
+1110101  011
+0010101  000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;4.
+[crossover]
+隨便找兩組你覺得夠優良的x，交叉相接變成新答案。
+重複一直做，直到x數目跟原先一樣多。本例是四個。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1010101 \/ 010  -&amp;gt;  1010101 -- 011
+1011001 /\ 011      1011001 -- 010 
+
+
+1010101011
+1011001010
+1110101010
+1010101000
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;5.
+[mutation]
+每個x都隨便找一個地方把數字改掉，也可以不改。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1010111011
+1011001000
+1110101010
+1010101001
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;6.
+重複3. 4. 5.，直到裡面有一個x是你滿意的，令f(x)最大的那個x。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;隨機產生N個x。&lt;/li&gt;
+  &lt;li&gt;計算fitness function。&lt;/li&gt;
+  &lt;li&gt;重複以下步驟，直到有一個x讓人滿意。
+&lt;br /&gt;
+　甲、selection。
+&lt;br /&gt;
+　乙、crossover。
+&lt;br /&gt;
+　丙、mutation。
+&lt;br /&gt;
+　丁、計算fitness function。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;一開始的 x 的足夠豐富，多演化幾次就可以得到不錯的結果。一開始的 x 足夠豐富，可以避免進入區域極值。 mutation 用於增加 x 的豐富性，以跳脫區域極值。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.csie.ntnu.edu.tw/~u91029/Optimization.html&quot;&gt;演算法筆記 - Optimization&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://littledoa.wixsite.com/pcclab/single-post/2016/02/03/Genetic-Algorithm-基因演算法&quot;&gt;Genetic Algorithm 基因演算法&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=UE6YkRWBtZk&quot;&gt;人工智慧系列之基因演算法&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python]filter、map、reduce、lambda</title>
+   <link href="http://localhost:4000blog//python/2019/02/27/Python-filter-map-reduce-lambd/"/>
+   <updated>2019-02-27T12:02:00+01:00</updated>
+   <id>http://localhost:4000/python/2019/02/27/[Python]filter、map、reduce、lambd</id>
+   <content type="html">&lt;ul&gt;
+  &lt;li&gt;lambda 可以直接定義一些簡單的 funciton。&lt;/li&gt;
+  &lt;li&gt;filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;lambda&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我其實覺得就是定義 funciton，只是是定義一些簡單，可以一行完成的 funciton。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 回傳輸入的變數 + 1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 上面的 func 其實就等於&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# 輸入兩個變數&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# 含 if&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;filter(function, sequence)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;對 sequence 中的 item 依序執行 function(item)，然後將執行結果為 True 的 item 組成一個 list/string/tuple（與 sequence 類型相同）回傳。
+這時候 function 可以使用 lambda 定義或是平常的 def 定義。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 回傳是數字，除 0 外都是 True&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# function 為 def&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# function 為 lambda&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;map(function, sequence)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;對 sequence 中的 item 依序執行 function(item)，執行結果以 list 回傳。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# funciton 只有一個參數&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 每次都回傳 1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+&lt;span class=&quot;c&quot;&gt;# function 有兩個參數&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;reduce(function, sequence, starting_value)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;對 sequence 中的 item 順序迭代調用 function，最後回傳一個值。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;functools&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reduce&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# 在 python3 是必須的&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 求 list 的和&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.cnblogs.com/longdouhzt/archive/2012/05/19/2508844.html&quot;&gt;Python特殊语法：filter、map、reduce、lambda [转]&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Reinforcement Learning</title>
+   <link href="http://localhost:4000blog//machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/"/>
+   <updated>2019-02-25T21:31:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2019/02/25/[Machine Learning]Reinforcement Learning</id>
+   <content type="html">&lt;h3 id=&quot;複習&quot;&gt;複習&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;機器學習可以被分為三大類：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Supervised Learning:
+&lt;br /&gt;
+Learn to generalize and classify new data based on &lt;em&gt;labelled&lt;/em&gt; training data. 像是 regression 和 classification 就屬於 Supervised Learning。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unsupervised Learning:
+&lt;br /&gt;
+Discover structure and relationships in complex high-dimensional data. 像是 cluster。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Reinforcement Learning:
+&lt;br /&gt;
+Generate policies/strategies that lead to a (possibly delayed) reward. Learn by interacting with the environment! 和人類學習的過程很像，會根據環境而行動，並做調整（像是學騎腳踏車）。這篇主要就是要介紹 Reinforcement Learning。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Reinforcement Learning 可以做什麼？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;2016 年 &lt;a href=&quot;https://zh.wikipedia.org/wiki/AlphaGo&quot;&gt;AlphaGo&lt;/a&gt; 擊敗世界棋王使用的就是 Reinforcement Learning&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=W_gxLKSsSIE&quot;&gt;Robot Learns to Flip Pancakes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;pole balancing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Differences to other methods&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Difference to supervised learning
+    &lt;ol&gt;
+      &lt;li&gt;Time! Reinforcement Learning 的學習時間會比 Supervised Learning 費時（當然要有缺點，不然大家幹嘛還要用 Supervised Learning），所以如果有 labels 通常還是會選用 Supervised Learning，但當事前沒有 labels，不知道結果的時候就可以使用 Reinforcement Learning。&lt;/li&gt;
+      &lt;li&gt;Can become better than the system designer, unlike a supervised system that can never become better than the teacher. 因為 Supervised Learning 是根據 system designer 給的 labels 下去計算，但 Reinforcement Learning 是機器自己學習所獲得的結果，就像是，雖然教練教學生打球，但學生的學習成果可能比教練還好。&lt;/li&gt;
+      &lt;li&gt;Feedback is usually not immediate but is given after many actions - delayed feedback! 像是下棋，要等到結果贏或輸才會知道是得到 positive reward 還是 negative reward。&lt;/li&gt;
+      &lt;li&gt;Feedback is given as a scalar reward, not as the correct action to make. Supervised Learning 的 feedback 是結果是否正確，但 Reinforcement Learning 得到的 feedback 是 reward（can be positive or negative）。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Difference to control theory
+    &lt;ol&gt;
+      &lt;li&gt;No physical model of the world, e.g., in pole balancing&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;機器怎麼學？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;不像 Supervised Learning 有 lable 可以知道結果是正確還是錯誤， Reinforcement Learning 的學習方法是透過 reward 來知道學習結果正確或不正確（就像是狗狗學習技能，如果做對了就給東西吃一樣）。所以透過打分數的結果來知道怎麼樣的行為是正確的而進行調整，往正確的學習道路邁進。（所以每次學習結果所獲得的 reward 就變得有點像是 Supervised Learning 的 labels 的感覺，只是這個 labels 是從學習的過程中獲得的）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;reinforcement-learning-如何進行&quot;&gt;Reinforcement Learning 如何進行？&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/reinforcement%20learning.png&quot; alt=&quot;reinforcement learning.png&quot; height=&quot;380px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Reinforcement Learning 問題的基本設定&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;A, S, R, P&amp;gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Action space : A&lt;/li&gt;
+  &lt;li&gt;State space : S&lt;/li&gt;
+  &lt;li&gt;Reward: R : S × A × S → R&lt;/li&gt;
+  &lt;li&gt;Transition : P :S × A → S&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A 代表的是 Agent 的所有動作（action）；S 是 state，是 Agent 所能感知的狀態； R 是 reward 代表獎勵或懲罰，是一個實數；P 是 Agent 所交互的世界，也被稱為 model。&lt;/p&gt;
+
+&lt;p&gt;根據上圖（&lt;a href=&quot;https://www.slideshare.net/yenlung/reinforcement-learning-90737484&quot;&gt;Source&lt;/a&gt;），電腦是 agent，地球代表 environment（環境），reward（獎勵）是環境所提供的反饋，reward 由模型設計者定義，可以是 positive 或是 negative，reward 的定義對強化學習來說是個很重要的一環。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Policy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 &lt;script type=&quot;math/tex&quot;&gt;\pi&lt;/script&gt;，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;stochastic policy: &lt;script type=&quot;math/tex&quot;&gt;\pi(a\mid s),~ and \sum\pi(a\mid s) = 1&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;deterministic policy: &lt;script type=&quot;math/tex&quot;&gt;\pi(s)&lt;/script&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Reward&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（&lt;a href=&quot;https://zhuanlan.zhihu.com/p/25239682&quot;&gt;Source&lt;/a&gt;）為例，最一開始的 state 是 &lt;script type=&quot;math/tex&quot;&gt;s_0&lt;/script&gt;，agent 做了 &lt;script type=&quot;math/tex&quot;&gt;a_0&lt;/script&gt; 的 action，這時候產生了一個 reward &lt;script type=&quot;math/tex&quot;&gt;r_1&lt;/script&gt;，然後因為剛剛的 &lt;script type=&quot;math/tex&quot;&gt;a_0&lt;/script&gt; 這時候 state 來到 &lt;script type=&quot;math/tex&quot;&gt;s_1&lt;/script&gt;，而 agent 要採取下一步 &lt;script type=&quot;math/tex&quot;&gt;a_1&lt;/script&gt; 的時候就會根據剛剛的 &lt;script type=&quot;math/tex&quot;&gt;r_1&lt;/script&gt; 來反應。agent 就這樣一步一步根據 reward 的結果來學習。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/reward.jpg&quot; alt=&quot;reward.jpg&quot; height=&quot;120px&quot; width=&quot;800px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但其實並不是所有的學習都會像這個例子一樣立即獲得 reward，像下棋就會是整局結束後才得到 reward。&lt;/p&gt;
+
+&lt;p&gt;另外，需要注意的是，Reward &lt;script type=&quot;math/tex&quot;&gt;\ne&lt;/script&gt; Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;總結來說，&lt;em&gt;Reinforcement Learning 的目標就是找到一個最佳的 Policy（策略），讓最後平均的 reward 最大！&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;所以現在問題就來了，&lt;em&gt;要如何衡量這個 policy 好不好？哪些 policies 是我們想要 explore 的？&lt;/em&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;value-function&quot;&gt;Value function&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Value function - How good is a policy?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。&lt;/p&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;V_\pi(s)&lt;/script&gt; 表示的是策略 &lt;script type=&quot;math/tex&quot;&gt;\pi&lt;/script&gt;，狀態 s 的長期期望收益。&lt;script type=&quot;math/tex&quot;&gt;Q_\pi(s, a)&lt;/script&gt; 是策略 &lt;script type=&quot;math/tex&quot;&gt;\pi&lt;/script&gt; 在狀態 s 下，採取動作 a 的長期期望收益。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;長期回報期望：&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 &lt; \gamma &lt; 1 %]]&gt;&lt;/script&gt; （因為 &lt;script type=&quot;math/tex&quot;&gt;\gamma&lt;/script&gt; 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Value function：&lt;script type=&quot;math/tex&quot;&gt;V_\pi(s) = E_\pi[G_t\mid S_t = s]&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Q function：&lt;script type=&quot;math/tex&quot;&gt;Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]&lt;/script&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;How to learn V(s)?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Monte Carlo approach&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Temporal Difference approach&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Summary&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;For a given policy, the value (expected reward) V(s) of each state is unknown before we learn it by interacting with the environment.&lt;/li&gt;
+  &lt;li&gt;V(s) is found iteratively, starting for example with V(s)←0, using the Monte Carlo or Temporal Difference methods.&lt;/li&gt;
+  &lt;li&gt;The Temporal Difference method generally converges much faster.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;q-learning&quot;&gt;Q-Learning&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Which policies should we explore?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;上面介紹了 V(s) 是狀態 s 的長期期望收益，那 agent 要如何決定根據它來決定要做什麼 action 採取什麼 policies 呢？這時候我們就會加上 action 這個變數來看，也就是上面提到的 Q(s, a)。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;V^*(s) = \max_{a} Q(s_{k+1}, a)&lt;/script&gt; denote the value function for the optimal policy&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;Q(s, a)&lt;/script&gt; is expected future reward of doing action a in state s and then following the optimal policy &lt;script type=&quot;math/tex&quot;&gt;Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})&lt;/script&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;Q(s, a)&lt;/script&gt; 未知，必須透過學習得到。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))&lt;/script&gt;, &lt;script type=&quot;math/tex&quot;&gt;\eta&lt;/script&gt; is learning rate&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/itplus/article/details/9361915&quot;&gt;這篇文章&lt;/a&gt;翻譯了這個&lt;a href=&quot;http://mnemstudio.org/path-finding-q-learning-tutorial.htm&quot;&gt;原文&lt;/a&gt;，我覺得非常好理解。但要整篇整理在這裡太麻煩了，所以自己看吧。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+Linköping University Neural Networks and Learning Systems TBMI26 / 732A55 2019 Lectures.
+&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/25239682&quot;&gt;深度强化学习（Deep Reinforcement Learning）入门：RL base &amp;amp; DQN-DDPG-A3C introduction&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/强化学习&quot;&gt;wikipedia - 強化學習&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.slideshare.net/yenlung/reinforcement-learning-90737484&quot;&gt;強化學習 Reinforcement Learning&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/&quot;&gt;莫凡python&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-reinforcement-learning-強化學習-dqn-實作atari-game-7f9185f833b0&quot;&gt;[機器學習 ML NOTE] Reinforcement Learning 強化學習(DQN原理)&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.zhihu.com/question/26408259&quot;&gt;如何用简单例子讲解 Q - learning 的具体过程？&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/itplus/article/details/9361915&quot;&gt;A Painless Q-learning Tutorial (一个 Q-learning 算法的简明教程)&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Covolutional Neural Networks(CNN)(1)</title>
+   <link href="http://localhost:4000blog//machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/"/>
+   <updated>2019-02-25T16:29:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2019/02/25/[Machine Learning]Covolutional Neural Networks(CNN)</id>
+   <content type="html">&lt;p&gt;這篇為 Coursera 上 &lt;a href=&quot;https://www.coursera.org/learn/convolutional-neural-networks/home/welcome&quot;&gt;Convolutional Neural Networks&lt;/a&gt; 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;前言&quot;&gt;前言：&lt;/h2&gt;
+
+&lt;p&gt;因為 Deep Learning 的快速發展，所以電腦視覺（computer vision）這幾年也迅速的超展開。像是自動駕駛就受惠於 computer vision 的進步，讓自駕車能更準確的偵測路人和其他車輛，提升安全性；或是人臉辨識系統也變得更厲害，像是手機的人臉辨識解鎖；或是使用 Deep Learning 辨別照片是屬於風景照、人、動物還是車輛等等（像是 iphone 的相簿現在就很變態的會自動歸類照片是什麼）；甚至在藝術作品上都有 Deep Learning 的蹤影。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;為什麼要使用-covolutional-neural-networkscnn&quot;&gt;為什麼要使用 Covolutional Neural Networks(CNN)？&lt;/h2&gt;
+
+&lt;h3 id=&quot;computer-vision-problem&quot;&gt;Computer Vision Problem&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Computer%20Vision%20Problem.png&quot; alt=&quot;Computer Vision Problem.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上圖的例子來看，第一張是 64x64 的照片，第二張畫素則是 1000x1000，這時候如果再加上 RGB 三原色的維度，兩張照片的維度分別會是 64x64x3 和 1000x1000x3。以 Neural Network 來實作的話（右下角），input layer 的 Xn 的 n = 1000x1000x3，如果第一層的 hidden 是 1000 個 nodes，這時候轉換的 W 的維度就會是 1000x3000000，這是不是很 CRAZY？&lt;/p&gt;
+
+&lt;p&gt;所以這時候就會碰到以下的問題。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;缺點&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;很難避免 overfitting&lt;/li&gt;
+  &lt;li&gt;計算上需要大量的電腦效能和 CPU，實在太不切實際了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;因此，為了解決的這個問題，我們就需要用到 CNN。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;cnn-的流程圖&quot;&gt;CNN 的流程圖&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://res.mdpi.com/entropy/entropy-19-00242/article_deploy/html/images/entropy-19-00242-g001.png&quot;&gt;Sourse&lt;/a&gt;
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/CNN.png&quot; alt=&quot;CNN.png&quot; height=&quot;300px&quot; width=&quot;630px&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;how-the-convolution-operation-works&quot;&gt;How the convolution operation works?&lt;/h2&gt;
+
+&lt;p&gt;現在先來看 convolutional layer 的部分，也是 CNN 非常重要的一個環節。這邊使用 Edge detection 作為範例操作 convolution operation 是如何運作的。&lt;/p&gt;
+
+&lt;h3 id=&quot;edge-detection-example&quot;&gt;Edge detection example&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/edge%20detect.png&quot; alt=&quot;edge detect.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在辨識下圖時我們可能會想要做垂直的邊緣辨識和水平的邊緣辨識。那要如何操作呢？&lt;/p&gt;
+
+&lt;h3 id=&quot;vertical-edge-detection&quot;&gt;Vertical edge detection&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/convolutional%20operation.png&quot; alt=&quot;convolutional operation.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;最左邊的圖是一張 6x6 pixel 的黑白圖，每個 pixel 的數字表示灰階的深度，數字越小代表顏色越深。中間是一個 3x3 的 filter，在有些地方會被稱為 kernel，但這門課都會稱作 filter。這樣的兩個 matrix 做 convolution 運算後（用 * 表示），會產生一個 4x4 的 matrix。&lt;/p&gt;
+
+&lt;p&gt;運算方法則是，將 3x3 的 filter 與圖片的左上方 match（如圖片淺藍底），對應到的格子相乘，最後再將九個數字相加。依序移動 3x3 的 filter，如此最後就會產生一個 4x4 的 matrix。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/convolution%20operation%20result.png&quot; alt=&quot;convolution operation result.png&quot; height=&quot;150px&quot; width=&quot;210px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;而中間的 filter 可以看到是一個由左至右從淺到深的圖。因為現在做的是 Vertical edge detection，所以才會選擇這樣的 filter。&lt;/p&gt;
+
+&lt;p&gt;再看一個例子，
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/vertical%20edge%20detection.png&quot; alt=&quot;vertical edge detection.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我們可以看到，最右邊最後產生的是一個中間一條白色的圖，這就偵測到了我們的想找垂直邊緣的圖（最左邊）的正中間有個邊界。（這個例子看起來邊緣很寬，是因為我們這個圖只有 6x6，如果今天用大一點的圖 1000x1000 就會發現這樣的偵測效果是很好的）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;different-transitions&quot;&gt;Different transitions&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/vertical%20detection%20different%20transitions.png&quot; alt=&quot;vertical detection different transitions.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;剛剛的例子是由亮到暗（上），現在的例子是由暗到亮（下），會發現時候最後運算出來的 matrix 也會不同，根據中間的數字我們可以知道，這張圖是由亮到暗還是由暗到亮。下圖的中間偵測得到邊緣數字是 -30，如果今天需要偵測的結果需要知道深淺的變化，那數字就是重要的，但如果今天只是要抓邊緣，也可以將 -30 取絕對值，一樣能抓到轉換的邊界。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;vertical-and-horizontal-edge-detection&quot;&gt;Vertical and horizontal edge detection&lt;/h3&gt;
+
+&lt;p&gt;看完了垂直的範例，我們再看一下偵測水平邊緣的 filter。
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/vertical%20and%20horizontal%20detection.png&quot; alt=&quot;vertical and horizontal detection.png&quot; height=&quot;400px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;different-filters&quot;&gt;Different filters&lt;/h2&gt;
+
+&lt;p&gt;從上面的結果可以發現，不同的 filter 可以讓我們偵測出不同的狀況。這邊提了一下兩個 filter，&lt;em&gt;Sobel filter&lt;/em&gt; 和 &lt;em&gt;Scharr filter&lt;/em&gt;。其實我們可以不需要直接使用現成的 filter，而是可以訓練出一個 filter 針對我們的需求，這之後會再提。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.coursera.org/learn/convolutional-neural-networks/home/welcome&quot;&gt;Coursera - Convolutional Neural Networks(deeplearning.ai)&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>字元編碼，ASCII、Unicode、UTF-8</title>
+   <link href="http://localhost:4000blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/"/>
+   <updated>2019-01-22T16:38:00+01:00</updated>
+   <id>http://localhost:4000/others/2019/01/22/ASCII，Unicode 和 UTF-8</id>
+   <content type="html">&lt;p&gt;關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;字元編碼&quot;&gt;字元編碼&lt;/h2&gt;
+&lt;p&gt;電腦採用二進位的方式理解符號與文字，而將字元與二進位的 0 和 1 組合作轉換就是編碼的基礎。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;ascii&quot;&gt;ASCII&lt;/h2&gt;
+&lt;p&gt;ASCII 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。&lt;/p&gt;
+
+&lt;p&gt;ASCII 使用了 7 個 bits，包含字母大小寫、數字及一些符號共有 128 個字元被編入 ASCII 中。空白是 32(00100000)，字母 A 是 65(01000001)，以此類推。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Extended ASCII&lt;/strong&gt;
+&lt;br /&gt;
+但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;unicode&quot;&gt;Unicode&lt;/h2&gt;
+&lt;p&gt;隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。&lt;/p&gt;
+
+&lt;p&gt;Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為，Code point。U+ 的意思是 Unicode，
+數字則是用十六進位表示。&lt;/p&gt;
+
+&lt;p&gt;但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;utf-8&quot;&gt;UTF-8&lt;/h2&gt;
+&lt;p&gt;有人發明了 UTF-8 這種儲存方式。&lt;/p&gt;
+
+&lt;p&gt;UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用用 UTF-8 編碼就能省下空間。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;比較&lt;/strong&gt;
+&lt;br /&gt;
+Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html&quot;&gt;字符编码笔记：ASCII，Unicode 和 UTF-8&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://blog.chunnorris.cc/2015/04/unicode.html&quot;&gt;淺談電腦編碼與 Unicode (一) 基礎概念篇&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118&quot;&gt;常見三種字符編碼的區別：ASCII、Unicode、UTF-8&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F&quot;&gt;[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_</title>
+   <link href="http://localhost:4000blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/"/>
+   <updated>2019-01-02T12:47:00+01:00</updated>
+   <id>http://localhost:4000/python/2019/01/02/Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_</id>
+   <content type="html">&lt;p&gt;在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png&quot; alt=&quot;pyinstaller pandas.png&quot; height=&quot;400px&quot; width=&quot;580px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;根據&lt;a href=&quot;https://github.com/pyinstaller/pyinstaller/pull/2998&quot;&gt;Hooks: Add hook-pandas.py to fix issue #2978. #2998&lt;/a&gt;的討論串，有人回答&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。&lt;/p&gt;
+
+&lt;p&gt;先檢查一下 pandas 版本&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip show pandas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;將版本降至 0.20.3&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install pandas==0.20.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這時候打包完後執行應該就不會有問題了！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://github.com/pyinstaller/pyinstaller/pull/2998&quot;&gt;Hooks: Add hook-pandas.py to fix issue #2978. #2998&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/qq_41185868/article/details/80601983&quot;&gt;成功解决pyinstaller打包AttributeError:type object pandas.&lt;em&gt;TSObject has no attribute _reduce_cython&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python]讀取與寫入xlsx檔案</title>
+   <link href="http://localhost:4000blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/"/>
+   <updated>2019-01-02T11:49:00+01:00</updated>
+   <id>http://localhost:4000/python/2019/01/02/[Python]讀取與寫入xlsx檔案</id>
+   <content type="html">&lt;p&gt;這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。&lt;/p&gt;
+
+&lt;p&gt;在開始前請先安裝 pandas 套件，&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install pandas
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;讀取檔案&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_excel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;filename.xlsx&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 獲取列數&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 獲取儲存格內容&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 修改儲存格內容&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;test&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 但修改後必須要儲存才會修正檔案內容&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# df.to_excel('test_result.xlsx', sheet_name = 'sheet1')&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;若在執行以上程式碼時產生錯誤訊息：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Pandas pd.read_excel giving ImportError: Install xlrd &amp;gt;= 0.9.0 for Excel support
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這時候只要安裝 xlrd 套件就能解決問題。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install xlrd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;寫入檔案&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Create a Pandas dataframe from some data.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Data'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]})&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Create a Pandas Excel writer using XlsxWriter as the engine.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ExcelWriter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'pandas_simple.xlsx'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'xlsxwriter'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Convert the dataframe to an XlsxWriter Excel object.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_excel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sheet_name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Sheet1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Close the Pandas Excel writer and output the Excel file.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;writer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;以上的程式碼是參考&lt;a href=&quot;https://xlsxwriter.readthedocs.io/example_pandas_simple.html#&quot;&gt;這裡&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;只要將 &lt;code class=&quot;highlighter-rouge&quot;&gt;pd.ExcelWriter&lt;/code&gt; 裡的參數 &lt;code class=&quot;highlighter-rouge&quot;&gt;engine='xlsxwriter'&lt;/code&gt; 改成 &lt;code class=&quot;highlighter-rouge&quot;&gt;engine='openpyxl'&lt;/code&gt; 就可以了。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://xlsxwriter.readthedocs.io/example_pandas_simple.html&quot;&gt;Example: Pandas Excel example&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel&quot;&gt;Python: Pandas pd.read_excel giving ImportError: Install xlrd &amp;gt;= 0.9.0 for Excel support&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2&quot;&gt;Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://ithelp.ithome.com.tw/articles/10197119&quot;&gt;PYTHON pandas 操作Excel 基本介紹&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Python]全形與半形轉換</title>
+   <link href="http://localhost:4000blog//python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/"/>
+   <updated>2019-01-02T11:32:00+01:00</updated>
+   <id>http://localhost:4000/python/2019/01/02/Python]全形與半形轉換</id>
+   <content type="html">&lt;p&gt;因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。&lt;/p&gt;
+
+&lt;p&gt;例如，半形的驚嘆號（!）是 unicode 編碼是 33，則全形的驚嘆號（！）unicode 就會編碼是 33 + 65248 = 65281&lt;/p&gt;
+
+&lt;p&gt;但要將數字解析成半形時是使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;chr()&lt;/code&gt; function，而全形則是使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;unichr()&lt;/code&gt; function。&lt;/p&gt;
+
+&lt;p&gt;以下將 33~126 全部列出來，並轉換成全形。&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;xrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;33&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;127&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;chr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;65248&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;unichr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;65248&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;結果，&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;33 ! 65281 ！
+34 &quot; 65282 ＂
+35 # 65283 ＃
+36 $ 65284 ＄
+37 % 65285 ％
+38 &amp;amp; 65286 ＆
+39 ' 65287 ＇
+40 ( 65288 （
+41 ) 65289 ）
+42 * 65290 ＊
+43 + 65291 ＋
+44 , 65292 ，
+45 - 65293 －
+46 . 65294 ．
+47 / 65295 ／
+48 0 65296 ０
+49 1 65297 １
+50 2 65298 ２
+51 3 65299 ３
+52 4 65300 ４
+53 5 65301 ５
+54 6 65302 ６
+55 7 65303 ７
+56 8 65304 ８
+57 9 65305 ９
+58 : 65306 ：
+59 ; 65307 ；
+60 &amp;lt; 65308 ＜
+61 = 65309 ＝
+62 &amp;gt; 65310 ＞
+63 ? 65311 ？
+64 @ 65312 ＠
+65 A 65313 Ａ
+66 B 65314 Ｂ
+67 C 65315 Ｃ
+68 D 65316 Ｄ
+69 E 65317 Ｅ
+70 F 65318 Ｆ
+71 G 65319 Ｇ
+72 H 65320 Ｈ
+73 I 65321 Ｉ
+74 J 65322 Ｊ
+75 K 65323 Ｋ
+76 L 65324 Ｌ
+77 M 65325 Ｍ
+78 N 65326 Ｎ
+79 O 65327 Ｏ
+80 P 65328 Ｐ
+81 Q 65329 Ｑ
+82 R 65330 Ｒ
+83 S 65331 Ｓ
+84 T 65332 Ｔ
+85 U 65333 Ｕ
+86 V 65334 Ｖ
+87 W 65335 Ｗ
+88 X 65336 Ｘ
+89 Y 65337 Ｙ
+90 Z 65338 Ｚ
+91 [ 65339 ［
+92 \ 65340 ＼
+93 ] 65341 ］
+94 ^ 65342 ＾
+95 _ 65343 ＿
+96 ` 65344 ｀
+97 a 65345 ａ
+98 b 65346 ｂ
+99 c 65347 ｃ
+100 d 65348 ｄ
+101 e 65349 ｅ
+102 f 65350 ｆ
+103 g 65351 ｇ
+104 h 65352 ｈ
+105 i 65353 ｉ
+106 j 65354 ｊ
+107 k 65355 ｋ
+108 l 65356 ｌ
+109 m 65357 ｍ
+110 n 65358 ｎ
+111 o 65359 ｏ
+112 p 65360 ｐ
+113 q 65361 ｑ
+114 r 65362 ｒ
+115 s 65363 ｓ
+116 t 65364 ｔ
+117 u 65365 ｕ
+118 v 65366 ｖ
+119 w 65367 ｗ
+120 x 65368 ｘ
+121 y 65369 ｙ
+122 z 65370 ｚ
+123 { 65371 ｛
+124 | 65372 ｜
+125 } 65373 ｝
+126 ~ 65374 ～
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://codertw.com/程式語言/367570/&quot;&gt;Python實現全形半形字元互轉的方法&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Linear Regression</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/"/>
+   <updated>2018-12-27T10:09:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/27/[Machine Learning]Linear Regression</id>
+   <content type="html">&lt;p&gt;Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;simple-linear-regression&quot;&gt;Simple Linear Regression&lt;/h2&gt;
+
+&lt;p&gt;Simple Linear Regression 假設 \(X, Y\) 存在線性關係，且可以使用以下的式子來表示 \(X, Y\)的關係。&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;Y \approx \beta_0 + \beta_1 X&lt;/script&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;而現實中我們無法知道參數 \(\beta_0, \beta_1\)，這時候我們會使用 train data 找出估計參數 \(\hat{\beta_0}, \hat{\beta_1}\)。簡單線性回歸的估計式可以寫成，&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;\hat{y} = \hat{\beta_0} + \hat{\beta_1} x&lt;/script&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其中，\(\hat{y}\) 是當 \(X = x\) 時 \(Y\)的預測值。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Estimating the Coefficients&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;現在有一堆 data， \((x_i, y_i), \thinspace i = 1, 2, 3, …, n\)，根據上面的迴歸式可以將這些 data 表示成，&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;y_i \approx \hat{\beta_0} + \hat{\beta_1} x_i, \thinspace for \thinspace i = 1, 2, 3, ..., n&lt;/script&gt;
+
+&lt;p&gt;已經知道迴歸模型可以用上面的式子表示，那現在的任務是要找到 \(\hat{\beta_0}\) 和 \(\hat{\beta_1}\)，只要找到這兩個參數就可以預測 \(y\) 了。&lt;/p&gt;
+
+&lt;p&gt;找 \(\hat{\beta_0}, \hat{\beta_1}\) 的方法叫 &lt;strong&gt;The Least Square Method&lt;/strong&gt;（最小平方法）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/linear%20regression.png&quot; alt=&quot;linear regression.png&quot; height=&quot;450px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上圖為例，紅色的點為 observations，深藍色的線是用最小平方法找到的迴歸線。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;The Least Square Method 是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;式子 \( \hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i \) 為 \(X = x_i\) 時 \(Y\) 的預測值。&lt;/p&gt;
+
+&lt;p&gt;我們使用 Residual(殘差) 來看這個預測的結果與實際數值的差距，定義為 \(e_i = y_i - \hat{y_i}\) (上圖中紅點到深藍色線的灰色線段們)。&lt;/p&gt;
+
+&lt;p&gt;將所有 Residual 相加便能&lt;/p&gt;
+
+&lt;p&gt;RSS =&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;http://www-bcf.usc.edu/~gareth/ISL/&quot;&gt;An Introduction to Statistical Learning with Applications in R&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Regression splines</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/"/>
+   <updated>2018-12-09T20:17:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/09/[Machine Learning]Regression splines</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png&quot; alt=&quot;splines scatter plot.png&quot; height=&quot;380px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上圖是一個 x, y 的分佈圖，紅線是這些點分部的方程式。但現實中，我們並無法真的知道紅線的方程式，我們可能使用一次方程式、二次方程式甚至更高次方的方程式去嘗試（如下圖
+）。
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/splines%20line.png&quot; alt=&quot;splines line.png&quot; height=&quot;380px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我們可以將擬合的多項式方程式（polynomial function）寫成，&lt;/p&gt;
+
+&lt;p&gt;\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + … + \beta_n x^n + \epsilon\)&lt;/p&gt;
+
+&lt;p&gt;但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。&lt;/p&gt;
+
+&lt;p&gt;這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Basis function&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + … + \beta_n b_n(x_i) + \epsilon_i\)&lt;/p&gt;
+
+&lt;p&gt;透過 \(b_1(X)\)、\(b_2(X)\)、……、\(b_n(X)\) 可以將非線性的自變量轉換成線性。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Piecewise Function&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。&lt;/p&gt;
+
+&lt;p&gt;如下圖每個區段都是用一次方程式去擬合。\(\xi\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/piecewise%20linear.png&quot; alt=&quot;piecewise linear.png&quot; height=&quot;600px&quot; width=&quot;500px&quot; /&gt;
+From: 《Elements of Statistical Learning》&lt;/p&gt;
+
+&lt;p&gt;但這些 piecewise function 是有條件的。
+&lt;br /&gt;
+雖然 piecewise function 是每個區段各自擬合出來的 function，但所有區段 function 必須整個為連續，也就是在 \(\xi\) 的交界處的值必須相同。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Cubic Spline&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;這裡則是使用三次方程式。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/piecewise%20cubic%20polynomials.png&quot; alt=&quot;piecewise cubic polynomials.png&quot; height=&quot;600px&quot; width=&quot;500px&quot; /&gt;
+From: 《Elements of Statistical Learning》&lt;/p&gt;
+
+&lt;p&gt;cubic spline 除了邊界的值相同外，還必須要一階和二階倒數相同。&lt;/p&gt;
+
+&lt;p&gt;看上圖左上的圖加上邊界連續後成為右上，雖然看起來是連續的函數，但並不是完美的曲線，如果再加上一階導數相同就變成左下，再加上二階導數就可以畫出右下的圖。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;這個 R code 是畫出最上面圖的程式碼，使用 &lt;a href=&quot;https://www.youtube.com/watch?v=bESJ81dyYro&quot;&gt;Introduction to Splines&lt;/a&gt; 裡頭的範例。&lt;/p&gt;
+
+&lt;div class=&quot;language-R highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;set.seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# function&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rnorm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sd&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# epsilon&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eps&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# plot&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_line&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f_x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colour&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme_bw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_point&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_smooth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;se&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stat_smooth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;formula&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;se&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;colour&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;green&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# stat_smooth(method = &quot;lm&quot;, formula = y ~ x + I(x^2) + I(x^3), se = FALSE, colour = &quot;gold1&quot;) +&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# stat_smooth(method = 'loess', se = FALSE, colour = &quot;red&quot;) +&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme_bw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/34825299&quot;&gt;一文读懂回归样条（regression splines），附Python代码&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=bESJ81dyYro&quot;&gt;Introduction to Splines&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=V1JRs6AP1AI&quot;&gt;Spline Regression | Non Linear Model | Polynomial Regression&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/样条函数&quot;&gt;wikipedia - 樣條函數&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://datascienceplus.com/cubic-and-smoothing-splines-in-r/&quot;&gt;Cubic and Smoothing Splines in R&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf&quot;&gt;《An Introduction to Statistical Learning with Applications in R》&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Principal Component Analysis(PCA)</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/"/>
+   <updated>2018-12-08T11:29:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/08/[Machine Learning]Principal Component Analysis(PCA)</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/PCA.png&quot; alt=&quot;PCA.png&quot; height=&quot;260px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From: «Pattern Recognition and Machine Learning» P.561&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;What is PCA?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Principal Component Analysis(PCA)，中文翻作「主成分分析」。&lt;/p&gt;
+
+&lt;p&gt;PCA 是一種將多維度降維的方法。
+&lt;br /&gt;
+一個變數其實可能是多個潛在變因（laten variables）組成，但我們無法實際測量出那些 laten variables，而 PCA 就是要拆解出影響較大的變因。使用較少的變數解釋多個 variables。&lt;/p&gt;
+
+&lt;p&gt;舉個例子，股市的點數上上下下，我們所能觀測到的是點數這個變數，但其實影響點數變動的潛在變因可能包含了很多市場因素，且每個因素可能又是互相影響。&lt;/p&gt;
+
+&lt;p&gt;如果用數學符號表示，\(x_i\) 是我們有的變數，\(z_i\) 是裡頭含有的潛在變因，\(x_i\) 是 \(z_i\) 的線性組合（linear combination）。
+&lt;br /&gt;
+\(x_1 = a_{11} z_1 + a_{12} z_2 + a_{13} z_3 + \epsilon_1\)
+&lt;br /&gt;
+\(x_2 = a_{21} z_1 + a_{22} z_2 + a_{23} z_3 + \epsilon_2\)
+&lt;br /&gt;
+\(x_3 = a_{31} z_1 + a_{32} z_2 + a_{33} z_3 + \epsilon_3\)
+&lt;br /&gt;
+……&lt;/p&gt;
+
+&lt;p&gt;可以將上式改寫成，
+&lt;br /&gt;
+\(z_1 = x_1 u_{i1} + x_2 u_{i2} + x_3 u_{i3}\)
+&lt;br /&gt;
+……&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;如何降維？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;根據 «Pattern Recognition and Machine Learning» 這本書第 561 頁給了 PCA 兩種定義&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;PCA can be defined as the orthogonal projection of the data onto a lower dimensional linear space, known as the principal subspace, such that the variance of the projected data is maximized (Hotelling, 1933).&lt;/li&gt;
+  &lt;li&gt;PCA can be defined as the linear projection that minimizes the average projection cost, defined as the mean squared distance tbtween the data points and their projections (Pearson, 1901).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;可以用上圖來理解，或是 &lt;a href=&quot;https://www.youtube.com/watch?v=FgakZw6K1QQ#t=4m35s&quot;&gt;StatQuest: Principal Component Analysis (PCA), Step-by-Step&lt;/a&gt; 這段。&lt;/p&gt;
+
+&lt;p&gt;根據上面的定義，可以看到，降維的方法是要做 &lt;a href=&quot;https://www.khanacademy.org/math/linear-algebra/alternate-bases/orthogonal-projections/v/linear-algebra-projections-onto-subspaces&quot;&gt;orthogonal projection&lt;/a&gt;，且找到投影向量讓投影後的資料變異量最大。&lt;/p&gt;
+
+&lt;p&gt;這邊我使用 &lt;a href=&quot;https://www.youtube.com/watch?v=FgakZw6K1QQ&quot;&gt;StatQuest: Principal Component Analysis (PCA), Step-by-Step&lt;/a&gt; 影片的內容來介紹。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;maximized 什麼？
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/PCA_maximizing.png&quot; alt=&quot;PCA_maximizing.png&quot; height=&quot;320px&quot; width=&quot;600px&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假如現在座標上有個綠色的點，以座標\((0, 0)\)原點，其長度為 a（影片沒有表示這是 a 向量，方便起見，後面以 a, b, c 向量表示），c 向量為 a 向量的投影方向與長度。根據畢氏定理，可以畫出一個正三角形，現在三角形的三邊長分別為 a, b, c（因為我懶得再圖上修正了，現在又變回長度）。而 PCA 要找的投影向量就是，最小化 \(b^2\) 的值，或是最大化 \(c^2\) 的值。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;投影&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/PCA_projection.png&quot; alt=&quot;PCA_projection.png&quot; height=&quot;320px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;根據上圖，這個二維座標上有好幾個點，我們現在就是要找到一條能讓投影後 variance 最大的投影向量（紅色虛線），如下圖。要找到 SS（eigenvalue） 最小的投影向量。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/SS.png&quot; alt=&quot;SS.png&quot; height=&quot;320px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在投影前，我們會先將資料平移 \(x_i - \mu_i\)，也就是不改變點之間的相對位置，這樣不但不會影響找投影向量的結果，在計算上也比較容易。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Variation 變異量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;變異量 = \(SS/(n-1), n \)是點的數量&lt;/p&gt;
+
+&lt;p&gt;有了變異量以後，我們通常會想要知道每個投影向量的變異量占比。&lt;/p&gt;
+
+&lt;p&gt;假如現在有 PC1 其變異量為 15，PC2 的變異量為 3，則 PC1 與 PC2 的變異量總和為 18。&lt;/p&gt;
+
+&lt;p&gt;所以 PC1 = 15*100%/18 = 83%，PC2 = 3*100%/18 = 17%。&lt;/p&gt;
+
+&lt;p&gt;在做 PCA 的時候，我們會根據轉換的 \(PC_i\) 的比重，來決定要考慮要使用幾個 \(PC_i\)。
+如果可以解釋百分之九十基本上就可以拿來使用。&lt;/p&gt;
+
+&lt;p&gt;假如今天有一筆多維度的資料，但轉換後 PC1 與 PC2 可以表示百分之九十的變異量，那麼這時候只要使用 PC1 與 PC2 就好，且還可以在平面座標上看點的分佈。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;基本上 PCA 就是在做座標變換，將原變數投影成新變數。接著以最少的新變數來代表原始資料最大的成分（variation 涵蓋量最大）。&lt;/p&gt;
+
+&lt;p&gt;其原則如下&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;新變數是原變數的線性組合&lt;/li&gt;
+  &lt;li&gt;保留原變數間的最大變異量（variance）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=FgakZw6K1QQ&quot;&gt;StatQuest: Principal Component Analysis (PCA), Step-by-Step&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@chih.sheng.huang821/機器-統計學習-主成分分析-principle-component-analysis-pca-58229cd26e71&quot;&gt;機器/統計學習:主成分分析(Principal Component Analysis, PCA)&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/主成分分析&quot;&gt;wikipedia - 主成分分析&lt;/a&gt;
+&lt;br /&gt;
+The Elements of Statistical Learning
+&lt;br /&gt;
+Pattern Recognition and Machine Learning&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Boosting and Adaboost</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/"/>
+   <updated>2018-12-03T17:12:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/03/Machine Learning]Boosting and Adaboost</id>
+   <content type="html">&lt;h2 id=&quot;boosting&quot;&gt;Boosting&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/boosting.png&quot; alt=&quot;boosting.png&quot; height=&quot;230px&quot; width=&quot;600px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From: &lt;a href=&quot;https://blog.bigml.com/2017/03/14/introduction-to-boosted-trees/&quot;&gt;Introduction to Boosted Trees&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Boosting 也是一種 Ensemble learning，它會結合多個弱分類器（weak classifiers）成為一個較準確的分類器，也可以應用在 regression 上。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;和 Bagging 有什麼不同？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bagging 各個 classifier 產生的過程是獨立的，但 Boosting 後產生的 classifier 與前面的 classifier 有關。也就是說，Bagging 的 classifier 可以並行產生，但 Boosting 必須要有順序的產生。所以時間上來說，Bagging 可以節省比較多的時間。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;與前面的分類器有關？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在 Boosting 中，每一次產生 classifier 後，後面的 classifier 會根據前面 classifier 的結果調整每個點的權重。&lt;/p&gt;
+
+&lt;p&gt;在前一個 classifier 分類錯誤後，在後一個 classifier 的權重會比較重，而表現較好的則會權重減少。這就是和 Bagging 最大的不同，Bagging 中所有的點都是隨機選取，且權重都是一樣的。&lt;/p&gt;
+
+&lt;p&gt;簡單來說，Boosting learns features from data.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;步驟&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;用最原始的 training data 跑一個 classifiers&lt;/li&gt;
+  &lt;li&gt;利用這個 classifiers 提高分類錯誤的點的權重，降低分類正確的點的權重。&lt;/li&gt;
+  &lt;li&gt;重複第二步驟 N 次，最後使用權重的平均值。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;adaboost&quot;&gt;AdaBoost&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/AdaBoost.png&quot; alt=&quot;AdaBoost.png&quot; height=&quot;350px&quot; width=&quot;700px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From: &lt;a href=&quot;https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3&quot;&gt;機器學習: Ensemble learning之Bagging、Boosting和AdaBoost&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;AdaBoost 應用了 boosting 的方法。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;概念&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;假設現在有 n 個樣本，要執行 boosting T 次。&lt;/p&gt;
+
+&lt;p&gt;第一次將所有樣本的權重都設為 \(\alpha_i\) = 1/n, i = 1, …, n&lt;/p&gt;
+
+&lt;p&gt;對所有 t = 1, …, T&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;根據樣本的權重 \(\alpha_i\) 建立出 classifier \(f_t(x)\)&lt;/li&gt;
+  &lt;li&gt;使用 \(f_t(x)\) 後計算 \(\epsilon_t\) 誤差&lt;/li&gt;
+  &lt;li&gt;利用 \(\epsilon_t\) 算出係數 \(w_t\)&lt;/li&gt;
+  &lt;li&gt;再重新計算 \(\alpha_i\)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最後的 model 就會是：&lt;/p&gt;
+
+&lt;p&gt;\(\hat{y} = sign \sum_{t=1}^{T} w_i f_t(x)\)&lt;/p&gt;
+
+&lt;p&gt;AdaBoost 的優勢就是讓 model 能夠從錯中學，使用提升與降低權重的方式讓分類錯誤的點可以在下一次的 model 中被改進。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;http://leijun00.github.io/2014/10/decision-tree-2/&quot;&gt;决策树（二）&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3&quot;&gt;機器學習: Ensemble learning之Bagging、Boosting和AdaBoost&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/niuniuyuh/article/details/54346930&quot;&gt;AdaBoost和随机森林的区别&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.coursera.org/learn/ml-classification/home/week/5&quot;&gt;Machine Learning -  University of Washington&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/mach_learn/article/details/39501849&quot;&gt;机器学习算法优缺点及其应用领域&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Random Forest</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/"/>
+   <updated>2018-12-03T14:07:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/03/[Machine LearningDecision Tree</id>
+   <content type="html">&lt;p&gt;基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。&lt;/p&gt;
+
+&lt;p&gt;Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 &lt;a href=&quot;https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/&quot;&gt;bagging&lt;/a&gt; 這篇提到的方法有點類似，但有些小差異。&lt;/p&gt;
+
+&lt;p&gt;使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Random Forest步驟&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;假如有一 training data，有 N 個樣本，p 個features。
+&lt;br /&gt;
+今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data&lt;/li&gt;
+  &lt;li&gt;在這組 data 中隨機從 p 個 featrues 中選取 m (m &amp;lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node&lt;/li&gt;
+  &lt;li&gt;重複步驟 2，直到完成這個 model 為止&lt;/li&gt;
+  &lt;li&gt;重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。&lt;/li&gt;
+  &lt;li&gt;Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。&lt;/li&gt;
+  &lt;li&gt;因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;優點：
+    &lt;ol&gt;
+      &lt;li&gt;不用做特徵（feature）選擇。&lt;/li&gt;
+      &lt;li&gt;訓練完後可以知道哪些 feature 比較重要。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=J4Wdy0Wc_xQ&quot;&gt;StatQuest: Random Forests Part 1 - Building, Using and Evaluating&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/edogawachia/article/details/79357844&quot;&gt;随机森林（Random Forest）算法原理&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/niuniuyuh/article/details/54346930&quot;&gt;AdaBoost和随机森林的区别&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Bagging</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/"/>
+   <updated>2018-12-03T12:50:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/03/[Machine Learning]Bagging</id>
+   <content type="html">&lt;h2 id=&quot;bagging&quot;&gt;Bagging&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/bagging.png&quot; alt=&quot;bagging.png&quot; height=&quot;450px&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From: Hastie, T., Tibshirani, R. and Friedman, J. The Elements of Statistical Learning. Springer, 2009. p.285&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Bagging 是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Bootstrap aggregating (bagging) is a machine learning ensemble meta-algorithm to improve classification and regression models in terms of stability and classification accuracy. It also reduces variance and helps to avoid ‘overfitting’. Although it is usually applied to decision tree models, it can be used with any type of model. (&lt;a href=&quot;https://docs.rapidminer.com/latest/studio/operators/modeling/predictive/trees/parallel_decision_tree.html&quot;&gt;Decision Tree - Bagging&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;簡單來說，Bagging是一種 Ensemble learning方法，它集結一些 model 來做最後的決策。通常會是集結表現沒那麼好的 model，讓這些 model 一起做決定，一種三個臭皮匠勝過一個諸葛亮的感覺。&lt;/p&gt;
+
+&lt;p&gt;Decision tree 是一個常見的 weak classifier，所以如果在 decision tree 上使用 bagging，可以讓最後表現結果比較好，也避免 overfitting 的情況。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Boostrap&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在開始說明 bagging 步驟前先介紹 bootstrap。&lt;/p&gt;
+
+&lt;p&gt;bootstrap 是一種抽樣方法。假設今天有一組資料，裡頭共有 N 個樣本，我們想要有 m 個大小為 N 的樣本作為訓練資料。方法是，每次從這 N 個樣本隨機抽取，且每次都是取後放回(也就是有些樣本可能被抽到一次以上，有些樣本可能沒被抽到)，同樣的方法重複 m 次，這樣我們就會有 m 組樣本數為 N 的 y 資料集。&lt;/p&gt;
+
+&lt;p&gt;這樣的方法在樣本數量少時很有用。如果樣本小，但我們用 train-validation-test 這樣的方式訓練資料，訓練的樣本資料非常小，會造成 bias 較大的問題。而使用 bootstrap 不會減少樣本的數量，也能保留 test data。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;如何操作？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;使用 boostrap 方法從 training data 中採集 B 組樣本數與 training data 相同的資料集。&lt;/li&gt;
+  &lt;li&gt;這 B 組資料集都建立一個 model， \(f_b(x)\)，共產生 B 個 model。&lt;/li&gt;
+  &lt;li&gt;最後預測的結果就是將這 B 個 model 做統合。在分類問題上，可以平均各個 model 的 posterior class probabilities，或是使用 majority voting。（選機率比較大的結果或是多數決）；在回歸上，則取平均值。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;從最上圖可以看到，不論是使用機率或是投票決定，bagging 選出的結果的 test error 都要比個別的 model 表現較好。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;除了 Bagging 外，Ensemble learning 還有另一種常見的方法 Boosting，這篇先到這裡之後繼續介紹。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3&quot;&gt;機器學習: Ensemble learning之Bagging、Boosting和AdaBoost&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://blog.csdn.net/edogawachia/article/details/79357844&quot;&gt;随机森林（Random Forest）算法原理&lt;/a&gt;
+&lt;br /&gt;
+The Elements of Statistical Learning
+&lt;br /&gt;
+Pattern Recognition and Machine Learning&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Machine Learning]Decision Tree</title>
+   <link href="http://localhost:4000blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/"/>
+   <updated>2018-12-03T11:05:00+01:00</updated>
+   <id>http://localhost:4000/machine%20learning/2018/12/03/[Machine Learning]Decision Tree 和 bagging</id>
+   <content type="html">&lt;h2 id=&quot;decision-tree&quot;&gt;Decision Tree&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/decision_tree.png&quot; alt=&quot;decision_tree.png&quot; height=&quot;190px&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Decision Tree是什麼？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;簡單來說，decision tree 是一個分類模型。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;這是 Pattern Recognition and Machine Learning 裡頭的定義。&lt;/p&gt;
+
+&lt;p&gt;根據上圖，想像一下，在右邊的二維座標平面上有一堆散布的點，而 decision tree，就是將這個平面一一分割，每一個框框都是一個分類結果。但我們可以用右邊那樣一層一層的樹枝結構狀來表示右邊難懂的圖。（這裡的例子是二維平面，當變數 \(x_i\) 增加時，這樣的概念可以推廣到多維空間）&lt;/p&gt;
+
+&lt;p&gt;每一個分支都像是一個 if-else 問題，如果是就選某一邊，不是就選另外一邊。&lt;/p&gt;
+
+&lt;p&gt;上圖左，我們可以看到有兩個變數，\(x_1\), \(x_2\)，第一關是 \(x_1 &amp;gt; \theta_1 \)，如果小於就往左邊分，如果大於就往右邊分，以此類推往下繼續細分，最後給予分類結果。最後共分成 A, B, C, D, E 五個類別，也就是右邊的五個框框。&lt;/p&gt;
+
+&lt;p&gt;Decision Tree 又可以分為&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Regression trees - 最後分類結果為連續變數&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Classification trees - 最後分類結果為類別變數&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;名詞&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Root node (The Root) - 第一個起始的點&lt;/li&gt;
+  &lt;li&gt;(Internal) Nodes - 中間的節點。上方會有箭頭指向 node，且 node 也會往下指向其他點。&lt;/li&gt;
+  &lt;li&gt;Leaves (terminal nodes) - 最後的節點，也就是最後的分類結果。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;如何分類？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;假如今天我有一份 data，decision tree 是如何決定要先使用哪一個變數與什麼值作為分割呢？&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;分割的原則是，這樣的分割要能得到最大的資訊增益 (Information gain, IG)&lt;/em&gt; (&lt;a href=&quot;https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda&quot;&gt;[資料分析&amp;amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;資訊量根據最後的分類結果可以使用，&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Regression trees:
+    &lt;ul&gt;
+      &lt;li&gt;MSE (mean-squared error)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Classification trees:
+    &lt;ul&gt;
+      &lt;li&gt;Entropy (Deviance)&lt;/li&gt;
+      &lt;li&gt;Gini impurity&lt;/li&gt;
+      &lt;li&gt;Missclassification error&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在 Classification tree 裡，Entropy 和 Gini impurity 是常用的兩種方式，
+詳細的公式請參考 &lt;a href=&quot;https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity&quot;&gt;Wikipedia&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;假如今天碰到兩種 model 算出來的資訊量都ㄧ樣，請選擇比較簡單的那個 model。（分支、leaves node 較少）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;R 範例&lt;/strong&gt;
+這裡使用 tree 這個 library 做範例，另外還有像是 rpart 也是做 decision 常用的 package。&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;iris&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 使用 Entropy (Deviance)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Species&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sepal.Length&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Petal.Length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iris&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;deviance&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 使用 Gini impurity&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Species&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sepal.Length&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Petal.Length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;iris&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;gini&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;優缺點&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;優點：
+    &lt;ol&gt;
+      &lt;li&gt;Simple to understand and interpret. 容易理解與解釋&lt;/li&gt;
+      &lt;li&gt;Able to handle both numerical and categorical data. 可以用在類別與 numerical 資料&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;缺點
+    &lt;ol&gt;
+      &lt;li&gt;Low bias and high variance with respect to the training data.
+（當 decision tree model 變得太過複雜時，太多 nodes，就會導致 overfitting (&lt;a href=&quot;https://en.wikipedia.org/wiki/Bias–variance_tradeoff&quot;&gt;bias-variance trade off&lt;/a&gt; 的狀況）&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以為了讓 model 不要 overfitting，我們可以使用 pruning 的方式，砍掉底下的樹枝。&lt;/p&gt;
+
+&lt;p&gt;在 R 可以使用，&lt;code class=&quot;highlighter-rouge&quot;&gt;prune.tree()&lt;/code&gt;，並且可以使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;best&lt;/code&gt; 這個參數來決定最後要保留多少 leaves。&lt;/p&gt;
+
+&lt;p&gt;使用剛剛最後的 &lt;code class=&quot;highlighter-rouge&quot;&gt;fit&lt;/code&gt;示範&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;prune_fit&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prune.tree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;best&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prune_fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prune_fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;summary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prune_fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;這時候 leaves 由原本的 9，修剪到了剩下 5，但 Misclassification error rate 卻是相同的。修剪過後的 model 較簡單，且 variance 也會比較小，在預測上表現也會較佳。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda&quot;&gt;[資料分析&amp;amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.youtube.com/watch?v=7VeUPuFGJHk&quot;&gt;StatQuest: Decision Trees&lt;/a&gt;
+&lt;br /&gt;
+The Elements of Statistical Learning
+&lt;br /&gt;
+Pattern Recognition and Machine Learning&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]如何在 ggplot2 圖形上希臘字母？</title>
+   <link href="http://localhost:4000blog//r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/"/>
+   <updated>2018-11-10T16:15:00+01:00</updated>
+   <id>http://localhost:4000/r/2018/11/10/[R]如何在 ggplot2 圖形上希臘字母？</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;1. 圖形文字&lt;/strong&gt;
+&lt;br /&gt;
+Text Labels: Use parse = T inside geom_text or annotate.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 座標軸標籤&lt;/strong&gt;
+&lt;br /&gt;
+Axis Labels: Use expression(alpha) to get greek alpha.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Legend&lt;/strong&gt;
+&lt;br /&gt;
+Legend Labels: Use bquote(alpha == .(value)) in legend label.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Fecet圖形&lt;/strong&gt;
+&lt;br /&gt;
+Facet 圖形比較特殊，要將 &lt;code class=&quot;highlighter-rouge&quot;&gt;labeller = label_parsed&lt;/code&gt;
+&lt;br /&gt;
+Facet Labels: Use labeller = label_parsed inside facet.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://stackoverflow.com/questions/5293715/how-to-use-greek-symbols-in-ggplot2&quot;&gt;來源&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]Environments (1)</title>
+   <link href="http://localhost:4000blog//r/2018/10/20/R-Environment/"/>
+   <updated>2018-10-20T15:26:00+02:00</updated>
+   <id>http://localhost:4000/r/2018/10/20/[R]Environment</id>
+   <content type="html">&lt;p&gt;這篇要介紹 R 的環境(Environments)。&lt;/p&gt;
+
+&lt;p&gt;我個人覺得環境是一個寫程式很重要但一開始會很困惑的東西，之前一直處於似懂非懂的狀態。
+&lt;br /&gt;
+其實如果只是用 R 來跑一些數據分析，其實不理解環境並不會造成什麼太大的問題，但如果能夠懂當然絕對是有利無弊。
+&lt;br /&gt;
+最近有了寫 R package 的經驗後，讓我開始對「環境」比較了解，所以這篇想要將我的理解記錄下來。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;1-什麼是環境environments&quot;&gt;1. 什麼是環境（Environments）？&lt;/h3&gt;
+
+&lt;p&gt;當我們每次打開 R studio 這時候便是打開了某個環境，接著我們產生了一些變數，這些變數便是在這個環境底下。&lt;/p&gt;
+
+&lt;p&gt;很抽象嗎？
+&lt;br /&gt;
+打開 R studio 時，在右上的框框（或是在某個位置）有個「Environment」，然後可以看到如下圖的「Gloabal Environment」，並且在下面的框框可以看到我們產生的變數（圖中的 x）。
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/enrionment%20variable.png&quot; alt=&quot;enrionment variable.png&quot; height=&quot;395px&quot; width=&quot;380px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這就表示，我們現在在「Gloabal Environment」這個環境底下，且 x 這個變數在「Gloabal Environment」環境中。&lt;/p&gt;
+
+&lt;p&gt;當我們把「Gloabal Environment」這個圖往下拉，可以看到像下圖這樣（每個人的可能都不太一樣）
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/enrionment.png&quot; alt=&quot;enrionment.png&quot; height=&quot;395px&quot; width=&quot;380px&quot; /&gt;
+依序往下就會是「Gloabal Environment」的 「parent 環境」。&lt;/p&gt;
+
+&lt;p&gt;（「parent 環境」是殺毀？！）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;環境就像是房間&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我覺得可以把「環境」想像是一個房間。
+&lt;br /&gt;
+當妳/你在操作 R ，產生任何變數，做任何動作，都是在這個房間裡面操作（通常一打開 R studio 都會是在 Global 環境）。所以這些變數全部都會被放在這個房間裡。或是想像在一個房間裡縫娃娃這些娃娃做完都會被放在這個房間裡。&lt;/p&gt;
+
+&lt;p&gt;那「parent 環境」就會是，妳/你走出這個房間來到客廳，也就是說，這個房間是被包在家裡的，走出家裡，整個家是被包在建築物裡的，然後社區，然後某條路，某個區，某個縣市……就是一個俄羅斯娃娃的感覺。往上一層就會是「parent 環境」、「grand parent 環境」…..以此類推。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;2-r-是如何在環境裡找變數的&quot;&gt;2. R 是如何在環境裡找變數的？&lt;/h3&gt;
+
+&lt;p&gt;根據上面的解釋我們知道，每次操作 R 的時候我們都會是在某個環境底下。
+&lt;br /&gt;
+那這和 R 要找變數有什麼關係呢？&lt;/p&gt;
+
+&lt;p&gt;在這之前我們先來看我現在有幾間房間呢？&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;.GlobalEnv&quot;        &quot;tools:rstudio&quot;     &quot;package:stats&quot;     &quot;package:graphics&quot;  &quot;package:grDevices&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [6] &quot;package:utils&quot;     &quot;package:datasets&quot;  &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;這表示，最底下的環境是&lt;code class=&quot;highlighter-rouge&quot;&gt;.GlobalEnv&lt;/code&gt;(Gloabal Environment)，它的 parent 變數是&lt;code class=&quot;highlighter-rouge&quot;&gt;tools:rstudio&lt;/code&gt;，再往上是&lt;code class=&quot;highlighter-rouge&quot;&gt;package:stats&lt;/code&gt;……等等，最後會是&lt;code class=&quot;highlighter-rouge&quot;&gt;package:base&lt;/code&gt;，但其實最上層會是 Empty environment。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在房間裡找東西？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果今天妳/你人在一個房間裡找東西妳/你會怎麼找？
+&lt;br /&gt;
+一定會先在房間裡搜尋一遍，如果怎麼都找不到，就會去客廳找，再找不到就到這棟建築物找……一直往外找對吧？&lt;/p&gt;
+
+&lt;p&gt;所以同樣的，如果今天我們想要找個變數 x，結果 R 發現找不到，那它就會往 parent 環境（search()的順序）找，再找不到就會再往上找，如果一直找到最上層還是沒有，就會跳出像這樣的錯誤。&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Error: object 'x' not found&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;找的方式就像是這個圖，&lt;a href=&quot;http://adv-r.had.co.nz/Environments.html&quot;&gt;source&lt;/a&gt;
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/search%20path.png&quot; alt=&quot;search path.png&quot; height=&quot;160px&quot; width=&quot;500px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;parent 是誰？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我們可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;parent.env()&lt;/code&gt;來查看上一層環境，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;now.env&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent.env&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent.env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;now.env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grandparent.env&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent.env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parent.env&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;3-可以增加環境嗎&quot;&gt;3. 可以增加環境嗎？&lt;/h3&gt;
+&lt;p&gt;如果仔細看剛剛&lt;code class=&quot;highlighter-rouge&quot;&gt;search()&lt;/code&gt;的結果會發現，那些都是 package 呢！
+&lt;br /&gt;
+其實在每次使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;library()&lt;/code&gt;或是&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt; attache 一個 pacakge 後環境就會被改變，這時 Gloabal Environment 的 parent 環境就會變成這個 package。（請自行實驗）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;（題外話）
+&lt;br /&gt;
+&lt;strong&gt;library() v.s require()&lt;/strong&gt;
+這兩者到底有什麼差別呢？&lt;/p&gt;
+
+&lt;p&gt;基本上兩個的差別只有在於找不到這個 package 時，&lt;code class=&quot;highlighter-rouge&quot;&gt;library()&lt;/code&gt; 會產生 Error 暫停程式，&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt;會 FALSE 並吐出 Warning ，然後繼續執行程式。
+&lt;br /&gt;
+所以可以把&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt;包在 if 裡，如果沒有這個 package 就安裝，程式也能繼續執行。&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Error in library(x) : there is no package called ‘x’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Loading required package: x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# Warning message:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#  there is no package called ‘x’&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;（題外話結束）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;也就是說，如果我們今天使用&lt;code class=&quot;highlighter-rouge&quot;&gt;library()&lt;/code&gt;或是&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt;就會讓環境改變。
+&lt;br /&gt;
+所以如果今天是要 create package 的話，千萬不要將 &lt;code class=&quot;highlighter-rouge&quot;&gt;library()&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt;包在任何 function，這樣非常危險，可能會造成 &lt;a href=&quot;http://r-pkgs.had.co.nz/namespace.html&quot;&gt;Namespace&lt;/a&gt; 的混亂。（如果看不懂可以先忽略這段）&lt;/p&gt;
+
+&lt;p&gt;那如果今天需要用到這個包，但是又不想讓它加到 search path（parent 環境）裡怎麼辦？&lt;/p&gt;
+
+&lt;p&gt;這時候請使用&lt;code class=&quot;highlighter-rouge&quot;&gt;::&lt;/code&gt;。例如，今天想要呼叫 pkg1 裡頭的 fun()，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pkg1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;::&lt;/code&gt;還有一個很好用的時刻，就是當今天有兩個不同的 package 擁有兩個同樣名稱的 function 時，先載入的 package 順序會被放在後面，所以如果直接呼叫 funciton ，一定會用到後載入的 package 的 function。&lt;/p&gt;
+
+&lt;p&gt;如果現在是 pkg1 和 pkg2 都有 fun()，那我們可以這樣用，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# 呼叫 pkg1 的 fun&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkg1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 呼叫 pkg2 的 fun&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pkg2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;這樣就絕對不會出錯了。
+不過記得，要使用&lt;code class=&quot;highlighter-rouge&quot;&gt;::&lt;/code&gt;必須要有 install 這個 package 才能使用。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Attaching v.s Loading&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;library() 和 require() 這兩個 function 的動作都是 &lt;strong&gt;Attaching&lt;/strong&gt;，也就是會將這 package 加到 parent 環境 (search path)。
+&lt;br /&gt;
+但 &lt;code class=&quot;highlighter-rouge&quot;&gt;::&lt;/code&gt;則是 &lt;strong&gt;Loading&lt;/strong&gt;，也就是說，這個 pacakge 在 loading 後可以在記憶體（memory）中被找到，但不會被加到 parent 環境 (search path) 中。
+&lt;a href=&quot;http://r-pkgs.had.co.nz/namespace.html#search-path&quot;&gt;source&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;下次介紹
+&lt;br /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new.env()&lt;/code&gt;和 function 中的環境&lt;/li&gt;
+  &lt;li&gt;&amp;lt;- 和 «- 的差別&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;http://adv-r.had.co.nz/Environments.html&quot;&gt;Advance R - Environments&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://r-pkgs.had.co.nz/namespace.html&quot;&gt;R package - Namespace&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;https://www.gl-li.com/2017/09/14/build-a-r-package-for-yourself/&quot;&gt;Build a R package for yourself&lt;/a&gt;
+&lt;br /&gt;
+&lt;a href=&quot;http://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html&quot;&gt;Making Your First R Package&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]variable types</title>
+   <link href="http://localhost:4000blog//r/2018/10/19/R-variable-types/"/>
+   <updated>2018-10-19T10:32:00+02:00</updated>
+   <id>http://localhost:4000/r/2018/10/19/[R]variable types</id>
+   <content type="html">&lt;p&gt;We know there are several common types in R, such as, vector, list, matrix, and data.frame.
+&lt;br /&gt;
+Here I’m going to see these 4 types more details.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;What are the differences between vector, list, matrix, and data.frame?&lt;/li&gt;
+  &lt;li&gt;What are the outputs of &lt;code class=&quot;highlighter-rouge&quot;&gt;is.atomic()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;is.vector()&lt;/code&gt;?&lt;/li&gt;
+  &lt;li&gt;What are the outputs of &lt;code class=&quot;highlighter-rouge&quot;&gt;typeof()&lt;/code&gt;?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;1-what-are-the-differences-between-vector-list-matrix-and-dataframe&quot;&gt;1. What are the differences between &lt;em&gt;vector&lt;/em&gt;, &lt;em&gt;list&lt;/em&gt;, &lt;em&gt;matrix&lt;/em&gt;, and &lt;em&gt;data.frame&lt;/em&gt;?&lt;/h3&gt;
+
+&lt;p&gt;We can seperate these four types to two groups from different aspects.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;(a) Elements type aspect&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Homogeneous data: &lt;em&gt;vector&lt;/em&gt;, &lt;em&gt;matrix&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Heterogeneous data: &lt;em&gt;list&lt;/em&gt;, &lt;em&gt;data.frame&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Which means all elements in &lt;em&gt;vector&lt;/em&gt; and &lt;em&gt;matrix&lt;/em&gt; have to be the same type (integer, double, or character ect.).
+But elements in &lt;em&gt;list&lt;/em&gt; and &lt;em&gt;data.frame&lt;/em&gt; can be different types.&lt;/p&gt;
+
+&lt;p&gt;For example:
+&lt;br /&gt;
+Vector has same type of elements&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# vector&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#  v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] 1 2 3 4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v_ch&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# v_ch&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;What if we give a vector different type of elements?&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;#[1] &quot;1&quot; &quot;2&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, R forces 1 to be character.&lt;/p&gt;
+
+&lt;p&gt;But what is the priority? Why not “2” become numeric?&lt;/p&gt;
+
+&lt;p&gt;Because &lt;strong&gt;the hierarchy for coercion&lt;/strong&gt; is:
+&lt;br /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;logical &amp;lt; integer &amp;lt; numeric &amp;lt; character&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So this is why numeric would be force to character.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://campus.datacamp.com/courses/introduction-to-r-for-finance/vectors-and-matrices?ex=3&quot;&gt;reference&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;(b) Dimension aspect&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;1 Dimension: &lt;em&gt;vector&lt;/em&gt;, &lt;em&gt;list&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;2 Dimensions: &lt;em&gt;matrix&lt;/em&gt;, &lt;em&gt;data.frame&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;2-what-are-the-outputs-of-isatomic-and-isvector&quot;&gt;2. What are the outputs of &lt;code class=&quot;highlighter-rouge&quot;&gt;is.atomic()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;is.vector()&lt;/code&gt;?&lt;/h3&gt;
+
+&lt;p&gt;Let’s see the outputs of these four types.&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# vector&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# list&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ncol&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# matrix&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# data.frame&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;(a) is.atomic()&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; is.atomic(v)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; is.atomic(l)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; is.atomic(mat)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; is.atomic(df)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;As you can see the results, &lt;code class=&quot;highlighter-rouge&quot;&gt;is.atomic()&lt;/code&gt; gives boolean values.
+&lt;br /&gt;
+And the output is to see if the object is &lt;em&gt;Homogeneous data&lt;/em&gt; or &lt;em&gt;Hetergeneous data&lt;/em&gt;.
+&lt;br /&gt;
+Hence, &lt;em&gt;vector&lt;/em&gt; and &lt;em&gt;matrix&lt;/em&gt; get TRUE, &lt;em&gt;list&lt;/em&gt; and &lt;em&gt;data.frame&lt;/em&gt; get FALSE.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;(b) is.vector()&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# is.vector(v)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# is.vector(l)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] TRUE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# is.vector(mat)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# is.vector(df)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] FALSE&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In contrast with is.atomic(), &lt;code class=&quot;highlighter-rouge&quot;&gt;is.vector()&lt;/code&gt; checks from Dimension aspect.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;3-what-are-the-outputs-of-typeof&quot;&gt;3. What are the outputs of &lt;code class=&quot;highlighter-rouge&quot;&gt;typeof()&lt;/code&gt;&lt;/h3&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# vector&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are numeric&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v_ch&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;c&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are characters&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# list&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are numeric&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l_ch&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are characters&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# matrix&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ncol&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are numeric&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mat_ch&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ncol&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;  &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# all elements are characters&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# data.frame&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Let’s see the results,&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ---vector-------------&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(v)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;integer&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(v_ch)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;character&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ---list-------------&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(l)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;list&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(l_ch)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;list&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ---matrix-------------&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(mat)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;integer&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(mat_ch)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;character&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# ---data.frame-------------&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &amp;gt; typeof(df)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# [1] &quot;list&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;From the result of ouputs, we can see it checks if the object is &lt;em&gt;Homogeneous data&lt;/em&gt; or not.
+&lt;br /&gt;
+If it is &lt;em&gt;Homogeneous data&lt;/em&gt; then &lt;code class=&quot;highlighter-rouge&quot;&gt;typeof()&lt;/code&gt; will show the type of elements.
+&lt;br /&gt;
+But if the object is &lt;em&gt;Hetergeneous data&lt;/em&gt;, it will give only &lt;em&gt;list&lt;/em&gt; as output result.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;More detail about Data Structure can be found &lt;a href=&quot;http://adv-r.had.co.nz/Data-structures.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Reference:
+&lt;br /&gt;
+&lt;a href=&quot;https://zhuanlan.zhihu.com/p/25551827&quot;&gt;R深入|数据类型&lt;/a&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]RStudtio編碼問題</title>
+   <link href="http://localhost:4000blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/"/>
+   <updated>2018-10-04T23:42:00+02:00</updated>
+   <id>http://localhost:4000/r/2018/10/04/[R]RStudtio編碼問題</id>
+   <content type="html">&lt;p&gt;解決編碼問題可以說最惱人的事了……&lt;br /&gt;
+在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;根據我的經驗，我覺得編碼問題可以分成三種，&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;R 程式碼編碼問題&lt;/li&gt;
+  &lt;li&gt;檔案編碼問題&lt;/li&gt;
+  &lt;li&gt;系統編碼問題&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;1-r-程式碼編碼問題&quot;&gt;1. R 程式碼編碼問題&lt;/h3&gt;
+&lt;p&gt;當你打開一份 R Script 時，發現 script 中的中文都是亂碼時，這時應該是這份 script 檔案的編碼與你電腦的 RScript 預設的不同。&lt;/p&gt;
+
+&lt;p&gt;這時選擇 File -&amp;gt; Reopen with Encoding… 更改編碼(UTF-8、BIG5、ASCII試試)，問題應該就可以解決了。&lt;/p&gt;
+
+&lt;p&gt;或是可以直接更改預設的讀檔編碼，到 Tools -&amp;gt; Global Options… -&amp;gt; (左邊選單) Code -&amp;gt; Saving 更改 Default text encoding。&lt;/p&gt;
+
+&lt;h3 id=&quot;2-檔案編碼問題&quot;&gt;2. 檔案編碼問題&lt;/h3&gt;
+&lt;p&gt;當你讀進一份檔案，可能碰到以下幾種狀況&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;a. 讀檔時出現編碼錯誤&lt;br /&gt;
+解決方法： &lt;br /&gt;
+(1)讀檔時設定 fileEncoding：讀檔時提供檔案本身編碼資訊，&lt;a href=&quot;https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/&quot;&gt;參考&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;(2)更改檔案編碼：先更改檔案本身的編碼，再使用 RStudio 讀取檔案。&lt;br /&gt;
+   如果是 Windows，我個人推薦直接使用記事本更改最方便。另存新檔直接存成需要的編碼。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;(3)更改預設讀檔編碼：如第一個提到的 R 程式碼編碼問題的解決方案，直接更改預設的編碼，設定成 UTF-8 應該是最好的。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;b. 順利讀進檔案，但無法正確顯示&lt;br /&gt;
+讀檔時，使用 encoding 參數來決定要顯示什麼語言&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;read.csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;filename.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;latin1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;3-系統編碼問題&quot;&gt;3. 系統編碼問題&lt;/h3&gt;
+&lt;p&gt;順利讀進檔案，已更改輸入時的編碼，但顯示仍舊錯誤。&lt;br /&gt;
+這問題是在讀一份含有瑞典文的檔案時碰到的，已經更改過檔案的編碼，但開啟後仍無法正確顯示瑞典文。&lt;/p&gt;
+
+&lt;p&gt;可以檢查一下系統本身的編碼是不是 UTF-8&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sessionInfo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 裡的 local&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# 或是&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sys.getlocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# MAC 會長得大概像這樣&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# &quot;en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果不是，更改系統的語系，以下更改為 UTF-8&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# for windows&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sys.setlocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LC_ALL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# for mac&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sys.setlocale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;category&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;LC_ALL&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locale&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;en_US.UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;另外，要查看 vector 的編碼可以使用&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# x is a vector&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Encoding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;我個人認為，解決編碼問題最重要的就是要先知道編碼出錯的問題在哪。&lt;br /&gt;
+是檔案本身編碼問題，還是系統的問題，那是要修改檔案還是要修改系統？&lt;br /&gt;&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)</title>
+   <link href="http://localhost:4000blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/"/>
+   <updated>2018-09-28T10:36:00+02:00</updated>
+   <id>http://localhost:4000/algorithm/2018/09/28/[Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)</id>
+   <content type="html">&lt;p&gt;以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;hamiltonian-path&quot;&gt;Hamiltonian path&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;What is Hamiltonian path?&lt;/strong&gt;&lt;br /&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Hamiltonian_path&quot;&gt;Hamiltonian path&lt;/a&gt; is a path that visit every node only once. It can be an undirected or directed graph. Also it&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hamiltonian cycle&lt;/strong&gt;&lt;br /&gt;
+If a Hamiltonian path is a cycle then we call it A Hamiltonian cycle (or Hamiltonian circuit).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Hamiltonian path problem&lt;/strong&gt;&lt;br /&gt;
+Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;travelling-salesman-problem&quot;&gt;Travelling Salesman Problem&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;What is Travelling Salesman Problem(TSP)?&lt;/strong&gt;&lt;br /&gt;
+There is a man traveling. He departures from a city and he wants to visit every cities(nods) with the shortest distance. In the end, he will go back to the origin city, and he can only stop in each city once.&lt;/p&gt;
+
+&lt;p&gt;Which means, TSP is looking for the shortest distance of &lt;em&gt;Hamiltonian cycle&lt;/em&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;reference:&lt;br /&gt;
+&lt;a href=&quot;http://www.csie.ntnu.edu.tw/~u91029/Circuit.html&quot;&gt;演算法筆記&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Travelling_salesman_problem&quot;&gt;Wikipedia - TSP&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Hamiltonian_path&quot;&gt;Wikipedia - Hamiltonian path&lt;/a&gt;&lt;br /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]scale 與 dist function</title>
+   <link href="http://localhost:4000blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/"/>
+   <updated>2018-09-27T18:04:00+02:00</updated>
+   <id>http://localhost:4000/r/2018/09/27/[R]scale 與 dist function</id>
+   <content type="html">&lt;p&gt;這篇文章會介紹 R 中的 scale 與 dist 兩個 function。&lt;/p&gt;
+
+&lt;p&gt;在做資料分析前會需要先標準化&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;scale&quot;&gt;scale&lt;/h3&gt;
+&lt;p&gt;scale 的主要作用在標準化數據，共有三個 arguments，&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;x: 必須要是 matrix，以「行」為每組數據計算&lt;/li&gt;
+  &lt;li&gt;center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值&lt;/li&gt;
+  &lt;li&gt;scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;預設 center 和 scale 都是 TRUE，也就是算出來的值是 &lt;a href=&quot;https://zh.wikipedia.org/wiki/標準分數&quot;&gt;z-score&lt;/a&gt;。&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;其中：&lt;br /&gt;
+\(x\)：數據&lt;br /&gt;
+\(\mu\)：平均值&lt;br /&gt;
+\(\sigma\)：標準差&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;dist&quot;&gt;dist&lt;/h3&gt;
+&lt;p&gt;dist 是在算數據間的距離，主要的 arguments有&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;x: 可以是 matrix, data.frame ，但必須要是 numeric。&lt;/li&gt;
+  &lt;li&gt;methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;以「列」為數據，兩兩計算，&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nrow&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R]如何在R Package加上code coverage (codecov)?</title>
+   <link href="http://localhost:4000blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/"/>
+   <updated>2018-09-14T18:04:00+02:00</updated>
+   <id>http://localhost:4000/r/2018/09/14/[R]如何在R Package加上code coverage (codecov)?</id>
+   <content type="html">&lt;p&gt;&lt;a href=&quot;https://zh.wikipedia.org/wiki/代碼覆蓋率&quot;&gt;code coverage&lt;/a&gt;(代碼覆蓋率)?&lt;/p&gt;
+
+&lt;p&gt;這篇是根據&lt;a href=&quot;https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/&quot;&gt;這篇&lt;/a&gt;的步驟操作。
+如果要找 package 內容物該有的東西可以參考我完成的一個 &lt;a href=&quot;https://github.com/shihs/LiUAdRLab3&quot;&gt;R package&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;以下會將步驟一一列下。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;1-完成-r-package-與建立-test-測試&quot;&gt;1. 完成 R package 與建立 test 測試&lt;/h3&gt;
+&lt;p&gt;建立 &lt;a href=&quot;http://r-pkgs.had.co.nz&quot;&gt;R package&lt;/a&gt; 可以參考大神的書，test 則可以參考這本書的 &lt;a href=&quot;http://r-pkgs.had.co.nz/tests.html&quot;&gt;testing 章節&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;基本上使用，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_testthat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;就會自己建立一個 &lt;a href=&quot;https://github.com/shihs/LiUAdRLab3/tree/master/tests&quot;&gt;tests 資料夾&lt;/a&gt;，再把要測試的程式碼加進下一層的 &lt;a href=&quot;https://github.com/shihs/LiUAdRLab3/tree/master/tests/testthat&quot;&gt;testthat 資料夾&lt;/a&gt;內。&lt;/p&gt;
+
+&lt;p&gt;最後進行測試，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;2-建立所有-code-coverage-需要的檔案與內容&quot;&gt;2. 建立所有 code coverage 需要的檔案與內容&lt;/h3&gt;
+
+&lt;p&gt;先跑一下程式碼，&lt;/p&gt;
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;devtools&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_coverage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;跑完後會出現以下的步驟提示，&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Creating `codecov.yml` from template.
+* Adding `codecov.yml` to `.Rbuildignore`.
+* Add to `README.md`: 
+[![Coverage Status](https://img.shields.io/codecov/c/github/shihs/LiUAdRLab3/master.svg)](https://codecov.io/github/shihs/LiUAdRLab3?branch=master)
+* Add to `.travis.yml`:
+after_success:
+  - Rscript -e 'covr::codecov()'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;基本上就一步一步照著做就對了，前面兩件事程式已經幫你處理好了，&lt;br /&gt;
+從第三步開始就行。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;3-將-github-與-codecov-連結&quot;&gt;3. 將 Github 與 codecov 連結&lt;/h3&gt;
+
+&lt;p&gt;使用 Github 帳號登入 &lt;a href=&quot;https://codecov.io&quot;&gt;codecov.io &lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;連結你要使用 codecov 的 reposity，
+會出現像這樣的&lt;a href=&quot;https://walczak.org/wp-content/uploads/2017/06/token.png&quot;&gt;畫面&lt;/a&gt;得到一組 token，
+將 token 複製，在 R 中跑以下程式碼，&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;install.packages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;covr&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;covr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;codecov&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;YOUR_TOKEN_GOES_HERE&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;大功告成！&lt;/p&gt;
+
+&lt;p&gt;這時候會看到你剛剛貼上的 coverage 圖案出現 code coverage 的結果。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;如果想要先在 R studio 上看測試結果可以使用，&lt;/p&gt;
+
+&lt;div class=&quot;language-r highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;covr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;report&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;viewer 視窗就會顯示測試結果了。&lt;/p&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[R][Git]如何在 Rstudio 上連接 R project 與 Github</title>
+   <link href="http://localhost:4000blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/"/>
+   <updated>2018-09-08T10:53:00+02:00</updated>
+   <id>http://localhost:4000/r/git/2018/09/08/[R][Git]如何連接Rstudio與githu</id>
+   <content type="html">&lt;p&gt;本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。&lt;/p&gt;
+
+&lt;p&gt;在進入主題前，請先安裝好 R、Rstudio 和 Git ，並且申請好 Github 帳號。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;前置作業&quot;&gt;前置作業&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;設置 SSH RSA key&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;1.複製 public key&lt;br /&gt;
+Tool &amp;gt; Global Options &amp;gt; Git/SVN &amp;gt; Create RSA Key &amp;gt; View public key &lt;br /&gt;
+點開 View public key 後，複製裡頭所有的東西。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Rstudio%20SSH.png&quot; alt=&quot;Rstudio SSH.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;2.將 public key 貼到 github&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/github%20ssh.png&quot; alt=&quot;github ssh.png&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;開始建立-connection&quot;&gt;開始建立 connection&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;建立專案&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;請先建立一個專案，這裡就不多加解釋了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在本機建立 repository&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Build &amp;gt; Configure public Tools &amp;gt; Git/SVN&lt;br /&gt;
+將 Version control system 由 None 改為 Git&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/version%20control%20system.png&quot; alt=&quot;version control system.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;這時候就會發現 Rstudio 的視窗長得不太一樣了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/rstudio%20git.png&quot; alt=&quot;rstudio git.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;下方視窗應該會有一些還未 commit 的檔案，但因為我都已經 commit 了，所以沒有內容。&lt;br /&gt;
+且這時候 pull 和 push 鍵應該還無法操作。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Github 同步&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;終於來到最後一哩路。&lt;/p&gt;
+
+&lt;p&gt;到 Github 上創建一個新的 repository，且名稱要和 project 相同，只要單純創建 repository 就好，什麼檔案都不要。&lt;/p&gt;
+
+&lt;p&gt;最後，打開 Rstudio 工具列的， Tools &amp;gt; Shell&lt;/p&gt;
+
+&lt;p&gt;然後在 Shell 裡輸入，&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git remote add origin https://github.com/你的github帳號/你的專案名稱.git
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;完成後就會發現專案已經和 Github 連結了！專案的檔案都出現在 Github 上了。&lt;br /&gt;
+這時候 pull 和 push 鍵也已經可以操作了。&lt;/p&gt;
+
+&lt;p&gt;未來只要更新專案內容，就可以直接在 Rstudio 上 commit 和 push 就好了！&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;補充&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;移除 project 與該 repository 的 connection &lt;code class=&quot;highlighter-rouge&quot;&gt;rm -rf .git&lt;/code&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;參考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Hadley Wickham 的 &lt;a href=&quot;http://r-pkgs.had.co.nz/git.html&quot;&gt;R Package Git 章節&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[統計]什麼是 CDF (Cumulative Distribution Function)?</title>
+   <link href="http://localhost:4000blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/"/>
+   <updated>2018-09-04T11:50:00+02:00</updated>
+   <id>http://localhost:4000/%E7%B5%B1%E8%A8%88/2018/09/04/[統計]什麼是CDF?</id>
+   <content type="html">&lt;p&gt;在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;cdf-cumulative-distribution-function&quot;&gt;CDF (Cumulative Distribution Function)&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The cumulative distribution function (CDF) of random variable \(X\) is defined as&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;F_X(x) = P(X \leq x), \forall x \in {\Bbb R}&lt;/script&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_2_1_cdf.php&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;Mathematical Statistics with Applications 這本書將 CDF 稱為 distribution function，&lt;br /&gt;
+&lt;a href=&quot;https://zh.wikipedia.org/wiki/累积分布函数&quot;&gt;wikipedia&lt;/a&gt; 則翻譯為&lt;strong&gt;累積分布函數&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;以下再分 &lt;em&gt;1.離散型函數&lt;/em&gt; 與 &lt;em&gt;2.連續型函數&lt;/em&gt; 來看，&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;離散型隨機變數的-cdf&quot;&gt;離散型隨機變數的 CDF&lt;/h3&gt;
+
+&lt;p&gt;以擲兩枚硬幣為例，出現 head 為 1，tail 為 0，&lt;br /&gt;
+其隨機變數 \(X\) 的 PMF 函數為&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,&amp; \;for\; x = 0 \\
+1/2,&amp; \;for\; x = 1 \\
+1/4,&amp; \;for\; x = 2 \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;PMF 函數圖為，
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/PMF_two%20coins.png&quot; alt=&quot;PMF_two coins.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;則它的 CDF 累積分佈函數為
+&lt;script type=&quot;math/tex&quot;&gt;% &lt;![CDATA[
+F_X(x) = \left\{ \begin{array}{rcl}
+0,&amp; &amp;for\; x &lt; 0 \\
+1/4,&amp; &amp;for\; 0 \leq x &lt; 1 \\
+3/4,&amp; &amp;for\; 1 \leq x &lt; 2 \\
+1,&amp;  &amp;for\; x \geq 2\\
+\end{array}\right. %]]&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;CDF 函數圖為，
+&lt;img src=&quot;http://localhost:4000/blog/img/posts/CDF_two%20coins.png&quot; alt=&quot;CDF_two coins.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;可以發現，離散型的 CDF \(F_X(x)\) 為不連續的函數圖。&lt;/p&gt;
+
+&lt;p&gt;關於離散型的 CDF 這&lt;a href=&quot;https://www.probabilitycourse.com/videos/chapter3/video3_5.php&quot;&gt;影片&lt;/a&gt;有更詳細的說明。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;連續型隨機變數的-cdf&quot;&gt;連續型隨機變數的 CDF&lt;/h3&gt;
+
+&lt;p&gt;那如果今天有個隨機變數 \(X\)，它的 CDF \(F(X)\) 為連續函數呢？&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(X\) with CDF \(F(X)\) is said to be continuous if \(F(X)\) is a continuous function for all \(X \in {\Bbb R} \). &lt;a href=&quot;https://www.probabilitycourse.com/chapter4/4_1_0_continuous_random_vars_distributions.php&quot;&gt;Source&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;參考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.probabilitycourse.com&quot;&gt;Introduce To Proability, Statistics and Random Process&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>[統計]離散型(Discrete)隨機變數與其機率分佈(3)</title>
+   <link href="http://localhost:4000blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/"/>
+   <updated>2018-09-04T11:36:00+02:00</updated>
+   <id>http://localhost:4000/%E7%B5%B1%E8%A8%88/2018/09/04/[統計]離散型(Discrete)隨機變數與其機率分佈(3)</id>
+   <content type="html">&lt;p&gt;這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 &lt;br /&gt;
+Mathematical Statistics with Applications, 7th edition 這本書為主，&lt;br /&gt;
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。&lt;/p&gt;
+
+&lt;p&gt;這一篇要介紹常見的離散型分佈（Discrete Distribution），這篇主要是參考  &lt;a href=&quot;https://www.probabilitycourse.com/chapter3/3_1_5_special_discrete_distr.php&quot;&gt;Source&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;伯努利分佈-bernoulli-distribution&quot;&gt;伯努利分佈 Bernoulli Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(X\) is said to be a &lt;em&gt;bernoulli&lt;/em&gt; random variable with peremeter \(p\), shown as &lt;strong&gt;\(X \sim Bernoulli(p)\)&lt;/strong&gt;, if its PMF is given by&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p,&amp; \;for\; x = 1 \\
+1-p,&amp; \;for\; x = 0 \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;where \(0 &amp;lt; p &amp;lt; 1\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;簡單來說，一個事件只有兩種可能。&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;生活中有非常多的例子都會是 Bernoulli Distribution，譬如，&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;考試有及格、不及格&lt;/li&gt;
+  &lt;li&gt;丟擲一枚銅板有正面、反面&lt;/li&gt;
+  &lt;li&gt;小孩子性別可能是男生、女生&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Bernoulli.png&quot; alt=&quot;Bernoulli.png&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;幾何分布-geometric-distribution&quot;&gt;幾何分布 Geometric Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(X\) is said to be a &lt;em&gt;geometric&lt;/em&gt; random variable with peremeter \(p\), shown as &lt;strong&gt;\(X \sim Geometric(p)\)&lt;/strong&gt;, if its PMF is given by&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p(1-p)^{k-1},&amp; \;for\; k = 1, 2, 3,...... \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;where \(0 &amp;lt; p &amp;lt; 1\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Geometric Distribution 的例子：擲一枚銅板，且此銅板擲到 Head 的機率為 \(p\)。今天擲這枚到出現第一個 Head 為止，則其機率分佈為 Geometric Distribution。&lt;br /&gt;
+另外，每一次擲這枚銅板都會是獨立的 Bernoulli 試驗。&lt;/p&gt;
+
+&lt;p&gt;所以，Geometric Distribution 就是很多次的 Bernoulli 試驗直到成功為止。&lt;/p&gt;
+
+&lt;p&gt;以 \(p = 0.3\) 為例，其 Geometric Distribution 的 PMF 會是這樣，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Geometric.png&quot; alt=&quot;Geometric.png&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;二項分布-binomial-distribution&quot;&gt;二項分布 Binomial Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(X\) is said to be a &lt;em&gt;binomial&lt;/em&gt; random variable with peremeter \(n\) and \(p\), shown as &lt;strong&gt;\(X \sim Binomial(n, p)\)&lt;/strong&gt;, if its PMF is given by&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},&amp; \;for\; k = 0, 1, 2,..., n \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;where \(0 &amp;lt; p &amp;lt; 1\)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。&lt;/p&gt;
+
+&lt;p&gt;所以它的 PMF 會有 &lt;script type=&quot;math/tex&quot;&gt;\left( \begin{array}{c} n \\ k \end{array} \right)&lt;/script&gt;，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。&lt;/p&gt;
+
+&lt;p&gt;可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。&lt;/p&gt;
+
+&lt;p&gt;以 \(n = 10,\; p = 0.3\) 為例，其 PMF 圖會是，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Binomial.png&quot; alt=&quot;Binomial.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Binomial random variable as a sum of Bernoulli random variables&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If \(X_1,\;X_2,\;X_3,…,\;X_n\) are independent \(Bernoulli(p)\) random variable,  then the random variable \(X\) defined by \(X = X_1 + X_2 + X_3 + … + X_n\) has a \(Binomial(n,p)\) distribution.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;也就是，二項分布可以看成是每個獨立的伯努利分佈的和。&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;布瓦松分布-poisson-distribution&quot;&gt;布瓦松分布 Poisson Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定義 Definition&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A random variable \(X\) is said to be a &lt;em&gt;poisson&lt;/em&gt; random variable with peremeter \(\lambda\), shown as &lt;strong&gt;\(X \sim Poisson(\lambda)\)&lt;/strong&gt;, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\frac{e^{-\lambda} \lambda^k}{k!} ,&amp; k \in R_X \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。&lt;/p&gt;
+
+&lt;p&gt;既然上面的式子為 PMF，那我們來檢驗
+&lt;strong&gt;\(\sum_{k \in R_X}{P_k(x)} = 1\)&lt;/strong&gt;
+是否正確。&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+\sum_{k \in R_X}{P_k(x)} &amp;= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&amp;= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;Note: 根據 Taylor Series(泰勒展開式) &lt;strong&gt;\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)&lt;/strong&gt;，上列式子可以寫成，&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+\begin{align}
+&amp;= e^{-\lambda} e^{\lambda} \\
+&amp;= 1 \\
+\end{align} %]]&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;The number of emails that I get in a weekday can be modeled by a Poisson distribution with an average of 0.2 emails per minute.&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;What is the probability that I get no emails in an interval of length 5 minutes?&lt;/li&gt;
+    &lt;li&gt;What is the probability that I get more than 3 emails in an interval of length 10 minutes?&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Poisson as an approximation for binomial&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &amp;gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}&lt;/script&gt;
+
+&lt;p&gt;\(X \sim Poisson(\lambda = 5)\) 的函數圖形，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/Poisson.png&quot; alt=&quot;Poisson.png&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;參考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817&quot;&gt;Mathematical Statistics with Applications 7th Edition&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.probabilitycourse.com&quot;&gt;Introduce To Proability, Statistics and Random Process&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ccckmit.wikidot.com/st:main&quot;&gt;陳鍾誠的網站&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>[統計]離散型(Discrete)隨機變數與其機率分佈(2)</title>
@@ -32,7 +2551,7 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，&lt;br 
   &lt;li&gt;Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)&lt;/script&gt;
 
 &lt;p&gt;且期望值 \(E(X)\) 會等於平均數 \(\mu\)&lt;/p&gt;
 
@@ -116,7 +2635,7 @@ E[\sin(X)] &amp; = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
   &lt;li&gt;且根據 LOTUS，這個式子可以再寫成&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(X - \mu)^2P(x)&lt;/script&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)&lt;/script&gt;
 
 &lt;hr /&gt;
 &lt;h3 id=&quot;期望值的運算&quot;&gt;期望值的運算&lt;/h3&gt;
@@ -173,14 +2692,12 @@ V(X) = \sigma^2 &amp; = E[(X - \mu)^2] \\
 &lt;/blockquote&gt;
 
 &lt;hr /&gt;
-
-&lt;hr /&gt;
 &lt;p&gt;參考：&lt;/p&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817&quot;&gt;Mathematical Statistics with Applications 7th Edition&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.probabilitycourse.com&quot;&gt;Introduce To Proability, Statistics and Random Process&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ccckmit.wikidot.com/st:main&quot;&gt;陳鍾誠的網站&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bmalone.weebly.com/uploads/2/2/3/9/22391186/bluman_statistics_book.pdf&quot;&gt;Allan G. Bluman Elementary Statistics – a step by step approach&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
@@ -213,6 +2730,14 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，&lt;br 
 
   &lt;p&gt;\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) &lt;br /&gt;
 \( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;擲兩枚硬幣，其樣本空間為 \( R = \{HH, HT, TH, TT\}  \)，共有 \(2^2\) 種可能。 &lt;br /&gt;
+若將 H 定義為 1，T 定義為 0，則其隨機變數 \(X\) 的值為 \( \{0, 1, 2\}\)&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;而隨機變數又分為 1. &lt;em&gt;離散型&lt;/em&gt; 與 2. &lt;em&gt;連續型&lt;/em&gt;，這一章節我們只會討論離散型。&lt;/p&gt;
@@ -276,14 +2801,33 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，&lt;br 
   &lt;li&gt;所有事件機率總和等於 1&lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;&lt;strong&gt;離散型 PMF 圖&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;擲兩枚硬幣，出現 head 為 1，tail 為 0 ，其 PMF 函數為&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,&amp; \;for\; x = 0 \\
+1/2,&amp; \;for\; x = 1 \\
+1/4,&amp; \;for\; x = 2 \\
+0,&amp; otherwise \\
+\end{array}\right. %]]&gt;&lt;/script&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;函數圖為，&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/PMF_two%20coins.png&quot; alt=&quot;PMF_two coins.png&quot; /&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;參考：&lt;/p&gt;
 
 &lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817&quot;&gt;Mathematical Statistics with Applications 7th Edition&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.probabilitycourse.com&quot;&gt;Introduce To Proability, Statistics and Random Process&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://ccckmit.wikidot.com/st:main&quot;&gt;陳鍾誠的網站&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bmalone.weebly.com/uploads/2/2/3/9/22391186/bluman_statistics_book.pdf&quot;&gt;Allan G. Bluman Elementary Statistics – a step by step approach&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
