@@ -11,6 +11,7 @@ This post is based on the [732A92 Texting Mining](https://www.ida.liu.se/~732A92
 
 這門課教授的是英文的文字探勘，中文與英文本身在結構上有非常大的差異，所以有些解析和斷詞的方法中文可能並不適用，但在基本概念上還是有相同的地方。
 
+每個主題都有一個 Lab 附在文章最後。
 
 ***
 
@@ -20,8 +21,15 @@ Information Retrieval (IR) is finding material (usually documents) of an unstruc
 
 中文稱為「資訊檢索」。從一堆的 unstructured 資料中（通常是文字）找出符合我們需要的條件的資料。
 
-例如，google 搜尋就是一個例子。我們在搜尋 bar 裡輸入我們想要找到的關鍵字，google 搜尋引擎會從它儲存的所有 database 中找出符合我們關鍵字條件的網站給我們。
+例如，google 搜尋就是一個例子。我們在搜尋 bar 裡輸入我們想要找到的關鍵字，google 搜尋引擎會從它儲存的所有 database（網站們） 中找出符合我們關鍵字條件的網站給我們。
 
+***
+
+那我們要如何找到包含這些關鍵字的文章呢？
+
+最直觀地想應該就是把有我們搜尋的關鍵字的文章抓出來吧！這就是 Boolean retrieval。
+
+在進入 Boolean retrieval 之前先來看一下 The classic search model。
 
 ### The classic search model
 
@@ -31,12 +39,13 @@ Information Retrieval (IR) is finding material (usually documents) of an unstruc
 
 ![PMF_two coins.png]({{ "/img/posts/The classic search model.png" | absolute_url }})
 
+***
 
 ### Boolean retrieval
 
 The Boolean retrieval model is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms, that is, in which terms are combined with the operators AND, OR, and NOT. The model views each document as just a set of words.
 
-很直覺的方法要找出包含關鍵字的可以使用 terms('words') 是否包含在 documents 裡。
+很直覺的方法要找出包含關鍵字的可以使用 terms(通常是個單詞) 是否包含在 documents 裡。
 
 例如，現在有 Sherlock Holmes 小說文字。我想要找出哪些篇章符合出現 'Moriarty' 和 'Lestrade' 但不包含 'Adair'。那麼下的 query 就會是 *Moriarty AND Lestrade AND NOT Adair*
 
@@ -57,7 +66,7 @@ The Boolean retrieval model is a model for information retrieval in which we can
 - Term–document matrices are sparse. 可以從上面的 matrix 看到，有很多的 0 ，也就是說其實很多資訊並不需要，但卻還是需要儲存。
 - 假如現在有 1,000,000 份 documents，有 500,000 不同的 terms ，這樣的條件下會產生 a matrix with 500,000,000,000 entries (62,5 GB)。
 
-所以我們必須得使用別的辦法減少不必要的資訊儲存。
+所以我們必須得使用別的辦法減少不必要的資訊儲存。這時候就有了 Inverted index。
 
 
 **Inverted index**
@@ -69,12 +78,16 @@ The inverted index is a key–value mapping, the basic idea is shown below.
 - the list for terms identifies those documents that contain the terms
 
 ![PMF_two coins.png]({{ "/img/posts/Inverted index.png" | absolute_url }})
-
+ 
+從上圖我們可以看到，和 Term–document matrix 不一樣的是 Inverted index 只儲存了有包含該單詞的 document ids。
 
 ***
 
-## Index construction
+現在我們知道我們要的是去看那些關鍵字是否包含在 documents 中，但我們並不會每一次找關鍵字的時候一篇一篇文章搜索，我們會先建立一個儲存好所有 term 的 matrix，
+但我們要怎麼決定是哪些 terms 要被儲存呢？
 
+
+## Index construction
 
 The major steps in index construction:
 
@@ -123,9 +136,7 @@ split 無法排除標點符號的問題，python 的 spacy 可以將標點符號
 
 
 ### Stop words
-A stop word is a word that is frequent but does not contribute much value for the application in question.
-
-For example: a, the, and...
+A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and...
 
 但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們到底或許可以根據分析的目的 Sherlock Holmes 考慮將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。
 
@@ -139,17 +150,16 @@ For example: a, the, and...
 
 但在分析前必須要將這些相同意義但不同型的單字修正為相同以便分析。
 
-- The term *lexeme* refers to a set of word forms that all share the same fundamental meaning.
-word forms run, runs, ran, running – lexeme run
+- The term *lexeme* refers to a set of word forms that all share the same fundamental meaning. For example: word forms run, runs, ran, running – lexeme run
 
 - The term *lemma* refers to the particular word form that is
-chosen, by convention, to represent a given lexeme.
-what you would put into a lexicon
-
+chosen, by convention, to represent a given lexeme. For example: what you would put into a lexicon
 
 ***
 
 ## Ranked retrieval
+
+進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。
 
 **Problems with Boolean retrieval**
 
@@ -163,8 +173,7 @@ what you would put into a lexicon
 
 - Based on the score, a ranked retrieval system can return a list of the top documents in the collection with respect to the query.
 
-
-前面提到的 boolean retrieval 只考慮了文件是否包含或不包含要的詞彙，但現在我們想要將那個詞彙有「重要」也考慮進去，也就是考慮那個詞彙在文件中的 weight。
+前面提到的 boolean retrieval 只考慮了文件是否包含或不包含要的詞彙，為了那個詞彙的「重要性」也考慮進去，我們要給予每個 term 不同的 weight。
 
 
 ### Term weighting
@@ -186,11 +195,9 @@ TD–IDF is Term frequency–inverse document frequency. This formula includes t
 
 The number of times a term t occurs in a document d is called the term frequency of t in d, and is denoted by tf(t, d).
 
-
 -*A problem with term frequency*
 
 Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，
-
 
 $$
 weight(t, d) = \left\{ \begin{array}{rcl}
@@ -216,11 +223,11 @@ It denotes by idf(t):
 
 $$\textrm{idf(t)} = log \frac{N}{df(t)}$$
 
-df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小。
+df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。
 
-**tf–idf weight**
+**TD–IDF Weight**
 
-現在我們有了 td 和 idf，則
+現在我們有了 td 和 idf，tf–idf weight 就是將這兩個數字相乘（出現次數乘以重要性），
 
 The **tf–idf weight** of a term t in a document d is defined as
 
@@ -286,13 +293,19 @@ Recall (R) is the fraction of relevant documents that are retrieved
 
 $$Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})$$
 
+***
 
-
+**Lab:** [Information Retrieval Lab](https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb)
 
 ***
 
 **Reference:**
 <br>
 [732A92 Texting Mining](https://www.ida.liu.se/~732A92/index.en.shtml)
-
+<br>
+[Introduction to Information Retrieval](https://nlp.stanford.edu/IR-book/information-retrieval-book.html)
+<br>
 [[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯](https://taweihuang.hpd.io/2017/03/01/tfidf/)
+<br>
+[Vector Space Model(1)](https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/)
+
