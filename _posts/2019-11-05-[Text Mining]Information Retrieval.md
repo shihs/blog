@@ -260,13 +260,51 @@ In ranked retrieval based on term frequency, the only relevant information is ho
 
 
 
+### The vector space model – idea 1
+Represent documents as vectors in a high-dimensional space:
+
+- The dimensions (axes) of the space correspond to the terms in
+the vocabulary (potentially relevant terms). For example: could be set of all words in the collection, set of most frequent words, ...
+
+- The values of the vector components depend on the term weighting scheme: Boolean values, counts, tf–idf values, ... (in scikit-learn: CountVectorizer, TfidfVectorizer)
 
 
 
+### The vector space model – idea 2
+To rank documents in the vector space model,
 
+- we represent the query as a vector in the same space as the documents in the collection
 
+- we compute the score of a candidate document as the similarity between its document vector and the query vector (similarity = proximity in the vector space)
 
+### Cosine similarity
 
+以下舉一個從一篇[部落格](https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/)看到的例子，
+
+例如:
+Query = {“Hello"}
+Doc1 = {“Foo", “Foo"}
+Doc2 = {“Hello", “World"}
+
+在經過計算之後，我們知道其向量分別為（可以使用 tf-idf values, counts,... 等等）
+
+Query = (1, 0, 0)
+Doc1 = (0, 0, 2)
+Doc2 = (1, 1, 0)
+
+我們可以使用歐幾里德距離算出 query 和兩個 documents 的距離分別是，根號5和1。但計算歐幾里德距離忽略掉了單詞出現的頻率的影響。
+
+如果說今天把上面的向量改一下，
+
+Query = (2, 0, 0)
+Doc1 = (0, 0, 4)
+Doc2 = (2, 2, 0)
+
+這時候 所有的距離都變成了兩倍，但其實他們完全是平行的向量。
+
+那如果我們考慮向量之間的角度呢？也就是計算兩個向量的 dot，這時候會發現，長度還是影響了最後的數值。
+
+因此，使用 **Cosine similarity** 來將數值 normalized。使用 cosine 後，數值只會介於 -1 和 1 之間，並且只需要考慮非0的數值。
 
 ***
 
