@@ -254,7 +254,6 @@ where N denotes the number of documents in the collection.
 
 - Documents as sets of terms
 In Boolean retrieval, the only relevant information is whether or not a term is present in a document.
-
 - Documents as bags of terms
 In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.
 
@@ -265,7 +264,6 @@ Represent documents as vectors in a high-dimensional space:
 
 - The dimensions (axes) of the space correspond to the terms in
 the vocabulary (potentially relevant terms). For example: could be set of all words in the collection, set of most frequent words, ...
-
 - The values of the vector components depend on the term weighting scheme: Boolean values, counts, tf–idf values, ... (in scikit-learn: CountVectorizer, TfidfVectorizer)
 
 
@@ -274,7 +272,6 @@ the vocabulary (potentially relevant terms). For example: could be set of all wo
 To rank documents in the vector space model,
 
 - we represent the query as a vector in the same space as the documents in the collection
-
 - we compute the score of a candidate document as the similarity between its document vector and the query vector (similarity = proximity in the vector space)
 
 ### Cosine similarity
