@@ -55,7 +55,7 @@ $$d(i, j) = \sqrt[q]{(|x_{i_1} - x_{j_1}|^q + |x_{i_2} - x_{j2}|^q + \ldots + |x
 - symmetric binary variables: both states are equally important; 0/1
 - asymmetric binary variables: one state is more important than the other (e.g. outcome of disease test); 1 is the important state, 0 the other
 
-![PMF_two coins.png]({{ "/img/posts/Contingency tables for Binary Variables.png" |absolute_url}} )
+![PMF_two coins.png]({{ "/img/posts/Contingency tables for Binary Variables.png" |absolute_url}})
 
 
 - Accuracy for symmetric binary variables
