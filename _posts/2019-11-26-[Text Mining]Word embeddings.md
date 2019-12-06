@@ -56,7 +56,7 @@ word embedding 方法可以使用最重要的就是因為有 distributional hypo
 如果還是不太明白，[這篇部落格](http://cpmarkchang.logdown.com/posts/772665-nlp-vector-space-semantics)應該可以看懂。
 
 **補充：**
-從上面的 matrix 可能會想到一件事，*context words*等於是決定了 target words 的向量啊！
+從上面的 matrix 可能會想到一件事，*context words* 等於是決定了 target words 的向量啊！
 換句話說，當我們分析不同的文本的時候，會需要不同的 context words來算出 word embeddings。想像，如果今天要分析新聞報導和 ptt 內容，不太可能使用一樣的 context words，畢竟ptt用語和新聞用語會有很大的不同。（蛤？你說記者都抄 ptt 內容嗎？XDDD）
 
 ***
@@ -66,12 +66,12 @@ word embedding 方法可以使用最重要的就是因為有 distributional hypo
 word embeddings 的應用
 
 - finding similar words. 找到相似的字，像是上面的例子，找出哪一個字和 cheese 比較相似。
-- answering ‘odd one out’-questions. 找出不一樣的詞，譬如說  lunch, breakfast, dinner, car 哪一個詞屬於不同類？
+- answering ‘odd one out’ questions. 找出不一樣的詞，譬如說  lunch, breakfast, dinner, car 哪一個詞屬於不同類？ (根據上面提到的概念，lunch, breakfast, dinner 這三個的 vector 應該會比較接近，會在比較接近的上下文中出現)
 
 
 ### Limitations of word embeddings
 
-- There are many different facets of ‘similarity’. Ex. Is a cat more similar to a dog or to a tiger? (在不同情境下，cat 和 dog 可能比較相似，都是寵物，但如果以生物的角度來看，cat 和 tiger 都屬於貓科動物，這時候 cat 和 tiger 會比較相似)
+- There are many different facets of ‘similarity’. Ex. Is a cat more similar to a dog or to a tiger? (在不同情境下，cat 和 dog 可能比較相似。譬如說，貓和狗都是寵物，但如果以生物的角度來看，cat 和 tiger 都屬於貓科動物，這時候 cat 和 tiger 會比較相似)
 
 - Text data does not reflect many ‘trivial’ properties of words. Ex. more ‘black sheep’ than ‘white sheep’ (如果只分析文本，因為大部分的羊都是白色的，所以在提到羊的時候並不會特別提到顏色，但當提到比較稀少的黑羊時，反而會特別說到 black，這會導致在分析時好像黑羊出現的頻率比白羊出現的頻率高)
 
@@ -84,7 +84,7 @@ word embeddings 的應用
 
 到目前為止，看起來都非常合理，那還會有什麼問題呢？
 
-這裡會碰到和之前提到過的，稀疏性的問題。如果今天 context words 有十萬個字，那麼 target words 就會是在十萬維度的空間的 vectors，而且可能會有很多的值都是 0 的狀況發生。那這樣要用什麼方法解決矩陣的稀疏性並產生 word embeddings（也就是每個詞的向量） 呢？
+這裡會碰到和之前提到過的，矩陣*稀疏性*的問題。如果今天 context words 有十萬個字，那麼 target words 就會是在十萬維度的空間的 vectors，而且可能會有很多的值都是 0 的狀況發生。那這樣要用什麼方法解決矩陣的稀疏性並產生 word embeddings（也就是每個詞的向量） 呢？
 
 從不同的面向來看幾個常見的 word embedding 方法，
 - Learning word embeddings via *matrix factorization*
@@ -92,13 +92,13 @@ word embeddings 的應用
 2. Positive Pointwise mutual information(PPMI)
 - Learning word embeddings via *language models*
 1. N-gram
-2. Neural language models
+2. Neural language models(Ex. word2vec)
 
 以下就要來介紹這幾種方法。
 
 ***
 
-## Singular Value Decomposition
+## Singular Value Decomposition(SVD)
 
 - The rows of co-occurrence matrices are long and sparse. Instead, we would like to have word vectors that are short and dense. 簡單來說，co-occurrence matrices 會有稀疏性的問題。 
 - One idea is to approximate the co-occurrence matrix by another matrix with fewer columns. Singular Value Decomposition 的想法是，將這個又長又臭的 co-occurrence matrix 用另比較少 columns 的 matrix 取代。
@@ -107,11 +107,11 @@ word embeddings 的應用
 ### 什麼是 Singular value decomposition（奇異值分解）?
 
 推薦[李宏毅老師的線性代數](https://www.youtube.com/watch?v=OEJ0wxxLO7M)
-- *Singular value decomposition(SVD)* can be applied on any matrix. (不需要是方陣)
+- *Singular value decomposition(SVD)* can be applied on any matrix. (不需要是方陣。比較：PCA 也是一個可降維的方法，但它的矩陣就必須要是方陣。)
 
 SVD 的概念就是，任一一個矩陣 $$A_{m \times n}$$，它都可以拆解成三個矩陣（$$U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}$$）的相乘。
 
-其中，$$U_{m \times n}$$ 的 columns 是 *Orthonormal*，而 $$V^T_{n \times n}$$ 的 rows 是 *Orthonormal*，$$\Sigma_{m \times n}$$ 是 *Diagonal*(只有對角線有非負的值，且)。
+其中，$$U_{m \times n}$$ 的 columns 是 *Orthonormal*，而 $$V^T_{n \times n}$$ 的 rows 是 *Orthonormal*，$$\Sigma_{m \times n}$$ 是 *Diagonal*(只有對角線有非負的值，且由大到小)。
 
 ![]({{ "/img/posts/SVD.png" |absolute_url}})
 
@@ -119,16 +119,16 @@ SVD 的概念就是，任一一個矩陣 $$A_{m \times n}$$，它都可以拆解
 
 ![]({{ "/img/posts/Sigma.png" |absolute_url}})
 
-而 $$\sigma_r, ~~where~~1 \le r \le k$$ 是奇異值（singular value），而r越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留$$\Sigma$$較重要的前面幾行得到一個相似的矩陣$$A$$。
+而 $$\sigma_r, ~~where~~1 \le r \le k$$ 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 $$\Sigma$$ 較重要的前面幾行得到一個相似的矩陣 $$A$$。
 
-$$A_{m \times n} = U_{m \times r}, \Sigma_{r \times r}, V^T_{r \times n} $$
+$$A_{m \times n} = U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n} $$
 
 參考[線代啟示錄-奇異值分解 (SVD)](https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/)的圖，
 
 ![]({{ "/img/posts/svd2.jpg" |absolute_url}})
 
 
-回到我們的 word-embedding。也就是說，使用 SVD 可以利用減少$$\Sigma$$的維度來處理稀疏性的問題，雖然刪除了一些詞仍舊保留重要的詞。
+回到我們的 word-embedding。也就是說，使用 SVD 可以利用減少 $$\Sigma$$ 的維度來處理稀疏性的問題，雖然刪除了一些詞仍舊保留重要的詞。
 
 - Each row of the (truncated) matrix 𝑼 is a k-dimensional vector that represents the ‘most important’ information about a word.
 - A practical problem is that computing the singular value decomposition for large matrices is expensive.
@@ -139,7 +139,7 @@ $$A_{m \times n} = U_{m \times r}, \Sigma_{r \times r}, V^T_{r \times n} $$
 
 ### Pointwise mutual information(PMI)
 
-- Raw counts favour pairs that involve very common contexts. Ex.the cat, a cat will receive higher weight than cute cat, small cat
+- Raw counts favour pairs that involve very common contexts. Ex.the cat, a cat will receive higher weight than cute cat, small cat.
 - We want a measure that favours contexts in which the target word occurs more often than other words.
 - A suitable measure is pointwise mutual information (PMI):
 
@@ -148,14 +148,14 @@ $$PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}$$
 簡單來說，我們可以用 PMI 公式來看兩個字之間的關係。
 
 
-現在我們把 x 看成我們的 target word，y 看成我們的 context word，
+現在我們把 $$x$$ 看成我們的 target word，$$y$$ 看成我們的 context word，
 
-- We want to use PMI to measure the associative strength between a word w and a context c in a data set D:
+- We want to use PMI to measure the associative strength between a word $$w$$ and a context $$c$$ in a data set $$D$$:
 
 $$PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}$$
 
 
-但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words.
+但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 $$w$$ 和 $$c$$ 並沒有共同出現過，再取 log，整個值會變成 -Inf)
 
 所以這時候就有了 **Positive Pointwise mutual information(PPMI)**。
 
@@ -170,7 +170,7 @@ $$􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)$$
 
 ***
 
-### Language models
+## Language models
 
 - A *probabilistic language model* is a probability distribution over sequences of words in some language.
 - Recent years have seen the rise of *neural language models*, which are based on distributed representations of words.
@@ -187,6 +187,7 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
 - An n-gram is a contiguous sequence of n words or characters. Ex. unigram (Text), bigram (Text Mining), trigram (Text Mining course)
 - An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.
+- n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。
 
 
 **Formal definition of an n-gram model**
@@ -200,7 +201,7 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
 **Unigram model**
 
-*n = 1*
+*n = 1* 不考慮前面出現的字。
 ![]({{ "/img/posts/Unigram model.png" |absolute_url}})
 
 Thus contexts are empty.
@@ -213,7 +214,7 @@ Thus contexts are empty.
 
 **Bigram models**
 
-n = 2
+*n = 2* 考慮前面出現的一個字。
 
 ![]({{ "/img/posts/Bigram models.png" |absolute_url}})
 
@@ -294,3 +295,5 @@ Thus contexts are unigrams.
 [自然語言處理 -- Pointwise Mutual Information](http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information)
 <br>
 [NLP Lunch Tutorial: Smoothing](https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf)
+<br>
+[機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？](https://kknews.cc/tech/83yx3qn.html)
