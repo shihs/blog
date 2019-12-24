@@ -2,6 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000blog/text%20mining/2019/11/26/Text-Mining-Word-embeddings/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000blog/text%20mining/2019/11/13/Text-Mining-Text-classification/</loc>
+    </url>
+
+    <url>
+        <loc>http://localhost:4000blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/</loc>
     </url>
 

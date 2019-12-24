@@ -65,7 +65,80 @@ $$\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{
 
 ***
 
-**Lab:** [Information Retrieval Lab](https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb)
+## Naive Bayes classifier
+
+### Bayes' theorem
+
+We know that $$C$$ is classes, $$x_i, i = 1, \cdots,n$$ is features. Using Bayes' theorem, the conditional probability can be decomposed as
+
+$$p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}$$
+
+也就是，
+
+$$\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}} $$
+
+
+根據上式，我們可以將分母視為常數，因為 features $$x_i, i = 1, \cdots,n$$ 的值是給定的，且與 $$C$$ 無關，所以可以得到
+
+$$
+\begin{align}
+p(C, x_1, \cdots,x_n) & = p(C)~p(x_1,\cdots,x_n|C) \\
+& \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
+& \propto \cdots\\
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
+\end{align}
+$$
+
+
+### Naive Bayes assumption
+
+Naive Bayes 假設 
+$$p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j$$
+
+根據 Naive Bayes 的假設，前面的式子我們可以寫成，
+
+$$
+\begin{align}
+p(C|x_1,..., x_n) & \propto p(C, x_1, \cdots,x_n) \\
+& \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
+& \propto p(C)~\prod_{i=1}^n p(x_i|C)
+\end{align}
+$$
+
+根據上面的推導過程，我們可以得到，
+
+$$
+p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)
+$$
+
+### Naive Bayes classifer
+
+而 Naive Bayes classifer 就是取各個分類 $$C_m, m = 1, \cdots, k$$ 
+中 $$p(C|x_1,..., x_n)$$ 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示
+
+$$C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)$$
+
+而 $$C_m$$ 就是最後的分類結果。
+
+
+### Two Classic Naive Bayes Variants for Text
+
+1. Multinomial Naive Bayes
+- Data follows a multinomial distribution (多項分布)
+- Each feature values is a count (word occurrence counts, TF-IDF weighting, ...)
+
+2. Bernoulli Naive Bayes
+- Data follows a multivariate Bernoulli distribution
+- Each feature is binary (word is present / absent)
+
+
+
+
+***
+
+**Lab:** [Text classification Lab](https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L2.ipynb)
 
 ***
 
@@ -75,7 +148,7 @@ $$\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{
 <br>
 [如何辨別機器學習模型的好壞？秒懂Confusion Matrix](https://www.ycc.idv.tw/confusion-matrix.html)
 <br>
-
+[wikipeida - 單純貝氏分類器](https://zh.wikipedia.org/wiki/朴素贝叶斯分类器)
 
 
 

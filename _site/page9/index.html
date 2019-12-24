@@ -58,7 +58,7 @@
         </a>
         <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
       </h1>
-      <p class="lead">I share some stuff.</p>
+      <p class="lead">Just for learning.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -168,6 +168,632 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">
+        [Python][爬蟲]如何下載 zip 檔
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 25, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 25, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這裡要示範使用三個不同的package下載zip檔。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.blog.pythonlibrary.org/wp-content/uploads/2012/06/wxDbViewer.zip'</span>
+
+<span class="k">print</span> <span class="s">"downloading with urllib"</span>
+<span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">"code.zip"</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">"downloading with urllib2"</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"code2.zip"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">code</span><span class="p">:</span>
+    <span class="n">code</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="s">"downloading with requests"</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"code3.zip"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">code</span><span class="p">:</span>
+    <span class="n">code</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p><a href="https://dzone.com/articles/how-download-file-python" target="_blank">參考</a></p>
+ -->
+    <div class="post-excerpt"><p>這裡要示範使用三個不同的package下載zip檔。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">
+        [Excel][VBA]寄出內文含圖檔的outlook信件
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 5, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 5, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Excel">Excel</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#VBA">VBA</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這裡要介紹如何使用Excel VBA<br />
+在信件內容包含截取sheet中的特定欄位區塊，<br />
+並將此區塊變為圖檔包含在內文中寄出。<br /></p>
+
+<p>現在要截取一份長這樣的檔案<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/2007909/E6x1745kT82DMCqRbLq2_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" />
+有兩種方法。<br /></p>
+
+<p>第一種方法是，<br />
+先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。<br /></p>
+
+<pre><code class="language-VBA">Sub PrintScreen()
+
+      '複製工作表要存圖檔的範圍
+        Sheets("Sheet1").Select
+        Set rng = Range("A1:B3")
+        rng.CopyPicture
+
+      ' Excel 存圖檔的精簡程式碼。
+        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  '新增 圖表
+            .Chart.Paste                                                '貼上 圖片
+            .Chart.Export Filename:="test.PNG", Filtername:="PNG" '匯出 圖片
+            .Delete                                                     '刪除 圖表
+        End With
+
+End Sub
+
+Sub SendMail_1()
+    
+    Dim objOutlook As Object
+    Dim objMail As Object
+    
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+    
+    With objMail
+        .to = "address@email.com"
+        .Subject = "Subject"
+        .Body = "mail body"
+        .HTMLbody = .HTMLbody &amp; "&lt;br&gt;&lt;B&gt;Embedded Image:&lt;/B&gt;&lt;br&gt;" _
+                &amp; "&lt;img src='test.PNG'" &amp; "width='250' height='100'&gt;&lt;br&gt;" _
+                &amp; "&lt;br&gt;Best Regards, &lt;br&gt;Sumit&lt;/font&gt;&lt;/span&gt;"
+       ' objMail.Attachments.Add "test.PNG"       ' 使用附件檔案
+       '.Display     ' 可以編輯郵件內容，再按下 傳送 鍵。
+       '.Save         ' to save a copy in the drafts folder
+        .Send        ' 直接送出郵件
+        
+    End With       
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+    
+End Sub
+
+</code></pre>
+
+<p>第二種方法是，<br />
+直接截取區要的區塊，變成圖檔，然後貼到信件內容。</p>
+
+<pre><code class="language-VBA">Sub SendMail_2()
+
+    Set objOutlook = CreateObject("Outlook.Application")
+    Set objMail = objOutlook.CreateItem(0)
+
+    ' mail body
+    strbody = "mail body&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"
+
+    'Copy range of interest
+    Dim r As Range
+    Set r = Sheets("Sheet1").Range("A1:B3")
+    r.Copy
+
+    'Paste as picture in sheet and cut immediately
+    Dim p As Picture
+    Set p = ActiveSheet.Pictures.Paste
+    p.Cut
+        
+    With objMail
+        .to = "address@email.com"
+        '.cc =
+        '.bcc = ""
+        .Subject = "Subject"
+        .HTMLbody = strbody
+        '.Display
+        
+    End With
+
+
+    'Get its Word editor
+    objMail.Display
+    Dim wordDoc As Object
+    Set wordDoc = objMail.GetInspector.WordEditor
+
+    'Paste picture
+    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste
+    
+    'send mail
+    objMail.Send
+    
+    Set objOutlook = Nothing
+    Set objMail = Nothing
+
+End Sub
+
+</code></pre>
+
+ -->
+    <div class="post-excerpt"><p>這裡要介紹如何使用Excel VBA<br />
+在信件內容包含截取sheet中的特定欄位區塊，<br />
+並將此區塊變為圖檔包含在內文中寄出。<br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread" data-disqus-identifier="/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">
+        [Python][爬蟲]不同的 Content-Type (multipart/form-data)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 30, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 30, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1" target="_blank">台灣精品獎得獎名單</a>。<br /></p>
+
+<p>我想要爬取的條件是，
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+
+<p>這時候會猜測這應該是個post的requests。</p>
+
+<p>果然，在按下查詢後，<br />
+出現了一個cross_list的可疑人物，<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/iJbMP5kdRba31P5IoKG0_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+
+<p>因為是post，<br />
+所以會期望在headers裡找到 “Form Data”，<br />
+這裡面應會藏著post需要的參數。<br /></p>
+
+<p>但不幸的是，什麼也沒有，<br />
+只找到長得像這樣的”Request Payload”<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+
+<p>然後Content-Type是multipart/form-data<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/SEe7tcApQfCSkEeYEgml_content-type.PNG" alt="content-type.PNG" /></p>
+
+<p>其實，我們平常需要的data form裡的資料就藏在Request Payload裡。<br />
+抓取的方式是，<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+
+<p>以這行為例，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>------WebKitFormBoundaryTaDJAA82fTd3ug3W
+Content-Disposition: form-data; name="awards[]"
+
+1
+</code></pre></div></div>
+<p>name後的 “award[]” 就會是dictionary的key，
+底下的 1 ，就會是value，
+所以就會變成</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+<span class="s">"awards[]"</span> <span class="o">=</span> <span class="s">"1"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>所以就把Request Payload所有的資訊寫成</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
+	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
+	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
+	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"Z"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>但這樣寫完會覺得非常不合理，<br />
+因為會有一堆同樣的key但給予不同的value，<br />
+也就是說會key會一直被新的value取代。<br /></p>
+
+<p>我當時的想法是，<br />
+看到 [] 就會很想要在裡面塞數字順位，<br />
+果然，從0開始，將相同的key編號，<br />
+就成功了。<br /></p>
+
+<p>所以這樣送出requests，</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
+<span class="c">#爬取台灣精品得獎名單http://www.taiwanexcellence.org/index.php/awards/now/cross_list/1/2017/2/1</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.taiwanexcellence.org/index.php/awards/now/send_search/1/2017/2/1/cross_list"</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
+	<span class="s">"awards[0]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
+	<span class="s">"awards[1]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+	<span class="s">"awards[2]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
+	<span class="s">"years[0]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
+	<span class="s">"years[1]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
+	<span class="s">"industry[0]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
+	<span class="s">"industry[1]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
+	<span class="s">"industry[2]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
+	<span class="s">"industry[3]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
+	<span class="s">"industry[4]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
+	<span class="s">"industry[5]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
+	<span class="s">"industry[6]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
+	<span class="s">"industry[7]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
+	<span class="s">"industry[8]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
+	<span class="s">"industry[9]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
+	<span class="s">"industry[10]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
+	<span class="s">"industry[11]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
+	<span class="s">"industry[12]"</span><span class="p">:</span><span class="s">"Z"</span>
+<span class="p">}</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p><a href="https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py" target="_blank">完整的程式碼</a></p>
+
+ -->
+    <div class="post-excerpt"><p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1" target="_blank">台灣精品獎得獎名單</a>。<br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">
+        [R]顯示完整數字，不顯示科學記號
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 27, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 27, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>只要輸入，調整可顯示的位數</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>就可以改為顯示完整數字</p>
+ -->
+    <div class="post-excerpt"><p>只要輸入，調整可顯示的位數</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread';
+        this.page.identifier = '/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread" data-disqus-identifier="/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
+        [R]Error when saving xlsx workbook with package openxlsx
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 22, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 22, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
+
+<p>2.找到Rtools底下的zip.exe路徑，
+並設定rools的zip.exe路徑即可解決此問題</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
+</span></code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread';
+        this.page.identifier = '/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread" data-disqus-identifier="/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -481,477 +1107,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">
-        [R]在R中使用system呼叫python-給予參數
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on April 24, 2017</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">April 24, 2017</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>假如現在我想要帶入參數給python script要怎麼做呢？</p>
-
-<p>首先，<br />
-在python程式碼的部分，<br />
-要使用 <strong>sys.arg[]</strong> 讓python程式獲取參數。</p>
-
-<p>還有，在 <strong>sys.arg[0]</strong> 表示的是程式名稱，<br />
-所以要使用 <strong>sys.arg[1]</strong> 才是表示要讀取的第一個參數。</p>
-
-<p>假如今天有支 <em>python_script.py</em></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="n">string</span> <span class="o">=</span> <span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">string</span>
-</code></pre></div></div>
-
-<p>在cmf中呼叫這支python程式</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python python_script.py world
-</code></pre></div></div>
-
-<p>R裡的system()要打的指令就是cmf中打的指令。<br />
-所以在R中就會變成，<br /></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py world"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>結果就會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, world
-</code></pre></div></div>
-
-<p>最後，<br />
-在使用system()必須要先setwd將路徑設成python_script.py所在位置。</p>
-
- -->
-    <div class="post-excerpt"><p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/#disqus_thread';
-        this.page.identifier = '/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/#disqus_thread" data-disqus-identifier="/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">
-        [R]設定 R 圖形字體
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on August 24, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">August 24, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
-以下的解法是針對windows方能使用。</p>
-
-<ol>
-  <li>使用windowsFonts函數將要使用的字體賦予一個值。
-    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowsFonts</span><span class="p">(</span><span class="n">BL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowsFont</span><span class="p">(</span><span class="s2">"微軟正黑體"</span><span class="p">))</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>在圖形中設定family。</li>
-</ol>
-
-<p>(1)使用par()在最一開始設定。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>(2) 在plot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>(3) 在ggplot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"取值"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"頻數"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">))</span><span class="w">
-</span></code></pre></div></div>
-
-<p>其實，family後是可以直接放要設定的字體完整名稱，
-不需定windowsFonts，
-只是假如字體名稱很長，
-便不需要一再地打上那麼長的名稱，
-如此以來便也適用mac。</p>
- -->
-    <div class="post-excerpt"><p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
-以下的解法是針對windows方能使用。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread';
-        this.page.identifier = '/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread" data-disqus-identifier="/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-R-batch/">
-        [R]R batch
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
-
-<p>因為.R檔無法點兩下就能執行，
-所以儲存一個R batch，再使用工作排程設定時間，
-就可以在固定時間自動執行程式。</p>
-
-<p>以下是在windows中的寫法，
-必須要先給R儲存的位置，後面放R script的位置。</p>
-
-<pre><code class="language-cmd">C:\Program Files\R\R-3.2.5\bin\R.exe" CMD BATCH "C:\Users\mypc\Desktop\myrscript.R"
-</code></pre>
-<p>將上面的程式碼貼在記事本(確認R的版本和位置)，
-再將記事本副檔名存成.bat 就完成了。</p>
-
- -->
-    <div class="post-excerpt"><p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-R-batch/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-R-batch/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/07/17/R-R-batch/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-R-batch/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
-        Windows7 自動排程
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Others">Others</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
-<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
-
-<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
-
- -->
-    <div class="post-excerpt"><p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread';
-        this.page.identifier = '/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread" data-disqus-identifier="/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
-        [R]使用 R 發送gmail Email
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>使用mailR package寫一個R的script，自動發信。</p>
-
-<p>以下幾個步驟，<br />
-1.<a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">啟用安全性較低的應用程式存取</a><br />
-2.<a href="https://github.com/rpremraj/mailR" target="_blank">使用mailR package</a></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
-
-</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
-          </span><span class="c1">#收件者</span><span class="w">
-          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
-                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
-          </span><span class="c1">#標題</span><span class="w">
-          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
-          </span><span class="c1">#內文</span><span class="w">
-          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
-          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
-          </span><span class="c1">#夾帶檔案</span><span class="w">
-          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
-          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
-          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span></code></pre></div></div>
-
-<p>另外，
-我其實還有查到gmailr這個package，
-但它有些bug，
-無法同時有信件內文又有夾帶檔案，
-所以目前找到最好的方式還是使用mailR。</p>
- -->
-    <div class="post-excerpt"><p>使用mailR package寫一個R的script，自動發信。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">0 Comments</a>
       </span>
 
     </div>

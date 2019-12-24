@@ -58,7 +58,7 @@
         </a>
         <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
       </h1>
-      <p class="lead">I share some stuff.</p>
+      <p class="lead">Just for learning.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -168,6 +168,735 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">
+        [Machine Learning]Regression splines
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 9, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 9, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+
+<p>上圖是一個 x, y 的分佈圖，紅線是這些點分部的方程式。但現實中，我們並無法真的知道紅線的方程式，我們可能使用一次方程式、二次方程式甚至更高次方的方程式去嘗試（如下圖
+）。
+<img src="http://localhost:4000/blog/img/posts/splines%20line.png" alt="splines line.png" height="380px" width="600px" /></p>
+
+<p>我們可以將擬合的多項式方程式（polynomial function）寫成，</p>
+
+<p>\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + … + \beta_n x^n + \epsilon\)</p>
+
+<p>但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。</p>
+
+<p>這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。</p>
+
+<hr />
+
+<p><strong>Basis function</strong></p>
+
+<p>\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + … + \beta_n b_n(x_i) + \epsilon_i\)</p>
+
+<p>透過 \(b_1(X)\)、\(b_2(X)\)、……、\(b_n(X)\) 可以將非線性的自變量轉換成線性。</p>
+
+<hr />
+
+<p><strong>Piecewise Function</strong></p>
+
+<p>將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。</p>
+
+<p>如下圖每個區段都是用一次方程式去擬合。\(\xi\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20linear.png" alt="piecewise linear.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>但這些 piecewise function 是有條件的。
+<br />
+雖然 piecewise function 是每個區段各自擬合出來的 function，但所有區段 function 必須整個為連續，也就是在 \(\xi\) 的交界處的值必須相同。</p>
+
+<hr />
+
+<p><strong>Cubic Spline</strong></p>
+
+<p>這裡則是使用三次方程式。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20cubic%20polynomials.png" alt="piecewise cubic polynomials.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>cubic spline 除了邊界的值相同外，還必須要一階和二階倒數相同。</p>
+
+<p>看上圖左上的圖加上邊界連續後成為右上，雖然看起來是連續的函數，但並不是完美的曲線，如果再加上一階導數相同就變成左下，再加上二階導數就可以畫出右下的圖。</p>
+
+<hr />
+
+<p>這個 R code 是畫出最上面圖的程式碼，使用 <a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a> 裡頭的範例。</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># function</span><span class="w">
+</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">11</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">^</span><span class="m">6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w">
+</span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="n">eps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># epsilon</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="w">
+
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">,</span><span class="w">
+  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># plot</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">I</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3), se = FALSE, colour = "gold1") +</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = 'loess', se = FALSE, colour = "red") +</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://zhuanlan.zhihu.com/p/34825299">一文读懂回归样条（regression splines），附Python代码</a>
+<br />
+<a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a>
+<br />
+<a href="https://www.youtube.com/watch?v=V1JRs6AP1AI">Spline Regression | Non Linear Model | Polynomial Regression</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/样条函数">wikipedia - 樣條函數</a>
+<br />
+<a href="https://datascienceplus.com/cubic-and-smoothing-splines-in-r/">Cubic and Smoothing Splines in R</a>
+<br />
+<a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf">《An Introduction to Statistical Learning with Applications in R》</a></p>
+ -->
+    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">
+        [Machine Learning]Principal Component Analysis(PCA)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
+
+<p>From: «Pattern Recognition and Machine Learning» P.561</p>
+
+<hr />
+
+<p><strong>What is PCA?</strong></p>
+
+<p>Principal Component Analysis(PCA)，中文翻作「主成分分析」。</p>
+
+<p>PCA 是一種將多維度降維的方法。
+<br />
+一個變數其實可能是多個潛在變因（laten variables）組成，但我們無法實際測量出那些 laten variables，而 PCA 就是要拆解出影響較大的變因。使用較少的變數解釋多個 variables。</p>
+
+<p>舉個例子，股市的點數上上下下，我們所能觀測到的是點數這個變數，但其實影響點數變動的潛在變因可能包含了很多市場因素，且每個因素可能又是互相影響。</p>
+
+<p>如果用數學符號表示，\(x_i\) 是我們有的變數，\(z_i\) 是裡頭含有的潛在變因，\(x_i\) 是 \(z_i\) 的線性組合（linear combination）。
+<br />
+\(x_1 = a_{11} z_1 + a_{12} z_2 + a_{13} z_3 + \epsilon_1\)
+<br />
+\(x_2 = a_{21} z_1 + a_{22} z_2 + a_{23} z_3 + \epsilon_2\)
+<br />
+\(x_3 = a_{31} z_1 + a_{32} z_2 + a_{33} z_3 + \epsilon_3\)
+<br />
+……</p>
+
+<p>可以將上式改寫成，
+<br />
+\(z_1 = x_1 u_{i1} + x_2 u_{i2} + x_3 u_{i3}\)
+<br />
+……</p>
+
+<hr />
+
+<p><strong>如何降維？</strong></p>
+
+<p>根據 «Pattern Recognition and Machine Learning» 這本書第 561 頁給了 PCA 兩種定義</p>
+<ol>
+  <li>PCA can be defined as the orthogonal projection of the data onto a lower dimensional linear space, known as the principal subspace, such that the variance of the projected data is maximized (Hotelling, 1933).</li>
+  <li>PCA can be defined as the linear projection that minimizes the average projection cost, defined as the mean squared distance tbtween the data points and their projections (Pearson, 1901).</li>
+</ol>
+
+<p>可以用上圖來理解，或是 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ#t=4m35s">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 這段。</p>
+
+<p>根據上面的定義，可以看到，降維的方法是要做 <a href="https://www.khanacademy.org/math/linear-algebra/alternate-bases/orthogonal-projections/v/linear-algebra-projections-onto-subspaces">orthogonal projection</a>，且找到投影向量讓投影後的資料變異量最大。</p>
+
+<p>這邊我使用 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 影片的內容來介紹。</p>
+
+<ul>
+  <li>maximized 什麼？
+<img src="http://localhost:4000/blog/img/posts/PCA_maximizing.png" alt="PCA_maximizing.png" height="320px" width="600px" /></li>
+</ul>
+
+<p>假如現在座標上有個綠色的點，以座標\((0, 0)\)原點，其長度為 a（影片沒有表示這是 a 向量，方便起見，後面以 a, b, c 向量表示），c 向量為 a 向量的投影方向與長度。根據畢氏定理，可以畫出一個正三角形，現在三角形的三邊長分別為 a, b, c（因為我懶得再圖上修正了，現在又變回長度）。而 PCA 要找的投影向量就是，最小化 \(b^2\) 的值，或是最大化 \(c^2\) 的值。</p>
+
+<ul>
+  <li>投影</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/PCA_projection.png" alt="PCA_projection.png" height="320px" width="600px" /></p>
+
+<p>根據上圖，這個二維座標上有好幾個點，我們現在就是要找到一條能讓投影後 variance 最大的投影向量（紅色虛線），如下圖。要找到 SS（eigenvalue） 最小的投影向量。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SS.png" alt="SS.png" height="320px" width="600px" /></p>
+
+<p>在投影前，我們會先將資料平移 \(x_i - \mu_i\)，也就是不改變點之間的相對位置，這樣不但不會影響找投影向量的結果，在計算上也比較容易。</p>
+
+<hr />
+
+<p><strong>Variation 變異量</strong></p>
+
+<p>變異量 = \(SS/(n-1), n \)是點的數量</p>
+
+<p>有了變異量以後，我們通常會想要知道每個投影向量的變異量占比。</p>
+
+<p>假如現在有 PC1 其變異量為 15，PC2 的變異量為 3，則 PC1 與 PC2 的變異量總和為 18。</p>
+
+<p>所以 PC1 = 15*100%/18 = 83%，PC2 = 3*100%/18 = 17%。</p>
+
+<p>在做 PCA 的時候，我們會根據轉換的 \(PC_i\) 的比重，來決定要考慮要使用幾個 \(PC_i\)。
+如果可以解釋百分之九十基本上就可以拿來使用。</p>
+
+<p>假如今天有一筆多維度的資料，但轉換後 PC1 與 PC2 可以表示百分之九十的變異量，那麼這時候只要使用 PC1 與 PC2 就好，且還可以在平面座標上看點的分佈。</p>
+
+<hr />
+
+<p>基本上 PCA 就是在做座標變換，將原變數投影成新變數。接著以最少的新變數來代表原始資料最大的成分（variation 涵蓋量最大）。</p>
+
+<p>其原則如下</p>
+<ul>
+  <li>新變數是原變數的線性組合</li>
+  <li>保留原變數間的最大變異量（variance）</li>
+</ul>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a>
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器-統計學習-主成分分析-principle-component-analysis-pca-58229cd26e71">機器/統計學習:主成分分析(Principal Component Analysis, PCA)</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/主成分分析">wikipedia - 主成分分析</a>
+<br />
+The Elements of Statistical Learning
+<br />
+Pattern Recognition and Machine Learning</p>
+ -->
+    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">
+        [Machine Learning]Boosting and Adaboost
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="boosting">Boosting</h2>
+
+<p><img src="http://localhost:4000/blog/img/posts/boosting.png" alt="boosting.png" height="230px" width="600px" /></p>
+
+<p>From: <a href="https://blog.bigml.com/2017/03/14/introduction-to-boosted-trees/">Introduction to Boosted Trees</a></p>
+
+<p>Boosting 也是一種 Ensemble learning，它會結合多個弱分類器（weak classifiers）成為一個較準確的分類器，也可以應用在 regression 上。</p>
+
+<hr />
+
+<p><strong>和 Bagging 有什麼不同？</strong></p>
+
+<p>Bagging 各個 classifier 產生的過程是獨立的，但 Boosting 後產生的 classifier 與前面的 classifier 有關。也就是說，Bagging 的 classifier 可以並行產生，但 Boosting 必須要有順序的產生。所以時間上來說，Bagging 可以節省比較多的時間。</p>
+
+<hr />
+
+<p><strong>與前面的分類器有關？</strong></p>
+
+<p>在 Boosting 中，每一次產生 classifier 後，後面的 classifier 會根據前面 classifier 的結果調整每個點的權重。</p>
+
+<p>在前一個 classifier 分類錯誤後，在後一個 classifier 的權重會比較重，而表現較好的則會權重減少。這就是和 Bagging 最大的不同，Bagging 中所有的點都是隨機選取，且權重都是一樣的。</p>
+
+<p>簡單來說，Boosting learns features from data.</p>
+
+<hr />
+
+<p><strong>步驟</strong></p>
+
+<ol>
+  <li>用最原始的 training data 跑一個 classifiers</li>
+  <li>利用這個 classifiers 提高分類錯誤的點的權重，降低分類正確的點的權重。</li>
+  <li>重複第二步驟 N 次，最後使用權重的平均值。</li>
+</ol>
+
+<hr />
+
+<h2 id="adaboost">AdaBoost</h2>
+
+<p><img src="http://localhost:4000/blog/img/posts/AdaBoost.png" alt="AdaBoost.png" height="350px" width="700px" /></p>
+
+<p>From: <a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a></p>
+
+<p>AdaBoost 應用了 boosting 的方法。</p>
+
+<p><strong>概念</strong></p>
+
+<p>假設現在有 n 個樣本，要執行 boosting T 次。</p>
+
+<p>第一次將所有樣本的權重都設為 \(\alpha_i\) = 1/n, i = 1, …, n</p>
+
+<p>對所有 t = 1, …, T</p>
+<ol>
+  <li>根據樣本的權重 \(\alpha_i\) 建立出 classifier \(f_t(x)\)</li>
+  <li>使用 \(f_t(x)\) 後計算 \(\epsilon_t\) 誤差</li>
+  <li>利用 \(\epsilon_t\) 算出係數 \(w_t\)</li>
+  <li>再重新計算 \(\alpha_i\)</li>
+</ol>
+
+<p>最後的 model 就會是：</p>
+
+<p>\(\hat{y} = sign \sum_{t=1}^{T} w_i f_t(x)\)</p>
+
+<p>AdaBoost 的優勢就是讓 model 能夠從錯中學，使用提升與降低權重的方式讓分類錯誤的點可以在下一次的 model 中被改進。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://leijun00.github.io/2014/10/decision-tree-2/">决策树（二）</a>
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
+<br />
+<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a>
+<br />
+<a href="https://www.coursera.org/learn/ml-classification/home/week/5">Machine Learning -  University of Washington</a>
+<br />
+<a href="https://blog.csdn.net/mach_learn/article/details/39501849">机器学习算法优缺点及其应用领域</a></p>
+ -->
+    <div class="post-excerpt"><h2 id="boosting">Boosting</h2>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">
+        [Machine Learning]Random Forest
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
+
+<p>Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 <a href="https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">bagging</a> 這篇提到的方法有點類似，但有些小差異。</p>
+
+<p>使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。</p>
+
+<hr />
+
+<p><strong>Random Forest步驟</strong></p>
+
+<p>假如有一 training data，有 N 個樣本，p 個features。
+<br />
+今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，</p>
+
+<ol>
+  <li>使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data</li>
+  <li>在這組 data 中隨機從 p 個 featrues 中選取 m (m &lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node</li>
+  <li>重複步驟 2，直到完成這個 model 為止</li>
+  <li>重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹</li>
+</ol>
+
+<p>最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。</p>
+
+<hr />
+
+<ul>
+  <li>因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。</li>
+  <li>Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。</li>
+  <li>因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。</li>
+  <li>
+    <p>Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。</p>
+  </li>
+  <li>優點：
+    <ol>
+      <li>不用做特徵（feature）選擇。</li>
+      <li>訓練完後可以知道哪些 feature 比較重要。</li>
+    </ol>
+  </li>
+</ul>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ">StatQuest: Random Forests Part 1 - Building, Using and Evaluating</a>
+<br />
+<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
+<br />
+<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a></p>
+ -->
+    <div class="post-excerpt"><p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">
+        [Machine Learning]Bagging
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="bagging">Bagging</h2>
+
+<p><img src="http://localhost:4000/blog/img/posts/bagging.png" alt="bagging.png" height="450px" width="500px" /></p>
+
+<p>From: Hastie, T., Tibshirani, R. and Friedman, J. The Elements of Statistical Learning. Springer, 2009. p.285</p>
+
+<hr />
+
+<p><strong>Bagging 是什麼？</strong></p>
+
+<p>Bootstrap aggregating (bagging) is a machine learning ensemble meta-algorithm to improve classification and regression models in terms of stability and classification accuracy. It also reduces variance and helps to avoid ‘overfitting’. Although it is usually applied to decision tree models, it can be used with any type of model. (<a href="https://docs.rapidminer.com/latest/studio/operators/modeling/predictive/trees/parallel_decision_tree.html">Decision Tree - Bagging</a>)</p>
+
+<p>簡單來說，Bagging是一種 Ensemble learning方法，它集結一些 model 來做最後的決策。通常會是集結表現沒那麼好的 model，讓這些 model 一起做決定，一種三個臭皮匠勝過一個諸葛亮的感覺。</p>
+
+<p>Decision tree 是一個常見的 weak classifier，所以如果在 decision tree 上使用 bagging，可以讓最後表現結果比較好，也避免 overfitting 的情況。</p>
+
+<hr />
+
+<p><strong>Boostrap</strong></p>
+
+<p>在開始說明 bagging 步驟前先介紹 bootstrap。</p>
+
+<p>bootstrap 是一種抽樣方法。假設今天有一組資料，裡頭共有 N 個樣本，我們想要有 m 個大小為 N 的樣本作為訓練資料。方法是，每次從這 N 個樣本隨機抽取，且每次都是取後放回(也就是有些樣本可能被抽到一次以上，有些樣本可能沒被抽到)，同樣的方法重複 m 次，這樣我們就會有 m 組樣本數為 N 的 y 資料集。</p>
+
+<p>這樣的方法在樣本數量少時很有用。如果樣本小，但我們用 train-validation-test 這樣的方式訓練資料，訓練的樣本資料非常小，會造成 bias 較大的問題。而使用 bootstrap 不會減少樣本的數量，也能保留 test data。</p>
+
+<hr />
+
+<p><strong>如何操作？</strong></p>
+
+<ol>
+  <li>使用 boostrap 方法從 training data 中採集 B 組樣本數與 training data 相同的資料集。</li>
+  <li>這 B 組資料集都建立一個 model， \(f_b(x)\)，共產生 B 個 model。</li>
+  <li>最後預測的結果就是將這 B 個 model 做統合。在分類問題上，可以平均各個 model 的 posterior class probabilities，或是使用 majority voting。（選機率比較大的結果或是多數決）；在回歸上，則取平均值。</li>
+</ol>
+
+<p>從最上圖可以看到，不論是使用機率或是投票決定，bagging 選出的結果的 test error 都要比個別的 model 表現較好。</p>
+
+<hr />
+
+<p>除了 Bagging 外，Ensemble learning 還有另一種常見的方法 Boosting，這篇先到這裡之後繼續介紹。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
+<br />
+<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
+<br />
+The Elements of Statistical Learning
+<br />
+Pattern Recognition and Machine Learning</p>
+
+ -->
+    <div class="post-excerpt"><h2 id="bagging">Bagging</h2>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Bagging/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Bagging/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -676,720 +1405,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2018/10/20/R-Environment/#disqus_thread" data-disqus-identifier="/r/2018/10/20/R-Environment/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/10/19/R-variable-types/">
-        [R]variable types
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on October 19, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">October 19, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
-<br />
-Here I’m going to see these 4 types more details.</p>
-
-<ol>
-  <li>What are the differences between vector, list, matrix, and data.frame?</li>
-  <li>What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</li>
-  <li>What are the outputs of <code class="highlighter-rouge">typeof()</code>?</li>
-</ol>
-
-<hr />
-
-<h3 id="1-what-are-the-differences-between-vector-list-matrix-and-dataframe">1. What are the differences between <em>vector</em>, <em>list</em>, <em>matrix</em>, and <em>data.frame</em>?</h3>
-
-<p>We can seperate these four types to two groups from different aspects.</p>
-
-<p><strong>(a) Elements type aspect</strong></p>
-<ul>
-  <li>Homogeneous data: <em>vector</em>, <em>matrix</em></li>
-  <li>Heterogeneous data: <em>list</em>, <em>data.frame</em></li>
-</ul>
-
-<p>Which means all elements in <em>vector</em> and <em>matrix</em> have to be the same type (integer, double, or character ect.).
-But elements in <em>list</em> and <em>data.frame</em> can be different types.</p>
-
-<p>For example:
-<br />
-Vector has same type of elements</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
-</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">
-</span><span class="c1">#  v</span><span class="w">
-</span><span class="c1"># [1] 1 2 3 4</span><span class="w">
-
-</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">
-</span><span class="c1"># v_ch</span><span class="w">
-</span><span class="c1"># [1] "a" "b" "c"</span><span class="w">
-</span></code></pre></div></div>
-<p>What if we give a vector different type of elements?</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">)</span><span class="w">
-</span><span class="c1"># v</span><span class="w">
-</span><span class="c1">#[1] "1" "2"</span><span class="w">
-</span></code></pre></div></div>
-<p>As you can see, R forces 1 to be character.</p>
-
-<p>But what is the priority? Why not “2” become numeric?</p>
-
-<p>Because <strong>the hierarchy for coercion</strong> is:
-<br /></p>
-<ul>
-  <li><strong>logical &lt; integer &lt; numeric &lt; character</strong></li>
-</ul>
-
-<p>So this is why numeric would be force to character.</p>
-
-<p><a href="https://campus.datacamp.com/courses/introduction-to-r-for-finance/vectors-and-matrices?ex=3">reference</a></p>
-
-<p><strong>(b) Dimension aspect</strong></p>
-<ul>
-  <li>1 Dimension: <em>vector</em>, <em>list</em></li>
-  <li>2 Dimensions: <em>matrix</em>, <em>data.frame</em></li>
-</ul>
-
-<hr />
-
-<h3 id="2-what-are-the-outputs-of-isatomic-and-isvector">2. What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</h3>
-
-<p>Let’s see the outputs of these four types.</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w"> </span><span class="c1"># vector</span><span class="w">
-</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="c1"># list</span><span class="w">
-</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># matrix</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># data.frame</span><span class="w">
-</span></code></pre></div></div>
-
-<p><strong>(a) is.atomic()</strong></p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># &gt; is.atomic(v)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(l)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(mat)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(df)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span></code></pre></div></div>
-<p>As you can see the results, <code class="highlighter-rouge">is.atomic()</code> gives boolean values.
-<br />
-And the output is to see if the object is <em>Homogeneous data</em> or <em>Hetergeneous data</em>.
-<br />
-Hence, <em>vector</em> and <em>matrix</em> get TRUE, <em>list</em> and <em>data.frame</em> get FALSE.</p>
-
-<p><strong>(b) is.vector()</strong></p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># is.vector(v)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># is.vector(l)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># is.vector(mat)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span><span class="c1"># is.vector(df)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span></code></pre></div></div>
-<p>In contrast with is.atomic(), <code class="highlighter-rouge">is.vector()</code> checks from Dimension aspect.</p>
-
-<hr />
-
-<h3 id="3-what-are-the-outputs-of-typeof">3. What are the outputs of <code class="highlighter-rouge">typeof()</code></h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
-</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># list</span><span class="w">
-</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">l_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">)</span><span class="w"> </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># matrix</span><span class="w">
-</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">mat_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># data.frame</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>Let’s see the results,</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ---vector-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(v)</span><span class="w">
-</span><span class="c1"># [1] "integer"</span><span class="w">
-</span><span class="c1"># &gt; typeof(v_ch)</span><span class="w">
-</span><span class="c1"># [1] "character"</span><span class="w">
-</span><span class="c1"># ---list-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(l)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span><span class="c1"># &gt; typeof(l_ch)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span><span class="c1"># ---matrix-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(mat)</span><span class="w">
-</span><span class="c1"># [1] "integer"</span><span class="w">
-</span><span class="c1"># &gt; typeof(mat_ch)</span><span class="w">
-</span><span class="c1"># [1] "character"</span><span class="w">
-</span><span class="c1"># ---data.frame-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(df)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span></code></pre></div></div>
-
-<p>From the result of ouputs, we can see it checks if the object is <em>Homogeneous data</em> or not.
-<br />
-If it is <em>Homogeneous data</em> then <code class="highlighter-rouge">typeof()</code> will show the type of elements.
-<br />
-But if the object is <em>Hetergeneous data</em>, it will give only <em>list</em> as output result.</p>
-
-<hr />
-
-<p>More detail about Data Structure can be found <a href="http://adv-r.had.co.nz/Data-structures.html">here</a></p>
-
-<p>Reference:
-<br />
-<a href="https://zhuanlan.zhihu.com/p/25551827">R深入|数据类型</a></p>
-
- -->
-    <div class="post-excerpt"><p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
-<br />
-Here I’m going to see these 4 types more details.</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/10/19/R-variable-types/#disqus_thread';
-        this.page.identifier = '/r/2018/10/19/R-variable-types/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/10/19/R-variable-types/#disqus_thread" data-disqus-identifier="/r/2018/10/19/R-variable-types/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">
-        [R]RStudtio編碼問題
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on October 4, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">October 4, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>解決編碼問題可以說最惱人的事了……<br />
-在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
-
-<hr />
-
-<p>根據我的經驗，我覺得編碼問題可以分成三種，</p>
-<ol>
-  <li>R 程式碼編碼問題</li>
-  <li>檔案編碼問題</li>
-  <li>系統編碼問題</li>
-</ol>
-
-<h3 id="1-r-程式碼編碼問題">1. R 程式碼編碼問題</h3>
-<p>當你打開一份 R Script 時，發現 script 中的中文都是亂碼時，這時應該是這份 script 檔案的編碼與你電腦的 RScript 預設的不同。</p>
-
-<p>這時選擇 File -&gt; Reopen with Encoding… 更改編碼(UTF-8、BIG5、ASCII試試)，問題應該就可以解決了。</p>
-
-<p>或是可以直接更改預設的讀檔編碼，到 Tools -&gt; Global Options… -&gt; (左邊選單) Code -&gt; Saving 更改 Default text encoding。</p>
-
-<h3 id="2-檔案編碼問題">2. 檔案編碼問題</h3>
-<p>當你讀進一份檔案，可能碰到以下幾種狀況<br /></p>
-
-<p>a. 讀檔時出現編碼錯誤<br />
-解決方法： <br />
-(1)讀檔時設定 fileEncoding：讀檔時提供檔案本身編碼資訊，<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/">參考</a><br /></p>
-
-<p>(2)更改檔案編碼：先更改檔案本身的編碼，再使用 RStudio 讀取檔案。<br />
-   如果是 Windows，我個人推薦直接使用記事本更改最方便。另存新檔直接存成需要的編碼。<br /></p>
-
-<p>(3)更改預設讀檔編碼：如第一個提到的 R 程式碼編碼問題的解決方案，直接更改預設的編碼，設定成 UTF-8 應該是最好的。<br /></p>
-
-<p>b. 順利讀進檔案，但無法正確顯示<br />
-讀檔時，使用 encoding 參數來決定要顯示什麼語言</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">read.csv</span><span class="p">(</span><span class="s2">"filename.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"latin1"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="3-系統編碼問題">3. 系統編碼問題</h3>
-<p>順利讀進檔案，已更改輸入時的編碼，但顯示仍舊錯誤。<br />
-這問題是在讀一份含有瑞典文的檔案時碰到的，已經更改過檔案的編碼，但開啟後仍無法正確顯示瑞典文。</p>
-
-<p>可以檢查一下系統本身的編碼是不是 UTF-8</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sessionInfo</span><span class="p">()</span><span class="w"> </span><span class="c1"># 裡的 local</span><span class="w">
-</span><span class="c1"># 或是</span><span class="w">
-</span><span class="n">Sys.getlocale</span><span class="p">()</span><span class="w">
-
-</span><span class="c1"># MAC 會長得大概像這樣</span><span class="w">
-</span><span class="c1"># "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8"</span><span class="w">
-</span></code></pre></div></div>
-<p>如果不是，更改系統的語系，以下更改為 UTF-8</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># for windows</span><span class="w">
-</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># for mac</span><span class="w">
-</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"en_US.UTF-8"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<p>另外，要查看 vector 的編碼可以使用</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># x is a vector</span><span class="w">
-</span><span class="n">Encoding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>我個人認為，解決編碼問題最重要的就是要先知道編碼出錯的問題在哪。<br />
-是檔案本身編碼問題，還是系統的問題，那是要修改檔案還是要修改系統？<br /></p>
-
- -->
-    <div class="post-excerpt"><p>解決編碼問題可以說最惱人的事了……<br />
-在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread';
-        this.page.identifier = '/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread" data-disqus-identifier="/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">
-        [Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 28, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 28, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Algorithm">Algorithm</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
-
-<hr />
-
-<h3 id="hamiltonian-path">Hamiltonian path</h3>
-
-<p><strong>What is Hamiltonian path?</strong><br />
-<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> is a path that visit every node only once. It can be an undirected or directed graph. Also it</p>
-
-<p><strong>Hamiltonian cycle</strong><br />
-If a Hamiltonian path is a cycle then we call it A Hamiltonian cycle (or Hamiltonian circuit).</p>
-
-<p><strong>Hamiltonian path problem</strong><br />
-Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete</p>
-
-<hr />
-
-<h3 id="travelling-salesman-problem">Travelling Salesman Problem</h3>
-
-<p><strong>What is Travelling Salesman Problem(TSP)?</strong><br />
-There is a man traveling. He departures from a city and he wants to visit every cities(nods) with the shortest distance. In the end, he will go back to the origin city, and he can only stop in each city once.</p>
-
-<p>Which means, TSP is looking for the shortest distance of <em>Hamiltonian cycle</em>.</p>
-
-<hr />
-
-<p>reference:<br />
-<a href="http://www.csie.ntnu.edu.tw/~u91029/Circuit.html">演算法筆記</a><br />
-<a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Wikipedia - TSP</a><br />
-<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Wikipedia - Hamiltonian path</a><br /></p>
- -->
-    <div class="post-excerpt"><p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread';
-        this.page.identifier = '/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread" data-disqus-identifier="/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/09/27/R-scale-%E8%88%87-dist-function/">
-        [R]scale 與 dist function
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 27, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 27, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
-
-<p>在做資料分析前會需要先標準化</p>
-
-<hr />
-
-<h3 id="scale">scale</h3>
-<p>scale 的主要作用在標準化數據，共有三個 arguments，</p>
-<ul>
-  <li>x: 必須要是 matrix，以「行」為每組數據計算</li>
-  <li>center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值</li>
-  <li>scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差</li>
-</ul>
-
-<p>預設 center 和 scale 都是 TRUE，也就是算出來的值是 <a href="https://zh.wikipedia.org/wiki/標準分數">z-score</a>。</p>
-
-<blockquote>
-
-  <p>\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)</p>
-</blockquote>
-
-<p>其中：<br />
-\(x\)：數據<br />
-\(\mu\)：平均值<br />
-\(\sigma\)：標準差</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-
-</span><span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h3 id="dist">dist</h3>
-<p>dist 是在算數據間的距離，主要的 arguments有</p>
-<ul>
-  <li>x: 可以是 matrix, data.frame ，但必須要是 numeric。</li>
-  <li>methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。</li>
-</ul>
-
-<p>以「列」為數據，兩兩計算，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-
-</span><span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread';
-        this.page.identifier = '/r/2018/09/27/R-scale-%E8%88%87-dist-function/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread" data-disqus-identifier="/r/2018/09/27/R-scale-%E8%88%87-dist-function/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">
-        [R]如何在R Package加上code coverage (codecov)?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 14, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 14, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
-
-<p>這篇是根據<a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/">這篇</a>的步驟操作。
-如果要找 package 內容物該有的東西可以參考我完成的一個 <a href="https://github.com/shihs/LiUAdRLab3">R package</a>。</p>
-
-<p>以下會將步驟一一列下。</p>
-
-<hr />
-
-<h3 id="1-完成-r-package-與建立-test-測試">1. 完成 R package 與建立 test 測試</h3>
-<p>建立 <a href="http://r-pkgs.had.co.nz">R package</a> 可以參考大神的書，test 則可以參考這本書的 <a href="http://r-pkgs.had.co.nz/tests.html">testing 章節</a>。</p>
-
-<p>基本上使用，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_testthat</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-<p>就會自己建立一個 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests">tests 資料夾</a>，再把要測試的程式碼加進下一層的 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests/testthat">testthat 資料夾</a>內。</p>
-
-<p>最後進行測試，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">test</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h3 id="2-建立所有-code-coverage-需要的檔案與內容">2. 建立所有 code coverage 需要的檔案與內容</h3>
-
-<p>先跑一下程式碼，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_coverage</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<p>跑完後會出現以下的步驟提示，</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Creating `codecov.yml` from template.
-* Adding `codecov.yml` to `.Rbuildignore`.
-* Add to `README.md`: 
-[![Coverage Status](https://img.shields.io/codecov/c/github/shihs/LiUAdRLab3/master.svg)](https://codecov.io/github/shihs/LiUAdRLab3?branch=master)
-* Add to `.travis.yml`:
-after_success:
-  - Rscript -e 'covr::codecov()'
-</code></pre></div></div>
-
-<p>基本上就一步一步照著做就對了，前面兩件事程式已經幫你處理好了，<br />
-從第三步開始就行。</p>
-
-<hr />
-
-<h3 id="3-將-github-與-codecov-連結">3. 將 Github 與 codecov 連結</h3>
-
-<p>使用 Github 帳號登入 <a href="https://codecov.io">codecov.io </a>。</p>
-
-<p>連結你要使用 codecov 的 reposity，
-會出現像這樣的<a href="https://walczak.org/wp-content/uploads/2017/06/token.png">畫面</a>得到一組 token，
-將 token 複製，在 R 中跑以下程式碼，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"covr"</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
-</span><span class="n">codecov</span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YOUR_TOKEN_GOES_HERE"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>大功告成！</p>
-
-<p>這時候會看到你剛剛貼上的 coverage 圖案出現 code coverage 的結果。</p>
-
-<hr />
-
-<p>如果想要先在 R studio 上看測試結果可以使用，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="w"> </span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
-</span><span class="n">report</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<p>viewer 視窗就會顯示測試結果了。</p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread';
-        this.page.identifier = '/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread" data-disqus-identifier="/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">0 Comments</a>
       </span>
 
     </div>

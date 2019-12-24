@@ -58,7 +58,7 @@
         </a>
         <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
       </h1>
-      <p class="lead">I share some stuff.</p>
+      <p class="lead">Just for learning.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -168,6 +168,700 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">
+        Google Map API - Geocoding 地址經緯度
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 28, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 28, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+<p>這次要介紹<code class="highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+</code></pre></div></div>
+<p>簡單來說，你可以<strong>根據地址找到該地址在地理上的座標（經緯度）</strong>，方便應用在地圖上標記位置。</p>
+
+<p>根據<code class="highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
+來看文件上給的一個輸出 json 格式的範例，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
+</code></pre></div></div>
+<p>看起來這個 API 是需要 API KEY 。</p>
+
+<p>但其實，這個 API 是可以不需要 KEY 的（我不知道為什麼 XD）。
+而且使用 API key 反而還會被限制一天可以搜尋的數量……</p>
+
+<p>所以其實上面的例子只要這樣就好，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+</code></pre></div></div>
+<p>當然也可以搜尋中文地址，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
+</code></pre></div></div>
+<p>就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。
+其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。</p>
+
+<h3 id="使用-python-快速爬取-api-內容">使用 python 快速爬取 API 內容</h3>
+<p>這邊我寫了一個簡單的 python 程式可以快速地使用這個 API 獲得地址的經緯度。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">urllib</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="k">def</span> <span class="nf">get_latitude_longtitude</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="c"># decode url</span>
+    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s">"https://maps.googleapis.com/maps/api/geocode/json?address="</span> <span class="o">+</span> <span class="n">address</span>
+    
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">js</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span> <span class="o">!=</span> <span class="s">"OVER_QUERY_LIMIT"</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s">"results"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"geometry"</span><span class="p">][</span><span class="s">"location"</span><span class="p">]</span>
+    <span class="n">lat</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lat"</span><span class="p">]</span>
+    <span class="n">lng</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s">"lng"</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">lat</span><span class="p">,</span> <span class="n">lng</span>
+
+
+
+<span class="n">address</span> <span class="o">=</span> <span class="s">"重慶南路一段122號"</span>
+<span class="n">lat</span><span class="p">,</span> <span class="n">lng</span> <span class="o">=</span> <span class="n">get_latitude_longtitude</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread';
+        this.page.identifier = '/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/#disqus_thread" data-disqus-identifier="/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">
+        [SQL][psql]基本指令(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 15, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 15, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#psql">psql</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+<h3 id="basic-commands">BASIC COMMANDS</h3>
+<p><strong>Connect to psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
+</code></pre></div></div>
+<p><strong>Quit psql</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
+</code></pre></div></div>
+<p><strong>List all databases</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
+# or
+$ \l
+
+#  exit from query result viewer
+$ q
+</code></pre></div></div>
+<p><strong>List all datatables in current database</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
+$ \connect dbname
+# or
+$ \c dbname
+
+# list all tables 
+$ \dt
+</code></pre></div></div>
+<p><br />
+<br /></p>
+<h3 id="sql-commands">SQL COMMANDS</h3>
+<p><strong>Create and Drop DATABASE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
+DROP DATABASE dbname;
+</code></pre></div></div>
+<p><strong>Create and Drop TABLE</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
+CREATE TABLE dtname (
+	id serial,
+	name text
+);
+
+# drop table dtname
+DROP TABLE dtname;
+</code></pre></div></div>
+<p><strong>Insert values</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
+</code></pre></div></div>
+<p><strong>Show all data in a table</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
+# or
+SELECT * FROM dtname
+</code></pre></div></div>
+<p><strong>Set primary key</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
+CREATE TABLE dtname (
+	id serial primary key,
+	name text,
+	birthday date
+);
+
+# multiple columns primary key
+CREATE TABLE postal_places (
+	postal_code text,
+	country text,
+	name text,
+	primary key (postal_code, country)
+);
+</code></pre></div></div>
+<p><strong>Declaring relationships</strong>
+<img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
+	sku text references products (sku),
+	sale_date date,
+	count integer
+);
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread';
+        this.page.identifier = '/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/#disqus_thread" data-disqus-identifier="/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">
+        [Python]Python 中的 *args 和 *kwargs
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 13, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 13, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
+args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
+如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
+
+<p>先簡單看以下的例子</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"kwargs="</span> <span class="o">+</span> <span class="n">j</span>
+		
+<span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="s">"a"</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="s">"b"</span><span class="p">,</span> <span class="n">third</span> <span class="o">=</span> <span class="s">"c"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>結果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agrs=1
+agrs=2
+agrs=3
+agrs=4
+kwargs=second
+kwargs=third
+kwargs=first
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="args-和-kwargs-不是重點-才是">args 和 kwargs 不是重點，* 才是</h3>
+
+<p>args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 <code class="highlighter-rouge">*</code>。<br />
+所以，if you like 其實參數也可以寫成 <code class="highlighter-rouge">*var</code> 和 <code class="highlighter-rouge">**vars</code>，<code class="highlighter-rouge">*args</code> 和 <code class="highlighter-rouge">**kwargs</code> 只是一個大家使用的習慣。</p>
+
+<h3 id="args-的用法">*args 的用法</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">first_arg</span> <span class="o">=</span> <span class="s">"this is first arguments"</span>
+
+<span class="k">def</span> <span class="nf">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">"first_arg="</span> <span class="o">+</span> <span class="n">first_arg</span>
+
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s">"other *args..."</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">"agrs="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+    <span class="n">arg_test</span><span class="p">(</span><span class="n">first_arg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>結果</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first_arg=this is first arguments
+other *args...
+agrs=1
+agrs=2
+agrs=3
+agrs=4
+</code></pre></div></div>
+
+<h3 id="kwargs-的用法">*kwargs 的用法</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s == </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+ 
+<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"yasoob"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name == yasoob
+</code></pre></div></div>
+<p>從以上兩個範例可以看出 args 和 kwargs 用法的差異。</p>
+
+<h3 id="使用-list-和-dictionary-當參數">使用 list 和 dictionary 當參數</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">test_arg</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">arg1</span>
+    <span class="k">print</span> <span class="n">arg2</span>
+    <span class="k">print</span> <span class="n">arg3</span>
+
+
+<span class="c">#===args===========</span>
+<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">test_arg</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<span class="c"># result</span>
+<span class="n">arg1</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">arg3</span><span class="o">=</span><span class="mi">3</span>
+
+<span class="c">#===kwargs===========</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"arg3"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s">"arg2"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s">"arg1"</span><span class="p">:</span><span class="mi">3</span>
+<span class="p">}</span>
+
+<span class="n">test_arg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="c"># result</span>
+<span class="n">arg1</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">arg3</span><span class="o">=</span><span class="mi">1</span>
+</code></pre></div></div>
+
+<p>根據以上範例，可以發現<code class="highlighter-rouge">*arg</code> print 的順序就是 list 的順序，但 <code class="highlighter-rouge">**kwargs</code> 會根據 dictionary 的 key 來賦予 value。</p>
+
+<p><br /></p>
+
+<p><a href="https://pythontips.com/2013/08/04/args-and-kwargs-in-python-explained/">參考</a></p>
+
+ -->
+    <div class="post-excerpt"><p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
+args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
+如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread';
+        this.page.identifier = '/python/2018/06/13/Python-args-%E5%92%8C-kwargs/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/06/13/Python-args-%E5%92%8C-kwargs/#disqus_thread" data-disqus-identifier="/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">
+        [Web][CSS]如何刪除 nav tag 底色兩邊的空白？
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 11, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 11, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Web">Web</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#CSS">CSS</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h3 id="nav的作用"><code class="highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
+
+<ol>
+  <li><code class="highlighter-rouge">&lt;nav&gt;</code> 為 HTML 文件的區域元素 (element)，<code class="highlighter-rouge">&lt;nav&gt;</code>用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。</li>
+  <li><code class="highlighter-rouge">&lt;nav&gt;</code> 除了全域屬性外，沒有定義其他屬性 (attribute) 。
+<a href="https://pydoing.blogspot.com/2012/01/html-5-nav.html">參考</a></li>
+</ol>
+
+<p>像我的<a href="https://shihs.github.io/">網頁</a>上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 <code class="highlighter-rouge">&lt;nav&gt;</code>裡。</p>
+
+<p><br /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- html --&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"wrapper-nav"</span> <span class="na">id=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>    
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span><span class="nt">&gt;</span>Contact Me<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>           
+  <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">nav</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="如何刪除-nav-背景的空白-how-to-remove-the-space-on-both-sides-of-navbar">如何刪除 <code class="highlighter-rouge">&lt;nav&gt;</code> 背景的空白 How to remove the space on both sides of navbar</h3>
+<p>若使用上面的程式碼會發現 <code class="highlighter-rouge">nav</code> 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在<code class="highlighter-rouge">&lt;body&gt;</code>這個 tag 上面做些調整</p>
+
+<ol>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">margin-left</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+ -->
+    <div class="post-excerpt"><h3 id="nav的作用"><code class="highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread';
+        this.page.identifier = '/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread" data-disqus-identifier="/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">
+        [Web][CSS]在不同螢幕解析度下調整css
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">May 24, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Web">Web</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#CSS">CSS</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。</p>
+
+<p><a href="http://www.ucamc.com/e-learning/css/102-rwd-css-media-type.html" target="_blank">參考網站</a></p>
+
+<h2 id="解析度可以這樣區分">解析度可以這樣區分</h2>
+<ol>
+  <li>手機：解析度為0px~320px<br /></li>
+  <li>平板電腦：解析度為320px~768px<br /></li>
+  <li>桌上型電腦：大於768px<br /></li>
+</ol>
+
+<p><br /></p>
+
+<h2 id="在-css-上調整">在 CSS 上調整</h2>
+
+<p>使用<em>@media</em></p>
+
+<p><strong>設定 Max Width</strong></p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 768px以下(包含)都適用，手機和平板會符合這個設定 */</span>
+<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span> <span class="m">768px</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nc">.class</span> <span class="p">{</span>
+		<span class="nl">background</span><span class="p">:</span> <span class="m">#ccc</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>設定 Min Width</strong></p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 329px以上(包含)都適用，平板和電腦會符合這個設定 */</span>
+<span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span> <span class="m">320px</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nc">.class</span> <span class="p">{</span>
+		<span class="nl">background</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>設定 Max Width and Min Width</strong></p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 介於768px與979px間適用 */</span>
+<span class="k">@media</span> <span class="p">(</span><span class="n">min-width</span><span class="p">:</span> <span class="m">768px</span><span class="p">)</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">979px</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nc">.class</span> <span class="p">{</span>
+		<span class="nl">background</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>如此就可以依據螢幕的寬度來顯示適合的方式了。</p>
+
+ -->
+    <div class="post-excerpt"><p>除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread';
+        this.page.identifier = '/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread" data-disqus-identifier="/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -654,625 +1348,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
-        [R]使用 R 寄Outlook Email
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 26, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
-
-<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
-<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
-</span><span class="c1">## init com api</span><span class="w">
-</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## create an email </span><span class="w">
-</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="c1">## configure  email parameter </span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
-</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
-</span><span class="c1"># First:text</span><span class="w">
-</span><span class="c1"># outMail[["body"]] = </span><span class="w">
-</span><span class="c1"># "Dear reciever,</span><span class="w">
-</span><span class="c1">#                      </span><span class="w">
-</span><span class="c1"># Please see attached.</span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># Best regards,</span><span class="w">
-</span><span class="c1"># Sender"</span><span class="w">
-
-</span><span class="c1"># Second:html text</span><span class="w">
-</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
-</span><span class="s1">'
-&lt;p&gt;Dear reciever,&lt;/p&gt;
-&lt;p&gt;Please see attached.&lt;/p&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;p&gt;Best regards,
-&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
-
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
-
-</span><span class="c1"># attachment</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## send it                     </span><span class="w">
-</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
-
-
-</span></code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
-        [Python][爬蟲]requests 的編碼
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 17, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 17, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
-
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
-
- -->
-    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-        [Python][爬蟲]防止被ban，代理IP怎麼用?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 7, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
-
-<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
-<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
-<ol>
-  <li>
-    <p>透明代理(Transparent Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Your IP</p>
-  </li>
-  <li>
-    <p>匿名代理(Anonymous Proxy)<br />
-REMOTE_ADDR = proxy IP<br />
-HTTP_VIA = proxy IP<br />
-HTTP_X_FORWARDED_FOR = proxy IP</p>
-  </li>
-  <li>
-    <p>混淆代理(Distorting Proxies)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Random IP address</p>
-  </li>
-  <li>
-    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = not determined<br />
-HTTP_X_FORWARDED_FOR = not determined<br /></p>
-  </li>
-</ol>
-
-<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
-<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
-<ol>
-  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
-  <li>http://www.proxyserverlist24.top/<br /></li>
-</ol>
-
-<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
-
-<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-
-<span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
-
-</code></pre></div></div>
-
-<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
-要爬取網站的時候，先讀取該檔案，
-只要被擋，就random使用proxy替換proxies。</p>
-
-<p>如果所有proxy都用完再重新爬取，
-網站上的proxy都會不停更換，
-所以只要更新proxy庫就好。</p>
-
- -->
-    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
-        [Python]呼叫其他.py的function
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 2, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
-<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
-	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
-
-</code></pre></div></div>
-
-<p>有兩種情況，<br />
-<strong>1. 這兩個檔案在同一個folder底下</strong><br />
-—main.py<br />
-—fun.py<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
-<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-
-</code></pre></div></div>
-
-<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
-想要呼叫的fun.py在function這個folder底下<br />
-—main.py<br />
-—function—fun.py<br /></p>
-
-<p>這時候main.py可以有兩種寫法</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
-<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
-<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
-<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
-<span class="c"># it's true, it's empty. But it's still important!</span>
-</code></pre></div></div>
-
-<p>那如果今天fun.py在function的下一層folder呢?<br />
-—main.py<br />
-—function—another—fun.py<br />
-只要把main.py改成<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
-<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-
-<span class="c">#或者也可以這樣寫</span>
-
-<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-<p>但最重要的是，<br />
-<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
-
- -->
-    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
-        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
-        [Tutorial]Computer Networking筆記(22-26)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 25, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
-<ul>
-  <li>bit = binary digit</li>
-  <li>8-bit system 最高到2^8</li>
-</ul>
-
-<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
-2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
- 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
-
-<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
-也就是，111111111<br /></p>
-
-<p>所以如果今天有更多的bits就可以儲存更多的data，
-這也就是為什麼更大的bits功能較強大了。</p>
-
-<h2 id="ip-address"><strong>IP Address</strong></h2>
-<p>每個device都有ip address。</p>
-
-<p>IP是一個32 bits的2進位表示的數字，<br />
-中間以「.」隔開成四組號碼。<br />
-像這樣:xxx.xxx.xxx.xxx<br />
-每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
-所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
-而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
-
-<p>這樣的方式就可以讓每個device表達它的位置。</p>
-
-<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
-<p>The Internet is a network of networks.</p>
-
-<p>影片舉了一個例子：
-想像網路其實是聚集了所有的網絡。
-例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
-而這三個網絡又都可以連到網路上。</p>
-
-<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
-這時候server收到訊息後，會再傳回response，
-可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
-
-<p>所以其實IP裡頭包含兩個訊息，</p>
-<ol>
-  <li>Newwork ID</li>
-  <li>Host ID</li>
-</ol>
-
-<p>但是，重點來了！<br />
-那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
-如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
-這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
-但這時候有人說，那萬一某個network的host很少，<br />
-那豈不是浪費了很多host的位址嗎！<br />
-但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
-這時候大家有點爭論不休，<br />
-到底該如何解決呢？<br /></p>
-
-<p>所以這時有人提出了一個辦法，<br />
-我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
-
-<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
-當今天在傳送訊息時，<br />
-device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
-
-<p>subnet mask一樣是一個32 bits的2進位數字，<br />
-1表示network id，0表示host id。<br />
-<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
-<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
       </span>
 
     </div>

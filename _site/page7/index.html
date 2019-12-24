@@ -58,7 +58,7 @@
         </a>
         <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
       </h1>
-      <p class="lead">I share some stuff.</p>
+      <p class="lead">Just for learning.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -168,6 +168,625 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+        [R]使用 R 寄Outlook Email
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 26, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
+
+<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
+<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
+</span><span class="c1">## init com api</span><span class="w">
+</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## create an email </span><span class="w">
+</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
+</span><span class="c1">## configure  email parameter </span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
+</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
+</span><span class="c1"># First:text</span><span class="w">
+</span><span class="c1"># outMail[["body"]] = </span><span class="w">
+</span><span class="c1"># "Dear reciever,</span><span class="w">
+</span><span class="c1">#                      </span><span class="w">
+</span><span class="c1"># Please see attached.</span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># Best regards,</span><span class="w">
+</span><span class="c1"># Sender"</span><span class="w">
+
+</span><span class="c1"># Second:html text</span><span class="w">
+</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+</span><span class="s1">'
+&lt;p&gt;Dear reciever,&lt;/p&gt;
+&lt;p&gt;Please see attached.&lt;/p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;p&gt;Best regards,
+&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
+
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
+
+</span><span class="c1"># attachment</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## send it                     </span><span class="w">
+</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
+
+
+</span></code></pre></div></div>
+ -->
+    <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread';
+        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+        [Python][爬蟲]requests 的編碼
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 17, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 17, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
+
+<p><strong>rep.text    ： unicode 型別</strong><br />
+1.是由 requests 以 rep.encoding 自動轉換的！<br />
+2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
+
+ -->
+    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+        [Python][爬蟲]防止被ban，代理IP怎麼用?
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 7, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
+
+<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
+這裡主要介紹如何使用IP代理。</p>
+
+<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
+<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
+<ol>
+  <li>
+    <p>透明代理(Transparent Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Your IP</p>
+  </li>
+  <li>
+    <p>匿名代理(Anonymous Proxy)<br />
+REMOTE_ADDR = proxy IP<br />
+HTTP_VIA = proxy IP<br />
+HTTP_X_FORWARDED_FOR = proxy IP</p>
+  </li>
+  <li>
+    <p>混淆代理(Distorting Proxies)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Random IP address</p>
+  </li>
+  <li>
+    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = not determined<br />
+HTTP_X_FORWARDED_FOR = not determined<br /></p>
+  </li>
+</ol>
+
+<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
+<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
+<ol>
+  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
+  <li>http://www.proxyserverlist24.top/<br /></li>
+</ol>
+
+<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
+
+<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
+<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+
+<span class="p">}</span>
+<span class="c">###注意</span>
+<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
+<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
+
+
+</code></pre></div></div>
+
+<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
+要爬取網站的時候，先讀取該檔案，
+只要被擋，就random使用proxy替換proxies。</p>
+
+<p>如果所有proxy都用完再重新爬取，
+網站上的proxy都會不停更換，
+所以只要更新proxy庫就好。</p>
+
+ -->
+    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
+        [Python]呼叫其他.py的function
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 2, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
+<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
+	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
+
+</code></pre></div></div>
+
+<p>有兩種情況，<br />
+<strong>1. 這兩個檔案在同一個folder底下</strong><br />
+—main.py<br />
+—fun.py<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
+<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
+想要呼叫的fun.py在function這個folder底下<br />
+—main.py<br />
+—function—fun.py<br /></p>
+
+<p>這時候main.py可以有兩種寫法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
+<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
+<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
+<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
+<span class="c"># it's true, it's empty. But it's still important!</span>
+</code></pre></div></div>
+
+<p>那如果今天fun.py在function的下一層folder呢?<br />
+—main.py<br />
+—function—another—fun.py<br />
+只要把main.py改成<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
+<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+
+<span class="c">#或者也可以這樣寫</span>
+
+<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但最重要的是，<br />
+<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+
+ -->
+    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
+        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
+        [Tutorial]Computer Networking筆記(22-26)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 25, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -483,540 +1102,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">
-        [R]如何刪除 U+00A0
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 17, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 17, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
-</code></pre></div></div>
-<p>而且不管用什麼方式都取代不了這個符號，
-這時候該怎麼辦呢？</p>
-
-<p>其實只要使用 “\U00A0”就可以了</p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
-</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
-</code></pre></div></div>
-<p>而且不管用什麼方式都取代不了這個符號，
-這時候該怎麼辦呢？</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/#disqus_thread';
-        this.page.identifier = '/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">
-        [Tutorial]Computer Networking筆記(9-11)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 15, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 15, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
-<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
-(just google it, you can find tons of pictures of NIC)</p>
-
-<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
-<p>字典翻譯的意思是，協議草案、禮儀。<br />
-在network裡，protocol是「網路傳輸協定」。</p>
-
-<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
-他用男生想要認識一個女生來舉例。</p>
-
-<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
-<ul>
-  <li>Hey  -&gt;</li>
-  <li>&lt;-  Hello</li>
-  <li>Can I get your number?   -&gt;</li>
-  <li>&lt;- 1234-567</li>
-</ul>
-
-<p>這樣的對話中會有幾個規則，</p>
-<ol>
-  <li>一次只會有一個人說話</li>
-  <li>男生說話以後，會預期女生會回話</li>
-  <li>問句會有預期的回答(specific messages receive specific responses)<br />
-符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
-</ol>
-
-<p>同樣的，用在computer commnication也要有一些規則。<br />
-Protocol are the rules for successful communication among two parties.</p>
-
-<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
-<ul>
-  <li>Can I connect to you?   -&gt;</li>
-  <li>&lt;-   Yes, you have my permission.</li>
-  <li>GET file google.com   -&gt;</li>
-  <li>&lt;-  sends file</li>
-</ul>
-
-<p>在computer networking裡，最重要的protocol是<br />
-<strong>format</strong>和<strong>order</strong> of massage<br />
-就像是上面的請求順序，<br />
-如果在mac還沒提出request，<br />
-sever就送出網頁，這肯定很怪的吧！<br /></p>
-
-<p>protocol有很多種，
-但我們先來看以下這個例子。<br />
-這是個網址，<br />
-http:// www.thenewboston.org /index.php</p>
-
-<ul>
-  <li><strong>http</strong>: protocol</li>
-  <li><strong>www.thenewboston.org</strong>: sever name</li>
-  <li><strong>index.php</strong>: file</li>
-</ul>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">
-        [Python]Google 翻譯 API 接口 googletrnas
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 15, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 15, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
-<pre><code class="language-cmd"># windows
-pip install googletrans
-</code></pre>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
-sudo pip install googletrans
-</code></pre></div></div>
-
-<p>程式碼</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-
-<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-
-<span class="c"># 這兩行很重要，不然會有編碼問題</span>
-<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span> <span class="s">"utf-8"</span> <span class="p">)</span>
-
-<span class="n">translator</span> <span class="o">=</span> <span class="n">Translator</span><span class="p">()</span>
-<span class="c"># src來源語言，dest要翻譯語言，如果要找其他語言可以參考說明文件</span>
-<span class="k">print</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">'고마워'</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s">"ko"</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="s">"zh-TW"</span><span class="p">)</span>
-
-</code></pre></div></div>
-
-<p>根據說明文件，這個套件可能會有不穩定的問題
-找到有人<a href="https://hk.saowen.com/a/4c76af2381e3a60e86f7c4b934a21faebad8b2e7b4a4131cb7c2889afcea6479" target="_blank">直接爬google翻譯的程式碼</a>
-但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。</p>
-
- -->
-    <div class="post-excerpt"><p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
-<pre><code class="language-cmd"># windows
-pip install googletrans
-</code></pre>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
-sudo pip install googletrans
-</code></pre></div></div>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/#disqus_thread';
-        this.page.identifier = '/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/#disqus_thread" data-disqus-identifier="/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">
-        [Tutorial]Computer Networking筆記(1-8)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 9, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 9, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="1what-is-computer-networking"><strong>1.What is Computer Networking?</strong></h2>
-<p>各裝置(<em>devices</em>)之間的連結<br />
-裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個<strong><em>Node</em></strong>。<br />
-連結：可以使用cable、wireless、copper wire等等，可以稱為<strong><em>communications media</em></strong>。<br />
-Internet(網路)就是一種computer network<br /></p>
-
-<p>computer nework的目的是為了要資料傳輸、資料交換，<br />
-這裡的資料可以是，documents、pictures、videos等等。</p>
-
-<p>computer newworking的兩個重點就是，<strong><em>Nodes</em></strong>和<strong><em>Communications Media</em></strong></p>
-
-<h2 id="2types-of-networks"><strong>2.Types of Networks</strong></h2>
-<p><strong><em>LAN</em></strong>(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡<br />
-<strong><em>MAN</em></strong>(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市<br />
-<strong><em>WAN</em></strong>(Wide Area Network)：&gt;30 miles的網絡連結，整個國家之間、跨國之間的連結<br /></p>
-
-<h2 id="3how-the-internet-works"><strong>3.How the Internet works?</strong></h2>
-<p>以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？<br />
-如果以上面computer network的邏輯來看，<br />
-其他電腦可以連結到我的電腦，看到我的個人網站。<br />
-但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，<br />
-所以實際上，要連到個人網站是透過<strong><em>server</em></strong>。<br />
-server is a special computer that everyone can access it.<br /></p>
-
-<p>我將個人網站建置(store)在server，<br />
-其他人要看到我的網站，<br />
-會在browser上打上網址，<br />
-這時候就會向server提出request，<br />
-sever接受到request會回傳data，這些data會是程式碼，<br />
-而browser會將這些程式碼轉成我們看得懂的網站。<br /></p>
-
-<p>通常建置網頁這樣的server我們稱為，<strong><em>web server</em></strong>。<br />
-像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，<br />
-所以這個server就必須要有很大的memory，<br />
-才能負荷這樣的使用流量。<br /></p>
-
-<h2 id="4client-and-host"><strong>4.Client and Host</strong></h2>
-<p>根據上面提到的例子，<br />
-使用PC的browser向sever提出request，<br />
-然後server會提供給data給PC的browser。<br /></p>
-
-<p>PC接收資料，而server提供資料，<br />
-PC就是client，sever就是host。<br /></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">
-        [Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 8, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 8, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這次要爬的網址長得像這樣</p>
-<ul>
-  <li>hazyfairyland.blogspot.tw</li>
-  <li>cartersoshkosh.tw</li>
-  <li>yungmaun.com.tw</li>
-</ul>
-
-<p>沒有www也沒有<a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank">http/https</a>，<br />
-如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，<br />
-但如果是使用request就會產生錯誤訊息。<br /></p>
-
-<p>這時候該怎麼辦呢？</p>
-
-<p>其實只要在前方加上”http://”就行了，<br />
-若其實該網址是”https//”， request也會自動重新導向。<br /></p>
-
-<p>假如所有的網址都是沒有www，<br />
-就直接在所有url前方加上”http://”就好了。<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"cartersoshkosh.tw"</span>
-
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>		
-        <span class="k">break</span>
-			
-    <span class="c"># catch requests.exceptions.MissingSchema error, add "http://" in the front</span>
-    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s">"http://"</span> <span class="o">+</span> <span class="n">url</span>
-       
-    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">url</span>  <span class="c"># print the final url</span>
-    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">history</span>  <span class="c"># print how many redirections it has gone throgh</span>
-</code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>這次要爬的網址長得像這樣</p>
-<ul>
-  <li>hazyfairyland.blogspot.tw</li>
-  <li>cartersoshkosh.tw</li>
-  <li>yungmaun.com.tw</li>
-</ul>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">0 Comments</a>
       </span>
 
     </div>

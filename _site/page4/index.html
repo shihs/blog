@@ -58,7 +58,7 @@
         </a>
         <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
       </h1>
-      <p class="lead">I share some stuff.</p>
+      <p class="lead">Just for learning.</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -168,6 +168,720 @@
 
     <div class="content container">
       <div class="posts" id="begin">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/10/19/R-variable-types/">
+        [R]variable types
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on October 19, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">October 19, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
+<br />
+Here I’m going to see these 4 types more details.</p>
+
+<ol>
+  <li>What are the differences between vector, list, matrix, and data.frame?</li>
+  <li>What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</li>
+  <li>What are the outputs of <code class="highlighter-rouge">typeof()</code>?</li>
+</ol>
+
+<hr />
+
+<h3 id="1-what-are-the-differences-between-vector-list-matrix-and-dataframe">1. What are the differences between <em>vector</em>, <em>list</em>, <em>matrix</em>, and <em>data.frame</em>?</h3>
+
+<p>We can seperate these four types to two groups from different aspects.</p>
+
+<p><strong>(a) Elements type aspect</strong></p>
+<ul>
+  <li>Homogeneous data: <em>vector</em>, <em>matrix</em></li>
+  <li>Heterogeneous data: <em>list</em>, <em>data.frame</em></li>
+</ul>
+
+<p>Which means all elements in <em>vector</em> and <em>matrix</em> have to be the same type (integer, double, or character ect.).
+But elements in <em>list</em> and <em>data.frame</em> can be different types.</p>
+
+<p>For example:
+<br />
+Vector has same type of elements</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
+</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">
+</span><span class="c1">#  v</span><span class="w">
+</span><span class="c1"># [1] 1 2 3 4</span><span class="w">
+
+</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">
+</span><span class="c1"># v_ch</span><span class="w">
+</span><span class="c1"># [1] "a" "b" "c"</span><span class="w">
+</span></code></pre></div></div>
+<p>What if we give a vector different type of elements?</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">)</span><span class="w">
+</span><span class="c1"># v</span><span class="w">
+</span><span class="c1">#[1] "1" "2"</span><span class="w">
+</span></code></pre></div></div>
+<p>As you can see, R forces 1 to be character.</p>
+
+<p>But what is the priority? Why not “2” become numeric?</p>
+
+<p>Because <strong>the hierarchy for coercion</strong> is:
+<br /></p>
+<ul>
+  <li><strong>logical &lt; integer &lt; numeric &lt; character</strong></li>
+</ul>
+
+<p>So this is why numeric would be force to character.</p>
+
+<p><a href="https://campus.datacamp.com/courses/introduction-to-r-for-finance/vectors-and-matrices?ex=3">reference</a></p>
+
+<p><strong>(b) Dimension aspect</strong></p>
+<ul>
+  <li>1 Dimension: <em>vector</em>, <em>list</em></li>
+  <li>2 Dimensions: <em>matrix</em>, <em>data.frame</em></li>
+</ul>
+
+<hr />
+
+<h3 id="2-what-are-the-outputs-of-isatomic-and-isvector">2. What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</h3>
+
+<p>Let’s see the outputs of these four types.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w"> </span><span class="c1"># vector</span><span class="w">
+</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="c1"># list</span><span class="w">
+</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># matrix</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># data.frame</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>(a) is.atomic()</strong></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># &gt; is.atomic(v)</span><span class="w">
+</span><span class="c1"># [1] TRUE</span><span class="w">
+</span><span class="c1"># &gt; is.atomic(l)</span><span class="w">
+</span><span class="c1"># [1] FALSE</span><span class="w">
+</span><span class="c1"># &gt; is.atomic(mat)</span><span class="w">
+</span><span class="c1"># [1] TRUE</span><span class="w">
+</span><span class="c1"># &gt; is.atomic(df)</span><span class="w">
+</span><span class="c1"># [1] FALSE</span><span class="w">
+</span></code></pre></div></div>
+<p>As you can see the results, <code class="highlighter-rouge">is.atomic()</code> gives boolean values.
+<br />
+And the output is to see if the object is <em>Homogeneous data</em> or <em>Hetergeneous data</em>.
+<br />
+Hence, <em>vector</em> and <em>matrix</em> get TRUE, <em>list</em> and <em>data.frame</em> get FALSE.</p>
+
+<p><strong>(b) is.vector()</strong></p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># is.vector(v)</span><span class="w">
+</span><span class="c1"># [1] TRUE</span><span class="w">
+</span><span class="c1"># is.vector(l)</span><span class="w">
+</span><span class="c1"># [1] TRUE</span><span class="w">
+</span><span class="c1"># is.vector(mat)</span><span class="w">
+</span><span class="c1"># [1] FALSE</span><span class="w">
+</span><span class="c1"># is.vector(df)</span><span class="w">
+</span><span class="c1"># [1] FALSE</span><span class="w">
+</span></code></pre></div></div>
+<p>In contrast with is.atomic(), <code class="highlighter-rouge">is.vector()</code> checks from Dimension aspect.</p>
+
+<hr />
+
+<h3 id="3-what-are-the-outputs-of-typeof">3. What are the outputs of <code class="highlighter-rouge">typeof()</code></h3>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
+</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
+</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
+</span><span class="c1"># list</span><span class="w">
+</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
+</span><span class="n">l_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">)</span><span class="w"> </span><span class="c1"># all elements are characters</span><span class="w">
+</span><span class="c1"># matrix</span><span class="w">
+</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
+</span><span class="n">mat_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
+</span><span class="c1"># data.frame</span><span class="w">
+</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>Let’s see the results,</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ---vector-------------</span><span class="w">
+</span><span class="c1"># &gt; typeof(v)</span><span class="w">
+</span><span class="c1"># [1] "integer"</span><span class="w">
+</span><span class="c1"># &gt; typeof(v_ch)</span><span class="w">
+</span><span class="c1"># [1] "character"</span><span class="w">
+</span><span class="c1"># ---list-------------</span><span class="w">
+</span><span class="c1"># &gt; typeof(l)</span><span class="w">
+</span><span class="c1"># [1] "list"</span><span class="w">
+</span><span class="c1"># &gt; typeof(l_ch)</span><span class="w">
+</span><span class="c1"># [1] "list"</span><span class="w">
+</span><span class="c1"># ---matrix-------------</span><span class="w">
+</span><span class="c1"># &gt; typeof(mat)</span><span class="w">
+</span><span class="c1"># [1] "integer"</span><span class="w">
+</span><span class="c1"># &gt; typeof(mat_ch)</span><span class="w">
+</span><span class="c1"># [1] "character"</span><span class="w">
+</span><span class="c1"># ---data.frame-------------</span><span class="w">
+</span><span class="c1"># &gt; typeof(df)</span><span class="w">
+</span><span class="c1"># [1] "list"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>From the result of ouputs, we can see it checks if the object is <em>Homogeneous data</em> or not.
+<br />
+If it is <em>Homogeneous data</em> then <code class="highlighter-rouge">typeof()</code> will show the type of elements.
+<br />
+But if the object is <em>Hetergeneous data</em>, it will give only <em>list</em> as output result.</p>
+
+<hr />
+
+<p>More detail about Data Structure can be found <a href="http://adv-r.had.co.nz/Data-structures.html">here</a></p>
+
+<p>Reference:
+<br />
+<a href="https://zhuanlan.zhihu.com/p/25551827">R深入|数据类型</a></p>
+
+ -->
+    <div class="post-excerpt"><p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
+<br />
+Here I’m going to see these 4 types more details.</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/10/19/R-variable-types/#disqus_thread';
+        this.page.identifier = '/r/2018/10/19/R-variable-types/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/10/19/R-variable-types/#disqus_thread" data-disqus-identifier="/r/2018/10/19/R-variable-types/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">
+        [R]RStudtio編碼問題
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on October 4, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">October 4, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>解決編碼問題可以說最惱人的事了……<br />
+在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
+
+<hr />
+
+<p>根據我的經驗，我覺得編碼問題可以分成三種，</p>
+<ol>
+  <li>R 程式碼編碼問題</li>
+  <li>檔案編碼問題</li>
+  <li>系統編碼問題</li>
+</ol>
+
+<h3 id="1-r-程式碼編碼問題">1. R 程式碼編碼問題</h3>
+<p>當你打開一份 R Script 時，發現 script 中的中文都是亂碼時，這時應該是這份 script 檔案的編碼與你電腦的 RScript 預設的不同。</p>
+
+<p>這時選擇 File -&gt; Reopen with Encoding… 更改編碼(UTF-8、BIG5、ASCII試試)，問題應該就可以解決了。</p>
+
+<p>或是可以直接更改預設的讀檔編碼，到 Tools -&gt; Global Options… -&gt; (左邊選單) Code -&gt; Saving 更改 Default text encoding。</p>
+
+<h3 id="2-檔案編碼問題">2. 檔案編碼問題</h3>
+<p>當你讀進一份檔案，可能碰到以下幾種狀況<br /></p>
+
+<p>a. 讀檔時出現編碼錯誤<br />
+解決方法： <br />
+(1)讀檔時設定 fileEncoding：讀檔時提供檔案本身編碼資訊，<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/">參考</a><br /></p>
+
+<p>(2)更改檔案編碼：先更改檔案本身的編碼，再使用 RStudio 讀取檔案。<br />
+   如果是 Windows，我個人推薦直接使用記事本更改最方便。另存新檔直接存成需要的編碼。<br /></p>
+
+<p>(3)更改預設讀檔編碼：如第一個提到的 R 程式碼編碼問題的解決方案，直接更改預設的編碼，設定成 UTF-8 應該是最好的。<br /></p>
+
+<p>b. 順利讀進檔案，但無法正確顯示<br />
+讀檔時，使用 encoding 參數來決定要顯示什麼語言</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">read.csv</span><span class="p">(</span><span class="s2">"filename.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"latin1"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="3-系統編碼問題">3. 系統編碼問題</h3>
+<p>順利讀進檔案，已更改輸入時的編碼，但顯示仍舊錯誤。<br />
+這問題是在讀一份含有瑞典文的檔案時碰到的，已經更改過檔案的編碼，但開啟後仍無法正確顯示瑞典文。</p>
+
+<p>可以檢查一下系統本身的編碼是不是 UTF-8</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sessionInfo</span><span class="p">()</span><span class="w"> </span><span class="c1"># 裡的 local</span><span class="w">
+</span><span class="c1"># 或是</span><span class="w">
+</span><span class="n">Sys.getlocale</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># MAC 會長得大概像這樣</span><span class="w">
+</span><span class="c1"># "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8"</span><span class="w">
+</span></code></pre></div></div>
+<p>如果不是，更改系統的語系，以下更改為 UTF-8</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># for windows</span><span class="w">
+</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># for mac</span><span class="w">
+</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"en_US.UTF-8"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<p>另外，要查看 vector 的編碼可以使用</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># x is a vector</span><span class="w">
+</span><span class="n">Encoding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>我個人認為，解決編碼問題最重要的就是要先知道編碼出錯的問題在哪。<br />
+是檔案本身編碼問題，還是系統的問題，那是要修改檔案還是要修改系統？<br /></p>
+
+ -->
+    <div class="post-excerpt"><p>解決編碼問題可以說最惱人的事了……<br />
+在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread';
+        this.page.identifier = '/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread" data-disqus-identifier="/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">
+        [Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 28, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 28, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Algorithm">Algorithm</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
+
+<hr />
+
+<h3 id="hamiltonian-path">Hamiltonian path</h3>
+
+<p><strong>What is Hamiltonian path?</strong><br />
+<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> is a path that visit every node only once. It can be an undirected or directed graph. Also it</p>
+
+<p><strong>Hamiltonian cycle</strong><br />
+If a Hamiltonian path is a cycle then we call it A Hamiltonian cycle (or Hamiltonian circuit).</p>
+
+<p><strong>Hamiltonian path problem</strong><br />
+Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete</p>
+
+<hr />
+
+<h3 id="travelling-salesman-problem">Travelling Salesman Problem</h3>
+
+<p><strong>What is Travelling Salesman Problem(TSP)?</strong><br />
+There is a man traveling. He departures from a city and he wants to visit every cities(nods) with the shortest distance. In the end, he will go back to the origin city, and he can only stop in each city once.</p>
+
+<p>Which means, TSP is looking for the shortest distance of <em>Hamiltonian cycle</em>.</p>
+
+<hr />
+
+<p>reference:<br />
+<a href="http://www.csie.ntnu.edu.tw/~u91029/Circuit.html">演算法筆記</a><br />
+<a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Wikipedia - TSP</a><br />
+<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Wikipedia - Hamiltonian path</a><br /></p>
+ -->
+    <div class="post-excerpt"><p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread';
+        this.page.identifier = '/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread" data-disqus-identifier="/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/09/27/R-scale-%E8%88%87-dist-function/">
+        [R]scale 與 dist function
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 27, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 27, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
+
+<p>在做資料分析前會需要先標準化</p>
+
+<hr />
+
+<h3 id="scale">scale</h3>
+<p>scale 的主要作用在標準化數據，共有三個 arguments，</p>
+<ul>
+  <li>x: 必須要是 matrix，以「行」為每組數據計算</li>
+  <li>center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值</li>
+  <li>scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差</li>
+</ul>
+
+<p>預設 center 和 scale 都是 TRUE，也就是算出來的值是 <a href="https://zh.wikipedia.org/wiki/標準分數">z-score</a>。</p>
+
+<blockquote>
+
+  <p>\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)</p>
+</blockquote>
+
+<p>其中：<br />
+\(x\)：數據<br />
+\(\mu\)：平均值<br />
+\(\sigma\)：標準差</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="dist">dist</h3>
+<p>dist 是在算數據間的距離，主要的 arguments有</p>
+<ul>
+  <li>x: 可以是 matrix, data.frame ，但必須要是 numeric。</li>
+  <li>methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。</li>
+</ul>
+
+<p>以「列」為數據，兩兩計算，</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread';
+        this.page.identifier = '/r/2018/09/27/R-scale-%E8%88%87-dist-function/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread" data-disqus-identifier="/r/2018/09/27/R-scale-%E8%88%87-dist-function/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">
+        [R]如何在R Package加上code coverage (codecov)?
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 14, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 14, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
+
+<p>這篇是根據<a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/">這篇</a>的步驟操作。
+如果要找 package 內容物該有的東西可以參考我完成的一個 <a href="https://github.com/shihs/LiUAdRLab3">R package</a>。</p>
+
+<p>以下會將步驟一一列下。</p>
+
+<hr />
+
+<h3 id="1-完成-r-package-與建立-test-測試">1. 完成 R package 與建立 test 測試</h3>
+<p>建立 <a href="http://r-pkgs.had.co.nz">R package</a> 可以參考大神的書，test 則可以參考這本書的 <a href="http://r-pkgs.had.co.nz/tests.html">testing 章節</a>。</p>
+
+<p>基本上使用，</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_testthat</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+<p>就會自己建立一個 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests">tests 資料夾</a>，再把要測試的程式碼加進下一層的 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests/testthat">testthat 資料夾</a>內。</p>
+
+<p>最後進行測試，</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">test</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="2-建立所有-code-coverage-需要的檔案與內容">2. 建立所有 code coverage 需要的檔案與內容</h3>
+
+<p>先跑一下程式碼，</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_coverage</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p>跑完後會出現以下的步驟提示，</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Creating `codecov.yml` from template.
+* Adding `codecov.yml` to `.Rbuildignore`.
+* Add to `README.md`: 
+[![Coverage Status](https://img.shields.io/codecov/c/github/shihs/LiUAdRLab3/master.svg)](https://codecov.io/github/shihs/LiUAdRLab3?branch=master)
+* Add to `.travis.yml`:
+after_success:
+  - Rscript -e 'covr::codecov()'
+</code></pre></div></div>
+
+<p>基本上就一步一步照著做就對了，前面兩件事程式已經幫你處理好了，<br />
+從第三步開始就行。</p>
+
+<hr />
+
+<h3 id="3-將-github-與-codecov-連結">3. 將 Github 與 codecov 連結</h3>
+
+<p>使用 Github 帳號登入 <a href="https://codecov.io">codecov.io </a>。</p>
+
+<p>連結你要使用 codecov 的 reposity，
+會出現像這樣的<a href="https://walczak.org/wp-content/uploads/2017/06/token.png">畫面</a>得到一組 token，
+將 token 複製，在 R 中跑以下程式碼，</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"covr"</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
+</span><span class="n">codecov</span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YOUR_TOKEN_GOES_HERE"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>大功告成！</p>
+
+<p>這時候會看到你剛剛貼上的 coverage 圖案出現 code coverage 的結果。</p>
+
+<hr />
+
+<p>如果想要先在 R studio 上看測試結果可以使用，</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="w"> </span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
+</span><span class="n">report</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<p>viewer 視窗就會顯示測試結果了。</p>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
+
+</div>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread';
+        this.page.identifier = '/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread" data-disqus-identifier="/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -686,757 +1400,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
-        [統計]離散型(Discrete)隨機變數與其機率分佈(2)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 2, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 2, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#統計">統計</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
-<p>這篇關於期望值的介紹在書中的 3.3，但這篇內容有很大部分也來自 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
-
-<hr />
-<h3 id="期望值-expectation">期望值 Expectation</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as</li>
-</ul>
-
-<script type="math/tex; mode=display">E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)</script>
-
-<p>且期望值 \(E(X)\) 會等於平均數 \(\mu\)</p>
-
-<script type="math/tex; mode=display">E(X) = \mu</script>
-
-<p>說明：</p>
-
-<blockquote>
-
-  <p>There is a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \). Suppose that we repeat this experiment a very large number of times \(N\), and that the trials are independent. Let \(N_1\) be the number of times we observe \(x_1\), \(N_2\) be the number of times we observe \(x_2, ….\), \(N_k\) be the number of times we observe \(x_k\).</p>
-</blockquote>
-
-<script type="math/tex; mode=display">P_X(x_1) \approx\frac{N_1}{N} \\
-P_X(x_2) \approx\frac{N_2}{N} \\
-\cdots\\
-P_X(x_k) \approx\frac{N_k}{N} \\
-\cdots</script>
-
-<blockquote>
-
-  <p>從以上式子我們可以得到 \(N_k = NP_X(x_k)\)</p>
-</blockquote>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\mu & = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
-& \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
-& = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
-& = E(X)
-\end{align} %]]></script>
-
-<p>以上就是 \(E(X) = \mu\) 的說明。</p>
-
-<p>另外，可能會看到一些不同的寫法表示期望值</p>
-
-<script type="math/tex; mode=display">E(X)=E[X]=EX=\mu=\mu_X</script>
-
-<p>這部分內容主要來源為 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
-
-<hr />
-<h3 id="law-of-the-unconscious-statistician-lotus">Law of the unconscious statistician (LOTUS)</h3>
-<p><strong>THEOREM 3.2</strong></p>
-<ul>
-  <li>Let \(X\) be a discrete random variable with probability function \(P(x)\) and \(g(X)\) be a real-valued function of \(Y\). Then the expected value of \(g(X)\) is given by</li>
-</ul>
-
-<script type="math/tex; mode=display">E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)</script>
-
-<p><strong>Example:</strong> <br />
-<a href="https://www.probabilitycourse.com/chapter3/3_2_3_functions_random_var.php">Source</a></p>
-<blockquote>
-
-  <p>Let \(X\) be a discrete random variable with range \(R_X = \{ 0, \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \pi… \} \), such that \(P_X(0)=P_X(\frac{\pi}{4})=P_X(\frac{\pi}{2})=P_X(\frac{3\pi}{4})=P_X(\pi)=\frac{1}{5}\).  Find \(E[sin(X)]\).</p>
-</blockquote>
-
-<p>Solution:</p>
-
-<blockquote>
-
-  <p>根據 LOTUS，
-<script type="math/tex">% <![CDATA[
-\begin{align}
-E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
-& = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
-& = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
-& = \frac{\sqrt{2} + 1}{2}
-\end{align} %]]></script></p>
-</blockquote>
-
-<hr />
-<h3 id="變異數-variance">變異數 Variance</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>If \(X\) is a random variable with mean \(E[X] = \mu\), the variance of \(X\) is defined as</li>
-</ul>
-
-<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2]</script>
-
-<ul>
-  <li>且根據 LOTUS，這個式子可以再寫成</li>
-</ul>
-
-<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)</script>
-
-<hr />
-<h3 id="期望值的運算">期望值的運算</h3>
-<p><strong>THEOREM 3.3</strong></p>
-
-<ul>
-  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(c\) be a constant. Then</li>
-</ul>
-
-<script type="math/tex; mode=display">E(c) = c.</script>
-
-<p><strong>THEOREM 3.4</strong></p>
-<ul>
-  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g(X)\) be a function of X, and c be as constant. Then</li>
-</ul>
-
-<script type="math/tex; mode=display">E[cg(X)] = cE[g(X)].</script>
-
-<p><strong>THEOREM 3.5</strong></p>
-<ul>
-  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g_1(X), g_2(X), …, g_k(X)\) be \(k\) functions of \(X\). Then</li>
-</ul>
-
-<script type="math/tex; mode=display">E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]</script>
-
-<p>根據以上定理，可以再產生</p>
-
-<p><strong>THEOREM 3.6</strong></p>
-<ul>
-  <li>Let X be a discrete random variable with probability function \(p(x)\) and mean \(E(X) = \mu\). Then</li>
-</ul>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-V(X) = \sigma^2 & = E[(X - \mu)^2] \\
-& = E(X^2) - \mu^2 \\
-& = E(X^2) - E^2(X) \\
-\end{align} %]]></script>
-
-<p>證明：</p>
-
-<blockquote>
-
-  <script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\sigma^2 & = E[(X - \mu)^2] & \\
-& = E[(X^2 - 2\mu X + \mu^2] \\
-& = E(X^2) - E(2\mu X) + E(\mu^2) \\
-& = E(X^2) - 2\mu E(X) + \mu^2 \\
-& = E(X^2) - 2\mu^2 + \mu^2 \\
-& = E(X^2) - \mu^2 \\
-& = E(X^2) - E^2(X) \\
-\end{align} %]]></script>
-</blockquote>
-
-<hr />
-<p>參考：</p>
-
-<ul>
-  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
-  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
-  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
-</ul>
-
- -->
-    <div class="post-excerpt"><p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread';
-        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
-        [統計]離散型(Discrete)隨機變數與其機率分佈(1)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 1, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 1, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#統計">統計</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
-<p>這篇內容為書中的 3.1 與 3.2。</p>
-
-<hr />
-
-<p>在開始前，何謂「隨機變數」？</p>
-<h3 id="隨機變數-random-variable">隨機變數 Random Variable</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 <a href="http://ccckmit.wikidot.com/st:randomvariable">Source</a><br /></li>
-  <li>A random variable \(X\) is a funcion from sample space to real number. <a href="https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php">Source</a></li>
-</ul>
-
-<blockquote>
-
-  <p>\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) <br />
-\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)</p>
-</blockquote>
-
-<p><strong>Example:</strong></p>
-
-<blockquote>
-
-  <p>擲兩枚硬幣，其樣本空間為 \( R = \{HH, HT, TH, TT\}  \)，共有 \(2^2\) 種可能。 <br />
-若將 H 定義為 1，T 定義為 0，則其隨機變數 \(X\) 的值為 \( \{0, 1, 2\}\)</p>
-</blockquote>
-
-<p>而隨機變數又分為 1. <em>離散型</em> 與 2. <em>連續型</em>，這一章節我們只會討論離散型。</p>
-
-<hr />
-
-<h3 id="離散型隨機變數-discrete-random-variable">離散型隨機變數 Discrete Random Variable</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)</li>
-  <li>\(X\) is a discrete random variable, if its range is countable. <a href="https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php">Source</a></li>
-</ul>
-
-<p>根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。</p>
-
-<p>所以像是擲銅板或是擲骰子就會是離散型隨機變數。</p>
-
-<p>以擲一顆骰子一次為例，其可能值為 \(\{1, 2, 3, 4, 5, 6\}\), 我們用 \(X\)來表示其隨機變數，<br />
-但因為隨機變數為 function，所以我們可以用 \(R_X\)來表示它的範圍，</p>
-
-<blockquote>
-
-  <p>\( Range(X) = R_X = \{1, 2, 3, 4, 5, 6\}  \) <br /></p>
-</blockquote>
-
-<hr />
-
-<h3 id="機率質量函數-probability-mass-function-pmf">機率質量函數 Probability Mass Function (PMF)</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
-</ul>
-
-<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
-
-<ul>
-  <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
-</ul>
-
-<p>機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。</p>
-
-<p>譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，</p>
-
-<blockquote>
-
-  <p>\( P(X = 1) = 1/6  \)</p>
-</blockquote>
-
-<p>另外，\( P_X(x) \)還有兩個很重要的<strong>性質</strong> <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a>，</p>
-
-<ul>
-  <li>\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)</li>
-  <li>\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)</li>
-</ul>
-
-<p>簡單來說就是，</p>
-<ol>
-  <li>任何事件發生的機率都只會介於 0 和 1 之間</li>
-  <li>所有事件機率總和等於 1</li>
-</ol>
-
-<p><strong>離散型 PMF 圖</strong></p>
-
-<p>擲兩枚硬幣，出現 head 為 1，tail 為 0 ，其 PMF 函數為</p>
-
-<blockquote>
-
-  <script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-1/4,& \;for\; x = 0 \\
-1/2,& \;for\; x = 1 \\
-1/4,& \;for\; x = 2 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-</blockquote>
-
-<p>函數圖為，</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
-
-<hr />
-
-<p>參考：</p>
-
-<ul>
-  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
-  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
-  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
-</ul>
- -->
-    <div class="post-excerpt"><p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread';
-        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">
-        [R]如何更改R介面語言的設定
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on August 27, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">August 27, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
-
-<p>以下為 mac 的 ios 系統解法，</p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"defaults write org.R-project.R force.LANG en_US.UTF-8"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>然後關閉 R 再重新打開就會改為英文介面囉！</p>
- -->
-    <div class="post-excerpt"><p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread';
-        this.page.identifier = '/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
-        [Python]執行pyinstaller產生的執行檔出現No module錯誤訊息
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 13, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 13, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
-
-<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
-執行在 dist 資料夾底下的檔案，卻出現
-`
-no module named ‘somepackagename’
-`
-的錯誤訊息。</p>
-
-<p>這表示，在打包這支程式時，並未把需要的套件打包進去？ <br />
-但是我使用 .py 執行時並沒有這樣的問題啊？ <br />
-表示我的電腦確實是有安裝該套件才是。</p>
-
-<p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
-所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
-
-<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
-
-<p>只要將原本的 <br />
-<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
-
-<p>改成 <br />
-<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
-
-<p>就好了。 <br /></p>
-
-<p>可以用， <br /></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
-</code></pre></div></div>
-<p>查看系統路徑，就可以知道套件可能的位置。</p>
-
- -->
-    <div class="post-excerpt"><p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
-        this.page.identifier = '/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">
-        [Python]彈出視窗 alert box
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 5, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 5, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
-以下會分為 mac 和 windows 兩個系統來討論。</p>
-
-<h2 id="mac">Mac</h2>
-
-<h3 id="1-easygui-套件">1. easygui 套件</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
-<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
-<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這個套件基本上蠻簡單的，只要使用<code class="highlighter-rouge">msgbox()</code>就好，<br />
-如果只是要在跑程式的時候使用沒有太大問題，<br /></p>
-
-<p>更多 <a href="https://blog.csdn.net/marksinoberg/article/details/51499909">easygui 套件</a> 的介紹</p>
-
-<p>但如果要把程式碼打包時（<a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller套件</a>） 這個方法就會失效，會出現錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ImportError: No module named easygui
-[3310] Failed to execute script alterwindow
-</code></pre></div></div>
-<p>所以如果要讓程式碼打包後可以出現彈跳視窗可以使用內建的 system。</p>
-
-<h3 id="2-ossystem">2. os.system()</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">"osascript -e 'Tell application </span><span class="se">\"</span><span class="s">System Events</span><span class="se">\"</span><span class="s"> to display dialog </span><span class="se">\"</span><span class="s">"</span><span class="o">+</span><span class="s">"Some Funky Message"</span><span class="o">+</span><span class="s">"</span><span class="se">\"</span><span class="s">'"</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這方法其實就是使用 python 執行<strong>系統命令</strong>。
-也就是，其實把 os.system() 括號裡的東西</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>osascript -e 'Tell application "System Events" to display dialog "Some Funky Message"'
-</code></pre></div></div>
-<p>打在 terminal 裡會執行的東西。</p>
-
-<p>將以上命令打在 terminal 會發現出現一個彈跳視窗，內容是 Some Funcky Message。
-<img src="http://localhost:4000/blog/img/posts/system_msg.jpg" alt="system_msg.jpg" /></p>
-
-<p>所以在 python 裡面同樣執行會產生同樣的結果。</p>
-
-<p>而這個方法將程式打包後可以正確執行。
-<br />
-<br /></p>
-
-<h2 id="windows">Windows</h2>
-<h3 id="1-easygui-套件-1">1. easygui 套件</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
-<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
-<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
-</code></pre></div></div>
-<p>基本上和 mac 一樣，將程式碼打包後也無法正常執行。</p>
-
-<h3 id="2-ctypes-套件">2. ctypes 套件</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 不需另外安裝</span>
-<span class="kn">import</span> <span class="nn">ctypes</span>
-<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Your text"</span><span class="p">,</span> <span class="s">"Your title"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c"># 或著你可以定義一個 function</span>
-<span class="k">def</span> <span class="nf">Mbox</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">style</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
-<span class="n">Mbox</span><span class="p">(</span><span class="s">'Your title'</span><span class="p">,</span> <span class="s">'Your text'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="c"># 如果是要輸出中文，記得重新 encode</span>
-<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"內容"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="s">"標題"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這個方法也可以打包後執行。</p>
-
-<p>另外，
-會看到有些地方使用</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxW()
-</code></pre></div></div>
-<p>而不是</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxA()
-</code></pre></div></div>
-<p>但執行後會發現，<code class="highlighter-rouge">ctypes.windll.user32.MessageBoxW()</code>這個方法會出現亂碼。</p>
-
-<p>這兩個的差別在<code class="highlighter-rouge">MessageBoxW</code>要使用 unicode 編碼，而<code class="highlighter-rouge">MessageBoxA</code>是 ascii 編碼。<br />
-<a href="https://stackoverflow.com/questions/20783046/python-program-displaying-messages-in-different-language-than-english">有人回答</a>這個問題	。</p>
-
-<p>這邊 mac 和 windows 各介紹了兩種方法，其實還有很多方法啦，只要能符合需求的都是好方法！</p>
-
- -->
-    <div class="post-excerpt"><p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
-以下會分為 mac 和 windows 兩個系統來討論。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread';
-        this.page.identifier = '/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread" data-disqus-identifier="/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">0 Comments</a>
       </span>
 
     </div>
