@@ -71,6 +71,10 @@ category: [Database]
       - 關係圖如下
     - 簡單屬性（Simple attribute）：非複合屬性則稱為*簡單屬性*
 
+  - 衍生屬性（Derived Attribute）
+    - 它的值可以由其它屬性之值經由某種方式的計算或推論而獲得
+    - 例如：年齡和星座可由生日推算出來
+
 
 |![Composite attributes.png]({{ "/img/posts/Composite attributes.png" |absolute_url}})|
 |:--:| 
