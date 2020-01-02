@@ -104,7 +104,7 @@ category: [Database]
 
 ## Conceptual model（概念塑模）
 
-概念塑模的目的是將現實中某部分的資料關係用**結構化**的方式呈現，建立整個資料庫邏輯結構的模型，過程不涉及任何資料庫管理系統、資料庫種類、軟體和實際儲存結構。最常使用*實體關聯模型*（Entity-Relationship Model）來繪製*實體關係圖*（Entity Relationship Diagram）。
+概念塑模的目的是將現實中某部分的資料關係用**結構化**的方式呈現，建立整個資料庫邏輯結構的模型，過程不涉及任何資料庫管理系統、資料庫種類、軟體和實際儲存結構。最常使用*實體關係圖*（Entity Relationship Diagram）來繪製*實體關聯模型*（Entity-Relationship Model）。
 
 |![ER Model.png]({{ "/img/posts/ER Model.png" |absolute_url}})|
 |:--:| 
@@ -117,6 +117,8 @@ category: [Database]
 2. ER Model 組成元件包括實體（Entity）和關係（Relationship）。
 - 實體（Entity）- 是在真實世界識別出的東西，例如：老師、學生、車子、品牌。
 - 關聯性（Relationships）- 在二個或多個實體間擁有的關係，主要分為三種：一對一、一對多、多對多。
+
+[下一篇](https://shihs.github.io/blog/database/2020/01/01/Database-ER-Model實體關係圖/)有詳細解說
 
 ***
 
