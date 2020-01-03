@@ -71,17 +71,15 @@ category: [Database]
       - 關係圖如下
     - 簡單屬性（Simple attribute）：非複合屬性則稱為*簡單屬性*
 
-  - 衍生屬性（Derived Attribute）
-    - 它的值可以由其它屬性之值經由某種方式的計算或推論而獲得
-    - 例如：年齡和星座可由生日推算出來
-
 
 |![Composite attributes.png]({{ "/img/posts/Composite attributes.png" |absolute_url}})|
 |:--:| 
 | [複合屬性 Composite attributes diagram](http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf) |
 
 
-
+  - 衍生屬性（Derived Attribute）
+    - 它的值可以由其它屬性之值經由某種方式的計算或推論而獲得
+    - 例如：年齡和星座可由生日推算出來
 
 
 ## 鍵屬性(Key attribute)
@@ -112,10 +110,10 @@ category: [Database]
     - 強關聯（strong relationship）：a relationship where entity is existence-independent of other entities, and PK of Child doesn’t contain PK component of Parent Entity
     - 弱關聯（weak (identifying) relationship）：a relationship where Child entity is existence-dependent on parent, and PK of Child Entity contains PK component of Parent Entity，也就是說，此關聯是連結*實體*與*弱實體*
   - Cardinality 
-    - 1:1
-    - 1:N
-    - M:1
-    - M:N
+    - 1:1 一對一
+    - 1:N 一對多
+    - M:1 多對一
+    - M:N 多對多
   - Participation constraints
     - 全部參與（Total participation）：every entity in the set is involved in the relationship
     - 部分參與（Partial participation）：not all entities in the set are involved in the relationship

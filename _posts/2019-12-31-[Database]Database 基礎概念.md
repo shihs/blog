@@ -141,7 +141,6 @@ category: [Database]
 ### Relational Model (Relational Data Model)
 
 - 中文稱「關聯（式）模型」。
-
 - Relational database 關聯式資料庫: represent data as a collection of relations。「關聯式資料庫」使用多個關聯表（relations）來呈現資料。
 
 **Relation（關聯表）**
@@ -244,8 +243,8 @@ category: [Database]
 
 **實體完整性(Entity Integrity)**
 - 實體完整性是關聯表內部的完整性條件，主要是用來規範關聯表主鍵的使用規則
-- 主鍵(primary  key)不可以是Null
-- 例如，(ename, cname)是主鍵，ename 屬性不可為空值;cname 屬性也不可是空值。
+- 主鍵（primary  key）不可以是 Null
+- 例如，（ename, cname）是主鍵，ename 屬性不可為空值；cname 屬性也不可是空值。
 
 
 **參考完整性(Referential Integrity)**
@@ -260,7 +259,7 @@ category: [Database]
 
 - 針對指定資料庫管理系統建立實際資料庫結構的資料模型，例如:SQL Server
 - 對於關聯式資料庫模型的實體模型來說，就是在資料庫管理系統軟體建立關聯表(Relation) 的表格、關聯性(Relationship)和索引等定義資料
-
+- 簡單來說，就是將 Conceptual model 和 Logical model 實際建立出來
 
 |![實體模型.png]({{ "/img/posts/實體模型.png" |absolute_url}})|
 |:--:| 
