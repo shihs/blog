@@ -208,7 +208,7 @@ category: [Database]
   - 下方範例關聯表來看，符合的有(sid)、(SSN)、(sid, SSN)、(sid, ename)、(SSN, cname)、(sid, tel)、(SSN, cname, postcode)......
 
 - 候選鍵（Candidate Keys）
-  - 候選鍵(Candidate Keys)是一個超鍵，在每一個關聯表至少擁有一個候選鍵，不只滿足超鍵的唯一性，還需要滿足最小性（Minimality）
+  - 候選鍵（Candidate Keys）是一個超鍵，在每一個關聯表至少擁有一個候選鍵，不只滿足超鍵的唯一性，還需要滿足最小性（Minimality）
   - Candidate Keys 是超鍵的子集合，但不同的是，候選鍵還必須要有最小性，所以單一屬性的超鍵一定是候選鍵
   - 舉個例子，如果下面的範例多了一個學生 sid = 5, ename = Jane，這時候 (sid, ename) 就不是候選鍵，因為去掉 ename 也能區分每一行，所以 ename 是多餘的
 
