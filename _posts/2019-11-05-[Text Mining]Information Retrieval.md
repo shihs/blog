@@ -138,7 +138,7 @@ split 無法排除標點符號的問題，python 的 spacy 可以將標點符號
 ### Stop words
 A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and...
 
-但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們到底或許可以根據分析的目的 Sherlock Holmes 考慮將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。
+但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們或許可以根據分析的目的將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。
 
 既然 stop words 對於分析沒有價值貢獻，那麼在做分析前就必須把 stop words 刪除，以避免干擾分析結果。
 
@@ -146,18 +146,22 @@ A stop word is a word that is frequent but does not contribute much value for th
 
 英文的文法有幾個規則，
 1. 動詞會根據人稱與時態有所變化
-2. 名詞的單數與複數有變化
+2. 動詞有動名詞型態
+3. 名詞的單數與複數有變化
 
 但在分析前必須要將這些相同意義但不同型的單字修正為相同以便分析。
 
-- The term *lexeme* refers to a set of word forms that all share the same fundamental meaning. For example: word forms run, runs, ran, running – lexeme run
+- The term *lexeme* refers to a set of word forms that all share the same fundamental meaning. 
+<br>
+For example: word forms run, runs, ran, running – lexeme run
 
-- The term *lemma* refers to the particular word form that is
-chosen, by convention, to represent a given lexeme. For example: what you would put into a lexicon
+- The term *lemma* refers to the particular word form that is chosen, by convention, to represent a given lexeme. 
+<br>
+For example: what you would put into a lexicon
 
 ***
 
-## Ranked retrieval
+## Ranked retrieval（排序檢索）
 
 進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。
 
@@ -253,8 +257,11 @@ where N denotes the number of documents in the collection.
 ### Document representations
 
 - Documents as sets of terms
+<br>
 In Boolean retrieval, the only relevant information is whether or not a term is present in a document.
+
 - Documents as bags of terms
+<br>
 In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.
 
 
@@ -328,6 +335,17 @@ Recall (R) is the fraction of relevant documents that are retrieved
 
 $$Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})$$
 
+
+**F1-measure**
+
+A good system should balance between precision and recall.   
+<br>
+The F1-measure is the harmonic mean of the two values:
+
+
+$$F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}$$
+
+
 ***
 
 **Lab:** [Information Retrieval Lab](https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb)
@@ -343,4 +361,5 @@ $$Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)
 [[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯](https://taweihuang.hpd.io/2017/03/01/tfidf/)
 <br>
 [Vector Space Model(1)](https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/)
-
+<br>
+[如何辨別機器學習模型的好壞？秒懂Confusion Matrix](https://www.ycc.idv.tw/confusion-matrix.html)
