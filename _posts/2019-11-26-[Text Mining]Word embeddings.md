@@ -15,7 +15,7 @@ This post is based on the [732A92 Texting Mining](https://www.ida.liu.se/~732A92
 ## Word embeddings
 
 對於人來說，要理解文字並不是件困難的事，但對電腦來說，每個字不過是一串 string，所以當我們要做 text mining 時就必須要將這些 string 轉化成電腦可以理解的方式。
-而 word embedding(word vector) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。
+而 word embedding(word vector or word representation) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。
 
 譬如說，人類可以理解 pretty 和 beautiful 是相近詞，但如果只是給電腦這兩個單字，對於電腦來說，這只是兩個不同長度的 string 罷了。word embedding 會將這兩個字轉換成不同的 vector 映射到一個高維空間，當這兩個 vector 越接近（可以使用 consine similarity）就表示這兩個詞越相近。這就是 word embedding 主要的概念。
 
@@ -98,7 +98,7 @@ word embeddings 的應用
 
 ***
 
-## Singular Value Decomposition(SVD)
+## Matrix factorization - Singular Value Decomposition(SVD)
 
 - The rows of co-occurrence matrices are long and sparse. Instead, we would like to have word vectors that are short and dense. 簡單來說，co-occurrence matrices 會有稀疏性的問題。 
 - One idea is to approximate the co-occurrence matrix by another matrix with fewer columns. Singular Value Decomposition 的想法是，將這個又長又臭的 co-occurrence matrix 用另比較少 columns 的 matrix 取代。
@@ -107,11 +107,13 @@ word embeddings 的應用
 ### 什麼是 Singular value decomposition（奇異值分解）?
 
 推薦[李宏毅老師的線性代數](https://www.youtube.com/watch?v=OEJ0wxxLO7M)
-- *Singular value decomposition(SVD)* can be applied on any matrix. (不需要是方陣。比較：PCA 也是一個可降維的方法，但它的矩陣就必須要是方陣。)
+- *Singular value decomposition(SVD)* can be applied on any matrix. (不需要是方陣。比較：PCA(特徵值分解) 也是一個降維的方法，但它的矩陣就必須要是方陣。)
 
 SVD 的概念就是，任一一個矩陣 $$A_{m \times n}$$，它都可以拆解成三個矩陣（$$U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}$$）的相乘。
 
 其中，$$U_{m \times n}$$ 的 columns 是 *Orthonormal*，而 $$V^T_{n \times n}$$ 的 rows 是 *Orthonormal*，$$\Sigma_{m \times n}$$ 是 *Diagonal*(只有對角線有非負的值，且由大到小)。
+
+*(在線性代數中，一個內積空間的正交基（orthogonal basis）是元素兩兩正交的基。稱基中的元素為基向量。 假若，一個正交基的基向量的模長都是單位長度1，則稱這正交基為標準正交基或"規範正交基"（Orthonormal basis）。)*
 
 ![]({{ "/img/posts/SVD.png" |absolute_url}})
 
@@ -119,23 +121,44 @@ SVD 的概念就是，任一一個矩陣 $$A_{m \times n}$$，它都可以拆解
 
 ![]({{ "/img/posts/Sigma.png" |absolute_url}})
 
-而 $$\sigma_r, ~~where~~1 \le r \le k$$ 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 $$\Sigma$$ 較重要的前面幾行得到一個相似的矩陣 $$A$$。
+而 $$\sigma_r, ~~where~~1 \le r \le k$$ 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 $$\Sigma$$ 較重要的前面幾行得到一個相似的矩陣 $$A$$。用較小的儲存空間就可以得到接近原始的矩陣 $$A$$。
 
-$$A_{m \times n} = U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n} $$
+$$A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n} $$
 
 參考[線代啟示錄-奇異值分解 (SVD)](https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/)的圖，
 
 ![]({{ "/img/posts/svd2.jpg" |absolute_url}})
 
 
-回到我們的 word-embedding。也就是說，使用 SVD 可以利用減少 $$\Sigma$$ 的維度來處理稀疏性的問題，雖然刪除了一些詞仍舊保留重要的詞。
+回到我們的 word-embedding。我們可以利用 SVD 進行去噪及降維，刪除一些不那麼重要的訊息，用來解決 Co-occurrence matrix 稀疏性的問題。
+
+我們也不需要再將相乘矩陣，直接使用 𝑼 就好，每一列就代表一個 target word。
+
 
 - Each row of the (truncated) matrix 𝑼 is a k-dimensional vector that represents the ‘most important’ information about a word.
 - A practical problem is that computing the singular value decomposition for large matrices is expensive.
 
+這邊看一個[例子](https://www.itread01.com/content/1569742263.html)，
+
+下圖是一個 Co-occurrence matrix $$~A_{m \times n}$$
+
+![]({{ "/img/posts/term-document.png" |absolute_url}})
+
+將上面的矩陣 $$A$$ 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。
+
+![]({{ "/img/posts/SVD example.png" |absolute_url}})
+
+取每個向量後兩維的對應值投影到一個二維空間，如下所示
+
+![]({{ "/img/posts/SVD example 2.png" |absolute_url}})
+
+上圖中，一個紅色的點對應一個詞，一個藍色的點對應一個文件。當這些點被投影到空間中，我們可以對這些詞和文件進行分類，比如說stock和market可以放在一類，real和estate可以放在一類，按這樣的分類結果，我們就可以知道文件中哪些事相近的詞，所以當使用者利用詞搜尋文件的時候，我們就可以利用相近的詞（在向量空間中相近的詞、被歸為同一類的詞）進行檢索，而不是只是使用完全相同的詞搜尋。
+
+
+
 ***
 
-## Positive Pointwise mutual information(PPMI)
+## Matrix factorization - Positive Pointwise mutual information(PPMI)
 
 ### Pointwise mutual information(PMI)
 
@@ -182,8 +205,9 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})$$
 
 $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
+***
 
-## N-gram models
+## Language models - N-gram models
 
 - An n-gram is a contiguous sequence of n words or characters. Ex. unigram (Text), bigram (Text Mining), trigram (Text Mining course)
 - An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.
@@ -197,7 +221,6 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 - $$P(w\mid u)$$: a probability that specifies how likely it is to observe  the word $$w$$ after the context 
 <br>(n − 1)-gram $$u$$
 
-***
 
 **Unigram model**
 
@@ -249,7 +272,6 @@ Thus contexts are unigrams.
 - Absolute discounting
 - Kneser-Ney smoothing
 
-***
 
 上面的狀況碰到的是，"CHER" 後面沒有出現 "READ" 的狀況，而導致機率等於0，但如果現在是 "CHER" 這個字從未出現在資料集中呢？這種狀況時，smoothing 便派不上用場了。
 
@@ -258,7 +280,7 @@ Thus contexts are unigrams.
 
 ***
 
-## Neural networks as language models
+## Language models - Neural networks as language models
 
 ### Advantages of neural language models
 - Neural models can achieve better perplexity than probabilistic models, and scale to much larger values of n.
@@ -297,3 +319,5 @@ Thus contexts are unigrams.
 [NLP Lunch Tutorial: Smoothing](https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf)
 <br>
 [機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？](https://kknews.cc/tech/83yx3qn.html)
+<br>
+[詞向量(one-hot/SVD/NNLM/Word2Vec/GloVe)](https://www.itread01.com/content/1569742263.html)
