@@ -162,8 +162,12 @@ $$A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r
 
 ### Pointwise mutual information(PMI)
 
-- Raw counts favour pairs that involve very common contexts. Ex.the cat, a cat will receive higher weight than cute cat, small cat.
+- Raw counts favour pairs that involve very common contexts. 
+<br>
+E.g. the cat, a cat will receive higher weight than cute cat, small cat.
+
 - We want a measure that favours contexts in which the target word occurs more often than other words.
+
 - A suitable measure is pointwise mutual information (PMI):
 
 $$PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}$$
@@ -191,6 +195,17 @@ $$􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)$$
 
 ![]({{ "/img/posts/Computing PPMI on a word–context matrix.png" |absolute_url}})
 
+
+看一個[例子](http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information)，
+
+下圖是一個 Co-occurrence matrix，列是 target words，行是 context words
+![]({{ "/img/posts/PMI example.png" |absolute_url}})
+
+假設這篇文章總共只有 19 個字，這裡我們計算 x = information，y = data 的 PMI 值，
+![]({{ "/img/posts/PMI example 2.png" |absolute_url}})
+
+根據同樣的方式可以求出所有 target words 對應的 context words 的 PMI 值。
+
 ***
 
 ## Language models
@@ -201,7 +216,7 @@ $$􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)$$
 
 $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})$$
 
-- To make probability estimates more robust, we can approximate the full history $$w_1 \ldots w_N$$ by the last few words(馬可夫鍊):
+- To make probability estimates more robust, we can approximate the full history $$w_1 \ldots w_N$$ by the last few words (馬可夫鍊):
 
 $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
@@ -209,8 +224,12 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
 ## Language models - N-gram models
 
-- An n-gram is a contiguous sequence of n words or characters. Ex. unigram (Text), bigram (Text Mining), trigram (Text Mining course)
+- An n-gram is a contiguous sequence of n words or characters. 
+<br>
+E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)
+
 - An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.
+
 - n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。
 
 
@@ -218,7 +237,7 @@ $$p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})$$
 
 - $$n$$: the model's order (1 = unigram, 2 = bigram, ...)
 - $$V$$: a set of possible words (character); the vocabulary
-- $$P(w\mid u)$$: a probability that specifies how likely it is to observe  the word $$w$$ after the context 
+- $$P(w\mid u)$$: a probability that specifies how likely it is to observe the word $$w$$ after the context 
 <br>(n − 1)-gram $$u$$
 
 
@@ -267,7 +286,8 @@ Thus contexts are unigrams.
 **Smoothing methods**
 - Additive smoothing
 - Good-Turing estimate
-- Jelinek-Mercer smoothing (interpolation) • Katz smoothing (backoff)
+- Jelinek-Mercer smoothing (interpolation)
+- Katz smoothing (backoff)
 - Witten-Bell smoothing
 - Absolute discounting
 - Kneser-Ney smoothing
@@ -275,8 +295,15 @@ Thus contexts are unigrams.
 
 上面的狀況碰到的是，"CHER" 後面沒有出現 "READ" 的狀況，而導致機率等於0，但如果現在是 "CHER" 這個字從未出現在資料集中呢？這種狀況時，smoothing 便派不上用場了。
 
-- A simple way to deal with this is to introduce a special word type UNK, and to smooth it like any other word type in the vocabulary.
-- When we compute the probability of a document, then we first replace every unknown word with UNK.
+- In addition to unseen words, a new text may even contain *unknown words*. For these, smoothing will not help.
+
+**Unknown words**
+<br>
+建立一個 token <UNK>，如果是 unknown words 就用 <UNK> 當作普通的單詞處理。
+
+- A simple way to deal with this is to introduce a special word type *UNK*, and to smooth it like any other word type in the vocabulary.
+- When we compute the probability of a document, then we first replace every unknown word with *UNK*.
+
 
 ***
 
