@@ -47,7 +47,7 @@ Convolution Layer 包括 filter 和激活函數 (ex. Relu) 所構成。
 
 ![]({{ "/img/posts/Convolution.gif" |absolute_url}})
 
-特徵擷取的方式是使用 Filter (或稱作 Kernel) 來萃取圖片中的特徵，上圖是一個 3x3 window 的 filter，而算法就是像圖那樣移動 (移動的步數是 stirde)，將數字相乘後再相加 (詳情可以看之前的[筆記1](https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/)、[筆記2](https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/)，包括 padding 和 stride 的概念)。美圖的不同效果就是使用不同的 Filter (Kernel) 做出來的。
+特徵擷取的方式是使用 Filter (或稱作 Kernel) 來萃取圖片中的特徵，上圖是一個 3x3 window 的 filter，而算法就是像圖那樣移動 (移動的步數是 stride)，將數字相乘後再相加 (詳情可以看之前的[筆記1](https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/)、[筆記2](https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/)，包括 padding 和 stride 的概念)。美圖的不同效果就是使用不同的 Filter (Kernel) 做出來的。
 
 下圖是不同的 filter 做出來的效果
 [圖片來源](https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/)
