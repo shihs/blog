@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "[Neural Network]Neural Network 1"
+title: "[Neural Network]Neural Network 1 - The idea"
 date: 2020-01-22 11:51
 author: "Shihs"
 category: [Neural Network]

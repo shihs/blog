@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "[Neural Network]Neural Network 2"
+title: "[Neural Network]Neural Network 2 - Gradient descent"
 date: 2020-01-23 16:56
 author: "Shihs"
 category: [Neural Network]
@@ -14,7 +14,7 @@ category: [Neural Network]
 
 ***
 
-在 Machine Learning 裡當我們使用 training data 訓練得到一個 model，我們會使用一組之前未參與訓練的 test data 去測試，計算 model 預測出來的結果與正確答案差異，計算這個 model 的準確率，換句話說，average cost of all training data 是我們衡量 model 好壞的依據。而神經網路學習就是減小成本函式。
+在 Machine Learning 裡我們使用 training data 訓練得到一個 model，但這「訓練」到底是怎麼訓練的呢？訓練的過程，通常是要找到最小的 cost，也就是最後的結果與真實值差距越小越好。
 
 在 Neural Network 我們要訓練的變數就是[前面一篇](https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/)提到的 weight 和 bias。一開始我們隨機的給予這些數字，然後在一次次的學習中去改進 weight 和 bias 的值，找到最小的成本函數。
 
@@ -108,7 +108,7 @@ $$\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac
 
 梯度 Gradient 的幾何意義，
 - $$\nabla f$$ 表示曲面 $$f(x, y, z) = C$$ 之垂直向量，如下圖所示。
-- $$\nabla f(P)$$ 表在 P 點增量最大的方向
+- $$\nabla f(P)$$ 表在 P 點增量最大的方向，也就是 the direction of steepest increase
 
 
 ![]({{ "/img/posts/gradient.png" |absolute_url}})
@@ -118,6 +118,13 @@ $$\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac
 ### 梯度下降法 Gradient descent
 
 Gradient descent 是一種最佳化方法。
+
+從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 $$-\nabla f(P)$$ 是找尋 minimum cost 的方向。
+
+總的來說，梯度下降法 Gradient descent 就是不斷的在某個點 P 算它的 Gradient，然後往 Gradient 的反方向一定，直到找到 local minimum 為止（無法知道是否找到 glocal minimum，會根據 initial values 而定）。
+
+
+在 neural netword 中，讓這個梯度計算更有效率的方法叫做 **Backpropagation**，而這正是 neural netword 的重點！下一篇繼續介紹 :)
 
 
 ***
