@@ -18,6 +18,12 @@ category: [Neural Network]
 
 在 Neural Network 我們要訓練的變數就是[前面一篇](https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/)提到的 weight 和 bias。一開始我們隨機的給予這些數字，然後在一次次的學習中去改進 weight 和 bias 的值，找到最小的成本函數。
 
+在課程的例子裡，Neural Network function 的 input 是 784 個 pixel 的數字，output 是 10 個數字，0 到 9 的機率，parameters 是 weight 和 bias。但在cost function 中，weight 和 bias 變成了 input，而 output 就是 cost 的值，parameters 則是很多的 training pairs。
+
+我們可以把 cost function 這樣表示， 
+
+$$C(w_1, w_2,..., b_1, b_2, ....) = cost$$
+
 cost 的算法是 Neural Network 算出來的值，扣掉正確值然後平方相加。學習過程中，我們將所有 training data 的 cost 相加平均（average cost of all training data），希望這個值越小越好。
 
 ![]({{ "/img/posts/cost.png" |absolute_url}})
