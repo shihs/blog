@@ -176,7 +176,7 @@ $$
 **Reference:**
 <br>
 [ML Lecture 7: Backpropagation](https://www.youtube.com/watch?v=ibJpTrp5mcE)
-
-
+<br>
+[Back-propagation](https://medium.com/ai-academy-taiwan/back-propagation-3946e8ed8c55)
 
 

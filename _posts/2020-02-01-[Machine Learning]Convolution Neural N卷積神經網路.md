@@ -34,7 +34,7 @@ category: [Machine Learning, Neural Network]
 
 ## 1. Convolution Layer 卷積層
 
-Convolution Layer 包括 filter 和激活函數 (ex. Relu) 所構成。
+Convolution Layer 由 filter 和激活函數 (ex. Relu) 所構成。
 
 下圖是常見的美圖效果，其實就是使用 filter 達成的
 [圖片來源](https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9)
