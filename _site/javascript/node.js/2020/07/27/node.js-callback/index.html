@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <!-- 數學符號 -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+  	
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">Just for learning.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+    <div class="links">
+      <ul>
+        <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
+        <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.instagram.com/itakephotos_tw/" class="instagram" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-instagram-8-240.png"></a></li>
+        <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
+      </ul>
+    </div>
+    
+
+    <p class = "rights">&copy; 2020. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[node.js]非同步（Asynchronous）、同步（Synchronous）、callback</h1>
+  <div class="post-info">
+    <i class="fas fa-calendar-alt"></i>
+    <span class="post-date">July 27, 2020</span> 
+    <span>
+        <i class="fas fa-comments"></i>
+        <a class="comment-count" href="/blog//javascript/node.js/2020/07/27/node.js-callback/#disqus_thread" data-disqus-identifier="/javascript/node.js/2020/07/27/node.js-callback/">0 Comments</a>
+    </span>
+    <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#javascript">javascript</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#node.js">node.js</a>
+        
+      
+    </span>
+  </div>
+  <div>
+    <p>簡單介紹 node.js 裡重要的「非同步（Asynchronous）」概念，那既然有「非同步（Asynchronous）」當然就會有「同步（Synchronous）」，以及因為「非同步（Asynchronous）」而衍伸出的重要 callback 概念。</p>
+
+<hr />
+
+<p>Node.js 是一個<strong>單執行緒</strong>且非同步的語言。</p>
+
+<p><strong>note</strong></p>
+<ul>
+  <li>
+    <p>執行緒：執行緒是比程序更小的單元，它是 cpu 的最小執行單元。是作業系統能夠進行運算排程的最小單位。一個程序，至少包含一個或多個執行緒。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+  <li>
+    <p>單執行緒：單執行的特性是<strong>順序執行</strong>，當遇到比較耗時的任務時，還未執行的任務就會處於等待狀態，一定要等到前面的任務完成了，才會往後執行。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+</ul>
+
+<p><strong>Asynchronous（非同步）&amp; Event queue（事件佇列）</strong></p>
+
+<p>以上提到，單執行緒「還未執行的任務就會處於等待狀態」，所謂的「未執行任務」必須要是<strong>非同步（Asynchronous）</strong>function 才行，而「等待狀態」是指那些任務會被放到 Event queue，而 Event queue 的事件在所有事件完成前不會被執行。簡單的說，程式碼一行一行執行，當遇到<strong>非同步（Asynchronous）</strong>function 時，就會先執行下一行的任務，而這個還未被執行的<strong>非同步（Asynchronous）</strong>function 就會被放到 Event queue 中等到最後才執行。</p>
+
+<hr />
+
+<h3 id="同步synchronous">同步（Synchronous）</h3>
+
+<ul>
+  <li>指程式必須等待前面的程式執行完才能執行。</li>
+</ul>
+
+<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
+
+<h3 id="非同步asynchronous">非同步（Asynchronous）</h3>
+
+<ul>
+  <li>指程式不須等待前面的程式執行完就能執行。</li>
+</ul>
+
+<p>下面舉一個常見的非同步 function，<strong>setTimeout()</strong>（第一個參數為時間到時要被執行的函式，第二個參數為要延遲的時間（毫秒）），setTimeout() 會在第二個參數的延遲時間後執行第一個參數的函式。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Timer is done!'</span><span class="p">)</span>
+<span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>以上程式碼印出來的結果會是，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
+Hi
+Timer is done!
+</code></pre></div></div>
+
+<p>因為 setTimeout() 裡的任務被放到 Event queue 中了，必須等到下面兩行程式碼跑完才接著跑 setTimeout() 裡的東西。</p>
+
+<h3 id="callback">callback</h3>
+
+<p>但假如果我們現在就是想要讓程式執行完，才接著下一個任務該怎麼辦呢？所以這時候有了 <strong>callback</strong>。</p>
+
+<p>callback 讓我們把一個函式丟進另一個函式當參數，讓我們可以控制程式碼的流程。先看一個簡單的範例，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callbackSleepWorker</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im wake up !'</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im first.'</span><span class="p">)</span>
+  <span class="nx">callbackWorker</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackSleepWorker</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>這個結果會先印出 ‘OK, Im first.’ 接著再印出 ‘OK, Im wake up !’。</p>
+
+<p>上面這個例子大概還看不太出來為什麼需要 callback，如果現在這個函式是個非同步函式呢？</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">money</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">function</span> <span class="nx">slower</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">money</span> <span class="o">=</span> <span class="mi">30</span>
+  <span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+  <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">slower</span><span class="p">()</span>
+<span class="nx">faster</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>以上程式碼印出來的會是：I have null。</p>
+
+<p>明明是先跑了 slower() 但 money 卻沒先被負值，這是因為 setTimeout() 是個非同步 function，所以它會先被放到 event queue 中，faster() 就先執行了。那如果我們現在想要讓 slower() 百分之百先執行可以怎麼做呢？</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">money</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">function</span> <span class="nx">slower</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">money</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="nx">callbackWorker</span><span class="p">()</span>
+  <span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+  <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">slower</span><span class="p">(</span><span class="nx">faster</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>這時候印出來的結果就會是：I have 30</p>
+
+<p>現在有個任務是，讀檔案並計算長度</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+
+<span class="c1">// fs.readFile(filename, callback(err, content))</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'finish'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'not finish'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>本來 readFile() 這個 function 會先被放到 event queue 裡，然後接著印出 ‘not finish’，但我們現在把要讀檔案這個任務放在 callback 裡，所以變成只要讀完檔案就會立刻執行，’not finish’ 會等到檔案讀完才會進行。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://medium.com/@Whien/js20min-day-18-關於回呼生活化-callback-1a112db1a788">JS20min Day — 18 關於回呼生活化 (Callback)</a>
+<br />
+<a href="https://larry850806.github.io/2016/06/16/nodejs-async/">[Node.js] 理解 Node.js 事件驅動</a>
+<br />
+<a href="https://blog.techbridge.cc/2019/10/05/javascript-async-sync-and-callback/">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！</a>
+<br />
+<a href="https://wcc723.github.io/javascript/2017/12/07/javascript-event-queue/">鐵人賽：一次只能做一件事情的 JavaScript</a>
+<br />
+<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">JavaScript 核心篇 學習筆記: Chap.15–執行緒與同步/非同步</a></p>
+
+
+  </div>
+</div>
+
+
+<a name="comments"></a>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog/#disqus_thread';
+        this.page.identifier = '/javascript/node.js/2020/07/27/node.js-callback/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+<div class="related">
+  <h2>Latest Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/blog/neural%20network/2020/02/13/Neural-Network-Neural-Network-3/">
+            [Neural Network]Neural Network 3 - Backpropagation        
+          </a>
+            <small>Feb 13, 2020</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">
+            [NLP]CNN in NLP        
+          </a>
+            <small>Feb 2, 2020</small>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">
+            [Neural Network]Convolution Neural Network 卷積神經網路        
+          </a>
+            <small>Feb 1, 2020</small>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+    <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
+  </body>
+</html>
