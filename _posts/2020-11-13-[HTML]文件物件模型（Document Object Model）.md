@@ -47,7 +47,7 @@ DOM 的樹狀結構中最重要的就是**節點**（**node**），而節點可�
 
 - **Attribute**：Attribute 是指各個標籤內的相關屬性，像是 `name`、`class`、`href` 等等都是被歸類在 Attribute。
 
-- **Text**：Text 是指被各個標籤包起來的文字，像是 `<h1>Hi</h1>` 中， Hi 被 `<h1>` 這個 Element 包起來，因此 Hello World 就是此 Element 的 Text。
+- **Text**：Text 是指被各個標籤包起來的文字，像是 `<h1>Hi</h1>` 中， Hi 被 `<h1>` 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。
 
 ***
 
