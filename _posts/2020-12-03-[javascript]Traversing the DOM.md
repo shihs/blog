@@ -7,7 +7,7 @@ author: "Shihs"
 category: [javascript]
 ---
 
-整理 Treehouse 前端課程中  JavaScript and the DOM](https://teamtreehouse.com/library/javascript-and-the-dom-2) 的最後一節 Traversing the DOM 內容。
+整理 Treehouse 前端課程中 [JavaScript and the DOM](https://teamtreehouse.com/library/javascript-and-the-dom-2) 的最後一節 Traversing the DOM 內容。
 
 DOM Traversal 的意思是，可以透過一個 element 與這個 element 的關係去選取其他的 element。
 
