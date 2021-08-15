@@ -11,6 +11,7 @@ tagline: "Quirky"
 description: "Just for learning."
 url: https://shihs.github.io/
 baseurl: /blog
+liker_id: shihs_tw
 
 author:
   name: "Min-Chun Shih"
@@ -28,6 +29,3 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
   - jemoji
-
-# Enter your Liker ID to enable LikeCoin button
-liker_id: shihs_tw
