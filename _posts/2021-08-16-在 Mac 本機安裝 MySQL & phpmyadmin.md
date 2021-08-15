@@ -18,14 +18,14 @@ category: []
 -   選擇下載 `.dmg` 檔
 -   下載完後安裝，安裝過程需要**設定 root 的密碼**
 -   打開系統偏好設定會看到出現 MySQL 的圖示，點選後啟動 MySQL
-    ![](https://i.imgur.com/tusQ0GN.png)
-    ![](https://i.imgur.com/rpAQ8yJ.png)
+    ![](https://i.imgur.com/tusQ0GN.png){:width="70%" heigh="70%"}
+    ![](https://i.imgur.com/rpAQ8yJ.png){:width="70%" heigh="70%"}
 
 #### 3. 使用 terminal 開啟 MySQL
 
 -   `mysql -u root -p`（`-u`: user, `-p`: password）
 -   出現 `Enter password:` 後輸入剛剛安裝時設定的 root 密碼
-    ![](https://i.imgur.com/dsXdFmP.png)
+    ![](https://i.imgur.com/dsXdFmP.png){:width="70%" heigh="70%"}
 
 #### 4. 下載 phpmyadmin
 
@@ -33,7 +33,7 @@ category: []
 
 -   下載：https://www.phpmyadmin.net/downloads/
 -   瀏覽器打開 http://localhost/phpmyadmin/index.php
-    ![](https://i.imgur.com/orDEaCz.png)
+    ![](https://i.imgur.com/orDEaCz.png){:width="70%" heigh="70%"}
 
 #### 5. 設定 phpmyadmin 登入密碼
 
