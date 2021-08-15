@@ -10,11 +10,11 @@ category: []
 #### 1. 啟動 Apache
 
 -   `sudo apachectl start`
--   打開瀏覽器 http://localhost/ 可以看到 **It works!**
+-   打開瀏覽器 [http://localhost/](http://localhost/) 可以看到 **It works!**
 
 #### 2. 下載 MySQL
 
--   https://dev.mysql.com/downloads/mysql/
+-   [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
 -   選擇下載 `.dmg` 檔
 -   下載完後安裝，安裝過程需要**設定 root 的密碼**
 -   打開系統偏好設定會看到出現 MySQL 的圖示，點選後啟動 MySQL
@@ -31,7 +31,7 @@ category: []
 
 這個步驟不是必須，下載 phpmyadmin 是為了可以使用操作介面查看 MySQL。
 
--   下載：https://www.phpmyadmin.net/downloads/
+-   下載 phpmyadmin：[https://www.phpmyadmin.net/downloads/](https://www.phpmyadmin.net/downloads/)
 -   瀏覽器打開 http://localhost/phpmyadmin/index.php
     ![](https://i.imgur.com/orDEaCz.png){:width="70%" heigh="70%"}
 
