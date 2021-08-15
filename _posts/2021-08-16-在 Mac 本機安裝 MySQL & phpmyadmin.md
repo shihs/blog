@@ -25,14 +25,14 @@ category: []
 
 -   `mysql -u root -p`（`-u`: user, `-p`: password）
 -   出現 `Enter password:` 後輸入剛剛安裝時設定的 root 密碼
-    ![](https://i.imgur.com/dsXdFmP.png){:width="70%" heigh="70%"}
+    ![](https://i.imgur.com/dsXdFmP.png){:width="90%" heigh="90%"}
 
 #### 4. 下載 phpmyadmin
 
 這個步驟不是必須，下載 phpmyadmin 是為了可以使用操作介面查看 MySQL。
 
 -   下載 phpmyadmin：[https://www.phpmyadmin.net/downloads/](https://www.phpmyadmin.net/downloads/)
--   瀏覽器打開 http://localhost/phpmyadmin/index.php
+-   瀏覽器打開 [http://localhost/phpmyadmin/index.php](http://localhost/phpmyadmin/index.php)
     ![](https://i.imgur.com/orDEaCz.png){:width="70%" heigh="70%"}
 
 #### 5. 設定 phpmyadmin 登入密碼
