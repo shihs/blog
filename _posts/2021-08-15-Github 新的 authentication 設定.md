@@ -75,5 +75,3 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 
 **Reference**:
 [Solved - Support for password authentication was removed - Github - Mac and Windows](https://www.youtube.com/watch?v=aKaYpl-ZpGg)
-
-https://button.like.co/shihs_tw
