@@ -9,8 +9,8 @@ category: []
 
 Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。
 
-- 使用 ssh
-- 使用 personal access token
+- [使用 ssh](https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#1-%E4%BD%BF%E7%94%A8-ssh)
+- [使用 personal access token](https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#2-%E4%BD%BF%E7%94%A8-personal-access-token)
 
 ---
 
@@ -61,11 +61,12 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 **Step 1:**
 
 - 參照 github 提供的方法，[Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)。
+  - **Settings** -> **Developer settings** -> **Personal access tokens** -> **Generate new token**
 
 **Step 2:** 將 create 出來的 token 加到「鑰匙圈」裡
 
 - 使用 spotlight 搜尋「keychain」
-- 在 keychain 上搜尋「git」，找到 github
+- 在 keychain 上搜尋「github」，找到 github
   ![]({{ "/img/posts/keychain.png" |absolute_url}}){:width="70%" heigh="70%"}
 - 點選下方「顯示密碼」，並將密碼改成剛剛在 github 上 create 的 token
   ![]({{ "/img/posts/add token.png" |absolute_url}}){:width="70%" heigh="70%"}
@@ -74,3 +75,5 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 
 **Reference**:
 [Solved - Support for password authentication was removed - Github - Mac and Windows](https://www.youtube.com/watch?v=aKaYpl-ZpGg)
+
+https://button.like.co/shihs_tw
