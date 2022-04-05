@@ -7,7 +7,7 @@ author: "Shihs"
 category: [Python]
 ---
 
-Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
+Conda 除了能夠管理套件也能夠管理工作環境，是個好用的工具。
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。
 
 ---
@@ -71,5 +71,4 @@ Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的�
 - `conda list`：active 環境中的所有套件
     - [`Build Channel`](https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply)的`pypi`表示是用`pip install PACKAGENAME`
     - `pip freeze`可以看到所有用`pip install`下載的套件
-![](https://i.imgur.com/gnlRU35.png)
 - `conda env remove --name ENV_NAME`：刪除名稱為`ENV_NAME`的環境

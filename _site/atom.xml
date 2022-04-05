@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-04-05T18:21:53+08:00</updated>
+ <updated>2022-04-05T18:54:33+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -17,7 +17,7 @@
    <link href="http://localhost:4000blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"/>
    <updated>2022-04-05T17:41:00+08:00</updated>
    <id>http://localhost:4000/python/2022/04/05/[Python]在 Mac 下載與安裝 Miniconda</id>
-   <content type="html">&lt;p&gt;Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
+   <content type="html">&lt;p&gt;Conda 除了能夠管理套件也能夠管理工作環境，是個好用的工具。
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -98,8 +98,7 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda list&lt;/code&gt;：active 環境中的所有套件
     &lt;ul&gt;
       &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Build Channel&lt;/code&gt;&lt;/a&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;pypi&lt;/code&gt;表示是用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install PACKAGENAME&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;可以看到所有用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt;下載的套件
-&lt;img src=&quot;https://i.imgur.com/gnlRU35.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;可以看到所有用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt;下載的套件&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda env remove --name ENV_NAME&lt;/code&gt;：刪除名稱為&lt;code class=&quot;highlighter-rouge&quot;&gt;ENV_NAME&lt;/code&gt;的環境&lt;/li&gt;
