@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,134 +183,107 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">
-        [Machine Learning]Regression splines
+      <a href="/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">
+        [Neural Network]Neural Network 1 - The idea
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 9, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2020</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 9, 2018</span>
+      <span class="post-date">January 22, 2020</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+    <!-- <p>在了解 CNN (卷積神經網路, Convolutional neural network) 與 RNN (循環神經網絡, Recurrent neural network) 前，先來認識最簡單的 NN (神經網路, Neural network) Multilayer perceptron。</p>
 
-<p>上圖是一個 x, y 的分佈圖，紅線是這些點分部的方程式。但現實中，我們並無法真的知道紅線的方程式，我們可能使用一次方程式、二次方程式甚至更高次方的方程式去嘗試（如下圖
-）。
-<img src="http://localhost:4000/blog/img/posts/splines%20line.png" alt="splines line.png" height="380px" width="600px" /></p>
-
-<p>我們可以將擬合的多項式方程式（polynomial function）寫成，</p>
-
-<p>\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + … + \beta_n x^n + \epsilon\)</p>
-
-<p>但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。</p>
-
-<p>這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。</p>
+<p>這篇是<a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural networks</a>的課程筆記。</p>
 
 <hr />
 
-<p><strong>Basis function</strong></p>
+<p>Neural network 啟發自大腦神經，所謂的 Neural 就是 neurons (神經元)，而在 Neural network 裡，neurons 是個介於 0 和 1 之間的數字。</p>
 
-<p>\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + … + \beta_n b_n(x_i) + \epsilon_i\)</p>
+<p>我們將以讓程式辨認手寫數字 0 到 9 為例解說 Neural network。下圖是一個 28*28 像素的手寫數字，</p>
 
-<p>透過 \(b_1(X)\)、\(b_2(X)\)、……、\(b_n(X)\) 可以將非線性的自變量轉換成線性。</p>
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%201.png" alt="" /></p>
 
-<hr />
+<p>每一個像素都是一個 0 到 1 的灰階值，而 Neural network 以這個圖的每個像素，對應到每個神經元作為輸入值，也就是說第一層輸入層共有 28*28 = 784 個神經元。灰階值 0 為黑色，1 為白色。這些在神經元中的數字稱為「激勵值」（activation）。</p>
 
-<p><strong>Piecewise Function</strong></p>
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%202.png" alt="" /></p>
 
-<p>將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。</p>
+<p>這裡範例使用，第一層為輸入層，中間兩層 hidden layers，最後一層為輸出層。而最後輸出層就是 0 到 9 的數字，每個神經元都有個「激勵值」（activation），而這數字就代表著最後給定可能是這個數字的判定結果。</p>
 
-<p>如下圖每個區段都是用一次方程式去擬合。\(\xi\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。</p>
+<p>而中間的 hidden layers 正是神經網路的重點。</p>
 
-<p><img src="http://localhost:4000/blog/img/posts/piecewise%20linear.png" alt="piecewise linear.png" height="600px" width="500px" />
-From: 《Elements of Statistical Learning》</p>
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%203.png" alt="" /></p>
 
-<p>但這些 piecewise function 是有條件的。
-<br />
-雖然 piecewise function 是每個區段各自擬合出來的 function，但所有區段 function 必須整個為連續，也就是在 \(\xi\) 的交界處的值必須相同。</p>
+<p>我們可以想像，將整個數字分解成不同的部分，</p>
 
-<hr />
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%204.png" alt="" /></p>
 
-<p><strong>Cubic Spline</strong></p>
+<p>第一層 hidden layer 是比較小段的部分，而第二層 hidden layer 是由這些小區塊組成比較大塊的區塊。</p>
 
-<p>這裡則是使用三次方程式。</p>
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%205.png" alt="" /></p>
 
-<p><img src="http://localhost:4000/blog/img/posts/piecewise%20cubic%20polynomials.png" alt="piecewise cubic polynomials.png" height="600px" width="500px" />
-From: 《Elements of Statistical Learning》</p>
+<p>有了這些概念之後，那我們要怎麼從輸入層到第一層的 hidden layer 呢？</p>
 
-<p>cubic spline 除了邊界的值相同外，還必須要一階和二階倒數相同。</p>
+<p>現在我們希望，第二層的其中一個神經元可以辨識這個圖有沒有一個邊，如下圖，</p>
 
-<p>看上圖左上的圖加上邊界連續後成為右上，雖然看起來是連續的函數，但並不是完美的曲線，如果再加上一階導數相同就變成左下，再加上二階導數就可以畫出右下的圖。</p>
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%206.png" alt="" /></p>
 
-<hr />
+<p>我們會給這個神經元與輸入層的神經元之間每個連線一個權重（weight），然後將輸入層的神經元乘上每個權重再加總，權重可以是正或負值。</p>
 
-<p>這個 R code 是畫出最上面圖的程式碼，使用 <a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a> 裡頭的範例。</p>
+<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function <script type="math/tex">\sigma(x) = \frac{1}{1+e^x}</script> 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+<p>但也許並不是每次加總大於零我們就希望給正的灰階值，因此，權重最後再加上個 bias，來調整我們想要給灰階值的值。</p>
 
-</span><span class="c1"># function</span><span class="w">
-</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
-  </span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">11</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">^</span><span class="m">6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%207.png" alt="" /></p>
 
-</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w">
-</span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span><span class="n">eps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># epsilon</span><span class="w">
-</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="w">
+<p>所有第一層 hidden layers 的神經元都根據這樣的概念，有自己關注的區塊，有自己的權重，再加上自己的 bias。第二層的 hidden layers 神經元也以同樣的概念計算，所以我們總共會有 13,002 個權重加上 bias。</p>
 
-</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
-  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
-  </span><span class="n">f_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">,</span><span class="w">
-  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w">
-</span><span class="p">)</span><span class="w">
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
 
-</span><span class="c1"># plot</span><span class="w">
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
-  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+<p>而所謂的 deep learning 的 learning 就是在學習這些權重和 bias，讓電腦去找到正確的值。</p>
 
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
-  </span><span class="n">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">I</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-  </span><span class="c1"># stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3), se = FALSE, colour = "gold1") +</span><span class="w">
-  </span><span class="c1"># stat_smooth(method = 'loess', se = FALSE, colour = "red") +</span><span class="w">
-  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
+<p>上上圖的式子只是其中一個神經元，而我們可以用矩陣表達所有第一層 hidden layers 的神經元。如下圖，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%209.png" alt="" /></p>
+
+<p>總的來說，我們可以將整個 neural network 看成一個 function。</p>
+
+<script type="math/tex; mode=display">f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
+   y_0 \\
+   \vdots \\
+   y_9
+  \end{bmatrix}</script>
+
+<p>最後，其實現在已經不使用 sigmoid function 了，現在主流的 function 用的是 <strong>ReLU</strong>。</p>
+
+<script type="math/tex; mode=display">ReLU(a) = max(0, a)</script>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%2010.png" alt="" /></p>
 
 <hr />
 
-<p>Reference:
+<p><strong>Reference:</strong>
 <br />
-<a href="https://zhuanlan.zhihu.com/p/34825299">一文读懂回归样条（regression splines），附Python代码</a>
-<br />
-<a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a>
-<br />
-<a href="https://www.youtube.com/watch?v=V1JRs6AP1AI">Spline Regression | Non Linear Model | Polynomial Regression</a>
-<br />
-<a href="https://zh.wikipedia.org/wiki/样条函数">wikipedia - 樣條函數</a>
-<br />
-<a href="https://datascienceplus.com/cubic-and-smoothing-splines-in-r/">Cubic and Smoothing Splines in R</a>
-<br />
-<a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf">《An Introduction to Statistical Learning with Applications in R》</a></p>
+<a href="https://www.youtube.com/watch?v=aircAruvnKk">究竟神經網路是什麼？ 第一章 深度學習</a></p>
  -->
-    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+    <div class="post-excerpt"><p>在了解 CNN (卷積神經網路, Convolutional neural network) 與 RNN (循環神經網絡, Recurrent neural network) 前，先來認識最簡單的 NN (神經網路, Neural network) Multilayer perceptron。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -318,8 +303,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/';
+        // this.page.url = '/blog//neural%20network/2020/01/22/Neural-Network-Neural-Network/#disqus_thread';
+        this.page.identifier = '/neural%20network/2020/01/22/Neural-Network-Neural-Network/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -332,7 +317,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//machine%20learning/2018/12/09/Machine-Learning-Regression-splines/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">0 Comments</a>
+        <a href="/blog//neural%20network/2020/01/22/Neural-Network-Neural-Network/#disqus_thread" data-disqus-identifier="/neural%20network/2020/01/22/Neural-Network-Neural-Network/">0 Comments</a>
       </span>
 
     </div>
@@ -341,729 +326,1335 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">
-        [Machine Learning]Principal Component Analysis(PCA)
+      <a href="/blog/database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/">
+        [Database]ER Model 實體關聯模型
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 8, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 1, 2020</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 8, 2018</span>
+      <span class="post-date">January 1, 2020</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        <a target="_blank" href="/blog/category/#Database">Database</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
+    <!-- <h2 id="實體關聯模型entity-relationship-model">實體關聯模型（Entity-Relationship Model）</h2>
 
-<p>From: «Pattern Recognition and Machine Learning» P.561</p>
+<p>是Conceptual model（概念塑模）的一環，用來描述<strong>實體</strong>與<strong>實體</strong>之間<strong>關係</strong>的工具。</p>
 
-<hr />
-
-<p><strong>What is PCA?</strong></p>
-
-<p>Principal Component Analysis(PCA)，中文翻作「主成分分析」。</p>
-
-<p>PCA 是一種將多維度降維的方法。
-<br />
-一個變數其實可能是多個潛在變因（laten variables）組成，但我們無法實際測量出那些 laten variables，而 PCA 就是要拆解出影響較大的變因。使用較少的變數解釋多個 variables。</p>
-
-<p>舉個例子，股市的點數上上下下，我們所能觀測到的是點數這個變數，但其實影響點數變動的潛在變因可能包含了很多市場因素，且每個因素可能又是互相影響。</p>
-
-<p>如果用數學符號表示，\(x_i\) 是我們有的變數，\(z_i\) 是裡頭含有的潛在變因，\(x_i\) 是 \(z_i\) 的線性組合（linear combination）。
-<br />
-\(x_1 = a_{11} z_1 + a_{12} z_2 + a_{13} z_3 + \epsilon_1\)
-<br />
-\(x_2 = a_{21} z_1 + a_{22} z_2 + a_{23} z_3 + \epsilon_2\)
-<br />
-\(x_3 = a_{31} z_1 + a_{32} z_2 + a_{33} z_3 + \epsilon_3\)
-<br />
-……</p>
-
-<p>可以將上式改寫成，
-<br />
-\(z_1 = x_1 u_{i1} + x_2 u_{i2} + x_3 u_{i3}\)
-<br />
-……</p>
-
-<hr />
-
-<p><strong>如何降維？</strong></p>
-
-<p>根據 «Pattern Recognition and Machine Learning» 這本書第 561 頁給了 PCA 兩種定義</p>
-<ol>
-  <li>PCA can be defined as the orthogonal projection of the data onto a lower dimensional linear space, known as the principal subspace, such that the variance of the projected data is maximized (Hotelling, 1933).</li>
-  <li>PCA can be defined as the linear projection that minimizes the average projection cost, defined as the mean squared distance tbtween the data points and their projections (Pearson, 1901).</li>
-</ol>
-
-<p>可以用上圖來理解，或是 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ#t=4m35s">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 這段。</p>
-
-<p>根據上面的定義，可以看到，降維的方法是要做 <a href="https://www.khanacademy.org/math/linear-algebra/alternate-bases/orthogonal-projections/v/linear-algebra-projections-onto-subspaces">orthogonal projection</a>，且找到投影向量讓投影後的資料變異量最大。</p>
-
-<p>這邊我使用 <a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a> 影片的內容來介紹。</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/ER%20Model.png" alt="ER Model.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">ER Model</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <ul>
-  <li>maximized 什麼？
-<img src="http://localhost:4000/blog/img/posts/PCA_maximizing.png" alt="PCA_maximizing.png" height="320px" width="600px" /></li>
-</ul>
-
-<p>假如現在座標上有個綠色的點，以座標\((0, 0)\)原點，其長度為 a（影片沒有表示這是 a 向量，方便起見，後面以 a, b, c 向量表示），c 向量為 a 向量的投影方向與長度。根據畢氏定理，可以畫出一個正三角形，現在三角形的三邊長分別為 a, b, c（因為我懶得再圖上修正了，現在又變回長度）。而 PCA 要找的投影向量就是，最小化 \(b^2\) 的值，或是最大化 \(c^2\) 的值。</p>
-
-<ul>
-  <li>投影</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/PCA_projection.png" alt="PCA_projection.png" height="320px" width="600px" /></p>
-
-<p>根據上圖，這個二維座標上有好幾個點，我們現在就是要找到一條能讓投影後 variance 最大的投影向量（紅色虛線），如下圖。要找到 SS（eigenvalue） 最小的投影向量。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/SS.png" alt="SS.png" height="320px" width="600px" /></p>
-
-<p>在投影前，我們會先將資料平移 \(x_i - \mu_i\)，也就是不改變點之間的相對位置，這樣不但不會影響找投影向量的結果，在計算上也比較容易。</p>
-
-<hr />
-
-<p><strong>Variation 變異量</strong></p>
-
-<p>變異量 = \(SS/(n-1), n \)是點的數量</p>
-
-<p>有了變異量以後，我們通常會想要知道每個投影向量的變異量占比。</p>
-
-<p>假如現在有 PC1 其變異量為 15，PC2 的變異量為 3，則 PC1 與 PC2 的變異量總和為 18。</p>
-
-<p>所以 PC1 = 15*100%/18 = 83%，PC2 = 3*100%/18 = 17%。</p>
-
-<p>在做 PCA 的時候，我們會根據轉換的 \(PC_i\) 的比重，來決定要考慮要使用幾個 \(PC_i\)。
-如果可以解釋百分之九十基本上就可以拿來使用。</p>
-
-<p>假如今天有一筆多維度的資料，但轉換後 PC1 與 PC2 可以表示百分之九十的變異量，那麼這時候只要使用 PC1 與 PC2 就好，且還可以在平面座標上看點的分佈。</p>
-
-<hr />
-
-<p>基本上 PCA 就是在做座標變換，將原變數投影成新變數。接著以最少的新變數來代表原始資料最大的成分（variation 涵蓋量最大）。</p>
-
-<p>其原則如下</p>
-<ul>
-  <li>新變數是原變數的線性組合</li>
-  <li>保留原變數間的最大變異量（variance）</li>
-</ul>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=FgakZw6K1QQ">StatQuest: Principal Component Analysis (PCA), Step-by-Step</a>
-<br />
-<a href="https://medium.com/@chih.sheng.huang821/機器-統計學習-主成分分析-principle-component-analysis-pca-58229cd26e71">機器/統計學習:主成分分析(Principal Component Analysis, PCA)</a>
-<br />
-<a href="https://zh.wikipedia.org/wiki/主成分分析">wikipedia - 主成分分析</a>
-<br />
-The Elements of Statistical Learning
-<br />
-Pattern Recognition and Machine Learning</p>
- -->
-    <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">
-        [Machine Learning]Boosting and Adaboost
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="boosting">Boosting</h2>
-
-<p><img src="http://localhost:4000/blog/img/posts/boosting.png" alt="boosting.png" height="230px" width="600px" /></p>
-
-<p>From: <a href="https://blog.bigml.com/2017/03/14/introduction-to-boosted-trees/">Introduction to Boosted Trees</a></p>
-
-<p>Boosting 也是一種 Ensemble learning，它會結合多個弱分類器（weak classifiers）成為一個較準確的分類器，也可以應用在 regression 上。</p>
-
-<hr />
-
-<p><strong>和 Bagging 有什麼不同？</strong></p>
-
-<p>Bagging 各個 classifier 產生的過程是獨立的，但 Boosting 後產生的 classifier 與前面的 classifier 有關。也就是說，Bagging 的 classifier 可以並行產生，但 Boosting 必須要有順序的產生。所以時間上來說，Bagging 可以節省比較多的時間。</p>
-
-<hr />
-
-<p><strong>與前面的分類器有關？</strong></p>
-
-<p>在 Boosting 中，每一次產生 classifier 後，後面的 classifier 會根據前面 classifier 的結果調整每個點的權重。</p>
-
-<p>在前一個 classifier 分類錯誤後，在後一個 classifier 的權重會比較重，而表現較好的則會權重減少。這就是和 Bagging 最大的不同，Bagging 中所有的點都是隨機選取，且權重都是一樣的。</p>
-
-<p>簡單來說，Boosting learns features from data.</p>
-
-<hr />
-
-<p><strong>步驟</strong></p>
-
-<ol>
-  <li>用最原始的 training data 跑一個 classifiers</li>
-  <li>利用這個 classifiers 提高分類錯誤的點的權重，降低分類正確的點的權重。</li>
-  <li>重複第二步驟 N 次，最後使用權重的平均值。</li>
-</ol>
-
-<hr />
-
-<h2 id="adaboost">AdaBoost</h2>
-
-<p><img src="http://localhost:4000/blog/img/posts/AdaBoost.png" alt="AdaBoost.png" height="350px" width="700px" /></p>
-
-<p>From: <a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a></p>
-
-<p>AdaBoost 應用了 boosting 的方法。</p>
-
-<p><strong>概念</strong></p>
-
-<p>假設現在有 n 個樣本，要執行 boosting T 次。</p>
-
-<p>第一次將所有樣本的權重都設為 \(\alpha_i\) = 1/n, i = 1, …, n</p>
-
-<p>對所有 t = 1, …, T</p>
-<ol>
-  <li>根據樣本的權重 \(\alpha_i\) 建立出 classifier \(f_t(x)\)</li>
-  <li>使用 \(f_t(x)\) 後計算 \(\epsilon_t\) 誤差</li>
-  <li>利用 \(\epsilon_t\) 算出係數 \(w_t\)</li>
-  <li>再重新計算 \(\alpha_i\)</li>
-</ol>
-
-<p>最後的 model 就會是：</p>
-
-<p>\(\hat{y} = sign \sum_{t=1}^{T} w_i f_t(x)\)</p>
-
-<p>AdaBoost 的優勢就是讓 model 能夠從錯中學，使用提升與降低權重的方式讓分類錯誤的點可以在下一次的 model 中被改進。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="http://leijun00.github.io/2014/10/decision-tree-2/">决策树（二）</a>
-<br />
-<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
-<br />
-<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a>
-<br />
-<a href="https://www.coursera.org/learn/ml-classification/home/week/5">Machine Learning -  University of Washington</a>
-<br />
-<a href="https://blog.csdn.net/mach_learn/article/details/39501849">机器学习算法优缺点及其应用领域</a></p>
- -->
-    <div class="post-excerpt"><h2 id="boosting">Boosting</h2>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">
-        [Machine Learning]Random Forest
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
-
-<p>Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 <a href="https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">bagging</a> 這篇提到的方法有點類似，但有些小差異。</p>
-
-<p>使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。</p>
-
-<hr />
-
-<p><strong>Random Forest步驟</strong></p>
-
-<p>假如有一 training data，有 N 個樣本，p 個features。
-<br />
-今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，</p>
-
-<ol>
-  <li>使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data</li>
-  <li>在這組 data 中隨機從 p 個 featrues 中選取 m (m &lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node</li>
-  <li>重複步驟 2，直到完成這個 model 為止</li>
-  <li>重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹</li>
-</ol>
-
-<p>最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。</p>
-
-<hr />
-
-<ul>
-  <li>因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。</li>
-  <li>Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。</li>
-  <li>因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。</li>
-  <li>
-    <p>Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。</p>
-  </li>
-  <li>優點：
-    <ol>
-      <li>不用做特徵（feature）選擇。</li>
-      <li>訓練完後可以知道哪些 feature 比較重要。</li>
-    </ol>
-  </li>
-</ul>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ">StatQuest: Random Forests Part 1 - Building, Using and Evaluating</a>
-<br />
-<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
-<br />
-<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a></p>
- -->
-    <div class="post-excerpt"><p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">
-        [Machine Learning]Bagging
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="bagging">Bagging</h2>
-
-<p><img src="http://localhost:4000/blog/img/posts/bagging.png" alt="bagging.png" height="450px" width="500px" /></p>
-
-<p>From: Hastie, T., Tibshirani, R. and Friedman, J. The Elements of Statistical Learning. Springer, 2009. p.285</p>
-
-<hr />
-
-<p><strong>Bagging 是什麼？</strong></p>
-
-<p>Bootstrap aggregating (bagging) is a machine learning ensemble meta-algorithm to improve classification and regression models in terms of stability and classification accuracy. It also reduces variance and helps to avoid ‘overfitting’. Although it is usually applied to decision tree models, it can be used with any type of model. (<a href="https://docs.rapidminer.com/latest/studio/operators/modeling/predictive/trees/parallel_decision_tree.html">Decision Tree - Bagging</a>)</p>
-
-<p>簡單來說，Bagging是一種 Ensemble learning方法，它集結一些 model 來做最後的決策。通常會是集結表現沒那麼好的 model，讓這些 model 一起做決定，一種三個臭皮匠勝過一個諸葛亮的感覺。</p>
-
-<p>Decision tree 是一個常見的 weak classifier，所以如果在 decision tree 上使用 bagging，可以讓最後表現結果比較好，也避免 overfitting 的情況。</p>
-
-<hr />
-
-<p><strong>Boostrap</strong></p>
-
-<p>在開始說明 bagging 步驟前先介紹 bootstrap。</p>
-
-<p>bootstrap 是一種抽樣方法。假設今天有一組資料，裡頭共有 N 個樣本，我們想要有 m 個大小為 N 的樣本作為訓練資料。方法是，每次從這 N 個樣本隨機抽取，且每次都是取後放回(也就是有些樣本可能被抽到一次以上，有些樣本可能沒被抽到)，同樣的方法重複 m 次，這樣我們就會有 m 組樣本數為 N 的 y 資料集。</p>
-
-<p>這樣的方法在樣本數量少時很有用。如果樣本小，但我們用 train-validation-test 這樣的方式訓練資料，訓練的樣本資料非常小，會造成 bias 較大的問題。而使用 bootstrap 不會減少樣本的數量，也能保留 test data。</p>
-
-<hr />
-
-<p><strong>如何操作？</strong></p>
-
-<ol>
-  <li>使用 boostrap 方法從 training data 中採集 B 組樣本數與 training data 相同的資料集。</li>
-  <li>這 B 組資料集都建立一個 model， \(f_b(x)\)，共產生 B 個 model。</li>
-  <li>最後預測的結果就是將這 B 個 model 做統合。在分類問題上，可以平均各個 model 的 posterior class probabilities，或是使用 majority voting。（選機率比較大的結果或是多數決）；在回歸上，則取平均值。</li>
-</ol>
-
-<p>從最上圖可以看到，不論是使用機率或是投票決定，bagging 選出的結果的 test error 都要比個別的 model 表現較好。</p>
-
-<hr />
-
-<p>除了 Bagging 外，Ensemble learning 還有另一種常見的方法 Boosting，這篇先到這裡之後繼續介紹。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://medium.com/@chih.sheng.huang821/機器學習-ensemble-learning之bagging-boosting和adaboost-af031229ebc3">機器學習: Ensemble learning之Bagging、Boosting和AdaBoost</a>
-<br />
-<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
-<br />
-The Elements of Statistical Learning
-<br />
-Pattern Recognition and Machine Learning</p>
-
- -->
-    <div class="post-excerpt"><h2 id="bagging">Bagging</h2>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Bagging/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Bagging/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">
-        [Machine Learning]Decision Tree
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="decision-tree">Decision Tree</h2>
-<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
-
-<hr />
-
-<p><strong>Decision Tree是什麼？</strong></p>
-
-<p>簡單來說，decision tree 是一個分類模型。</p>
-
-<ul>
-  <li>Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one.</li>
-</ul>
-
-<p>這是 Pattern Recognition and Machine Learning 裡頭的定義。</p>
-
-<p>根據上圖，想像一下，在右邊的二維座標平面上有一堆散布的點，而 decision tree，就是將這個平面一一分割，每一個框框都是一個分類結果。但我們可以用右邊那樣一層一層的樹枝結構狀來表示右邊難懂的圖。（這裡的例子是二維平面，當變數 \(x_i\) 增加時，這樣的概念可以推廣到多維空間）</p>
-
-<p>每一個分支都像是一個 if-else 問題，如果是就選某一邊，不是就選另外一邊。</p>
-
-<p>上圖左，我們可以看到有兩個變數，\(x_1\), \(x_2\)，第一關是 \(x_1 &gt; \theta_1 \)，如果小於就往左邊分，如果大於就往右邊分，以此類推往下繼續細分，最後給予分類結果。最後共分成 A, B, C, D, E 五個類別，也就是右邊的五個框框。</p>
-
-<p>Decision Tree 又可以分為</p>
-<ol>
-  <li>
-    <p>Regression trees - 最後分類結果為連續變數</p>
-  </li>
-  <li>
-    <p>Classification trees - 最後分類結果為類別變數</p>
-  </li>
-</ol>
-
-<hr />
-
-<p><strong>名詞</strong></p>
-
-<ul>
-  <li>Root node (The Root) - 第一個起始的點</li>
-  <li>(Internal) Nodes - 中間的節點。上方會有箭頭指向 node，且 node 也會往下指向其他點。</li>
-  <li>Leaves (terminal nodes) - 最後的節點，也就是最後的分類結果。</li>
-</ul>
-
-<hr />
-
-<p><strong>如何分類？</strong></p>
-
-<p>假如今天我有一份 data，decision tree 是如何決定要先使用哪一個變數與什麼值作為分割呢？</p>
-
-<p><em>分割的原則是，這樣的分割要能得到最大的資訊增益 (Information gain, IG)</em> (<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>)</p>
-
-<p>資訊量根據最後的分類結果可以使用，</p>
-<ol>
-  <li>Regression trees:
+  <li>實體（Entity）：是指用以描述真實世界的物件，在關聯式資料庫中為一個「資料表」
     <ul>
-      <li>MSE (mean-squared error)</li>
+      <li>實體至少擁有一個不是鍵（主鍵）的屬性</li>
+      <li>一個實體可以含有多個「屬性」(Attribute)用以描述該實體，在關聯式資料庫中，以資料表的「欄位」來表示</li>
+      <li>例如：學生、員工、產品等等都是屬於實體</li>
     </ul>
   </li>
-  <li>Classification trees:
+  <li>關係（Relationship）：指用來表示「一個實體」與「另一個實體」關聯的方式
     <ul>
-      <li>Entropy (Deviance)</li>
-      <li>Gini impurity</li>
-      <li>Missclassification error</li>
+      <li>例如：一對一關係、一對多關係、多對多關係</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="實體entity">實體（Entity）</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>a ”thing” in the real world with an independent existence</li>
+  <li>用來描述實際存在的事物（如:學生），也可以是邏輯抽象的概念（如:課程）</li>
+  <li>必須可以被識別，亦即能夠清楚分辨出兩個不同的實體(an independent existence)</li>
+  <li>以「名詞」的來命名，不可以是「形容詞」或「動詞」</li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>實體(entity)</li>
+  <li>弱實體(weak entity)：必須依靠其他實體才能存在，若其依靠的實體消失，則該實體的存在也沒有意義了
+    <ul>
+      <li>例如：學生家長就是依附在學生實體的弱實體，若學生不存在，則家長也沒有存在的意義</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/entity%20diagram.png" alt="entity diagram.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Entity diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="屬性attribute">屬性(Attribute)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>用來描述實體的性質（Property）（就是關聯式表格的行）
+    <ul>
+      <li>例如：學生的學號、名字、班級等等</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>多值屬性 vs 單值屬性
+    <ul>
+      <li>多值屬性（Multivalued attributes）：屬性值不只一個時，我們稱該屬性為<em>多值屬性</em>
+        <ul>
+          <li>例如：學生有多個專長，珠算、程式…</li>
+          <li>關係圖中以「雙橢圓形」來表示</li>
+        </ul>
+      </li>
+      <li>單值屬性（Single-valued attribute）：非多值屬性稱為<em>單值屬性</em></li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Multivalued%20attributes.png" alt="Multivalued attributes.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">多值屬性 Multivalued attributes diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>複合屬性 vs 簡單屬性
+    <ul>
+      <li>複合屬性（Composite attributes）：屬性由數個屬性所組成時，我們稱該屬性為<em>複合屬性</em>
+        <ul>
+          <li>例如：姓名由姓、名組成</li>
+          <li>關係圖如下</li>
+        </ul>
+      </li>
+      <li>簡單屬性（Simple attribute）：非複合屬性則稱為<em>簡單屬性</em></li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Composite%20attributes.png" alt="Composite attributes.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">複合屬性 Composite attributes diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>衍生屬性（Derived Attribute）
+    <ul>
+      <li>它的值可以由其它屬性之值經由某種方式的計算或推論而獲得</li>
+      <li>例如：年齡和星座可由生日推算出來</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="鍵屬性key-attribute">鍵屬性(Key attribute)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>是指該屬性的值在某個環境下具有唯一性（primary key）</li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/attribute.png" alt="attribute.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Attribute diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="關係relationship">關係(Relationship)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>是指用來表達兩個實體之間所隱含的關聯性</li>
+  <li>使用足以說明關聯性質的「動詞」或「動詞片語」命名
+    <ul>
+      <li>例如：『學生』與『系所』兩個實體型態間存在著一種關係─「就讀於」</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>關聯強度 Strength
+    <ul>
+      <li>強關聯（strong relationship）：a relationship where entity is existence-independent of other entities, and PK of Child doesn’t contain PK component of Parent Entity</li>
+      <li>弱關聯（weak (identifying) relationship）：a relationship where Child entity is existence-dependent on parent, and PK of Child Entity contains PK component of Parent Entity，也就是說，此關聯是連結<em>實體</em>與<em>弱實體</em></li>
+    </ul>
+  </li>
+  <li>Cardinality
+    <ul>
+      <li>1:1 一對一</li>
+      <li>1:N 一對多</li>
+      <li>M:1 多對一</li>
+      <li>M:N 多對多</li>
+    </ul>
+  </li>
+  <li>Participation constraints
+    <ul>
+      <li>全部參與（Total participation）：every entity in the set is involved in the relationship</li>
+      <li>部分參與（Partial participation）：not all entities in the set are involved in the relationship</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Relationship.png" alt="Relationship.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Relationship diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><strong>弱實體例子</strong></p>
+
+<p>為了區分和一般實體的關係, 我們會以雙菱形來表示實體與弱實體之間的關係, 而弱實體和關係之間以雙直線連接</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/books.png" alt="books.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.vertabelo.com/blog/chen-erd-notation/">Example</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>以上圖為例，CHAPTER 必須依靠 BOOK 才能存在，所以 CHAPTER 是一個弱實體，兩者間用雙菱形（弱關聯）來連結。CHAPTER 用雙直線（Total participation）連接關係，因為 CHAPTER 是依靠 BOOK 而存在，表示每一個 CHAPTER 必定屬於某本 BOOK。而 CHAPTER 的 primary key 由 BOOK 的 primary key（BOOK ID） 與 CHAPTER ID 組成。</p>
+
+<p>如果將上圖關係轉換成表格，CHAPTER 表格會有 {TITLE, CHAPTER ID, BOOK ID} 三個欄位，而 (CHAPTER ID, BOOK ID) 合併為 primary key。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="http://cc.cust.edu.tw/~ccchen/doc/db_03.pdf">ER Model 實體關係圖</a>
+<br />
+<a href="http://www.csie.sju.edu.tw/cm/course/db/ch04.pdf">第4章 資料庫設計與實體關聯模型</a>
+<br />
+<a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">利用實體-關係模型 (E-R Model) 規劃資料庫</a>
+<br />
+<a href="https://www.vertabelo.com/blog/chen-erd-notation/">Chen notation</a>
+<br />
+<a href="http://snowlin.cmu.edu.tw/mis/MIS_Lec01.pdf">資料庫基礎概念</a></p>
+ -->
+    <div class="post-excerpt"><h2 id="實體關聯模型entity-relationship-model">實體關聯模型（Entity-Relationship Model）</h2>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/#disqus_thread';
+        this.page.identifier = '/database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/#disqus_thread" data-disqus-identifier="/database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/">
+        [Database]Database 基礎概念
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 31, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 31, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Database">Database</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="資料data與資訊information">資料(Data)與資訊(Information)</h2>
+
+<ul>
+  <li>資料(Data)：資訊(Information)的原始型態，是未經整理和分析的原始數值、文字或符號。</li>
+  <li>資訊(Information)：經過整理和分析後的資料，是有實質意義的資料。</li>
+  <li>資料處理(Data Processing)：資料(Data) 經過資料處理(Data Processing) 後將資料轉換為資訊(Information)。</li>
+</ul>
+
+<h2 id="資料階層">資料階層</h2>
+
+<p>資料階層的最小儲存單位是位元，8個位元組成一個位元組，也就是ASCII碼的字元。數個位元組結合成欄位，多個欄位組成記錄，最後將一組記錄儲存成檔案，資料庫就是 一組相關檔案的集合。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/%E8%B3%87%E6%96%99%E9%9A%8E%E5%B1%A4.png" alt="資料階層.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch01.pdf">資料階層</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>第一階層：位元(Bits)</li>
+  <li>第二階層：位元組(Bytes)</li>
+  <li>第三階層：欄位(Fields)</li>
+  <li>第四階層：記錄(Records)</li>
+  <li>第五階層：檔案(Files)</li>
+  <li>第六階層：資料庫(Database)</li>
+</ul>
+
+<hr />
+
+<h2 id="資料庫系統database-system">資料庫系統(Database System)</h2>
+
+<p>資料庫系統(Database System)是由「資料庫」(Database)和「資料庫管理系統」(Database Management System，DBMS)所組成。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Database%20System.png" alt="Database System.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch01.pdf">資料庫系統</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="資料庫database">資料庫(Database)</h3>
+<ol>
+  <li>Represents some aspects of the real world (miniworld)</li>
+  <li>資料庫是一個對結構化資訊或資料的組織性收集，通常以電子方式儲存在電腦系統。</li>
+  <li>資料庫通常由資料庫管理系統(DBMS)控制。</li>
+  <li>目前運行中最常見的資料庫型態通常是在一系列的表格中進行行列間建模，使得處理和資料查詢更為有效。</li>
+  <li>大部分的資料庫使用結構化查詢語言(SQL)來書寫或查詢資料。</li>
+  <li>資料庫容許多名用戶在同一時間快速、安全地以高度複雜邏輯和語言取得或查詢資料。</li>
+  <li>Meta-data: Database definition or descriptive information (Stored by the DBMS in a database catalog or data dictionary)</li>
+</ol>
+
+<h3 id="資料庫管理系統dbms">資料庫管理系統(DBMS)</h3>
+<ol>
+  <li>資料庫通常需要一個稱做資料庫管理系統(DBMS)的全面資料庫軟體程式。</li>
+  <li>DBMS是作為資料庫和其用戶或程式之間的介面，讓用戶能檢索、更新和管理，使得資訊組織化和最佳化。</li>
+  <li>DBMS亦可促進對資料庫的監督和控制，增強各方面的管理運作，包括績效監控、最佳化、備份以及系統恢復。</li>
+</ol>
+
+<hr />
+
+<h2 id="database-system-design-process">Database System Design Process</h2>
+
+<p>好的資料庫系統設計對於資料庫的維護、更新及修改相當重要，另外，如何有效的儲存、提取資料也是資料庫重要的一環，接下來要介紹資料庫的設計。</p>
+
+<p><strong>資料庫系統設計（Database System Process）</strong>有兩個主要的方向，</p>
+
+<ol>
+  <li><strong>Database design</strong>（資料庫設計）
+    <ul>
+      <li>focuses on defining the database</li>
+    </ul>
+  </li>
+  <li><strong>Application design</strong>（應用設計）
+    <ul>
+      <li>focuses on the programs and interfaces that access the database</li>
     </ul>
   </li>
 </ol>
 
-<p>在 Classification tree 裡，Entropy 和 Gini impurity 是常用的兩種方式，
-詳細的公式請參考 <a href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">Wikipedia</a></p>
-
-<p>假如今天碰到兩種 model 算出來的資訊量都ㄧ樣，請選擇比較簡單的那個 model。（分支、leaves node 較少）</p>
-
-<hr />
-
-<p><strong>R 範例</strong>
-這裡使用 tree 這個 library 做範例，另外還有像是 rpart 也是做 decision 常用的 package。</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="w">
-</span><span class="n">data</span><span class="p">(</span><span class="s2">"iris"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 使用 Entropy (Deviance)</span><span class="w">
-</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"deviance"</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-
-</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-
-
-</span><span class="c1"># 使用 Gini impurity</span><span class="w">
-</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"gini"</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-
-</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Database%20System%20Design%20Process.png" alt="Database System Design Process.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.ida.liu.se/~TDDD37/fo/DBTechnology01-2019-6up.pdf">Database System Design Process</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 
-<p><strong>優缺點</strong></p>
+<h2 id="database-design資料庫設計-data-modeling資料塑模">Database Design（資料庫設計）/ Data Modeling（資料塑模）</h2>
+
+<p>(在 <a href="https://www.ida.liu.se/~TDDD37/fo/DBTechnology01-2019-6up.pdf">Database Technology</a> 講義裡寫的是 Database Design，但找到兩個台灣的講義（<a href="http://www.csie.sju.edu.tw/cm/course/db/ch01.pdf">第1章 資料庫的基礎</a>、<a href="https://www.mis.nsysu.edu.tw/db-book/PDF/Ch2.pdf">第二章 實體關係模式:基本概念</a>）都是用資料塑模（Data Modeling），所以這兩個東西我把它們放在一起)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Data%20Modeling.png" alt="Data Modeling.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch01.pdf">Data Modeling</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="資料庫設計階段phases-for-designing-a-database">資料庫設計階段（Phases for designing a database）:</h3>
+<ol>
+  <li>Requirements specification and analysis</li>
+  <li><strong>Conceptual design</strong>（Conceptual model，概念塑模)
+    <ul>
+      <li>e.g., using the Entity-Relationship model (ER Model)</li>
+    </ul>
+  </li>
+  <li><strong>Logical design</strong>（Logical model，邏輯塑模)
+    <ul>
+      <li>e.g., using the relational model (關聯模型)</li>
+    </ul>
+  </li>
+  <li><strong>Physical design</strong>（Physical model，實體塑模)
+    <ul>
+      <li>e.g., 設定索引</li>
+    </ul>
+  </li>
+</ol>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="https://www.guru99.com/images/DatabaseDesignProcess(1).png" alt="Database development life cycle" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.guru99.com/database-design.html">Database development life cycle</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="conceptual-model概念塑模">Conceptual model（概念塑模）</h2>
+
+<p>概念塑模的目的是將現實中某部分的資料關係用<strong>結構化</strong>的方式呈現，建立整個資料庫邏輯結構的模型，過程不涉及任何資料庫管理系統、資料庫種類、軟體和實際儲存結構。最常使用<em>實體關係圖</em>（Entity Relationship Diagram）來繪製<em>實體關聯模型</em>（Entity-Relationship Model）。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/ER%20Model.png" alt="ER Model.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">ER Model</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="entity-relationship-model-er-model">Entity-Relationship model (ER Model)</h3>
+
+<ol>
+  <li>ER Model 則是用來繪製<strong>結構化</strong>資料的概念圖。</li>
+  <li>ER Model 組成元件包括實體（Entity）和關係（Relationship）。
+    <ul>
+      <li>實體（Entity）- 是在真實世界識別出的東西，例如：老師、學生、車子、品牌。</li>
+      <li>關聯性（Relationships）- 在二個或多個實體間擁有的關係，主要分為三種：一對一、一對多、多對多。</li>
+    </ul>
+  </li>
+</ol>
+
+<p><a href="https://shihs.github.io/blog/database/2020/01/01/Database-ER-Model實體關係圖/">下一篇</a>有詳細解說</p>
+
+<hr />
+
+<h2 id="logical-model邏輯塑模">Logical model（邏輯塑模）</h2>
+
+<p>使用的工具是關聯模型（Relational Model），最後會產生資料表的定義關聯綱目（schema）。</p>
+
+<p>邏輯模型主要是由三種元素所組成，如下所示:</p>
+<ul>
+  <li>資料結構（Data Structures）：資料的組成方式，就是欄和列組成表格的關聯表(Relations)</li>
+  <li>資料操作或運算（Data Manipulation 或 Operations）：資料的相關操作，關聯式代數(Relational Algebra)和關聯式計算(Relational Calculus)</li>
+  <li>完整性限制條件（Integrity Constraints）：維護資料完整性的條件，其目的是確保儲存的資料是合法的資料</li>
+</ul>
+
+<p>資料庫系統演進各年代的資料庫系統中，其使用的資料庫模型就是邏輯資料模型，主要有四種邏輯資料模型，如下所示:</p>
+<ul>
+  <li>階層式模型（Hierarchical Model）</li>
+  <li>網路式模型（Network Model）</li>
+  <li><strong>關聯式模型（Relational Model）</strong><a href="(https://zh.wikipedia.org/wiki/关系模型)">wiki</a></li>
+  <li>物件導向式模型（Object-Oriented Model）</li>
+</ul>
+
+<h3 id="relational-model-relational-data-model">Relational Model (Relational Data Model)</h3>
 
 <ul>
-  <li>優點：
+  <li>中文稱「關聯（式）模型」。</li>
+  <li>Relational database 關聯式資料庫: represent data as a collection of relations。「關聯式資料庫」使用多個關聯表（relations）來呈現資料。</li>
+</ul>
+
+<p><strong>Relation（關聯表）</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/relation.png" alt="relation.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.ida.liu.se/~TDDD37/fo/DBTechnology02-2019-6up.pdf">relation (關聯表)</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>Relation 是關聯表（如上圖），是包含 data 的 table（表格）</p>
+  </li>
+  <li>Each row (tuple) represents a record of related data values
+    <ul>
+      <li>一列（row）稱為一個值組（tuple），紀錄各個 data 的值</li>
+    </ul>
+  </li>
+  <li>Each column (attribute) holds a corresponding value for each row
+    <ul>
+      <li>Columns associated with a data type (domain)</li>
+      <li>Each column header: attribute name</li>
+    </ul>
+  </li>
+  <li><strong>Domain</strong>
+    <ul>
+      <li>Domain is a set of <em>atomic values</em>. 
+<br />
+e.g., <script type="math/tex">\{ 0, 1, 2, ... \}</script>, <script type="math/tex">\{\text{Jo Smith}, \text{Dana Jones}, \text{Ashley Wong}, \text{Y. K. Lee}, ...\}</script></li>
+      <li><em>atomic values</em>: Each value indivisible（不可分割）</li>
+      <li>Domains specified by <em>data type</em>(integer, string, date, real, etc.)</li>
+    </ul>
+  </li>
+  <li><strong>Relation Schema</strong>
+    <ul>
+      <li>Schema describes the relation（關聯表）</li>
+      <li>關聯表綱要（relation schema）是由關聯表名稱 R（relation name）和一連串屬性 <script type="math/tex">(A_1,A_2,….,A_n)</script>清單（list）還有定義域（domain）所組成</li>
+      <li><strong>integrity constraints</strong>（完整性限制）</li>
+      <li>Denoted by <script type="math/tex">R(A_1, A_2, ..., A_n)</script></li>
+    </ul>
+  </li>
+  <li><strong>Attribute</strong> <script type="math/tex">A_i</script>
+    <ul>
+      <li>Name of a role in the relation schema R</li>
+      <li>使用 <script type="math/tex">dom(A_i)</script> 的符號來說明屬性 <script type="math/tex">A_i</script> 的定義域的範圍是什麼</li>
+      <li>屬性名稱不可重複，但 domain 可以重複</li>
+    </ul>
+  </li>
+  <li><strong>NULL Values</strong>
+    <ul>
+      <li>Each domain may be augmented with a special value called NULL</li>
+    </ul>
+  </li>
+  <li><em>Question:</em> A relation schema consists of?
+    <ul>
+      <li>Ans: relation name, attribute names and domains, and integrity constraints</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="integrity-constraints完整性限制">Integrity Constraints（完整性限制）</h3>
+
+<ul>
+  <li>建立檢查資料庫儲存資料的依據和保障資料的正確性。不但可以防止授權使用者將不合法資料存入資料庫，還能夠避免關聯表間的資料不一致。</li>
+  <li>關聯式資料庫模型的完整性限制條件有很多種，適用所有關聯式資料庫的完整性限制條件有四種，如下所示:
+    <ul>
+      <li>鍵限制條件(Key Constraints)</li>
+      <li>定義域限制條件(Domain Constraints)</li>
+      <li>實體完整性(Entity Integrity)</li>
+      <li>參考完整性(Referential Integrity)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>鍵限制條件（Key Constraints）</strong></p>
+
+<p>鍵限制條件（Key Constraints）是指關聯表一定擁有一個唯一和最小的主鍵（Primary Key）</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/keys.png" alt="keys.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">Key</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>超鍵（Superkeys）
+    <ul>
+      <li>是關聯表綱要的單一屬性或屬性值集合，超鍵需要滿足唯一性（Uniqueness）</li>
+      <li>Superkeys 可以由一個或多個行（屬性）組成，只要唯一就可以</li>
+      <li>下方範例關聯表來看，符合的有(sid)、(SSN)、(sid, SSN)、(sid, ename)、(SSN, cname)、(sid, tel)、(SSN, cname, postcode)……</li>
+    </ul>
+  </li>
+  <li>候選鍵（Candidate Keys）
+    <ul>
+      <li>候選鍵（Candidate Keys）是一個超鍵，在每一個關聯表至少擁有一個候選鍵，不只滿足超鍵的唯一性，還需要滿足最小性（Minimality）</li>
+      <li>Candidate Keys 是超鍵的子集合，但不同的是，候選鍵還必須要有最小性，所以單一屬性的超鍵一定是候選鍵</li>
+      <li>舉個例子，如果下面的範例多了一個學生 sid = 5, ename = Jane，這時候 (sid, ename) 就不是候選鍵，因為去掉 ename 也能區分每一行，所以 ename 是多餘的</li>
+    </ul>
+  </li>
+  <li>主鍵（Primary Key）
+    <ul>
+      <li>符合的有(sid)、(SSN)</li>
+      <li>從候選鍵中選出一個作為主鍵，挑選主鍵的原則如下所示:
+        <ul>
+          <li>不可為空值(Not Null)</li>
+          <li>永遠不會改變(Never Change)</li>
+          <li>非識別值(Nonidentifying Value)</li>
+          <li>簡短且簡單的值(Brevity and Simplicity)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>替代鍵（Alternate Keys）
+    <ul>
+      <li>在候選鍵中不是主鍵的其他候選鍵稱為替代鍵(Alternate Keys)，因為這些是可以用來替代主鍵的候選鍵</li>
+      <li>如果 (sid) 是主鍵，則 (SSN) 是替代鍵</li>
+    </ul>
+  </li>
+  <li>外來鍵（Foreign Keys）
+    <ul>
+      <li>是關聯表的單一或多個屬性的集合，它的屬性值是參考到其他關聯表的主鍵，用來建立兩個關聯表間的連接</li>
+      <li>換句話說，Foreign Keys 是其他關聯表的主鍵，它（們）可以是該關聯表的主鍵，但不一定是</li>
+      <li>外來鍵和參考的主鍵屬於相同定義域，不過屬性名稱可以不同</li>
+      <li>外來鍵可以是空值NULL</li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Students.png" alt="Students.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">範例關聯表</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>定義域限制條件(Domain Constraints)</strong></p>
+<ul>
+  <li>每個值都必須是基元值且必須在定義域內</li>
+  <li>例如，屬性 age 的定義域是 int，屬性值可以為5 ，但不可以是4.5</li>
+</ul>
+
+<p><strong>實體完整性(Entity Integrity)</strong></p>
+<ul>
+  <li>實體完整性是關聯表內部的完整性條件，主要是用來規範關聯表主鍵的使用規則</li>
+  <li>主鍵（primary  key）不可以是 Null</li>
+  <li>例如，（ename, cname）是主鍵，ename 屬性不可為空值；cname 屬性也不可是空值。</li>
+</ul>
+
+<p><strong>參考完整性(Referential Integrity)</strong></p>
+<ul>
+  <li>關聯表的所有外來鍵值，都必須能參考到另一關聯表的主鍵值</li>
+</ul>
+
+<hr />
+
+<h2 id="physical-model實體塑模">Physical Model（實體塑模）</h2>
+
+<ul>
+  <li>針對指定資料庫管理系統建立實際資料庫結構的資料模型，例如:SQL Server</li>
+  <li>對於關聯式資料庫模型的實體模型來說，就是在資料庫管理系統軟體建立關聯表(Relation) 的表格、關聯性(Relationship)和索引等定義資料</li>
+  <li>簡單來說，就是將 Conceptual model 和 Logical model 實際建立出來</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/%E5%AF%A6%E9%AB%94%E6%A8%A1%E5%9E%8B.png" alt="實體模型.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">實體模型</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="http://www.csie.sju.edu.tw/cm/course/db/ch01.pdf">第1章 資料庫的基礎</a>
+<br />
+<a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">第3章 關聯式資料庫模型</a>
+<br />
+<a href="https://www.oracle.com/tw/database/what-is-database.html">Oracle - 什麼是資料庫？</a>
+<br />
+<a href="https://www.ida.liu.se/~TDDD37/fo/DBTechnology01-2019-6up.pdf">Database Technology - Topic 1: Introduction</a>
+<br />
+<a href="https://www.ida.liu.se/~TDDD37/fo/DBTechnology02-2019-6up.pdf">Database Technology - Topic 2: Relational Databases</a>
+<br />
+<a href="http://championdatablog.com/自動草稿/">深入了解關聯式資料模型(Relational Data Model)</a>
+<br />
+<a href="https://www.mis.nsysu.edu.tw/db-book/PDF/Ch2.pdf">第二章 實體關係模式:基本概念</a>
+<br />
+<a href="https://www.mysql.tw/2015/04/data-modeling.html">Data Modeling (資料塑模) : 概念塑模、邏輯塑模、實體塑模</a>
+<br />
+<a href="https://www.itread01.com/content/1545320464.html">快速理解資料庫超鍵，候選鍵，主鍵</a></p>
+
+ -->
+    <div class="post-excerpt"><h2 id="資料data與資訊information">資料(Data)與資訊(Information)</h2>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/#disqus_thread';
+        this.page.identifier = '/database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/#disqus_thread" data-disqus-identifier="/database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">
+        [NLP]NLTK & spaCy 筆記
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 17, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 17, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#NLP">NLP</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>常見的 NLP package 有 NLTK、spaCy、Scikit-learn 等等，參考下面的功能比較圖。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/NLPlibraresPython.png" alt="" /></p>
+
+<p>這裡則要分別介紹 NLTK 和 spaCy 的一些用法。從上面的比較圖我們知道，這兩個 package 基本上功能相似，在 preprocessing 時一定會使用到，但兩者有各自的優缺點。</p>
+
+<h3 id="nltk">NLTK</h3>
+
+<p>主要用於處理斷詞、詞頻、 pos 等等，更多用法請參照下面連結。</p>
+
+<p><a href="https://github.com/shihs/732A92-TextMining/blob/master/note/NLTK.ipynb">NLTK</a></p>
+
+<h3 id="spacy">spaCy</h3>
+
+<p>spaCy 是 NLTK 的主要競爭者，它們的功能類似。</p>
+
+<p><a href="https://github.com/shihs/732A92-TextMining/blob/master/note/spaCy.ipynb">spaCy</a></p>
+
+ -->
+    <div class="post-excerpt"><p>常見的 NLP package 有 NLTK、spaCy、Scikit-learn 等等，參考下面的功能比較圖。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/#disqus_thread';
+        this.page.identifier = '/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/#disqus_thread" data-disqus-identifier="/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">
+        [Text Mining]Word embeddings
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on November 26, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">November 26, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+<hr />
+
+<h2 id="word-embeddings">Word embeddings</h2>
+
+<p>對於人來說，要理解文字並不是件困難的事，但對電腦來說，每個字不過是一串 string，所以當我們要做 text mining 時就必須要將這些 string 轉化成電腦可以理解的方式。
+而 word embedding(word vector or word representation) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。</p>
+
+<p>譬如說，人類可以理解 pretty 和 beautiful 是相近詞，但如果只是給電腦這兩個單字，對於電腦來說，這只是兩個不同長度的 string 罷了。word embedding 會將這兩個字轉換成不同的 vector 映射到一個高維空間，當這兩個 vector 越接近（可以使用 consine similarity）就表示這兩個詞越相近。這就是 word embedding 主要的概念。</p>
+
+<ul>
+  <li>A word embedding is a mapping of words to points in a vector space such that nearby words (points) are similar in terms of their distributional properties.</li>
+</ul>
+
+<h3 id="the-distributional-principle">The distributional principle</h3>
+
+<p>word embedding 方法可以使用最重要的就是因為有 distributional hypothesis 這個假設。</p>
+
+<ul>
+  <li>The distributional principle states that words that occur in similar contexts tend to have similar meanings.</li>
+</ul>
+
+<p>這裡的概念是說，詞(target words)出現在類似的上下文中(context words)，則它們很有可能有相似的意思。
+譬如說，
+<br />
+-「那隻『貓』好可愛」
+<br />
+-「那隻『狗』好可愛」
+<br />
+這時候除了『貓』和『狗』外，這兩句話的上下文是一樣的，根據 distributional principle，這兩個詞應該是相似的。</p>
+
+<h3 id="co-occurrence-matrix">Co-occurrence matrix</h3>
+
+<p><img src="http://localhost:4000/blog/img/posts/Co-occurrence%20matrix.png" alt="" /></p>
+
+<p>上圖中，context words 就是上下文，而 target words 就是我們想要分析的字詞。
+<br />
+現在來看 cheese 這個字，可以看到和 butter, cake, cow, deer 這幾個字一起出現的次數分別是，12, 2, 1和0次。看起來和 butter 還有 cake 連結性比較強。
+再來看 bread 這個字，同樣的在 butter 和 cake 上的連結也比較強。如果我們把這兩個單字用向量表示就會是，(12, 2, 1, 0) 和 (5, 5, 0, 0)，可以去比較和其他兩個單字的 cosine similarity，這兩個的關係是比較強的。</p>
+
+<p>現在我們把它們畫出來（因為它們被映射到的是四維空間，所以老師的 slide 只看 cow 和 cake 這兩個 context words）</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/From%20co-occurrences%20to%20word%20vectors.png" alt="" /></p>
+
+<p>如果還是不太明白，<a href="http://cpmarkchang.logdown.com/posts/772665-nlp-vector-space-semantics">這篇部落格</a>應該可以看懂。</p>
+
+<p><strong>補充：</strong>
+從上面的 matrix 可能會想到一件事，<em>context words</em> 等於是決定了 target words 的向量啊！
+換句話說，當我們分析不同的文本的時候，會需要不同的 context words來算出 word embeddings。想像，如果今天要分析新聞報導和 ptt 內容，不太可能使用一樣的 context words，畢竟ptt用語和新聞用語會有很大的不同。（蛤？你說記者都抄 ptt 內容嗎？XDDD）</p>
+
+<hr />
+
+<h3 id="simple-applications-of-word-embeddings">Simple applications of word embeddings</h3>
+
+<p>word embeddings 的應用</p>
+
+<ul>
+  <li>finding similar words. 找到相似的字，像是上面的例子，找出哪一個字和 cheese 比較相似。</li>
+  <li>answering ‘odd one out’ questions. 找出不一樣的詞，譬如說  lunch, breakfast, dinner, car 哪一個詞屬於不同類？ (根據上面提到的概念，lunch, breakfast, dinner 這三個的 vector 應該會比較接近，會在比較接近的上下文中出現)</li>
+</ul>
+
+<h3 id="limitations-of-word-embeddings">Limitations of word embeddings</h3>
+
+<ul>
+  <li>
+    <p>There are many different facets of ‘similarity’. Ex. Is a cat more similar to a dog or to a tiger? (在不同情境下，cat 和 dog 可能比較相似。譬如說，貓和狗都是寵物，但如果以生物的角度來看，cat 和 tiger 都屬於貓科動物，這時候 cat 和 tiger 會比較相似)</p>
+  </li>
+  <li>
+    <p>Text data does not reflect many ‘trivial’ properties of words. Ex. more ‘black sheep’ than ‘white sheep’ (如果只分析文本，因為大部分的羊都是白色的，所以在提到羊的時候並不會特別提到顏色，但當提到比較稀少的黑羊時，反而會特別說到 black，這會導致在分析時好像黑羊出現的頻率比白羊出現的頻率高)</p>
+  </li>
+  <li>
+    <p>Word vectors reflect social biases in the data used to train them. Ex. including gender and ethnic stereotypes (<a href="https://www.pnas.org/content/115/16/E3635">論文</a>參考) 很多詞語上的用法其實帶有非常多的社會偏見和刻板印象，而這也會導致分析出的結果有所偏差。</p>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>還有什麼問題？</strong></p>
+
+<p>到目前為止，看起來都非常合理，那還會有什麼問題呢？</p>
+
+<p>這裡會碰到和之前提到過的，矩陣<em>稀疏性</em>的問題。如果今天 context words 有十萬個字，那麼 target words 就會是在十萬維度的空間的 vectors，而且可能會有很多的值都是 0 的狀況發生。那這樣要用什麼方法解決矩陣的稀疏性並產生 word embeddings（也就是每個詞的向量） 呢？</p>
+
+<p>從不同的面向來看幾個常見的 word embedding 方法，</p>
+<ul>
+  <li>Learning word embeddings via <em>matrix factorization</em>
     <ol>
-      <li>Simple to understand and interpret. 容易理解與解釋</li>
-      <li>Able to handle both numerical and categorical data. 可以用在類別與 numerical 資料</li>
+      <li>Singular Value Decomposition(SVD)</li>
+      <li>Positive Pointwise mutual information(PPMI)</li>
     </ol>
   </li>
-  <li>缺點
+  <li>Learning word embeddings via <em>language models</em>
     <ol>
-      <li>Low bias and high variance with respect to the training data.
-（當 decision tree model 變得太過複雜時，太多 nodes，就會導致 overfitting (<a href="https://en.wikipedia.org/wiki/Bias–variance_tradeoff">bias-variance trade off</a> 的狀況）</li>
+      <li>N-gram</li>
+      <li>Neural language models(Ex. word2vec)</li>
     </ol>
   </li>
 </ul>
 
-<p>所以為了讓 model 不要 overfitting，我們可以使用 pruning 的方式，砍掉底下的樹枝。</p>
-
-<p>在 R 可以使用，<code class="highlighter-rouge">prune.tree()</code>，並且可以使用 <code class="highlighter-rouge">best</code> 這個參數來決定最後要保留多少 leaves。</p>
-
-<p>使用剛剛最後的 <code class="highlighter-rouge">fit</code>示範</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prune_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prune.tree</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="n">summary</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>這時候 leaves 由原本的 9，修剪到了剩下 5，但 Misclassification error rate 卻是相同的。修剪過後的 model 較簡單，且 variance 也會比較小，在預測上表現也會較佳。</p>
+<p>以下就要來介紹這幾種方法。</p>
 
 <hr />
 
-<p>Reference:
+<h2 id="matrix-factorization---singular-value-decompositionsvd">Matrix factorization - Singular Value Decomposition(SVD)</h2>
+
+<ul>
+  <li>The rows of co-occurrence matrices are long and sparse. Instead, we would like to have word vectors that are short and dense. 簡單來說，co-occurrence matrices 會有稀疏性的問題。</li>
+  <li>One idea is to approximate the co-occurrence matrix by another matrix with fewer columns. Singular Value Decomposition 的想法是，將這個又長又臭的 co-occurrence matrix 用另比較少 columns 的 matrix 取代。</li>
+</ul>
+
+<h3 id="什麼是-singular-value-decomposition奇異值分解">什麼是 Singular value decomposition（奇異值分解）?</h3>
+
+<p>推薦<a href="https://www.youtube.com/watch?v=OEJ0wxxLO7M">李宏毅老師的線性代數</a></p>
+<ul>
+  <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA(特徵值分解) 也是一個降維的方法，但它的矩陣就必須要是方陣。)</li>
+</ul>
+
+<p>SVD 的概念就是，任一一個矩陣 <script type="math/tex">A_{m \times n}</script>，它都可以拆解成三個矩陣（<script type="math/tex">U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}</script>）的相乘。</p>
+
+<p>其中，<script type="math/tex">U_{m \times n}</script> 的 columns 是 <em>Orthonormal</em>，而 <script type="math/tex">V^T_{n \times n}</script> 的 rows 是 <em>Orthonormal</em>，<script type="math/tex">\Sigma_{m \times n}</script> 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
+
+<p><em>(在線性代數中，一個內積空間的正交基（orthogonal basis）是元素兩兩正交的基。稱基中的元素為基向量。 假若，一個正交基的基向量的模長都是單位長度1，則稱這正交基為標準正交基或”規範正交基”（Orthonormal basis）。)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SVD.png" alt="" /></p>
+
+<ul>
+  <li><script type="math/tex">\Sigma_{m \times n}</script> 會是一個長得像這樣的矩陣，且 <script type="math/tex">\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k</script></li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Sigma.png" alt="" /></p>
+
+<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。用較小的儲存空間就可以得到接近原始的矩陣 <script type="math/tex">A</script>。</p>
+
+<script type="math/tex; mode=display">A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
+
+<p>參考<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>的圖，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/svd2.jpg" alt="" /></p>
+
+<p>回到我們的 word-embedding。我們可以利用 SVD 進行去噪及降維，刪除一些不那麼重要的訊息，用來解決 Co-occurrence matrix 稀疏性的問題。</p>
+
+<p>我們也不需要再將相乘矩陣，直接使用 𝑼 就好，每一列就代表一個 target word。</p>
+
+<ul>
+  <li>Each row of the (truncated) matrix 𝑼 is a k-dimensional vector that represents the ‘most important’ information about a word.</li>
+  <li>A practical problem is that computing the singular value decomposition for large matrices is expensive.</li>
+</ul>
+
+<p>這邊看一個<a href="https://www.itread01.com/content/1569742263.html">例子</a>，</p>
+
+<p>下圖是一個 Co-occurrence matrix <script type="math/tex">~A_{m \times n}</script></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/term-document.png" alt="" /></p>
+
+<p>將上面的矩陣 <script type="math/tex">A</script> 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SVD%20example.png" alt="" /></p>
+
+<p>取每個向量後兩維的對應值投影到一個二維空間，如下所示</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SVD%20example%202.png" alt="" /></p>
+
+<p>上圖中，一個紅色的點對應一個詞，一個藍色的點對應一個文件。當這些點被投影到空間中，我們可以對這些詞和文件進行分類，比如說stock和market可以放在一類，real和estate可以放在一類，按這樣的分類結果，我們就可以知道文件中哪些事相近的詞，所以當使用者利用詞搜尋文件的時候，我們就可以利用相近的詞（在向量空間中相近的詞、被歸為同一類的詞）進行檢索，而不是只是使用完全相同的詞搜尋。</p>
+
+<hr />
+
+<h2 id="matrix-factorization---positive-pointwise-mutual-informationppmi">Matrix factorization - Positive Pointwise mutual information(PPMI)</h2>
+
+<h3 id="pointwise-mutual-informationpmi">Pointwise mutual information(PMI)</h3>
+
+<ul>
+  <li>
+    <p>Raw counts favour pairs that involve very common contexts. 
 <br />
-<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>
+E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
+  </li>
+  <li>
+    <p>We want a measure that favours contexts in which the target word occurs more often than other words.</p>
+  </li>
+  <li>
+    <p>A suitable measure is pointwise mutual information (PMI):</p>
+  </li>
+</ul>
+
+<script type="math/tex; mode=display">PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}</script>
+
+<p>簡單來說，我們可以用 PMI 公式來看兩個字之間的關係。</p>
+
+<p>現在我們把 <script type="math/tex">x</script> 看成我們的 target word，<script type="math/tex">y</script> 看成我們的 context word，</p>
+
+<ul>
+  <li>We want to use PMI to measure the associative strength between a word <script type="math/tex">w</script> and a context <script type="math/tex">c</script> in a data set <script type="math/tex">D</script>:</li>
+</ul>
+
+<script type="math/tex; mode=display">PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}</script>
+
+<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 <script type="math/tex">w</script> 和 <script type="math/tex">c</script> 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
+
+<p>所以這時候就有了 <strong>Positive Pointwise mutual information(PPMI)</strong>。</p>
+
+<ul>
+  <li>In positive pointwise mutual information (PPMI), all negative and undefined values are replaced by zero:</li>
+</ul>
+
+<script type="math/tex; mode=display">􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)</script>
+
+<ul>
+  <li>PPMI assigns high values to rare events, it is advisable to apply a count threshold or smooth the probabilities.</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Computing%20PPMI%20on%20a%20word%E2%80%93context%20matrix.png" alt="" /></p>
+
+<p>看一個<a href="http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information">例子</a>，</p>
+
+<p>下圖是一個 Co-occurrence matrix，列是 target words，行是 context words
+<img src="http://localhost:4000/blog/img/posts/PMI%20example.png" alt="" /></p>
+
+<p>假設這篇文章總共只有 19 個字，這裡我們計算 x = information，y = data 的 PMI 值，
+<img src="http://localhost:4000/blog/img/posts/PMI%20example%202.png" alt="" /></p>
+
+<p>根據同樣的方式可以求出所有 target words 對應的 context words 的 PMI 值。</p>
+
+<hr />
+
+<h2 id="language-models">Language models</h2>
+
+<ul>
+  <li>A <em>probabilistic language model</em> is a probability distribution over sequences of words in some language.</li>
+  <li>Recent years have seen the rise of <em>neural language models</em>, which are based on distributed representations of words.</li>
+  <li>By the chain rule, the probability of a sequence of 𝑁 words can be computed using conditional probabilities as</li>
+</ul>
+
+<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})</script>
+
+<ul>
+  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words (馬可夫鍊):</li>
+</ul>
+
+<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})</script>
+
+<hr />
+
+<h2 id="language-models---n-gram-models">Language models - N-gram models</h2>
+
+<ul>
+  <li>
+    <p>An n-gram is a contiguous sequence of n words or characters. 
 <br />
-<a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">StatQuest: Decision Trees</a>
+E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</p>
+  </li>
+  <li>
+    <p>An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.</p>
+  </li>
+  <li>
+    <p>n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。</p>
+  </li>
+</ul>
+
+<p><strong>Formal definition of an n-gram model</strong></p>
+
+<ul>
+  <li><script type="math/tex">n</script>: the model’s order (1 = unigram, 2 = bigram, …)</li>
+  <li><script type="math/tex">V</script>: a set of possible words (character); the vocabulary</li>
+  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe the word <script type="math/tex">w</script> after the context 
+<br />(n − 1)-gram <script type="math/tex">u</script></li>
+</ul>
+
+<p><strong>Unigram model</strong></p>
+
+<p><em>n = 1</em> 不考慮前面出現的字。
+<img src="http://localhost:4000/blog/img/posts/Unigram%20model.png" alt="" /></p>
+
+<p>Thus contexts are empty.</p>
+
+<p><strong>MLE of unigram probabilities</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/MLE%20of%20unigram%20probabilities.png" alt="" /></p>
+
+<hr />
+
+<p><strong>Bigram models</strong></p>
+
+<p><em>n = 2</em> 考慮前面出現的一個字。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Bigram%20models.png" alt="" /></p>
+
+<p>Thus contexts are unigrams.</p>
+
+<p><strong>Estimating bigram probabilities</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Estimating%20bigram%20probabilities.png" alt="" /></p>
+
+<p><strong>Example</strong>
+(<a href="https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf">source</a>)
+<img src="http://localhost:4000/blog/img/posts/bigram%20example.png" alt="" /></p>
+
+<hr />
+
+<p><strong>Smoothing</strong></p>
+
+<p>當在計算 bigram 時可能會碰到兩個字完全沒有相鄰的狀況，這會導致算出來的機率等於 0。（如下圖）</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/bigram%20smoothing.png" alt="" /></p>
+
+<p>這種時候就需要用到，smoothing。</p>
+
+<p><strong>Smoothing methods</strong></p>
+<ul>
+  <li>Additive smoothing</li>
+  <li>Good-Turing estimate</li>
+  <li>Jelinek-Mercer smoothing (interpolation)</li>
+  <li>Katz smoothing (backoff)</li>
+  <li>Witten-Bell smoothing</li>
+  <li>Absolute discounting</li>
+  <li>Kneser-Ney smoothing</li>
+</ul>
+
+<p>上面的狀況碰到的是，”CHER” 後面沒有出現 “READ” 的狀況，而導致機率等於0，但如果現在是 “CHER” 這個字從未出現在資料集中呢？這種狀況時，smoothing 便派不上用場了。</p>
+
+<ul>
+  <li>In addition to unseen words, a new text may even contain <em>unknown words</em>. For these, smoothing will not help.</li>
+</ul>
+
+<p><strong>Unknown words</strong>
 <br />
-The Elements of Statistical Learning
+建立一個 token <UNK>，如果是 unknown words 就用 <UNK> 當作普通的單詞處理。</UNK></UNK></p>
+
+<ul>
+  <li>A simple way to deal with this is to introduce a special word type <em>UNK</em>, and to smooth it like any other word type in the vocabulary.</li>
+  <li>When we compute the probability of a document, then we first replace every unknown word with <em>UNK</em>.</li>
+</ul>
+
+<hr />
+
+<h2 id="language-models---neural-networks-as-language-models">Language models - Neural networks as language models</h2>
+
+<h3 id="advantages-of-neural-language-models">Advantages of neural language models</h3>
+<ul>
+  <li>Neural models can achieve better perplexity than probabilistic models, and scale to much larger values of n.</li>
+  <li>Words in different positions share parameters, making them share statistical strength. (Everything must pass through the hidden layer.)</li>
+  <li>The network can learn that in some contexts, only parts of the  n-gram are informative. (implicit smoothing, helps with unknown words)</li>
+</ul>
+
+<h3 id="word2vec">word2vec</h3>
+
+<ul>
+  <li>word2vec 是 word embedding 的一種</li>
+  <li>
+    <p>word2Vec 主要有 CBOW (continuous bag-of-words) 和 skip-gram 兩種模型</p>
+  </li>
+  <li>CBOW 是給定上下文，來預測輸入的字詞；Skip-gram 則是給定輸入字詞後，來預測上下文</li>
+</ul>
+
+<hr />
+
+<p><strong>Reference:</strong>
 <br />
-Pattern Recognition and Machine Learning</p>
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<br />
+<a href="https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305ddf5522015de5479f4701b1">詞向量介紹</a>
+<br />
+<a href="http://cpmarkchang.logdown.com/posts/772665-nlp-vector-space-semantics">自然語言處理 – Vector Space of Semantics</a>
+<br />
+<a href="https://zhuanlan.zhihu.com/p/26306795">[NLP] 秒懂词向量Word2vec的本质</a>
+<br />
+<a href="https://www.youtube.com/watch?v=OEJ0wxxLO7M">李宏毅老師的線性代數 - SVD</a>
+<br />
+<a href="http://www.shuang0420.com/2017/03/21/NLP%20笔记%20-%20再谈词向量/">NLP 笔记 - 再谈词向量</a>
+<br />
+<a href="https://www.twblogs.net/a/5c7bdd70bd9eee339918b4da">機器學習筆記之二十二——PCA與SVD</a>
+<br />
+<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>
+<br />
+<a href="http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information">自然語言處理 – Pointwise Mutual Information</a>
+<br />
+<a href="https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf">NLP Lunch Tutorial: Smoothing</a>
+<br />
+<a href="https://kknews.cc/tech/83yx3qn.html">機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？</a>
+<br />
+<a href="https://www.itread01.com/content/1569742263.html">詞向量(one-hot/SVD/NNLM/Word2Vec/GloVe)</a></p>
  -->
-    <div class="post-excerpt"><h2 id="decision-tree">Decision Tree</h2>
-<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1083,8 +1674,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/';
+        // this.page.url = '/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/26/Text-Mining-Word-embeddings/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1097,7 +1688,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">0 Comments</a>
+        <a href="/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">0 Comments</a>
       </span>
 
     </div>
@@ -1106,271 +1697,478 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/">
-        [R]如何在 ggplot2 圖形上希臘字母？
+      <a href="/blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">
+        [Text Mining]Text clustering and topic modelling
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 10, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on November 21, 2019</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 10, 2018</span>
+      <span class="post-date">November 21, 2019</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p><strong>1. 圖形文字</strong>
-<br />
-Text Labels: Use parse = T inside geom_text or annotate.</p>
-
-<p><strong>2. 座標軸標籤</strong>
-<br />
-Axis Labels: Use expression(alpha) to get greek alpha.</p>
-
-<p><strong>3. Legend</strong>
-<br />
-Legend Labels: Use bquote(alpha == .(value)) in legend label.</p>
-
-<p><strong>4. Fecet圖形</strong>
-<br />
-Facet 圖形比較特殊，要將 <code class="highlighter-rouge">labeller = label_parsed</code>
-<br />
-Facet Labels: Use labeller = label_parsed inside facet.</p>
-
-<p><a href="https://stackoverflow.com/questions/5293715/how-to-use-greek-symbols-in-ggplot2">來源</a></p>
- -->
-    <div class="post-excerpt"><p><strong>1. 圖形文字</strong>
-<br />
-Text Labels: Use parse = T inside geom_text or annotate.</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/#disqus_thread';
-        this.page.identifier = '/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/#disqus_thread" data-disqus-identifier="/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/10/20/R-Environment/">
-        [R]Environments (1)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on October 20, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">October 20, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇要介紹 R 的環境(Environments)。</p>
-
-<p>我個人覺得環境是一個寫程式很重要但一開始會很困惑的東西，之前一直處於似懂非懂的狀態。
-<br />
-其實如果只是用 R 來跑一些數據分析，其實不理解環境並不會造成什麼太大的問題，但如果能夠懂當然絕對是有利無弊。
-<br />
-最近有了寫 R package 的經驗後，讓我開始對「環境」比較了解，所以這篇想要將我的理解記錄下來。</p>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
 
 <hr />
 
-<h3 id="1-什麼是環境environments">1. 什麼是環境（Environments）？</h3>
+<p>在進入 Text clustering 前我想要先介紹 <strong>Clustering</strong>。</p>
 
-<p>當我們每次打開 R studio 這時候便是打開了某個環境，接著我們產生了一些變數，這些變數便是在這個環境底下。</p>
+<h2 id="clustring">Clustring</h2>
 
-<p>很抽象嗎？
-<br />
-打開 R studio 時，在右上的框框（或是在某個位置）有個「Environment」，然後可以看到如下圖的「Gloabal Environment」，並且在下面的框框可以看到我們產生的變數（圖中的 x）。
-<img src="http://localhost:4000/blog/img/posts/enrionment%20variable.png" alt="enrionment variable.png" height="395px" width="380px" /></p>
+<ul>
+  <li>
+    <p>Clustering (分群）是一種 unsupervised learning（非監督學習）</p>
+  </li>
+  <li>Typical applications
+    <ol>
+      <li>As a stand-alone tool to get insight into data distribution</li>
+      <li>As a preprocessing step for other algorithms</li>
+    </ol>
+  </li>
+  <li>Cluster: a collection of data objects。但什麼樣的 data 會被歸在同一個 cluster 呢？ 這就是 clustering 最重要的概念，<strong>Similar</strong> 和 <strong>Dissimilar</strong>。</li>
+  <li><strong>Similar</strong> to one another within the same cluster</li>
+  <li><strong>Dissimilar</strong> to the objects in other clusters</li>
+</ul>
 
-<p>這就表示，我們現在在「Gloabal Environment」這個環境底下，且 x 這個變數在「Gloabal Environment」環境中。</p>
+<p>=&gt; 而提到 Similar 和 Dissimilar 就要必須要提到 distance (or similarity) measures。有了 distance（similarity）才有辦法定義 Similar 和 Dissimilar。</p>
 
-<p>當我們把「Gloabal Environment」這個圖往下拉，可以看到像下圖這樣（每個人的可能都不太一樣）
-<img src="http://localhost:4000/blog/img/posts/enrionment.png" alt="enrionment.png" height="395px" width="380px" />
-依序往下就會是「Gloabal Environment」的 「parent 環境」。</p>
+<h3 id="distancesimilarity">Distance（Similarity）</h3>
 
-<p>（「parent 環境」是殺毀？！）</p>
+<ul>
+  <li>Distances are normally used to measure the similarity or dissimilarity between two data objects</li>
+</ul>
 
-<p><strong>環境就像是房間</strong></p>
+<p>Distances 可以有很多種定義方式，但不管怎麼定義，都一定要符合以下的 properties。</p>
+<ul>
+  <li><script type="math/tex">d(i, j) \ge 0</script> (non-negativity)</li>
+  <li><script type="math/tex">d(i, i) = 0</script> (identity of indiscernibles)</li>
+  <li><script type="math/tex">d(i, j) = d(j, i)</script> (symmetry)</li>
+  <li><script type="math/tex">d(i, j) \le d(i, k) + d(k, j)</script> (triangle inequality)</li>
+</ul>
 
-<p>我覺得可以把「環境」想像是一個房間。
-<br />
-當妳/你在操作 R ，產生任何變數，做任何動作，都是在這個房間裡面操作（通常一打開 R studio 都會是在 Global 環境）。所以這些變數全部都會被放在這個房間裡。或是想像在一個房間裡縫娃娃這些娃娃做完都會被放在這個房間裡。</p>
+<p><strong>Minkowski distance</strong></p>
 
-<p>那「parent 環境」就會是，妳/你走出這個房間來到客廳，也就是說，這個房間是被包在家裡的，走出家裡，整個家是被包在建築物裡的，然後社區，然後某條路，某個區，某個縣市……就是一個俄羅斯娃娃的感覺。往上一層就會是「parent 環境」、「grand parent 環境」…..以此類推。</p>
+<p><script type="math/tex">d(i, j) = \sqrt[q]{(|x_{i_1} - x_{j_1}|^q + |x_{i_2} - x_{j2}|^q + \ldots + |x_{i_p} - x_{j_p}|^q)}</script>
+, q is a positive integer</p>
 
-<hr />
+<ul>
+  <li>If q = 1, d is Manhattan distance</li>
+  <li>If q = 2, d is Euclidean distance</li>
+</ul>
 
-<h3 id="2-r-是如何在環境裡找變數的">2. R 是如何在環境裡找變數的？</h3>
+<p><strong>Binary Variables</strong></p>
 
-<p>根據上面的解釋我們知道，每次操作 R 的時候我們都會是在某個環境底下。
-<br />
-那這和 R 要找變數有什麼關係呢？</p>
+<ul>
+  <li>symmetric binary variables: both states are equally important; 0/1</li>
+  <li>asymmetric binary variables: one state is more important than the other (e.g. outcome of disease test); 1 is the important state, 0 the other</li>
+</ul>
 
-<p>在這之前我們先來看我現在有幾間房間呢？</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">search</span><span class="p">()</span><span class="w">
-</span><span class="c1"># [1] ".GlobalEnv"        "tools:rstudio"     "package:stats"     "package:graphics"  "package:grDevices"</span><span class="w">
-</span><span class="c1"># [6] "package:utils"     "package:datasets"  "package:methods"   "Autoloads"         "package:base"</span><span class="w">
-</span></code></pre></div></div>
-<p>這表示，最底下的環境是<code class="highlighter-rouge">.GlobalEnv</code>(Gloabal Environment)，它的 parent 變數是<code class="highlighter-rouge">tools:rstudio</code>，再往上是<code class="highlighter-rouge">package:stats</code>……等等，最後會是<code class="highlighter-rouge">package:base</code>，但其實最上層會是 Empty environment。</p>
+<p><img src="http://localhost:4000/blog/img/posts/Contingency%20tables%20for%20Binary%20Variables.png" alt="PMF_two coins.png" /></p>
 
-<p><strong>在房間裡找東西？</strong></p>
+<ul>
+  <li>Accuracy for symmetric binary variables</li>
+</ul>
 
-<p>如果今天妳/你人在一個房間裡找東西妳/你會怎麼找？
-<br />
-一定會先在房間裡搜尋一遍，如果怎麼都找不到，就會去客廳找，再找不到就到這棟建築物找……一直往外找對吧？</p>
+<script type="math/tex; mode=display">sim(i, j) = \frac{a+d}{a+b+c+d}</script>
 
-<p>所以同樣的，如果今天我們想要找個變數 x，結果 R 發現找不到，那它就會往 parent 環境（search()的順序）找，再找不到就會再往上找，如果一直找到最上層還是沒有，就會跳出像這樣的錯誤。</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w">
-</span><span class="c1"># Error: object 'x' not found</span><span class="w">
-</span></code></pre></div></div>
-<p>找的方式就像是這個圖，<a href="http://adv-r.had.co.nz/Environments.html">source</a>
-<img src="http://localhost:4000/blog/img/posts/search%20path.png" alt="search path.png" height="160px" width="500px" /></p>
+<ul>
+  <li>Jaccard similarity for asymmetric binary variables</li>
+</ul>
 
-<p><strong>parent 是誰？</strong></p>
-
-<p>我們可以用<code class="highlighter-rouge">parent.env()</code>來查看上一層環境，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">now.env</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">environment</span><span class="p">()</span><span class="w">
-</span><span class="n">parent.env</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">parent.env</span><span class="p">(</span><span class="n">now.env</span><span class="p">)</span><span class="w">
-</span><span class="n">grandparent.env</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">parent.env</span><span class="p">(</span><span class="n">parent.env</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h3 id="3-可以增加環境嗎">3. 可以增加環境嗎？</h3>
-<p>如果仔細看剛剛<code class="highlighter-rouge">search()</code>的結果會發現，那些都是 package 呢！
-<br />
-其實在每次使用 <code class="highlighter-rouge">library()</code>或是<code class="highlighter-rouge">require()</code> attache 一個 pacakge 後環境就會被改變，這時 Gloabal Environment 的 parent 環境就會變成這個 package。（請自行實驗）</p>
+<script type="math/tex; mode=display">sim(i, j) = \frac{a}{a+b+c}</script>
 
 <hr />
 
-<p>（題外話）
-<br />
-<strong>library() v.s require()</strong>
-這兩者到底有什麼差別呢？</p>
+<h2 id="text-clustering">Text clustering</h2>
 
-<p>基本上兩個的差別只有在於找不到這個 package 時，<code class="highlighter-rouge">library()</code> 會產生 Error 暫停程式，<code class="highlighter-rouge">require()</code>會 FALSE 並吐出 Warning ，然後繼續執行程式。
-<br />
-所以可以把<code class="highlighter-rouge">require()</code>包在 if 裡，如果沒有這個 package 就安裝，程式也能繼續執行。</p>
+<p><img src="http://localhost:4000/blog/img/posts/Conceptual%20framework%20for%20text%20mining.png" alt="PMF_two coins.png" /></p>
 
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">library</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Error in library(x) : there is no package called ‘x’</span><span class="w">
+<p>上圖是 Conceptual framework for text mining，而這篇要介紹的是 Clustering 和 Topic Analysis。</p>
 
-</span><span class="n">require</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span><span class="c1"># Loading required package: x</span><span class="w">
-</span><span class="c1"># Warning message:</span><span class="w">
-</span><span class="c1"># In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :</span><span class="w">
-</span><span class="c1">#  there is no package called ‘x’</span><span class="w">
-</span></code></pre></div></div>
-<p>（題外話結束）</p>
+<ul>
+  <li>
+    <p><strong>Text clustering</strong> is the task of grouping similar texts together. What is considered ‘similar’ depends on the application.</p>
+  </li>
+  <li>
+    <p>Clustering is a central tool in exploratory data analysis, where it can help us to get insights into the distribution of a data set.</p>
+  </li>
+  <li>
+    <p>Clustering is also useful as a pre-processing technique in knowledge-focused applications. Example: Brown clustering</p>
+  </li>
+</ul>
 
-<hr />
-
-<p>也就是說，如果我們今天使用<code class="highlighter-rouge">library()</code>或是<code class="highlighter-rouge">require()</code>就會讓環境改變。
-<br />
-所以如果今天是要 create package 的話，千萬不要將 <code class="highlighter-rouge">library()</code>和<code class="highlighter-rouge">require()</code>包在任何 function，這樣非常危險，可能會造成 <a href="http://r-pkgs.had.co.nz/namespace.html">Namespace</a> 的混亂。（如果看不懂可以先忽略這段）</p>
-
-<p>那如果今天需要用到這個包，但是又不想讓它加到 search path（parent 環境）裡怎麼辦？</p>
-
-<p>這時候請使用<code class="highlighter-rouge">::</code>。例如，今天想要呼叫 pkg1 裡頭的 fun()，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pkg1</span><span class="o">::</span><span class="n">fun</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-<p><code class="highlighter-rouge">::</code>還有一個很好用的時刻，就是當今天有兩個不同的 package 擁有兩個同樣名稱的 function 時，先載入的 package 順序會被放在後面，所以如果直接呼叫 funciton ，一定會用到後載入的 package 的 function。</p>
-
-<p>如果現在是 pkg1 和 pkg2 都有 fun()，那我們可以這樣用，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 呼叫 pkg1 的 fun</span><span class="w">
-</span><span class="n">pkg1</span><span class="o">::</span><span class="n">fun</span><span class="p">()</span><span class="w">
-
-</span><span class="c1"># 呼叫 pkg2 的 fun</span><span class="w">
-</span><span class="n">pkg2</span><span class="o">::</span><span class="n">fun</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-<p>這樣就絕對不會出錯了。
-不過記得，要使用<code class="highlighter-rouge">::</code>必須要有 install 這個 package 才能使用。</p>
-
-<p><strong>Attaching v.s Loading</strong></p>
-
-<p>library() 和 require() 這兩個 function 的動作都是 <strong>Attaching</strong>，也就是會將這 package 加到 parent 環境 (search path)。
-<br />
-但 <code class="highlighter-rouge">::</code>則是 <strong>Loading</strong>，也就是說，這個 pacakge 在 loading 後可以在記憶體（memory）中被找到，但不會被加到 parent 環境 (search path) 中。
-<a href="http://r-pkgs.had.co.nz/namespace.html#search-path">source</a></p>
+<p><img src="http://localhost:4000/blog/img/posts/The%20standard%20text%20clustering%20pipeline.png" alt="PMF_two coins.png" /></p>
 
 <hr />
 
-<p>下次介紹
-<br /></p>
+<h2 id="similarity-measures">Similarity measures</h2>
+
+<p>剛剛前面提到的 Similarity，如何用在 text 上呢？</p>
+
+<p><strong>Accuracy for symmetric binary vectors</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Accuracy%20for%20symmetric%20binary%20vectors.png" alt="PMF_two coins.png" /></p>
+
+<p><strong>Jaccard similarity for asymmetric binary vectors</strong></p>
+
+<hr />
+
+<h2 id="hard-clustering-and-soft-clustering">Hard clustering and soft clustering</h2>
+
+<p><strong>Hard clustering</strong></p>
+<ul>
+  <li>Each document either belongs to a cluster or not. Ex. Hierarchical clustering(brown clustring), Partitioning clustering(k-means), Density-Based clustering(DBSCAN)</li>
+</ul>
+
+<p><strong>Soft clustering</strong></p>
+<ul>
+  <li>Each document belongs to each cluster to a certain degree. Ex. LDA (topic model)</li>
+</ul>
+
+<hr />
+
+<h2 id="an-overview-of-hard-clustering-methods">An overview of hard clustering methods</h2>
+
+<h3 id="hierarchical-clustering">Hierarchical clustering</h3>
+
+<p>This method does not require the number of clusters k as an input, but needs a termination condition</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Hierarchical%20Clustering.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p><strong>Agglomerative</strong>: Each document starts in its own cluster. Hierarchy is created by merging pairs of clusters.
+將點倆倆合併，最後所有的點會全部在同一個 cluster 裡。那至於要用什麼決定要將兩個點合併呢？這時候又有 Linkage criteria 來決定，eg. Single-link, Complete-link, Average-link 等等。不同的 linkage criteria 會導致不同的分群結果，如下圖。</p>
+  </li>
+  <li>
+    <p><strong>Divisive clustering</strong>: All documents start in one cluster. Hierarchy is created by splitting clusters recursively.</p>
+  </li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Linkage%20criteria.png" alt="" /></p>
+
+<ul>
+  <li><strong>Brown clustring</strong></li>
+</ul>
+
+<h3 id="partitioning-clustering">Partitioning clustering</h3>
+<ul>
+  <li>
+    <p><strong>K-means</strong></p>
+  </li>
+  <li>
+    <p>Issues with the k-means algorithm</p>
+    <ol>
+      <li>The k-means algorithm always converges, but there is no guarantee that it finds a global optimum. (Solution: random restarts)</li>
+      <li>The number of clusters needs to be specified in advance, or chosen based on heuristics and cross-validation. (Example: elbow method)</li>
+      <li>The k-means algorithm is not good at handling outliers – every document will eventually belong to some cluster.</li>
+      <li>K-means is restricted to clusters with convex shapes =&gt; Density-Based clustering</li>
+    </ol>
+  </li>
+</ul>
+
+<h3 id="density-based-clustering">Density-Based clustering</h3>
+
+<ul>
+  <li>The basic idea behind density-based algorithms is that different regions of the vector space can be more or less densely populated.</li>
+  <li>Under this view, clusters can take any shape; they are not constrained to convex clusters as in k-means.</li>
+</ul>
+
+<p><strong>Directly density-reachable</strong></p>
+
+<ul>
+  <li>DBSCAN</li>
+</ul>
+
+<hr />
+
+<h2 id="evaluation-of-hard-clustering">Evaluation of hard clustering</h2>
+
+<h3 id="intrinsic-and-extrinsic-evaluation">Intrinsic and extrinsic evaluation</h3>
+<ul>
+  <li>In <strong>intrinsic</strong> evaluation, a clustering is evaluated based on internal measures such as coherence and separation. <em>Are documents in the same cluster similar? Are clusters well-separated?</em></li>
+  <li>In <strong>extrinsic</strong> evaluation, a clustering is evaluated based on data that was not used for the clustering, such as known class labels. <em>cluster purity, Rand index</em></li>
+</ul>
+
+<h3 id="rand-index">Rand index</h3>
+
+<p>假設一個集合中有N篇文章
+一個集合中有N(N-1)/2個集合對
+TP：同一類的文章被分到同一個簇
+TN：不同類的文章被分到不同簇
+FP：不同類的文章被分到同一個簇
+FN：同一類的文章被分到不同簇
+Rand Index度量的正確的百分比
+RI = （TP+TN）/（TP+FP+FN+TN）</p>
+
+<hr />
+
+<h2 id="topic-models">Topic models</h2>
+<ul>
+  <li>A topic model is a statistical model for representing the abstract topics that are expressed in a collection of documents.</li>
+  <li>Topic models are examples of soft clustering techniques – each document belongs to each cluster (topic) to a certain degree.</li>
+</ul>
+
+<h3 id="latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</h3>
+
+<p>LDA有兩個原則，</p>
 <ol>
-  <li><code class="highlighter-rouge">new.env()</code>和 function 中的環境</li>
-  <li>&lt;- 和 «- 的差別</li>
+  <li>每個 domcuments 是由多個 Topic 組成（each document belongs to each cluster (topic) to a certain degree）</li>
+  <li>每個主題會有不同的 terms 來描述，且同樣對詞可以同時出現在不同的主題。</li>
+</ol>
+
+<p><img src="http://localhost:4000/blog/img/posts/Topic%20models.png" alt="" /></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Topic%20models2.png" alt="" /></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<br />
+<a href="https://www.ida.liu.se/~732A75/info/courseinfo.en.shtml">732A75 Advanced Data Mining</a>
+<br />
+<a href="http://cpmarkchang.logdown.com/posts/238079-natural-language-processing-brown-clustering">自然語言處理 – Brown Clustering</a>
+<br />
+<a href="https://medium.com/@tengyuanchang/直觀理解-lda-latent-dirichlet-allocation-與文件主題模型-ab4f26c27184">直觀理解 LDA (Latent Dirichlet Allocation) 與文件主題模型</a>
+<br />
+<a href="https://www.twblogs.net/a/5b8c83e12b717718833363ae">聚類評價指標 Rand Index,RI,Recall,Precision,F1</a></p>
+ -->
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">
+        [Text Mining]Text classification
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on November 13, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">November 13, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+<hr />
+
+<h2 id="text-classification">Text classification</h2>
+
+<ul>
+  <li>Text classification is the task of categorising text documents into predefined classes.</li>
+</ul>
+
+<h2 id="evaluation-of-text-classifiers">Evaluation of text classifiers</h2>
+
+<p>最簡單的檢視預測結果好壞的方法就是將 predict 出來的類別與真實的類別做比較。（預測必須要在 test data，換句話說之前並沒有參與任何 training 的過程。這點在做所有 Machine Learning 的方法都很重要，在做 model 測試前不要碰 test data。）</p>
+
+<h3 id="accuracy">Accuracy</h3>
+<p>The accuracy of a classifier is the proportion of documents for which the classifier predicts the gold-standard class:</p>
+
+<script type="math/tex; mode=display">\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}</script>
+
+<h3 id="accuracy-and-imbalanced-data-sets">Accuracy and imbalanced data sets</h3>
+
+<p>上面的 accuracy 看起來非常合理啊，去計算分類正確的比例來判斷這個分類器是否預測準確。但，如果其實資料本身的類別並不平均呢？</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/imbalanced%20data%20sets.png" alt="PMF_two coins.png" /></p>
+
+<p>根據上圖，我們只要把所有資料都猜綠色的 class，這樣 accuracy 就能有 80%。從這個例子可以知道，</p>
+
+<ul>
+  <li>
+    <p>Evaluation measures are no absolute measures of performance. 如果今天得到 accuracy 是 80% 我們並無法確定這樣的準確率的好壞，要根據每個問題去判斷。</p>
+  </li>
+  <li>
+    <p>Instead, we should ask for a classifier’s performance relative to other classifiers, or other points of comparison. E.g.’Logistic Regression has a higher accuracy than Naive Bayes.’</p>
+  </li>
+  <li>
+    <p>When other classifiers are not available, a simple baseline is to always predict the most frequent class in the training data.</p>
+  </li>
+</ul>
+
+<h2 id="precision-and-recall">Precision and recall</h2>
+
+<ul>
+  <li>
+    <p>Precision and recall ‘zoom in’ on how good a system is at identifying documents of a specific class.</p>
+  </li>
+  <li>
+    <p>Precision is the proportion of correctly classified documents among all documents for which the system predicts class.</p>
+  </li>
+</ul>
+
+<script type="math/tex; mode=display">\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}</script>
+
+<ul>
+  <li>Recall is the proportion of correctly classified documents among all documents with gold-standard class.</li>
+</ul>
+
+<script type="math/tex; mode=display">\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}</script>
+
+<h2 id="f1-measure">F1-measure</h2>
+<p>A good classifier should balance between precision and recall.  </p>
+
+<script type="math/tex; mode=display">\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}</script>
+
+<hr />
+
+<h2 id="naive-bayes-classifier">Naive Bayes classifier</h2>
+
+<h3 id="bayes-theorem">Bayes’ theorem</h3>
+
+<p>We know that <script type="math/tex">C</script> is classes, <script type="math/tex">x_i, i = 1, \cdots,n</script> is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
+
+<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}</script>
+
+<p>也就是，</p>
+
+<script type="math/tex; mode=display">\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}</script>
+
+<p>根據上式，我們可以將分母視為常數，因為 features <script type="math/tex">x_i, i = 1, \cdots,n</script> 的值是給定的，且與 <script type="math/tex">C</script> 無關，所以可以得到</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+p(C, x_1, \cdots,x_n) & = p(C)~p(x_1,\cdots,x_n|C) \\
+& \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
+& \propto \cdots\\
+& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
+\end{align} %]]></script>
+
+<h3 id="naive-bayes-assumption">Naive Bayes assumption</h3>
+
+<p>Naive Bayes 假設 
+<script type="math/tex">p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j</script></p>
+
+<p>根據 Naive Bayes 的假設，前面的式子我們可以寫成，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+p(C|x_1,..., x_n) & \propto p(C, x_1, \cdots,x_n) \\
+& \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
+& \propto p(C)~\prod_{i=1}^n p(x_i|C)
+\end{align} %]]></script>
+
+<p>根據上面的推導過程，我們可以得到，</p>
+
+<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)</script>
+
+<h3 id="naive-bayes-classifer">Naive Bayes classifer</h3>
+
+<p>而 Naive Bayes classifer 就是取各個分類 <script type="math/tex">C_m, m = 1, \cdots, k</script> 
+中 <script type="math/tex">p(C|x_1,..., x_n)</script> 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
+
+<script type="math/tex; mode=display">C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)</script>
+
+<p>而 <script type="math/tex">C_m</script> 就是最後的分類結果。</p>
+
+<h3 id="two-classic-naive-bayes-variants-for-text">Two Classic Naive Bayes Variants for Text</h3>
+
+<ol>
+  <li>Multinomial Naive Bayes
+    <ul>
+      <li>Data follows a multinomial distribution (多項分布)</li>
+      <li>Each feature values is a count (word occurrence counts, TF-IDF weighting, …)</li>
+    </ul>
+  </li>
+  <li>Bernoulli Naive Bayes
+    <ul>
+      <li>Data follows a multivariate Bernoulli distribution</li>
+      <li>Each feature is binary (word is present / absent)</li>
+    </ul>
+  </li>
 </ol>
 
 <hr />
 
-<p>Reference:
+<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L2.ipynb">Text classification Lab</a></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
 <br />
-<a href="http://adv-r.had.co.nz/Environments.html">Advance R - Environments</a>
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
 <br />
-<a href="http://r-pkgs.had.co.nz/namespace.html">R package - Namespace</a>
+<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a>
 <br />
-<a href="https://www.gl-li.com/2017/09/14/build-a-r-package-for-yourself/">Build a R package for yourself</a>
-<br />
-<a href="http://tinyheero.github.io/jekyll/update/2015/07/26/making-your-first-R-package.html">Making Your First R Package</a></p>
+<a href="https://zh.wikipedia.org/wiki/朴素贝叶斯分类器">wikipeida - 單純貝氏分類器</a></p>
+
  -->
-    <div class="post-excerpt"><p>這篇要介紹 R 的環境(Environments)。</p>
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1390,8 +2188,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/10/20/R-Environment/#disqus_thread';
-        this.page.identifier = '/r/2018/10/20/R-Environment/';
+        // this.page.url = '/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/13/Text-Mining-Text-classification/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1404,7 +2202,449 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/10/20/R-Environment/#disqus_thread" data-disqus-identifier="/r/2018/10/20/R-Environment/">0 Comments</a>
+        <a href="/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/13/Text-Mining-Text-classification/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">
+        [Text Mining]Information Retrieval
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on November 5, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">November 5, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+<p>這門課教授的是英文的文字探勘，中文與英文本身在結構上有非常大的差異，所以有些解析和斷詞的方法中文可能並不適用，但在基本概念上還是有相同的地方。</p>
+
+<p>每個主題都有一個 Lab 附在文章最後。</p>
+
+<hr />
+
+<h2 id="information-retrieval-ir">Information Retrieval (IR)</h2>
+
+<p>Information Retrieval (IR) is finding material (usually documents) of an unstructured nature (usually text) that satisfies an information need from within large collections (usually stored on computers).</p>
+
+<p>中文稱為「資訊檢索」。從一堆的 unstructured 資料中（通常是文字）找出符合我們需要的條件的資料。</p>
+
+<p>例如，google 搜尋就是一個例子。我們在搜尋 bar 裡輸入我們想要找到的關鍵字，google 搜尋引擎會從它儲存的所有 database（網站們） 中找出符合我們關鍵字條件的網站給我們。</p>
+
+<hr />
+
+<p>那我們要如何找到包含這些關鍵字的文章呢？</p>
+
+<p>最直觀地想應該就是把有我們搜尋的關鍵字的文章抓出來吧！這就是 Boolean retrieval。</p>
+
+<p>在進入 Boolean retrieval 之前先來看一下 The classic search model。</p>
+
+<h3 id="the-classic-search-model">The classic search model</h3>
+
+<ul>
+  <li>To communicate her/his information need to an IR system, the user formulates a <em>search query</em>.</li>
+  <li>The objective of the IR system is to find documents in the collection that ‘match’ the search query.</li>
+  <li>A good IR system finds documents that are also relevant for the user’s information need.</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/The%20classic%20search%20model.png" alt="PMF_two coins.png" /></p>
+
+<hr />
+
+<h3 id="boolean-retrieval">Boolean retrieval</h3>
+
+<p>The Boolean retrieval model is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms, that is, in which terms are combined with the operators AND, OR, and NOT. The model views each document as just a set of words.</p>
+
+<p>很直覺的方法要找出包含關鍵字的可以使用 terms(通常是個單詞) 是否包含在 documents 裡。</p>
+
+<p>例如，現在有 Sherlock Holmes 小說文字。我想要找出哪些篇章符合出現 ‘Moriarty’ 和 ‘Lestrade’ 但不包含 ‘Adair’。那麼下的 query 就會是 <em>Moriarty AND Lestrade AND NOT Adair</em></p>
+
+<p>那個我們可以將上面的概念寫成一個 <strong>Term–document matrix</strong>。</p>
+
+<p><strong>Term–document matrix</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Term%E2%80%93document%20matrix.png" alt="PMF_two coins.png" /></p>
+
+<p>每一行代表一個章節，每一列代表一個條件的單詞（term）。以列來看，0 表示該單詞沒有出現在那一章節中，1 表示該單詞有出現。
+<br />
+像是第一列，’Adair’ 只有出現在 ‘Empty house’ 這個章節。</p>
+
+<p>這樣的方法看似簡單，但以實務上來說並不是個好辦法。因為，</p>
+
+<ul>
+  <li>Term–document matrices are sparse. 可以從上面的 matrix 看到，有很多的 0 ，也就是說其實很多資訊並不需要，但卻還是需要儲存。</li>
+  <li>假如現在有 1,000,000 份 documents，有 500,000 不同的 terms ，這樣的條件下會產生 a matrix with 500,000,000,000 entries (62,5 GB)。</li>
+</ul>
+
+<p>所以我們必須得使用別的辦法減少不必要的資訊儲存。這時候就有了 Inverted index。</p>
+
+<p><strong>Inverted index</strong></p>
+
+<p>The inverted index is a key–value mapping, the basic idea is shown below.</p>
+
+<ul>
+  <li>the keys are search terms</li>
+  <li>the values are sorted lists of document identifiers (ids)</li>
+  <li>the list for terms identifies those documents that contain the terms</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Inverted%20index.png" alt="PMF_two coins.png" /></p>
+
+<p>從上圖我們可以看到，和 Term–document matrix 不一樣的是 Inverted index 只儲存了有包含該單詞的 document ids。</p>
+
+<hr />
+
+<p>現在我們知道我們要的是去看那些關鍵字是否包含在 documents 中，但我們並不會每一次找關鍵字的時候一篇一篇文章搜索，我們會先建立一個儲存好所有 term 的 matrix，
+但我們要怎麼決定是哪些 terms 要被儲存呢？</p>
+
+<h2 id="index-construction">Index construction</h2>
+
+<p>The major steps in index construction:</p>
+
+<ol>
+  <li>Collect the documents to be indexed.</li>
+  <li>Tokenize the text.</li>
+  <li>Do linguistic preprocessing of tokens.</li>
+  <li>Index the documents that each term occurs in.</li>
+</ol>
+
+<p><img src="http://localhost:4000/blog/img/posts/building%20an%20index%20by%20sorting%20and%20grouping.png" alt="PMF_two coins.png" /></p>
+
+<h3 id="tokenization">Tokenization</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">raw</span> <span class="o">=</span> <span class="s">"Apple is looking at buying U.K. startup for $1 billion."</span>
+<span class="c"># tokenize raw text based on whitespace</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
+	<span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+
+<span class="c"># tokenize using spaCy</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c"># 結果：</span>
+<span class="c"># Apple</span>
+<span class="c"># is</span>
+<span class="c"># looking</span>
+<span class="c"># at</span>
+<span class="c"># buying</span>
+<span class="c"># U.K.</span>
+<span class="c"># startup</span>
+<span class="c"># for</span>
+<span class="c"># $</span>
+<span class="c"># 1</span>
+<span class="c"># billion</span>
+<span class="c"># . </span>
+</code></pre></div></div>
+
+<p>英文每個單字可以很容易地使用空白（.split()）來分割出每個單字，但只使用
+split 無法排除標點符號的問題，python 的 spacy 可以將標點符號也區分出來。</p>
+
+<h3 id="stop-words">Stop words</h3>
+<p>A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and…</p>
+
+<p>但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們或許可以根據分析的目的將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。</p>
+
+<p>既然 stop words 對於分析沒有價值貢獻，那麼在做分析前就必須把 stop words 刪除，以避免干擾分析結果。</p>
+
+<h3 id="lexemes-and-lemmas">Lexemes and lemmas</h3>
+
+<p>英文的文法有幾個規則，</p>
+<ol>
+  <li>動詞會根據人稱與時態有所變化</li>
+  <li>動詞有動名詞型態</li>
+  <li>名詞的單數與複數有變化</li>
+</ol>
+
+<p>但在分析前必須要將這些相同意義但不同型的單字修正為相同以便分析。</p>
+
+<ul>
+  <li>
+    <p>The term <em>lexeme</em> refers to a set of word forms that all share the same fundamental meaning. 
+<br />
+For example: word forms run, runs, ran, running – lexeme run</p>
+  </li>
+  <li>
+    <p>The term <em>lemma</em> refers to the particular word form that is chosen, by convention, to represent a given lexeme. 
+<br />
+For example: what you would put into a lexicon</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="ranked-retrieval排序檢索">Ranked retrieval（排序檢索）</h2>
+
+<p>進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。</p>
+
+<p><strong>Problems with Boolean retrieval</strong></p>
+
+<ul>
+  <li>Not many users are capable of writing high-quality Boolean queries, and many find the process too time-consuming.</li>
+  <li>Feast or famine: Boolean queries tend to return either too many results, or no results at all.</li>
+  <li>Intuitively, whether or not a document ‘matches’ a search query is not a Boolean property, but is gradual in nature.</li>
+</ul>
+
+<p><strong>Ranked retrieval</strong></p>
+<ul>
+  <li>
+    <p>A ranked retrieval system assigns scores to documents based on how well they match a given search query. (There are many possible ways of scoring.)</p>
+  </li>
+  <li>
+    <p>Based on the score, a ranked retrieval system can return a list of the top documents in the collection with respect to the query.</p>
+  </li>
+</ul>
+
+<p>前面提到的 boolean retrieval 只考慮了文件是否包含或不包含要的詞彙，為了那個詞彙的「重要性」也考慮進去，我們要給予每個 term 不同的 weight。</p>
+
+<h3 id="term-weighting">Term weighting</h3>
+
+<ul>
+  <li>The score of a document d with respect to a query q is the sum of the weights of all terms t that occur in both d and q.</li>
+</ul>
+
+<script type="math/tex; mode=display">\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}</script>
+
+<ul>
+  <li>Any specific way to assign weights to terms is called a term weighting scheme.</li>
+</ul>
+
+<p>計算 weight 的方法有很多種，也可以自行定義，這邊介紹一種常用的方法。</p>
+
+<h3 id="tdidf-weight">TD–IDF weight</h3>
+
+<p>TD–IDF is Term frequency–inverse document frequency. This formula includes two parts: Term frequency &amp; Inverse document frequency.</p>
+
+<p><strong>Term frequency</strong></p>
+
+<p>The number of times a term t occurs in a document d is called the term frequency of t in d, and is denoted by tf(t, d).</p>
+
+<p>-<em>A problem with term frequency</em></p>
+
+<p>Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+weight(t, d) = \left\{ \begin{array}{rcl}
+1 + log_{10}tf(t, d), & if ~ tf(t, d) > 0 \\
+0, & others \\
+\end{array}\right. %]]></script>
+
+<p>稱作，<em>log-frequency weighting</em></p>
+
+<p>-<em>Another problem with term frequency</em></p>
+
+<p>時常重複出現的慣用詞彙對一個文件的影響很大。例如，現在想要考慮 Sherlock Holmes 裡包含 Moriarty 和 Holmes 的章節，但當我們下 query 去找時會發現，Holmes 出現最多的章節幾乎沒有 Moriarty，這是因為 Holmes 在這些文本裡出現的比例實在太高了，如果直接以它出現的頻率來分析肯定會造成很大的誤差，進而影響了出現次數少很多的 Moriarty。所以這時候 Inverse document frequency 就非常重要了！</p>
+
+<p><strong>Inverse document frequency</strong></p>
+
+<ul>
+  <li>Let N be the total number of documents in the collection.</li>
+  <li>The number of documents that contain a term t is called the
+document frequency of t, and is denoted by df(t).</li>
+</ul>
+
+<p>It denotes by idf(t):</p>
+
+<script type="math/tex; mode=display">\textrm{idf(t)} = log \frac{N}{df(t)}</script>
+
+<p>df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。</p>
+
+<p><strong>TD–IDF Weight</strong></p>
+
+<p>現在我們有了 td 和 idf，tf–idf weight 就是將這兩個數字相乘（出現次數乘以重要性），</p>
+
+<p>The <strong>tf–idf weight</strong> of a term t in a document d is defined as</p>
+
+<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}</script>
+
+<p>where N denotes the number of documents in the collection.</p>
+
+<p><strong>Variations of the tf–idf weighting scheme</strong></p>
+
+<p>因為 df(t) 可能是 0，所以我們改良一下上面的式子。</p>
+
+<p>In scikit-learn, the tf–idf weight is computed as</p>
+
+<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)</script>
+
+<p>where N denotes the number of documents in the collection.</p>
+
+<hr />
+
+<h2 id="the-vector-space-model">The vector space model</h2>
+
+<h3 id="document-representations">Document representations</h3>
+
+<ul>
+  <li>
+    <p>Documents as sets of terms
+<br />
+In Boolean retrieval, the only relevant information is whether or not a term is present in a document.</p>
+  </li>
+  <li>
+    <p>Documents as bags of terms
+<br />
+In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.</p>
+  </li>
+</ul>
+
+<h3 id="the-vector-space-model--idea-1">The vector space model – idea 1</h3>
+<p>Represent documents as vectors in a high-dimensional space:</p>
+
+<ul>
+  <li>The dimensions (axes) of the space correspond to the terms in
+the vocabulary (potentially relevant terms). For example: could be set of all words in the collection, set of most frequent words, …</li>
+  <li>The values of the vector components depend on the term weighting scheme: Boolean values, counts, tf–idf values, … (in scikit-learn: CountVectorizer, TfidfVectorizer)</li>
+</ul>
+
+<h3 id="the-vector-space-model--idea-2">The vector space model – idea 2</h3>
+<p>To rank documents in the vector space model,</p>
+
+<ul>
+  <li>we represent the query as a vector in the same space as the documents in the collection</li>
+  <li>we compute the score of a candidate document as the similarity between its document vector and the query vector (similarity = proximity in the vector space)</li>
+</ul>
+
+<h3 id="cosine-similarity">Cosine similarity</h3>
+
+<p>以下舉一個從一篇<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">部落格</a>看到的例子，</p>
+
+<p>例如:
+Query = {“Hello”}
+Doc1 = {“Foo”, “Foo”}
+Doc2 = {“Hello”, “World”}</p>
+
+<p>在經過計算之後，我們知道其向量分別為（可以使用 tf-idf values, counts,… 等等）</p>
+
+<p>Query = (1, 0, 0)
+Doc1 = (0, 0, 2)
+Doc2 = (1, 1, 0)</p>
+
+<p>我們可以使用歐幾里德距離算出 query 和兩個 documents 的距離分別是，根號5和1。但計算歐幾里德距離忽略掉了單詞出現的頻率的影響。</p>
+
+<p>如果說今天把上面的向量改一下，</p>
+
+<p>Query = (2, 0, 0)
+Doc1 = (0, 0, 4)
+Doc2 = (2, 2, 0)</p>
+
+<p>這時候 所有的距離都變成了兩倍，但其實他們完全是平行的向量。</p>
+
+<p>那如果我們考慮向量之間的角度呢？也就是計算兩個向量的 dot，這時候會發現，長度還是影響了最後的數值。</p>
+
+<p>因此，使用 <strong>Cosine similarity</strong> 來將數值 normalized。使用 cosine 後，數值只會介於 -1 和 1 之間，並且只需要考慮非0的數值。</p>
+
+<hr />
+
+<h2 id="evaluation-of-information-retrieval-systems">Evaluation of information retrieval systems</h2>
+
+<p>To evaluate an IR system we need:</p>
+<ul>
+  <li>a document collection</li>
+  <li>a collection of queries</li>
+  <li>a gold-standard relevance judgement</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Precision%20and%20recall%20for%20Boolean%20retrieval.png" alt="PMF_two coins.png" /></p>
+
+<p><strong>Precision:</strong></p>
+
+<p>Precision (P) is the fraction of retrieved documents that are relevant</p>
+
+<script type="math/tex; mode=display">Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})</script>
+
+<p><strong>Recall:</strong></p>
+
+<p>Recall (R) is the fraction of relevant documents that are retrieved</p>
+
+<script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
+
+<p><strong>F1-measure</strong></p>
+
+<p>A good system should balance between precision and recall.   
+<br />
+The F1-measure is the harmonic mean of the two values:</p>
+
+<script type="math/tex; mode=display">F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}</script>
+
+<hr />
+
+<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb">Information Retrieval Lab</a></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<br />
+<a href="https://nlp.stanford.edu/IR-book/information-retrieval-book.html">Introduction to Information Retrieval</a>
+<br />
+<a href="https://taweihuang.hpd.io/2017/03/01/tfidf/">[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯</a>
+<br />
+<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">Vector Space Model(1)</a>
+<br />
+<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a></p>
+ -->
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">0 Comments</a>
       </span>
 
     </div>

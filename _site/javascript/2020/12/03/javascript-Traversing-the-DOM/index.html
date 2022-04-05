@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>M.C. Shih &middot; BLOG</title>  
+  
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/blog/public/css/poole.css">
+  <link rel="stylesheet" href="/blog/public/css/syntax.css">
+  <link rel="stylesheet" href="/blog/public/css/hyde.css">
+  <link rel="stylesheet" href="/blog/public/css/custom.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.css">
+  <link rel="stylesheet" href="/blog/public/css/fontawesome-all.min.css">
+  <!-- <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet"> -->
+
+
+  <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface"> -->
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" sizes="16x16" href="/blog/public/apple-touch-icon-16-precomposed.png">
+  <link rel="apple-touch-icon" sizes="24x24" href="/blog/public/apple-touch-icon-24-precomposed.png">
+  <link rel="apple-touch-icon" sizes="32x32" href="/blog/public/apple-touch-icon-32-precomposed.png">
+  <link rel="apple-touch-icon" sizes="48x48" href="/blog/public/apple-touch-icon-48-precomposed.png">
+  <link rel="apple-touch-icon" sizes="57x57" href="/blog/public/apple-touch-icon-57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="64x64" href="/blog/public/apple-touch-icon-64-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/blog/public/apple-touch-icon-72-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="114x114" href="/blog/public/apple-touch-icon-114-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="120x120" href="/blog/public/apple-touch-icon-120-precomposed.png"> 
+  <link rel="apple-touch-icon" sizes="144x144" href="/blog/public/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/blog/public/apple-touch-icon-152-precomposed.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="/blog/public/apple-touch-icon-512-precomposed.png">
+  <link rel="shortcut icon" href="/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <!-- 數學符號 -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+</head>
+
+
+  <body>
+  	
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="/blog/">
+          M.C. Shih
+        </a>
+        <img src="/blog/img/headshot.png" alt="Author Image" class="headshot">
+      </h1>
+      <p class="lead">Just for learning.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/blog/">Blog</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/about/">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/archive/">Archives</a>
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/category/">Category</a>
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/blog/search/">Search</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+
+    </nav>
+    <div class="links">
+      <ul>
+        <li><a href="https://shihs.github.io" class="homepage" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-home-6-240.png"></a></li>
+        <li><a href="https://github.com/shihs" class="github" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-github-3-240.png"></a></li>
+        <li><a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" class="linkedin" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-linkedin-3-240.png"></a></li>
+        <li><a href="https://www.instagram.com/itakephotos_tw/" class="instagram" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-instagram-8-240.png"></a></li>
+        <li><a href="https://www.flickr.com/photos/mcshihs/" class="flickr" target="_blank"><img src="/blog/img/link%20icon/iconmonstr-flickr-3-240.png"></a></li>
+      </ul>
+    </div>
+    
+
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">[javascript]Traversing the DOM</h1>
+  <div class="post-info">
+    <i class="fas fa-calendar-alt"></i>
+    <span class="post-date">December 3, 2020</span>
+    <span>
+      <i class="fas fa-comments"></i>
+      <a
+        class="comment-count"
+        href="/blog//javascript/2020/12/03/javascript-Traversing-the-DOM/#disqus_thread"
+        data-disqus-identifier="/javascript/2020/12/03/javascript-Traversing-the-DOM/"
+        >0 Comments</a
+      >
+    </span>
+    <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+       
+      <a
+        target="_blank"
+        href="/blog/category/#javascript"
+        >javascript</a
+      >
+       
+    </span>
+  </div>
+  <div><p>整理 Treehouse 前端課程中 <a href="https://teamtreehouse.com/library/javascript-and-the-dom-2">JavaScript and the DOM</a> 的最後一節 Traversing the DOM 內容。</p>
+
+<p>DOM Traversal 的意思是，可以透過一個 element 與這個 element 的關係去選取其他的 element。</p>
+
+<hr />
+
+<h2 id="parentnode">parentNode</h2>
+
+<ul>
+  <li><strong>parentNode</strong>：顧名思義，選取被選取的 element 的 parent node。</li>
+</ul>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 id 為 myParagraph 的 node</span>
+<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="s1">'myParagraph'</span><span class="p">);</span> 
+
+<span class="c1">// 使用 paragraph 選取它的 parent node</span>
+<span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">paragraph</span><span class="p">.</span><span class="nx">parenNode</span><span class="p">;</span> 
+
+<span class="c1">// 可以直接利用這個 parent node 做些事</span>
+<span class="nx">parent</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">paragraph</span><span class="p">);</span> <span class="c1">// 刪除 paragraph node</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="previouselementsibling--insertbefore">previousElementSibling &amp; insertBefore</h2>
+
+<ul>
+  <li><strong>previousElementSibling</strong>：選取被選取的 element 前一個的 sibling。</li>
+  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
+</ul>
+
+<p><strong>previousSibling v.s. previousSibling</strong></p>
+
+<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
+
+<p>在課程的範例中，現在想要按了 Up 按鈕之後，該 &lt;li&gt; 就會上移。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>grapes 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>amethyst 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>lavender 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>plums 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+
+<span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'up'</span><span class="p">)</span> <span class="p">{</span>
+  	<span class="c1">// 被 click 的 button 的 parent node 就是 li</span>
+    <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
+    <span class="c1">// 被選取的 li tag 的 previous element sibiling，也就是前一個 li tag</span>
+    <span class="kd">let</span> <span class="nx">prevLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span> 
+    <span class="c1">// 這個 li 的 parent node</span>
+    <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
+    <span class="c1">// 如果 prevLi 不是 null，換句話說，不是第一個</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">prevLi</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 將被選取的 li tag 往前移</span>
+      <span class="nx">ul</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">li</span><span class="p">,</span> <span class="nx">prevLi</span><span class="p">);</span> 
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="nextelementsibling--insertbefore">nextElementSibling &amp; insertBefore</h2>
+
+<p>按了 down button 之後，該 li 往下移。基本上概念和剛剛上面往前一是一樣的，只是現在使用 nextElementSibling，去選取後面的 element。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>grapes 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>amethyst 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>lavender 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>plums 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+
+<span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'down'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">nextLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">nextLi</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ul</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">nextLi</span><span class="p">,</span> <span class="nx">li</span><span class="p">);</span>
+    <span class="p">}</span>    
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="children">children</h2>
+
+<p><code class="highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+
+<span class="c1">// lisUl 底下的 child，也就是 li tag</span>
+<span class="kd">const</span> <span class="nx">lis</span> <span class="o">=</span> <span class="nx">listUl</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+</code></pre></div></div>
+<hr />
+
+<h2 id="firstchild--lastchild-vs-firstelementchild--lastelementchild">firstChild &amp; lastChild v.s. firstElementChild &amp; lastElementChild</h2>
+
+<p>選取該 element 的第一個或最後一個 child。同樣的，firstElementChild &amp; lastElementChild 選取的會是 element。</p>
+
+</div>
+</div>
+
+<div class="likecoin">
+  
+  <iframe
+    src="https://button.like.co/in/embed/shihs_tw/button?referrer=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fjavascript%2F2020%2F12%2F03%2Fjavascript-Traversing-the-DOM%2F" height="200" width="560" allowfullscreen="" frameborder="0"
+  >
+  </iframe>
+  
+</div>
+
+  
+<a name="comments"></a>
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog/#disqus_thread';
+        this.page.identifier = '/javascript/2020/12/03/javascript-Traversing-the-DOM/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+  <div class="related">
+    <h2>Latest Posts</h2>
+    <ul class="related-posts">
+      
+      <li>
+        <h3>
+          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
+          <small>Apr 5, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
+          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
+          <small>Apr 5, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
+          <a href="/blog/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/"> [Web]MVC 架構 </a>
+          <small>Aug 22, 2021</small>
+        </h3>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+    <script id="dsq-count-scr" src="//mcshihs.disqus.com/count.js" async></script>
+  </body>
+</html>

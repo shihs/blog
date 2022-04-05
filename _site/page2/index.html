@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,117 +183,259 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/2019/02/27/Python-filter-map-reduce-lambd/">
-        [Python]filter、map、reduce、lambda
+      <a href="/blog/javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/">
+        [javascript]同步 v.s. 非同步與callback, promise, async, and await
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 27, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 16, 2021</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 27, 2019</span>
+      <span class="post-date">January 16, 2021</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog/category/#javascript">javascript</a>
         
       
     </span>
 
 
     </div>
-    <!-- <ul>
-  <li>lambda 可以直接定義一些簡單的 funciton。</li>
-  <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
+    <!-- <p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
+
+<hr />
+
+<p>JavaScript Engine 是以單執行緒（單線程/Single Thread）且同步（Synchronous）的方式執行。</p>
+
+<h2 id="同步synchronous">同步（Synchronous）</h2>
+
+<ul>
+  <li>指程式必須等待前面的程式執行完才能執行。</li>
 </ul>
 
-<hr />
+<h2 id="非同步asynchronous">非同步（Asynchronous）</h2>
 
-<p><strong>lambda</strong></p>
+<ul>
+  <li>指程式不須等待前面的程式執行完就能執行。</li>
+</ul>
 
-<p>我其實覺得就是定義 funciton，只是是定義一些簡單，可以一行完成的 funciton。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳輸入的變數 + 1</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="c"># 上面的 func 其實就等於</span>
-<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<p><strong>note</strong></p>
+<ul>
+  <li>
+    <p>執行緒（thread）：執行緒是比程序（process）更小的單元，它是 CPU 的最小執行單元。是作業系統能夠進行運算排程的最小單位。一個程序（process），至少包含一個或多個執行緒。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+  <li>
+    <p>單執行緒：單執行的特性是<strong>順序執行</strong>，當遇到比較耗時的任務時，還未執行的任務就會處於等待狀態，一定要等到前面的任務完成了，才會往後執行。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+</ul>
 
+<p>因為 JavaScript 是以單執行緒且同步的方式去執行，它在執行程式碼的時候會按照順序將程式碼片段在堆疊中（stack）執行，而且一次只會執行一個程式碼片段（one thing at a time），只是當碰到非同步（Asynchronous）的任務時，會把它往後放，放到事件佇列(Event Queue)中，等所有的任務完成後才會回來執行。以下面程式碼為例，</p>
 
-<span class="c"># 輸入兩個變數</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-
-
-<span class="c"># 含 if</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">False</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-</code></pre></div></div>
-<hr />
-
-<p><strong>filter(function, sequence)</strong></p>
-
-<p>對 sequence 中的 item 依序執行 function(item)，然後將執行結果為 True 的 item 組成一個 list/string/tuple（與 sequence 類型相同）回傳。
-這時候 function 可以使用 lambda 定義或是平常的 def 定義。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳是數字，除 0 外都是 True</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
-<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
-
-<span class="c"># function 為 def</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
-<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
-
-<span class="c"># function 為 lambda</span>
-<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
-<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
-
-</code></pre></div></div>
-<hr />
-
-<p><strong>map(function, sequence)</strong></p>
-
-<p>對 sequence 中的 item 依序執行 function(item)，執行結果以 list 回傳。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># funciton 只有一個參數</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<span class="c"># 每次都回傳 1</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
-
-
-<span class="c"># function 有兩個參數</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
-</code></pre></div></div>
-<hr />
-
-<p><strong>reduce(function, sequence, starting_value)</strong></p>
-
-<p>對 sequence 中的 item 順序迭代調用 function，最後回傳一個值。</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span> <span class="c"># 在 python3 是必須的</span>
-
-<span class="c"># 求 list 的和</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// setTimeout(callbackFunction, timeToDelay)</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'b'</span><span class="p">);</span>
 </code></pre></div></div>
 
+<p>印出來的結果會是</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b
+a
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">setTimeout</code> 是一個非同步的 Web API，JavaScript 執行到這段的時候會將 <code class="highlighter-rouge">setTimeout</code> 放到 Event Queue 中等待，等 stack 中的任務都執行完才回來執行，所以會先印出<code class="highlighter-rouge">b</code>再印<code class="highlighter-rouge">a</code>。</p>
+
 <hr />
-<p>Reference:
+
+<h2 id="callback">Callback</h2>
+
+<p>callback 是 javascript 中很常見的一種使用方式，它讓函式可以當成參數傳進另一個參數中使用，讓我們可以控制程式碼的流程。看以下範例，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This test function is done.</span>
+<span class="c1">// This is main end.</span>
+</code></pre></div></div>
+
+<p>但其實更多時候 callback 會牽扯到非同步 API 的狀況，像是下面的例子，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
+    <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This is main end.</span>
+<span class="c1">// This test function is done.</span>
+</code></pre></div></div>
+
+<p>這次<code class="highlighter-rouge">callback()</code>因為會有等待的情況，所以後面的 “This is main end.” 先被執行完。那假如想要<code class="highlighter-rouge">callback()</code>執行完才執行下一行該怎麼做呢？（譬如說，這個<code class="highlighter-rouge">callback()</code>在做的是使用<code class="highlighter-rouge">XMLHttpRequest()</code>送 request 給某個網頁，而下面的程式碼必須等待網頁的 response 才可以執行下面的程式碼。）這時候只要把，執行 “This is main end.” 這行程式碼也當成 callback() 傳進去就行了。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">callback2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
+    <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+        <span class="nx">callback2</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This test function is done.</span>
+<span class="c1">// This is main end.</span>
+</code></pre></div></div>
+
+<p>所以 callback 可以用來解決非同步的問題，但是當 callback 越來越多，就會形成 <code class="highlighter-rouge">callback hell</code>，就像是下面這樣，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">api1</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Done with api1"</span><span class="p">);</span>
+        <span class="nx">callback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">api2</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Done with api2"</span><span class="p">);</span>
+        <span class="nx">callback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">api1</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">api2</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"All function is done."</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// "Done with api1"</span>
+<span class="c1">// "Done with api2"</span>
+<span class="c1">// "All function is done."</span>
+</code></pre></div></div>
+
+<p>甚至變成</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">api1</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">api2</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">api3</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">api4</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="c1">// bla bla bla</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="promise">Promise</h2>
+
+<p>Promise 也是一個可以用來處理非同步操作的東西。Promise 通常包括三種狀態：<code class="highlighter-rouge">resolve</code>、<code class="highlighter-rouge">reject</code>和<code class="highlighter-rouge">pending</code>。<code class="highlighter-rouge">resolve</code>代表成功，<code class="highlighter-rouge">rejetc</code>代表失敗，<code class="highlighter-rouge">pending</code>代表還在處理中, 結束狀態未知。<code class="highlighter-rouge">then()</code>方法可以回傳<code class="highlighter-rouge">Promise</code>物件。</p>
+
+<p>例如，現在想要使用<code class="highlighter-rouge">XMLHttpRequest()</code> API傳送 request，我們需要等待 response 後才有後續動作。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="s2">"https://www.google.com/"</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s2">"document"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+
+	<span class="c1">// 如果沒等待 response，status 和 response 會是 0 和 null</span>
+	<span class="c1">// console.log(xhr.status);</span>
+	<span class="c1">// console.log(xhr.response);</span>
+
+	<span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+	<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">sendHttp</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">then()</code> 其實是可以一直往後加，就是像<code class="highlighter-rouge">callback</code>，想要前面的事情做完，才做下面，形成 Promise Chain，但這樣就又會變成 then hell。所以這時候出現了 async 和 await，讓程式碼看起來更容易閱讀。</p>
+
+<hr />
+
+<h2 id="asyncawait">Async/Await</h2>
+
+<p>async/await 還是會用到 promise，但不使用 then 去啟動。像剛剛上面的例子，可以改寫成下面這樣，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="s2">"https://www.google.com/"</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s2">"document"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+
+	<span class="kr">await</span> <span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+	<span class="c1">// 如果需要更多 sleep(2000)</span>
+	<span class="c1">// await sleep(2000);</span>
+		
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">sendHttp</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>在<code class="highlighter-rouge">sendHttp()</code>這個 function 前加上 async，並在<code class="highlighter-rouge">sleep(2000)</code>前加上 await 就好，整體畫面看起來是不是容易閱讀很多？如果需要更多的<code class="highlighter-rouge">sleep(2000)</code>，只需要多加 await 往下寫就好，整個畫面看起來容易閱讀很多。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
 <br />
-<a href="https://www.cnblogs.com/longdouhzt/archive/2012/05/19/2508844.html">Python特殊语法：filter、map、reduce、lambda [转]</a></p>
+<a href="https://medium.com/@hyWang/%E9%9D%9E%E5%90%8C%E6%AD%A5-asynchronous-%E8%88%87%E5%90%8C%E6%AD%A5-synchronous-%E7%9A%84%E5%B7%AE%E7%95%B0-c7f99b9a298a">非同步(Asynchronous)與同步(Synchronous)的差異</a>
+<br />
+<a href="https://hsiangfeng.github.io/javascript/20191209/1271823341/">世界上誤解最大的語言 JavaScript 之 JS 到底是同步與非同步語言?!</a>
+<br />
+<a href="https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html">[筆記] 理解 JavaScript 中的事件循環、堆疊、佇列和併發模式（Learn event loop, stack, queue, and concurrency mode of JavaScript in depth）</a>
+<br />
+<a href="https://yu-jack.github.io/2018/07/22/promise/">callback, promise, async/await 使用方式教學以及介紹 Part I</a></p>
+
  -->
-    <div class="post-excerpt"><ul>
-  <li>lambda 可以直接定義一些簡單的 funciton。</li>
-  <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
-</ul>
+    <div class="post-excerpt"><p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -301,8 +455,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/02/27/Python-filter-map-reduce-lambd/#disqus_thread';
-        this.page.identifier = '/python/2019/02/27/Python-filter-map-reduce-lambd/';
+        // this.page.url = '/blog//javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/#disqus_thread';
+        this.page.identifier = '/javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -315,7 +469,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2019/02/27/Python-filter-map-reduce-lambd/#disqus_thread" data-disqus-identifier="/python/2019/02/27/Python-filter-map-reduce-lambd/">0 Comments</a>
+        <a href="/blog//javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/#disqus_thread" data-disqus-identifier="/javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/">0 Comments</a>
       </span>
 
     </div>
@@ -324,209 +478,178 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/">
-        [Machine Learning]Reinforcement Learning
+      <a href="/blog/javascript/2020/12/03/javascript-Traversing-the-DOM/">
+        [javascript]Traversing the DOM
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 25, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2020</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 25, 2019</span>
+      <span class="post-date">December 3, 2020</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        <a target="_blank" href="/blog/category/#javascript">javascript</a>
         
       
     </span>
 
 
     </div>
-    <!-- <h3 id="複習">複習</h3>
+    <!-- <p>整理 Treehouse 前端課程中 <a href="https://teamtreehouse.com/library/javascript-and-the-dom-2">JavaScript and the DOM</a> 的最後一節 Traversing the DOM 內容。</p>
 
-<p><strong>機器學習可以被分為三大類：</strong></p>
-<ul>
-  <li>
-    <p>Supervised Learning:
-<br />
-Learn to generalize and classify new data based on <em>labelled</em> training data. 像是 regression 和 classification 就屬於 Supervised Learning。</p>
-  </li>
-  <li>
-    <p>Unsupervised Learning:
-<br />
-Discover structure and relationships in complex high-dimensional data. 像是 cluster。</p>
-  </li>
-  <li>
-    <p>Reinforcement Learning:
-<br />
-Generate policies/strategies that lead to a (possibly delayed) reward. Learn by interacting with the environment! 和人類學習的過程很像，會根據環境而行動，並做調整（像是學騎腳踏車）。這篇主要就是要介紹 Reinforcement Learning。</p>
-  </li>
-</ul>
+<p>DOM Traversal 的意思是，可以透過一個 element 與這個 element 的關係去選取其他的 element。</p>
 
 <hr />
 
-<p><strong>Reinforcement Learning 可以做什麼？</strong></p>
+<h2 id="parentnode">parentNode</h2>
+
 <ul>
-  <li>2016 年 <a href="https://zh.wikipedia.org/wiki/AlphaGo">AlphaGo</a> 擊敗世界棋王使用的就是 Reinforcement Learning</li>
-  <li><a href="https://www.youtube.com/watch?v=W_gxLKSsSIE">Robot Learns to Flip Pancakes</a></li>
-  <li>pole balancing</li>
+  <li><strong>parentNode</strong>：顧名思義，選取被選取的 element 的 parent node。</li>
 </ul>
 
-<p><strong>Differences to other methods</strong></p>
-<ul>
-  <li>Difference to supervised learning
-    <ol>
-      <li>Time! Reinforcement Learning 的學習時間會比 Supervised Learning 費時（當然要有缺點，不然大家幹嘛還要用 Supervised Learning），所以如果有 labels 通常還是會選用 Supervised Learning，但當事前沒有 labels，不知道結果的時候就可以使用 Reinforcement Learning。</li>
-      <li>Can become better than the system designer, unlike a supervised system that can never become better than the teacher. 因為 Supervised Learning 是根據 system designer 給的 labels 下去計算，但 Reinforcement Learning 是機器自己學習所獲得的結果，就像是，雖然教練教學生打球，但學生的學習成果可能比教練還好。</li>
-      <li>Feedback is usually not immediate but is given after many actions - delayed feedback! 像是下棋，要等到結果贏或輸才會知道是得到 positive reward 還是 negative reward。</li>
-      <li>Feedback is given as a scalar reward, not as the correct action to make. Supervised Learning 的 feedback 是結果是否正確，但 Reinforcement Learning 得到的 feedback 是 reward（can be positive or negative）。</li>
-    </ol>
-  </li>
-  <li>Difference to control theory
-    <ol>
-      <li>No physical model of the world, e.g., in pole balancing</li>
-    </ol>
-  </li>
-</ul>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 id 為 myParagraph 的 node</span>
+<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="s1">'myParagraph'</span><span class="p">);</span> 
 
-<p><strong>機器怎麼學？</strong></p>
+<span class="c1">// 使用 paragraph 選取它的 parent node</span>
+<span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">paragraph</span><span class="p">.</span><span class="nx">parenNode</span><span class="p">;</span> 
 
-<p>不像 Supervised Learning 有 lable 可以知道結果是正確還是錯誤， Reinforcement Learning 的學習方法是透過 reward 來知道學習結果正確或不正確（就像是狗狗學習技能，如果做對了就給東西吃一樣）。所以透過打分數的結果來知道怎麼樣的行為是正確的而進行調整，往正確的學習道路邁進。（所以每次學習結果所獲得的 reward 就變得有點像是 Supervised Learning 的 labels 的感覺，只是這個 labels 是從學習的過程中獲得的）</p>
+<span class="c1">// 可以直接利用這個 parent node 做些事</span>
+<span class="nx">parent</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">paragraph</span><span class="p">);</span> <span class="c1">// 刪除 paragraph node</span>
+</code></pre></div></div>
 
 <hr />
 
-<h2 id="reinforcement-learning-如何進行">Reinforcement Learning 如何進行？</h2>
+<h2 id="previouselementsibling--insertbefore">previousElementSibling &amp; insertBefore</h2>
 
-<p><img src="http://localhost:4000/blog/img/posts/reinforcement%20learning.png" alt="reinforcement learning.png" height="380px" width="600px" /></p>
+<ul>
+  <li><strong>previousElementSibling</strong>：選取被選取的 element 前一個的 sibling。</li>
+  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
+</ul>
+
+<p><strong>previousSibling v.s. previousSibling</strong></p>
+
+<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
+
+<p>在課程的範例中，現在想要按了 Up 按鈕之後，該 &lt;li&gt; 就會上移。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>grapes 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>amethyst 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>lavender 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>plums 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+
+<span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'up'</span><span class="p">)</span> <span class="p">{</span>
+  	<span class="c1">// 被 click 的 button 的 parent node 就是 li</span>
+    <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
+    <span class="c1">// 被選取的 li tag 的 previous element sibiling，也就是前一個 li tag</span>
+    <span class="kd">let</span> <span class="nx">prevLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">previousElementSibling</span><span class="p">;</span> 
+    <span class="c1">// 這個 li 的 parent node</span>
+    <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
+    <span class="c1">// 如果 prevLi 不是 null，換句話說，不是第一個</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">prevLi</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 將被選取的 li tag 往前移</span>
+      <span class="nx">ul</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">li</span><span class="p">,</span> <span class="nx">prevLi</span><span class="p">);</span> 
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+</code></pre></div></div>
 
 <hr />
 
-<p><strong>Reinforcement Learning 問題的基本設定</strong></p>
+<h2 id="nextelementsibling--insertbefore">nextElementSibling &amp; insertBefore</h2>
 
-<p>&lt;A, S, R, P&gt;</p>
-<ul>
-  <li>Action space : A</li>
-  <li>State space : S</li>
-  <li>Reward: R : S × A × S → R</li>
-  <li>Transition : P :S × A → S</li>
-</ul>
+<p>按了 down button 之後，該 li 往下移。基本上概念和剛剛上面往前一是一樣的，只是現在使用 nextElementSibling，去選取後面的 element。</p>
 
-<p>A 代表的是 Agent 的所有動作（action）；S 是 state，是 Agent 所能感知的狀態； R 是 reward 代表獎勵或懲罰，是一個實數；P 是 Agent 所交互的世界，也被稱為 model。</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>grapes 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>amethyst 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>lavender 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li&gt;</span>plums 
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"up"</span><span class="nt">&gt;</span>Up<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"down"</span><span class="nt">&gt;</span>Down<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"remove"</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
 
-<p>根據上圖（<a href="https://www.slideshare.net/yenlung/reinforcement-learning-90737484">Source</a>），電腦是 agent，地球代表 environment（環境），reward（獎勵）是環境所提供的反饋，reward 由模型設計者定義，可以是 positive 或是 negative，reward 的定義對強化學習來說是個很重要的一環。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
 
-<p><strong>Policy</strong></p>
-
-<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 <script type="math/tex">\pi</script>，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
-
-<ul>
-  <li>stochastic policy: <script type="math/tex">\pi(a\mid s),~ and \sum\pi(a\mid s) = 1</script></li>
-  <li>deterministic policy: <script type="math/tex">\pi(s)</script></li>
-</ul>
-
-<p><strong>Reward</strong></p>
-
-<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 <script type="math/tex">s_0</script>，agent 做了 <script type="math/tex">a_0</script> 的 action，這時候產生了一個 reward <script type="math/tex">r_1</script>，然後因為剛剛的 <script type="math/tex">a_0</script> 這時候 state 來到 <script type="math/tex">s_1</script>，而 agent 要採取下一步 <script type="math/tex">a_1</script> 的時候就會根據剛剛的 <script type="math/tex">r_1</script> 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/reward.jpg" alt="reward.jpg" height="120px" width="800px" /></p>
-
-<p>但其實並不是所有的學習都會像這個例子一樣立即獲得 reward，像下棋就會是整局結束後才得到 reward。</p>
-
-<p>另外，需要注意的是，Reward <script type="math/tex">\ne</script> Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
-
-<hr />
-
-<p>總結來說，<em>Reinforcement Learning 的目標就是找到一個最佳的 Policy（策略），讓最後平均的 reward 最大！</em></p>
-
-<p>所以現在問題就來了，<em>要如何衡量這個 policy 好不好？哪些 policies 是我們想要 explore 的？</em></p>
-
-<hr />
-
-<h2 id="value-function">Value function</h2>
-
-<p><strong>Value function - How good is a policy?</strong></p>
-
-<p>定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。</p>
-
-<p><script type="math/tex">V_\pi(s)</script> 表示的是策略 <script type="math/tex">\pi</script>，狀態 s 的長期期望收益。<script type="math/tex">Q_\pi(s, a)</script> 是策略 <script type="math/tex">\pi</script> 在狀態 s 下，採取動作 a 的長期期望收益。</p>
-
-<ul>
-  <li>
-    <p>長期回報期望：<script type="math/tex">% <![CDATA[
-G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （因為 <script type="math/tex">\gamma</script> 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
-  </li>
-  <li>
-    <p>Value function：<script type="math/tex">V_\pi(s) = E_\pi[G_t\mid S_t = s]</script></p>
-  </li>
-  <li>
-    <p>Q function：<script type="math/tex">Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]</script></p>
-  </li>
-</ul>
-
-<p><strong>How to learn V(s)?</strong></p>
-
-<ul>
-  <li>
-    <p>Monte Carlo approach</p>
-  </li>
-  <li>
-    <p>Temporal Difference approach</p>
-  </li>
-</ul>
-
-<p><strong>Summary</strong></p>
-<ul>
-  <li>For a given policy, the value (expected reward) V(s) of each state is unknown before we learn it by interacting with the environment.</li>
-  <li>V(s) is found iteratively, starting for example with V(s)←0, using the Monte Carlo or Temporal Difference methods.</li>
-  <li>The Temporal Difference method generally converges much faster.</li>
-</ul>
+<span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'down'</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">nextLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">nextLi</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ul</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">nextLi</span><span class="p">,</span> <span class="nx">li</span><span class="p">);</span>
+    <span class="p">}</span>    
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
 
 <hr />
 
-<h2 id="q-learning">Q-Learning</h2>
+<h2 id="children">children</h2>
 
-<p><strong>Which policies should we explore?</strong></p>
+<p><code class="highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
 
-<p>上面介紹了 V(s) 是狀態 s 的長期期望收益，那 agent 要如何決定根據它來決定要做什麼 action 採取什麼 policies 呢？這時候我們就會加上 action 這個變數來看，也就是上面提到的 Q(s, a)。</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
 
-<ul>
-  <li><script type="math/tex">V^*(s) = \max_{a} Q(s_{k+1}, a)</script> denote the value function for the optimal policy</li>
-  <li><script type="math/tex">Q(s, a)</script> is expected future reward of doing action a in state s and then following the optimal policy <script type="math/tex">Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})</script></li>
-  <li><script type="math/tex">Q(s, a)</script> 未知，必須透過學習得到。</li>
-</ul>
-
-<p><script type="math/tex">Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))</script>, <script type="math/tex">\eta</script> is learning rate</p>
-
-<p><a href="https://blog.csdn.net/itplus/article/details/9361915">這篇文章</a>翻譯了這個<a href="http://mnemstudio.org/path-finding-q-learning-tutorial.htm">原文</a>，我覺得非常好理解。但要整篇整理在這裡太麻煩了，所以自己看吧。</p>
-
+<span class="c1">// lisUl 底下的 child，也就是 li tag</span>
+<span class="kd">const</span> <span class="nx">lis</span> <span class="o">=</span> <span class="nx">listUl</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+</code></pre></div></div>
 <hr />
 
-<p>Reference:
-<br />
-Linköping University Neural Networks and Learning Systems TBMI26 / 732A55 2019 Lectures.
-<br />
-<a href="https://zhuanlan.zhihu.com/p/25239682">深度强化学习（Deep Reinforcement Learning）入门：RL base &amp; DQN-DDPG-A3C introduction</a>
-<br />
-<a href="https://zh.wikipedia.org/wiki/强化学习">wikipedia - 強化學習</a>
-<br />
-<a href="https://www.slideshare.net/yenlung/reinforcement-learning-90737484">強化學習 Reinforcement Learning</a>
-<br />
-<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/">莫凡python</a>
-<br />
-<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-reinforcement-learning-強化學習-dqn-實作atari-game-7f9185f833b0">[機器學習 ML NOTE] Reinforcement Learning 強化學習(DQN原理)</a>
-<br />
-<a href="https://www.zhihu.com/question/26408259">如何用简单例子讲解 Q - learning 的具体过程？</a>
-<br />
-<a href="https://blog.csdn.net/itplus/article/details/9361915">A Painless Q-learning Tutorial (一个 Q-learning 算法的简明教程)</a></p>
+<h2 id="firstchild--lastchild-vs-firstelementchild--lastelementchild">firstChild &amp; lastChild v.s. firstElementChild &amp; lastElementChild</h2>
+
+<p>選取該 element 的第一個或最後一個 child。同樣的，firstElementChild &amp; lastElementChild 選取的會是 element。</p>
 
  -->
-    <div class="post-excerpt"><h3 id="複習">複習</h3>
+    <div class="post-excerpt"><p>整理 Treehouse 前端課程中 <a href="https://teamtreehouse.com/library/javascript-and-the-dom-2">JavaScript and the DOM</a> 的最後一節 Traversing the DOM 內容。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -546,8 +669,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/';
+        // this.page.url = '/blog//javascript/2020/12/03/javascript-Traversing-the-DOM/#disqus_thread';
+        this.page.identifier = '/javascript/2020/12/03/javascript-Traversing-the-DOM/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -560,7 +683,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/">0 Comments</a>
+        <a href="/blog//javascript/2020/12/03/javascript-Traversing-the-DOM/#disqus_thread" data-disqus-identifier="/javascript/2020/12/03/javascript-Traversing-the-DOM/">0 Comments</a>
       </span>
 
     </div>
@@ -569,15 +692,751 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">
-        [Machine Learning]Covolutional Neural Networks(CNN)(1)
+      <a href="/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">
+        [HTML]文件物件模型（Document Object Model）
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 25, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on November 13, 2020</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 25, 2019</span>
+      <span class="post-date">November 13, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#HTML">HTML</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h3 id="dom-是什麼">DOM 是什麼？</h3>
+
+<p>DOM 是 Document Object Model（文件物件模型）的縮寫，它是 HTML、XML 和 SVG 文件的程式介面（programming interface）；可以理解成 DOM 是文件和程式溝通的橋樑、介面，也可以說，DOM 是針對 HTML、XML 和 SVG 提供的一個 API，為了讓程式（ex. JavaScript）能夠操作文件的內容。DOM 將文件（HTML、XML 和 SVG）用樹狀結構表示（如下圖），樹中的每一個節點（node）皆為物件（object），DOM 定義了一些方法讓程式可以存取這些的節點（node）/ 物件（object）並改變文件架構、風格（CSS）和內容。</p>
+
+<p><strong><a href="https://teamtreehouse.com/library/what-is-the-dom">Treehouse 的課程</a>這樣解釋：</strong></p>
+<ul>
+  <li>The DOM is a represenation (map) of a webpage that JavaScript can use.</li>
+  <li>The DOM represents a web page as a tree-like structure.</li>
+</ul>
+
+<p>另外，寫網頁的時候常使用 JavaScript 來存取 DOM，但 DOM 並不屬於 JavaScript 語言的一部分，只是我們常用 JavaScript 去存取 DOM，換句話說，JavaScript 可以用其他語言取代，只是不常見。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/DOM%20tree.png" alt="DOM tree.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://teamtreehouse.com/library/what-is-the-dom">The DOM represents a web page as a tree-like structure</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/DOM.gif" alt="" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://ithelp.ithome.com.tw/articles/10202689">Example of DOM hierarchy in an HTML document</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="為什麼需要-dom">為什麼需要 DOM？</h3>
+
+<p>為的是要讓不同的瀏覽器有一樣的文件物件模型標準，否則我們現在就都得針對不同的瀏覽器個別寫程式碼了。而這個標準是由 <a href="https://zh.wikipedia.org/wiki/%E4%B8%87%E7%BB%B4%E7%BD%91%E8%81%94%E7%9B%9F">W3C</a>（全球資訊網協會）所定義的。</p>
+
+<hr />
+
+<h3 id="dom-解析">DOM 解析</h3>
+
+<p>DOM 的樹狀結構中最重要的就是<strong>節點</strong>（<strong>node</strong>），而節點可以分為下列四種（以 HTML 為例，看上圖）：</p>
+
+<ul>
+  <li>
+    <p><strong>Document</strong>：Document 就是指這整份文件，就是這份 HTML 檔的開端，所有的 nodes 都會從 Document 開始往下。</p>
+  </li>
+  <li>
+    <p><strong>Element</strong>：Element 是指文件內的各個標籤，像是 <code class="highlighter-rouge"><span class="nt">&lt;html&gt;</span></code>、<code class="highlighter-rouge">&lt;body&gt;</code>、<code class="highlighter-rouge">&lt;div&gt;</code>、<code class="highlighter-rouge">&lt;p&gt;</code> 等等各種 HTML Tag 都被歸類在 Element。</p>
+  </li>
+  <li>
+    <p><strong>Attribute</strong>：Attribute 是指各個標籤內的相關屬性，像是 <code class="highlighter-rouge">name</code>、<code class="highlighter-rouge">class</code>、<code class="highlighter-rouge">href</code> 等等都是被歸類在 Attribute。</p>
+  </li>
+  <li>
+    <p><strong>Text</strong>：Text 是指被各個標籤包起來的文字，像是 <code class="highlighter-rouge">&lt;h1&gt;Hi&lt;/h1&gt;</code> 中， Hi 被 <code class="highlighter-rouge">&lt;h1&gt;</code> 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="api--dom--javascript">API = DOM + JavaScript</h3>
+
+<p>這邊介紹一些常見的 DOM API，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'idName'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'tagName'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'className'</span><span class="p">);</span>
+
+<span class="c1">// selector 可以是 id:#idName, class:.className, tag:tagName, or CSS pseudo-class</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span> 
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="補充bom--window">補充：BOM &amp; window</h3>
+
+<p><strong>BOM</strong> 是 Browser Object Model（瀏覽器物件模型）的縮寫。DOM 是文件和程式溝通的接口，BOM 則是和瀏覽器溝通的接口。像是跳轉到其他頁面、螢幕大小的參數等等可以操作的方法或屬性。</p>
+
+<p>同樣的 BOM 也有很多屬於它的 object，像是 <code class="highlighter-rouge">location</code>，下面這個程式碼可以讓瀏覽器跳轉到另一個頁面：</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"http://www.xxxx.com"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>而 <strong>windows</strong> 也是 <strong>BOM</strong> 的一個 object。「關閉視窗」可以這樣寫，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://ithelp.ithome.com.tw/articles/10202689">Day03-深入理解網頁架構：DOM</a>
+<br />
+<a href="https://www.wibibi.com/info.php?tid=379">W3C DOM</a>
+<br />
+<a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Document_Object_Model">文件物件模型 (DOM)</a>
+<br />
+<a href="https://www.fooish.com/javascript/dom/">JavaScript DOM (Document Object Model)</a>
+<br />
+<a href="https://www.zhihu.com/question/33453164">DOM, DOCUMENT, BOM, WINDOW 有什么区别?</a></p>
+
+ -->
+    <div class="post-excerpt"><h3 id="dom-是什麼">DOM 是什麼？</h3>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/#disqus_thread';
+        this.page.identifier = '/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/#disqus_thread" data-disqus-identifier="/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/javascript/node.js/2020/07/27/node.js-callback/">
+        [node.js]非同步（Asynchronous）、同步（Synchronous）、callback
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 27, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 27, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#javascript">javascript</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#node.js">node.js</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>簡單介紹 node.js 裡重要的「非同步（Asynchronous）」概念，那既然有「非同步（Asynchronous）」當然就會有「同步（Synchronous）」，以及因為「非同步（Asynchronous）」而衍伸出的重要 callback 概念。</p>
+
+<hr />
+
+<p>Node.js 是一個<strong>單執行緒</strong>且非同步的語言。</p>
+
+<p><strong>note</strong></p>
+<ul>
+  <li>
+    <p>執行緒：執行緒是比程序更小的單元，它是 cpu 的最小執行單元。是作業系統能夠進行運算排程的最小單位。一個程序，至少包含一個或多個執行緒。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+  <li>
+    <p>單執行緒：單執行的特性是<strong>順序執行</strong>，當遇到比較耗時的任務時，還未執行的任務就會處於等待狀態，一定要等到前面的任務完成了，才會往後執行。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+</ul>
+
+<p><strong>Asynchronous（非同步）&amp; Event queue（事件佇列）</strong></p>
+
+<p>以上提到，單執行緒「還未執行的任務就會處於等待狀態」，所謂的「未執行任務」必須要是<strong>非同步（Asynchronous）</strong>function 才行，而「等待狀態」是指那些任務會被放到 Event queue，而 Event queue 的事件在所有事件完成前不會被執行。簡單的說，程式碼一行一行執行，當遇到<strong>非同步（Asynchronous）</strong>function 時，就會先執行下一行的任務，而這個還未被執行的<strong>非同步（Asynchronous）</strong>function 就會被放到 Event queue 中等到最後才執行。</p>
+
+<hr />
+
+<h3 id="同步synchronous">同步（Synchronous）</h3>
+
+<ul>
+  <li>指程式必須等待前面的程式執行完才能執行。</li>
+</ul>
+
+<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
+
+<h3 id="非同步asynchronous">非同步（Asynchronous）</h3>
+
+<ul>
+  <li>指程式不須等待前面的程式執行完就能執行。</li>
+</ul>
+
+<p>下面舉一個常見的非同步 function，<strong>setTimeout()</strong>（第一個參數為時間到時要被執行的函式，第二個參數為要延遲的時間（毫秒）），setTimeout() 會在第二個參數的延遲時間後執行第一個參數的函式。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Timer is done!'</span><span class="p">)</span>
+<span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>以上程式碼印出來的結果會是，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
+Hi
+Timer is done!
+</code></pre></div></div>
+
+<p>因為 setTimeout() 裡的任務被放到 Event queue 中了，必須等到下面兩行程式碼跑完才接著跑 setTimeout() 裡的東西。</p>
+
+<h3 id="callback">callback</h3>
+
+<p>但假如果我們現在就是想要讓程式執行完，才接著下一個任務該怎麼辦呢？所以這時候有了 <strong>callback</strong>。</p>
+
+<p>callback 讓我們把一個函式丟進另一個函式當參數，讓我們可以控制程式碼的流程。先看一個簡單的範例，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callbackSleepWorker</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im wake up !'</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im first.'</span><span class="p">)</span>
+  <span class="nx">callbackWorker</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackSleepWorker</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>這個結果會先印出 ‘OK, Im first.’ 接著再印出 ‘OK, Im wake up !’。</p>
+
+<p>上面這個例子大概還看不太出來為什麼需要 callback，如果現在這個函式是個非同步函式呢？</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">money</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">function</span> <span class="nx">slower</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">money</span> <span class="o">=</span> <span class="mi">30</span>
+  <span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+  <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">slower</span><span class="p">()</span>
+<span class="nx">faster</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>以上程式碼印出來的會是：I have null。</p>
+
+<p>明明是先跑了 slower() 但 money 卻沒先被負值，這是因為 setTimeout() 是個非同步 function，所以它會先被放到 event queue 中，faster() 就先執行了。那如果我們現在想要讓 slower() 百分之百先執行可以怎麼做呢？</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">money</span> <span class="o">=</span> <span class="kc">null</span>
+<span class="kd">function</span> <span class="nx">slower</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">money</span> <span class="o">=</span> <span class="mi">30</span>
+    <span class="nx">callbackWorker</span><span class="p">()</span>
+  <span class="p">},</span> <span class="mi">200</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+  <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">slower</span><span class="p">(</span><span class="nx">faster</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>這時候印出來的結果就會是：I have 30</p>
+
+<p>現在有個任務是，讀檔案並計算長度</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+
+<span class="c1">// fs.readFile(filename, callback(err, content))</span>
+
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'finish'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'not finish'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>本來 readFile() 這個 function 會先被放到 event queue 裡，然後接著印出 ‘not finish’，但我們現在把要讀檔案這個任務放在 callback 裡，所以變成只要讀完檔案就會立刻執行，’not finish’ 會等到檔案讀完才會進行。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://medium.com/@Whien/js20min-day-18-關於回呼生活化-callback-1a112db1a788">JS20min Day — 18 關於回呼生活化 (Callback)</a>
+<br />
+<a href="https://larry850806.github.io/2016/06/16/nodejs-async/">[Node.js] 理解 Node.js 事件驅動</a>
+<br />
+<a href="https://blog.techbridge.cc/2019/10/05/javascript-async-sync-and-callback/">JavaScript 中的同步與非同步（上）：先成為 callback 大師吧！</a>
+<br />
+<a href="https://wcc723.github.io/javascript/2017/12/07/javascript-event-queue/">鐵人賽：一次只能做一件事情的 JavaScript</a>
+<br />
+<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">JavaScript 核心篇 學習筆記: Chap.15–執行緒與同步/非同步</a></p>
+
+ -->
+    <div class="post-excerpt"><p>簡單介紹 node.js 裡重要的「非同步（Asynchronous）」概念，那既然有「非同步（Asynchronous）」當然就會有「同步（Synchronous）」，以及因為「非同步（Asynchronous）」而衍伸出的重要 callback 概念。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//javascript/node.js/2020/07/27/node.js-callback/#disqus_thread';
+        this.page.identifier = '/javascript/node.js/2020/07/27/node.js-callback/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//javascript/node.js/2020/07/27/node.js-callback/#disqus_thread" data-disqus-identifier="/javascript/node.js/2020/07/27/node.js-callback/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/neural%20network/2020/02/13/Neural-Network-Neural-Network-3/">
+        [Neural Network]Neural Network 3 - Backpropagation
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 13, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 13, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://shihs.github.io/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">前面</a>介紹了 neural network 使用 Gradient descent 來找 cost function 的最小值，那這篇要來介紹 neural network 如何使用 <strong>Backpropagation</strong> 這個演算法讓 neural network 訓練過程中更有效率。</p>
+
+<p>這篇是<a href="https://www.youtube.com/watch?v=IHZwWFHWa-w&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=2">Neural networks</a>的課程筆記。另外，覺得李宏毅老師的<a href="https://www.youtube.com/watch?v=ibJpTrp5mcE">課程</a>也講解的很清楚，所以我會搭配老師的課程內容。李宏毅老師和主要課程使用的符號不太ㄧ樣，但我還是使用他們原本各自的符號。</p>
+
+<hr />
+
+<h3 id="gradient-descent">Gradient Descent</h3>
+
+<p>Gradient descent 的目的是要找到 neural network 的 parameters 的最佳解。</p>
+
+<p>Network parameters: 
+<script type="math/tex">\theta = {\{w_1, w_2,..., b_1, b_2,...\}}</script></p>
+
+<p>Gradient: 
+<script type="math/tex">\nabla L(\theta) = \begin{bmatrix}
+    \partial L(\theta)/\partial w_1 \\
+    \partial L(\theta)/\partial w_2 \\
+    \vdots \\
+    \partial L(\theta)/\partial b_1 \\
+    \partial L(\theta)/\partial b_2 \\
+    \vdots 
+\end{bmatrix}</script></p>
+
+<p>初始 parameters: <script type="math/tex">\theta^0</script>，計算 <script type="math/tex">\nabla L(\theta^0)</script>，則 <script type="math/tex">\theta^1 = \theta^0 - \eta \nabla L(\theta^0)</script>，接著可以再繼續算出 <script type="math/tex">\theta_2, \theta_3...</script></p>
+
+<p>在 neural network 裡 Gradient 的最大問題就是，neural network 有太多的參數，所以這裡我們要介紹的 Backpropagation 就是一個比較有效的計算 Gradient 的演算法。也就是說，Backpropagation 基本上就是 Gradient Descent，但是是一個有效率的演算法。</p>
+
+<hr />
+
+<p>前面我們舉的例子是手寫辨識，input 加上兩層的 hideen layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
+
+<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 outpu，中間是兩層的 hidden layer，所以 cost function 可以寫成，<script type="math/tex">C(w_1, b_1, w_2, b_2, w_3, b_3)</script></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/simple%20neural%20network.png" alt="" /></p>
+
+<p>為了說明 Backpropagation 現在我們再把範圍縮小到最後一層的 hidden layer 和 output，如下圖。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Backpropagation.png" alt="" /></p>
+
+<p>我們令最後的 output 為 <script type="math/tex">a^{(L)}</script> 表示它是在第 L 層，而 hidden layer 為  <script type="math/tex">a^{(L-1)}</script> 表示在第 L-1 層，所以上標就只是用來表達它們各自在哪一層而已。</p>
+
+<p>在 <script type="math/tex">a^{(L-1)}</script> 後的 <script type="math/tex">y</script> 是我們期望的輸出結果，我們希望 <script type="math/tex">y=1</script>，也就是說，這裡的 cost 值會是，</p>
+
+<script type="math/tex; mode=display">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+
+<p>以上圖的例子就會是，<script type="math/tex">(0.66 - 1)^2</script></p>
+
+<p>接著我們來看每一個神經元的值。根據前面學過的，我們知道每一個神經元都是由前面的 weight 和 bias 算出來了，也就是說</p>
+
+<script type="math/tex; mode=display">a^{(L)} = \sigma (w^{(L)} a^{(L-1)} + b^{(L)})</script>
+
+<p>那為了方便，我們把 sigmoid function 裡的式子用一個符號表示，</p>
+
+<script type="math/tex; mode=display">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+
+<p>而 <script type="math/tex">a^{(L)}</script> 就可以寫成，</p>
+
+<script type="math/tex; mode=display">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script>
+
+<hr />
+
+<p>我們現在有了上面三個式子，</p>
+
+<p><script type="math/tex">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+<br />
+<script type="math/tex">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+<br />
+<script type="math/tex">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script></p>
+
+<p>那我們現在要如何計算權重 <script type="math/tex">w^{(L)}</script> 對於 cost function 的影響程度呢？換句話說，我們想要知道 cost function 對 <script type="math/tex">w^{(L)}</script> 的偏微分 <script type="math/tex">\frac{\partial C_0}{\partial w^{(L)}}</script>。</p>
+
+<p>根據 <strong>chain rule</strong>，我們可以再將上式改寫成，</p>
+
+<script type="math/tex; mode=display">\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}</script>
+
+<p>下一個步驟要來計算每一個值，我們可以根據上面式子得到的 (1)(2)(3) 得到，</p>
+
+<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - y)</script>
+
+<script type="math/tex; mode=display">\frac{\partial a^{(L)}}{\partial z^{(L)}} = \sigma' (z^{(L)})</script>
+
+<script type="math/tex; mode=display">\frac{\partial z^{(L)}}{\partial w^{(L)}} = a^{(L-1)}</script>
+
+<p>所以可以將式子整理成，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\frac{\partial C_0}{\partial w^{(L)}} & = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+& = a^{(L-1)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align} %]]></script>
+
+<p>而這只是其中一個 training sample 算出來的 cost，而總代價函數應該是所有 training data 的平均，也就是</p>
+
+<script type="math/tex; mode=display">\frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{\partial C_k}{\partial w^{(L)}}</script>
+
+<p>而這其實只是 gradient 裡其中的一個 compenent，</p>
+
+<p>Gradient:</p>
+
+<script type="math/tex; mode=display">\nabla C = \begin{bmatrix}
+    \frac{\partial C}{\partial w^{(1)}} \\
+    \frac{\partial C}{\partial b^{(1)}} \\
+    \frac{\partial C}{\partial w^{(2)}} \\
+    \frac{\partial C}{\partial b^{(2)}} \\
+    \vdots \\
+    \frac{\partial C}{\partial w^{(L)}} \\
+    \frac{\partial C}{\partial b^{(L)}} \\
+\end{bmatrix}</script>
+
+<p>如果要計算的是 bias 的偏微分，式子就會是，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\frac{\partial C_0}{\partial b^{(L)}} & = \frac{\partial z^{(L)}}{\partial b^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+& = 1 \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align} %]]></script>
+
+<p>接下來，我們來看這個 cost function 對上一層 activation 的敏感度，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\frac{\partial C_0}{\partial a^{(L-1)}} & = \frac{\partial z^{(L)}}{\partial a^{(L-1)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+& = w^{(L)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align} %]]></script>
+
+<hr />
+
+<p>前面我們看的是只有一個神經元的狀況，回到真實的 neural network 結構。一個神經元是來自前面很多神經元與 weight 和 bias 的計算，且一個 training data 的 cost 值是每個 output 減 expected value 平方的和。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Backpropagation%20cost.png" alt="" /></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Backpropagation%202.png" alt="" /></p>
+
+<p>基本上，所有的式子都和只有一個神經元是一樣的，唯一有變化的是，<script type="math/tex">\frac{\partial C_0}{\partial a_k^{(L-1)}}</script></p>
+
+<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}} \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \frac{\partial C_0}{\partial a_j^{(L)}}</script>
+
+<p>因為，一個神經元會向下影響其他所有與它連接的神經元，所以必須將它們全部加起來。</p>
+
+<p>根據以上，只要不斷往回算就可以了。</p>
+
+<hr />
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.youtube.com/watch?v=ibJpTrp5mcE">ML Lecture 7: Backpropagation</a>
+<br />
+<a href="https://medium.com/ai-academy-taiwan/back-propagation-3946e8ed8c55">Back-propagation</a></p>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">前面</a>介紹了 neural network 使用 Gradient descent 來找 cost function 的最小值，那這篇要來介紹 neural network 如何使用 <strong>Backpropagation</strong> 這個演算法讓 neural network 訓練過程中更有效率。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//neural%20network/2020/02/13/Neural-Network-Neural-Network-3/#disqus_thread';
+        this.page.identifier = '/neural%20network/2020/02/13/Neural-Network-Neural-Network-3/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//neural%20network/2020/02/13/Neural-Network-Neural-Network-3/#disqus_thread" data-disqus-identifier="/neural%20network/2020/02/13/Neural-Network-Neural-Network-3/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">
+        [NLP]CNN in NLP
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 2, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 2, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#NLP">NLP</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://shihs.github.io/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N卷積神經網路/">前一篇</a>介紹了 CNN 的概念，這篇要來介紹 CNN 如何運用在 NLP 中。</p>
+
+<hr />
+
+<p>Yoon Kim 在 2014 年發表論文 <a href="https://arxiv.org/abs/1408.5882">Convolutional Neural Networks for Sentence Classification</a> 提出將 CNN 運用在 NLP。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/CNN%20in%20NLP.png" alt="" /></p>
+
+<p>上圖就是 Yoon Kim 論文提出的方法概念，和在圖像運用的 CNN 一樣，有 convolution 和 pooling，然後最後是一個 softmax function。</p>
+
+<p>我們先來看第一步，</p>
+
+<h2 id="convolution">Convolution</h2>
+
+<p>在圖片中，我們將圖片看成一個 nxm 的矩陣，每一格都是一個數字，而我們可以使用 filter(kernel) 來獲取想要的特徵。而在 NLP 中，如果想要將文字表示成數字，可以使用 word embedding，例如 word2vect、glove，或是 one-hot encode 的詞彙到索引詞向量表示方法。</p>
+
+<p>上圖中的第一個矩陣是 ‘I love this movie very much!’ 的 word embedding 矩陣，每一列代表一個 word 的向量。總共有七個字，每一個字用一個 5 維的向量表示，所以用一個 7x5 的矩陣表示。</p>
+
+<p><strong>filter</strong></p>
+
+<p>現在知道了輸入的表示法，那在 convolution 中最重要的 filter 要如何使用呢？</p>
+
+<p>一般 CNN 的 filter 會是一個方正矩陣，從左往右再往下滑動，但在 NLP 中，filter 矩陣會和向量的維度一樣，但一次可能滑動兩個字 (2-grams)、三個字 (3-grams)等等，這個稱作 region size，看上圖的第二大行，有紅色系、綠色系、黃色系三種 filter，分別代表 region size 4、3 和 2，且各有兩個，也就是總共有六個 filter。(像這樣移動的方式只有一個方向叫做，<a href="https://blog.goodaudience.com/introduction-to-1d-convolutional-neural-networks-in-keras-for-time-sequences-3a7ff801a2cf">1D converlution</a>)</p>
+
+<p>整張大圖的第三行，就是輸入矩陣 (channel) 乘上 filter 之後的結果。</p>
+
+<h2 id="pooling">Pooling</h2>
+
+<p>Convolution 的下一步是 pooling，上圖使用的是 max pooling，也就是取最大的值。</p>
+
+<p>pooling 後 flatten 所有值，最後一步 softmax function 便完成了。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.youtube.com/watch?v=wNBaNhvL4pg">Simple Deep Neural Networks for Text Classification</a>
+<br />
+<a href="https://kiseliu.github.io/2016/09/22/understanding-convolutional-neural-networks-for-nlp/">Understanding Convolutional Neural Networks for NLP
+</a>
+<br />
+<a href="https://blog.goodaudience.com/introduction-to-1d-convolutional-neural-networks-in-keras-for-time-sequences-3a7ff801a2cf">Introduction to 1D Convolutional Neural Networks in Keras for Time Sequences</a></p>
+ -->
+    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N卷積神經網路/">前一篇</a>介紹了 CNN 的概念，這篇要來介紹 CNN 如何運用在 NLP 中。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/#disqus_thread';
+        this.page.identifier = '/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/#disqus_thread" data-disqus-identifier="/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">
+        [Neural Network]Convolution Neural Network 卷積神經網路
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 1, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 1, 2020</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -585,105 +1444,123 @@ s.setAttribute('data-timestamp', +new Date());
       
       
         <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
+    <!-- <p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
+
+<p>卷積神經網絡(Convolutional Neural Network)簡稱 CNN，主要應用在影像辨識，這篇想要簡單的說明 CNN 的概念。</p>
 
 <hr />
 
-<h2 id="前言">前言：</h2>
+<p>先看下面兩張 CNN 概念圖</p>
 
-<p>因為 Deep Learning 的快速發展，所以電腦視覺（computer vision）這幾年也迅速的超展開。像是自動駕駛就受惠於 computer vision 的進步，讓自駕車能更準確的偵測路人和其他車輛，提升安全性；或是人臉辨識系統也變得更厲害，像是手機的人臉辨識解鎖；或是使用 Deep Learning 辨別照片是屬於風景照、人、動物還是車輛等等（像是 iphone 的相簿現在就很變態的會自動歸類照片是什麼）；甚至在藝術作品上都有 Deep Learning 的蹤影。</p>
+<p><a href="https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html/3">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%201.png" alt="" /></p>
+
+<p><a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%202.png" alt="" /></p>
+
+<p>從上圖可以看到整個流程各經過兩次的 Convolution、Pooling 和 Fully Connected，所以其實只要搞懂 <strong>Convolution</strong>、<strong>Pooling</strong> 和 <strong>Fully Connected</strong> 分別在做什麼就可以掌握 CNN 了。</p>
+
+<p>整個流程是，前面的 Convolution 和 Pooling (又稱為 subsampling) 在做的是 feature extraction (特徵擷取)，而 Fully connection 在做的是 classification (分類辨識)。</p>
 
 <hr />
 
-<h2 id="為什麼要使用-covolutional-neural-networkscnn">為什麼要使用 Covolutional Neural Networks(CNN)？</h2>
+<h2 id="1-convolution-layer-卷積層">1. Convolution Layer 卷積層</h2>
 
-<h3 id="computer-vision-problem">Computer Vision Problem</h3>
+<p>Convolution Layer 由 filter 和激活函數 (ex. Relu) 所構成。</p>
 
-<p><img src="http://localhost:4000/blog/img/posts/Computer%20Vision%20Problem.png" alt="Computer Vision Problem.png" height="400px" width="600px" /></p>
+<p>下圖是常見的美圖效果，其實就是使用 filter 達成的
+<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/%E7%BE%8E%E5%9C%96.png" alt="" /></p>
 
-<p>以上圖的例子來看，第一張是 64x64 的照片，第二張畫素則是 1000x1000，這時候如果再加上 RGB 三原色的維度，兩張照片的維度分別會是 64x64x3 和 1000x1000x3。以 Neural Network 來實作的話（右下角），input layer 的 Xn 的 n = 1000x1000x3，如果第一層的 hidden 是 1000 個 nodes，這時候轉換的 W 的維度就會是 1000x3000000，這是不是很 CRAZY？</p>
+<p>卷積 (Convolution) 做的是特徵擷取，而不同的效果在做的就是對不同的特徵做擷取。例如，銳化效果在做的就是強化邊緣的特徵，也就是加強擷取出邊緣的特徵。</p>
 
-<p>所以這時候就會碰到以下的問題。</p>
+<p>那所以卷積到底是如何擷取不同的特徵的呢？
+<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
 
-<p><strong>缺點</strong></p>
+<p><img src="http://localhost:4000/blog/img/posts/Convolution.gif" alt="" /></p>
+
+<p>特徵擷取的方式是使用 Filter (或稱作 Kernel) 來萃取圖片中的特徵，上圖是一個 3x3 window 的 filter，而算法就是像圖那樣移動 (移動的步數是 stride)，將數字相乘後再相加 (詳情可以看之前的<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">筆記1</a>、<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">筆記2</a>，包括 padding 和 stride 的概念)。美圖的不同效果就是使用不同的 Filter (Kernel) 做出來的。</p>
+
+<p>下圖是不同的 filter 做出來的效果
+<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/kernels.png" alt="" /></p>
+
+<p>現在明白了 filter，但再回去看最一開始的流程圖，為什麼 converlution 有三個呢？這是因為使用了三個 filter 去擷取不同的特徵。</p>
+
+<p>看完 filter 再看 Relu。可以看到最上圖圖中有個 Relu，也就是將所有計算出來結果的負值都變為 0。
+<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Relu.png" alt="" /></p>
+
+<p>如果是彩色的圖，通常會有三個 channel (RGB)，也就是一開始輸入的 image 有三個，可以看下圖
+<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/three%20images%20convolution.jpg" alt="" /></p>
+
+<h2 id="2-pooling-layer-池化層">2. Pooling Layer 池化層</h2>
+
+<p>pooling 又稱為 subsampling，是為了提取特定區域主要特徵，但又想要減少參數的數量，以防止模型過擬合，常用的是 max pooling，也就是取該區域最大的值，也有 average pooling，也就是取該區域的平均值。
+<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
+
+<p>下圖是取 max pooling，使用 2x2 的 window，且 stride 為 2</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/pooling.jpg" alt="" /></p>
+
+<h2 id="3-fully-connected-layer-全連接層">3. Fully Connected Layer 全連接層</h2>
+
+<p>Fully Connected Layer 主要是進行 Flattening 平坦化，將最後的矩陣轉換成一維，然後再使用傳統的 neural network + softmax()。</p>
+
+<p>參考我之前的<a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">[Neural Network]Neural Network 1</a></p>
+
+<hr />
+
+<p>以上就是 CNN 的流程。</p>
+
+<p>最後提一下，從上面的過程我們可以知道，CNN 整個過程中需要求解的參數是</p>
+
 <ol>
-  <li>很難避免 overfitting</li>
-  <li>計算上需要大量的電腦效能和 CPU，實在太不切實際了</li>
+  <li>Convolution layer filters</li>
+  <li>Full Connected Layer filters</li>
 </ol>
 
-<p>因此，為了解決的這個問題，我們就需要用到 CNN。</p>
+<p><a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">來源</a></p>
 
 <hr />
 
-<h2 id="cnn-的流程圖">CNN 的流程圖</h2>
-<p><a href="https://res.mdpi.com/entropy/entropy-19-00242/article_deploy/html/images/entropy-19-00242-g001.png">Sourse</a>
-<img src="http://localhost:4000/blog/img/posts/CNN.png" alt="CNN.png" height="300px" width="630px" /></p>
-
-<hr />
-
-<h2 id="how-the-convolution-operation-works">How the convolution operation works?</h2>
-
-<p>現在先來看 convolutional layer 的部分，也是 CNN 非常重要的一個環節。這邊使用 Edge detection 作為範例操作 convolution operation 是如何運作的。</p>
-
-<h3 id="edge-detection-example">Edge detection example</h3>
-
-<p><img src="http://localhost:4000/blog/img/posts/edge%20detect.png" alt="edge detect.png" height="400px" width="600px" /></p>
-
-<p>在辨識下圖時我們可能會想要做垂直的邊緣辨識和水平的邊緣辨識。那要如何操作呢？</p>
-
-<h3 id="vertical-edge-detection">Vertical edge detection</h3>
-
-<p><img src="http://localhost:4000/blog/img/posts/convolutional%20operation.png" alt="convolutional operation.png" height="400px" width="600px" /></p>
-
-<p>最左邊的圖是一張 6x6 pixel 的黑白圖，每個 pixel 的數字表示灰階的深度，數字越小代表顏色越深。中間是一個 3x3 的 filter，在有些地方會被稱為 kernel，但這門課都會稱作 filter。這樣的兩個 matrix 做 convolution 運算後（用 * 表示），會產生一個 4x4 的 matrix。</p>
-
-<p>運算方法則是，將 3x3 的 filter 與圖片的左上方 match（如圖片淺藍底），對應到的格子相乘，最後再將九個數字相加。依序移動 3x3 的 filter，如此最後就會產生一個 4x4 的 matrix。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/convolution%20operation%20result.png" alt="convolution operation result.png" height="150px" width="210px" /></p>
-
-<p>而中間的 filter 可以看到是一個由左至右從淺到深的圖。因為現在做的是 Vertical edge detection，所以才會選擇這樣的 filter。</p>
-
-<p>再看一個例子，
-<img src="http://localhost:4000/blog/img/posts/vertical%20edge%20detection.png" alt="vertical edge detection.png" height="400px" width="600px" /></p>
-
-<p>我們可以看到，最右邊最後產生的是一個中間一條白色的圖，這就偵測到了我們的想找垂直邊緣的圖（最左邊）的正中間有個邊界。（這個例子看起來邊緣很寬，是因為我們這個圖只有 6x6，如果今天用大一點的圖 1000x1000 就會發現這樣的偵測效果是很好的）</p>
-
-<hr />
-
-<h3 id="different-transitions">Different transitions</h3>
-
-<p><img src="http://localhost:4000/blog/img/posts/vertical%20detection%20different%20transitions.png" alt="vertical detection different transitions.png" height="400px" width="600px" /></p>
-
-<p>剛剛的例子是由亮到暗（上），現在的例子是由暗到亮（下），會發現時候最後運算出來的 matrix 也會不同，根據中間的數字我們可以知道，這張圖是由亮到暗還是由暗到亮。下圖的中間偵測得到邊緣數字是 -30，如果今天需要偵測的結果需要知道深淺的變化，那數字就是重要的，但如果今天只是要抓邊緣，也可以將 -30 取絕對值，一樣能抓到轉換的邊界。</p>
-
-<hr />
-
-<h3 id="vertical-and-horizontal-edge-detection">Vertical and horizontal edge detection</h3>
-
-<p>看完了垂直的範例，我們再看一下偵測水平邊緣的 filter。
-<img src="http://localhost:4000/blog/img/posts/vertical%20and%20horizontal%20detection.png" alt="vertical and horizontal detection.png" height="400px" width="600px" /></p>
-
-<hr />
-
-<h2 id="different-filters">Different filters</h2>
-
-<p>從上面的結果可以發現，不同的 filter 可以讓我們偵測出不同的狀況。這邊提了一下兩個 filter，<em>Sobel filter</em> 和 <em>Scharr filter</em>。其實我們可以不需要直接使用現成的 filter，而是可以訓練出一個 filter 針對我們的需求，這之後會再提。</p>
-
-<hr />
-
-<p>Reference:
+<p><strong>Reference:</strong>
 <br />
-<a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
+<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">[資料分析&amp;機器學習] 第5.1講: 卷積神經網絡介紹(Convolutional Neural Network)
+</a>
+<br />
+<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">[機器學習 ML NOTE]Convolution Neural Network 卷積神經網路</a>
+<br />
+<a href="https://zhuanlan.zhihu.com/p/42559190">【DL笔记6】从此明白了卷积神经网络（CNN）</a>
+<br />
+<a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">Convolutional Neural Networks’ (CNN) Backward Propagation</a></p>
  -->
-    <div class="post-excerpt"><p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
+    <div class="post-excerpt"><p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -703,8 +1580,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/';
+        // this.page.url = '/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread';
+        this.page.identifier = '/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -717,7 +1594,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">0 Comments</a>
+        <a href="/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread" data-disqus-identifier="/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">0 Comments</a>
       </span>
 
     </div>
@@ -726,177 +1603,153 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">
-        字元編碼，ASCII、Unicode、UTF-8
+      <a href="/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">
+        [Neural Network]Neural Network 2 - Gradient descent
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 22, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 23, 2020</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 22, 2019</span>
+      <span class="post-date">January 23, 2020</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Others">Others</a>
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)</p>
+    <!-- <p><a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">上一篇</a>說明了神經網路的基本原理，這篇我們要講解神經網路是如何學習的 - Gradient descent。</p>
+
+<p>這篇是<a href="https://www.youtube.com/watch?v=IHZwWFHWa-w&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=2">Neural networks</a>的課程筆記。</p>
 
 <hr />
 
-<h2 id="字元編碼">字元編碼</h2>
-<p>電腦採用二進位的方式理解符號與文字，而將字元與二進位的 0 和 1 組合作轉換就是編碼的基礎。</p>
+<p>在 Machine Learning 裡我們使用 training data 訓練得到一個 model，但這「訓練」到底是怎麼訓練的呢？訓練的過程，通常是要找到最小的 cost，也就是最後的結果與真實值差距越小越好。</p>
+
+<p>在 Neural Network 我們要訓練的變數就是<a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">前面一篇</a>提到的 weight 和 bias。一開始我們隨機的給予這些數字，然後在一次次的學習中去改進 weight 和 bias 的值，找到最小的成本函數。</p>
+
+<p>在課程的例子裡，Neural Network function 的 input 是 784 個 pixel 的數字，output 是 10 個數字，0 到 9 的機率，parameters 是 weight 和 bias。但在cost function 中，weight 和 bias 變成了 input，而 output 就是 cost 的值，parameters 則是很多的 training pairs。</p>
+
+<p>我們可以把 cost function 這樣表示，</p>
+
+<script type="math/tex; mode=display">C(w_1, w_2,..., b_1, b_2, ....) = cost</script>
+
+<p>cost 的算法是 Neural Network 算出來的值，扣掉正確值然後平方相加。學習過程中，我們將所有 training data 的 cost 相加平均（average cost of all training data），希望這個值越小越好。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/cost.png" alt="" /></p>
+
+<p>那我們要如何找到最小的 cost 值？</p>
+
+<p>如果 cost function 是一個像下圖的函數圖形，我們知道微分等於 0 可以找到最小值，但這並非一件容易的事，尤其是當我們有很多變數時。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/local%20minima.png" alt="" /></p>
+
+<p>所以我們可以用的方法是，先隨機到函數圖形上的一點，然後根據該點的切線斜率來決定該往哪個方向移動可以找到最低點。這樣的方法，可以讓我們到 local minimum，我們無法確認找到的最小是否是 global minimum，因為這取決與一開始的 initial value。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/local%20minima%202.png" alt="" /></p>
 
 <hr />
 
-<h2 id="ascii">ASCII</h2>
-<p>ASCII 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。</p>
+<p>在進入 Gradient descent 之前，我想要先介紹一下基礎觀念。以下將會講解，</p>
 
-<p>ASCII 使用了 7 個 bits，包含字母大小寫、數字及一些符號共有 128 個字元被編入 ASCII 中。空白是 32(00100000)，字母 A 是 65(01000001)，以此類推。</p>
+<ol>
+  <li>導函數 Derivative function 與導數 Derivative</li>
+  <li>方向導數 Directional derivative</li>
+  <li>偏導數 Partial derivative</li>
+  <li>梯度 Gradient</li>
+</ol>
 
-<p><strong>Extended ASCII</strong>
-<br />
-但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。</p>
+<h3 id="導數-derivative">導數 Derivative</h3>
+
+<p>切線的斜率稱為「導數」（Derivative），也就是微分。</p>
+
+<p>定義成，</p>
+
+<script type="math/tex; mode=display">m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}</script>
+
+<h3 id="偏導數-partial-derivative">偏導數 Partial derivative</h3>
+
+<p>斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。</p>
+
+<p>以兩個字變數為例， <script type="math/tex">z = f(x, y)</script></p>
+
+<p><script type="math/tex">f_x(a, b)</script> 為對 <script type="math/tex">x</script> 的偏導數，定義為</p>
+
+<script type="math/tex; mode=display">f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}</script>
+
+<p><script type="math/tex">f_y(a, b)</script> 為對 <script type="math/tex">y</script> 的偏導數，定義為</p>
+
+<script type="math/tex; mode=display">f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}</script>
+
+<p>也就是對 x 或 y 方向做偏微分。</p>
+
+<h3 id="方向導數-directional-derivative">方向導數 Directional derivative</h3>
+
+<p>斜率求的是單變數的微分，在多變數中要求斜率必須要看是哪個方向的斜率，因為各個方向的斜率都不相同，這時要求的就是方向導數。</p>
+
+<p>假設函數 <script type="math/tex">z = f(x, y)</script>，在定義域 <script type="math/tex">xy</script> 平面上有一點 <script type="math/tex">(x, y)</script> 及單位向量 <script type="math/tex">\overset{\rightharpoonup}{u} = (u_1, u_2)</script>。則曲面 <script type="math/tex">z = f(x, y)</script> 在 <script type="math/tex">(a, b)</script> 處，沿 <script type="math/tex">\overset{\rightharpoonup}{u}</script> 的方向的斜率定義為，</p>
+
+<script type="math/tex; mode=display">\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}</script>
+
+<p>方向導數的意義在於，有助於計算出空間中某一場量 <script type="math/tex">f(x, y, z)</script> 在某一特定方向 <script type="math/tex">\boldsymbol{u}</script> 之變化率。</p>
+
+<h3 id="梯度-gradient">梯度 Gradient</h3>
+
+<p>梯度的定義就是對各個分量做偏微分。</p>
+
+<p>例如，現在是兩變數函數 <script type="math/tex">f(x, y)</script>，其梯度 <script type="math/tex">\nabla f(x, y)</script> 定義為</p>
+
+<script type="math/tex; mode=display">\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)</script>
+
+<p>若是變數有三個，則 <script type="math/tex">\nabla f(x, y, y)</script> 定義為</p>
+
+<script type="math/tex; mode=display">\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)</script>
+
+<p>Gernal 來看，有 n 個變數的函數 <script type="math/tex">f(x_1, x_2, \cdots, x_n)</script>，我們可以寫成</p>
+
+<script type="math/tex; mode=display">\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)</script>
+
+<p>梯度 Gradient 的幾何意義，</p>
+<ul>
+  <li><script type="math/tex">\nabla f</script> 表示曲面 <script type="math/tex">f(x, y, z) = C</script> 之垂直向量，如下圖所示。</li>
+  <li><script type="math/tex">\nabla f(P)</script> 表在 P 點增量最大的方向，也就是 the direction of steepest increase</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/gradient.png" alt="" /></p>
 
 <hr />
 
-<h2 id="unicode">Unicode</h2>
-<p>隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。</p>
+<h3 id="梯度下降法-gradient-descent">梯度下降法 Gradient descent</h3>
 
-<p>Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為，Code point。U+ 的意思是 Unicode，
-數字則是用十六進位表示。</p>
+<p>Gradient descent 是一種最佳化方法。</p>
 
-<p>但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。</p>
+<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 <script type="math/tex">-\nabla f(P)</script> 是找尋 minimum cost 的方向。</p>
 
-<hr />
+<p>總的來說，梯度下降法 Gradient descent 就是不斷的在某個點 P 算它的 Gradient，然後往 Gradient 的反方向一定，直到找到 local minimum 為止（無法知道是否找到 glocal minimum，會根據 initial values 而定）。</p>
 
-<h2 id="utf-8">UTF-8</h2>
-<p>有人發明了 UTF-8 這種儲存方式。</p>
-
-<p>UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用用 UTF-8 編碼就能省下空間。</p>
-
-<p><strong>比較</strong>
-<br />
-Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式</p>
+<p>在 neural netword 中，讓這個梯度計算更有效率的方法叫做 <strong>Backpropagation</strong>，而這正是 neural netword 的重點！下一篇繼續介紹 :)</p>
 
 <hr />
 
-<p>Reference:
+<p><strong>Reference:</strong>
 <br />
-<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode 和 UTF-8</a>
+<a href="https://ocw.chu.edu.tw/pluginfile.php/827/mod_resource/content/33/Summary_227.pdf">方向導數(Directional Derivative)之定義與意義</a>
 <br />
-<a href="http://blog.chunnorris.cc/2015/04/unicode.html">淺談電腦編碼與 Unicode (一) 基礎概念篇</a>
-<br />
-<a href="https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118">常見三種字符編碼的區別：ASCII、Unicode、UTF-8</a>
-<br />
-<a href="https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F">[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知</a></p>
+<a href="https://ocw.chu.edu.tw/pluginfile.php/826/mod_resource/content/31/Summary_226.pdf">純量函數之梯度(Gradient)</a></p>
+
  -->
-    <div class="post-excerpt"><p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)</p>
+    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">上一篇</a>說明了神經網路的基本原理，這篇我們要講解神經網路是如何學習的 - Gradient descent。</p>
 
 </div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread';
-        this.page.identifier = '/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread" data-disqus-identifier="/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">0 Comments</a>
-      </span>
-
-    </div>
     
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">
-        [Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_
-      </a>
-    </h1>
 
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
-<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
-
-<p>根據<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>的討論串，有人回答</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
-</code></pre></div></div>
-
-<p>我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。</p>
-
-<p>先檢查一下 pandas 版本</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
-</code></pre></div></div>
-
-<p>將版本降至 0.20.3</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
-</code></pre></div></div>
-
-<p>這時候打包完後執行應該就不會有問題了！</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>
-<br />
-<a href="https://blog.csdn.net/qq_41185868/article/details/80601983">成功解决pyinstaller打包AttributeError:type object pandas.<em>TSObject has no attribute _reduce_cython</em></a></p>
- -->
-    <div class="post-excerpt"><p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
-<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
-
-</div>
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -916,8 +1769,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/';
+        // this.page.url = '/blog//neural%20network/2020/01/23/Neural-Network-Neural-Network-2/#disqus_thread';
+        this.page.identifier = '/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -930,452 +1783,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">
-        [Python]讀取與寫入xlsx檔案
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
-
-<p>在開始前請先安裝 pandas 套件，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>讀取檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
-
-<span class="c"># 獲取列數</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 獲取儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 修改儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
-<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
-<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
-</code></pre></div></div>
-
-<p>若在執行以上程式碼時產生錯誤訊息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
-</code></pre></div></div>
-
-<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>寫入檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-
-<span class="c"># Create a Pandas dataframe from some data.</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
-
-<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
-
-<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
-
-<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
-<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
-
-<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
-</code></pre></div></div>
-<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
-<br />
-<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
-<br />
-<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
-<br />
-<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
-
- -->
-    <div class="post-excerpt"><p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">
-        [Python]全形與半形轉換
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。</p>
-
-<p>例如，半形的驚嘆號（!）是 unicode 編碼是 33，則全形的驚嘆號（！）unicode 就會編碼是 33 + 65248 = 65281</p>
-
-<p>但要將數字解析成半形時是使用 <code class="highlighter-rouge">chr()</code> function，而全形則是使用 <code class="highlighter-rouge">unichr()</code> function。</p>
-
-<p>以下將 33~126 全部列出來，並轉換成全形。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">127</span><span class="p">):</span>
-	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
-
-</code></pre></div></div>
-
-<p>結果，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
-34 " 65282 ＂
-35 # 65283 ＃
-36 $ 65284 ＄
-37 % 65285 ％
-38 &amp; 65286 ＆
-39 ' 65287 ＇
-40 ( 65288 （
-41 ) 65289 ）
-42 * 65290 ＊
-43 + 65291 ＋
-44 , 65292 ，
-45 - 65293 －
-46 . 65294 ．
-47 / 65295 ／
-48 0 65296 ０
-49 1 65297 １
-50 2 65298 ２
-51 3 65299 ３
-52 4 65300 ４
-53 5 65301 ５
-54 6 65302 ６
-55 7 65303 ７
-56 8 65304 ８
-57 9 65305 ９
-58 : 65306 ：
-59 ; 65307 ；
-60 &lt; 65308 ＜
-61 = 65309 ＝
-62 &gt; 65310 ＞
-63 ? 65311 ？
-64 @ 65312 ＠
-65 A 65313 Ａ
-66 B 65314 Ｂ
-67 C 65315 Ｃ
-68 D 65316 Ｄ
-69 E 65317 Ｅ
-70 F 65318 Ｆ
-71 G 65319 Ｇ
-72 H 65320 Ｈ
-73 I 65321 Ｉ
-74 J 65322 Ｊ
-75 K 65323 Ｋ
-76 L 65324 Ｌ
-77 M 65325 Ｍ
-78 N 65326 Ｎ
-79 O 65327 Ｏ
-80 P 65328 Ｐ
-81 Q 65329 Ｑ
-82 R 65330 Ｒ
-83 S 65331 Ｓ
-84 T 65332 Ｔ
-85 U 65333 Ｕ
-86 V 65334 Ｖ
-87 W 65335 Ｗ
-88 X 65336 Ｘ
-89 Y 65337 Ｙ
-90 Z 65338 Ｚ
-91 [ 65339 ［
-92 \ 65340 ＼
-93 ] 65341 ］
-94 ^ 65342 ＾
-95 _ 65343 ＿
-96 ` 65344 ｀
-97 a 65345 ａ
-98 b 65346 ｂ
-99 c 65347 ｃ
-100 d 65348 ｄ
-101 e 65349 ｅ
-102 f 65350 ｆ
-103 g 65351 ｇ
-104 h 65352 ｈ
-105 i 65353 ｉ
-106 j 65354 ｊ
-107 k 65355 ｋ
-108 l 65356 ｌ
-109 m 65357 ｍ
-110 n 65358 ｎ
-111 o 65359 ｏ
-112 p 65360 ｐ
-113 q 65361 ｑ
-114 r 65362 ｒ
-115 s 65363 ｓ
-116 t 65364 ｔ
-117 u 65365 ｕ
-118 v 65366 ｖ
-119 w 65367 ｗ
-120 x 65368 ｘ
-121 y 65369 ｙ
-122 z 65370 ｚ
-123 { 65371 ｛
-124 | 65372 ｜
-125 } 65373 ｝
-126 ~ 65374 ～
-
-</code></pre></div></div>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://codertw.com/程式語言/367570/">Python實現全形半形字元互轉的方法</a></p>
- -->
-    <div class="post-excerpt"><p>因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/">
-        [Machine Learning]Linear Regression
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 27, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 27, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。</p>
-
-<hr />
-
-<h2 id="simple-linear-regression">Simple Linear Regression</h2>
-
-<p>Simple Linear Regression 假設 \(X, Y\) 存在線性關係，且可以使用以下的式子來表示 \(X, Y\)的關係。</p>
-
-<blockquote>
-
-  <script type="math/tex; mode=display">Y \approx \beta_0 + \beta_1 X</script>
-</blockquote>
-
-<p>而現實中我們無法知道參數 \(\beta_0, \beta_1\)，這時候我們會使用 train data 找出估計參數 \(\hat{\beta_0}, \hat{\beta_1}\)。簡單線性回歸的估計式可以寫成，</p>
-
-<blockquote>
-
-  <script type="math/tex; mode=display">\hat{y} = \hat{\beta_0} + \hat{\beta_1} x</script>
-</blockquote>
-
-<p>其中，\(\hat{y}\) 是當 \(X = x\) 時 \(Y\)的預測值。</p>
-
-<hr />
-
-<p><strong>Estimating the Coefficients</strong></p>
-
-<p>現在有一堆 data， \((x_i, y_i), \thinspace i = 1, 2, 3, …, n\)，根據上面的迴歸式可以將這些 data 表示成，</p>
-
-<script type="math/tex; mode=display">y_i \approx \hat{\beta_0} + \hat{\beta_1} x_i, \thinspace for \thinspace i = 1, 2, 3, ..., n</script>
-
-<p>已經知道迴歸模型可以用上面的式子表示，那現在的任務是要找到 \(\hat{\beta_0}\) 和 \(\hat{\beta_1}\)，只要找到這兩個參數就可以預測 \(y\) 了。</p>
-
-<p>找 \(\hat{\beta_0}, \hat{\beta_1}\) 的方法叫 <strong>The Least Square Method</strong>（最小平方法）。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/linear%20regression.png" alt="linear regression.png" height="450px" width="600px" /></p>
-
-<p>以上圖為例，紅色的點為 observations，深藍色的線是用最小平方法找到的迴歸線。</p>
-
-<hr />
-
-<p><strong>The Least Square Method 是什麼？</strong></p>
-
-<p>式子 \( \hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_i \) 為 \(X = x_i\) 時 \(Y\) 的預測值。</p>
-
-<p>我們使用 Residual(殘差) 來看這個預測的結果與實際數值的差距，定義為 \(e_i = y_i - \hat{y_i}\) (上圖中紅點到深藍色線的灰色線段們)。</p>
-
-<p>將所有 Residual 相加便能</p>
-
-<p>RSS =</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="http://www-bcf.usc.edu/~gareth/ISL/">An Introduction to Statistical Learning with Applications in R</a></p>
-
- -->
-    <div class="post-excerpt"><p>Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/">0 Comments</a>
+        <a href="/blog//neural%20network/2020/01/23/Neural-Network-Neural-Network-2/#disqus_thread" data-disqus-identifier="/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">0 Comments</a>
       </span>
 
     </div>

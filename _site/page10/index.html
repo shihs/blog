@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,71 +183,67 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">
-        [R]在R中使用system呼叫python-給予參數
+      <a href="/blog/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
+        [Tutorial]Computer Networking筆記(16-21)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on April 24, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 24, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">April 24, 2017</span>
+      <span class="post-date">January 24, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
-<p>假如現在我想要帶入參數給python script要怎麼做呢？</p>
+<h2 id="osi-model"><strong>OSI Model</strong></h2>
+<p><a href="https://zh.wikipedia.org/wiki/OSI模型" target="_blank">OSI Model- Open System Interconnection Reference Model</a><br />
+總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。</p>
 
-<p>首先，<br />
-在python程式碼的部分，<br />
-要使用 <strong>sys.arg[]</strong> 讓python程式獲取參數。</p>
+<p><a href="https://tw.voicetube.com/videos/20018" target="_blank">這有另外一個我覺得還不錯的影片</a></p>
 
-<p>還有，在 <strong>sys.arg[0]</strong> 表示的是程式名稱，<br />
-所以要使用 <strong>sys.arg[1]</strong> 才是表示要讀取的第一個參數。</p>
+<h2 id="modem"><strong>Modem</strong></h2>
+<p>Modem就是我們說的<a href="https://zh.wikipedia.org/wiki/调制解调器" target="_blank">數據機</a>。<br />
+It’s device that connects the network to the Internet.<br />
+It converges digital signals from router(or any other devices) to analog signals.<br />
+簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br />
+電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br /></p>
 
-<p>假如今天有支 <em>python_script.py</em></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<h2 id="router"><strong>Router</strong></h2>
+<p>Router是<a href="https://zh.wikipedia.org/wiki/路由器" target="_blank">路由器</a>。<br />
+Router joins network together.<br /></p>
 
-<span class="n">string</span> <span class="o">=</span> <span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="k">print</span> <span class="n">string</span>
-</code></pre></div></div>
+<h2 id="switch"><strong>Switch</strong></h2>
+<p>Switch是分享器。<br />
+假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br /></p>
 
-<p>在cmf中呼叫這支python程式</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python python_script.py world
-</code></pre></div></div>
+<p><a href="https://www.mobile01.com/topicdetail.php?f=507&amp;t=1631479" target="_blank">路由器和分享器差在哪</a></p>
 
-<p>R裡的system()要打的指令就是cmf中打的指令。<br />
-所以在R中就會變成，<br /></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py world"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>結果就會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, world
-</code></pre></div></div>
-
-<p>最後，<br />
-在使用system()必須要先setwd將路徑設成python_script.py所在位置。</p>
+<h2 id="repeaterextender"><strong>Repeater/Extender</strong></h2>
+<p>Repeater/Extender是中繼器。<br />
+在一個比較大的空間裡，路由器的信號會因為距離而所差別，<br />
+這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。<br />
+即便是接網路線，如果網路線過長，訊號也會變差，<br />
+所以如果使用中繼器可以解決距離較遠的問題。<br />
+而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
 
  -->
-    <div class="post-excerpt"><p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -255,8 +263,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/#disqus_thread';
-        this.page.identifier = '/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/';
+        // this.page.url = '/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -269,7 +277,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/#disqus_thread" data-disqus-identifier="/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">0 Comments</a>
+        <a href="/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">0 Comments</a>
       </span>
 
     </div>
@@ -278,70 +286,96 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">
-        [R]設定 R 圖形字體
+      <a href="/blog/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">
+        [Tutorial]Computer Networking筆記(12-15)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on August 24, 2016</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 20, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">August 24, 2016</span>
+      <span class="post-date">January 20, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
-以下的解法是針對windows方能使用。</p>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
+<h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
+<p><a href="https://zh.wikipedia.org/wiki/网络拓扑" target="_blank">Topology/Layout</a>是網路之間連接的方式，wiki上翻成「網路拓樸」。<br />
+每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。</p>
+
+<p>這個課程介紹三種方式：</p>
 <ol>
-  <li>使用windowsFonts函數將要使用的字體賦予一個值。
-    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">windowsFonts</span><span class="p">(</span><span class="n">BL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">windowsFont</span><span class="p">(</span><span class="s2">"微軟正黑體"</span><span class="p">))</span><span class="w">
-</span></code></pre></div>    </div>
-  </li>
-  <li>在圖形中設定family。</li>
+  <li>Bus Topology(Tutorial 12)</li>
+  <li>Ring Topology(Tutorial 13)</li>
+  <li>Star Topology(Tutorial 14)</li>
 </ol>
 
-<p>(1)使用par()在最一開始設定。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">par</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p><strong>1. Bus Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/匯流排拓撲" target="_blank">Bus Topology</a>是最簡單的一種連接方式，最主要中間有一條主幹，<br />
+其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br />
+才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br /></p>
 
-<p>(2) 在plot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sales</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="m">13</span><span class="p">,</span><span class="w"> </span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"RWEPA公司102年1月至6月銷售統計圖"</span><span class="p">,</span><span class="w"> 
-     </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"月份"</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"銷售金額（萬元)"</span><span class="p">,</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>這樣的優點就是，簡單而且便宜，<br />
+適合使用在小範圍的網絡內。<br /></p>
 
-<p>(3) 在ggplot中設定</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
-</span><span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">geom_histogram</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"purple"</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.6</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"取值"</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"頻數"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
-    </span><span class="n">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"BL"</span><span class="p">))</span><span class="w">
-</span></code></pre></div></div>
+<p>但缺點是，只有主幹上出了問題，整個網路可能就會出問題。<br /></p>
 
-<p>其實，family後是可以直接放要設定的字體完整名稱，
-不需定windowsFonts，
-只是假如字體名稱很長，
-便不需要一再地打上那麼長的名稱，
-如此以來便也適用mac。</p>
+<p><strong>2. Ring Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/環狀拓撲" target="_blank">Ring Topology</a>與Bus Topology不同的是，它是一個沒有終端環狀，<br />
+所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br />
+一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br /></p>
+
+<p>這樣的優點就是，它不需要Bus Topology必須的terminator，<br />
+而且如果是雙環，也比較不會有主幹出問題，<br />
+整個網路就壞掉的問題。<br /></p>
+
+<p>但缺點是，<br />
+它比Bus Topology貴。<br /></p>
+
+<p><strong>3. Star Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/星型网" target="_blank">Star Topology</a>可能是家裡最常見的一種連結方式。<br />
+Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br />
+例如，如果中心是rounter，它會在連結internet。<br /></p>
+
+<p>這種topology的優點是，價格低、easy to expand。<br />
+另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。<br /></p>
+
+<p>但缺點是，因為所有nodes都連結中心，<br />
+也就是所有的nodes全部都必須要依賴中心，<br />
+所以只要中心的device壞掉，整個連線就會全部失效。<br /></p>
+
+<p><strong>4.Mesh Topology</strong><br />
+<a href="https://zh.wikipedia.org/wiki/网状网络" target="_blank">Mesh Topology</a>所有nodes之間都互相連結，就像個網狀。<br />
+這種方式比較會在MAN或WAN見到，不會在LAN使用。<br /></p>
+
+<p>優點是，因為每個node之間都互相連結，<br />
+所以假如有兩個nodes之間的連結出了問題，<br />
+還可以透過其他nodes傳遞訊號，<br />
+這樣在傳送訊息上也比較保險。<br /></p>
+
+<p>缺點是，因為每個node之間都要連接，就會需要有很多的cable，<br />
+這時候成本就會提高。有越多的node，成本就會越高。<br />
+另一方面，因為一個node需要和其他所有nodes連結，<br />
+這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，<br />
+且每一次增加node可能都需要增加NIC。<br /></p>
+
  -->
-    <div class="post-excerpt"><p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
-以下的解法是針對windows方能使用。</p>
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -361,8 +395,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread';
-        this.page.identifier = '/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/';
+        // this.page.url = '/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -375,7 +409,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/#disqus_thread" data-disqus-identifier="/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">0 Comments</a>
+        <a href="/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">0 Comments</a>
       </span>
 
     </div>
@@ -384,15 +418,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-R-batch/">
-        [R]R batch
+      <a href="/blog/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
+        [R]read.csv出現編碼錯誤訊息
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 17, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
+      <span class="post-date">January 17, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -406,24 +440,33 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
+    <!-- <p>在讀取csv檔案時出現錯誤訊息</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+ 
+</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
+</span></code></pre></div></div>
 
-<p>因為.R檔無法點兩下就能執行，
-所以儲存一個R batch，再使用工作排程設定時間，
-就可以在固定時間自動執行程式。</p>
+<p>會出現這樣的錯誤訊息通常是因為編碼問題。</p>
 
-<p>以下是在windows中的寫法，
-必須要先給R儲存的位置，後面放R script的位置。</p>
-
-<pre><code class="language-cmd">C:\Program Files\R\R-3.2.5\bin\R.exe" CMD BATCH "C:\Users\mypc\Desktop\myrscript.R"
-</code></pre>
-<p>將上面的程式碼貼在記事本(確認R的版本和位置)，
-再將記事本副檔名存成.bat 就完成了。</p>
+<p>先將這份檔案丟到Notepad++，
+可以看到右下方顯示這份檔案的編碼，
+(這份檔案是UTF-8)
+所以只要加上
+<strong>fileEncoding =”UTF-8”</strong>
+就可以解決這個問題了。</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
 
  -->
-    <div class="post-excerpt"><p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
+    <div class="post-excerpt"><p>在讀取csv檔案時出現錯誤訊息</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+ 
+</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
+</span></code></pre></div></div>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -443,8 +486,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-R-batch/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-R-batch/';
+        // this.page.url = '/blog//r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
+        this.page.identifier = '/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -457,7 +500,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2016/07/17/R-R-batch/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-R-batch/">0 Comments</a>
+        <a href="/blog//r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
       </span>
 
     </div>
@@ -466,89 +509,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
-        Windows7 自動排程
+      <a href="/blog/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">
+        [R]如何刪除 U+00A0
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 17, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Others">Others</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
-<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
-
-<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
-
- -->
-    <div class="post-excerpt"><p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread';
-        this.page.identifier = '/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread" data-disqus-identifier="/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
-        [R]使用 R 發送gmail Email
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
+      <span class="post-date">January 17, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -562,44 +531,27 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>使用mailR package寫一個R的script，自動發信。</p>
+    <!-- <p>在資料中有些含有空白的文字讀進R後會變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
+</code></pre></div></div>
+<p>而且不管用什麼方式都取代不了這個符號，
+這時候該怎麼辦呢？</p>
 
-<p>以下幾個步驟，<br />
-1.<a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">啟用安全性較低的應用程式存取</a><br />
-2.<a href="https://github.com/rpremraj/mailR" target="_blank">使用mailR package</a></p>
+<p>其實只要使用 “\U00A0”就可以了</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
-
-</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
-          </span><span class="c1">#收件者</span><span class="w">
-          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
-                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
-          </span><span class="c1">#標題</span><span class="w">
-          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
-          </span><span class="c1">#內文</span><span class="w">
-          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
-          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
-          </span><span class="c1">#夾帶檔案</span><span class="w">
-          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
-          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
-          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># t是含有"&lt;U+00A0&gt;"的字串</span><span class="w">
+</span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-
-<p>另外，
-我其實還有查到gmailr這個package，
-但它有些bug，
-無法同時有信件內文又有夾帶檔案，
-所以目前找到最好的方式還是使用mailR。</p>
  -->
-    <div class="post-excerpt"><p>使用mailR package寫一個R的script，自動發信。</p>
+    <div class="post-excerpt"><p>在資料中有些含有空白的文字讀進R後會變成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
+</code></pre></div></div>
+<p>而且不管用什麼方式都取代不了這個符號，
+這時候該怎麼辦呢？</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -619,8 +571,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/';
+        // this.page.url = '/blog//r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/#disqus_thread';
+        this.page.identifier = '/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -633,7 +585,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">0 Comments</a>
+        <a href="/blog//r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">0 Comments</a>
       </span>
 
     </div>
@@ -642,15 +594,142 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/">
-        [Python]使用 python 下載 gmail 附件
+      <a href="/blog/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">
+        [Tutorial]Computer Networking筆記(9-11)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 8, 2016</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 15, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 8, 2016</span>
+      <span class="post-date">January 15, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+<h2 id="1what-is-nicnetwork-interface-card"><strong>1.What is NIC(Network Interface Card)?</strong></h2>
+<p>NIC就是網卡，所有電腦都必須要有網卡才能連上網路。<br />
+(just google it, you can find tons of pictures of NIC)</p>
+
+<h2 id="2what-is-a-protocol"><strong>2.What is a Protocol?</strong></h2>
+<p>字典翻譯的意思是，協議草案、禮儀。<br />
+在network裡，protocol是「網路傳輸協定」。</p>
+
+<p>這裡作者先不講定義，先講一個communication會有什麼要件，<br />
+他用男生想要認識一個女生來舉例。</p>
+
+<p>一開始男生要搭訕女生他們可能會有像這樣的對話</p>
+<ul>
+  <li>Hey  -&gt;</li>
+  <li>&lt;-  Hello</li>
+  <li>Can I get your number?   -&gt;</li>
+  <li>&lt;- 1234-567</li>
+</ul>
+
+<p>這樣的對話中會有幾個規則，</p>
+<ol>
+  <li>一次只會有一個人說話</li>
+  <li>男生說話以後，會預期女生會回話</li>
+  <li>問句會有預期的回答(specific messages receive specific responses)<br />
+符合這樣的規則，那麼人之間的對話(communication)才會有可能成立。</li>
+</ol>
+
+<p>同樣的，用在computer commnication也要有一些規則。<br />
+Protocol are the rules for successful communication among two parties.</p>
+
+<p>如果今天你的mac想要和web sever communicates這時候protocol會是什麼呢？</p>
+<ul>
+  <li>Can I connect to you?   -&gt;</li>
+  <li>&lt;-   Yes, you have my permission.</li>
+  <li>GET file google.com   -&gt;</li>
+  <li>&lt;-  sends file</li>
+</ul>
+
+<p>在computer networking裡，最重要的protocol是<br />
+<strong>format</strong>和<strong>order</strong> of massage<br />
+就像是上面的請求順序，<br />
+如果在mac還沒提出request，<br />
+sever就送出網頁，這肯定很怪的吧！<br /></p>
+
+<p>protocol有很多種，
+但我們先來看以下這個例子。<br />
+這是個網址，<br />
+http:// www.thenewboston.org /index.php</p>
+
+<ul>
+  <li><strong>http</strong>: protocol</li>
+  <li><strong>www.thenewboston.org</strong>: sever name</li>
+  <li><strong>index.php</strong>: file</li>
+</ul>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">
+        [Python]Google 翻譯 API 接口 googletrnas
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 15, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 15, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -664,73 +743,46 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>每天都會收到信並且要利用信中的附件整理資料，
-但這樣我在跑程式前還要手動去下載檔案，
-覺得實在太麻煩，
-所以找到了這個辦法！</p>
+    <!-- <p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
+<pre><code class="language-cmd"># windows
+pip install googletrans
+</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
+sudo pip install googletrans
+</code></pre></div></div>
 
-<p>因為我的mail是gamil，
-所以以下的程式碼是針對gmail，
-在執行前要先<a href="http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/" target="_blank">打開imap</a>
-我主要是參考<a href="https://gist.github.com/jasonrdsouza/1674794" target="_blank">這裡</a></p>
+<p>程式碼</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">imaplib</span><span class="p">,</span> <span class="n">inspect</span>
-<span class="kn">import</span> <span class="nn">email</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">decode_header</span>
+<span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
-<span class="c">#與IMAP4 server連線，gmail要開啟IMAP</span>
-<span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
-<span class="c">#登入</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
-<span class="c">#選擇信箱標籤</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
-<span class="c">#找所有mail</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
+<span class="c"># 這兩行很重要，不然會有編碼問題</span>
+<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span> <span class="s">"utf-8"</span> <span class="p">)</span>
 
-<span class="c">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
-
-<span class="n">emailbody</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
-
-<span class="c">#找出含有附件的部分</span>
-<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
-		<span class="k">continue</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-		<span class="k">continue</span>
-
-	<span class="c">#附件檔名</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>  
-	<span class="c">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-	<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
-		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
-
-		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
-			<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-			<span class="k">print</span> <span class="s">"attachement is downloaded!"</span>
-		<span class="k">else</span><span class="p">:</span>
-			<span class="k">print</span> <span class="s">"file is already exist!"</span>
-			
-<span class="c">#關閉連線與登出</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
-
+<span class="n">translator</span> <span class="o">=</span> <span class="n">Translator</span><span class="p">()</span>
+<span class="c"># src來源語言，dest要翻譯語言，如果要找其他語言可以參考說明文件</span>
+<span class="k">print</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">'고마워'</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s">"ko"</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="s">"zh-TW"</span><span class="p">)</span>
 
 </code></pre></div></div>
+
+<p>根據說明文件，這個套件可能會有不穩定的問題
+找到有人<a href="https://hk.saowen.com/a/4c76af2381e3a60e86f7c4b934a21faebad8b2e7b4a4131cb7c2889afcea6479" target="_blank">直接爬google翻譯的程式碼</a>
+但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。</p>
+
  -->
-    <div class="post-excerpt"><p>每天都會收到信並且要利用信中的附件整理資料，
-但這樣我在跑程式前還要手動去下載檔案，
-覺得實在太麻煩，
-所以找到了這個辦法！</p>
+    <div class="post-excerpt"><p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
+<pre><code class="language-cmd"># windows
+pip install googletrans
+</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
+sudo pip install googletrans
+</code></pre></div></div>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -750,8 +802,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/#disqus_thread';
-        this.page.identifier = '/python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/';
+        // this.page.url = '/blog//python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/#disqus_thread';
+        this.page.identifier = '/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -764,7 +816,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/#disqus_thread" data-disqus-identifier="/python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/">0 Comments</a>
+        <a href="/blog//python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/#disqus_thread" data-disqus-identifier="/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">0 Comments</a>
       </span>
 
     </div>
@@ -773,49 +825,80 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">
-        [R]在 R 中使用 system 呼叫 python
+      <a href="/blog/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">
+        [Tutorial]Computer Networking筆記(1-8)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 8, 2016</span> -->
+      <!-- <span class="post-date">Posted by Shihs on January 9, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 8, 2016</span>
+      <span class="post-date">January 9, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
-<p>一開始我找到了rPython這個library，
-但它似乎無法在windows上使用……
-所以我又找到了另一個不需要安裝任何套件且可以在windows上執行的辦法！</p>
+<h2 id="1what-is-computer-networking"><strong>1.What is Computer Networking?</strong></h2>
+<p>各裝置(<em>devices</em>)之間的連結<br />
+裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個<strong><em>Node</em></strong>。<br />
+連結：可以使用cable、wireless、copper wire等等，可以稱為<strong><em>communications media</em></strong>。<br />
+Internet(網路)就是一種computer network<br /></p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>computer nework的目的是為了要資料傳輸、資料交換，<br />
+這裡的資料可以是，documents、pictures、videos等等。</p>
 
-<p>這個辦法是呼叫系統函數，
-就像是在cmd上面打的指令一樣，
-而且在mac上也可以執行！</p>
+<p>computer newworking的兩個重點就是，<strong><em>Nodes</em></strong>和<strong><em>Communications Media</em></strong></p>
+
+<h2 id="2types-of-networks"><strong>2.Types of Networks</strong></h2>
+<p><strong><em>LAN</em></strong>(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡<br />
+<strong><em>MAN</em></strong>(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市<br />
+<strong><em>WAN</em></strong>(Wide Area Network)：&gt;30 miles的網絡連結，整個國家之間、跨國之間的連結<br /></p>
+
+<h2 id="3how-the-internet-works"><strong>3.How the Internet works?</strong></h2>
+<p>以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？<br />
+如果以上面computer network的邏輯來看，<br />
+其他電腦可以連結到我的電腦，看到我的個人網站。<br />
+但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，<br />
+所以實際上，要連到個人網站是透過<strong><em>server</em></strong>。<br />
+server is a special computer that everyone can access it.<br /></p>
+
+<p>我將個人網站建置(store)在server，<br />
+其他人要看到我的網站，<br />
+會在browser上打上網址，<br />
+這時候就會向server提出request，<br />
+sever接受到request會回傳data，這些data會是程式碼，<br />
+而browser會將這些程式碼轉成我們看得懂的網站。<br /></p>
+
+<p>通常建置網頁這樣的server我們稱為，<strong><em>web server</em></strong>。<br />
+像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，<br />
+所以這個server就必須要有很大的memory，<br />
+才能負荷這樣的使用流量。<br /></p>
+
+<h2 id="4client-and-host"><strong>4.Client and Host</strong></h2>
+<p>根據上面提到的例子，<br />
+使用PC的browser向sever提出request，<br />
+然後server會提供給data給PC的browser。<br /></p>
+
+<p>PC接收資料，而server提供資料，<br />
+PC就是client，sever就是host。<br /></p>
 
  -->
-    <div class="post-excerpt"><p>我個人比較偏好使用R做所有的事情，
-但某些時候還是需要使用到python，
-所以希望可以在R上呼叫python程式碼。</p>
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -835,8 +918,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread';
-        this.page.identifier = '/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/';
+        // this.page.url = '/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -849,7 +932,119 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/#disqus_thread" data-disqus-identifier="/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">0 Comments</a>
+        <a href="/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">
+        [Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這次要爬的網址長得像這樣</p>
+<ul>
+  <li>hazyfairyland.blogspot.tw</li>
+  <li>cartersoshkosh.tw</li>
+  <li>yungmaun.com.tw</li>
+</ul>
+
+<p>沒有www也沒有<a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank">http/https</a>，<br />
+如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，<br />
+但如果是使用request就會產生錯誤訊息。<br /></p>
+
+<p>這時候該怎麼辦呢？</p>
+
+<p>其實只要在前方加上”http://”就行了，<br />
+若其實該網址是”https//”， request也會自動重新導向。<br /></p>
+
+<p>假如所有的網址都是沒有www，<br />
+就直接在所有url前方加上”http://”就好了。<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"cartersoshkosh.tw"</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>		
+        <span class="k">break</span>
+			
+    <span class="c"># catch requests.exceptions.MissingSchema error, add "http://" in the front</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">"http://"</span> <span class="o">+</span> <span class="n">url</span>
+       
+    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">url</span>  <span class="c"># print the final url</span>
+    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">history</span>  <span class="c"># print how many redirections it has gone throgh</span>
+</code></pre></div></div>
+
+ -->
+    <div class="post-excerpt"><p>這次要爬的網址長得像這樣</p>
+<ul>
+  <li>hazyfairyland.blogspot.tw</li>
+  <li>cartersoshkosh.tw</li>
+  <li>yungmaun.com.tw</li>
+</ul>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">0 Comments</a>
       </span>
 
     </div>
@@ -860,7 +1055,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <div class="pagination">
   
-    <span class="pagination-item older">Older</span>
+    <a class="pagination-item older" href="/blog/page11">Older</a>
   
   
     

@@ -316,8 +316,10 @@ Thus contexts are unigrams.
 
 ### word2vec
 
+- word2vec 是 word embedding 的一種
+- word2Vec 主要有 CBOW (continuous bag-of-words) 和 skip-gram 兩種模型
 
-
+- CBOW 是給定上下文，來預測輸入的字詞；Skip-gram 則是給定輸入字詞後，來預測上下文
 
 
 

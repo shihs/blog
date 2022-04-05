@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,15 +183,15 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">
-        [Python][爬蟲]如何下載 zip 檔
+      <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
+        [Python]使用 pyinstaller 套件打包 .py 檔
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 25, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 25, 2017</span>
+      <span class="post-date">May 24, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -187,44 +199,88 @@
       
       
         <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>這裡要示範使用三個不同的package下載zip檔。</p>
+    <!-- <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
-<span class="kn">import</span> <span class="nn">urllib2</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。<br /></p>
 
-<span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.blog.pythonlibrary.org/wp-content/uploads/2012/06/wxDbViewer.zip'</span>
+<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
+<br /></p>
 
-<span class="k">print</span> <span class="s">"downloading with urllib"</span>
-<span class="n">urllib</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s">"code.zip"</span><span class="p">)</span>
+<h2 id="前提">前提</h2>
+<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
 
-<span class="k">print</span> <span class="s">"downloading with urllib2"</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"code2.zip"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">code</span><span class="p">:</span>
-    <span class="n">code</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="k">print</span> <span class="s">"downloading with requests"</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"code3.zip"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">code</span><span class="p">:</span>
-    <span class="n">code</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
+<h2 id="安裝">安裝</h2>
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
 </code></pre></div></div>
 
-<p><a href="https://dzone.com/articles/how-download-file-python" target="_blank">參考</a></p>
+<p><strong>Mac</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+</code></pre></div></div>
+<p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
+<em>[Errno 1] Operation not permitted</em></p>
+
+<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+</code></pre></div></div>
+<p>就成功安裝了。<br />
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
+
+<h2 id="打包-py-檔">打包 .py 檔</h2>
+<p>假如現在要打包一個 test.py 檔<br /></p>
+
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>完成後會產生三個檔案，</p>
+<ol>
+  <li>build 資料夾</li>
+  <li>dist 資料夾</li>
+  <li>test.spec 檔</li>
+</ol>
+
+<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
+
+<p><strong>Mac</strong><br />
+Mac的操作基本上和 Windows 指令一樣，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>打包完後產生出來的檔案也會一樣。<br />
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
+<br />
+可以試試看在 .py 檔裡增加一行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+</code></pre></div></div>
+<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
+
+<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+</code></pre></div></div>
+<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
+
+<h2 id="常用參數">常用參數</h2>
+<ol>
+  <li>pyinstaller -h 查看參數</li>
+  <li>-F 打包成一個exe文件</li>
+  <li>–icon=圖標路徑</li>
+</ol>
+
+<p><br />
+關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/" target="_blank">部落格</a>我覺得說明蠻詳細的。</p>
+
  -->
-    <div class="post-excerpt"><p>這裡要示範使用三個不同的package下載zip檔。</p>
+    <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -244,8 +300,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/';
+        // this.page.url = '/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -258,7 +314,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">0 Comments</a>
+        <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
       </span>
 
     </div>
@@ -267,194 +323,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">
-        [Excel][VBA]寄出內文含圖檔的outlook信件
+      <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
+        [Python]下載與安裝 Python2.7 及 pip 套件
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 5, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on May 23, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 5, 2017</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Excel">Excel</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#VBA">VBA</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這裡要介紹如何使用Excel VBA<br />
-在信件內容包含截取sheet中的特定欄位區塊，<br />
-並將此區塊變為圖檔包含在內文中寄出。<br /></p>
-
-<p>現在要截取一份長這樣的檔案<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/2007909/E6x1745kT82DMCqRbLq2_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" />
-有兩種方法。<br /></p>
-
-<p>第一種方法是，<br />
-先將截取的區塊存成圖檔後再將此圖檔讀取到郵件內容。<br /></p>
-
-<pre><code class="language-VBA">Sub PrintScreen()
-
-      '複製工作表要存圖檔的範圍
-        Sheets("Sheet1").Select
-        Set rng = Range("A1:B3")
-        rng.CopyPicture
-
-      ' Excel 存圖檔的精簡程式碼。
-        With ActiveSheet.ChartObjects.Add(1, 1, rng.Width, rng.Height)  '新增 圖表
-            .Chart.Paste                                                '貼上 圖片
-            .Chart.Export Filename:="test.PNG", Filtername:="PNG" '匯出 圖片
-            .Delete                                                     '刪除 圖表
-        End With
-
-End Sub
-
-Sub SendMail_1()
-    
-    Dim objOutlook As Object
-    Dim objMail As Object
-    
-    Set objOutlook = CreateObject("Outlook.Application")
-    Set objMail = objOutlook.CreateItem(0)
-    
-    With objMail
-        .to = "address@email.com"
-        .Subject = "Subject"
-        .Body = "mail body"
-        .HTMLbody = .HTMLbody &amp; "&lt;br&gt;&lt;B&gt;Embedded Image:&lt;/B&gt;&lt;br&gt;" _
-                &amp; "&lt;img src='test.PNG'" &amp; "width='250' height='100'&gt;&lt;br&gt;" _
-                &amp; "&lt;br&gt;Best Regards, &lt;br&gt;Sumit&lt;/font&gt;&lt;/span&gt;"
-       ' objMail.Attachments.Add "test.PNG"       ' 使用附件檔案
-       '.Display     ' 可以編輯郵件內容，再按下 傳送 鍵。
-       '.Save         ' to save a copy in the drafts folder
-        .Send        ' 直接送出郵件
-        
-    End With       
-    
-    Set objOutlook = Nothing
-    Set objMail = Nothing
-    
-End Sub
-
-</code></pre>
-
-<p>第二種方法是，<br />
-直接截取區要的區塊，變成圖檔，然後貼到信件內容。</p>
-
-<pre><code class="language-VBA">Sub SendMail_2()
-
-    Set objOutlook = CreateObject("Outlook.Application")
-    Set objMail = objOutlook.CreateItem(0)
-
-    ' mail body
-    strbody = "mail body&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;"
-
-    'Copy range of interest
-    Dim r As Range
-    Set r = Sheets("Sheet1").Range("A1:B3")
-    r.Copy
-
-    'Paste as picture in sheet and cut immediately
-    Dim p As Picture
-    Set p = ActiveSheet.Pictures.Paste
-    p.Cut
-        
-    With objMail
-        .to = "address@email.com"
-        '.cc =
-        '.bcc = ""
-        .Subject = "Subject"
-        .HTMLbody = strbody
-        '.Display
-        
-    End With
-
-
-    'Get its Word editor
-    objMail.Display
-    Dim wordDoc As Object
-    Set wordDoc = objMail.GetInspector.WordEditor
-
-    'Paste picture
-    wordDoc.Range(Start:=wordDoc.Range.End - 3).Paste
-    
-    'send mail
-    objMail.Send
-    
-    Set objOutlook = Nothing
-    Set objMail = Nothing
-
-End Sub
-
-</code></pre>
-
- -->
-    <div class="post-excerpt"><p>這裡要介紹如何使用Excel VBA<br />
-在信件內容包含截取sheet中的特定欄位區塊，<br />
-並將此區塊變為圖檔包含在內文中寄出。<br /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread';
-        this.page.identifier = '/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/#disqus_thread" data-disqus-identifier="/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">
-        [Python][爬蟲]不同的 Content-Type (multipart/form-data)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 30, 2017</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 30, 2017</span>
+      <span class="post-date">May 23, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -462,131 +339,92 @@ s.setAttribute('data-timestamp', +new Date());
       
       
         <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1" target="_blank">台灣精品獎得獎名單</a>。<br /></p>
+    <!-- <p>安裝前可以先認識 <a href="https://zh.wikipedia.org/wiki/Python" target="_blank">Python</a>。</p>
 
-<p>我想要爬取的條件是，
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/Hpw8hdtgR2y2Yr1gIYln_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+<p>這篇文章將會介紹如何在 windows 系統中下載與安裝 python2.7 以及安裝 pip 套件。</p>
 
-<p>這時候會猜測這應該是個post的requests。</p>
+<p>主要步驟其實就是四個：</p>
+<ol>
+  <li>下載Python</li>
+  <li>設定環境變數</li>
+  <li>下載get-pip.py</li>
+  <li>設定環境變數</li>
+</ol>
 
-<p>果然，在按下查詢後，<br />
-出現了一個cross_list的可疑人物，<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/iJbMP5kdRba31P5IoKG0_%E6%93%B7%E5%8F%96.PNG" alt="擷取.PNG" /></p>
+<h3 id="1下載-python27">1.下載 Python2.7</h3>
 
-<p>因為是post，<br />
-所以會期望在headers裡找到 “Form Data”，<br />
-這裡面應會藏著post需要的參數。<br /></p>
+<p><a href="https://www.python.org/downloads/release/python-2714/">Python2.7.14載點</a>
+根據自己電腦是32位元還是64位元選擇要下載的檔案
+<img src="http://localhost:4000/blog/img/posts/python%20downloads.jpg" alt="python downloads.jpg" /></p>
 
-<p>但不幸的是，什麼也沒有，<br />
-只找到長得像這樣的”Request Payload”<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+<p>下載下來後的檔案（我的電腦是32位元）
+<img src="http://localhost:4000/blog/img/posts/python%20installation.jpg" alt="python installation.jpg" /></p>
 
-<p>然後Content-Type是multipart/form-data<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/SEe7tcApQfCSkEeYEgml_content-type.PNG" alt="content-type.PNG" /></p>
+<p>點兩下安裝，就是一直按下一步就對了
+<img src="http://localhost:4000/blog/img/posts/python%20install%20step.jpg" alt="python install step.jpg" /></p>
 
-<p>其實，我們平常需要的data form裡的資料就藏在Request Payload裡。<br />
-抓取的方式是，<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1985162/w5DjcxhTR0s2PKSNbQwQ_payload.PNG" alt="payload.PNG" /></p>
+<h3 id="2設定環境變數">2.設定環境變數</h3>
+<p>設定環境變數的目的是，在執行 Python 時讓系統可以根據環境變數底下的路徑依序去找 Python 程式，而不會不知道要如何執行 Python。</p>
 
-<p>以這行為例，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>------WebKitFormBoundaryTaDJAA82fTd3ug3W
-Content-Disposition: form-data; name="awards[]"
+<p>設定環境變數步驟，<br /></p>
 
-1
-</code></pre></div></div>
-<p>name後的 “award[]” 就會是dictionary的key，
-底下的 1 ，就會是value，
-所以就會變成</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
-<span class="s">"awards[]"</span> <span class="o">=</span> <span class="s">"1"</span>
-<span class="p">}</span>
-</code></pre></div></div>
+<p>電腦(右鍵)-&gt;內容
+<img src="http://localhost:4000/blog/img/posts/environment.jpg" alt="environment.jpg" /></p>
 
-<p>所以就把Request Payload所有的資訊寫成</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
-	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
-	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
-	<span class="s">"awards[]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
-	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
-	<span class="s">"years[]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
-	<span class="s">"industry[]"</span><span class="p">:</span><span class="s">"Z"</span>
-<span class="p">}</span>
+<p>1.進階系統設定 -&gt; 2.環境變數 -&gt; 3.點選PATH-&gt;編輯
+<img src="http://localhost:4000/blog/img/posts/environment%20variable.jpg" alt="environment variable.jpg" /></p>
+
+<p>在變數最後加上安裝路徑「;C:\Python27」（這是預設的安裝路徑，如果安裝過程中有更改位置，這邊要改成安裝的路徑）
+<img src="http://localhost:4000/blog/img/posts/python%20path.jpg" alt="python path.jpg" /></p>
+
+<p>以上步驟完成之後在 cmd 輸入 python，就開始執行 Python 了！ 
+<img src="http://localhost:4000/blog/img/posts/python%20test.jpg" alt="python test.jpg" /></p>
+
+<p><br />
+基本上到這裡已經安裝好 Python 了，那為什麼要安裝 pip 呢？<br /></p>
+
+<p>Python 有很多別人寫好且非常好用的套件，當我們想要使用這些套件前會需要先下載安裝套件，而 pip 是用來下載其他套件非常好用的工具。<br /></p>
+
+<p>當我們下載完 pip 後，
+未來下載套件只需要在 cmd 輸入指令就能搞定。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install packagename
 </code></pre></div></div>
 
-<p>但這樣寫完會覺得非常不合理，<br />
-因為會有一堆同樣的key但給予不同的value，<br />
-也就是說會key會一直被新的value取代。<br /></p>
+<p>也許現在還是會有點困惑，但未來真正開始寫 Python 就會明白為什麼大家下載完 Python 都會接著安裝 pip 了。</p>
 
-<p>我當時的想法是，<br />
-看到 [] 就會很想要在裡面塞數字順位，<br />
-果然，從0開始，將相同的key編號，<br />
-就成功了。<br /></p>
+<h3 id="3下載-get-pippy">3.下載 get-pip.py</h3>
+<p>先下載 <a href="http://localhost:4000/blog/downloads/get-pip.py">get-pip.py</a></p>
 
-<p>所以這樣送出requests，</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="c">#爬取台灣精品得獎名單http://www.taiwanexcellence.org/index.php/awards/now/cross_list/1/2017/2/1</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">math</span>
-
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.taiwanexcellence.org/index.php/awards/now/send_search/1/2017/2/1/cross_list"</span>
-
-<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"keyword"</span><span class="p">:</span><span class="s">""</span><span class="p">,</span>
-	<span class="s">"awards[0]"</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
-	<span class="s">"awards[1]"</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
-	<span class="s">"awards[2]"</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
-	<span class="s">"years[0]"</span><span class="p">:</span><span class="s">"2017"</span><span class="p">,</span>
-	<span class="s">"years[1]"</span><span class="p">:</span><span class="s">"2016"</span><span class="p">,</span>
-	<span class="s">"industry[0]"</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
-	<span class="s">"industry[1]"</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
-	<span class="s">"industry[2]"</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
-	<span class="s">"industry[3]"</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
-	<span class="s">"industry[4]"</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
-	<span class="s">"industry[5]"</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
-	<span class="s">"industry[6]"</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
-	<span class="s">"industry[7]"</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
-	<span class="s">"industry[8]"</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
-	<span class="s">"industry[9]"</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
-	<span class="s">"industry[10]"</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
-	<span class="s">"industry[11]"</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
-	<span class="s">"industry[12]"</span><span class="p">:</span><span class="s">"Z"</span>
-<span class="p">}</span>
-
-<span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">)</span>
-
+<p>接著開啟 cmd，使用 cd 將目前位置移到 get-pip.py 的路徑底下，並輸入</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python get-pip.py
 </code></pre></div></div>
+<p><img src="http://localhost:4000/blog/img/posts/run%20pip_get.jpg" alt="run pip_get.jpg" /></p>
 
-<p><a href="https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py" target="_blank">完整的程式碼</a></p>
+<p>這時候只差最後一步了</p>
+
+<h3 id="4設定環境變數">4.設定環境變數</h3>
+<p>這個步驟與剛剛第2個步驟一樣，不過現在要加上的路徑是「;C:\Python27\Script」
+<img src="http://localhost:4000/blog/img/posts/python%20script%20path.jpg" alt="python script path.jpg" /></p>
+
+<p><br />
+<br />
+接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install requests
+</code></pre></div></div>
+<p>如果沒有問題，一切就大功告成！<br /></p>
 
  -->
-    <div class="post-excerpt"><p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1" target="_blank">台灣精品獎得獎名單</a>。<br /></p>
+    <div class="post-excerpt"><p>安裝前可以先認識 <a href="https://zh.wikipedia.org/wiki/Python" target="_blank">Python</a>。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -606,8 +444,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/';
+        // this.page.url = '/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread';
+        this.page.identifier = '/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -620,7 +458,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">0 Comments</a>
+        <a href="/blog//python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/#disqus_thread" data-disqus-identifier="/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">0 Comments</a>
       </span>
 
     </div>
@@ -629,15 +467,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">
-        [R]顯示完整數字，不顯示科學記號
+      <a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">
+        [R]如何使用R讀取Excel檔案
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 27, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 27, 2017</span>
+      <span class="post-date">February 26, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -651,17 +489,155 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>只要輸入，調整可顯示的位數</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+    <!-- <p>很多資料會使用excel檔案儲存，<br />
+這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
+<ol>
+  <li>csv</li>
+  <li>xlsx</li>
+  <li>xls</li>
+</ol>
+
+<h2 id="1csv"><strong>1.csv</strong><br /></h2>
+<p>csv是最簡單的，不需要install任何package，<strong>read.csv</strong></p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
+</code></pre></div></div>
+<p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
+這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
+</span></code></pre></div></div>
+<p>問題應該就可以被解決了。<br /></p>
+
+<h2 id="2xlsx"><strong>2.xlsx</strong><br /></h2>
+<p>讀取xlsx檔案時依據情況，有兩個套件我會使用，<br /></p>
+<ul>
+  <li><a href="https://cran.r-project.org/web/packages/openxlsx/openxlsx.pdf" target="_blank">openxlsx</a><br /></li>
+  <li><a href="https://cran.r-project.org/web/packages/XLConnect/XLConnect.pdf" target="_blank">XLConnect</a><br /></li>
+</ul>
+
+<p>這兩個套件都可以儲存多個sheet，<br />
+對儲存格做顏色、合併、篩選等等一般可以做的事都可以用程式碼去做。</p>
+
+<h3 id="1openxlsx"><strong>(1)openxlsx</strong></h3>
+
+<p><em>讀檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 可以使用sheet參數選擇要的sheet，預設是第一個sheet</span><span class="w">
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.xlsx</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheetName</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p>就可以改為顯示完整數字</p>
- -->
-    <div class="post-excerpt"><p>只要輸入，調整可顯示的位數</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+<p><em>寫檔</em></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">openxlsx</span><span class="p">)</span><span class="w">
+
+</span><span class="c1">### 整個xlsx只有一張sheet寫檔可以簡單的使用write.xlsx就好</span><span class="w">
+</span><span class="n">write.xlsx</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1">### 有多個sheet要寫入檔案，或是要調整sheet的style</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createWorkbook</span><span class="p">()</span><span class="w">
+
+</span><span class="c1"># 增加sheet</span><span class="w">
+</span><span class="n">addWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"sheetName"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設定欄位寬度</span><span class="w">
+</span><span class="n">setColWidths</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">),</span><span class="w"> </span><span class="n">widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="nf">rep</span><span class="p">(</span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">),</span><span class="w"> </span><span class="m">30</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 增加style</span><span class="w">
+</span><span class="n">headerStyle</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createStyle</span><span class="p">(</span><span class="n">fgFill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"TopBottomLeftRight"</span><span class="p">,</span><span class="w"> </span><span class="n">halign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"center"</span><span class="p">,</span><span class="w"> </span><span class="n">textDecoration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"bold"</span><span class="p">,</span><span class="w"> </span><span class="n">fontSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">)</span><span class="w">
+
+</span><span class="n">addStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">headerStyle</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">gridExpand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 加上filter</span><span class="w">
+</span><span class="n">addFilter</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">ncol</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="w">
+
+</span><span class="c1"># 寫檔</span><span class="w">
+</span><span class="n">writeData</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sheet</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="s2">"file.xlsx"</span><span class="p">,</span><span class="w"> </span><span class="n">overwrite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
+
+<h3 id="2xlconnect"><strong>(2)XLConnect</strong><br /></h3>
+<p>至於XLConnect我是在想要使用資料驗證(data validation)裡的「清單」功能時想要克服的。</p>
+
+<p>一開始想要直接使用openxlsx的dataValidation function，<br />
+但一直失敗，且找到<a href="https://rdrr.io/cran/openxlsx/man/dataValidation.html" target="_blank">這裡</a>說明 list 這個功能無法發揮，<br />
+所以我想到先儲存一個 template，將我需要的資料驗證清單做好，<br />
+再使用 loadworkbook 的方法就可以保留 excel 裡原本的樣式。</p>
+
+<p>原本是直接使用 openxlsx 這個 library 的 loadWorkbook，<br />
+但在調整顏色時一直會有 error 無法解決，<br />
+在改用 XLConnect 這個 library 後就成功使用我想要的cells style與保留資料驗證清單了。<br /></p>
+
+<p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
+使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
+  invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
+</code></pre></div></div>
+
+<p>看起來像是編碼上的錯誤，但這份檔案上完全沒有中文，<br />
+後來我甚至存一份空白的excel檔案都還是會有錯誤。</p>
+
+<p>我將其他可以使用 loadWorkbook 這個 function 的 xlsx 丟進 Notepad++ 看，<br />
+發現可以讀的檔案是<em>Macintosh(CR)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Macintosh(CR).PNG" alt="Macintosh(CR).PNG" /></p>
+
+<p>不能讀的檔案是<em>Unix(LF)</em></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Unix(LF).PNG" alt="Unix(LF).PNG" /></p>
+
+<p>但是，將 template 儲存成 Macintosh(CR) 後，<br />
+openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
+而 XLConnect 的錯誤則解除了。</p>
+
+<p>程式碼範例，<br /></p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">XLConnect</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 讀取template</span><span class="w">
+</span><span class="n">wb</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">loadWorkbook</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># d是要儲存的dataframe，getSheets(wb)是sheet的名稱</span><span class="w">
+</span><span class="n">writeWorksheet</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">startRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="n">startCol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 設style</span><span class="w">
+</span><span class="n">cs</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">createCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">)</span><span class="w">
+</span><span class="c1"># 邊框</span><span class="w">
+</span><span class="n">setBorder</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"all"</span><span class="p">),</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">XLC</span><span class="o">$</span><span class="s2">"BORDER.THIN"</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">XLC</span><span class="o">$</span><span class="s2">"COLOR.BLACK"</span><span class="p">))</span><span class="w">
+</span><span class="n">setCellStyle</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSheets</span><span class="p">(</span><span class="n">wb</span><span class="p">),</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">7</span><span class="o">:</span><span class="p">(</span><span class="m">7</span><span class="o">+</span><span class="n">nrow</span><span class="p">(</span><span class="n">d</span><span class="p">)),</span><span class="w"> </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">cellstyle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 存檔</span><span class="w">
+</span><span class="n">saveWorkbook</span><span class="p">(</span><span class="n">wb</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"savefile.xlsx"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="3xls">3.xls<br /></h2>
+<p>xls用的是<a href="https://cran.r-project.org/web/packages/readxl/readxl.pdf" target="_blank">readxl</a>套件，是R界有名的ggplot2作者<a href="http://hadley.nz/" target="_blank">Hadley Wickham</a>所寫。<br /></p>
+
+<p>下載完後只要一行指令就好，</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">readxl</span><span class="p">)</span><span class="w">
+</span><span class="n">saleslead</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read_excel</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="n">PATH</span><span class="p">,</span><span class="w"> </span><span class="s2">"2018 sales lead report (for TM only).xls"</span><span class="p">),</span><span class="w"> </span><span class="n">sheet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Raw Data"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+<p>但要注意的是<a href="http://readxl.tidyverse.org/articles/cell-and-column-types.html#excel-types-r-types-col_types" target="_blank">屬性問題</a>。</p>
+
+<p>其他更多 library 的 function 都可以去CRAN找哦！</p>
+ -->
+    <div class="post-excerpt"><p>很多資料會使用excel檔案儲存，<br />
+這邊介紹如何使用R讀取主要三種常用的excel附檔名。<br /></p>
+<ol>
+  <li>csv</li>
+  <li>xlsx</li>
+  <li>xls</li>
+</ol>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -681,8 +657,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread';
-        this.page.identifier = '/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/';
+        // this.page.url = '/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread';
+        this.page.identifier = '/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -695,7 +671,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread" data-disqus-identifier="/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">0 Comments</a>
+        <a href="/blog//r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">0 Comments</a>
       </span>
 
     </div>
@@ -704,15 +680,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
-        [R]Error when saving xlsx workbook with package openxlsx
+      <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
+        [R]使用 R 寄Outlook Email
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 22, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 22, 2017</span>
+      <span class="post-date">February 26, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -726,35 +702,55 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
+    <!-- <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
 
-<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
+<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
+<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
 
-<p>2.找到Rtools底下的zip.exe路徑，
-並設定rools的zip.exe路徑即可解決此問題</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
+</span><span class="c1">## init com api</span><span class="w">
+</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## create an email </span><span class="w">
+</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
+</span><span class="c1">## configure  email parameter </span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
+</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
+</span><span class="c1"># First:text</span><span class="w">
+</span><span class="c1"># outMail[["body"]] = </span><span class="w">
+</span><span class="c1"># "Dear reciever,</span><span class="w">
+</span><span class="c1">#                      </span><span class="w">
+</span><span class="c1"># Please see attached.</span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># </span><span class="w">
+</span><span class="c1"># Best regards,</span><span class="w">
+</span><span class="c1"># Sender"</span><span class="w">
+
+</span><span class="c1"># Second:html text</span><span class="w">
+</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
+</span><span class="s1">'
+&lt;p&gt;Dear reciever,&lt;/p&gt;
+&lt;p&gt;Please see attached.&lt;/p&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;p&gt;Best regards,
+&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
+
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
+
+</span><span class="c1"># attachment</span><span class="w">
+</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
+</span><span class="c1">## send it                     </span><span class="w">
+</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
+
+
 </span></code></pre></div></div>
-
  -->
-    <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
+    <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -774,8 +770,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread';
-        this.page.identifier = '/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/';
+        // this.page.url = '/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread';
+        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -788,7 +784,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread" data-disqus-identifier="/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">0 Comments</a>
+        <a href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
       </span>
 
     </div>
@@ -797,15 +793,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">
-        [Python][爬蟲]利用python下載zip檔並解壓縮
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
+        [Python][爬蟲]requests 的編碼
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 18, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 17, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 18, 2017</span>
+      <span class="post-date">February 17, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -822,38 +818,22 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>下載檔案是使用package urllib2<br />
-解壓縮檔案則是使用package zipfile<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400</span>
-<span class="kn">import</span> <span class="nn">urllib2</span> <span class="c">#urllib2.urlopen </span>
-<span class="kn">import</span> <span class="nn">zipfile</span> <span class="c">#zipfile.ZipFile</span>
-
-<span class="k">def</span> <span class="nf">DownloadTWCompany</span><span class="p">():</span>
-	<span class="c"># 檔案下載</span>
-	<span class="k">print</span> <span class="s">"下載全國營業(稅籍)登記資料集壓縮擋..."</span>
-	<span class="n">downloadurl</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://www.fia.gov.tw/opendata/bgmopen1.zip'</span><span class="p">)</span>
-	<span class="n">zipcontent</span><span class="o">=</span> <span class="n">downloadurl</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"TWRAW.zip"</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-	    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipcontent</span><span class="p">)</span>
-	<span class="k">print</span> <span class="s">"下載完成!"</span>
-	
-	<span class="c"># 解壓縮檔案</span>
-	<span class="k">print</span> <span class="s">"資料解壓縮..."</span>
-	<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'TWRAW.zip'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-		<span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s">"."</span><span class="p">,</span> <span class="n">pwd</span> <span class="o">=</span> <span class="s">"1234"</span><span class="p">)</span>  <span class="c"># 解壓縮密碼1234</span>
-	
-	<span class="k">print</span> <span class="s">"解壓縮完成!"</span>
-
-<span class="n">DownloadTWCompany</span><span class="p">()</span>
-
+    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
 </code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
+
+<p><strong>rep.text    ： unicode 型別</strong><br />
+1.是由 requests 以 rep.encoding 自動轉換的！<br />
+2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
 
  -->
-    <div class="post-excerpt"><p>下載檔案是使用package urllib2<br />
-解壓縮檔案則是使用package zipfile<br /></p>
+    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -873,8 +853,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/';
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -887,7 +867,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">0 Comments</a>
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
       </span>
 
     </div>
@@ -896,15 +876,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/">
-        [Python][爬蟲]如何刪除網頁中的 & nbsp;
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
+        [Python][爬蟲]防止被ban，代理IP怎麼用?
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 17, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 17, 2017</span>
+      <span class="post-date">February 7, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -921,41 +901,92 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>在爬取網頁時偶爾會碰到<br /></p>
+    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ni">&amp;nbsp;</span>
+<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
+這裡主要介紹如何使用IP代理。</p>
+
+<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
+<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
+<ol>
+  <li>
+    <p>透明代理(Transparent Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Your IP</p>
+  </li>
+  <li>
+    <p>匿名代理(Anonymous Proxy)<br />
+REMOTE_ADDR = proxy IP<br />
+HTTP_VIA = proxy IP<br />
+HTTP_X_FORWARDED_FOR = proxy IP</p>
+  </li>
+  <li>
+    <p>混淆代理(Distorting Proxies)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = Proxy IP<br />
+HTTP_X_FORWARDED_FOR = Random IP address</p>
+  </li>
+  <li>
+    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
+REMOTE_ADDR = Proxy IP<br />
+HTTP_VIA = not determined<br />
+HTTP_X_FORWARDED_FOR = not determined<br /></p>
+  </li>
+</ol>
+
+<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
+<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
+<ol>
+  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
+  <li>http://www.proxyserverlist24.top/<br /></li>
+</ol>
+
+<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
+
+<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
+<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
+
+<span class="p">}</span>
+<span class="c">###注意</span>
+<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
+<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
+
+
 </code></pre></div></div>
 
-<p>而且怎麼樣都刪不掉也取代不掉，<br />
-使用strip()仍然會有空白。</p>
+<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
+要爬取網站的時候，先讀取該檔案，
+只要被擋，就random使用proxy替換proxies。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
-</code></pre></div></div>
-
-<p>假如現在有一個網頁內容包含</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;td&gt;</span>
-	E601010<span class="ni">&amp;nbsp;</span>
-	電器承裝業
-	<span class="nt">&lt;br&gt;</span>
-	E601020<span class="ni">&amp;nbsp;</span>
-	電器安裝業
-	<span class="nt">&lt;br&gt;</span>													
-<span class="nt">&lt;/td&gt;</span>
-</code></pre></div></div>
-
-<p>已經抓出td tag，<br />
-接著可以使用</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這時候td type會變成str，<br />
-再使用replace取代就可以刪除空白了。<br /></p>
+<p>如果所有proxy都用完再重新爬取，
+網站上的proxy都會不停更換，
+所以只要更新proxy庫就好。</p>
 
  -->
-    <div class="post-excerpt"><p>在爬取網頁時偶爾會碰到<br /></p>
+    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
+<ol>
+  <li>動態設置user agent</li>
+  <li>使用代理IP</li>
+</ol>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -975,8 +1006,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/';
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -989,7 +1020,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/">0 Comments</a>
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
       </span>
 
     </div>
@@ -998,15 +1029,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/">
-        [Python][爬蟲]不同的 Content-Type (application/json)
+      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
+        [Python]呼叫其他.py的function
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on May 5, 2017</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">May 5, 2017</span>
+      <span class="post-date">February 2, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -1014,65 +1045,88 @@ s.setAttribute('data-timestamp', +new Date());
       
       
         <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
-所有的行業代碼與中文名稱。</p>
+    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
 
-<p>按下一頁發現會load一個post的網址<br />
-<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1792968/fSvGMaRQRCfVLL1T7SMz_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%883.47.28.png" alt="螢幕快照 2017-05-10 下午3.47.28.png" /></p>
-
-<p>接著想要在headers裡找到 “Form Data”，<br />
-這裡面應會藏著post需要的參數。<br /></p>
-
-<p>可是，這時候卻只有找到 “Requests Payload”，<br />
-這個看起來很像payload的東西，<br />
-它看起來是個json，<br />
-且Response Headers的Content-Type正是application/json。</p>
-
-<p><img src="http://user-image.logdown.io/user/13067/blog/12306/post/1792968/qomn6tsmQcaYV27GsYea_content%20type.png" alt="content type.png" /></p>
-
-<p>所以我將 “Requests Payload”按下view source後的結果直接複製，<br />
-然後requests結果再用json.loads就可以得到想要的結果了。<br /></p>
-
-<p>程式碼如下，</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding:utf-8 -*-</span>
-<span class="c"># 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">json</span>
-
-
-<span class="c"># payload for requests</span>
-<span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
-
-<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">,</span> 
-		  <span class="s">"Referer"</span><span class="p">:</span><span class="s">"http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp"</span><span class="p">}</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation"</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
-
-<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">js</span><span class="p">[</span><span class="s">"d"</span><span class="p">][</span><span class="s">"Result"</span><span class="p">]:</span>
-	<span class="n">code</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Code"</span><span class="p">]</span>
-	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
-	<span class="k">print</span> <span class="n">code</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
+<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
+	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
 
 </code></pre></div></div>
+
+<p>有兩種情況，<br />
+<strong>1. 這兩個檔案在同一個folder底下</strong><br />
+—main.py<br />
+—fun.py<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
+<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
+想要呼叫的fun.py在function這個folder底下<br />
+—main.py<br />
+—function—fun.py<br /></p>
+
+<p>這時候main.py可以有兩種寫法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
+<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
+<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
+<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
+<span class="c"># it's true, it's empty. But it's still important!</span>
+</code></pre></div></div>
+
+<p>那如果今天fun.py在function的下一層folder呢?<br />
+—main.py<br />
+—function—another—fun.py<br />
+只要把main.py改成<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
+<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
+
+<span class="c">#或者也可以這樣寫</span>
+
+<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c"># 使用fun.py的itsafunction()</span>
+<span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但最重要的是，<br />
+<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+
  -->
-    <div class="post-excerpt"><p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
-所有的行業代碼與中文名稱。</p>
+    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1092,8 +1146,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/';
+        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
+        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1106,7 +1160,147 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/">0 Comments</a>
+        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
+        [Tutorial]Computer Networking筆記(22-26)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 25, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
+
+ -->
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
       </span>
 
     </div>

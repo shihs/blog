@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,928 +183,926 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">
-        [NLP]NLTK 筆記
+      <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/">
+        [Python]在 Mac 下載與安裝 Miniconda
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 17, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on April 5, 2022</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 17, 2019</span>
+      <span class="post-date">April 5, 2022</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#NLP">NLP</a>
+        <a target="_blank" href="/blog/category/#Python">Python</a>
         
       
     </span>
 
 
     </div>
-    <!-- 
- -->
-    <div class="post-excerpt">
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
+    <!-- <p>Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
+之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前我在的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。</p>
 
+<h2 id="刪除-anaconda">刪除 Anaconda</h2>
 
-<script>
+<p>參考官網的 <a href="https://docs.anaconda.com/anaconda/install/uninstall/">uninstall Anaconda</a> 的方法。</p>
 
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/#disqus_thread';
-        this.page.identifier = '/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/';
-};
+<p>原本想使用第二種方法 <code class="highlighter-rouge">conda install anaconda-clean</code>，但在下載 <code class="highlighter-rouge">anaconda-clean</code> 時一直碰到問題，所以最後決定使用第一種方法。</p>
 
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
+<p>直接刪除整個 <code class="highlighter-rouge">rm -rf ~/anaconda3</code> 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 <code class="highlighter-rouge">anaconda</code> 刪除所有相關的檔案。</p>
 
-
-
-        <a href="/blog//nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/#disqus_thread" data-disqus-identifier="/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">
-        [Text Mining]Word embeddings
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 26, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 26, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-<hr />
-
-<h2 id="word-embeddings">Word embeddings</h2>
-
-<p>對於人來說，要理解文字並不是件困難的事，但對電腦來說，每個字不過是一串 string，所以當我們要做 text mining 時就必須要將這些 string 轉化成電腦可以理解的方式。
-而 word embedding(word vector) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。</p>
-
-<p>譬如說，人類可以理解 pretty 和 beautiful 是相近詞，但如果只是給電腦這兩個單字，對於電腦來說，這只是兩個不同長度的 string 罷了。word embedding 會將這兩個字轉換成不同的 vector 映射到一個高維空間，當這兩個 vector 越接近（可以使用 consine similarity）就表示這兩個詞越相近。這就是 word embedding 主要的概念。</p>
-
-<ul>
-  <li>A word embedding is a mapping of words to points in a vector space such that nearby words (points) are similar in terms of their distributional properties.</li>
-</ul>
-
-<h3 id="the-distributional-principle">The distributional principle</h3>
-
-<p>word embedding 方法可以使用最重要的就是因為有 distributional hypothesis 這個假設。</p>
-
-<ul>
-  <li>The distributional principle states that words that occur in similar contexts tend to have similar meanings.</li>
-</ul>
-
-<p>這裡的概念是說，詞(target words)出現在類似的上下文中(context words)，則它們很有可能有相似的意思。
-譬如說，
-<br />
--「那隻『貓』好可愛」
-<br />
--「那隻『狗』好可愛」
-<br />
-這時候除了『貓』和『狗』外，這兩句話的上下文是一樣的，根據 distributional principle，這兩個詞應該是相似的。</p>
-
-<h3 id="co-occurrence-matrix">Co-occurrence matrix</h3>
-
-<p><img src="http://localhost:4000/blog/img/posts/Co-occurrence%20matrix.png" alt="" /></p>
-
-<p>上圖中，context words 就是上下文，而 target words 就是我們想要分析的字詞。
-<br />
-現在來看 cheese 這個字，可以看到和 butter, cake, cow, deer 這幾個字一起出現的次數分別是，12, 2, 1和0次。看起來和 butter 還有 cake 連結性比較強。
-再來看 bread 這個字，同樣的在 butter 和 cake 上的連結也比較強。如果我們把這兩個單字用向量表示就會是，(12, 2, 1, 0) 和 (5, 5, 0, 0)，可以去比較和其他兩個單字的 cosine similarity，這兩個的關係是比較強的。</p>
-
-<p>現在我們把它們畫出來（因為它們被映射到的是四維空間，所以老師的 slide 只看 cow 和 cake 這兩個 context words）</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/From%20co-occurrences%20to%20word%20vectors.png" alt="" /></p>
-
-<p>如果還是不太明白，<a href="http://cpmarkchang.logdown.com/posts/772665-nlp-vector-space-semantics">這篇部落格</a>應該可以看懂。</p>
-
-<p><strong>補充：</strong>
-從上面的 matrix 可能會想到一件事，<em>context words</em> 等於是決定了 target words 的向量啊！
-換句話說，當我們分析不同的文本的時候，會需要不同的 context words來算出 word embeddings。想像，如果今天要分析新聞報導和 ptt 內容，不太可能使用一樣的 context words，畢竟ptt用語和新聞用語會有很大的不同。（蛤？你說記者都抄 ptt 內容嗎？XDDD）</p>
-
-<hr />
-
-<h3 id="simple-applications-of-word-embeddings">Simple applications of word embeddings</h3>
-
-<p>word embeddings 的應用</p>
-
-<ul>
-  <li>finding similar words. 找到相似的字，像是上面的例子，找出哪一個字和 cheese 比較相似。</li>
-  <li>answering ‘odd one out’ questions. 找出不一樣的詞，譬如說  lunch, breakfast, dinner, car 哪一個詞屬於不同類？ (根據上面提到的概念，lunch, breakfast, dinner 這三個的 vector 應該會比較接近，會在比較接近的上下文中出現)</li>
-</ul>
-
-<h3 id="limitations-of-word-embeddings">Limitations of word embeddings</h3>
-
-<ul>
-  <li>
-    <p>There are many different facets of ‘similarity’. Ex. Is a cat more similar to a dog or to a tiger? (在不同情境下，cat 和 dog 可能比較相似。譬如說，貓和狗都是寵物，但如果以生物的角度來看，cat 和 tiger 都屬於貓科動物，這時候 cat 和 tiger 會比較相似)</p>
-  </li>
-  <li>
-    <p>Text data does not reflect many ‘trivial’ properties of words. Ex. more ‘black sheep’ than ‘white sheep’ (如果只分析文本，因為大部分的羊都是白色的，所以在提到羊的時候並不會特別提到顏色，但當提到比較稀少的黑羊時，反而會特別說到 black，這會導致在分析時好像黑羊出現的頻率比白羊出現的頻率高)</p>
-  </li>
-  <li>
-    <p>Word vectors reflect social biases in the data used to train them. Ex. including gender and ethnic stereotypes (<a href="https://www.pnas.org/content/115/16/E3635">論文</a>參考) 很多詞語上的用法其實帶有非常多的社會偏見和刻板印象，而這也會導致分析出的結果有所偏差。</p>
-  </li>
-</ul>
-
-<hr />
-
-<p><strong>還有什麼問題？</strong></p>
-
-<p>到目前為止，看起來都非常合理，那還會有什麼問題呢？</p>
-
-<p>這裡會碰到和之前提到過的，矩陣<em>稀疏性</em>的問題。如果今天 context words 有十萬個字，那麼 target words 就會是在十萬維度的空間的 vectors，而且可能會有很多的值都是 0 的狀況發生。那這樣要用什麼方法解決矩陣的稀疏性並產生 word embeddings（也就是每個詞的向量） 呢？</p>
-
-<p>從不同的面向來看幾個常見的 word embedding 方法，</p>
-<ul>
-  <li>Learning word embeddings via <em>matrix factorization</em>
-    <ol>
-      <li>Singular Value Decomposition(SVD)</li>
-      <li>Positive Pointwise mutual information(PPMI)</li>
-    </ol>
-  </li>
-  <li>Learning word embeddings via <em>language models</em>
-    <ol>
-      <li>N-gram</li>
-      <li>Neural language models(Ex. word2vec)</li>
-    </ol>
-  </li>
-</ul>
-
-<p>以下就要來介紹這幾種方法。</p>
-
-<hr />
-
-<h2 id="singular-value-decompositionsvd">Singular Value Decomposition(SVD)</h2>
-
-<ul>
-  <li>The rows of co-occurrence matrices are long and sparse. Instead, we would like to have word vectors that are short and dense. 簡單來說，co-occurrence matrices 會有稀疏性的問題。</li>
-  <li>One idea is to approximate the co-occurrence matrix by another matrix with fewer columns. Singular Value Decomposition 的想法是，將這個又長又臭的 co-occurrence matrix 用另比較少 columns 的 matrix 取代。</li>
-</ul>
-
-<h3 id="什麼是-singular-value-decomposition奇異值分解">什麼是 Singular value decomposition（奇異值分解）?</h3>
-
-<p>推薦<a href="https://www.youtube.com/watch?v=OEJ0wxxLO7M">李宏毅老師的線性代數</a></p>
-<ul>
-  <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA 也是一個可降維的方法，但它的矩陣就必須要是方陣。)</li>
-</ul>
-
-<p>SVD 的概念就是，任一一個矩陣 <script type="math/tex">A_{m \times n}</script>，它都可以拆解成三個矩陣（<script type="math/tex">U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}</script>）的相乘。</p>
-
-<p>其中，<script type="math/tex">U_{m \times n}</script> 的 columns 是 <em>Orthonormal</em>，而 <script type="math/tex">V^T_{n \times n}</script> 的 rows 是 <em>Orthonormal</em>，<script type="math/tex">\Sigma_{m \times n}</script> 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/SVD.png" alt="" /></p>
-
-<ul>
-  <li><script type="math/tex">\Sigma_{m \times n}</script> 會是一個長得像這樣的矩陣，且 <script type="math/tex">\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k</script></li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Sigma.png" alt="" /></p>
-
-<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。</p>
-
-<script type="math/tex; mode=display">A_{m \times n} = U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
-
-<p>參考<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>的圖，</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/svd2.jpg" alt="" /></p>
-
-<p>回到我們的 word-embedding。也就是說，使用 SVD 可以利用減少 <script type="math/tex">\Sigma</script> 的維度來處理稀疏性的問題，雖然刪除了一些詞仍舊保留重要的詞。</p>
-
-<ul>
-  <li>Each row of the (truncated) matrix 𝑼 is a k-dimensional vector that represents the ‘most important’ information about a word.</li>
-  <li>A practical problem is that computing the singular value decomposition for large matrices is expensive.</li>
-</ul>
-
-<hr />
-
-<h2 id="positive-pointwise-mutual-informationppmi">Positive Pointwise mutual information(PPMI)</h2>
-
-<h3 id="pointwise-mutual-informationpmi">Pointwise mutual information(PMI)</h3>
-
-<ul>
-  <li>Raw counts favour pairs that involve very common contexts. Ex.the cat, a cat will receive higher weight than cute cat, small cat.</li>
-  <li>We want a measure that favours contexts in which the target word occurs more often than other words.</li>
-  <li>A suitable measure is pointwise mutual information (PMI):</li>
-</ul>
-
-<script type="math/tex; mode=display">PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}</script>
-
-<p>簡單來說，我們可以用 PMI 公式來看兩個字之間的關係。</p>
-
-<p>現在我們把 <script type="math/tex">x</script> 看成我們的 target word，<script type="math/tex">y</script> 看成我們的 context word，</p>
-
-<ul>
-  <li>We want to use PMI to measure the associative strength between a word <script type="math/tex">w</script> and a context <script type="math/tex">c</script> in a data set <script type="math/tex">D</script>:</li>
-</ul>
-
-<script type="math/tex; mode=display">PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}</script>
-
-<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 <script type="math/tex">w</script> 和 <script type="math/tex">c</script> 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
-
-<p>所以這時候就有了 <strong>Positive Pointwise mutual information(PPMI)</strong>。</p>
-
-<ul>
-  <li>In positive pointwise mutual information (PPMI), all negative and undefined values are replaced by zero:</li>
-</ul>
-
-<script type="math/tex; mode=display">􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)</script>
-
-<ul>
-  <li>PPMI assigns high values to rare events, it is advisable to apply a count threshold or smooth the probabilities.</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Computing%20PPMI%20on%20a%20word%E2%80%93context%20matrix.png" alt="" /></p>
-
-<hr />
-
-<h2 id="language-models">Language models</h2>
-
-<ul>
-  <li>A <em>probabilistic language model</em> is a probability distribution over sequences of words in some language.</li>
-  <li>Recent years have seen the rise of <em>neural language models</em>, which are based on distributed representations of words.</li>
-  <li>By the chain rule, the probability of a sequence of 𝑁 words can be computed using conditional probabilities as</li>
-</ul>
-
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})</script>
-
-<ul>
-  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words(馬可夫鍊):</li>
-</ul>
-
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})</script>
-
-<h2 id="n-gram-models">N-gram models</h2>
-
-<ul>
-  <li>An n-gram is a contiguous sequence of n words or characters. Ex. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</li>
-  <li>An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.</li>
-  <li>n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。</li>
-</ul>
-
-<p><strong>Formal definition of an n-gram model</strong></p>
-
-<ul>
-  <li><script type="math/tex">n</script>: the model’s order (1 = unigram, 2 = bigram, …)</li>
-  <li><script type="math/tex">V</script>: a set of possible words (character); the vocabulary</li>
-  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe  the word <script type="math/tex">w</script> after the context 
-<br />(n − 1)-gram <script type="math/tex">u</script></li>
-</ul>
-
-<hr />
-
-<p><strong>Unigram model</strong></p>
-
-<p><em>n = 1</em> 不考慮前面出現的字。
-<img src="http://localhost:4000/blog/img/posts/Unigram%20model.png" alt="" /></p>
-
-<p>Thus contexts are empty.</p>
-
-<p><strong>MLE of unigram probabilities</strong></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/MLE%20of%20unigram%20probabilities.png" alt="" /></p>
-
-<hr />
-
-<p><strong>Bigram models</strong></p>
-
-<p><em>n = 2</em> 考慮前面出現的一個字。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Bigram%20models.png" alt="" /></p>
-
-<p>Thus contexts are unigrams.</p>
-
-<p><strong>Estimating bigram probabilities</strong></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Estimating%20bigram%20probabilities.png" alt="" /></p>
-
-<p><strong>Example</strong>
-(<a href="https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf">source</a>)
-<img src="http://localhost:4000/blog/img/posts/bigram%20example.png" alt="" /></p>
-
-<hr />
-
-<p><strong>Smoothing</strong></p>
-
-<p>當在計算 bigram 時可能會碰到兩個字完全沒有相鄰的狀況，這會導致算出來的機率等於 0。（如下圖）</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/bigram%20smoothing.png" alt="" /></p>
-
-<p>這種時候就需要用到，smoothing。</p>
-
-<p><strong>Smoothing methods</strong></p>
-<ul>
-  <li>Additive smoothing</li>
-  <li>Good-Turing estimate</li>
-  <li>Jelinek-Mercer smoothing (interpolation) • Katz smoothing (backoff)</li>
-  <li>Witten-Bell smoothing</li>
-  <li>Absolute discounting</li>
-  <li>Kneser-Ney smoothing</li>
-</ul>
-
-<hr />
-
-<p>上面的狀況碰到的是，”CHER” 後面沒有出現 “READ” 的狀況，而導致機率等於0，但如果現在是 “CHER” 這個字從未出現在資料集中呢？這種狀況時，smoothing 便派不上用場了。</p>
-
-<ul>
-  <li>A simple way to deal with this is to introduce a special word type UNK, and to smooth it like any other word type in the vocabulary.</li>
-  <li>When we compute the probability of a document, then we first replace every unknown word with UNK.</li>
-</ul>
-
-<hr />
-
-<h2 id="neural-networks-as-language-models">Neural networks as language models</h2>
-
-<h3 id="advantages-of-neural-language-models">Advantages of neural language models</h3>
-<ul>
-  <li>Neural models can achieve better perplexity than probabilistic models, and scale to much larger values of n.</li>
-  <li>Words in different positions share parameters, making them share statistical strength. (Everything must pass through the hidden layer.)</li>
-  <li>The network can learn that in some contexts, only parts of the  n-gram are informative. (implicit smoothing, helps with unknown words)</li>
-</ul>
-
-<h3 id="word2vec">word2vec</h3>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
-<br />
-<a href="https://fgc.stpi.narl.org.tw/activity/videoDetail/4b1141305ddf5522015de5479f4701b1">詞向量介紹</a>
-<br />
-<a href="http://cpmarkchang.logdown.com/posts/772665-nlp-vector-space-semantics">自然語言處理 – Vector Space of Semantics</a>
-<br />
-<a href="https://zhuanlan.zhihu.com/p/26306795">[NLP] 秒懂词向量Word2vec的本质</a>
-<br />
-<a href="https://www.youtube.com/watch?v=OEJ0wxxLO7M">李宏毅老師的線性代數 - SVD</a>
-<br />
-<a href="http://www.shuang0420.com/2017/03/21/NLP%20笔记%20-%20再谈词向量/">NLP 笔记 - 再谈词向量</a>
-<br />
-<a href="https://www.twblogs.net/a/5c7bdd70bd9eee339918b4da">機器學習筆記之二十二——PCA與SVD</a>
-<br />
-<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>
-<br />
-<a href="http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information">自然語言處理 – Pointwise Mutual Information</a>
-<br />
-<a href="https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf">NLP Lunch Tutorial: Smoothing</a>
-<br />
-<a href="https://kknews.cc/tech/83yx3qn.html">機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？</a></p>
- -->
-    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread';
-        this.page.identifier = '/text%20mining/2019/11/26/Text-Mining-Word-embeddings/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">
-        [Text Mining]Text clustering and topic modelling
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 21, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 21, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-<hr />
-
-<p>在進入 Text clustering 前我想要先介紹 <strong>Clustering</strong>。</p>
-
-<h2 id="clustring">Clustring</h2>
-
-<ul>
-  <li>
-    <p>Clustering (分群）是一種 unsupervised learning（非監督學習）</p>
-  </li>
-  <li>Typical applications
-    <ol>
-      <li>As a stand-alone tool to get insight into data distribution</li>
-      <li>As a preprocessing step for other algorithms</li>
-    </ol>
-  </li>
-  <li>Cluster: a collection of data objects。但什麼樣的 data 會被歸在同一個 cluster 呢？ 這就是 clustering 最重要的概念，<strong>Similar</strong> 和 <strong>Dissimilar</strong>。</li>
-  <li><strong>Similar</strong> to one another within the same cluster</li>
-  <li><strong>Dissimilar</strong> to the objects in other clusters</li>
-</ul>
-
-<p>=&gt; 而提到 Similar 和 Dissimilar 就要必須要提到 distance (or similarity) measures。有了 distance（similarity）才有辦法定義 Similar 和 Dissimilar。</p>
-
-<h3 id="distancesimilarity">Distance（Similarity）</h3>
-
-<ul>
-  <li>Distances are normally used to measure the similarity or dissimilarity between two data objects</li>
-</ul>
-
-<p>Distances 可以有很多種定義方式，但不管怎麼定義，都一定要符合以下的 properties。</p>
-<ul>
-  <li><script type="math/tex">d(i, j) \ge 0</script> (non-negativity)</li>
-  <li><script type="math/tex">d(i, i) = 0</script> (identity of indiscernibles)</li>
-  <li><script type="math/tex">d(i, j) = d(j, i)</script> (symmetry)</li>
-  <li><script type="math/tex">d(i, j) \le d(i, k) + d(k, j)</script> (triangle inequality)</li>
-</ul>
-
-<p><strong>Minkowski distance</strong></p>
-
-<p><script type="math/tex">d(i, j) = \sqrt[q]{(|x_{i_1} - x_{j_1}|^q + |x_{i_2} - x_{j2}|^q + \ldots + |x_{i_p} - x_{j_p}|^q)}</script>
-, q is a positive integer</p>
-
-<ul>
-  <li>If q = 1, d is Manhattan distance</li>
-  <li>If q = 2, d is Euclidean distance</li>
-</ul>
-
-<p><strong>Binary Variables</strong></p>
-
-<ul>
-  <li>symmetric binary variables: both states are equally important; 0/1</li>
-  <li>asymmetric binary variables: one state is more important than the other (e.g. outcome of disease test); 1 is the important state, 0 the other</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Contingency%20tables%20for%20Binary%20Variables.png" alt="PMF_two coins.png" /></p>
-
-<ul>
-  <li>Accuracy for symmetric binary variables</li>
-</ul>
-
-<script type="math/tex; mode=display">sim(i, j) = \frac{a+d}{a+b+c+d}</script>
-
-<ul>
-  <li>Jaccard similarity for asymmetric binary variables</li>
-</ul>
-
-<script type="math/tex; mode=display">sim(i, j) = \frac{a}{a+b+c}</script>
-
-<hr />
-
-<h2 id="text-clustering">Text clustering</h2>
-
-<p><img src="http://localhost:4000/blog/img/posts/Conceptual%20framework%20for%20text%20mining.png" alt="PMF_two coins.png" /></p>
-
-<p>上圖是 Conceptual framework for text mining，而這篇要介紹的是 Clustering 和 Topic Analysis。</p>
-
-<ul>
-  <li>
-    <p><strong>Text clustering</strong> is the task of grouping similar texts together. What is considered ‘similar’ depends on the application.</p>
-  </li>
-  <li>
-    <p>Clustering is a central tool in exploratory data analysis, where it can help us to get insights into the distribution of a data set.</p>
-  </li>
-  <li>
-    <p>Clustering is also useful as a pre-processing technique in knowledge-focused applications. Example: Brown clustering</p>
-  </li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/The%20standard%20text%20clustering%20pipeline.png" alt="PMF_two coins.png" /></p>
-
-<hr />
-
-<h2 id="similarity-measures">Similarity measures</h2>
-
-<p>剛剛前面提到的 Similarity，如何用在 text 上呢？</p>
-
-<p><strong>Accuracy for symmetric binary vectors</strong></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Accuracy%20for%20symmetric%20binary%20vectors.png" alt="PMF_two coins.png" /></p>
-
-<p><strong>Jaccard similarity for asymmetric binary vectors</strong></p>
-
-<hr />
-
-<h2 id="hard-clustering-and-soft-clustering">Hard clustering and soft clustering</h2>
-
-<p><strong>Hard clustering</strong></p>
-<ul>
-  <li>Each document either belongs to a cluster or not. Ex. Hierarchical clustering(brown clustring), Partitioning clustering(k-means), Density-Based clustering(DBSCAN)</li>
-</ul>
-
-<p><strong>Soft clustering</strong></p>
-<ul>
-  <li>Each document belongs to each cluster to a certain degree. Ex. LDA (topic model)</li>
-</ul>
-
-<hr />
-
-<h2 id="an-overview-of-hard-clustering-methods">An overview of hard clustering methods</h2>
-
-<h3 id="hierarchical-clustering">Hierarchical clustering</h3>
-
-<p>This method does not require the number of clusters k as an input, but needs a termination condition</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Hierarchical%20Clustering.png" alt="" /></p>
-
-<ul>
-  <li>
-    <p><strong>Agglomerative</strong>: Each document starts in its own cluster. Hierarchy is created by merging pairs of clusters.
-將點倆倆合併，最後所有的點會全部在同一個 cluster 裡。那至於要用什麼決定要將兩個點合併呢？這時候又有 Linkage criteria 來決定，eg. Single-link, Complete-link, Average-link 等等。不同的 linkage criteria 會導致不同的分群結果，如下圖。</p>
-  </li>
-  <li>
-    <p><strong>Divisive clustering</strong>: All documents start in one cluster. Hierarchy is created by splitting clusters recursively.</p>
-  </li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Linkage%20criteria.png" alt="" /></p>
-
-<ul>
-  <li><strong>Brown clustring</strong></li>
-</ul>
-
-<h3 id="partitioning-clustering">Partitioning clustering</h3>
-<ul>
-  <li>
-    <p><strong>K-means</strong></p>
-  </li>
-  <li>
-    <p>Issues with the k-means algorithm</p>
-    <ol>
-      <li>The k-means algorithm always converges, but there is no guarantee that it finds a global optimum. (Solution: random restarts)</li>
-      <li>The number of clusters needs to be specified in advance, or chosen based on heuristics and cross-validation. (Example: elbow method)</li>
-      <li>The k-means algorithm is not good at handling outliers – every document will eventually belong to some cluster.</li>
-      <li>K-means is restricted to clusters with convex shapes =&gt; Density-Based clustering</li>
-    </ol>
-  </li>
-</ul>
-
-<h3 id="density-based-clustering">Density-Based clustering</h3>
-
-<ul>
-  <li>The basic idea behind density-based algorithms is that different regions of the vector space can be more or less densely populated.</li>
-  <li>Under this view, clusters can take any shape; they are not constrained to convex clusters as in k-means.</li>
-</ul>
-
-<p><strong>Directly density-reachable</strong></p>
-
-<ul>
-  <li>DBSCAN</li>
-</ul>
-
-<hr />
-
-<h2 id="evaluation-of-hard-clustering">Evaluation of hard clustering</h2>
-
-<h3 id="intrinsic-and-extrinsic-evaluation">Intrinsic and extrinsic evaluation</h3>
-<ul>
-  <li>In <strong>intrinsic</strong> evaluation, a clustering is evaluated based on internal measures such as coherence and separation. <em>Are documents in the same cluster similar? Are clusters well-separated?</em></li>
-  <li>In <strong>extrinsic</strong> evaluation, a clustering is evaluated based on data that was not used for the clustering, such as known class labels. <em>cluster purity, Rand index</em></li>
-</ul>
-
-<h3 id="rand-index">Rand index</h3>
-
-<p>假設一個集合中有N篇文章
-一個集合中有N(N-1)/2個集合對
-TP：同一類的文章被分到同一個簇
-TN：不同類的文章被分到不同簇
-FP：不同類的文章被分到同一個簇
-FN：同一類的文章被分到不同簇
-Rand Index度量的正確的百分比
-RI = （TP+TN）/（TP+FP+FN+TN）</p>
-
-<hr />
-
-<h2 id="topic-models">Topic models</h2>
-<ul>
-  <li>A topic model is a statistical model for representing the abstract topics that are expressed in a collection of documents.</li>
-  <li>Topic models are examples of soft clustering techniques – each document belongs to each cluster (topic) to a certain degree.</li>
-</ul>
-
-<h3 id="latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</h3>
-
-<p>LDA有兩個原則，</p>
-<ol>
-  <li>每個 domcuments 是由多個 Topic 組成（each document belongs to each cluster (topic) to a certain degree）</li>
-  <li>每個主題會有不同的 terms 來描述，且同樣對詞可以同時出現在不同的主題。</li>
-</ol>
-
-<p><img src="http://localhost:4000/blog/img/posts/Topic%20models.png" alt="" /></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Topic%20models2.png" alt="" /></p>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
-<br />
-<a href="https://www.ida.liu.se/~732A75/info/courseinfo.en.shtml">732A75 Advanced Data Mining</a>
-<br />
-<a href="http://cpmarkchang.logdown.com/posts/238079-natural-language-processing-brown-clustering">自然語言處理 – Brown Clustering</a>
-<br />
-<a href="https://medium.com/@tengyuanchang/直觀理解-lda-latent-dirichlet-allocation-與文件主題模型-ab4f26c27184">直觀理解 LDA (Latent Dirichlet Allocation) 與文件主題模型</a>
-<br />
-<a href="https://www.twblogs.net/a/5b8c83e12b717718833363ae">聚類評價指標 Rand Index,RI,Recall,Precision,F1</a></p>
- -->
-    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/#disqus_thread';
-        this.page.identifier = '/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">
-        [Text Mining]Text classification
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 13, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 13, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-<hr />
-
-<h2 id="text-classification">Text classification</h2>
-
-<ul>
-  <li>Text classification is the task of categorising text documents into predefined classes.</li>
-</ul>
-
-<h2 id="evaluation-of-text-classifiers">Evaluation of text classifiers</h2>
-
-<p>最簡單的檢視預測結果好壞的方法就是將 predict 出來的類別與真實的類別做比較。（預測必須要在 test data，換句話說之前並沒有參與任何 training 的過程。這點在做所有 Machine Learning 的方法都很重要，在做 model 測試前不要碰 test data。）</p>
-
-<h3 id="accuracy">Accuracy</h3>
-<p>The accuracy of a classifier is the proportion of documents for which the classifier predicts the gold-standard class:</p>
-
-<script type="math/tex; mode=display">\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}</script>
-
-<h3 id="accuracy-and-imbalanced-data-sets">Accuracy and imbalanced data sets</h3>
-
-<p>上面的 accuracy 看起來非常合理啊，去計算分類正確的比例來判斷這個分類器是否預測準確。但，如果其實資料本身的類別並不平均呢？</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/imbalanced%20data%20sets.png" alt="PMF_two coins.png" /></p>
-
-<p>根據上圖，我們只要把所有資料都猜綠色的 class，這樣 accuracy 就能有 80%。從這個例子可以知道，</p>
-
-<ul>
-  <li>
-    <p>Evaluation measures are no absolute measures of performance. 如果今天得到 accuracy 是 80% 我們並無法確定這樣的準確率的好壞，要根據每個問題去判斷。</p>
-  </li>
-  <li>
-    <p>Instead, we should ask for a classifier’s performance relative to other classifiers, or other points of comparison. E.g.’Logistic Regression has a higher accuracy than Naive Bayes.’</p>
-  </li>
-  <li>
-    <p>When other classifiers are not available, a simple baseline is to always predict the most frequent class in the training data.</p>
-  </li>
-</ul>
-
-<h2 id="precision-and-recall">Precision and recall</h2>
-
-<ul>
-  <li>
-    <p>Precision and recall ‘zoom in’ on how good a system is at identifying documents of a specific class.</p>
-  </li>
-  <li>
-    <p>Precision is the proportion of correctly classified documents among all documents for which the system predicts class.</p>
-  </li>
-</ul>
-
-<script type="math/tex; mode=display">\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}</script>
-
-<ul>
-  <li>Recall is the proportion of correctly classified documents among all documents with gold-standard class.</li>
-</ul>
-
-<script type="math/tex; mode=display">\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}</script>
-
-<h2 id="f1-measure">F1-measure</h2>
-<p>A good classifier should balance between precision and recall.  </p>
-
-<script type="math/tex; mode=display">\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}</script>
-
-<hr />
-
-<h2 id="naive-bayes-classifier">Naive Bayes classifier</h2>
-
-<h3 id="bayes-theorem">Bayes’ theorem</h3>
-
-<p>We know that <script type="math/tex">C</script> is classes, <script type="math/tex">x_i, i = 1, \cdots,n</script> is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
-
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}</script>
-
-<p>也就是，</p>
-
-<script type="math/tex; mode=display">\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}</script>
-
-<p>根據上式，我們可以將分母視為常數，因為 features <script type="math/tex">x_i, i = 1, \cdots,n</script> 的值是給定的，且與 <script type="math/tex">C</script> 無關，所以可以得到</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C, x_1, \cdots,x_n) & = p(C)~p(x_1,\cdots,x_n|C) \\
-& \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
-& \propto \cdots\\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
-\end{align} %]]></script>
-
-<h3 id="naive-bayes-assumption">Naive Bayes assumption</h3>
-
-<p>Naive Bayes 假設 
-<script type="math/tex">p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j</script></p>
-
-<p>根據 Naive Bayes 的假設，前面的式子我們可以寫成，</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C|x_1,..., x_n) & \propto p(C, x_1, \cdots,x_n) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
-& \propto p(C)~\prod_{i=1}^n p(x_i|C)
-\end{align} %]]></script>
-
-<p>根據上面的推導過程，我們可以得到，</p>
-
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)</script>
-
-<h3 id="naive-bayes-classifer">Naive Bayes classifer</h3>
-
-<p>而 Naive Bayes classifer 就是取各個分類 <script type="math/tex">C_m, m = 1, \cdots, k</script> 
-中 <script type="math/tex">p(C|x_1,..., x_n)</script> 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
-
-<script type="math/tex; mode=display">C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)</script>
-
-<p>而 <script type="math/tex">C_m</script> 就是最後的分類結果。</p>
-
-<h3 id="two-classic-naive-bayes-variants-for-text">Two Classic Naive Bayes Variants for Text</h3>
+<h2 id="下載與安裝-miniconda">下載與安裝 Miniconda</h2>
 
 <ol>
-  <li>Multinomial Naive Bayes
+  <li>到官網下載 <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>
     <ul>
-      <li>Data follows a multinomial distribution (多項分布)</li>
-      <li>Each feature values is a count (word occurrence counts, TF-IDF weighting, …)</li>
+      <li>根據步驟一直點選下一步就好</li>
     </ul>
   </li>
-  <li>Bernoulli Naive Bayes
+  <li>安裝完成後，Miniconda 會自動在 <code class="highlighter-rouge">.zchrc</code> 和 <code class="highlighter-rouge">.bash_profile</code> 加上路徑
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
+ <span class="c"># !! Contents within this block are managed by 'conda init' !!</span>
+ <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="s1">'/Users/your_user_name/opt/miniconda3/bin/conda'</span> <span class="s1">'shell.bash'</span> <span class="s1">'hook'</span> 2&gt; /dev/null<span class="k">)</span><span class="s2">"</span>
+ <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-eq</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
+     </span><span class="nb">eval</span> <span class="s2">"</span><span class="nv">$__conda_setup</span><span class="s2">"</span>
+ <span class="k">else
+     if</span> <span class="o">[</span> <span class="nt">-f</span> <span class="s2">"/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+         <span class="nb">.</span> <span class="s2">"/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh"</span>
+     <span class="k">else
+         </span><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"/Users/your_user_name/opt/miniconda3/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+     <span class="k">fi
+ fi
+ </span><span class="nb">unset </span>__conda_setup
+ <span class="c"># &lt;&lt;&lt; conda initialize &lt;&lt;&lt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>確認是否安裝成功
     <ul>
-      <li>Data follows a multivariate Bernoulli distribution</li>
-      <li>Each feature is binary (word is present / absent)</li>
+      <li>打開 terminal，<code class="highlighter-rouge">conda --version</code> 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！</li>
     </ul>
   </li>
 </ol>
 
+<h2 id="conda-常用指令">conda 常用指令</h2>
+
+<h3 id="cheatsheet">Cheatsheet</h3>
+<ul>
+  <li><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Document</a></li>
+</ul>
+
+<p><strong>conda 的資訊</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
+  <li><code class="highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
+  <li><code class="highlighter-rouge">conda env list</code>：conda 所有的環境</li>
+</ul>
+
+<p><strong>conda basic</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
+  <li><code class="highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
+</ul>
+
+<p><strong>環境</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境
+    <ul>
+      <li>Ex. <code class="highlighter-rouge">conda create --name myenv python=3.6</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
+  <li><code class="highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
+  <li><code class="highlighter-rouge">conda list</code>：active 環境中的所有套件
+    <ul>
+      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="highlighter-rouge">Build Channel</code></a>的<code class="highlighter-rouge">pypi</code>表示是用<code class="highlighter-rouge">pip install PACKAGENAME</code></li>
+      <li><code class="highlighter-rouge">pip freeze</code>可以看到所有用<code class="highlighter-rouge">pip install</code>下載的套件
+<img src="https://i.imgur.com/gnlRU35.png" alt="" /></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
+之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前我在的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread';
+        this.page.identifier = '/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/">
+        [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on April 5, 2022</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">April 5, 2022</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="virtualenv">Virtualenv</h2>
+
+<p><code class="highlighter-rouge">virtualenv</code>是用來建立一個獨立的<code class="highlighter-rouge">Python</code>環境的工具，支援 Python2 和 Python3。</p>
+
+<ol>
+  <li>安裝 virtualenv：<code class="highlighter-rouge">pip install virtualenv</code></li>
+  <li>建立虛擬環境：
+    <ul>
+      <li>先建立一個資料夾：<code class="highlighter-rouge">mkdir myenv</code></li>
+      <li>路徑移到該資料夾：<code class="highlighter-rouge">cd myenv</code></li>
+      <li>建立虛擬環境：<code class="highlighter-rouge">virtualenv venv</code></li>
+    </ul>
+  </li>
+  <li>啟動虛擬環境：<code class="highlighter-rouge">source env/bin/activate</code></li>
+  <li>在該環境下載套件：<code class="highlighter-rouge">pip install PACKAGE_NAME</code></li>
+  <li>停用虛擬環境：<code class="highlighter-rouge">deactivate</code></li>
+</ol>
+
 <hr />
 
-<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L2.ipynb">Text classification Lab</a></p>
+<h2 id="conda">Conda</h2>
+
+<blockquote>
+  <p>Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. It was created for Python programs, but it can package and distribute software for any language.</p>
+</blockquote>
+
+<p>Conda 是一個開源的跨平台工具軟體，它被設計作為 Python、R、Lua、Scala 與 Java 等任何程式語言的套件、依賴性以及工作環境管理員。傳統 Python 使用者以 pip 作為套件管理員（package manager）、以 venv 作為工作環境管理員（environment manager），而 conda 則達成了「兩個願望、一次滿足」既可以管理套件亦能夠管理工作環境。</p>
+
+<h3 id="在-python-使用-conda">在 Python 使用 conda</h3>
+<ul>
+  <li>可以下載 <code class="highlighter-rouge">Anaconda</code>（3 GB 以上）或 <code class="highlighter-rouge">Miniconda</code>（400 MB 左右）
+    <ul>
+      <li><code class="highlighter-rouge">Miniconda</code> installer = Python + conda</li>
+      <li><code class="highlighter-rouge">Anaconda</code> installer = Python + conda + meta package anaconda = <code class="highlighter-rouge">Miniconda</code> installer + conda install anaconda</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong><a href="https://stackoverflow.com/questions/30034840/what-are-the-differences-between-conda-and-anaconda/30057885#30057885">What are the differences between Conda and Anaconda?</a></strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda</code> is the package manager. <code class="highlighter-rouge">Anaconda</code> is a set of about a hundred packages including conda, numpy, scipy, ipython notebook, and so on.</li>
+  <li><code class="highlighter-rouge">Miniconda</code> is a smaller alternative to Anaconda that is just conda and its dependencies, not those listed above.</li>
+  <li>Once you have Miniconda, you can easily install Anaconda into it with <code class="highlighter-rouge">conda install anaconda</code>.</li>
+</ul>
+
+<h3 id="下載">下載</h3>
+<ul>
+  <li>下載 <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a></li>
+  <li>下載 <a href="https://www.anaconda.com/products/individual">Anaconda</a></li>
+</ul>
+
+<h3 id="cheatsheet">Cheatsheet</h3>
+<ul>
+  <li><a href="https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf">Document</a></li>
+</ul>
+
+<p><strong>conda 的資訊</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
+  <li><code class="highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
+  <li><code class="highlighter-rouge">conda env list</code>：conda 所有的環境</li>
+</ul>
+
+<p><strong>conda basic</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
+  <li><code class="highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
+</ul>
+
+<p><strong>環境</strong></p>
+<ul>
+  <li><code class="highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境
+    <ul>
+      <li>Ex. <code class="highlighter-rouge">conda create --name myenv python=3.6</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
+  <li><code class="highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
+  <li><code class="highlighter-rouge">conda list</code>：active 環境中的所有套件
+    <ul>
+      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="highlighter-rouge">Build Channel</code></a>的<code class="highlighter-rouge">pypi</code>表示是用<code class="highlighter-rouge">pip install PACKAGENAME</code></li>
+      <li><code class="highlighter-rouge">pip freeze</code>可以看到所有用<code class="highlighter-rouge">pip install</code>下載的套件
+<img src="https://i.imgur.com/yvuy4kT.png" alt="" width="50%" heigh="50%" /></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
+</ul>
+
+<hr />
+
+<p><strong>Reference</strong>:</p>
+<ul>
+  <li><a href="https://medium.com/datainpoint/python-essentials-conda-quickstart-1f1e9ecd1025">輕鬆學習 Python：conda 的核心功能</a></li>
+  <li><a href="https://medium.com/python4u/python-virtualenv虛擬環境安裝-9d6be2d45db9">Python — Virtualenv虛擬環境安裝</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><h2 id="virtualenv">Virtualenv</h2>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread';
+        this.page.identifier = '/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/">
+        [Web]MVC 架構
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 22, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 22, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Web">Web</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇簡單地介紹 MVC 架構，若是有任何錯誤觀念，歡迎留言。</p>
+
+<p>之前用 node.js 的 express 加上 MVC 架構寫了一個 <a href="https://github.com/shihs/to-do-list-app">TO DO LIST</a>，也許有這個例子可以更容易理解。</p>
+
+<hr />
+
+<h2 id="what-is-mvc">What is MVC?</h2>
+
+<p>MVC 的三個字母分別表示 Model、View 和 Controller，是一種在軟體開發時的軟體架構 (architectural pattern) ，由 Trygve Reenskaug 在 1978 年提出，是為了 Smalltalk （一種程式語言）所發明的一種軟體架構（<a href="https://zh.wikipedia.org/wiki/MVC">wiki</a>）。</p>
+
+<p>它的設計原則是「<strong>關注點分離</strong> (separation of concerns, SOC) 」，把不同作用的程式碼放在不同的檔案裡，讓大家各司其職。</p>
+
+<hr />
+
+<h2 id="圖解-mvc">圖解 MVC</h2>
+
+<p>下圖簡單的說明了，MVC 的流程。</p>
+
+<p><img src="https://i.imgur.com/bVwaxlv.jpg" alt="" width="90%" heigh="90%" />
+<a href="https://www.hellosanta.com.tw/blog/Graphical-MVC-architecture">圖片來源</a></p>
+
+<p>使用者操作網站與網站互動，當使用者點選網頁發出 request（可能登入、點進連結、加入購物車…..等等）後，<strong>Controller</strong> 會去接收這個 User 傳來的 request，並根據請求和 <strong>Model</strong> 要資料，當 <strong>Model</strong> 吐出資料給 <strong>Controller</strong> 後，<strong>Controller</strong> 再把資料丟給 <strong>View</strong> 讓前端去顯示，這時候 User 就會看到前端顯示出剛剛送出 request 後產生的畫面。</p>
+
+<p>從上面的說明可以發現，<strong>Controller</strong> 扮演了重要的角色，它除了接收使用者的要求，也負責協調工作給 <strong>Model</strong> 與 <strong>View</strong>，讓每個部分都獨立專注在自己的工作，彼此之前不會直接的溝通，都是靠 <strong>Controller</strong> 傳話。</p>
+
+<p>我覺得可以想像成 <strong>View</strong> 和 <strong>Model</strong> 各是一個部門，兩個部門有各自負責的工作且彼此之間不會直接對話與干預彼此，而使用者就是老闆，<strong>Controller</strong> 負責把老闆的任務分配給各部門，並作為各個部門之間溝通與傳遞消息的角色，讓 <strong>View</strong> 和 <strong>Model</strong> 不用知道對方在幹嘛也能讓每個任務順利完成。</p>
+
+<p>舉一個例子，有一個使用者輸入帳號和密碼要登入一個網站，當使用者點選登入後會送出 request 到 <strong>Controller</strong>，這時候 <strong>Controller</strong> 將這個消息告訴 <strong>Model</strong>，並請 <strong>Model</strong> 檢查使用者輸入的帳號密碼是否正確，<strong>Model</strong> 收到指令後會去和 DB 確認，確認完之後會將結果傳回給 <strong>Controller</strong>（可能是帳號密碼正確或錯誤），<strong>Controller</strong> 再把這個結果給 <strong>View</strong>，<strong>View</strong> 就能根據結果顯示在網頁上，如果成功就順利登入，如果帳號密碼錯誤就顯示失敗。</p>
+
+<p>下面這個圖，加上了前端和後端，<strong>View</strong> 負責的內容會是使用者看到的畫面（前端），而 <strong>Controller</strong> 和 <strong>Model</strong> 是使用者不會注意到背後運作的東西，而與 DB 拿資料就是 <strong>Model</strong> 的任務。</p>
+
+<p><img src="https://dotblogsfile.blob.core.windows.net/user/%E5%B7%A5%E7%A8%8B%E8%89%AF%E7%94%B0/ec9b5c12-03c6-4658-a3f2-85f4bdeaf371/1538274044_80461.png" alt="" width="90%" heigh="90%" />
+<a href="https://dotblogs.com.tw/armycoding/2018/09/29/164045">圖片來源</a></p>
+
+<hr />
+
+<h2 id="model-view-controller">Model, View, Controller</h2>
+
+<p>下面再來詳細的介紹一下 MVC 它們的工作內容。</p>
+
+<h3 id="controller">Controller</h3>
+
+<p>從上面的圖例我們知道 Controller 是負責接收使用者的 request 並將資料分配給 Model 和 View 的重要角色。它將使用者的 request 傳給 Model，請 Model 去拿取資料，之後再將 Model 給的資料送給 View，讓 View 將資料呈現在前端讓使用者可以看到。</p>
+
+<p>因此 Controller 決定了整個任務的工作流程，並決定最後如何呈現。下面幾個來自「<a href="https://tw.alphacamp.co/blog/mvc-model-view-controller">MVC 架構是什麼？認識 Model-View-Controller 軟體設計模式</a>」的例子</p>
+
+<ul>
+  <li>使用者是否需要先登入 (認證) 才可以看到網頁內容？</li>
+  <li>使用者是否只能閱讀資料，但不能修改或刪除？</li>
+  <li>使用者新增了資料之後，會重新導向至哪個頁面？</li>
+</ul>
+
+<h3 id="model">Model</h3>
+
+<p>Model 主要負責和資料庫溝通以及商業邏輯有關的任務。Model 可以直接對資料庫做存取，但它並不關心資料之後如何被顯示或操作。而所謂的商業邏輯可以這樣理解，假設今天有一個滿千折打九折的折扣，像這樣的「商業邏輯」就可以使用一個 model 去處理使用者的訂單；又或者今天在寫一個部落格的網站，就可以有 <em>post</em> 和 <em>comment</em> 這兩個 model 去對資料庫寫進新的文章和留言的功能。</p>
+
+<h3 id="view">View</h3>
+
+<p>網頁的前端，使用者看到的部分，也就是 HTML 的部分。</p>
+
+<hr />
+
+<h2 id="mvc-優點">MVC 優點</h2>
+
+<ul>
+  <li>不管是誰寫，檔案存放的邏輯不會差太多</li>
+  <li>程式碼可以重複利用（reusable）</li>
+  <li>更容易維護程式碼</li>
+  <li>方便團隊合作：團隊各在開發時可以各自負責不同部分，不會互相影響</li>
+</ul>
+
+<hr />
+
+<h2 id="route-與-mvc-框架">Route 與 MVC 框架</h2>
+
+<p>前面介紹的 MVC 架構當使用者送出 request 後是直接由 <strong>Controller</strong> 去接收做處理，但如果網頁的 request 是由 <strong>Route</strong> 去處理，這樣 <strong>Controller</strong> 接收的訊息就會是由 <strong>Route</strong> 傳送過來的，但其他的工作內容基本上和前面介紹的 MVC 是一樣的。</p>
+
+<p>如果想要具體的了解可以看這篇「<a href="https://ithelp.ithome.com.tw/articles/10194968">Node.js-Backend 見聞錄(10)：關於後端觀念(六)-關於 MVC </a>」，比較具體地介紹 node.js route 的 MVC 架構。</p>
+
+<p><img src="https://2.bp.blogspot.com/-gX62WAgkWWs/VIXBRs6w6SI/AAAAAAAAAvM/hmx8361at9k/s1600/laravel-mvc-components.png" alt="" width="90%" heigh="90%" />
+<a href="https://tutorial-4-php.blogspot.com/2014/12/model-view-controller-mvc.html">圖片來源</a></p>
+
+<p>*上圖 Routing 上面的「Laravel」是 PHP 的一個 web framwork，因為圖片來源的文章是在講解 PHP。</p>
+
+<hr />
+
+<ul>
+  <li><a href="https://tutorial-4-php.blogspot.com/2014/12/model-view-controller-mvc.html">Model-View-Controller (MVC) </a></li>
+  <li><a href="https://tw.alphacamp.co/blog/mvc-model-view-controller">MVC 架構是什麼？認識 Model-View-Controller 軟體設計模式</a></li>
+  <li><a href="https://ithelp.ithome.com.tw/articles/10191216">[Day 01] 什麼是 MVC？能吃嗎？ </a></li>
+  <li><a href="https://www.ibest.tw/mvc-website.php">什麼是 MVC 網頁設計? 做網站一定需要 MVC 嗎?</a></li>
+  <li><a href="https://www.youtube.com/watch?v=zW_tZR0Ir3Q">Node.js Crash Course Tutorial #11 - Express Router &amp; MVC</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>這篇簡單地介紹 MVC 架構，若是有任何錯誤觀念，歡迎留言。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread';
+        this.page.identifier = '/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread" data-disqus-identifier="/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/">
+        [SQL]在 Mac 本機安裝 MySQL & phpmyadmin
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 16, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 16, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h4 id="1-啟動-apache">1. 啟動 Apache</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">sudo apachectl start</code></li>
+  <li>打開瀏覽器 <a href="http://localhost/">http://localhost/</a> 可以看到 <strong>It works!</strong></li>
+</ul>
+
+<h4 id="2-下載-mysql">2. 下載 MySQL</h4>
+
+<ul>
+  <li><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></li>
+  <li>選擇下載 <code class="highlighter-rouge">.dmg</code> 檔</li>
+  <li>下載完後安裝，安裝過程需要<strong>設定 root 的密碼</strong></li>
+  <li>打開系統偏好設定會看到出現 MySQL 的圖示，點選後啟動 MySQL
+<img src="https://i.imgur.com/tusQ0GN.png" alt="" width="70%" heigh="70%" />
+<img src="https://i.imgur.com/rpAQ8yJ.png" alt="" width="70%" heigh="70%" /></li>
+</ul>
+
+<h4 id="3-使用-terminal-開啟-mysql">3. 使用 terminal 開啟 MySQL</h4>
+
+<ul>
+  <li><code class="highlighter-rouge">mysql -u root -p</code>（<code class="highlighter-rouge">-u</code>: user, <code class="highlighter-rouge">-p</code>: password）</li>
+  <li>出現 <code class="highlighter-rouge">Enter password:</code> 後輸入剛剛安裝時設定的 root 密碼
+<img src="https://i.imgur.com/dsXdFmP.png" alt="" width="90%" heigh="90%" /></li>
+</ul>
+
+<h4 id="4-下載-phpmyadmin">4. 下載 phpmyadmin</h4>
+
+<p>這個步驟不是必須，下載 phpmyadmin 是為了可以使用操作介面查看 MySQL。</p>
+
+<ul>
+  <li>下載 phpmyadmin：<a href="https://www.phpmyadmin.net/downloads/">https://www.phpmyadmin.net/downloads/</a></li>
+  <li>瀏覽器打開 <a href="http://localhost/phpmyadmin/index.php">http://localhost/phpmyadmin/index.php</a>
+<img src="https://i.imgur.com/orDEaCz.png" alt="" /></li>
+</ul>
+
+<h4 id="5-設定-phpmyadmin-登入密碼">5. 設定 phpmyadmin 登入密碼</h4>
+
+<p>因為 phpmyadmin 的密碼身份驗證是 <code class="highlighter-rouge">caching_sha2_password</code> 所以會無法使用一開始設定的 root 與密碼登入，這時候需要先修改 db 的資料。</p>
+
+<ul>
+  <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
+  <li>將 root 的密碼身份驗證由 <code class="highlighter-rouge">caching_sha2_password</code> 改成 <code class="highlighter-rouge">mysql_native_password</code>
+    <ul>
+      <li><code class="highlighter-rouge">use mysql；</code>（使用 <code class="highlighter-rouge">mysql</code> 這個 db）</li>
+      <li><code class="highlighter-rouge">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密碼';</code></li>
+      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+    </ul>
+  </li>
+  <li>這時候 phpmyadmin 就可以使用設定好的 root 的密碼登入了</li>
+</ul>
+
+<hr />
+
+<h3 id="新增新的-mysql-user">新增新的 MySQL User</h3>
+
+<p>通常不會讓所有人都使用 root 權限操作 db，這時候就需要增加新的 user 讓其他人使用。</p>
+
+<ul>
+  <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
+  <li>新增 User
+    <ul>
+      <li><code class="highlighter-rouge">use mysql；</code></li>
+      <li><code class="highlighter-rouge">CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'PASSWORD';</code></li>
+      <li><code class="highlighter-rouge">ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';</code></li>
+      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+    </ul>
+  </li>
+  <li>設定完成後 phpmyadmin 和 terminal 都可以使用設定好的帳號密碼登入
+    <ul>
+      <li><code class="highlighter-rouge">mysql -u USERNAME -p</code> / <code class="highlighter-rouge">PASSWORD</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="設定新增-user-的權限">設定新增 User 的權限</h4>
+
+<ul>
+  <li>查看某 user 的權限：
+<code class="highlighter-rouge">SHOW GRANTS FOR 'username'@'localhost';</code></li>
+  <li>GRANT 權限：
+<code class="highlighter-rouge">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></li>
+  <li>REVOKE 權限：
+<code class="highlighter-rouge">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></li>
+  <li>reload all the privileges：<code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+</ul>
+
+<hr />
+
+<p><strong>Reference</strong></p>
+
+<ul>
+  <li><a href="https://jqnets.com/blog/mac-%E9%9B%BB%E8%85%A6%E5%9F%B7%E8%A1%8C-php-mysql-phpmyadmin/">Mac 電腦執行 PHP &amp; MySQL &amp; phpMyadmin</a></li>
+  <li><a href="https://www.itread01.com/content/1546243084.html">phpmyadmin 連線 MySQL8.0 報錯#2054 - The server requested authentication method unknown to the client</a></li>
+  <li><a href="https://phoenixnap.com/kb/how-to-create-new-mysql-user-account-grant-privileges">How To Create New MySQL User and Grant Privileges</a></li>
+  <li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql">How To Create a New User and Grant Permissions in MySQL</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><h4 id="1-啟動-apache">1. 啟動 Apache</h4>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread';
+        this.page.identifier = '/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread" data-disqus-identifier="/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/">
+        [Git]Github 新的 authentication 設定
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 15, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 15, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Git">Git</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
+
+<ul>
+  <li><a href="https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#1-%E4%BD%BF%E7%94%A8-ssh">使用 ssh</a></li>
+  <li><a href="https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#2-%E4%BD%BF%E7%94%A8-personal-access-token">使用 personal access token</a></li>
+</ul>
+
+<hr />
+
+<h3 id="1-使用-ssh">1. 使用 ssh</h3>
+
+<p>情況：</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/git%20push.png" alt="" /></p>
+
+<ul>
+  <li>之前已 clone 下來的 repo</li>
+  <li>修改後要 push 碰到下面的錯誤訊息</li>
+</ul>
+
+<pre><code class="language-bash=">remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requested URL returned error: 403
+</code></pre>
+
+<p><strong>Step 1:</strong> Enabling two-factor authentication</p>
+
+<ul>
+  <li>根據錯誤訊息提供的<a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">網址</a>，先去 <strong>Enabling two-factor authentication</strong>，照著 <a href="https://docs.github.com/en/github/authenticating-to-github/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication-recovery-methods">Configuring two-factor authentication recovery methods</a> 的步驟做（裡面提到的 TOTP app 我是用 <a href="https://www.salesforce.com/solutions/mobile/app-suite/security/">Salesforce Authenticator</a>）。</li>
+</ul>
+
+<p><strong>Step 2:</strong> 加 ssh key</p>
+
+<ul>
+  <li>確認 github 是否已經加了 ssh key <code class="highlighter-rouge">ssh -t git@github.com</code>，如果沒加會出現像這樣的訊息<img src="http://localhost:4000/blog/img/posts/ssh%20test.png" alt="" /></li>
+  <li>在本機 gen ssh key，並在 github 頁面新增 ssh key。我主要是參考下面兩個網址：
+    <ul>
+      <li><a href="https://blog.jaycetyle.com/2018/02/github-ssh/">Git 版本控制筆記 - 使用 github 及 ssh 金鑰設定</a></li>
+      <li><a href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">生成新 SSH 密钥并添加到 ssh-agent</a></li>
+    </ul>
+  </li>
+  <li>完成之後在 terminal 打上 <code class="highlighter-rouge">ssh -t git@github.com</code> 會是
+<img src="http://localhost:4000/blog/img/posts/ssh%20success.png" alt="" /></li>
+</ul>
+
+<p><strong>Step 3:</strong> 重新 push</p>
+
+<ul>
+  <li><code class="highlighter-rouge">git remote set-url origin git@github.com:[your-github-name]/[repo-name].git</code></li>
+  <li>重新 add 和 commit 修改，就可以 push 了</li>
+</ul>
+
+<p>但這樣的方法還是很麻煩……每一支 reop 都要重新 <code class="highlighter-rouge">git remote set-url origin ...</code> 所以另一個方法是使用 <strong>personal access token</strong>。</p>
+
+<p><strong>Reference</strong>:
+<a href="https://www.youtube.com/watch?v=5Jz0wVmYUUE">GitHub Support for password authentication was removed (August 13, 2021) - Solution</a></p>
+
+<hr />
+
+<h2 id="2-使用-personal-access-token">2. 使用 personal access token</h2>
+
+<p>這裡的方法是在 Mac 的操作。</p>
+
+<p><strong>Step 1:</strong></p>
+
+<ul>
+  <li>參照 github 提供的方法，<a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">Creating a personal access token</a>。
+    <ul>
+      <li><strong>Settings</strong> -&gt; <strong>Developer settings</strong> -&gt; <strong>Personal access tokens</strong> -&gt; <strong>Generate new token</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Step 2:</strong> 將 create 出來的 token 加到「鑰匙圈」裡</p>
+
+<ul>
+  <li>使用 spotlight 搜尋「keychain」</li>
+  <li>在 keychain 上搜尋「github」，找到 github
+<img src="http://localhost:4000/blog/img/posts/keychain.png" alt="" width="70%" heigh="70%" /></li>
+  <li>點選下方「顯示密碼」，並將密碼改成剛剛在 github 上 create 的 token
+<img src="http://localhost:4000/blog/img/posts/add%20token.png" alt="" width="70%" heigh="70%" /></li>
+</ul>
+
+<p>現在可以任意地使用之前 clone 下來的 repo 了，不過如果剛剛 create token 有時間限制，之後必須要再重新建立新的密碼並修改。</p>
+
+<p><strong>Reference</strong>:
+<a href="https://www.youtube.com/watch?v=aKaYpl-ZpGg">Solved - Support for password authentication was removed - Github - Mac and Windows</a></p>
+ -->
+    <div class="post-excerpt"><p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread';
+        this.page.identifier = '/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">
+        [前端]Cookie & Session
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on March 7, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">March 7, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#前端">前端</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
+
+<hr />
+
+<h3 id="重點">重點</h3>
+
+<p>Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態，而 Cookie 是將狀態資料存在 Client 端（Browser），而 Session 則是將資料存在 Server 端（e.g Redis）</p>
+
+<hr />
+
+<h3 id="http-的-stateless無狀態">HTTP 的 stateless（無狀態）</h3>
+
+<p>前面說到「Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態」，但</p>
+
+<ol>
+  <li>為什麼 Server 不知道 Client 的狀態呢？</li>
+  <li>為什麼需要讓 Sever 知道 Client 的狀態呢？</li>
+</ol>
+
+<p><img src="http://wiki.hashphp.org/images/6/67/HTTP_Model.jpg" alt="HTTP Model" width="50%" heigh="50%" /></p>
+
+<p>要回答第一個問題，就要先知道「<strong>HTTP 是 stateless（無狀態）</strong>」，而 stateless（無狀態）的定義是</p>
+
+<ul>
+  <li>Server 和 Client 不會記住（retain）之前的連線</li>
+  <li>每個 Client 送出的 request 都被視為是唯一且獨立的 connection</li>
+</ul>
+
+<p>舉個例子，</p>
+
+<p><a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless</a></p>
+
+<p>上面這個網址是我在搜尋「無狀態」時找到覺得解釋得不錯的部落格，而我從我的瀏覽器打開這個網頁，和你從你的瀏覽器輸入這個網址打開，基本是上一樣的，並不需要先連到其他網頁，像這樣子的情況就稱為 stateless（無狀態）。</p>
+
+<p>解決第一個問題後，那 stateless 就 stateless 啊，為什麼要讓 Server 知道 Client 的狀態呢？</p>
+
+<p>想想看，我們在使用 facebook 或是 instagram 等等很多網站都必須要先登入後才能觀看到想看到的頁面；或是，在網拍網站上如果我們把東西加到購物車，當下次登入時打開，還能夠看到上次加入的商品。但以剛剛 stateless（無狀態）的邏輯來思考，這件事情是不可能可以達成的，因為假如每次的 request 都是獨立且唯一的，那這樣每一次重新點選網頁都會是一個新的事件，Server 就像是失憶一樣，根本不會記得曾經發生過什麼事情，所以當 Client 端做了改變（ex. 登入、商品加入購物車…等等），Sever 端並不會知道，當我們想要做任何事情，每一次都必須要重新來一遍才行。</p>
+
+<p>這就是為什麼我們會想要讓 Server 知道 Client 的狀態了（Stateful）。</p>
+
+<hr />
+
+<h3 id="cookie-是什麼">Cookie 是什麼？</h3>
+
+<p>Cookie 是用來記錄 Client 與 Server 目前的溝通狀態，會以 name-value 的形式呈現，並且存在 Client 端。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/cookie.png" alt="進入 googlec.com 後得到的 cookie" width="80%" heigh="80%" /></p>
+
+<p>而這個 cookie 在 Client 端第一次發送 request 後，Server 會以 <code class="highlighter-rouge">Set-Cookie</code> 的方式寫在 response header，回應給 Client，而 Client 瀏覽器就會將這個 Cookie 存在本機端，下一次要再次送 request 時，會把這個已儲存的 Cookie 已 <code class="highlighter-rouge">Cookie</code> 的方式存在 resquest header 和 request 一起送出，讓 Sever 知道這個 Client 目前的狀態。（可以用 Chrome 的開法者模式看 network 中網頁的 Response Headers 和 Request Headers 找到 <code class="highlighter-rouge">Set-Cookie</code> 和 <code class="highlighter-rouge">Cookie</code>）</p>
+
+<p>但這樣儲存 Cookie 又會有什麼問題呢？</p>
+
+<ol>
+  <li>
+    <p>Cookie size 的限制：根據 RFC-2965 的規定，一個 Cookie 最大只能是 4096 bytes。</p>
+  </li>
+  <li>
+    <p>佔據網路流量：由於每次 request 都會傳送 Cookie 資料，所以當 Cookie 資料越來越大，request 傳輸的資訊也會更著變大，這樣就會影響網路傳輸的速度。</p>
+  </li>
+  <li>
+    <p>Cookie 可能被 Client 竄改：由於 Cookie 存在 Client 端，所以 Client 是可以完整的看到 Cookie 資料的，那如果 Cookie 竄改或者是外洩，這樣就存在著資安的風險。</p>
+  </li>
+</ol>
+
+<p>根據以上的問題，我們可以知道，Cookie 中不能存放有資安疑慮的資料，也不能存放太大的資訊量。所以為了彌補這些不足，就有了 Session 的出現。</p>
+
+<hr />
+
+<h3 id="session-是什麼">Session 是什麼？</h3>
+
+<p>Session 是一種比 Cookie 更安全的狀態管理機制。</p>
+
+<p>既然 Session 是為了彌補 Cookie 的不足，它就必須要解決上面提到的 Cookie 可能會有的問題。所以 Session 會將狀態資訊存在 Sever 端，以避免 Client 端可以任意修改資訊，此方法也能避免儲存與傳輸的資料過大的問題。</p>
+
+<p>而為了要讓 Client 端知道 Session 儲存的資訊，Server 端會在 response 的 Cookie 中回傳一組 SessionID 讓 Client 儲存在 Cookie 裡，當下次 Client 送出 request 時，就在 Cookie 裡一起送出這組 SessionID，而 Server 就可以透過這組 SessionID 去驗證這個 Client 身份，並知道上一次儲存的狀態，然後回傳內容。</p>
 
 <hr />
 
 <p><strong>Reference:</strong>
 <br />
-<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">前端三十｜27. [WEB] Cookie &amp; Session 是什麼？</a>
 <br />
-<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a>
+<a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">[ASP.NET]Stateful與Stateless</a>
 <br />
-<a href="https://zh.wikipedia.org/wiki/朴素贝叶斯分类器">wikipeida - 單純貝氏分類器</a></p>
+<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">白話 Session 與 Cookie：從經營雜貨店開始</a>
+<br />
+<a href="https://medium.com/@vicxu/authentication-那些小事上集-cookie-與-session-介紹-1da2d413afa2">淺談 Authentication 上集：Cookie 與 Session 介紹</a></p>
 
  -->
-    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+    <div class="post-excerpt"><p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1112,8 +1122,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread';
-        this.page.identifier = '/text%20mining/2019/11/13/Text-Mining-Text-classification/';
+        // this.page.url = '/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread';
+        this.page.identifier = '/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1126,7 +1136,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/13/Text-Mining-Text-classification/">0 Comments</a>
+        <a href="/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread" data-disqus-identifier="/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">0 Comments</a>
       </span>
 
     </div>
@@ -1135,533 +1145,166 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">
-        [Text Mining]Information Retrieval
+      <a href="/blog/python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/">
+        [Python]Numpy & Pandas 簡介
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 5, 2019</span> -->
+      <!-- <span class="post-date">Posted by Shihs on February 10, 2021</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 5, 2019</span>
+      <span class="post-date">February 10, 2021</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Numpy">Numpy</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Pandas">Pandas</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+    <!-- <h3 id="簡介">簡介</h3>
 
-<p>這門課教授的是英文的文字探勘，中文與英文本身在結構上有非常大的差異，所以有些解析和斷詞的方法中文可能並不適用，但在基本概念上還是有相同的地方。</p>
+<p>numpy 和 pandas</p>
 
-<p>每個主題都有一個 Lab 附在文章最後。</p>
+<p>运算速度快：numpy 和 pandas 都是采用 C 语言编写, pandas 又是基于 numpy, 是 numpy 的升级版本。
+消耗资源少：采用的是矩阵运算，会比 python 自带的字典或者列表快好多</p>
 
-<hr />
-
-<h2 id="information-retrieval-ir">Information Retrieval (IR)</h2>
-
-<p>Information Retrieval (IR) is finding material (usually documents) of an unstructured nature (usually text) that satisfies an information need from within large collections (usually stored on computers).</p>
-
-<p>中文稱為「資訊檢索」。從一堆的 unstructured 資料中（通常是文字）找出符合我們需要的條件的資料。</p>
-
-<p>例如，google 搜尋就是一個例子。我們在搜尋 bar 裡輸入我們想要找到的關鍵字，google 搜尋引擎會從它儲存的所有 database（網站們） 中找出符合我們關鍵字條件的網站給我們。</p>
-
-<hr />
-
-<p>那我們要如何找到包含這些關鍵字的文章呢？</p>
-
-<p>最直觀地想應該就是把有我們搜尋的關鍵字的文章抓出來吧！這就是 Boolean retrieval。</p>
-
-<p>在進入 Boolean retrieval 之前先來看一下 The classic search model。</p>
-
-<h3 id="the-classic-search-model">The classic search model</h3>
+<p><strong>Numpy</strong></p>
 
 <ul>
-  <li>To communicate her/his information need to an IR system, the user formulates a <em>search query</em>.</li>
-  <li>The objective of the IR system is to find documents in the collection that ‘match’ the search query.</li>
-  <li>A good IR system finds documents that are also relevant for the user’s information need.</li>
+  <li>Series：一維</li>
+  <li>DataFrame：二維</li>
+  <li>Panel：三維</li>
 </ul>
 
-<p><img src="http://localhost:4000/blog/img/posts/The%20classic%20search%20model.png" alt="PMF_two coins.png" /></p>
-
-<hr />
-
-<h3 id="boolean-retrieval">Boolean retrieval</h3>
-
-<p>The Boolean retrieval model is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms, that is, in which terms are combined with the operators AND, OR, and NOT. The model views each document as just a set of words.</p>
-
-<p>很直覺的方法要找出包含關鍵字的可以使用 terms(通常是個單詞) 是否包含在 documents 裡。</p>
-
-<p>例如，現在有 Sherlock Holmes 小說文字。我想要找出哪些篇章符合出現 ‘Moriarty’ 和 ‘Lestrade’ 但不包含 ‘Adair’。那麼下的 query 就會是 <em>Moriarty AND Lestrade AND NOT Adair</em></p>
-
-<p>那個我們可以將上面的概念寫成一個 <strong>Term–document matrix</strong>。</p>
-
-<p><strong>Term–document matrix</strong></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Term%E2%80%93document%20matrix.png" alt="PMF_two coins.png" /></p>
-
-<p>每一行代表一個章節，每一列代表一個條件的單詞（term）。以列來看，0 表示該單詞沒有出現在那一章節中，1 表示該單詞有出現。
+<p><strong>Reference:</strong>
 <br />
-像是第一列，’Adair’ 只有出現在 ‘Empty house’ 這個章節。</p>
+<a href="https://oranwind.org/python-pandas-ji-chu-jiao-xue/#:~:text=Pandas%20%E6%98%AFpython%20%E7%9A%84%E4%B8%80%E5%80%8B,%E8%B3%87%E6%96%99%EF%BC%8C%E4%B8%BB%E8%A6%81%E7%89%B9%E8%89%B2%E6%8F%8F%E8%BF%B0%E5%A6%82%E4%B8%8B%EF%BC%9A&amp;text=%E9%80%8F%E9%81%8E%E8%BC%89%E5%85%A5%E8%87%B3Pandas,%E5%80%BC%E5%8E%BB%E9%99%A4%E6%88%96%E5%8F%96%E4%BB%A3%E7%AD%89%E3%80%82">[Python] Pandas 基礎教學</a>
+<br /></p>
 
-<p>這樣的方法看似簡單，但以實務上來說並不是個好辦法。因為，</p>
+ -->
+    <div class="post-excerpt"><h3 id="簡介">簡介</h3>
 
-<ul>
-  <li>Term–document matrices are sparse. 可以從上面的 matrix 看到，有很多的 0 ，也就是說其實很多資訊並不需要，但卻還是需要儲存。</li>
-  <li>假如現在有 1,000,000 份 documents，有 500,000 不同的 terms ，這樣的條件下會產生 a matrix with 500,000,000,000 entries (62,5 GB)。</li>
-</ul>
+</div>
+    
 
-<p>所以我們必須得使用別的辦法減少不必要的資訊儲存。這時候就有了 Inverted index。</p>
-
-<p><strong>Inverted index</strong></p>
-
-<p>The inverted index is a key–value mapping, the basic idea is shown below.</p>
-
-<ul>
-  <li>the keys are search terms</li>
-  <li>the values are sorted lists of document identifiers (ids)</li>
-  <li>the list for terms identifies those documents that contain the terms</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Inverted%20index.png" alt="PMF_two coins.png" /></p>
-
-<p>從上圖我們可以看到，和 Term–document matrix 不一樣的是 Inverted index 只儲存了有包含該單詞的 document ids。</p>
-
-<hr />
-
-<p>現在我們知道我們要的是去看那些關鍵字是否包含在 documents 中，但我們並不會每一次找關鍵字的時候一篇一篇文章搜索，我們會先建立一個儲存好所有 term 的 matrix，
-但我們要怎麼決定是哪些 terms 要被儲存呢？</p>
-
-<h2 id="index-construction">Index construction</h2>
-
-<p>The major steps in index construction:</p>
-
-<ol>
-  <li>Collect the documents to be indexed.</li>
-  <li>Tokenize the text.</li>
-  <li>Do linguistic preprocessing of tokens.</li>
-  <li>Index the documents that each term occurs in.</li>
-</ol>
-
-<p><img src="http://localhost:4000/blog/img/posts/building%20an%20index%20by%20sorting%20and%20grouping.png" alt="PMF_two coins.png" /></p>
-
-<h3 id="tokenization">Tokenization</h3>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">raw</span> <span class="o">=</span> <span class="s">"Apple is looking at buying U.K. startup for $1 billion."</span>
-<span class="c"># tokenize raw text based on whitespace</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
-	<span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
 
 
-<span class="c"># tokenize using spaCy</span>
-<span class="kn">import</span> <span class="nn">spacy</span>
+<script>
 
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/#disqus_thread';
+        this.page.identifier = '/python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/';
+};
 
-<span class="c"># 結果：</span>
-<span class="c"># Apple</span>
-<span class="c"># is</span>
-<span class="c"># looking</span>
-<span class="c"># at</span>
-<span class="c"># buying</span>
-<span class="c"># U.K.</span>
-<span class="c"># startup</span>
-<span class="c"># for</span>
-<span class="c"># $</span>
-<span class="c"># 1</span>
-<span class="c"># billion</span>
-<span class="c"># . </span>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/#disqus_thread" data-disqus-identifier="/python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">
+        [Python]asyncio 和 await
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 22, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.google.com.tw/'</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Send a request at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Receive a response at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
 </code></pre></div></div>
-
-<p>英文每個單字可以很容易地使用空白（.split()）來分割出每個單字，但只使用
-split 無法排除標點符號的問題，python 的 spacy 可以將標點符號也區分出來。</p>
-
-<h3 id="stop-words">Stop words</h3>
-<p>A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and…</p>
-
-<p>但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們到底或許可以根據分析的目的 Sherlock Holmes 考慮將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。</p>
-
-<p>既然 stop words 對於分析沒有價值貢獻，那麼在做分析前就必須把 stop words 刪除，以避免干擾分析結果。</p>
-
-<h3 id="lexemes-and-lemmas">Lexemes and lemmas</h3>
-
-<p>英文的文法有幾個規則，</p>
-<ol>
-  <li>動詞會根據人稱與時態有所變化</li>
-  <li>名詞的單數與複數有變化</li>
-</ol>
-
-<p>但在分析前必須要將這些相同意義但不同型的單字修正為相同以便分析。</p>
-
-<ul>
-  <li>
-    <p>The term <em>lexeme</em> refers to a set of word forms that all share the same fundamental meaning. For example: word forms run, runs, ran, running – lexeme run</p>
-  </li>
-  <li>
-    <p>The term <em>lemma</em> refers to the particular word form that is
-chosen, by convention, to represent a given lexeme. For example: what you would put into a lexicon</p>
-  </li>
-</ul>
-
-<hr />
-
-<h2 id="ranked-retrieval">Ranked retrieval</h2>
-
-<p>進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。</p>
-
-<p><strong>Problems with Boolean retrieval</strong></p>
-
-<ul>
-  <li>Not many users are capable of writing high-quality Boolean queries, and many find the process too time-consuming.</li>
-  <li>Feast or famine: Boolean queries tend to return either too many results, or no results at all.</li>
-  <li>Intuitively, whether or not a document ‘matches’ a search query is not a Boolean property, but is gradual in nature.</li>
-</ul>
-
-<p><strong>Ranked retrieval</strong></p>
-<ul>
-  <li>
-    <p>A ranked retrieval system assigns scores to documents based on how well they match a given search query. (There are many possible ways of scoring.)</p>
-  </li>
-  <li>
-    <p>Based on the score, a ranked retrieval system can return a list of the top documents in the collection with respect to the query.</p>
-  </li>
-</ul>
-
-<p>前面提到的 boolean retrieval 只考慮了文件是否包含或不包含要的詞彙，為了那個詞彙的「重要性」也考慮進去，我們要給予每個 term 不同的 weight。</p>
-
-<h3 id="term-weighting">Term weighting</h3>
-
-<ul>
-  <li>The score of a document d with respect to a query q is the sum of the weights of all terms t that occur in both d and q.</li>
-</ul>
-
-<script type="math/tex; mode=display">\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}</script>
-
-<ul>
-  <li>Any specific way to assign weights to terms is called a term weighting scheme.</li>
-</ul>
-
-<p>計算 weight 的方法有很多種，也可以自行定義，這邊介紹一種常用的方法。</p>
-
-<h3 id="tdidf-weight">TD–IDF weight</h3>
-
-<p>TD–IDF is Term frequency–inverse document frequency. This formula includes two parts: Term frequency &amp; Inverse document frequency.</p>
-
-<p><strong>Term frequency</strong></p>
-
-<p>The number of times a term t occurs in a document d is called the term frequency of t in d, and is denoted by tf(t, d).</p>
-
-<p>-<em>A problem with term frequency</em></p>
-
-<p>Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-weight(t, d) = \left\{ \begin{array}{rcl}
-1 + log_{10}tf(t, d), & if ~ tf(t, d) > 0 \\
-0, & others \\
-\end{array}\right. %]]></script>
-
-<p>稱作，<em>log-frequency weighting</em></p>
-
-<p>-<em>Another problem with term frequency</em></p>
-
-<p>時常重複出現的慣用詞彙對一個文件的影響很大。例如，現在想要考慮 Sherlock Holmes 裡包含 Moriarty 和 Holmes 的章節，但當我們下 query 去找時會發現，Holmes 出現最多的章節幾乎沒有 Moriarty，這是因為 Holmes 在這些文本裡出現的比例實在太高了，如果直接以它出現的頻率來分析肯定會造成很大的誤差，進而影響了出現次數少很多的 Moriarty。所以這時候 Inverse document frequency 就非常重要了！</p>
-
-<p><strong>Inverse document frequency</strong></p>
-
-<ul>
-  <li>Let N be the total number of documents in the collection.</li>
-  <li>The number of documents that contain a term t is called the
-document frequency of t, and is denoted by df(t).</li>
-</ul>
-
-<p>It denotes by idf(t):</p>
-
-<script type="math/tex; mode=display">\textrm{idf(t)} = log \frac{N}{df(t)}</script>
-
-<p>df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。</p>
-
-<p><strong>TD–IDF Weight</strong></p>
-
-<p>現在我們有了 td 和 idf，tf–idf weight 就是將這兩個數字相乘（出現次數乘以重要性），</p>
-
-<p>The <strong>tf–idf weight</strong> of a term t in a document d is defined as</p>
-
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}</script>
-
-<p>where N denotes the number of documents in the collection.</p>
-
-<p><strong>Variations of the tf–idf weighting scheme</strong></p>
-
-<p>因為 df(t) 可能是 0，所以我們改良一下上面的式子。</p>
-
-<p>In scikit-learn, the tf–idf weight is computed as</p>
-
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)</script>
-
-<p>where N denotes the number of documents in the collection.</p>
-
-<hr />
-
-<h2 id="the-vector-space-model">The vector space model</h2>
-
-<h3 id="document-representations">Document representations</h3>
-
-<ul>
-  <li>Documents as sets of terms
-In Boolean retrieval, the only relevant information is whether or not a term is present in a document.</li>
-  <li>Documents as bags of terms
-In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.</li>
-</ul>
-
-<h3 id="the-vector-space-model--idea-1">The vector space model – idea 1</h3>
-<p>Represent documents as vectors in a high-dimensional space:</p>
-
-<ul>
-  <li>The dimensions (axes) of the space correspond to the terms in
-the vocabulary (potentially relevant terms). For example: could be set of all words in the collection, set of most frequent words, …</li>
-  <li>The values of the vector components depend on the term weighting scheme: Boolean values, counts, tf–idf values, … (in scikit-learn: CountVectorizer, TfidfVectorizer)</li>
-</ul>
-
-<h3 id="the-vector-space-model--idea-2">The vector space model – idea 2</h3>
-<p>To rank documents in the vector space model,</p>
-
-<ul>
-  <li>we represent the query as a vector in the same space as the documents in the collection</li>
-  <li>we compute the score of a candidate document as the similarity between its document vector and the query vector (similarity = proximity in the vector space)</li>
-</ul>
-
-<h3 id="cosine-similarity">Cosine similarity</h3>
-
-<p>以下舉一個從一篇<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">部落格</a>看到的例子，</p>
-
-<p>例如:
-Query = {“Hello”}
-Doc1 = {“Foo”, “Foo”}
-Doc2 = {“Hello”, “World”}</p>
-
-<p>在經過計算之後，我們知道其向量分別為（可以使用 tf-idf values, counts,… 等等）</p>
-
-<p>Query = (1, 0, 0)
-Doc1 = (0, 0, 2)
-Doc2 = (1, 1, 0)</p>
-
-<p>我們可以使用歐幾里德距離算出 query 和兩個 documents 的距離分別是，根號5和1。但計算歐幾里德距離忽略掉了單詞出現的頻率的影響。</p>
-
-<p>如果說今天把上面的向量改一下，</p>
-
-<p>Query = (2, 0, 0)
-Doc1 = (0, 0, 4)
-Doc2 = (2, 2, 0)</p>
-
-<p>這時候 所有的距離都變成了兩倍，但其實他們完全是平行的向量。</p>
-
-<p>那如果我們考慮向量之間的角度呢？也就是計算兩個向量的 dot，這時候會發現，長度還是影響了最後的數值。</p>
-
-<p>因此，使用 <strong>Cosine similarity</strong> 來將數值 normalized。使用 cosine 後，數值只會介於 -1 和 1 之間，並且只需要考慮非0的數值。</p>
-
-<hr />
-
-<h2 id="evaluation-of-information-retrieval-systems">Evaluation of information retrieval systems</h2>
-
-<p>To evaluate an IR system we need:</p>
-<ul>
-  <li>a document collection</li>
-  <li>a collection of queries</li>
-  <li>a gold-standard relevance judgement</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/Precision%20and%20recall%20for%20Boolean%20retrieval.png" alt="PMF_two coins.png" /></p>
-
-<p><strong>Precision:</strong></p>
-
-<p>Precision (P) is the fraction of retrieved documents that are relevant</p>
-
-<script type="math/tex; mode=display">Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})</script>
-
-<p><strong>Recall:</strong></p>
-
-<p>Recall (R) is the fraction of relevant documents that are retrieved</p>
-
-<script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
-
-<hr />
-
-<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb">Information Retrieval Lab</a></p>
 
 <hr />
 
 <p><strong>Reference:</strong>
 <br />
-<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
-<br />
-<a href="https://nlp.stanford.edu/IR-book/information-retrieval-book.html">Introduction to Information Retrieval</a>
-<br />
-<a href="https://taweihuang.hpd.io/2017/03/01/tfidf/">[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯</a>
-<br />
-<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">Vector Space Model(1)</a></p>
-
+<a href="https://ithelp.ithome.com.tw/articles/10199385">python的asyncio模組(一)：異步執行的好處</a>
+<br /></p>
  -->
-    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+    <div class="post-excerpt"><p>```python
+import requests
+import time
+import asyncio</p>
 
 </div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread';
-        this.page.identifier = '/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">0 Comments</a>
-      </span>
-
-    </div>
     
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
-        [Machine Learning]Markov Chain Monte Carlo (MCMC)
-      </a>
-    </h1>
 
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 12, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 12, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><strong>MCMC 是什麼？</strong></p>
-
-<p>Markov Chain Monte Carlo （MCMC）是一種抽樣方法，用來解決無法直接抽樣的分佈的隨機抽樣問題。</p>
-
-<p><strong>The Goal of MCMC</strong></p>
-
-<p>We want to sample from some distribution p, or approximate an <script type="math/tex">E[f(x)] ~ where ~ (X \sim p)</script>
-<br />
-通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。</p>
-
-<hr />
-
-<p><strong>為什麼要使用 MCMC？</strong></p>
-
-<p>在 Baysian Inference 中常使用到這個公式</p>
-
-<script type="math/tex; mode=display">p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>或是，它的參數 <script type="math/tex">\theta</script> 的貝式估計</p>
-
-<script type="math/tex; mode=display">\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>其中的 <script type="math/tex">p(\theta)</script> 為先驗機率 (prior probability)，基本上我們無法獲得 <script type="math/tex">p(\theta)</script> 的值，這時候就需要 MCMC。</p>
-
-<hr />
-
-<p>MCMC 由兩部分的觀念 (步驟) 組成, 一個是 「Markov Chain」 ，另一個則是「Monte Carlo integration」，接下來將說明這兩個部分。</p>
-
-<hr />
-
-<p><strong>Monte Carlo Integration</strong></p>
-
-<p>Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子</p>
-
-<script type="math/tex; mode=display">E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)</script>
-
-<p>也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。</p>
-
-<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 <script type="math/tex">p(\theta \mid y)</script> 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
-
-<p>所以說，哪有這麼好的事？</p>
-
-<p>這時候可以採用其他的抽樣方法，譬如，<em>rejection sampling</em>, <em>importance sampling</em> 和本文的重點 <em>MCMC</em>。</p>
-
-<hr />
-
-<p><strong>Markov Chain</strong></p>
-
-<ul>
-  <li>
-    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence <script type="math/tex">X_0, X_1, ...</script> of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 <script type="math/tex">X_0, X_1, ...</script>，且每一個變數只和前一個變數有關，也就是 <script type="math/tex">X_{t+1}</script> 來自 <script type="math/tex">p(X_{t+1} \mid X_t)</script>，像這樣的數列我們就稱為馬可夫鍊。</p>
-  </li>
-  <li>
-    <p><script type="math/tex">p(X_{t+1} \mid X_t)</script> 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
-  </li>
-  <li>
-    <p>A Markov chain is stationary, with stationary distribution <script type="math/tex">Φ, if ~\forall k ~ X_k  \sim Φ</script></p>
-  </li>
-  <li>
-    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 <script type="math/tex">\pi(·)</script> 並且與 <script type="math/tex">X_0</script> 的選擇無關。</p>
-  </li>
-</ul>
-
-<p><em>Monte Carlo Integration</em>可以看<a href="https://www.youtube.com/watch?v=MKnjsqYVG4Y">這裡</a></p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=3ZmW_7NXVvk">(ML 18.1) Markov chain Monte Carlo (MCMC) introduction-12eZWG0Z5gY.mp4</a>
-<br />
-<a href="http://web.ntpu.edu.tw/~ccw/statmath/M_mcmc.pdf">The Markov Chain Monte Carlo Simulations</a>
-<br /> 
-Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
-<br />
-<a href="https://zhuanlan.zhihu.com/p/25610149">[数据分析] Markov Chain Monte Carlo</a>
-<br />
-<a href="https://www.youtube.com/watch?v=s8w8AsFK77c&amp;list=PLyAft-JyjIYq2SLTHO2ptmx-cChbE5GBm">徐亦达机器学习课程 Markov Chain Monte Carlo</a>
-<br />
-<a href="http://www.cnblogs.com/pinard/p/6625739.html">MCMC(一)蒙特卡罗方法</a></p>
- -->
-    <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
-
-</div>
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1681,8 +1324,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/';
+        // this.page.url = '/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread';
+        this.page.identifier = '/python/2021/01/22/Python-asyncio-%E5%92%8C-await/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1695,322 +1338,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">
-        [Machine Learning]Covolutional Neural Networks(CNN)(2)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
-
-<ul>
-  <li>Padding</li>
-  <li>Strided Convolution</li>
-  <li>Convolutions Over Volume
-***</li>
-</ul>
-
-<h2 id="padding">Padding</h2>
-
-<p><strong>為什麼需要 Padding?</strong></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/padding.png" alt="padding.png" height="400px" width="600px" /></p>
-
-<p>Convolution operation 的缺點：</p>
-<ol>
-  <li>經過 convolution fitler 後原始圖將變小。如果有很多層 convolutional layer，資訊在每次運算後不斷損失。</li>
-  <li>最邊緣的 pixel 只會被使用到一次，但中間的 pixel 會使用到較多次。也就是說，會有邊緣的很多資訊缺失。</li>
-</ol>
-
-<p>所以為了解決以上的缺點，我們將 input 的圖的邊緣加上一個 pixel，這樣經過卷積運算後的圖像仍和原圖一樣大。邊緣也是可以加 2 pixel 的。</p>
-
-<p>以上圖為例，原本為 6x6(nxn) 的圖，經過 3x3(fxf) 的 filter 做卷積運算後，變為 (n-f+1)x(n-f+1) 的圖。</p>
-
-<p>但如果今天邊緣加上 p pixel，最後圖檔就會變為 (n+2p-f+1)x(n+2p-f+1) 的圖。</p>
-
-<hr />
-
-<p><strong>The choice of padding - Vaild and Same convolutions</strong></p>
-
-<ol>
-  <li>Vaild - No padding</li>
-  <li>Same - Pad so that output size is the same as the input size
-<br />
-根據上面的公式，如果在 input 圖邊緣加上 pixel 後經過卷積運算要和原始圖檔大小ㄧ樣，那要符合 n+2p-f+1 = n，那就會得到 p = (f-1)/2</li>
-</ol>
-
-<p>For computer vision, usually f is odd. 3 by 3 filters are very common.</p>
-
-<hr />
-
-<h2 id="strided-convolution">Strided Convolution</h2>
-
-<p>前面我們在做 convolution 時 filter 都是一次跳一格計算，strided 則是一次跳不只一格。</p>
-
-<p>如下圖，這時候最後結果的 pixel 也會不同，計算公式就會是 ((n+2p-f)/2)+1 取 floor。
-<img src="http://localhost:4000/blog/img/posts/strided.png" alt="strided.png" height="400px" width="600px" /></p>
-
-<hr />
-
-<p><strong>cross-correlation vs. convolution</strong></p>
-
-<ul>
-  <li>cross-correlation：數學家喜歡將 convolutional operation 稱為 cross-correlation。在做運算時會將 filter 做水平與垂直翻轉，如下圖。</li>
-  <li>convolution：在 deep learning 通常都稱為 convolution，且不會將 filter 做鏡射的動作。</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/cross-correlation.png" alt="cross-correlation.png" height="400px" width="600px" /></p>
-
-<p>那這樣幹嘛要翻轉？因為在做訊號處理時，翻轉後會有一些好的特性可以拿來使用。但在做 deep learning 時基本上沒有影響，所以做 deep learning 時不會翻轉 filter。</p>
-
-<hr />
-
-<h2 id="convolutions-over-volume">Convolutions Over Volume</h2>
-
-<p><strong>Convolutions on RGB impages</strong></p>
-
-<p>前面舉的例子都是在 2D 上計算 convolution，現在要來看如何在 3D 上實現 convolution。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
- -->
-    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">
-        [Algorithm]基因演算法Genetic Algorithm
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Algorithm">Algorithm</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
-
-<p>它的想法是來自於基因遺傳，透過細胞分裂將好的基因保留，不好的基因淘汰，一代傳一代，最後留下最適合生存的物種，所謂「適者生存」。
-實現的方式就像基因的機制那樣，透過<em>隨機</em>選擇後，再進行 crossover 和 mutation，經過多次迭代後，最後結果將會收斂到一個最佳解。但這最佳解不ㄧ定是 global maximum（minimum），通常是 local maximum（minimum）。</p>
-
-<p>（但其實這與基因的真實行為完全無關，就像是 Neural Network 和人類神經反應的真實行為無關一樣。）</p>
-
-<hr />
-<h3 id="演算法流程圖">演算法流程圖</h3>
-<p><img src="http://localhost:4000/blog/img/posts/genetic%20algorithm.gif" alt="genetic algorithm.gif" height="380px" width="600px" />
-<a href="https://dotblogs.com.tw/dragon229/2013/01/03/86692">Source</a></p>
-
-<ol>
-  <li>一開始隨機產生n個變數 (n由使用者決定)</li>
-  <li>利用適應函數（fitness function）計算所有變數的適應值</li>
-  <li>依每個的適應值進行「選擇、複製」</li>
-  <li>對留下的變數進行交配（crossover）及突變（mutation）的動作</li>
-</ol>
-
-<hr />
-
-<h3 id="範例">範例</h3>
-
-<p>以下範例是來自<a href="http://www.csie.ntnu.edu.tw/~u91029/Optimization.html">演算法筆記的 Optimization</a></p>
-
-<p>1.
-[初始化]
-一開始先隨便弄出幾個x。本例是四個。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101010
-1011001011
-1110101011
-0010101000
-</code></pre></div></div>
-
-<p>2.
-[fitness function]
-根據問題特性，定義好壞程度。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(1010101010) = 678
-</code></pre></div></div>
-
-<p>3.
-[selection]
-隨便找個位置切一刀，每個x都被分成兩段。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101  010
-1011001  011
-1110101  011
-0010101  000
-</code></pre></div></div>
-
-<p>4.
-[crossover]
-隨便找兩組你覺得夠優良的x，交叉相接變成新答案。
-重複一直做，直到x數目跟原先一樣多。本例是四個。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101 \/ 010  -&gt;  1010101 -- 011
-1011001 /\ 011      1011001 -- 010 
-
-
-1010101011
-1011001010
-1110101010
-1010101000
-</code></pre></div></div>
-
-<p>5.
-[mutation]
-每個x都隨便找一個地方把數字改掉，也可以不改。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010111011
-1011001000
-1110101010
-1010101001
-</code></pre></div></div>
-
-<p>6.
-重複3. 4. 5.，直到裡面有一個x是你滿意的，令f(x)最大的那個x。</p>
-<ol>
-  <li>隨機產生N個x。</li>
-  <li>計算fitness function。</li>
-  <li>重複以下步驟，直到有一個x讓人滿意。
-<br />
-　甲、selection。
-<br />
-　乙、crossover。
-<br />
-　丙、mutation。
-<br />
-　丁、計算fitness function。</li>
-</ol>
-
-<p>一開始的 x 的足夠豐富，多演化幾次就可以得到不錯的結果。一開始的 x 足夠豐富，可以避免進入區域極值。 mutation 用於增加 x 的豐富性，以跳脫區域極值。</p>
-
-<hr />
-
-<p>Reference:</p>
-
-<p><a href="http://www.csie.ntnu.edu.tw/~u91029/Optimization.html">演算法筆記 - Optimization</a>
-<br />
-<a href="http://littledoa.wixsite.com/pcclab/single-post/2016/02/03/Genetic-Algorithm-基因演算法">Genetic Algorithm 基因演算法</a>
-<br />
-<a href="https://www.youtube.com/watch?v=UE6YkRWBtZk">人工智慧系列之基因演算法</a></p>
- -->
-    <div class="post-excerpt"><p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/#disqus_thread';
-        this.page.identifier = '/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/#disqus_thread" data-disqus-identifier="/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">0 Comments</a>
+        <a href="/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread" data-disqus-identifier="/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">0 Comments</a>
       </span>
 
     </div>

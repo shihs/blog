@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,15 +183,15 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">
-        [R]使用 R 寄Outlook Email
+      <a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">
+        [R][Git]如何在 Rstudio 上連接 R project 與 Github
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 26, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 8, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 26, 2018</span>
+      <span class="post-date">September 8, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -187,567 +199,93 @@
       
       
         <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
-
-<p>這篇要介紹使用RDOCOMClient這個套件來發送outlook夾帶檔案的電子郵件。<br />
-<a href="https://stackoverflow.com/questions/26811679/sending-email-in-r-via-outlook" target="_blank">參考</a></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">RDCOMClient</span><span class="p">)</span><span class="w">
-</span><span class="c1">## init com api</span><span class="w">
-</span><span class="n">OutApp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">COMCreate</span><span class="p">(</span><span class="s2">"Outlook.Application"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## create an email </span><span class="w">
-</span><span class="n">outMail</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OutApp</span><span class="o">$</span><span class="n">CreateItem</span><span class="p">(</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="c1">## configure  email parameter </span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"To"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"reciever@mail.com"</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"subject"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"subject"</span><span class="w">
-</span><span class="c1"># There are two ways you can write for mail body</span><span class="w">
-</span><span class="c1"># First:text</span><span class="w">
-</span><span class="c1"># outMail[["body"]] = </span><span class="w">
-</span><span class="c1"># "Dear reciever,</span><span class="w">
-</span><span class="c1">#                      </span><span class="w">
-</span><span class="c1"># Please see attached.</span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># </span><span class="w">
-</span><span class="c1"># Best regards,</span><span class="w">
-</span><span class="c1"># Sender"</span><span class="w">
-
-</span><span class="c1"># Second:html text</span><span class="w">
-</span><span class="n">body</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> 
-</span><span class="s1">'
-&lt;p&gt;Dear reciever,&lt;/p&gt;
-&lt;p&gt;Please see attached.&lt;/p&gt;
-&lt;br&gt;
-&lt;br&gt;
-&lt;p&gt;Best regards,
-&lt;p&gt;Sender&lt;/p&gt;'</span><span class="w">
-
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"HTMLbody"</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w">
-
-</span><span class="c1"># attachment</span><span class="w">
-</span><span class="n">outMail</span><span class="p">[[</span><span class="s2">"Attachments"</span><span class="p">]]</span><span class="o">$</span><span class="n">Add</span><span class="p">(</span><span class="s2">"path of your attachment"</span><span class="p">)</span><span class="w">
-</span><span class="c1">## send it                     </span><span class="w">
-</span><span class="n">outMail</span><span class="o">$</span><span class="n">Send</span><span class="p">()</span><span class="w">
-
-
-</span></code></pre></div></div>
- -->
-    <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread';
-        this.page.identifier = '/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/#disqus_thread" data-disqus-identifier="/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">
-        [Python][爬蟲]requests 的編碼
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 17, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 17, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
         &nbsp;
       
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        <a target="_blank" href="/blog/category/#Git">Git</a>
         
       
     </span>
 
 
     </div>
-    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
-
-<p><strong>rep.text    ： unicode 型別</strong><br />
-1.是由 requests 以 rep.encoding 自動轉換的！<br />
-2.rep.encoding 是以 Reponse Headers 的 Content-Type 決定！</p>
-
- -->
-    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
-</code></pre></div></div>
-<p><strong>rep.content ： bytes 型別</strong></p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">
-        [Python][爬蟲]防止被ban，代理IP怎麼用?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 7, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 7, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-<p><a href="http://willdrevo.com/using-a-proxy-with-a-randomized-user-agent-in-python-requests" target="_blank">參考</a><br />
-這裡主要介紹如何使用IP代理。</p>
-
-<h2 id="proxy代理類型"><strong>proxy代理類型</strong></h2>
-<p><a href="http://gohom.win/2016/01/20/proxy-type/" target="_blank">參考</a></p>
-<ol>
-  <li>
-    <p>透明代理(Transparent Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Your IP</p>
-  </li>
-  <li>
-    <p>匿名代理(Anonymous Proxy)<br />
-REMOTE_ADDR = proxy IP<br />
-HTTP_VIA = proxy IP<br />
-HTTP_X_FORWARDED_FOR = proxy IP</p>
-  </li>
-  <li>
-    <p>混淆代理(Distorting Proxies)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = Proxy IP<br />
-HTTP_X_FORWARDED_FOR = Random IP address</p>
-  </li>
-  <li>
-    <p>高匿代理(Elite proxy或High Anonymity Proxy)<br />
-REMOTE_ADDR = Proxy IP<br />
-HTTP_VIA = not determined<br />
-HTTP_X_FORWARDED_FOR = not determined<br /></p>
-  </li>
-</ol>
-
-<h2 id="代理proxy哪裡找"><strong>代理proxy哪裡找？</strong></h2>
-<p>這裡提供兩個我覺得品質比較好的proxy代理<br /></p>
-<ol>
-  <li>http://www.goubanjia.com/free/index.shtml<br /></li>
-  <li>http://www.proxyserverlist24.top/<br /></li>
-</ol>
-
-<p><a href="https://github.com/shihs/proxy/blob/master/get_proxies.py" target="_blank">程式碼</a></p>
-
-<h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
-	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
-
-<span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
-
-</code></pre></div></div>
-
-<p>抓完proxy後，我將所有proxy儲存在csv檔案中，
-要爬取網站的時候，先讀取該檔案，
-只要被擋，就random使用proxy替換proxies。</p>
-
-<p>如果所有proxy都用完再重新爬取，
-網站上的proxy都會不停更換，
-所以只要更新proxy庫就好。</p>
-
- -->
-    <div class="post-excerpt"><h2 id="如何讓爬蟲程式不被ban"><strong>如何讓爬蟲程式不被ban?</strong></h2>
-<ol>
-  <li>動態設置user agent</li>
-  <li>使用代理IP</li>
-</ol>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
-        [Python]呼叫其他.py的function
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 2, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
-<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
-	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
-
-</code></pre></div></div>
-
-<p>有兩種情況，<br />
-<strong>1. 這兩個檔案在同一個folder底下</strong><br />
-—main.py<br />
-—fun.py<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
-<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-
-</code></pre></div></div>
-
-<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
-想要呼叫的fun.py在function這個folder底下<br />
-—main.py<br />
-—function—fun.py<br /></p>
-
-<p>這時候main.py可以有兩種寫法</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
-<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
-<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
-<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
-<span class="c"># it's true, it's empty. But it's still important!</span>
-</code></pre></div></div>
-
-<p>那如果今天fun.py在function的下一層folder呢?<br />
-—main.py<br />
-—function—another—fun.py<br />
-只要把main.py改成<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
-<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-
-<span class="c">#或者也可以這樣寫</span>
-
-<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-<p>但最重要的是，<br />
-<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
-
- -->
-    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
-        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
-        [Tutorial]Computer Networking筆記(22-26)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 25, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+    <!-- <p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
+
+<p>在進入主題前，請先安裝好 R、Rstudio 和 Git ，並且申請好 Github 帳號。</p>
+
+<hr />
+
+<h2 id="前置作業">前置作業</h2>
+<p><strong>設置 SSH RSA key</strong></p>
+
+<p>1.複製 public key<br />
+Tool &gt; Global Options &gt; Git/SVN &gt; Create RSA Key &gt; View public key <br />
+點開 View public key 後，複製裡頭所有的東西。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Rstudio%20SSH.png" alt="Rstudio SSH.png" /></p>
+
+<p>2.將 public key 貼到 github</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/github%20ssh.png" alt="github ssh.png" /></p>
+
+<hr />
+
+<h2 id="開始建立-connection">開始建立 connection</h2>
+
+<p><strong>建立專案</strong></p>
+
+<p>請先建立一個專案，這裡就不多加解釋了。</p>
+
+<p><strong>在本機建立 repository</strong></p>
+
+<p>Build &gt; Configure public Tools &gt; Git/SVN<br />
+將 Version control system 由 None 改為 Git</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/version%20control%20system.png" alt="version control system.png" /></p>
+
+<p>這時候就會發現 Rstudio 的視窗長得不太一樣了。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/rstudio%20git.png" alt="rstudio git.png" /></p>
+
+<p>下方視窗應該會有一些還未 commit 的檔案，但因為我都已經 commit 了，所以沒有內容。<br />
+且這時候 pull 和 push 鍵應該還無法操作。</p>
+
+<p><strong>Github 同步</strong></p>
+
+<p>終於來到最後一哩路。</p>
+
+<p>到 Github 上創建一個新的 repository，且名稱要和 project 相同，只要單純創建 repository 就好，什麼檔案都不要。</p>
+
+<p>最後，打開 Rstudio 工具列的， Tools &gt; Shell</p>
+
+<p>然後在 Shell 裡輸入，</p>
+<pre><code class="language-git">git remote add origin https://github.com/你的github帳號/你的專案名稱.git
+git push -u origin master
+</code></pre>
+
+<p>完成後就會發現專案已經和 Github 連結了！專案的檔案都出現在 Github 上了。<br />
+這時候 pull 和 push 鍵也已經可以操作了。</p>
+
+<p>未來只要更新專案內容，就可以直接在 Rstudio 上 commit 和 push 就好了！</p>
+
+<hr />
+
+<p><strong>補充</strong></p>
+
+<p>移除 project 與該 repository 的 connection <code class="highlighter-rouge">rm -rf .git</code></p>
+
+<hr />
+<p>參考：</p>
+
 <ul>
-  <li>bit = binary digit</li>
-  <li>8-bit system 最高到2^8</li>
+  <li>Hadley Wickham 的 <a href="http://r-pkgs.had.co.nz/git.html">R Package Git 章節</a></li>
 </ul>
 
-<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
-2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
- 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
-
-<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
-也就是，111111111<br /></p>
-
-<p>所以如果今天有更多的bits就可以儲存更多的data，
-這也就是為什麼更大的bits功能較強大了。</p>
-
-<h2 id="ip-address"><strong>IP Address</strong></h2>
-<p>每個device都有ip address。</p>
-
-<p>IP是一個32 bits的2進位表示的數字，<br />
-中間以「.」隔開成四組號碼。<br />
-像這樣:xxx.xxx.xxx.xxx<br />
-每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
-所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
-而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
-
-<p>這樣的方式就可以讓每個device表達它的位置。</p>
-
-<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
-<p>The Internet is a network of networks.</p>
-
-<p>影片舉了一個例子：
-想像網路其實是聚集了所有的網絡。
-例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
-而這三個網絡又都可以連到網路上。</p>
-
-<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
-這時候server收到訊息後，會再傳回response，
-可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
-
-<p>所以其實IP裡頭包含兩個訊息，</p>
-<ol>
-  <li>Newwork ID</li>
-  <li>Host ID</li>
-</ol>
-
-<p>但是，重點來了！<br />
-那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
-如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
-這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
-但這時候有人說，那萬一某個network的host很少，<br />
-那豈不是浪費了很多host的位址嗎！<br />
-但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
-這時候大家有點爭論不休，<br />
-到底該如何解決呢？<br /></p>
-
-<p>所以這時有人提出了一個辦法，<br />
-我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
-
-<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
-當今天在傳送訊息時，<br />
-device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
-
-<p>subnet mask一樣是一個32 bits的2進位數字，<br />
-1表示network id，0表示host id。<br />
-<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
-<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
-
  -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+    <div class="post-excerpt"><p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -767,8 +305,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
+        // this.page.url = '/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread';
+        this.page.identifier = '/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -781,7 +319,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
+        <a href="/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread" data-disqus-identifier="/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">0 Comments</a>
       </span>
 
     </div>
@@ -790,65 +328,108 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
-        [Tutorial]Computer Networking筆記(16-21)
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">
+        [統計]什麼是 CDF (Cumulative Distribution Function)?
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 24, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 24, 2018</span>
+      <span class="post-date">September 4, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        <a target="_blank" href="/blog/category/#統計">統計</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+    <!-- <p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
 
-<h2 id="osi-model"><strong>OSI Model</strong></h2>
-<p><a href="https://zh.wikipedia.org/wiki/OSI模型" target="_blank">OSI Model- Open System Interconnection Reference Model</a><br />
-總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。</p>
+<hr />
 
-<p><a href="https://tw.voicetube.com/videos/20018" target="_blank">這有另外一個我覺得還不錯的影片</a></p>
+<h3 id="cdf-cumulative-distribution-function">CDF (Cumulative Distribution Function)</h3>
+<p><strong>定義 Definition</strong></p>
 
-<h2 id="modem"><strong>Modem</strong></h2>
-<p>Modem就是我們說的<a href="https://zh.wikipedia.org/wiki/调制解调器" target="_blank">數據機</a>。<br />
-It’s device that connects the network to the Internet.<br />
-It converges digital signals from router(or any other devices) to analog signals.<br />
-簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br />
-電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br /></p>
+<ul>
+  <li>The cumulative distribution function (CDF) of random variable \(X\) is defined as</li>
+</ul>
 
-<h2 id="router"><strong>Router</strong></h2>
-<p>Router是<a href="https://zh.wikipedia.org/wiki/路由器" target="_blank">路由器</a>。<br />
-Router joins network together.<br /></p>
+<script type="math/tex; mode=display">F_X(x) = P(X \leq x), \forall x \in {\Bbb R}</script>
 
-<h2 id="switch"><strong>Switch</strong></h2>
-<p>Switch是分享器。<br />
-假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br /></p>
+<p><a href="https://www.probabilitycourse.com/chapter3/3_2_1_cdf.php">Source</a></p>
 
-<p><a href="https://www.mobile01.com/topicdetail.php?f=507&amp;t=1631479" target="_blank">路由器和分享器差在哪</a></p>
+<blockquote>
 
-<h2 id="repeaterextender"><strong>Repeater/Extender</strong></h2>
-<p>Repeater/Extender是中繼器。<br />
-在一個比較大的空間裡，路由器的信號會因為距離而所差別，<br />
-這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。<br />
-即便是接網路線，如果網路線過長，訊號也會變差，<br />
-所以如果使用中繼器可以解決距離較遠的問題。<br />
-而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
+  <p>Mathematical Statistics with Applications 這本書將 CDF 稱為 distribution function，<br />
+<a href="https://zh.wikipedia.org/wiki/累积分布函数">wikipedia</a> 則翻譯為<strong>累積分布函數</strong>。</p>
+</blockquote>
 
+<p>以下再分 <em>1.離散型函數</em> 與 <em>2.連續型函數</em> 來看，</p>
+
+<hr />
+<h3 id="離散型隨機變數的-cdf">離散型隨機變數的 CDF</h3>
+
+<p>以擲兩枚硬幣為例，出現 head 為 1，tail 為 0，<br />
+其隨機變數 \(X\) 的 PMF 函數為</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,& \;for\; x = 0 \\
+1/2,& \;for\; x = 1 \\
+1/4,& \;for\; x = 2 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<p>PMF 函數圖為，
+<img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
+
+<p>則它的 CDF 累積分佈函數為
+<script type="math/tex">% <![CDATA[
+F_X(x) = \left\{ \begin{array}{rcl}
+0,& &for\; x < 0 \\
+1/4,& &for\; 0 \leq x < 1 \\
+3/4,& &for\; 1 \leq x < 2 \\
+1,&  &for\; x \geq 2\\
+\end{array}\right. %]]></script></p>
+
+<p>CDF 函數圖為，
+<img src="http://localhost:4000/blog/img/posts/CDF_two%20coins.png" alt="CDF_two coins.png" /></p>
+
+<p>可以發現，離散型的 CDF \(F_X(x)\) 為不連續的函數圖。</p>
+
+<p>關於離散型的 CDF 這<a href="https://www.probabilitycourse.com/videos/chapter3/video3_5.php">影片</a>有更詳細的說明。</p>
+
+<hr />
+<h3 id="連續型隨機變數的-cdf">連續型隨機變數的 CDF</h3>
+
+<p>那如果今天有個隨機變數 \(X\)，它的 CDF \(F(X)\) 為連續函數呢？<br /></p>
+
+<p><strong>定義 Definition</strong></p>
+<ul>
+  <li>A random variable \(X\) with CDF \(F(X)\) is said to be continuous if \(F(X)\) is a continuous function for all \(X \in {\Bbb R} \). <a href="https://www.probabilitycourse.com/chapter4/4_1_0_continuous_random_vars_distributions.php">Source</a></li>
+</ul>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+</ul>
+
+<hr />
  -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+    <div class="post-excerpt"><p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -868,8 +449,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/';
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -882,7 +463,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">0 Comments</a>
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">0 Comments</a>
       </span>
 
     </div>
@@ -891,94 +472,204 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">
-        [Tutorial]Computer Networking筆記(12-15)
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(3)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 20, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 20, 2018</span>
+      <span class="post-date">September 4, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        <a target="_blank" href="/blog/category/#統計">統計</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
 
-<h2 id="topologylayout"><strong>Topology/Layout</strong></h2>
-<p><a href="https://zh.wikipedia.org/wiki/网络拓扑" target="_blank">Topology/Layout</a>是網路之間連接的方式，wiki上翻成「網路拓樸」。<br />
-每一種方式都各有有缺點，所以取決於使用的目的來決定適合哪種Layout。</p>
+<p>這一篇要介紹常見的離散型分佈（Discrete Distribution），這篇主要是參考  <a href="https://www.probabilitycourse.com/chapter3/3_1_5_special_discrete_distr.php">Source</a></p>
 
-<p>這個課程介紹三種方式：</p>
+<hr />
+<h3 id="伯努利分佈-bernoulli-distribution">伯努利分佈 Bernoulli Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>bernoulli</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Bernoulli(p)\)</strong>, if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p,& \;for\; x = 1 \\
+1-p,& \;for\; x = 0 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
+
+<p>簡單來說，一個事件只有兩種可能。<br /></p>
+
+<p>生活中有非常多的例子都會是 Bernoulli Distribution，譬如，</p>
 <ol>
-  <li>Bus Topology(Tutorial 12)</li>
-  <li>Ring Topology(Tutorial 13)</li>
-  <li>Star Topology(Tutorial 14)</li>
+  <li>考試有及格、不及格</li>
+  <li>丟擲一枚銅板有正面、反面</li>
+  <li>小孩子性別可能是男生、女生</li>
 </ol>
 
-<p><strong>1. Bus Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/匯流排拓撲" target="_blank">Bus Topology</a>是最簡單的一種連接方式，最主要中間有一條主幹，<br />
-其他node再與主幹相連。最重要的是，主幹的尾端一定要有terminator，<br />
-才能將傳到尾端的訊號吸收，否則會有回傳的訊號干擾。<br /></p>
+<p><img src="http://localhost:4000/blog/img/posts/Bernoulli.png" alt="Bernoulli.png" /></p>
 
-<p>這樣的優點就是，簡單而且便宜，<br />
-適合使用在小範圍的網絡內。<br /></p>
+<hr />
+<h3 id="幾何分布-geometric-distribution">幾何分布 Geometric Distribution</h3>
+<p><strong>定義 Definition</strong></p>
 
-<p>但缺點是，只有主幹上出了問題，整個網路可能就會出問題。<br /></p>
+<ul>
+  <li>A random variable \(X\) is said to be a <em>geometric</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Geometric(p)\)</strong>, if its PMF is given by</li>
+</ul>
 
-<p><strong>2. Ring Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/環狀拓撲" target="_blank">Ring Topology</a>與Bus Topology不同的是，它是一個沒有終端環狀，<br />
-所有node與該環狀線連結，訊號會順著同一個方向傳遞。<br />
-一般來說，會有兩個環狀(double ring)，訊號會是反方向傳遞。<br /></p>
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
 
-<p>這樣的優點就是，它不需要Bus Topology必須的terminator，<br />
-而且如果是雙環，也比較不會有主幹出問題，<br />
-整個網路就壞掉的問題。<br /></p>
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
 
-<p>但缺點是，<br />
-它比Bus Topology貴。<br /></p>
+<p>Geometric Distribution 的例子：擲一枚銅板，且此銅板擲到 Head 的機率為 \(p\)。今天擲這枚到出現第一個 Head 為止，則其機率分佈為 Geometric Distribution。<br />
+另外，每一次擲這枚銅板都會是獨立的 Bernoulli 試驗。</p>
 
-<p><strong>3. Star Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/星型网" target="_blank">Star Topology</a>可能是家裡最常見的一種連結方式。<br />
-Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星狀一樣。<br />
-例如，如果中心是rounter，它會在連結internet。<br /></p>
+<p>所以，Geometric Distribution 就是很多次的 Bernoulli 試驗直到成功為止。</p>
 
-<p>這種topology的優點是，價格低、easy to expand。<br />
-另一方面，如果有其中的node或是某一個node與中心的device的連結出了問題，其他nodes都不會被影響。<br /></p>
+<p>以 \(p = 0.3\) 為例，其 Geometric Distribution 的 PMF 會是這樣，</p>
 
-<p>但缺點是，因為所有nodes都連結中心，<br />
-也就是所有的nodes全部都必須要依賴中心，<br />
-所以只要中心的device壞掉，整個連線就會全部失效。<br /></p>
+<p><img src="http://localhost:4000/blog/img/posts/Geometric.png" alt="Geometric.png" /></p>
 
-<p><strong>4.Mesh Topology</strong><br />
-<a href="https://zh.wikipedia.org/wiki/网状网络" target="_blank">Mesh Topology</a>所有nodes之間都互相連結，就像個網狀。<br />
-這種方式比較會在MAN或WAN見到，不會在LAN使用。<br /></p>
+<hr />
+<h3 id="二項分布-binomial-distribution">二項分布 Binomial Distribution</h3>
+<p><strong>定義 Definition</strong></p>
 
-<p>優點是，因為每個node之間都互相連結，<br />
-所以假如有兩個nodes之間的連結出了問題，<br />
-還可以透過其他nodes傳遞訊號，<br />
-這樣在傳送訊息上也比較保險。<br /></p>
+<ul>
+  <li>A random variable \(X\) is said to be a <em>binomial</em> random variable with peremeter \(n\) and \(p\), shown as <strong>\(X \sim Binomial(n, p)\)</strong>, if its PMF is given by</li>
+</ul>
 
-<p>缺點是，因為每個node之間都要連接，就會需要有很多的cable，<br />
-這時候成本就會提高。有越多的node，成本就會越高。<br />
-另一方面，因為一個node需要和其他所有nodes連結，<br />
-這時候網卡(NIC)就需要更強大，同樣也會造成成本的提高，<br />
-且每一次增加node可能都需要增加NIC。<br /></p>
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},& \;for\; k = 0, 1, 2,..., n \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
 
+<ul>
+  <li>where \(0 &lt; p &lt; 1\)</li>
+</ul>
+
+<p>Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。</p>
+
+<p>所以它的 PMF 會有 <script type="math/tex">\left( \begin{array}{c} n \\ k \end{array} \right)</script>，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
+
+<p>可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。</p>
+
+<p>以 \(n = 10,\; p = 0.3\) 為例，其 PMF 圖會是，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Binomial.png" alt="Binomial.png" /></p>
+
+<p><strong>Binomial random variable as a sum of Bernoulli random variables</strong></p>
+
+<ul>
+  <li>If \(X_1,\;X_2,\;X_3,…,\;X_n\) are independent \(Bernoulli(p)\) random variable,  then the random variable \(X\) defined by \(X = X_1 + X_2 + X_3 + … + X_n\) has a \(Binomial(n,p)\) distribution.</li>
+</ul>
+
+<p>也就是，二項分布可以看成是每個獨立的伯努利分佈的和。</p>
+
+<hr />
+<h3 id="布瓦松分布-poisson-distribution">布瓦松分布 Poisson Distribution</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(X\) is said to be a <em>poisson</em> random variable with peremeter \(\lambda\), shown as <strong>\(X \sim Poisson(\lambda)\)</strong>, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+\frac{e^{-\lambda} \lambda^k}{k!} ,& k \in R_X \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+
+<p>Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。</p>
+
+<p>既然上面的式子為 PMF，那我們來檢驗
+<strong>\(\sum_{k \in R_X}{P_k(x)} = 1\)</strong>
+是否正確。</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\sum_{k \in R_X}{P_k(x)} &= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+\end{align} %]]></script>
+
+<blockquote>
+
+  <p>Note: 根據 Taylor Series(泰勒展開式) <strong>\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)</strong>，上列式子可以寫成，</p>
+</blockquote>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+&= e^{-\lambda} e^{\lambda} \\
+&= 1 \\
+\end{align} %]]></script>
+
+<p><strong>Example:</strong></p>
+
+<blockquote>
+
+  <p>The number of emails that I get in a weekday can be modeled by a Poisson distribution with an average of 0.2 emails per minute.</p>
+  <ol>
+    <li>What is the probability that I get no emails in an interval of length 5 minutes?</li>
+    <li>What is the probability that I get more than 3 emails in an interval of length 10 minutes?</li>
+  </ol>
+</blockquote>
+
+<p><strong>Poisson as an approximation for binomial</strong></p>
+<ul>
+  <li>Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have</li>
+</ul>
+
+<script type="math/tex; mode=display">\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}</script>
+
+<p>\(X \sim Poisson(\lambda = 5)\) 的函數圖形，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Poisson.png" alt="Poisson.png" /></p>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
  -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -998,8 +689,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/';
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1012,7 +703,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">0 Comments</a>
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">0 Comments</a>
       </span>
 
     </div>
@@ -1021,15 +712,446 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
-        [R]read.csv出現編碼錯誤訊息
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(2)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 17, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 2, 2018</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 17, 2018</span>
+      <span class="post-date">September 2, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+<p>這篇關於期望值的介紹在書中的 3.3，但這篇內容有很大部分也來自 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
+
+<hr />
+<h3 id="期望值-expectation">期望值 Expectation</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as</li>
+</ul>
+
+<script type="math/tex; mode=display">E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)</script>
+
+<p>且期望值 \(E(X)\) 會等於平均數 \(\mu\)</p>
+
+<script type="math/tex; mode=display">E(X) = \mu</script>
+
+<p>說明：</p>
+
+<blockquote>
+
+  <p>There is a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \). Suppose that we repeat this experiment a very large number of times \(N\), and that the trials are independent. Let \(N_1\) be the number of times we observe \(x_1\), \(N_2\) be the number of times we observe \(x_2, ….\), \(N_k\) be the number of times we observe \(x_k\).</p>
+</blockquote>
+
+<script type="math/tex; mode=display">P_X(x_1) \approx\frac{N_1}{N} \\
+P_X(x_2) \approx\frac{N_2}{N} \\
+\cdots\\
+P_X(x_k) \approx\frac{N_k}{N} \\
+\cdots</script>
+
+<blockquote>
+
+  <p>從以上式子我們可以得到 \(N_k = NP_X(x_k)\)</p>
+</blockquote>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\mu & = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
+& \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
+& = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
+& = E(X)
+\end{align} %]]></script>
+
+<p>以上就是 \(E(X) = \mu\) 的說明。</p>
+
+<p>另外，可能會看到一些不同的寫法表示期望值</p>
+
+<script type="math/tex; mode=display">E(X)=E[X]=EX=\mu=\mu_X</script>
+
+<p>這部分內容主要來源為 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
+
+<hr />
+<h3 id="law-of-the-unconscious-statistician-lotus">Law of the unconscious statistician (LOTUS)</h3>
+<p><strong>THEOREM 3.2</strong></p>
+<ul>
+  <li>Let \(X\) be a discrete random variable with probability function \(P(x)\) and \(g(X)\) be a real-valued function of \(Y\). Then the expected value of \(g(X)\) is given by</li>
+</ul>
+
+<script type="math/tex; mode=display">E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)</script>
+
+<p><strong>Example:</strong> <br />
+<a href="https://www.probabilitycourse.com/chapter3/3_2_3_functions_random_var.php">Source</a></p>
+<blockquote>
+
+  <p>Let \(X\) be a discrete random variable with range \(R_X = \{ 0, \frac{\pi}{4}, \frac{\pi}{2}, \frac{3\pi}{4}, \pi… \} \), such that \(P_X(0)=P_X(\frac{\pi}{4})=P_X(\frac{\pi}{2})=P_X(\frac{3\pi}{4})=P_X(\pi)=\frac{1}{5}\).  Find \(E[sin(X)]\).</p>
+</blockquote>
+
+<p>Solution:</p>
+
+<blockquote>
+
+  <p>根據 LOTUS，
+<script type="math/tex">% <![CDATA[
+\begin{align}
+E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
+& = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
+& = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
+& = \frac{\sqrt{2} + 1}{2}
+\end{align} %]]></script></p>
+</blockquote>
+
+<hr />
+<h3 id="變異數-variance">變異數 Variance</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>If \(X\) is a random variable with mean \(E[X] = \mu\), the variance of \(X\) is defined as</li>
+</ul>
+
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2]</script>
+
+<ul>
+  <li>且根據 LOTUS，這個式子可以再寫成</li>
+</ul>
+
+<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)</script>
+
+<hr />
+<h3 id="期望值的運算">期望值的運算</h3>
+<p><strong>THEOREM 3.3</strong></p>
+
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(c\) be a constant. Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E(c) = c.</script>
+
+<p><strong>THEOREM 3.4</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g(X)\) be a function of X, and c be as constant. Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E[cg(X)] = cE[g(X)].</script>
+
+<p><strong>THEOREM 3.5</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g_1(X), g_2(X), …, g_k(X)\) be \(k\) functions of \(X\). Then</li>
+</ul>
+
+<script type="math/tex; mode=display">E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]</script>
+
+<p>根據以上定理，可以再產生</p>
+
+<p><strong>THEOREM 3.6</strong></p>
+<ul>
+  <li>Let X be a discrete random variable with probability function \(p(x)\) and mean \(E(X) = \mu\). Then</li>
+</ul>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+V(X) = \sigma^2 & = E[(X - \mu)^2] \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
+
+<p>證明：</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+\begin{align}
+\sigma^2 & = E[(X - \mu)^2] & \\
+& = E[(X^2 - 2\mu X + \mu^2] \\
+& = E(X^2) - E(2\mu X) + E(\mu^2) \\
+& = E(X^2) - 2\mu E(X) + \mu^2 \\
+& = E(X^2) - 2\mu^2 + \mu^2 \\
+& = E(X^2) - \mu^2 \\
+& = E(X^2) - E^2(X) \\
+\end{align} %]]></script>
+</blockquote>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
+
+ -->
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">
+        [統計]離散型(Discrete)隨機變數與其機率分佈(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 1, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 1, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#統計">統計</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+<p>這篇內容為書中的 3.1 與 3.2。</p>
+
+<hr />
+
+<p>在開始前，何謂「隨機變數」？</p>
+<h3 id="隨機變數-random-variable">隨機變數 Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>隨機變數 \(X\) 是一個以樣本空間 \(S\) 為定義域（Domain）的實數值函數。 <a href="http://ccckmit.wikidot.com/st:randomvariable">Source</a><br /></li>
+  <li>A random variable \(X\) is a funcion from sample space to real number. <a href="https://www.probabilitycourse.com/chapter3/3_1_1_random_variables.php">Source</a></li>
+</ul>
+
+<blockquote>
+
+  <p>\( X: S  \to {\Bbb R}, \ S \ is \ sample \ space  \) <br />
+\( i.e. \ \forall \ s \in S, \ X(s) \in {\Bbb R}  \)</p>
+</blockquote>
+
+<p><strong>Example:</strong></p>
+
+<blockquote>
+
+  <p>擲兩枚硬幣，其樣本空間為 \( R = \{HH, HT, TH, TT\}  \)，共有 \(2^2\) 種可能。 <br />
+若將 H 定義為 1，T 定義為 0，則其隨機變數 \(X\) 的值為 \( \{0, 1, 2\}\)</p>
+</blockquote>
+
+<p>而隨機變數又分為 1. <em>離散型</em> 與 2. <em>連續型</em>，這一章節我們只會討論離散型。</p>
+
+<hr />
+
+<h3 id="離散型隨機變數-discrete-random-variable">離散型隨機變數 Discrete Random Variable</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>A random variable \(Y\) is said to be discrete if it can assume only a finite or countably infinite number of distinct values. (DEFINITION 3.1)</li>
+  <li>\(X\) is a discrete random variable, if its range is countable. <a href="https://www.probabilitycourse.com/chapter3/3_1_2_discrete_random_var.php">Source</a></li>
+</ul>
+
+<p>根據定義，離散型隨機變數（Discrete Random Variable）必須為可數（countable）。</p>
+
+<p>所以像是擲銅板或是擲骰子就會是離散型隨機變數。</p>
+
+<p>以擲一顆骰子一次為例，其可能值為 \(\{1, 2, 3, 4, 5, 6\}\), 我們用 \(X\)來表示其隨機變數，<br />
+但因為隨機變數為 function，所以我們可以用 \(R_X\)來表示它的範圍，</p>
+
+<blockquote>
+
+  <p>\( Range(X) = R_X = \{1, 2, 3, 4, 5, 6\}  \) <br /></p>
+</blockquote>
+
+<hr />
+
+<h3 id="機率質量函數-probability-mass-function-pmf">機率質量函數 Probability Mass Function (PMF)</h3>
+<p><strong>定義 Definition</strong></p>
+
+<ul>
+  <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
+</ul>
+
+<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
+
+<ul>
+  <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
+</ul>
+
+<p>機率質量函數 Probability Mass Function (PMF) 可以用來表達樣本空間中某事件的機率。</p>
+
+<p>譬如說，擲一顆公平的骰子，骰子點數為 1 的機率我們可以這樣表示，</p>
+
+<blockquote>
+
+  <p>\( P(X = 1) = 1/6  \)</p>
+</blockquote>
+
+<p>另外，\( P_X(x) \)還有兩個很重要的<strong>性質</strong> <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a>，</p>
+
+<ul>
+  <li>\( 0 \leqslant P_X(x) \leqslant 1 , \forall x \)</li>
+  <li>\( \sum_{\substack{x \in R_X}}P_X(x) = 1 \)</li>
+</ul>
+
+<p>簡單來說就是，</p>
+<ol>
+  <li>任何事件發生的機率都只會介於 0 和 1 之間</li>
+  <li>所有事件機率總和等於 1</li>
+</ol>
+
+<p><strong>離散型 PMF 圖</strong></p>
+
+<p>擲兩枚硬幣，出現 head 為 1，tail 為 0 ，其 PMF 函數為</p>
+
+<blockquote>
+
+  <script type="math/tex; mode=display">% <![CDATA[
+P_X(x) = \left\{ \begin{array}{rcl}
+1/4,& \;for\; x = 0 \\
+1/2,& \;for\; x = 1 \\
+1/4,& \;for\; x = 2 \\
+0,& otherwise \\
+\end{array}\right. %]]></script>
+</blockquote>
+
+<p>函數圖為，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
+
+<hr />
+
+<p>參考：</p>
+
+<ul>
+  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
+  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
+  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
+</ul>
+ -->
+    <div class="post-excerpt"><p>這一系列我是以 
+Wackerley, Mendenhall and Scheaffer 的 <br />
+Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
+有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread';
+        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">
+        [R]如何更改R介面語言的設定
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on August 27, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">August 27, 2018</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -1043,31 +1165,20 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>在讀取csv檔案時出現錯誤訊息</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
- 
-</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
+    <!-- <p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
+
+<p>以下為 mac 的 ios 系統解法，</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"defaults write org.R-project.R force.LANG en_US.UTF-8"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 
-<p>會出現這樣的錯誤訊息通常是因為編碼問題。</p>
-
-<p>先將這份檔案丟到Notepad++，
-可以看到右下方顯示這份檔案的編碼，
-(這份檔案是UTF-8)
-所以只要加上
-<strong>fileEncoding =”UTF-8”</strong>
-就可以解決這個問題了。</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">paste0</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">fileEncoding</span><span class="w"> </span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w"> 
-</span></code></pre></div></div>
-
+<p>然後關閉 R 再重新打開就會改為英文介面囉！</p>
  -->
-    <div class="post-excerpt"><p>在讀取csv檔案時出現錯誤訊息</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
- 
-</span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
-</span></code></pre></div></div>
+    <div class="post-excerpt"><p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1087,8 +1198,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
-        this.page.identifier = '/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
+        // this.page.url = '/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread';
+        this.page.identifier = '/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1101,7 +1212,259 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
+        <a href="/blog//r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
+        [Python]執行pyinstaller產生的執行檔出現No module錯誤訊息
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 13, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 13, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
+
+<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
+執行在 dist 資料夾底下的檔案，卻出現
+`
+no module named ‘somepackagename’
+`
+的錯誤訊息。</p>
+
+<p>這表示，在打包這支程式時，並未把需要的套件打包進去？ <br />
+但是我使用 .py 執行時並沒有這樣的問題啊？ <br />
+表示我的電腦確實是有安裝該套件才是。</p>
+
+<p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
+所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
+
+<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
+
+<p>只要將原本的 <br />
+<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
+
+<p>改成 <br />
+<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
+
+<p>就好了。 <br /></p>
+
+<p>可以用， <br /></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</code></pre></div></div>
+<p>查看系統路徑，就可以知道套件可能的位置。</p>
+
+ -->
+    <div class="post-excerpt"><p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
+        this.page.identifier = '/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">
+        [Python]彈出視窗 alert box
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 5, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 5, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
+以下會分為 mac 和 windows 兩個系統來討論。</p>
+
+<h2 id="mac">Mac</h2>
+
+<h3 id="1-easygui-套件">1. easygui 套件</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
+<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
+<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這個套件基本上蠻簡單的，只要使用<code class="highlighter-rouge">msgbox()</code>就好，<br />
+如果只是要在跑程式的時候使用沒有太大問題，<br /></p>
+
+<p>更多 <a href="https://blog.csdn.net/marksinoberg/article/details/51499909">easygui 套件</a> 的介紹</p>
+
+<p>但如果要把程式碼打包時（<a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller套件</a>） 這個方法就會失效，會出現錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ImportError: No module named easygui
+[3310] Failed to execute script alterwindow
+</code></pre></div></div>
+<p>所以如果要讓程式碼打包後可以出現彈跳視窗可以使用內建的 system。</p>
+
+<h3 id="2-ossystem">2. os.system()</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">"osascript -e 'Tell application </span><span class="se">\"</span><span class="s">System Events</span><span class="se">\"</span><span class="s"> to display dialog </span><span class="se">\"</span><span class="s">"</span><span class="o">+</span><span class="s">"Some Funky Message"</span><span class="o">+</span><span class="s">"</span><span class="se">\"</span><span class="s">'"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這方法其實就是使用 python 執行<strong>系統命令</strong>。
+也就是，其實把 os.system() 括號裡的東西</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>osascript -e 'Tell application "System Events" to display dialog "Some Funky Message"'
+</code></pre></div></div>
+<p>打在 terminal 裡會執行的東西。</p>
+
+<p>將以上命令打在 terminal 會發現出現一個彈跳視窗，內容是 Some Funcky Message。
+<img src="http://localhost:4000/blog/img/posts/system_msg.jpg" alt="system_msg.jpg" /></p>
+
+<p>所以在 python 裡面同樣執行會產生同樣的結果。</p>
+
+<p>而這個方法將程式打包後可以正確執行。
+<br />
+<br /></p>
+
+<h2 id="windows">Windows</h2>
+<h3 id="1-easygui-套件-1">1. easygui 套件</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 記得先安裝 easygui 套件</span>
+<span class="kn">from</span> <span class="nn">easygui</span> <span class="kn">import</span> <span class="n">msgbox</span>
+<span class="n">msgbox</span><span class="p">(</span><span class="s">'Stuff'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>基本上和 mac 一樣，將程式碼打包後也無法正常執行。</p>
+
+<h3 id="2-ctypes-套件">2. ctypes 套件</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 不需另外安裝</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"Your text"</span><span class="p">,</span> <span class="s">"Your title"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># 或著你可以定義一個 function</span>
+<span class="k">def</span> <span class="nf">Mbox</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">style</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
+<span class="n">Mbox</span><span class="p">(</span><span class="s">'Your title'</span><span class="p">,</span> <span class="s">'Your text'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># 如果是要輸出中文，記得重新 encode</span>
+<span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">user32</span><span class="o">.</span><span class="n">MessageBoxA</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">"內容"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="s">"標題"</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"big5"</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這個方法也可以打包後執行。</p>
+
+<p>另外，
+會看到有些地方使用</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxW()
+</code></pre></div></div>
+<p>而不是</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctypes.windll.user32.MessageBoxA()
+</code></pre></div></div>
+<p>但執行後會發現，<code class="highlighter-rouge">ctypes.windll.user32.MessageBoxW()</code>這個方法會出現亂碼。</p>
+
+<p>這兩個的差別在<code class="highlighter-rouge">MessageBoxW</code>要使用 unicode 編碼，而<code class="highlighter-rouge">MessageBoxA</code>是 ascii 編碼。<br />
+<a href="https://stackoverflow.com/questions/20783046/python-program-displaying-messages-in-different-language-than-english">有人回答</a>這個問題	。</p>
+
+<p>這邊 mac 和 windows 各介紹了兩種方法，其實還有很多方法啦，只要能符合需求的都是好方法！</p>
+
+ -->
+    <div class="post-excerpt"><p>介紹如何使用 python 寫彈跳視窗，其實網路上可以找到蠻多方法的，我這邊就簡單介紹幾個。<br />
+以下會分為 mac 和 windows 兩個系統來討論。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread';
+        this.page.identifier = '/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/#disqus_thread" data-disqus-identifier="/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">0 Comments</a>
       </span>
 
     </div>

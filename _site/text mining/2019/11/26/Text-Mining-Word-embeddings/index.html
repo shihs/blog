@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,31 +183,37 @@
   <h1 class="post-title">[Text Mining]Word embeddings</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">November 26, 2019</span> 
+    <span class="post-date">November 26, 2019</span>
     <span>
-        <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">0 Comments</a>
+      <i class="fas fa-comments"></i>
+      <a
+        class="comment-count"
+        href="/blog//text%20mining/2019/11/26/Text-Mining-Word-embeddings/#disqus_thread"
+        data-disqus-identifier="/text%20mining/2019/11/26/Text-Mining-Word-embeddings/"
+        >0 Comments</a
+      >
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
+       
+      <a
+        target="_blank"
+        href="/blog/category/#Text Mining"
+        >Text Mining</a
+      >
+       
     </span>
   </div>
-  <div>
-    <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+  <div><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
 
 <hr />
 
 <h2 id="word-embeddings">Word embeddings</h2>
 
 <p>對於人來說，要理解文字並不是件困難的事，但對電腦來說，每個字不過是一串 string，所以當我們要做 text mining 時就必須要將這些 string 轉化成電腦可以理解的方式。
-而 word embedding(word vector) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。</p>
+而 word embedding(word vector or word representation) 的概念就是將文字轉換成 vector ，好讓電腦可以讀懂文字間的關係。</p>
 
 <p>譬如說，人類可以理解 pretty 和 beautiful 是相近詞，但如果只是給電腦這兩個單字，對於電腦來說，這只是兩個不同長度的 string 罷了。word embedding 會將這兩個字轉換成不同的 vector 映射到一個高維空間，當這兩個 vector 越接近（可以使用 consine similarity）就表示這兩個詞越相近。這就是 word embedding 主要的概念。</p>
 
@@ -292,7 +310,7 @@
 
 <hr />
 
-<h2 id="singular-value-decompositionsvd">Singular Value Decomposition(SVD)</h2>
+<h2 id="matrix-factorization---singular-value-decompositionsvd">Matrix factorization - Singular Value Decomposition(SVD)</h2>
 
 <ul>
   <li>The rows of co-occurrence matrices are long and sparse. Instead, we would like to have word vectors that are short and dense. 簡單來說，co-occurrence matrices 會有稀疏性的問題。</li>
@@ -303,12 +321,14 @@
 
 <p>推薦<a href="https://www.youtube.com/watch?v=OEJ0wxxLO7M">李宏毅老師的線性代數</a></p>
 <ul>
-  <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA 也是一個可降維的方法，但它的矩陣就必須要是方陣。)</li>
+  <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA(特徵值分解) 也是一個降維的方法，但它的矩陣就必須要是方陣。)</li>
 </ul>
 
 <p>SVD 的概念就是，任一一個矩陣 <script type="math/tex">A_{m \times n}</script>，它都可以拆解成三個矩陣（<script type="math/tex">U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}</script>）的相乘。</p>
 
 <p>其中，<script type="math/tex">U_{m \times n}</script> 的 columns 是 <em>Orthonormal</em>，而 <script type="math/tex">V^T_{n \times n}</script> 的 rows 是 <em>Orthonormal</em>，<script type="math/tex">\Sigma_{m \times n}</script> 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
+
+<p><em>(在線性代數中，一個內積空間的正交基（orthogonal basis）是元素兩兩正交的基。稱基中的元素為基向量。 假若，一個正交基的基向量的模長都是單位長度1，則稱這正交基為標準正交基或”規範正交基”（Orthonormal basis）。)</em></p>
 
 <p><img src="http://localhost:4000/blog/img/posts/SVD.png" alt="" /></p>
 
@@ -318,31 +338,57 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/Sigma.png" alt="" /></p>
 
-<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。</p>
+<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。用較小的儲存空間就可以得到接近原始的矩陣 <script type="math/tex">A</script>。</p>
 
-<script type="math/tex; mode=display">A_{m \times n} = U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
+<script type="math/tex; mode=display">A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
 
 <p>參考<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>的圖，</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/svd2.jpg" alt="" /></p>
 
-<p>回到我們的 word-embedding。也就是說，使用 SVD 可以利用減少 <script type="math/tex">\Sigma</script> 的維度來處理稀疏性的問題，雖然刪除了一些詞仍舊保留重要的詞。</p>
+<p>回到我們的 word-embedding。我們可以利用 SVD 進行去噪及降維，刪除一些不那麼重要的訊息，用來解決 Co-occurrence matrix 稀疏性的問題。</p>
+
+<p>我們也不需要再將相乘矩陣，直接使用 𝑼 就好，每一列就代表一個 target word。</p>
 
 <ul>
   <li>Each row of the (truncated) matrix 𝑼 is a k-dimensional vector that represents the ‘most important’ information about a word.</li>
   <li>A practical problem is that computing the singular value decomposition for large matrices is expensive.</li>
 </ul>
 
+<p>這邊看一個<a href="https://www.itread01.com/content/1569742263.html">例子</a>，</p>
+
+<p>下圖是一個 Co-occurrence matrix <script type="math/tex">~A_{m \times n}</script></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/term-document.png" alt="" /></p>
+
+<p>將上面的矩陣 <script type="math/tex">A</script> 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SVD%20example.png" alt="" /></p>
+
+<p>取每個向量後兩維的對應值投影到一個二維空間，如下所示</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/SVD%20example%202.png" alt="" /></p>
+
+<p>上圖中，一個紅色的點對應一個詞，一個藍色的點對應一個文件。當這些點被投影到空間中，我們可以對這些詞和文件進行分類，比如說stock和market可以放在一類，real和estate可以放在一類，按這樣的分類結果，我們就可以知道文件中哪些事相近的詞，所以當使用者利用詞搜尋文件的時候，我們就可以利用相近的詞（在向量空間中相近的詞、被歸為同一類的詞）進行檢索，而不是只是使用完全相同的詞搜尋。</p>
+
 <hr />
 
-<h2 id="positive-pointwise-mutual-informationppmi">Positive Pointwise mutual information(PPMI)</h2>
+<h2 id="matrix-factorization---positive-pointwise-mutual-informationppmi">Matrix factorization - Positive Pointwise mutual information(PPMI)</h2>
 
 <h3 id="pointwise-mutual-informationpmi">Pointwise mutual information(PMI)</h3>
 
 <ul>
-  <li>Raw counts favour pairs that involve very common contexts. Ex.the cat, a cat will receive higher weight than cute cat, small cat.</li>
-  <li>We want a measure that favours contexts in which the target word occurs more often than other words.</li>
-  <li>A suitable measure is pointwise mutual information (PMI):</li>
+  <li>
+    <p>Raw counts favour pairs that involve very common contexts. 
+<br />
+E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
+  </li>
+  <li>
+    <p>We want a measure that favours contexts in which the target word occurs more often than other words.</p>
+  </li>
+  <li>
+    <p>A suitable measure is pointwise mutual information (PMI):</p>
+  </li>
 </ul>
 
 <script type="math/tex; mode=display">PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}</script>
@@ -373,6 +419,16 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/Computing%20PPMI%20on%20a%20word%E2%80%93context%20matrix.png" alt="" /></p>
 
+<p>看一個<a href="http://cpmarkchang.logdown.com/posts/195584-natural-language-processing-pointwise-mutual-information">例子</a>，</p>
+
+<p>下圖是一個 Co-occurrence matrix，列是 target words，行是 context words
+<img src="http://localhost:4000/blog/img/posts/PMI%20example.png" alt="" /></p>
+
+<p>假設這篇文章總共只有 19 個字，這裡我們計算 x = information，y = data 的 PMI 值，
+<img src="http://localhost:4000/blog/img/posts/PMI%20example%202.png" alt="" /></p>
+
+<p>根據同樣的方式可以求出所有 target words 對應的 context words 的 PMI 值。</p>
+
 <hr />
 
 <h2 id="language-models">Language models</h2>
@@ -386,17 +442,27 @@
 <script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})</script>
 
 <ul>
-  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words(馬可夫鍊):</li>
+  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words (馬可夫鍊):</li>
 </ul>
 
 <script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})</script>
 
-<h2 id="n-gram-models">N-gram models</h2>
+<hr />
+
+<h2 id="language-models---n-gram-models">Language models - N-gram models</h2>
 
 <ul>
-  <li>An n-gram is a contiguous sequence of n words or characters. Ex. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</li>
-  <li>An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.</li>
-  <li>n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。</li>
+  <li>
+    <p>An n-gram is a contiguous sequence of n words or characters. 
+<br />
+E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</p>
+  </li>
+  <li>
+    <p>An n-gram model is a language model defined on n-grams –  a probability distribution over sequences of n words.</p>
+  </li>
+  <li>
+    <p>n-gram 是一種語言機率模型。一句話出現的機率是一個聯合模型。如果一個詞的出現只考慮前面一個字，那就是 bi-gram；如果一個詞的出現考慮前面兩個字，那就是 tri-gram。</p>
+  </li>
 </ul>
 
 <p><strong>Formal definition of an n-gram model</strong></p>
@@ -404,11 +470,9 @@
 <ul>
   <li><script type="math/tex">n</script>: the model’s order (1 = unigram, 2 = bigram, …)</li>
   <li><script type="math/tex">V</script>: a set of possible words (character); the vocabulary</li>
-  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe  the word <script type="math/tex">w</script> after the context 
+  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe the word <script type="math/tex">w</script> after the context 
 <br />(n − 1)-gram <script type="math/tex">u</script></li>
 </ul>
-
-<hr />
 
 <p><strong>Unigram model</strong></p>
 
@@ -453,24 +517,31 @@
 <ul>
   <li>Additive smoothing</li>
   <li>Good-Turing estimate</li>
-  <li>Jelinek-Mercer smoothing (interpolation) • Katz smoothing (backoff)</li>
+  <li>Jelinek-Mercer smoothing (interpolation)</li>
+  <li>Katz smoothing (backoff)</li>
   <li>Witten-Bell smoothing</li>
   <li>Absolute discounting</li>
   <li>Kneser-Ney smoothing</li>
 </ul>
 
-<hr />
-
 <p>上面的狀況碰到的是，”CHER” 後面沒有出現 “READ” 的狀況，而導致機率等於0，但如果現在是 “CHER” 這個字從未出現在資料集中呢？這種狀況時，smoothing 便派不上用場了。</p>
 
 <ul>
-  <li>A simple way to deal with this is to introduce a special word type UNK, and to smooth it like any other word type in the vocabulary.</li>
-  <li>When we compute the probability of a document, then we first replace every unknown word with UNK.</li>
+  <li>In addition to unseen words, a new text may even contain <em>unknown words</em>. For these, smoothing will not help.</li>
+</ul>
+
+<p><strong>Unknown words</strong>
+<br />
+建立一個 token <UNK>，如果是 unknown words 就用 <UNK> 當作普通的單詞處理。</UNK></UNK></p>
+
+<ul>
+  <li>A simple way to deal with this is to introduce a special word type <em>UNK</em>, and to smooth it like any other word type in the vocabulary.</li>
+  <li>When we compute the probability of a document, then we first replace every unknown word with <em>UNK</em>.</li>
 </ul>
 
 <hr />
 
-<h2 id="neural-networks-as-language-models">Neural networks as language models</h2>
+<h2 id="language-models---neural-networks-as-language-models">Language models - Neural networks as language models</h2>
 
 <h3 id="advantages-of-neural-language-models">Advantages of neural language models</h3>
 <ul>
@@ -480,6 +551,14 @@
 </ul>
 
 <h3 id="word2vec">word2vec</h3>
+
+<ul>
+  <li>word2vec 是 word embedding 的一種</li>
+  <li>
+    <p>word2Vec 主要有 CBOW (continuous bag-of-words) 和 skip-gram 兩種模型</p>
+  </li>
+  <li>CBOW 是給定上下文，來預測輸入的字詞；Skip-gram 則是給定輸入字詞後，來預測上下文</li>
+</ul>
 
 <hr />
 
@@ -505,12 +584,22 @@
 <br />
 <a href="https://nlp.stanford.edu/~wcmac/papers/20050421-smoothing-tutorial.pdf">NLP Lunch Tutorial: Smoothing</a>
 <br />
-<a href="https://kknews.cc/tech/83yx3qn.html">機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？</a></p>
-
-  </div>
+<a href="https://kknews.cc/tech/83yx3qn.html">機器學習五分鐘：自然語言處理（NLP）的N-gram模型是什麼？</a>
+<br />
+<a href="https://www.itread01.com/content/1569742263.html">詞向量(one-hot/SVD/NNLM/Word2Vec/GloVe)</a></p>
+</div>
 </div>
 
+<div class="likecoin">
+  
+  <iframe
+    src="https://button.like.co/in/embed/shihs_tw/button?referrer=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Ftext%2520mining%2F2019%2F11%2F26%2FText-Mining-Word-embeddings%2F" height="200" width="560" allowfullscreen="" frameborder="0"
+  >
+  </iframe>
+  
+</div>
 
+  
 <a name="comments"></a>
 <div id="disqus_thread"></div>
 <script>
@@ -540,38 +629,33 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-<div class="related">
-  <h2>Latest Posts</h2>
-  <ul class="related-posts">
-    
+  <div class="related">
+    <h2>Latest Posts</h2>
+    <ul class="related-posts">
+      
       <li>
         <h3>
-          <a href="/blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">
-            [NLP]NLTK 筆記        
-          </a>
-            <small>Dec 17, 2019</small>
+          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
+          <small>Apr 5, 2022</small>
         </h3>
       </li>
-    
+      
       <li>
         <h3>
-          <a href="/blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">
-            [Text Mining]Text clustering and topic modelling        
-          </a>
-            <small>Nov 21, 2019</small>
+          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
+          <small>Apr 5, 2022</small>
         </h3>
       </li>
-    
+      
       <li>
         <h3>
-          <a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">
-            [Text Mining]Text classification        
-          </a>
-            <small>Nov 13, 2019</small>
+          <a href="/blog/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/"> [Web]MVC 架構 </a>
+          <small>Aug 22, 2021</small>
         </h3>
       </li>
-    
-  </ul>
+      
+    </ul>
+  </div>
 </div>
 
     </div>

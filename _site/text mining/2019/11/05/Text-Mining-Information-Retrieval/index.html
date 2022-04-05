@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,24 +183,30 @@
   <h1 class="post-title">[Text Mining]Information Retrieval</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">November 5, 2019</span> 
+    <span class="post-date">November 5, 2019</span>
     <span>
-        <i class="fas fa-comments"></i>
-        <a class="comment-count" href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">0 Comments</a>
+      <i class="fas fa-comments"></i>
+      <a
+        class="comment-count"
+        href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread"
+        data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/"
+        >0 Comments</a
+      >
     </span>
     <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
+       
+      <a
+        target="_blank"
+        href="/blog/category/#Text Mining"
+        >Text Mining</a
+      >
+       
     </span>
   </div>
-  <div>
-    <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+  <div><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
 
 <p>這門課教授的是英文的文字探勘，中文與英文本身在結構上有非常大的差異，所以有些解析和斷詞的方法中文可能並不適用，但在基本概念上還是有相同的地方。</p>
 
@@ -319,7 +337,7 @@ split 無法排除標點符號的問題，python 的 spacy 可以將標點符號
 <h3 id="stop-words">Stop words</h3>
 <p>A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and…</p>
 
-<p>但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們到底或許可以根據分析的目的 Sherlock Holmes 考慮將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。</p>
+<p>但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們或許可以根據分析的目的將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。</p>
 
 <p>既然 stop words 對於分析沒有價值貢獻，那麼在做分析前就必須把 stop words 刪除，以避免干擾分析結果。</p>
 
@@ -328,6 +346,7 @@ split 無法排除標點符號的問題，python 的 spacy 可以將標點符號
 <p>英文的文法有幾個規則，</p>
 <ol>
   <li>動詞會根據人稱與時態有所變化</li>
+  <li>動詞有動名詞型態</li>
   <li>名詞的單數與複數有變化</li>
 </ol>
 
@@ -335,17 +354,20 @@ split 無法排除標點符號的問題，python 的 spacy 可以將標點符號
 
 <ul>
   <li>
-    <p>The term <em>lexeme</em> refers to a set of word forms that all share the same fundamental meaning. For example: word forms run, runs, ran, running – lexeme run</p>
+    <p>The term <em>lexeme</em> refers to a set of word forms that all share the same fundamental meaning. 
+<br />
+For example: word forms run, runs, ran, running – lexeme run</p>
   </li>
   <li>
-    <p>The term <em>lemma</em> refers to the particular word form that is
-chosen, by convention, to represent a given lexeme. For example: what you would put into a lexicon</p>
+    <p>The term <em>lemma</em> refers to the particular word form that is chosen, by convention, to represent a given lexeme. 
+<br />
+For example: what you would put into a lexicon</p>
   </li>
 </ul>
 
 <hr />
 
-<h2 id="ranked-retrieval">Ranked retrieval</h2>
+<h2 id="ranked-retrieval排序檢索">Ranked retrieval（排序檢索）</h2>
 
 <p>進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。</p>
 
@@ -448,10 +470,16 @@ document frequency of t, and is denoted by df(t).</li>
 <h3 id="document-representations">Document representations</h3>
 
 <ul>
-  <li>Documents as sets of terms
-In Boolean retrieval, the only relevant information is whether or not a term is present in a document.</li>
-  <li>Documents as bags of terms
-In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.</li>
+  <li>
+    <p>Documents as sets of terms
+<br />
+In Boolean retrieval, the only relevant information is whether or not a term is present in a document.</p>
+  </li>
+  <li>
+    <p>Documents as bags of terms
+<br />
+In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.</p>
+  </li>
 </ul>
 
 <h3 id="the-vector-space-model--idea-1">The vector space model – idea 1</h3>
@@ -525,6 +553,14 @@ Doc2 = (2, 2, 0)</p>
 
 <script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
 
+<p><strong>F1-measure</strong></p>
+
+<p>A good system should balance between precision and recall.   
+<br />
+The F1-measure is the harmonic mean of the two values:</p>
+
+<script type="math/tex; mode=display">F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}</script>
+
 <hr />
 
 <p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb">Information Retrieval Lab</a></p>
@@ -539,13 +575,22 @@ Doc2 = (2, 2, 0)</p>
 <br />
 <a href="https://taweihuang.hpd.io/2017/03/01/tfidf/">[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯</a>
 <br />
-<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">Vector Space Model(1)</a></p>
-
-
-  </div>
+<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">Vector Space Model(1)</a>
+<br />
+<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a></p>
+</div>
 </div>
 
+<div class="likecoin">
+  
+  <iframe
+    src="https://button.like.co/in/embed/shihs_tw/button?referrer=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Ftext%2520mining%2F2019%2F11%2F05%2FText-Mining-Information-Retrieval%2F" height="200" width="560" allowfullscreen="" frameborder="0"
+  >
+  </iframe>
+  
+</div>
 
+  
 <a name="comments"></a>
 <div id="disqus_thread"></div>
 <script>
@@ -575,38 +620,33 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-<div class="related">
-  <h2>Latest Posts</h2>
-  <ul class="related-posts">
-    
+  <div class="related">
+    <h2>Latest Posts</h2>
+    <ul class="related-posts">
+      
       <li>
         <h3>
-          <a href="/blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">
-            [NLP]NLTK 筆記        
-          </a>
-            <small>Dec 17, 2019</small>
+          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
+          <small>Apr 5, 2022</small>
         </h3>
       </li>
-    
+      
       <li>
         <h3>
-          <a href="/blog/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">
-            [Text Mining]Word embeddings        
-          </a>
-            <small>Nov 26, 2019</small>
+          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
+          <small>Apr 5, 2022</small>
         </h3>
       </li>
-    
+      
       <li>
         <h3>
-          <a href="/blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">
-            [Text Mining]Text clustering and topic modelling        
-          </a>
-            <small>Nov 21, 2019</small>
+          <a href="/blog/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/"> [Web]MVC 架構 </a>
+          <small>Aug 22, 2021</small>
         </h3>
       </li>
-    
-  </ul>
+      
+    </ul>
+  </div>
 </div>
 
     </div>

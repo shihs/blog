@@ -148,6 +148,18 @@
           
         
       
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
 
     </nav>
     <div class="links">
@@ -161,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2019. All rights reserved.</p>
+    <p class = "rights">&copy; 2022. All rights reserved.</p>
   </div>
 </div>
 
@@ -171,189 +183,114 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/10/19/R-variable-types/">
-        [R]variable types
+      <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
+        [Machine Learning]Markov Chain Monte Carlo (MCMC)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on October 19, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on March 12, 2019</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">October 19, 2018</span>
+      <span class="post-date">March 12, 2019</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
-<br />
-Here I’m going to see these 4 types more details.</p>
+    <!-- <p><strong>MCMC 是什麼？</strong></p>
 
-<ol>
-  <li>What are the differences between vector, list, matrix, and data.frame?</li>
-  <li>What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</li>
-  <li>What are the outputs of <code class="highlighter-rouge">typeof()</code>?</li>
-</ol>
+<p>Markov Chain Monte Carlo （MCMC）是一種抽樣方法，用來解決無法直接抽樣的分佈的隨機抽樣問題。</p>
+
+<p><strong>The Goal of MCMC</strong></p>
+
+<p>We want to sample from some distribution p, or approximate an <script type="math/tex">E[f(x)] ~ where ~ (X \sim p)</script>
+<br />
+通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。</p>
 
 <hr />
 
-<h3 id="1-what-are-the-differences-between-vector-list-matrix-and-dataframe">1. What are the differences between <em>vector</em>, <em>list</em>, <em>matrix</em>, and <em>data.frame</em>?</h3>
+<p><strong>為什麼要使用 MCMC？</strong></p>
 
-<p>We can seperate these four types to two groups from different aspects.</p>
+<p>在 Baysian Inference 中常使用到這個公式</p>
 
-<p><strong>(a) Elements type aspect</strong></p>
+<script type="math/tex; mode=display">p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
+
+<p>或是，它的參數 <script type="math/tex">\theta</script> 的貝式估計</p>
+
+<script type="math/tex; mode=display">\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
+
+<p>其中的 <script type="math/tex">p(\theta)</script> 為先驗機率 (prior probability)，基本上我們無法獲得 <script type="math/tex">p(\theta)</script> 的值，這時候就需要 MCMC。</p>
+
+<hr />
+
+<p>MCMC 由兩部分的觀念 (步驟) 組成, 一個是 「Markov Chain」 ，另一個則是「Monte Carlo integration」，接下來將說明這兩個部分。</p>
+
+<hr />
+
+<p><strong>Monte Carlo Integration</strong></p>
+
+<p>Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子</p>
+
+<script type="math/tex; mode=display">E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)</script>
+
+<p>也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。</p>
+
+<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 <script type="math/tex">p(\theta \mid y)</script> 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
+
+<p>所以說，哪有這麼好的事？</p>
+
+<p>這時候可以採用其他的抽樣方法，譬如，<em>rejection sampling</em>, <em>importance sampling</em> 和本文的重點 <em>MCMC</em>。</p>
+
+<hr />
+
+<p><strong>Markov Chain</strong></p>
+
 <ul>
-  <li>Homogeneous data: <em>vector</em>, <em>matrix</em></li>
-  <li>Heterogeneous data: <em>list</em>, <em>data.frame</em></li>
+  <li>
+    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence <script type="math/tex">X_0, X_1, ...</script> of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 <script type="math/tex">X_0, X_1, ...</script>，且每一個變數只和前一個變數有關，也就是 <script type="math/tex">X_{t+1}</script> 來自 <script type="math/tex">p(X_{t+1} \mid X_t)</script>，像這樣的數列我們就稱為馬可夫鍊。</p>
+  </li>
+  <li>
+    <p><script type="math/tex">p(X_{t+1} \mid X_t)</script> 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
+  </li>
+  <li>
+    <p>A Markov chain is stationary, with stationary distribution <script type="math/tex">Φ, if ~\forall k ~ X_k  \sim Φ</script></p>
+  </li>
+  <li>
+    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 <script type="math/tex">\pi(·)</script> 並且與 <script type="math/tex">X_0</script> 的選擇無關。</p>
+  </li>
 </ul>
 
-<p>Which means all elements in <em>vector</em> and <em>matrix</em> have to be the same type (integer, double, or character ect.).
-But elements in <em>list</em> and <em>data.frame</em> can be different types.</p>
-
-<p>For example:
-<br />
-Vector has same type of elements</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
-</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">
-</span><span class="c1">#  v</span><span class="w">
-</span><span class="c1"># [1] 1 2 3 4</span><span class="w">
-
-</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">
-</span><span class="c1"># v_ch</span><span class="w">
-</span><span class="c1"># [1] "a" "b" "c"</span><span class="w">
-</span></code></pre></div></div>
-<p>What if we give a vector different type of elements?</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">)</span><span class="w">
-</span><span class="c1"># v</span><span class="w">
-</span><span class="c1">#[1] "1" "2"</span><span class="w">
-</span></code></pre></div></div>
-<p>As you can see, R forces 1 to be character.</p>
-
-<p>But what is the priority? Why not “2” become numeric?</p>
-
-<p>Because <strong>the hierarchy for coercion</strong> is:
-<br /></p>
-<ul>
-  <li><strong>logical &lt; integer &lt; numeric &lt; character</strong></li>
-</ul>
-
-<p>So this is why numeric would be force to character.</p>
-
-<p><a href="https://campus.datacamp.com/courses/introduction-to-r-for-finance/vectors-and-matrices?ex=3">reference</a></p>
-
-<p><strong>(b) Dimension aspect</strong></p>
-<ul>
-  <li>1 Dimension: <em>vector</em>, <em>list</em></li>
-  <li>2 Dimensions: <em>matrix</em>, <em>data.frame</em></li>
-</ul>
+<p><em>Monte Carlo Integration</em>可以看<a href="https://www.youtube.com/watch?v=MKnjsqYVG4Y">這裡</a></p>
 
 <hr />
-
-<h3 id="2-what-are-the-outputs-of-isatomic-and-isvector">2. What are the outputs of <code class="highlighter-rouge">is.atomic()</code> and <code class="highlighter-rouge">is.vector()</code>?</h3>
-
-<p>Let’s see the outputs of these four types.</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w"> </span><span class="c1"># vector</span><span class="w">
-</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w"> </span><span class="c1"># list</span><span class="w">
-</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># matrix</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># data.frame</span><span class="w">
-</span></code></pre></div></div>
-
-<p><strong>(a) is.atomic()</strong></p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># &gt; is.atomic(v)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(l)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(mat)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># &gt; is.atomic(df)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span></code></pre></div></div>
-<p>As you can see the results, <code class="highlighter-rouge">is.atomic()</code> gives boolean values.
-<br />
-And the output is to see if the object is <em>Homogeneous data</em> or <em>Hetergeneous data</em>.
-<br />
-Hence, <em>vector</em> and <em>matrix</em> get TRUE, <em>list</em> and <em>data.frame</em> get FALSE.</p>
-
-<p><strong>(b) is.vector()</strong></p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># is.vector(v)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># is.vector(l)</span><span class="w">
-</span><span class="c1"># [1] TRUE</span><span class="w">
-</span><span class="c1"># is.vector(mat)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span><span class="c1"># is.vector(df)</span><span class="w">
-</span><span class="c1"># [1] FALSE</span><span class="w">
-</span></code></pre></div></div>
-<p>In contrast with is.atomic(), <code class="highlighter-rouge">is.vector()</code> checks from Dimension aspect.</p>
-
-<hr />
-
-<h3 id="3-what-are-the-outputs-of-typeof">3. What are the outputs of <code class="highlighter-rouge">typeof()</code></h3>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># vector</span><span class="w">
-</span><span class="n">v</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">v_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w"> </span><span class="s2">"c"</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># list</span><span class="w">
-</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">l_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"b"</span><span class="p">)</span><span class="w"> </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># matrix</span><span class="w">
-</span><span class="n">mat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are numeric</span><span class="w">
-</span><span class="n">mat_ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="p">),</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">  </span><span class="c1"># all elements are characters</span><span class="w">
-</span><span class="c1"># data.frame</span><span class="w">
-</span><span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-<p>Let’s see the results,</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ---vector-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(v)</span><span class="w">
-</span><span class="c1"># [1] "integer"</span><span class="w">
-</span><span class="c1"># &gt; typeof(v_ch)</span><span class="w">
-</span><span class="c1"># [1] "character"</span><span class="w">
-</span><span class="c1"># ---list-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(l)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span><span class="c1"># &gt; typeof(l_ch)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span><span class="c1"># ---matrix-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(mat)</span><span class="w">
-</span><span class="c1"># [1] "integer"</span><span class="w">
-</span><span class="c1"># &gt; typeof(mat_ch)</span><span class="w">
-</span><span class="c1"># [1] "character"</span><span class="w">
-</span><span class="c1"># ---data.frame-------------</span><span class="w">
-</span><span class="c1"># &gt; typeof(df)</span><span class="w">
-</span><span class="c1"># [1] "list"</span><span class="w">
-</span></code></pre></div></div>
-
-<p>From the result of ouputs, we can see it checks if the object is <em>Homogeneous data</em> or not.
-<br />
-If it is <em>Homogeneous data</em> then <code class="highlighter-rouge">typeof()</code> will show the type of elements.
-<br />
-But if the object is <em>Hetergeneous data</em>, it will give only <em>list</em> as output result.</p>
-
-<hr />
-
-<p>More detail about Data Structure can be found <a href="http://adv-r.had.co.nz/Data-structures.html">here</a></p>
 
 <p>Reference:
 <br />
-<a href="https://zhuanlan.zhihu.com/p/25551827">R深入|数据类型</a></p>
-
- -->
-    <div class="post-excerpt"><p>We know there are several common types in R, such as, vector, list, matrix, and data.frame.
+<a href="https://www.youtube.com/watch?v=3ZmW_7NXVvk">(ML 18.1) Markov chain Monte Carlo (MCMC) introduction-12eZWG0Z5gY.mp4</a>
 <br />
-Here I’m going to see these 4 types more details.</p>
+<a href="http://web.ntpu.edu.tw/~ccw/statmath/M_mcmc.pdf">The Markov Chain Monte Carlo Simulations</a>
+<br /> 
+Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
+<br />
+<a href="https://zhuanlan.zhihu.com/p/25610149">[数据分析] Markov Chain Monte Carlo</a>
+<br />
+<a href="https://www.youtube.com/watch?v=s8w8AsFK77c&amp;list=PLyAft-JyjIYq2SLTHO2ptmx-cChbE5GBm">徐亦达机器学习课程 Markov Chain Monte Carlo</a>
+<br />
+<a href="http://www.cnblogs.com/pinard/p/6625739.html">MCMC(一)蒙特卡罗方法</a></p>
+ -->
+    <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -373,8 +310,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/10/19/R-variable-types/#disqus_thread';
-        this.page.identifier = '/r/2018/10/19/R-variable-types/';
+        // this.page.url = '/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -387,7 +324,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/10/19/R-variable-types/#disqus_thread" data-disqus-identifier="/r/2018/10/19/R-variable-types/">0 Comments</a>
+        <a href="/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">0 Comments</a>
       </span>
 
     </div>
@@ -396,100 +333,109 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">
-        [R]RStudtio編碼問題
+      <a href="/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">
+        [Machine Learning]Covolutional Neural Networks(CNN)(2)
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on October 4, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on March 2, 2019</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">October 4, 2018</span>
+      <span class="post-date">March 2, 2019</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#R">R</a>
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
         
       
     </span>
 
 
     </div>
-    <!-- <p>解決編碼問題可以說最惱人的事了……<br />
-在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
+    <!-- <p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
 
-<hr />
+<ul>
+  <li>Padding</li>
+  <li>Strided Convolution</li>
+  <li>Convolutions Over Volume
+***</li>
+</ul>
 
-<p>根據我的經驗，我覺得編碼問題可以分成三種，</p>
+<h2 id="padding">Padding</h2>
+
+<p><strong>為什麼需要 Padding?</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/padding.png" alt="padding.png" height="400px" width="600px" /></p>
+
+<p>Convolution operation 的缺點：</p>
 <ol>
-  <li>R 程式碼編碼問題</li>
-  <li>檔案編碼問題</li>
-  <li>系統編碼問題</li>
+  <li>經過 convolution fitler 後原始圖將變小。如果有很多層 convolutional layer，資訊在每次運算後不斷損失。</li>
+  <li>最邊緣的 pixel 只會被使用到一次，但中間的 pixel 會使用到較多次。也就是說，會有邊緣的很多資訊缺失。</li>
 </ol>
 
-<h3 id="1-r-程式碼編碼問題">1. R 程式碼編碼問題</h3>
-<p>當你打開一份 R Script 時，發現 script 中的中文都是亂碼時，這時應該是這份 script 檔案的編碼與你電腦的 RScript 預設的不同。</p>
+<p>所以為了解決以上的缺點，我們將 input 的圖的邊緣加上一個 pixel，這樣經過卷積運算後的圖像仍和原圖一樣大。邊緣也是可以加 2 pixel 的。</p>
 
-<p>這時選擇 File -&gt; Reopen with Encoding… 更改編碼(UTF-8、BIG5、ASCII試試)，問題應該就可以解決了。</p>
+<p>以上圖為例，原本為 6x6(nxn) 的圖，經過 3x3(fxf) 的 filter 做卷積運算後，變為 (n-f+1)x(n-f+1) 的圖。</p>
 
-<p>或是可以直接更改預設的讀檔編碼，到 Tools -&gt; Global Options… -&gt; (左邊選單) Code -&gt; Saving 更改 Default text encoding。</p>
-
-<h3 id="2-檔案編碼問題">2. 檔案編碼問題</h3>
-<p>當你讀進一份檔案，可能碰到以下幾種狀況<br /></p>
-
-<p>a. 讀檔時出現編碼錯誤<br />
-解決方法： <br />
-(1)讀檔時設定 fileEncoding：讀檔時提供檔案本身編碼資訊，<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/">參考</a><br /></p>
-
-<p>(2)更改檔案編碼：先更改檔案本身的編碼，再使用 RStudio 讀取檔案。<br />
-   如果是 Windows，我個人推薦直接使用記事本更改最方便。另存新檔直接存成需要的編碼。<br /></p>
-
-<p>(3)更改預設讀檔編碼：如第一個提到的 R 程式碼編碼問題的解決方案，直接更改預設的編碼，設定成 UTF-8 應該是最好的。<br /></p>
-
-<p>b. 順利讀進檔案，但無法正確顯示<br />
-讀檔時，使用 encoding 參數來決定要顯示什麼語言</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">read.csv</span><span class="p">(</span><span class="s2">"filename.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"latin1"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<h3 id="3-系統編碼問題">3. 系統編碼問題</h3>
-<p>順利讀進檔案，已更改輸入時的編碼，但顯示仍舊錯誤。<br />
-這問題是在讀一份含有瑞典文的檔案時碰到的，已經更改過檔案的編碼，但開啟後仍無法正確顯示瑞典文。</p>
-
-<p>可以檢查一下系統本身的編碼是不是 UTF-8</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sessionInfo</span><span class="p">()</span><span class="w"> </span><span class="c1"># 裡的 local</span><span class="w">
-</span><span class="c1"># 或是</span><span class="w">
-</span><span class="n">Sys.getlocale</span><span class="p">()</span><span class="w">
-
-</span><span class="c1"># MAC 會長得大概像這樣</span><span class="w">
-</span><span class="c1"># "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8"</span><span class="w">
-</span></code></pre></div></div>
-<p>如果不是，更改系統的語系，以下更改為 UTF-8</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># for windows</span><span class="w">
-</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"UTF-8"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># for mac</span><span class="w">
-</span><span class="n">Sys.setlocale</span><span class="p">(</span><span class="n">category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"LC_ALL"</span><span class="p">,</span><span class="w"> </span><span class="n">locale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"en_US.UTF-8"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p>但如果今天邊緣加上 p pixel，最後圖檔就會變為 (n+2p-f+1)x(n+2p-f+1) 的圖。</p>
 
 <hr />
 
-<p>另外，要查看 vector 的編碼可以使用</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># x is a vector</span><span class="w">
-</span><span class="n">Encoding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
+<p><strong>The choice of padding - Vaild and Same convolutions</strong></p>
 
-<p>我個人認為，解決編碼問題最重要的就是要先知道編碼出錯的問題在哪。<br />
-是檔案本身編碼問題，還是系統的問題，那是要修改檔案還是要修改系統？<br /></p>
+<ol>
+  <li>Vaild - No padding</li>
+  <li>Same - Pad so that output size is the same as the input size
+<br />
+根據上面的公式，如果在 input 圖邊緣加上 pixel 後經過卷積運算要和原始圖檔大小ㄧ樣，那要符合 n+2p-f+1 = n，那就會得到 p = (f-1)/2</li>
+</ol>
 
+<p>For computer vision, usually f is odd. 3 by 3 filters are very common.</p>
+
+<hr />
+
+<h2 id="strided-convolution">Strided Convolution</h2>
+
+<p>前面我們在做 convolution 時 filter 都是一次跳一格計算，strided 則是一次跳不只一格。</p>
+
+<p>如下圖，這時候最後結果的 pixel 也會不同，計算公式就會是 ((n+2p-f)/2)+1 取 floor。
+<img src="http://localhost:4000/blog/img/posts/strided.png" alt="strided.png" height="400px" width="600px" /></p>
+
+<hr />
+
+<p><strong>cross-correlation vs. convolution</strong></p>
+
+<ul>
+  <li>cross-correlation：數學家喜歡將 convolutional operation 稱為 cross-correlation。在做運算時會將 filter 做水平與垂直翻轉，如下圖。</li>
+  <li>convolution：在 deep learning 通常都稱為 convolution，且不會將 filter 做鏡射的動作。</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/cross-correlation.png" alt="cross-correlation.png" height="400px" width="600px" /></p>
+
+<p>那這樣幹嘛要翻轉？因為在做訊號處理時，翻轉後會有一些好的特性可以拿來使用。但在做 deep learning 時基本上沒有影響，所以做 deep learning 時不會翻轉 filter。</p>
+
+<hr />
+
+<h2 id="convolutions-over-volume">Convolutions Over Volume</h2>
+
+<p><strong>Convolutions on RGB impages</strong></p>
+
+<p>前面舉的例子都是在 2D 上計算 convolution，現在要來看如何在 3D 上實現 convolution。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
  -->
-    <div class="post-excerpt"><p>解決編碼問題可以說最惱人的事了……<br />
-在使用中文或是其他歐語系語言時經常碰到編碼問題，這篇我根據我自己的一些經驗整理了一些在使用 RStudio 時解決編碼問題的辦法。</p>
+    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -509,8 +455,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread';
-        this.page.identifier = '/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/';
+        // this.page.url = '/blog//machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -523,7 +469,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/#disqus_thread" data-disqus-identifier="/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">0 Comments</a>
+        <a href="/blog//machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">0 Comments</a>
       </span>
 
     </div>
@@ -532,15 +478,15 @@ s.setAttribute('data-timestamp', +new Date());
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">
-        [Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)
+      <a href="/blog/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">
+        [Algorithm]基因演算法Genetic Algorithm
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 28, 2018</span> -->
+      <!-- <span class="post-date">Posted by Shihs on March 2, 2019</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 28, 2018</span>
+      <span class="post-date">March 2, 2019</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
@@ -554,818 +500,116 @@ s.setAttribute('data-timestamp', +new Date());
 
 
     </div>
-    <!-- <p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
+    <!-- <p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
+
+<p>它的想法是來自於基因遺傳，透過細胞分裂將好的基因保留，不好的基因淘汰，一代傳一代，最後留下最適合生存的物種，所謂「適者生存」。
+實現的方式就像基因的機制那樣，透過<em>隨機</em>選擇後，再進行 crossover 和 mutation，經過多次迭代後，最後結果將會收斂到一個最佳解。但這最佳解不ㄧ定是 global maximum（minimum），通常是 local maximum（minimum）。</p>
+
+<p>（但其實這與基因的真實行為完全無關，就像是 Neural Network 和人類神經反應的真實行為無關一樣。）</p>
 
 <hr />
+<h3 id="演算法流程圖">演算法流程圖</h3>
+<p><img src="http://localhost:4000/blog/img/posts/genetic%20algorithm.gif" alt="genetic algorithm.gif" height="380px" width="600px" />
+<a href="https://dotblogs.com.tw/dragon229/2013/01/03/86692">Source</a></p>
 
-<h3 id="hamiltonian-path">Hamiltonian path</h3>
-
-<p><strong>What is Hamiltonian path?</strong><br />
-<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> is a path that visit every node only once. It can be an undirected or directed graph. Also it</p>
-
-<p><strong>Hamiltonian cycle</strong><br />
-If a Hamiltonian path is a cycle then we call it A Hamiltonian cycle (or Hamiltonian circuit).</p>
-
-<p><strong>Hamiltonian path problem</strong><br />
-Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete</p>
-
-<hr />
-
-<h3 id="travelling-salesman-problem">Travelling Salesman Problem</h3>
-
-<p><strong>What is Travelling Salesman Problem(TSP)?</strong><br />
-There is a man traveling. He departures from a city and he wants to visit every cities(nods) with the shortest distance. In the end, he will go back to the origin city, and he can only stop in each city once.</p>
-
-<p>Which means, TSP is looking for the shortest distance of <em>Hamiltonian cycle</em>.</p>
-
-<hr />
-
-<p>reference:<br />
-<a href="http://www.csie.ntnu.edu.tw/~u91029/Circuit.html">演算法筆記</a><br />
-<a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Wikipedia - TSP</a><br />
-<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Wikipedia - Hamiltonian path</a><br /></p>
- -->
-    <div class="post-excerpt"><p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread';
-        this.page.identifier = '/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/#disqus_thread" data-disqus-identifier="/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/09/27/R-scale-%E8%88%87-dist-function/">
-        [R]scale 與 dist function
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 27, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 27, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
-
-<p>在做資料分析前會需要先標準化</p>
-
-<hr />
-
-<h3 id="scale">scale</h3>
-<p>scale 的主要作用在標準化數據，共有三個 arguments，</p>
-<ul>
-  <li>x: 必須要是 matrix，以「行」為每組數據計算</li>
-  <li>center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值</li>
-  <li>scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差</li>
-</ul>
-
-<p>預設 center 和 scale 都是 TRUE，也就是算出來的值是 <a href="https://zh.wikipedia.org/wiki/標準分數">z-score</a>。</p>
-
-<blockquote>
-
-  <p>\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)</p>
-</blockquote>
-
-<p>其中：<br />
-\(x\)：數據<br />
-\(\mu\)：平均值<br />
-\(\sigma\)：標準差</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-
-</span><span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h3 id="dist">dist</h3>
-<p>dist 是在算數據間的距離，主要的 arguments有</p>
-<ul>
-  <li>x: 可以是 matrix, data.frame ，但必須要是 numeric。</li>
-  <li>methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。</li>
-</ul>
-
-<p>以「列」為數據，兩兩計算，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-
-</span><span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread';
-        this.page.identifier = '/r/2018/09/27/R-scale-%E8%88%87-dist-function/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread" data-disqus-identifier="/r/2018/09/27/R-scale-%E8%88%87-dist-function/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">
-        [R]如何在R Package加上code coverage (codecov)?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 14, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 14, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
-
-<p>這篇是根據<a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/">這篇</a>的步驟操作。
-如果要找 package 內容物該有的東西可以參考我完成的一個 <a href="https://github.com/shihs/LiUAdRLab3">R package</a>。</p>
-
-<p>以下會將步驟一一列下。</p>
-
-<hr />
-
-<h3 id="1-完成-r-package-與建立-test-測試">1. 完成 R package 與建立 test 測試</h3>
-<p>建立 <a href="http://r-pkgs.had.co.nz">R package</a> 可以參考大神的書，test 則可以參考這本書的 <a href="http://r-pkgs.had.co.nz/tests.html">testing 章節</a>。</p>
-
-<p>基本上使用，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_testthat</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-<p>就會自己建立一個 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests">tests 資料夾</a>，再把要測試的程式碼加進下一層的 <a href="https://github.com/shihs/LiUAdRLab3/tree/master/tests/testthat">testthat 資料夾</a>內。</p>
-
-<p>最後進行測試，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">test</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<h3 id="2-建立所有-code-coverage-需要的檔案與內容">2. 建立所有 code coverage 需要的檔案與內容</h3>
-
-<p>先跑一下程式碼，</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">devtools</span><span class="o">::</span><span class="n">use_coverage</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<p>跑完後會出現以下的步驟提示，</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Creating `codecov.yml` from template.
-* Adding `codecov.yml` to `.Rbuildignore`.
-* Add to `README.md`: 
-[![Coverage Status](https://img.shields.io/codecov/c/github/shihs/LiUAdRLab3/master.svg)](https://codecov.io/github/shihs/LiUAdRLab3?branch=master)
-* Add to `.travis.yml`:
-after_success:
-  - Rscript -e 'covr::codecov()'
-</code></pre></div></div>
-
-<p>基本上就一步一步照著做就對了，前面兩件事程式已經幫你處理好了，<br />
-從第三步開始就行。</p>
-
-<hr />
-
-<h3 id="3-將-github-與-codecov-連結">3. 將 Github 與 codecov 連結</h3>
-
-<p>使用 Github 帳號登入 <a href="https://codecov.io">codecov.io </a>。</p>
-
-<p>連結你要使用 codecov 的 reposity，
-會出現像這樣的<a href="https://walczak.org/wp-content/uploads/2017/06/token.png">畫面</a>得到一組 token，
-將 token 複製，在 R 中跑以下程式碼，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"covr"</span><span class="p">)</span><span class="w">
-</span><span class="n">library</span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
-</span><span class="n">codecov</span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YOUR_TOKEN_GOES_HERE"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>大功告成！</p>
-
-<p>這時候會看到你剛剛貼上的 coverage 圖案出現 code coverage 的結果。</p>
-
-<hr />
-
-<p>如果想要先在 R studio 上看測試結果可以使用，</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="w"> </span><span class="p">(</span><span class="n">covr</span><span class="p">)</span><span class="w">
-</span><span class="n">report</span><span class="p">()</span><span class="w">
-</span></code></pre></div></div>
-
-<p>viewer 視窗就會顯示測試結果了。</p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread';
-        this.page.identifier = '/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread" data-disqus-identifier="/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">
-        [R][Git]如何在 Rstudio 上連接 R project 與 Github
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 8, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 8, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#Git">Git</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
-
-<p>在進入主題前，請先安裝好 R、Rstudio 和 Git ，並且申請好 Github 帳號。</p>
-
-<hr />
-
-<h2 id="前置作業">前置作業</h2>
-<p><strong>設置 SSH RSA key</strong></p>
-
-<p>1.複製 public key<br />
-Tool &gt; Global Options &gt; Git/SVN &gt; Create RSA Key &gt; View public key <br />
-點開 View public key 後，複製裡頭所有的東西。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Rstudio%20SSH.png" alt="Rstudio SSH.png" /></p>
-
-<p>2.將 public key 貼到 github</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/github%20ssh.png" alt="github ssh.png" /></p>
-
-<hr />
-
-<h2 id="開始建立-connection">開始建立 connection</h2>
-
-<p><strong>建立專案</strong></p>
-
-<p>請先建立一個專案，這裡就不多加解釋了。</p>
-
-<p><strong>在本機建立 repository</strong></p>
-
-<p>Build &gt; Configure public Tools &gt; Git/SVN<br />
-將 Version control system 由 None 改為 Git</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/version%20control%20system.png" alt="version control system.png" /></p>
-
-<p>這時候就會發現 Rstudio 的視窗長得不太一樣了。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/rstudio%20git.png" alt="rstudio git.png" /></p>
-
-<p>下方視窗應該會有一些還未 commit 的檔案，但因為我都已經 commit 了，所以沒有內容。<br />
-且這時候 pull 和 push 鍵應該還無法操作。</p>
-
-<p><strong>Github 同步</strong></p>
-
-<p>終於來到最後一哩路。</p>
-
-<p>到 Github 上創建一個新的 repository，且名稱要和 project 相同，只要單純創建 repository 就好，什麼檔案都不要。</p>
-
-<p>最後，打開 Rstudio 工具列的， Tools &gt; Shell</p>
-
-<p>然後在 Shell 裡輸入，</p>
-<pre><code class="language-git">git remote add origin https://github.com/你的github帳號/你的專案名稱.git
-git push -u origin master
-</code></pre>
-
-<p>完成後就會發現專案已經和 Github 連結了！專案的檔案都出現在 Github 上了。<br />
-這時候 pull 和 push 鍵也已經可以操作了。</p>
-
-<p>未來只要更新專案內容，就可以直接在 Rstudio 上 commit 和 push 就好了！</p>
-
-<hr />
-
-<p><strong>補充</strong></p>
-
-<p>移除 project 與該 repository 的 connection <code class="highlighter-rouge">rm -rf .git</code></p>
-
-<hr />
-<p>參考：</p>
-
-<ul>
-  <li>Hadley Wickham 的 <a href="http://r-pkgs.had.co.nz/git.html">R Package Git 章節</a></li>
-</ul>
-
- -->
-    <div class="post-excerpt"><p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread';
-        this.page.identifier = '/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread" data-disqus-identifier="/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">
-        [統計]什麼是 CDF (Cumulative Distribution Function)?
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 4, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#統計">統計</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
-
-<hr />
-
-<h3 id="cdf-cumulative-distribution-function">CDF (Cumulative Distribution Function)</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>The cumulative distribution function (CDF) of random variable \(X\) is defined as</li>
-</ul>
-
-<script type="math/tex; mode=display">F_X(x) = P(X \leq x), \forall x \in {\Bbb R}</script>
-
-<p><a href="https://www.probabilitycourse.com/chapter3/3_2_1_cdf.php">Source</a></p>
-
-<blockquote>
-
-  <p>Mathematical Statistics with Applications 這本書將 CDF 稱為 distribution function，<br />
-<a href="https://zh.wikipedia.org/wiki/累积分布函数">wikipedia</a> 則翻譯為<strong>累積分布函數</strong>。</p>
-</blockquote>
-
-<p>以下再分 <em>1.離散型函數</em> 與 <em>2.連續型函數</em> 來看，</p>
-
-<hr />
-<h3 id="離散型隨機變數的-cdf">離散型隨機變數的 CDF</h3>
-
-<p>以擲兩枚硬幣為例，出現 head 為 1，tail 為 0，<br />
-其隨機變數 \(X\) 的 PMF 函數為</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-1/4,& \;for\; x = 0 \\
-1/2,& \;for\; x = 1 \\
-1/4,& \;for\; x = 2 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-
-<p>PMF 函數圖為，
-<img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
-
-<p>則它的 CDF 累積分佈函數為
-<script type="math/tex">% <![CDATA[
-F_X(x) = \left\{ \begin{array}{rcl}
-0,& &for\; x < 0 \\
-1/4,& &for\; 0 \leq x < 1 \\
-3/4,& &for\; 1 \leq x < 2 \\
-1,&  &for\; x \geq 2\\
-\end{array}\right. %]]></script></p>
-
-<p>CDF 函數圖為，
-<img src="http://localhost:4000/blog/img/posts/CDF_two%20coins.png" alt="CDF_two coins.png" /></p>
-
-<p>可以發現，離散型的 CDF \(F_X(x)\) 為不連續的函數圖。</p>
-
-<p>關於離散型的 CDF 這<a href="https://www.probabilitycourse.com/videos/chapter3/video3_5.php">影片</a>有更詳細的說明。</p>
-
-<hr />
-<h3 id="連續型隨機變數的-cdf">連續型隨機變數的 CDF</h3>
-
-<p>那如果今天有個隨機變數 \(X\)，它的 CDF \(F(X)\) 為連續函數呢？<br /></p>
-
-<p><strong>定義 Definition</strong></p>
-<ul>
-  <li>A random variable \(X\) with CDF \(F(X)\) is said to be continuous if \(F(X)\) is a continuous function for all \(X \in {\Bbb R} \). <a href="https://www.probabilitycourse.com/chapter4/4_1_0_continuous_random_vars_distributions.php">Source</a></li>
-</ul>
-
-<hr />
-<p>參考：</p>
-
-<ul>
-  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
-</ul>
-
-<hr />
- -->
-    <div class="post-excerpt"><p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
-
-</div>
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread';
-        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">
-        [統計]離散型(Discrete)隨機變數與其機率分佈(3)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 4, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 4, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#統計">統計</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
-<p>這一篇要介紹常見的離散型分佈（Discrete Distribution），這篇主要是參考  <a href="https://www.probabilitycourse.com/chapter3/3_1_5_special_discrete_distr.php">Source</a></p>
-
-<hr />
-<h3 id="伯努利分佈-bernoulli-distribution">伯努利分佈 Bernoulli Distribution</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>A random variable \(X\) is said to be a <em>bernoulli</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Bernoulli(p)\)</strong>, if its PMF is given by</li>
-</ul>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p,& \;for\; x = 1 \\
-1-p,& \;for\; x = 0 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-
-<ul>
-  <li>where \(0 &lt; p &lt; 1\)</li>
-</ul>
-
-<p>簡單來說，一個事件只有兩種可能。<br /></p>
-
-<p>生活中有非常多的例子都會是 Bernoulli Distribution，譬如，</p>
 <ol>
-  <li>考試有及格、不及格</li>
-  <li>丟擲一枚銅板有正面、反面</li>
-  <li>小孩子性別可能是男生、女生</li>
+  <li>一開始隨機產生n個變數 (n由使用者決定)</li>
+  <li>利用適應函數（fitness function）計算所有變數的適應值</li>
+  <li>依每個的適應值進行「選擇、複製」</li>
+  <li>對留下的變數進行交配（crossover）及突變（mutation）的動作</li>
 </ol>
 
-<p><img src="http://localhost:4000/blog/img/posts/Bernoulli.png" alt="Bernoulli.png" /></p>
+<hr />
+
+<h3 id="範例">範例</h3>
+
+<p>以下範例是來自<a href="http://www.csie.ntnu.edu.tw/~u91029/Optimization.html">演算法筆記的 Optimization</a></p>
+
+<p>1.
+[初始化]
+一開始先隨便弄出幾個x。本例是四個。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101010
+1011001011
+1110101011
+0010101000
+</code></pre></div></div>
+
+<p>2.
+[fitness function]
+根據問題特性，定義好壞程度。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(1010101010) = 678
+</code></pre></div></div>
+
+<p>3.
+[selection]
+隨便找個位置切一刀，每個x都被分成兩段。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101  010
+1011001  011
+1110101  011
+0010101  000
+</code></pre></div></div>
+
+<p>4.
+[crossover]
+隨便找兩組你覺得夠優良的x，交叉相接變成新答案。
+重複一直做，直到x數目跟原先一樣多。本例是四個。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101 \/ 010  -&gt;  1010101 -- 011
+1011001 /\ 011      1011001 -- 010 
+
+
+1010101011
+1011001010
+1110101010
+1010101000
+</code></pre></div></div>
+
+<p>5.
+[mutation]
+每個x都隨便找一個地方把數字改掉，也可以不改。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010111011
+1011001000
+1110101010
+1010101001
+</code></pre></div></div>
+
+<p>6.
+重複3. 4. 5.，直到裡面有一個x是你滿意的，令f(x)最大的那個x。</p>
+<ol>
+  <li>隨機產生N個x。</li>
+  <li>計算fitness function。</li>
+  <li>重複以下步驟，直到有一個x讓人滿意。
+<br />
+　甲、selection。
+<br />
+　乙、crossover。
+<br />
+　丙、mutation。
+<br />
+　丁、計算fitness function。</li>
+</ol>
+
+<p>一開始的 x 的足夠豐富，多演化幾次就可以得到不錯的結果。一開始的 x 足夠豐富，可以避免進入區域極值。 mutation 用於增加 x 的豐富性，以跳脫區域極值。</p>
 
 <hr />
-<h3 id="幾何分布-geometric-distribution">幾何分布 Geometric Distribution</h3>
-<p><strong>定義 Definition</strong></p>
 
-<ul>
-  <li>A random variable \(X\) is said to be a <em>geometric</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Geometric(p)\)</strong>, if its PMF is given by</li>
-</ul>
+<p>Reference:</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-
-<ul>
-  <li>where \(0 &lt; p &lt; 1\)</li>
-</ul>
-
-<p>Geometric Distribution 的例子：擲一枚銅板，且此銅板擲到 Head 的機率為 \(p\)。今天擲這枚到出現第一個 Head 為止，則其機率分佈為 Geometric Distribution。<br />
-另外，每一次擲這枚銅板都會是獨立的 Bernoulli 試驗。</p>
-
-<p>所以，Geometric Distribution 就是很多次的 Bernoulli 試驗直到成功為止。</p>
-
-<p>以 \(p = 0.3\) 為例，其 Geometric Distribution 的 PMF 會是這樣，</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Geometric.png" alt="Geometric.png" /></p>
-
-<hr />
-<h3 id="二項分布-binomial-distribution">二項分布 Binomial Distribution</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>A random variable \(X\) is said to be a <em>binomial</em> random variable with peremeter \(n\) and \(p\), shown as <strong>\(X \sim Binomial(n, p)\)</strong>, if its PMF is given by</li>
-</ul>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},& \;for\; k = 0, 1, 2,..., n \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-
-<ul>
-  <li>where \(0 &lt; p &lt; 1\)</li>
-</ul>
-
-<p>Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。</p>
-
-<p>所以它的 PMF 會有 <script type="math/tex">\left( \begin{array}{c} n \\ k \end{array} \right)</script>，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
-
-<p>可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。</p>
-
-<p>以 \(n = 10,\; p = 0.3\) 為例，其 PMF 圖會是，</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Binomial.png" alt="Binomial.png" /></p>
-
-<p><strong>Binomial random variable as a sum of Bernoulli random variables</strong></p>
-
-<ul>
-  <li>If \(X_1,\;X_2,\;X_3,…,\;X_n\) are independent \(Bernoulli(p)\) random variable,  then the random variable \(X\) defined by \(X = X_1 + X_2 + X_3 + … + X_n\) has a \(Binomial(n,p)\) distribution.</li>
-</ul>
-
-<p>也就是，二項分布可以看成是每個獨立的伯努利分佈的和。</p>
-
-<hr />
-<h3 id="布瓦松分布-poisson-distribution">布瓦松分布 Poisson Distribution</h3>
-<p><strong>定義 Definition</strong></p>
-
-<ul>
-  <li>A random variable \(X\) is said to be a <em>poisson</em> random variable with peremeter \(\lambda\), shown as <strong>\(X \sim Poisson(\lambda)\)</strong>, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by</li>
-</ul>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\frac{e^{-\lambda} \lambda^k}{k!} ,& k \in R_X \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
-
-<p>Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。</p>
-
-<p>既然上面的式子為 PMF，那我們來檢驗
-<strong>\(\sum_{k \in R_X}{P_k(x)} = 1\)</strong>
-是否正確。</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\sum_{k \in R_X}{P_k(x)} &= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
-&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
-\end{align} %]]></script>
-
-<blockquote>
-
-  <p>Note: 根據 Taylor Series(泰勒展開式) <strong>\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)</strong>，上列式子可以寫成，</p>
-</blockquote>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-&= e^{-\lambda} e^{\lambda} \\
-&= 1 \\
-\end{align} %]]></script>
-
-<p><strong>Example:</strong></p>
-
-<blockquote>
-
-  <p>The number of emails that I get in a weekday can be modeled by a Poisson distribution with an average of 0.2 emails per minute.</p>
-  <ol>
-    <li>What is the probability that I get no emails in an interval of length 5 minutes?</li>
-    <li>What is the probability that I get more than 3 emails in an interval of length 10 minutes?</li>
-  </ol>
-</blockquote>
-
-<p><strong>Poisson as an approximation for binomial</strong></p>
-<ul>
-  <li>Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have</li>
-</ul>
-
-<script type="math/tex; mode=display">\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}</script>
-
-<p>\(X \sim Poisson(\lambda = 5)\) 的函數圖形，</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Poisson.png" alt="Poisson.png" /></p>
-
-<hr />
-<p>參考：</p>
-
-<ul>
-  <li><a href="https://www.amazon.com/Mathematical-Statistics-Applications-Dennis-Wackerly/dp/0495110817">Mathematical Statistics with Applications 7th Edition</a></li>
-  <li><a href="https://www.probabilitycourse.com">Introduce To Proability, Statistics and Random Process</a></li>
-  <li><a href="http://ccckmit.wikidot.com/st:main">陳鍾誠的網站</a></li>
-</ul>
+<p><a href="http://www.csie.ntnu.edu.tw/~u91029/Optimization.html">演算法筆記 - Optimization</a>
+<br />
+<a href="http://littledoa.wixsite.com/pcclab/single-post/2016/02/03/Genetic-Algorithm-基因演算法">Genetic Algorithm 基因演算法</a>
+<br />
+<a href="https://www.youtube.com/watch?v=UE6YkRWBtZk">人工智慧系列之基因演算法</a></p>
  -->
-    <div class="post-excerpt"><p>這一系列我是以 
-Wackerley, Mendenhall and Scheaffer 的 <br />
-Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
-有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
+    <div class="post-excerpt"><p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
 
 </div>
+    
+
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
       <i class="fas fa-comments"></i>
@@ -1385,8 +629,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread';
-        this.page.identifier = '/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/';
+        // this.page.url = '/blog//algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/#disqus_thread';
+        this.page.identifier = '/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -1399,7 +643,796 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/#disqus_thread" data-disqus-identifier="/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">0 Comments</a>
+        <a href="/blog//algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/#disqus_thread" data-disqus-identifier="/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2019/02/27/Python-filter-map-reduce-lambd/">
+        [Python]filter、map、reduce、lambda
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 27, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 27, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <ul>
+  <li>lambda 可以直接定義一些簡單的 funciton。</li>
+  <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
+</ul>
+
+<hr />
+
+<p><strong>lambda</strong></p>
+
+<p>我其實覺得就是定義 funciton，只是是定義一些簡單，可以一行完成的 funciton。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳輸入的變數 + 1</span>
+<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="c"># 上面的 func 其實就等於</span>
+<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+
+
+<span class="c"># 輸入兩個變數</span>
+<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+
+<span class="c"># 含 if</span>
+<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">False</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+<hr />
+
+<p><strong>filter(function, sequence)</strong></p>
+
+<p>對 sequence 中的 item 依序執行 function(item)，然後將執行結果為 True 的 item 組成一個 list/string/tuple（與 sequence 類型相同）回傳。
+這時候 function 可以使用 lambda 定義或是平常的 def 定義。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳是數字，除 0 外都是 True</span>
+<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+
+<span class="c"># function 為 def</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
+<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
+
+<span class="c"># function 為 lambda</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
+<span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
+
+</code></pre></div></div>
+<hr />
+
+<p><strong>map(function, sequence)</strong></p>
+
+<p>對 sequence 中的 item 依序執行 function(item)，執行結果以 list 回傳。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># funciton 只有一個參數</span>
+<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="c"># 每次都回傳 1</span>
+<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+
+<span class="c"># function 有兩個參數</span>
+<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+<hr />
+
+<p><strong>reduce(function, sequence, starting_value)</strong></p>
+
+<p>對 sequence 中的 item 順序迭代調用 function，最後回傳一個值。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span> <span class="c"># 在 python3 是必須的</span>
+
+<span class="c"># 求 list 的和</span>
+<span class="n">res</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+<p>Reference:
+<br />
+<a href="https://www.cnblogs.com/longdouhzt/archive/2012/05/19/2508844.html">Python特殊语法：filter、map、reduce、lambda [转]</a></p>
+ -->
+    <div class="post-excerpt"><ul>
+  <li>lambda 可以直接定義一些簡單的 funciton。</li>
+  <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
+</ul>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2019/02/27/Python-filter-map-reduce-lambd/#disqus_thread';
+        this.page.identifier = '/python/2019/02/27/Python-filter-map-reduce-lambd/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2019/02/27/Python-filter-map-reduce-lambd/#disqus_thread" data-disqus-identifier="/python/2019/02/27/Python-filter-map-reduce-lambd/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/">
+        [Machine Learning]Reinforcement Learning
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 25, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 25, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h3 id="複習">複習</h3>
+
+<p><strong>機器學習可以被分為三大類：</strong></p>
+<ul>
+  <li>
+    <p>Supervised Learning:
+<br />
+Learn to generalize and classify new data based on <em>labelled</em> training data. 像是 regression 和 classification 就屬於 Supervised Learning。</p>
+  </li>
+  <li>
+    <p>Unsupervised Learning:
+<br />
+Discover structure and relationships in complex high-dimensional data. 像是 cluster。</p>
+  </li>
+  <li>
+    <p>Reinforcement Learning:
+<br />
+Generate policies/strategies that lead to a (possibly delayed) reward. Learn by interacting with the environment! 和人類學習的過程很像，會根據環境而行動，並做調整（像是學騎腳踏車）。這篇主要就是要介紹 Reinforcement Learning。</p>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>Reinforcement Learning 可以做什麼？</strong></p>
+<ul>
+  <li>2016 年 <a href="https://zh.wikipedia.org/wiki/AlphaGo">AlphaGo</a> 擊敗世界棋王使用的就是 Reinforcement Learning</li>
+  <li><a href="https://www.youtube.com/watch?v=W_gxLKSsSIE">Robot Learns to Flip Pancakes</a></li>
+  <li>pole balancing</li>
+</ul>
+
+<p><strong>Differences to other methods</strong></p>
+<ul>
+  <li>Difference to supervised learning
+    <ol>
+      <li>Time! Reinforcement Learning 的學習時間會比 Supervised Learning 費時（當然要有缺點，不然大家幹嘛還要用 Supervised Learning），所以如果有 labels 通常還是會選用 Supervised Learning，但當事前沒有 labels，不知道結果的時候就可以使用 Reinforcement Learning。</li>
+      <li>Can become better than the system designer, unlike a supervised system that can never become better than the teacher. 因為 Supervised Learning 是根據 system designer 給的 labels 下去計算，但 Reinforcement Learning 是機器自己學習所獲得的結果，就像是，雖然教練教學生打球，但學生的學習成果可能比教練還好。</li>
+      <li>Feedback is usually not immediate but is given after many actions - delayed feedback! 像是下棋，要等到結果贏或輸才會知道是得到 positive reward 還是 negative reward。</li>
+      <li>Feedback is given as a scalar reward, not as the correct action to make. Supervised Learning 的 feedback 是結果是否正確，但 Reinforcement Learning 得到的 feedback 是 reward（can be positive or negative）。</li>
+    </ol>
+  </li>
+  <li>Difference to control theory
+    <ol>
+      <li>No physical model of the world, e.g., in pole balancing</li>
+    </ol>
+  </li>
+</ul>
+
+<p><strong>機器怎麼學？</strong></p>
+
+<p>不像 Supervised Learning 有 lable 可以知道結果是正確還是錯誤， Reinforcement Learning 的學習方法是透過 reward 來知道學習結果正確或不正確（就像是狗狗學習技能，如果做對了就給東西吃一樣）。所以透過打分數的結果來知道怎麼樣的行為是正確的而進行調整，往正確的學習道路邁進。（所以每次學習結果所獲得的 reward 就變得有點像是 Supervised Learning 的 labels 的感覺，只是這個 labels 是從學習的過程中獲得的）</p>
+
+<hr />
+
+<h2 id="reinforcement-learning-如何進行">Reinforcement Learning 如何進行？</h2>
+
+<p><img src="http://localhost:4000/blog/img/posts/reinforcement%20learning.png" alt="reinforcement learning.png" height="380px" width="600px" /></p>
+
+<hr />
+
+<p><strong>Reinforcement Learning 問題的基本設定</strong></p>
+
+<p>&lt;A, S, R, P&gt;</p>
+<ul>
+  <li>Action space : A</li>
+  <li>State space : S</li>
+  <li>Reward: R : S × A × S → R</li>
+  <li>Transition : P :S × A → S</li>
+</ul>
+
+<p>A 代表的是 Agent 的所有動作（action）；S 是 state，是 Agent 所能感知的狀態； R 是 reward 代表獎勵或懲罰，是一個實數；P 是 Agent 所交互的世界，也被稱為 model。</p>
+
+<p>根據上圖（<a href="https://www.slideshare.net/yenlung/reinforcement-learning-90737484">Source</a>），電腦是 agent，地球代表 environment（環境），reward（獎勵）是環境所提供的反饋，reward 由模型設計者定義，可以是 positive 或是 negative，reward 的定義對強化學習來說是個很重要的一環。</p>
+
+<p><strong>Policy</strong></p>
+
+<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 <script type="math/tex">\pi</script>，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
+
+<ul>
+  <li>stochastic policy: <script type="math/tex">\pi(a\mid s),~ and \sum\pi(a\mid s) = 1</script></li>
+  <li>deterministic policy: <script type="math/tex">\pi(s)</script></li>
+</ul>
+
+<p><strong>Reward</strong></p>
+
+<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 <script type="math/tex">s_0</script>，agent 做了 <script type="math/tex">a_0</script> 的 action，這時候產生了一個 reward <script type="math/tex">r_1</script>，然後因為剛剛的 <script type="math/tex">a_0</script> 這時候 state 來到 <script type="math/tex">s_1</script>，而 agent 要採取下一步 <script type="math/tex">a_1</script> 的時候就會根據剛剛的 <script type="math/tex">r_1</script> 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/reward.jpg" alt="reward.jpg" height="120px" width="800px" /></p>
+
+<p>但其實並不是所有的學習都會像這個例子一樣立即獲得 reward，像下棋就會是整局結束後才得到 reward。</p>
+
+<p>另外，需要注意的是，Reward <script type="math/tex">\ne</script> Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
+
+<hr />
+
+<p>總結來說，<em>Reinforcement Learning 的目標就是找到一個最佳的 Policy（策略），讓最後平均的 reward 最大！</em></p>
+
+<p>所以現在問題就來了，<em>要如何衡量這個 policy 好不好？哪些 policies 是我們想要 explore 的？</em></p>
+
+<hr />
+
+<h2 id="value-function">Value function</h2>
+
+<p><strong>Value function - How good is a policy?</strong></p>
+
+<p>定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。</p>
+
+<p><script type="math/tex">V_\pi(s)</script> 表示的是策略 <script type="math/tex">\pi</script>，狀態 s 的長期期望收益。<script type="math/tex">Q_\pi(s, a)</script> 是策略 <script type="math/tex">\pi</script> 在狀態 s 下，採取動作 a 的長期期望收益。</p>
+
+<ul>
+  <li>
+    <p>長期回報期望：<script type="math/tex">% <![CDATA[
+G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （因為 <script type="math/tex">\gamma</script> 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
+  </li>
+  <li>
+    <p>Value function：<script type="math/tex">V_\pi(s) = E_\pi[G_t\mid S_t = s]</script></p>
+  </li>
+  <li>
+    <p>Q function：<script type="math/tex">Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]</script></p>
+  </li>
+</ul>
+
+<p><strong>How to learn V(s)?</strong></p>
+
+<ul>
+  <li>
+    <p>Monte Carlo approach</p>
+  </li>
+  <li>
+    <p>Temporal Difference approach</p>
+  </li>
+</ul>
+
+<p><strong>Summary</strong></p>
+<ul>
+  <li>For a given policy, the value (expected reward) V(s) of each state is unknown before we learn it by interacting with the environment.</li>
+  <li>V(s) is found iteratively, starting for example with V(s)←0, using the Monte Carlo or Temporal Difference methods.</li>
+  <li>The Temporal Difference method generally converges much faster.</li>
+</ul>
+
+<hr />
+
+<h2 id="q-learning">Q-Learning</h2>
+
+<p><strong>Which policies should we explore?</strong></p>
+
+<p>上面介紹了 V(s) 是狀態 s 的長期期望收益，那 agent 要如何決定根據它來決定要做什麼 action 採取什麼 policies 呢？這時候我們就會加上 action 這個變數來看，也就是上面提到的 Q(s, a)。</p>
+
+<ul>
+  <li><script type="math/tex">V^*(s) = \max_{a} Q(s_{k+1}, a)</script> denote the value function for the optimal policy</li>
+  <li><script type="math/tex">Q(s, a)</script> is expected future reward of doing action a in state s and then following the optimal policy <script type="math/tex">Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})</script></li>
+  <li><script type="math/tex">Q(s, a)</script> 未知，必須透過學習得到。</li>
+</ul>
+
+<p><script type="math/tex">Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))</script>, <script type="math/tex">\eta</script> is learning rate</p>
+
+<p><a href="https://blog.csdn.net/itplus/article/details/9361915">這篇文章</a>翻譯了這個<a href="http://mnemstudio.org/path-finding-q-learning-tutorial.htm">原文</a>，我覺得非常好理解。但要整篇整理在這裡太麻煩了，所以自己看吧。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+Linköping University Neural Networks and Learning Systems TBMI26 / 732A55 2019 Lectures.
+<br />
+<a href="https://zhuanlan.zhihu.com/p/25239682">深度强化学习（Deep Reinforcement Learning）入门：RL base &amp; DQN-DDPG-A3C introduction</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/强化学习">wikipedia - 強化學習</a>
+<br />
+<a href="https://www.slideshare.net/yenlung/reinforcement-learning-90737484">強化學習 Reinforcement Learning</a>
+<br />
+<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/">莫凡python</a>
+<br />
+<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-reinforcement-learning-強化學習-dqn-實作atari-game-7f9185f833b0">[機器學習 ML NOTE] Reinforcement Learning 強化學習(DQN原理)</a>
+<br />
+<a href="https://www.zhihu.com/question/26408259">如何用简单例子讲解 Q - learning 的具体过程？</a>
+<br />
+<a href="https://blog.csdn.net/itplus/article/details/9361915">A Painless Q-learning Tutorial (一个 Q-learning 算法的简明教程)</a></p>
+
+ -->
+    <div class="post-excerpt"><h3 id="複習">複習</h3>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">
+        [Machine Learning]Covolutional Neural Networks(CNN)(1)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 25, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 25, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
+
+<hr />
+
+<h2 id="前言">前言：</h2>
+
+<p>因為 Deep Learning 的快速發展，所以電腦視覺（computer vision）這幾年也迅速的超展開。像是自動駕駛就受惠於 computer vision 的進步，讓自駕車能更準確的偵測路人和其他車輛，提升安全性；或是人臉辨識系統也變得更厲害，像是手機的人臉辨識解鎖；或是使用 Deep Learning 辨別照片是屬於風景照、人、動物還是車輛等等（像是 iphone 的相簿現在就很變態的會自動歸類照片是什麼）；甚至在藝術作品上都有 Deep Learning 的蹤影。</p>
+
+<hr />
+
+<h2 id="為什麼要使用-covolutional-neural-networkscnn">為什麼要使用 Covolutional Neural Networks(CNN)？</h2>
+
+<h3 id="computer-vision-problem">Computer Vision Problem</h3>
+
+<p><img src="http://localhost:4000/blog/img/posts/Computer%20Vision%20Problem.png" alt="Computer Vision Problem.png" height="400px" width="600px" /></p>
+
+<p>以上圖的例子來看，第一張是 64x64 的照片，第二張畫素則是 1000x1000，這時候如果再加上 RGB 三原色的維度，兩張照片的維度分別會是 64x64x3 和 1000x1000x3。以 Neural Network 來實作的話（右下角），input layer 的 Xn 的 n = 1000x1000x3，如果第一層的 hidden 是 1000 個 nodes，這時候轉換的 W 的維度就會是 1000x3000000，這是不是很 CRAZY？</p>
+
+<p>所以這時候就會碰到以下的問題。</p>
+
+<p><strong>缺點</strong></p>
+<ol>
+  <li>很難避免 overfitting</li>
+  <li>計算上需要大量的電腦效能和 CPU，實在太不切實際了</li>
+</ol>
+
+<p>因此，為了解決的這個問題，我們就需要用到 CNN。</p>
+
+<hr />
+
+<h2 id="cnn-的流程圖">CNN 的流程圖</h2>
+<p><a href="https://res.mdpi.com/entropy/entropy-19-00242/article_deploy/html/images/entropy-19-00242-g001.png">Sourse</a>
+<img src="http://localhost:4000/blog/img/posts/CNN.png" alt="CNN.png" height="300px" width="630px" /></p>
+
+<hr />
+
+<h2 id="how-the-convolution-operation-works">How the convolution operation works?</h2>
+
+<p>現在先來看 convolutional layer 的部分，也是 CNN 非常重要的一個環節。這邊使用 Edge detection 作為範例操作 convolution operation 是如何運作的。</p>
+
+<h3 id="edge-detection-example">Edge detection example</h3>
+
+<p><img src="http://localhost:4000/blog/img/posts/edge%20detect.png" alt="edge detect.png" height="400px" width="600px" /></p>
+
+<p>在辨識下圖時我們可能會想要做垂直的邊緣辨識和水平的邊緣辨識。那要如何操作呢？</p>
+
+<h3 id="vertical-edge-detection">Vertical edge detection</h3>
+
+<p><img src="http://localhost:4000/blog/img/posts/convolutional%20operation.png" alt="convolutional operation.png" height="400px" width="600px" /></p>
+
+<p>最左邊的圖是一張 6x6 pixel 的黑白圖，每個 pixel 的數字表示灰階的深度，數字越小代表顏色越深。中間是一個 3x3 的 filter，在有些地方會被稱為 kernel，但這門課都會稱作 filter。這樣的兩個 matrix 做 convolution 運算後（用 * 表示），會產生一個 4x4 的 matrix。</p>
+
+<p>運算方法則是，將 3x3 的 filter 與圖片的左上方 match（如圖片淺藍底），對應到的格子相乘，最後再將九個數字相加。依序移動 3x3 的 filter，如此最後就會產生一個 4x4 的 matrix。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/convolution%20operation%20result.png" alt="convolution operation result.png" height="150px" width="210px" /></p>
+
+<p>而中間的 filter 可以看到是一個由左至右從淺到深的圖。因為現在做的是 Vertical edge detection，所以才會選擇這樣的 filter。</p>
+
+<p>再看一個例子，
+<img src="http://localhost:4000/blog/img/posts/vertical%20edge%20detection.png" alt="vertical edge detection.png" height="400px" width="600px" /></p>
+
+<p>我們可以看到，最右邊最後產生的是一個中間一條白色的圖，這就偵測到了我們的想找垂直邊緣的圖（最左邊）的正中間有個邊界。（這個例子看起來邊緣很寬，是因為我們這個圖只有 6x6，如果今天用大一點的圖 1000x1000 就會發現這樣的偵測效果是很好的）</p>
+
+<hr />
+
+<h3 id="different-transitions">Different transitions</h3>
+
+<p><img src="http://localhost:4000/blog/img/posts/vertical%20detection%20different%20transitions.png" alt="vertical detection different transitions.png" height="400px" width="600px" /></p>
+
+<p>剛剛的例子是由亮到暗（上），現在的例子是由暗到亮（下），會發現時候最後運算出來的 matrix 也會不同，根據中間的數字我們可以知道，這張圖是由亮到暗還是由暗到亮。下圖的中間偵測得到邊緣數字是 -30，如果今天需要偵測的結果需要知道深淺的變化，那數字就是重要的，但如果今天只是要抓邊緣，也可以將 -30 取絕對值，一樣能抓到轉換的邊界。</p>
+
+<hr />
+
+<h3 id="vertical-and-horizontal-edge-detection">Vertical and horizontal edge detection</h3>
+
+<p>看完了垂直的範例，我們再看一下偵測水平邊緣的 filter。
+<img src="http://localhost:4000/blog/img/posts/vertical%20and%20horizontal%20detection.png" alt="vertical and horizontal detection.png" height="400px" width="600px" /></p>
+
+<hr />
+
+<h2 id="different-filters">Different filters</h2>
+
+<p>從上面的結果可以發現，不同的 filter 可以讓我們偵測出不同的狀況。這邊提了一下兩個 filter，<em>Sobel filter</em> 和 <em>Scharr filter</em>。其實我們可以不需要直接使用現成的 filter，而是可以訓練出一個 filter 針對我們的需求，這之後會再提。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
+ -->
+    <div class="post-excerpt"><p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">
+        字元編碼，ASCII、Unicode、UTF-8
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 22, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
+<br />
+2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
+
+<hr />
+
+<h2 id="字元編碼">字元編碼</h2>
+
+<ul>
+  <li>在電腦的世界是使用二進位（binary）的方式來進行運算，也就是 0 與 1 兩個 digits（each binary digit called bit）。</li>
+  <li>而電腦是使用「關」與「開」來表示二進位中的 0 與 1。</li>
+  <li>在現代電腦中是由上百萬的電晶體（transistors）來控制這樣的「關」與「開」（0 與 1）。</li>
+</ul>
+
+<hr />
+
+<h2 id="ascii">ASCII</h2>
+<p><a href="https://zh.wikipedia.org/wiki/ASCII">ASCII</a> 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。它的目的是用來統一規範，規定數字與字母大小寫、符號等等的對應關係，而每一個數字由 8 個 bits 表示。最後一次更新是在1986年，至今為止共定義了 128 個字元。</p>
+
+<p>像是 <code class="highlighter-rouge">HI!</code> 就是由數字 72、73 和 33 所組成的。由二進位表示就是，<code class="highlighter-rouge">01001000</code>、<code class="highlighter-rouge">01001001</code>、<code class="highlighter-rouge">00100001</code>。</p>
+
+<p><strong>Extended ASCII</strong>
+<br />
+但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。（<a href="https://zh.wikipedia.org/zh-tw/EASCII">Wikipedia</a>）</p>
+
+<hr />
+
+<h2 id="unicode">Unicode</h2>
+<p>隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。</p>
+
+<p>Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為 Code point。U+ 的意思是 Unicode，
+數字則是用十六進位表示。</p>
+
+<p>但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。</p>
+
+<hr />
+
+<h2 id="utf-8">UTF-8</h2>
+<p>有人發明了 UTF-8 這種儲存方式。</p>
+
+<p>UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用 UTF-8 編碼就能省下空間。</p>
+
+<p><strong>比較</strong>
+<br />
+Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode 和 UTF-8</a>
+<br />
+<a href="http://blog.chunnorris.cc/2015/04/unicode.html">淺談電腦編碼與 Unicode (一) 基礎概念篇</a>
+<br />
+<a href="https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118">常見三種字符編碼的區別：ASCII、Unicode、UTF-8</a>
+<br />
+<a href="https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F">[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知</a>
+<br />
+<a href="https://cs50.harvard.edu/x/2022/notes/0/">CS50 2022 - Lecture 0</a></p>
+ -->
+    <div class="post-excerpt"><p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
+<br />
+2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread';
+        this.page.identifier = '/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread" data-disqus-identifier="/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">
+        [Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 2, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
+<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
+
+<p>根據<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>的討論串，有人回答</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
+</code></pre></div></div>
+
+<p>我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。</p>
+
+<p>先檢查一下 pandas 版本</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
+</code></pre></div></div>
+
+<p>將版本降至 0.20.3</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
+</code></pre></div></div>
+
+<p>這時候打包完後執行應該就不會有問題了！</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>
+<br />
+<a href="https://blog.csdn.net/qq_41185868/article/details/80601983">成功解决pyinstaller打包AttributeError:type object pandas.<em>TSObject has no attribute _reduce_cython</em></a></p>
+ -->
+    <div class="post-excerpt"><p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
+<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread';
+        this.page.identifier = '/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">0 Comments</a>
       </span>
 
     </div>
