@@ -61,16 +61,6 @@
     ,
   
 
-    "python-numpy-pandas-2021-02-10-python-pandas-e7-b0-a1-e4-bb-8b": {
-      "title": "[Python]Numpy &amp; Pandas 簡介",
-      "content"	 : "簡介numpy 和 pandas运算速度快：numpy 和 pandas 都是采用 C 语言编写, pandas 又是基于 numpy, 是 numpy 的升级版本。消耗资源少：采用的是矩阵运算，会比 python 自带的字典或者列表快好多Numpy  Series：一維  DataFrame：二維  Panel：三維Reference:[Python] Pandas 基礎教學",
-      "url": " /python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/",
-      "author": "Shihs",
-      "categories": "Python, Numpy, Pandas"
-    }
-    ,
-  
-
     "python-2021-01-22-python-asyncio-e5-92-8c-await": {
       "title": "[Python]asyncio 和 await",
       "content"	 : "import requestsimport timeimport asynciourl = &#39;https://www.google.com.tw/&#39;loop = asyncio.get_event_loop()start_time = time.time()async def send_req(url):    t = time.time()    print(&quot;Send a request at&quot;,t-start_time,&quot;seconds.&quot;)    res = await loop.run_in_executor(None,requests.get,url)    t = time.time()    print(&quot;Receive a response at&quot;,t-start_time,&quot;seconds.&quot;)tasks = []for i in range(10):    task = loop.create_task(send_req(url))    tasks.append(task)loop.run_until_complete(asyncio.wait(tasks))Reference:python的asyncio模組(一)：異步執行的好處",

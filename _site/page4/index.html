@@ -183,156 +183,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
-        [Machine Learning]Markov Chain Monte Carlo (MCMC)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 12, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 12, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><strong>MCMC 是什麼？</strong></p>
-
-<p>Markov Chain Monte Carlo （MCMC）是一種抽樣方法，用來解決無法直接抽樣的分佈的隨機抽樣問題。</p>
-
-<p><strong>The Goal of MCMC</strong></p>
-
-<p>We want to sample from some distribution p, or approximate an <script type="math/tex">E[f(x)] ~ where ~ (X \sim p)</script>
-<br />
-通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。</p>
-
-<hr />
-
-<p><strong>為什麼要使用 MCMC？</strong></p>
-
-<p>在 Baysian Inference 中常使用到這個公式</p>
-
-<script type="math/tex; mode=display">p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>或是，它的參數 <script type="math/tex">\theta</script> 的貝式估計</p>
-
-<script type="math/tex; mode=display">\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>其中的 <script type="math/tex">p(\theta)</script> 為先驗機率 (prior probability)，基本上我們無法獲得 <script type="math/tex">p(\theta)</script> 的值，這時候就需要 MCMC。</p>
-
-<hr />
-
-<p>MCMC 由兩部分的觀念 (步驟) 組成, 一個是 「Markov Chain」 ，另一個則是「Monte Carlo integration」，接下來將說明這兩個部分。</p>
-
-<hr />
-
-<p><strong>Monte Carlo Integration</strong></p>
-
-<p>Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子</p>
-
-<script type="math/tex; mode=display">E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)</script>
-
-<p>也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。</p>
-
-<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 <script type="math/tex">p(\theta \mid y)</script> 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
-
-<p>所以說，哪有這麼好的事？</p>
-
-<p>這時候可以採用其他的抽樣方法，譬如，<em>rejection sampling</em>, <em>importance sampling</em> 和本文的重點 <em>MCMC</em>。</p>
-
-<hr />
-
-<p><strong>Markov Chain</strong></p>
-
-<ul>
-  <li>
-    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence <script type="math/tex">X_0, X_1, ...</script> of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 <script type="math/tex">X_0, X_1, ...</script>，且每一個變數只和前一個變數有關，也就是 <script type="math/tex">X_{t+1}</script> 來自 <script type="math/tex">p(X_{t+1} \mid X_t)</script>，像這樣的數列我們就稱為馬可夫鍊。</p>
-  </li>
-  <li>
-    <p><script type="math/tex">p(X_{t+1} \mid X_t)</script> 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
-  </li>
-  <li>
-    <p>A Markov chain is stationary, with stationary distribution <script type="math/tex">Φ, if ~\forall k ~ X_k  \sim Φ</script></p>
-  </li>
-  <li>
-    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 <script type="math/tex">\pi(·)</script> 並且與 <script type="math/tex">X_0</script> 的選擇無關。</p>
-  </li>
-</ul>
-
-<p><em>Monte Carlo Integration</em>可以看<a href="https://www.youtube.com/watch?v=MKnjsqYVG4Y">這裡</a></p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=3ZmW_7NXVvk">(ML 18.1) Markov chain Monte Carlo (MCMC) introduction-12eZWG0Z5gY.mp4</a>
-<br />
-<a href="http://web.ntpu.edu.tw/~ccw/statmath/M_mcmc.pdf">The Markov Chain Monte Carlo Simulations</a>
-<br /> 
-Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
-<br />
-<a href="https://zhuanlan.zhihu.com/p/25610149">[数据分析] Markov Chain Monte Carlo</a>
-<br />
-<a href="https://www.youtube.com/watch?v=s8w8AsFK77c&amp;list=PLyAft-JyjIYq2SLTHO2ptmx-cChbE5GBm">徐亦达机器学习课程 Markov Chain Monte Carlo</a>
-<br />
-<a href="http://www.cnblogs.com/pinard/p/6625739.html">MCMC(一)蒙特卡罗方法</a></p>
- -->
-    <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">
         [Machine Learning]Covolutional Neural Networks(CNN)(2)
       </a>
@@ -1433,6 +1283,146 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">
+        [Python]讀取與寫入xlsx檔案
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 2, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
+
+<p>在開始前請先安裝 pandas 套件，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>讀取檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="c"># 獲取列數</span>
+<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c"># 獲取儲存格內容</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c"># 修改儲存格內容</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
+<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
+<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
+</code></pre></div></div>
+
+<p>若在執行以上程式碼時產生錯誤訊息：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
+</code></pre></div></div>
+
+<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>寫入檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c"># Create a Pandas dataframe from some data.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
+
+<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
+<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
+
+<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
+
+<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
+
+<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
+</code></pre></div></div>
+<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
+<br />
+<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
+<br />
+<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
+<br />
+<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
+
+ -->
+    <div class="post-excerpt"><p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread';
+        this.page.identifier = '/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">0 Comments</a>
       </span>
 
     </div>

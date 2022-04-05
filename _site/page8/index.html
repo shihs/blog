@@ -183,193 +183,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">
-        [Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
-
-<p>基本流程：</p>
-<ol>
-  <li>找到圖片的來源網址</li>
-  <li>下載圖片</li>
-  <li>調整圖片、解析圖片，獲得圖片上的數字與英文</li>
-  <li>帶入參數</li>
-</ol>
-
-<p>以
-<a href="https://serv.gcis.nat.gov.tw/pub/cmpy/cmpyInfoListAction.do">經濟部公司及分公司基本資料查詢系統</a>
-為例，從檢查元素中可以發現，在載入這個頁面時會有一個產生圖片的
-<a href="https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg">網址</a>
-同時被載入。而這個頁面正是送出 requests 時會產生的驗證碼圖片。</p>
-
-<p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
-
-<h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-
-<span class="c"># 1. 找到圖片的來源網址</span>
-<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
-
-<span class="c"># 2. 下載圖片</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-
-<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="程式碼步驟解析">程式碼步驟解析</h3>
-
-<h4 id="session">session()</h4>
-<p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
-</code></pre></div></div>
-
-<h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</code></pre></div></div>
-<p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
-
-<h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
-
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">image</span>
-
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">captcha</span>
-</code></pre></div></div>
-
-<p>有時候將下載下來的圖片直接丟進 pytesseract.image_to_string() 解析結果正確率會很低，但如果調整一下圖片的 size 反而會有較正確的結果。所以前面我先使用 resize 調整圖片的大小，並重新存檔。最後再使用 pytesseract.image_to_string() 解析圖片。</p>
-
-<p>可以根據 pytesseract.image_to_string() 解析出來的結果做些調整以提高正確率。因為發現這個圖片解析出來後常會有些多餘的符號，所以使用 replace 修正。</p>
-
-<p><br /></p>
-<h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
-
-<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
-像是被調整過後的圖片變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
-</code></pre></div></div>
-<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
-
-<p>會碰到錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
-  "for transparency")
-
----省略--
-
-TypeError: int() argument must be a string or a number, not 'tuple'
-</code></pre></div></div>
-
-<p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
-</code></pre></div></div>
-
-<p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
-<span class="c"># print image</span>
-</code></pre></div></div>
-<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
-
-<p><br /></p>
-
-<p>基本上，根據上面的概念就可以破解驗證碼，只要再根據個別網站的狀況做調整就好。</p>
-
-<p><strong>經濟部公司及分公司基本資料查詢系統</strong>爬蟲網站
-<a href="https://github.com/shihs/Taiwan-Company-info-crawler">完整程式碼</a>
-。或是，另外比較複雜的驗證碼可以參考我的
-<a href="https://github.com/shihs/read-captcha">github</a>
-。</p>
-
- -->
-    <div class="post-excerpt"><p>當爬網站碰到需要讀取驗證碼的網站時可以使用
-<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">
         [Python][SQL]Python 連接 SQLite
       </a>
@@ -1267,6 +1080,146 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/#disqus_thread" data-disqus-identifier="/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
+        [Python]使用 pyinstaller 套件打包 .py 檔
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">May 24, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。<br /></p>
+
+<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
+<br /></p>
+
+<h2 id="前提">前提</h2>
+<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
+
+<h2 id="安裝">安裝</h2>
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+</code></pre></div></div>
+
+<p><strong>Mac</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+</code></pre></div></div>
+<p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
+<em>[Errno 1] Operation not permitted</em></p>
+
+<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+</code></pre></div></div>
+<p>就成功安裝了。<br />
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
+
+<h2 id="打包-py-檔">打包 .py 檔</h2>
+<p>假如現在要打包一個 test.py 檔<br /></p>
+
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>完成後會產生三個檔案，</p>
+<ol>
+  <li>build 資料夾</li>
+  <li>dist 資料夾</li>
+  <li>test.spec 檔</li>
+</ol>
+
+<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
+
+<p><strong>Mac</strong><br />
+Mac的操作基本上和 Windows 指令一樣，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>打包完後產生出來的檔案也會一樣。<br />
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
+<br />
+可以試試看在 .py 檔裡增加一行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+</code></pre></div></div>
+<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
+
+<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+</code></pre></div></div>
+<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
+
+<h2 id="常用參數">常用參數</h2>
+<ol>
+  <li>pyinstaller -h 查看參數</li>
+  <li>-F 打包成一個exe文件</li>
+  <li>–icon=圖標路徑</li>
+</ol>
+
+<p><br />
+關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/" target="_blank">部落格</a>我覺得說明蠻詳細的。</p>
+
+ -->
+    <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
       </span>
 
     </div>

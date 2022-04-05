@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-04-05T17:51:53+08:00</updated>
+ <updated>2022-04-05T17:54:15+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -597,34 +597,6 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 &lt;a href=&quot;https://hulitw.medium.com/session-and-cookie-15e47ed838bc&quot;&gt;白話 Session 與 Cookie：從經營雜貨店開始&lt;/a&gt;
 &lt;br /&gt;
 &lt;a href=&quot;https://medium.com/@vicxu/authentication-那些小事上集-cookie-與-session-介紹-1da2d413afa2&quot;&gt;淺談 Authentication 上集：Cookie 與 Session 介紹&lt;/a&gt;&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>[Python]Numpy & Pandas 簡介</title>
-   <link href="http://localhost:4000blog//python/numpy/pandas/2021/02/10/Python-Pandas-%E7%B0%A1%E4%BB%8B/"/>
-   <updated>2021-02-10T15:54:00+08:00</updated>
-   <id>http://localhost:4000/python/numpy/pandas/2021/02/10/[Python]Pandas 簡介</id>
-   <content type="html">&lt;h3 id=&quot;簡介&quot;&gt;簡介&lt;/h3&gt;
-
-&lt;p&gt;numpy 和 pandas&lt;/p&gt;
-
-&lt;p&gt;运算速度快：numpy 和 pandas 都是采用 C 语言编写, pandas 又是基于 numpy, 是 numpy 的升级版本。
-消耗资源少：采用的是矩阵运算，会比 python 自带的字典或者列表快好多&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Numpy&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Series：一維&lt;/li&gt;
-  &lt;li&gt;DataFrame：二維&lt;/li&gt;
-  &lt;li&gt;Panel：三維&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt;
-&lt;br /&gt;
-&lt;a href=&quot;https://oranwind.org/python-pandas-ji-chu-jiao-xue/#:~:text=Pandas%20%E6%98%AFpython%20%E7%9A%84%E4%B8%80%E5%80%8B,%E8%B3%87%E6%96%99%EF%BC%8C%E4%B8%BB%E8%A6%81%E7%89%B9%E8%89%B2%E6%8F%8F%E8%BF%B0%E5%A6%82%E4%B8%8B%EF%BC%9A&amp;amp;text=%E9%80%8F%E9%81%8E%E8%BC%89%E5%85%A5%E8%87%B3Pandas,%E5%80%BC%E5%8E%BB%E9%99%A4%E6%88%96%E5%8F%96%E4%BB%A3%E7%AD%89%E3%80%82&quot;&gt;[Python] Pandas 基礎教學&lt;/a&gt;
-&lt;br /&gt;&lt;/p&gt;
 
 </content>
  </entry>

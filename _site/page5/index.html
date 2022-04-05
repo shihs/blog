@@ -183,146 +183,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">
-        [Python]讀取與寫入xlsx檔案
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
-
-<p>在開始前請先安裝 pandas 套件，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>讀取檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
-
-<span class="c"># 獲取列數</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 獲取儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-
-<span class="c"># 修改儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
-<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
-<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
-</code></pre></div></div>
-
-<p>若在執行以上程式碼時產生錯誤訊息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
-</code></pre></div></div>
-
-<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>寫入檔案</strong></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
-
-<span class="c"># Create a Pandas dataframe from some data.</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
-
-<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
-
-<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
-
-<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
-<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
-
-<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
-</code></pre></div></div>
-<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
-<br />
-<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
-<br />
-<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
-<br />
-<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
-
- -->
-    <div class="post-excerpt"><p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/blog/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">
         [Python]全形與半形轉換
       </a>
@@ -1365,6 +1225,214 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Bagging/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">
+        [Machine Learning]Decision Tree
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">December 3, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <h2 id="decision-tree">Decision Tree</h2>
+<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
+
+<hr />
+
+<p><strong>Decision Tree是什麼？</strong></p>
+
+<p>簡單來說，decision tree 是一個分類模型。</p>
+
+<ul>
+  <li>Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one.</li>
+</ul>
+
+<p>這是 Pattern Recognition and Machine Learning 裡頭的定義。</p>
+
+<p>根據上圖，想像一下，在右邊的二維座標平面上有一堆散布的點，而 decision tree，就是將這個平面一一分割，每一個框框都是一個分類結果。但我們可以用右邊那樣一層一層的樹枝結構狀來表示右邊難懂的圖。（這裡的例子是二維平面，當變數 \(x_i\) 增加時，這樣的概念可以推廣到多維空間）</p>
+
+<p>每一個分支都像是一個 if-else 問題，如果是就選某一邊，不是就選另外一邊。</p>
+
+<p>上圖左，我們可以看到有兩個變數，\(x_1\), \(x_2\)，第一關是 \(x_1 &gt; \theta_1 \)，如果小於就往左邊分，如果大於就往右邊分，以此類推往下繼續細分，最後給予分類結果。最後共分成 A, B, C, D, E 五個類別，也就是右邊的五個框框。</p>
+
+<p>Decision Tree 又可以分為</p>
+<ol>
+  <li>
+    <p>Regression trees - 最後分類結果為連續變數</p>
+  </li>
+  <li>
+    <p>Classification trees - 最後分類結果為類別變數</p>
+  </li>
+</ol>
+
+<hr />
+
+<p><strong>名詞</strong></p>
+
+<ul>
+  <li>Root node (The Root) - 第一個起始的點</li>
+  <li>(Internal) Nodes - 中間的節點。上方會有箭頭指向 node，且 node 也會往下指向其他點。</li>
+  <li>Leaves (terminal nodes) - 最後的節點，也就是最後的分類結果。</li>
+</ul>
+
+<hr />
+
+<p><strong>如何分類？</strong></p>
+
+<p>假如今天我有一份 data，decision tree 是如何決定要先使用哪一個變數與什麼值作為分割呢？</p>
+
+<p><em>分割的原則是，這樣的分割要能得到最大的資訊增益 (Information gain, IG)</em> (<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>)</p>
+
+<p>資訊量根據最後的分類結果可以使用，</p>
+<ol>
+  <li>Regression trees:
+    <ul>
+      <li>MSE (mean-squared error)</li>
+    </ul>
+  </li>
+  <li>Classification trees:
+    <ul>
+      <li>Entropy (Deviance)</li>
+      <li>Gini impurity</li>
+      <li>Missclassification error</li>
+    </ul>
+  </li>
+</ol>
+
+<p>在 Classification tree 裡，Entropy 和 Gini impurity 是常用的兩種方式，
+詳細的公式請參考 <a href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">Wikipedia</a></p>
+
+<p>假如今天碰到兩種 model 算出來的資訊量都ㄧ樣，請選擇比較簡單的那個 model。（分支、leaves node 較少）</p>
+
+<hr />
+
+<p><strong>R 範例</strong>
+這裡使用 tree 這個 library 做範例，另外還有像是 rpart 也是做 decision 常用的 package。</p>
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="s2">"iris"</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># 使用 Entropy (Deviance)</span><span class="w">
+</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"deviance"</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
+
+</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
+
+
+</span><span class="c1"># 使用 Gini impurity</span><span class="w">
+</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"gini"</span><span class="p">))</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
+
+</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<p><strong>優缺點</strong></p>
+
+<ul>
+  <li>優點：
+    <ol>
+      <li>Simple to understand and interpret. 容易理解與解釋</li>
+      <li>Able to handle both numerical and categorical data. 可以用在類別與 numerical 資料</li>
+    </ol>
+  </li>
+  <li>缺點
+    <ol>
+      <li>Low bias and high variance with respect to the training data.
+（當 decision tree model 變得太過複雜時，太多 nodes，就會導致 overfitting (<a href="https://en.wikipedia.org/wiki/Bias–variance_tradeoff">bias-variance trade off</a> 的狀況）</li>
+    </ol>
+  </li>
+</ul>
+
+<p>所以為了讓 model 不要 overfitting，我們可以使用 pruning 的方式，砍掉底下的樹枝。</p>
+
+<p>在 R 可以使用，<code class="highlighter-rouge">prune.tree()</code>，並且可以使用 <code class="highlighter-rouge">best</code> 這個參數來決定最後要保留多少 leaves。</p>
+
+<p>使用剛剛最後的 <code class="highlighter-rouge">fit</code>示範</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prune_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prune.tree</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+</span><span class="n">plot</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
+</span><span class="n">text</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>這時候 leaves 由原本的 9，修剪到了剩下 5，但 Misclassification error rate 卻是相同的。修剪過後的 model 較簡單，且 variance 也會比較小，在預測上表現也會較佳。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>
+<br />
+<a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">StatQuest: Decision Trees</a>
+<br />
+The Elements of Statistical Learning
+<br />
+Pattern Recognition and Machine Learning</p>
+ -->
+    <div class="post-excerpt"><h2 id="decision-tree">Decision Tree</h2>
+<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread';
+        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">0 Comments</a>
       </span>
 
     </div>

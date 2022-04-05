@@ -183,214 +183,6 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">
-        [Machine Learning]Decision Tree
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <h2 id="decision-tree">Decision Tree</h2>
-<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
-
-<hr />
-
-<p><strong>Decision Tree是什麼？</strong></p>
-
-<p>簡單來說，decision tree 是一個分類模型。</p>
-
-<ul>
-  <li>Tree-based methods partition the feature space into a set of rectangles, and then fit a simple model (like a constant) in each one.</li>
-</ul>
-
-<p>這是 Pattern Recognition and Machine Learning 裡頭的定義。</p>
-
-<p>根據上圖，想像一下，在右邊的二維座標平面上有一堆散布的點，而 decision tree，就是將這個平面一一分割，每一個框框都是一個分類結果。但我們可以用右邊那樣一層一層的樹枝結構狀來表示右邊難懂的圖。（這裡的例子是二維平面，當變數 \(x_i\) 增加時，這樣的概念可以推廣到多維空間）</p>
-
-<p>每一個分支都像是一個 if-else 問題，如果是就選某一邊，不是就選另外一邊。</p>
-
-<p>上圖左，我們可以看到有兩個變數，\(x_1\), \(x_2\)，第一關是 \(x_1 &gt; \theta_1 \)，如果小於就往左邊分，如果大於就往右邊分，以此類推往下繼續細分，最後給予分類結果。最後共分成 A, B, C, D, E 五個類別，也就是右邊的五個框框。</p>
-
-<p>Decision Tree 又可以分為</p>
-<ol>
-  <li>
-    <p>Regression trees - 最後分類結果為連續變數</p>
-  </li>
-  <li>
-    <p>Classification trees - 最後分類結果為類別變數</p>
-  </li>
-</ol>
-
-<hr />
-
-<p><strong>名詞</strong></p>
-
-<ul>
-  <li>Root node (The Root) - 第一個起始的點</li>
-  <li>(Internal) Nodes - 中間的節點。上方會有箭頭指向 node，且 node 也會往下指向其他點。</li>
-  <li>Leaves (terminal nodes) - 最後的節點，也就是最後的分類結果。</li>
-</ul>
-
-<hr />
-
-<p><strong>如何分類？</strong></p>
-
-<p>假如今天我有一份 data，decision tree 是如何決定要先使用哪一個變數與什麼值作為分割呢？</p>
-
-<p><em>分割的原則是，這樣的分割要能得到最大的資訊增益 (Information gain, IG)</em> (<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>)</p>
-
-<p>資訊量根據最後的分類結果可以使用，</p>
-<ol>
-  <li>Regression trees:
-    <ul>
-      <li>MSE (mean-squared error)</li>
-    </ul>
-  </li>
-  <li>Classification trees:
-    <ul>
-      <li>Entropy (Deviance)</li>
-      <li>Gini impurity</li>
-      <li>Missclassification error</li>
-    </ul>
-  </li>
-</ol>
-
-<p>在 Classification tree 裡，Entropy 和 Gini impurity 是常用的兩種方式，
-詳細的公式請參考 <a href="https://en.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity">Wikipedia</a></p>
-
-<p>假如今天碰到兩種 model 算出來的資訊量都ㄧ樣，請選擇比較簡單的那個 model。（分支、leaves node 較少）</p>
-
-<hr />
-
-<p><strong>R 範例</strong>
-這裡使用 tree 這個 library 做範例，另外還有像是 rpart 也是做 decision 常用的 package。</p>
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span><span class="w">
-</span><span class="n">data</span><span class="p">(</span><span class="s2">"iris"</span><span class="p">)</span><span class="w">
-
-</span><span class="c1"># 使用 Entropy (Deviance)</span><span class="w">
-</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"deviance"</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-
-</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-
-
-</span><span class="c1"># 使用 Gini impurity</span><span class="w">
-</span><span class="n">fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">tree</span><span class="p">(</span><span class="n">Species</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Sepal.Length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Petal.Length</span><span class="p">,</span><span class="w"> </span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"gini"</span><span class="p">))</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-
-</span><span class="n">summary</span><span class="p">(</span><span class="n">fit</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<hr />
-
-<p><strong>優缺點</strong></p>
-
-<ul>
-  <li>優點：
-    <ol>
-      <li>Simple to understand and interpret. 容易理解與解釋</li>
-      <li>Able to handle both numerical and categorical data. 可以用在類別與 numerical 資料</li>
-    </ol>
-  </li>
-  <li>缺點
-    <ol>
-      <li>Low bias and high variance with respect to the training data.
-（當 decision tree model 變得太過複雜時，太多 nodes，就會導致 overfitting (<a href="https://en.wikipedia.org/wiki/Bias–variance_tradeoff">bias-variance trade off</a> 的狀況）</li>
-    </ol>
-  </li>
-</ul>
-
-<p>所以為了讓 model 不要 overfitting，我們可以使用 pruning 的方式，砍掉底下的樹枝。</p>
-
-<p>在 R 可以使用，<code class="highlighter-rouge">prune.tree()</code>，並且可以使用 <code class="highlighter-rouge">best</code> 這個參數來決定最後要保留多少 leaves。</p>
-
-<p>使用剛剛最後的 <code class="highlighter-rouge">fit</code>示範</p>
-
-<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prune_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prune.tree</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
-</span><span class="n">plot</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
-</span><span class="n">text</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">,</span><span class="w"> </span><span class="n">pretty</span><span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="w">
-</span><span class="n">summary</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>這時候 leaves 由原本的 9，修剪到了剩下 5，但 Misclassification error rate 卻是相同的。修剪過後的 model 較簡單，且 variance 也會比較小，在預測上表現也會較佳。</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://medium.com/@yehjames/資料分析-機器學習-第3-5講-決策樹-decision-tree-以及隨機森林-random-forest-介紹-7079b0ddfbda">[資料分析&amp;機器學習] 第3.5講 : 決策樹(Decision Tree)以及隨機森林</a>
-<br />
-<a href="https://www.youtube.com/watch?v=7VeUPuFGJHk">StatQuest: Decision Trees</a>
-<br />
-The Elements of Statistical Learning
-<br />
-Pattern Recognition and Machine Learning</p>
- -->
-    <div class="post-excerpt"><h2 id="decision-tree">Decision Tree</h2>
-<p><img src="http://localhost:4000/blog/img/posts/decision_tree.png" alt="decision_tree.png" height="190px" width="500px" /></p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
       <a href="/blog/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/">
         [R]如何在 ggplot2 圖形上希臘字母？
       </a>
@@ -1418,6 +1210,151 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/#disqus_thread" data-disqus-identifier="/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">
+        [R][Git]如何在 Rstudio 上連接 R project 與 Github
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Git">Git</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
+
+<p>在進入主題前，請先安裝好 R、Rstudio 和 Git ，並且申請好 Github 帳號。</p>
+
+<hr />
+
+<h2 id="前置作業">前置作業</h2>
+<p><strong>設置 SSH RSA key</strong></p>
+
+<p>1.複製 public key<br />
+Tool &gt; Global Options &gt; Git/SVN &gt; Create RSA Key &gt; View public key <br />
+點開 View public key 後，複製裡頭所有的東西。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Rstudio%20SSH.png" alt="Rstudio SSH.png" /></p>
+
+<p>2.將 public key 貼到 github</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/github%20ssh.png" alt="github ssh.png" /></p>
+
+<hr />
+
+<h2 id="開始建立-connection">開始建立 connection</h2>
+
+<p><strong>建立專案</strong></p>
+
+<p>請先建立一個專案，這裡就不多加解釋了。</p>
+
+<p><strong>在本機建立 repository</strong></p>
+
+<p>Build &gt; Configure public Tools &gt; Git/SVN<br />
+將 Version control system 由 None 改為 Git</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/version%20control%20system.png" alt="version control system.png" /></p>
+
+<p>這時候就會發現 Rstudio 的視窗長得不太一樣了。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/rstudio%20git.png" alt="rstudio git.png" /></p>
+
+<p>下方視窗應該會有一些還未 commit 的檔案，但因為我都已經 commit 了，所以沒有內容。<br />
+且這時候 pull 和 push 鍵應該還無法操作。</p>
+
+<p><strong>Github 同步</strong></p>
+
+<p>終於來到最後一哩路。</p>
+
+<p>到 Github 上創建一個新的 repository，且名稱要和 project 相同，只要單純創建 repository 就好，什麼檔案都不要。</p>
+
+<p>最後，打開 Rstudio 工具列的， Tools &gt; Shell</p>
+
+<p>然後在 Shell 裡輸入，</p>
+<pre><code class="language-git">git remote add origin https://github.com/你的github帳號/你的專案名稱.git
+git push -u origin master
+</code></pre>
+
+<p>完成後就會發現專案已經和 Github 連結了！專案的檔案都出現在 Github 上了。<br />
+這時候 pull 和 push 鍵也已經可以操作了。</p>
+
+<p>未來只要更新專案內容，就可以直接在 Rstudio 上 commit 和 push 就好了！</p>
+
+<hr />
+
+<p><strong>補充</strong></p>
+
+<p>移除 project 與該 repository 的 connection <code class="highlighter-rouge">rm -rf .git</code></p>
+
+<hr />
+<p>參考：</p>
+
+<ul>
+  <li>Hadley Wickham 的 <a href="http://r-pkgs.had.co.nz/git.html">R Package Git 章節</a></li>
+</ul>
+
+ -->
+    <div class="post-excerpt"><p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread';
+        this.page.identifier = '/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/#disqus_thread" data-disqus-identifier="/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">0 Comments</a>
       </span>
 
     </div>
