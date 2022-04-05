@@ -183,6 +183,149 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">
+        [Neural Network]Neural Network 1 - The idea
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 22, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>在了解 CNN (卷積神經網路, Convolutional neural network) 與 RNN (循環神經網絡, Recurrent neural network) 前，先來認識最簡單的 NN (神經網路, Neural network) Multilayer perceptron。</p>
+
+<p>這篇是<a href="https://www.youtube.com/watch?v=aircAruvnKk&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi">Neural networks</a>的課程筆記。</p>
+
+<hr />
+
+<p>Neural network 啟發自大腦神經，所謂的 Neural 就是 neurons (神經元)，而在 Neural network 裡，neurons 是個介於 0 和 1 之間的數字。</p>
+
+<p>我們將以讓程式辨認手寫數字 0 到 9 為例解說 Neural network。下圖是一個 28*28 像素的手寫數字，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%201.png" alt="" /></p>
+
+<p>每一個像素都是一個 0 到 1 的灰階值，而 Neural network 以這個圖的每個像素，對應到每個神經元作為輸入值，也就是說第一層輸入層共有 28*28 = 784 個神經元。灰階值 0 為黑色，1 為白色。這些在神經元中的數字稱為「激勵值」（activation）。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%202.png" alt="" /></p>
+
+<p>這裡範例使用，第一層為輸入層，中間兩層 hidden layers，最後一層為輸出層。而最後輸出層就是 0 到 9 的數字，每個神經元都有個「激勵值」（activation），而這數字就代表著最後給定可能是這個數字的判定結果。</p>
+
+<p>而中間的 hidden layers 正是神經網路的重點。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%203.png" alt="" /></p>
+
+<p>我們可以想像，將整個數字分解成不同的部分，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%204.png" alt="" /></p>
+
+<p>第一層 hidden layer 是比較小段的部分，而第二層 hidden layer 是由這些小區塊組成比較大塊的區塊。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%205.png" alt="" /></p>
+
+<p>有了這些概念之後，那我們要怎麼從輸入層到第一層的 hidden layer 呢？</p>
+
+<p>現在我們希望，第二層的其中一個神經元可以辨識這個圖有沒有一個邊，如下圖，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%206.png" alt="" /></p>
+
+<p>我們會給這個神經元與輸入層的神經元之間每個連線一個權重（weight），然後將輸入層的神經元乘上每個權重再加總，權重可以是正或負值。</p>
+
+<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function <script type="math/tex">\sigma(x) = \frac{1}{1+e^x}</script> 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
+
+<p>但也許並不是每次加總大於零我們就希望給正的灰階值，因此，權重最後再加上個 bias，來調整我們想要給灰階值的值。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%207.png" alt="" /></p>
+
+<p>所有第一層 hidden layers 的神經元都根據這樣的概念，有自己關注的區塊，有自己的權重，再加上自己的 bias。第二層的 hidden layers 神經元也以同樣的概念計算，所以我們總共會有 13,002 個權重加上 bias。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
+
+<p>而所謂的 deep learning 的 learning 就是在學習這些權重和 bias，讓電腦去找到正確的值。</p>
+
+<p>上上圖的式子只是其中一個神經元，而我們可以用矩陣表達所有第一層 hidden layers 的神經元。如下圖，</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%209.png" alt="" /></p>
+
+<p>總的來說，我們可以將整個 neural network 看成一個 function。</p>
+
+<script type="math/tex; mode=display">f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
+   y_0 \\
+   \vdots \\
+   y_9
+  \end{bmatrix}</script>
+
+<p>最後，其實現在已經不使用 sigmoid function 了，現在主流的 function 用的是 <strong>ReLU</strong>。</p>
+
+<script type="math/tex; mode=display">ReLU(a) = max(0, a)</script>
+
+<p><img src="http://localhost:4000/blog/img/posts/neural%20network%2010.png" alt="" /></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.youtube.com/watch?v=aircAruvnKk">究竟神經網路是什麼？ 第一章 深度學習</a></p>
+ -->
+    <div class="post-excerpt"><p>在了解 CNN (卷積神經網路, Convolutional neural network) 與 RNN (循環神經網絡, Recurrent neural network) 前，先來認識最簡單的 NN (神經網路, Neural network) Multilayer perceptron。</p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//neural%20network/2020/01/22/Neural-Network-Neural-Network/#disqus_thread';
+        this.page.identifier = '/neural%20network/2020/01/22/Neural-Network-Neural-Network/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//neural%20network/2020/01/22/Neural-Network-Neural-Network/#disqus_thread" data-disqus-identifier="/neural%20network/2020/01/22/Neural-Network-Neural-Network/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/">
         [Database]ER Model 實體關聯模型
       </a>
@@ -2502,156 +2645,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
-        [Machine Learning]Markov Chain Monte Carlo (MCMC)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 12, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 12, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><strong>MCMC 是什麼？</strong></p>
-
-<p>Markov Chain Monte Carlo （MCMC）是一種抽樣方法，用來解決無法直接抽樣的分佈的隨機抽樣問題。</p>
-
-<p><strong>The Goal of MCMC</strong></p>
-
-<p>We want to sample from some distribution p, or approximate an <script type="math/tex">E[f(x)] ~ where ~ (X \sim p)</script>
-<br />
-通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。</p>
-
-<hr />
-
-<p><strong>為什麼要使用 MCMC？</strong></p>
-
-<p>在 Baysian Inference 中常使用到這個公式</p>
-
-<script type="math/tex; mode=display">p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>或是，它的參數 <script type="math/tex">\theta</script> 的貝式估計</p>
-
-<script type="math/tex; mode=display">\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
-
-<p>其中的 <script type="math/tex">p(\theta)</script> 為先驗機率 (prior probability)，基本上我們無法獲得 <script type="math/tex">p(\theta)</script> 的值，這時候就需要 MCMC。</p>
-
-<hr />
-
-<p>MCMC 由兩部分的觀念 (步驟) 組成, 一個是 「Markov Chain」 ，另一個則是「Monte Carlo integration」，接下來將說明這兩個部分。</p>
-
-<hr />
-
-<p><strong>Monte Carlo Integration</strong></p>
-
-<p>Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子</p>
-
-<script type="math/tex; mode=display">E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)</script>
-
-<p>也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。</p>
-
-<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 <script type="math/tex">p(\theta \mid y)</script> 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
-
-<p>所以說，哪有這麼好的事？</p>
-
-<p>這時候可以採用其他的抽樣方法，譬如，<em>rejection sampling</em>, <em>importance sampling</em> 和本文的重點 <em>MCMC</em>。</p>
-
-<hr />
-
-<p><strong>Markov Chain</strong></p>
-
-<ul>
-  <li>
-    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence <script type="math/tex">X_0, X_1, ...</script> of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 <script type="math/tex">X_0, X_1, ...</script>，且每一個變數只和前一個變數有關，也就是 <script type="math/tex">X_{t+1}</script> 來自 <script type="math/tex">p(X_{t+1} \mid X_t)</script>，像這樣的數列我們就稱為馬可夫鍊。</p>
-  </li>
-  <li>
-    <p><script type="math/tex">p(X_{t+1} \mid X_t)</script> 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
-  </li>
-  <li>
-    <p>A Markov chain is stationary, with stationary distribution <script type="math/tex">Φ, if ~\forall k ~ X_k  \sim Φ</script></p>
-  </li>
-  <li>
-    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 <script type="math/tex">\pi(·)</script> 並且與 <script type="math/tex">X_0</script> 的選擇無關。</p>
-  </li>
-</ul>
-
-<p><em>Monte Carlo Integration</em>可以看<a href="https://www.youtube.com/watch?v=MKnjsqYVG4Y">這裡</a></p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=3ZmW_7NXVvk">(ML 18.1) Markov chain Monte Carlo (MCMC) introduction-12eZWG0Z5gY.mp4</a>
-<br />
-<a href="http://web.ntpu.edu.tw/~ccw/statmath/M_mcmc.pdf">The Markov Chain Monte Carlo Simulations</a>
-<br /> 
-Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
-<br />
-<a href="https://zhuanlan.zhihu.com/p/25610149">[数据分析] Markov Chain Monte Carlo</a>
-<br />
-<a href="https://www.youtube.com/watch?v=s8w8AsFK77c&amp;list=PLyAft-JyjIYq2SLTHO2ptmx-cChbE5GBm">徐亦达机器学习课程 Markov Chain Monte Carlo</a>
-<br />
-<a href="http://www.cnblogs.com/pinard/p/6625739.html">MCMC(一)蒙特卡罗方法</a></p>
- -->
-    <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/#disqus_thread" data-disqus-identifier="/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">0 Comments</a>
       </span>
 
     </div>

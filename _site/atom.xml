@@ -4,13 +4,22 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-04-05T18:54:33+08:00</updated>
+ <updated>2022-04-05T18:57:30+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Test</title>
+   <link href="http://localhost:4000blog//2022/04/05/Test/"/>
+   <updated>2022-04-05T18:57:00+08:00</updated>
+   <id>http://localhost:4000/2022/04/05/Test</id>
+   <content type="html">&lt;p&gt;Test&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>[Python]在 Mac 下載與安裝 Miniconda</title>

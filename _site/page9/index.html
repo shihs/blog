@@ -183,6 +183,146 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">
+        [Python]使用 pyinstaller 套件打包 .py 檔
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on May 24, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">May 24, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+
+    </div>
+    <!-- <p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+<p>不可能每次有一個新的使用者就要重新安裝一次 Python，還要安裝套件(更不要說有時候安裝套件會碰到一些問題)，且要執行 .py 檔對於不會使用 terminal 或是 cmd 的人來說可能會選擇放棄，這就減少了讓妳/你的程式給更多人使用的機會。<br /></p>
+
+<p>而 <strong>pyinstaller</strong> 是一個可以把 .py 打包成一個 .exe 檔的工具，讓使用者只要點兩下就能執行妳/你寫好的 Python 檔案。<br />
+<br /></p>
+
+<h2 id="前提">前提</h2>
+<p>pyinstaller可以在 Windows、MacOS、Linux 上使用，但是不是跨平台，所以如果今天使用者是 windows 那麼就必須要在 windows 作業系統底下產生 .exe 檔，若使用者是 macOS 那就必須要在 mac 底下打包產生執行檔。<br /></p>
+
+<h2 id="安裝">安裝</h2>
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+</code></pre></div></div>
+
+<p><strong>Mac</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+</code></pre></div></div>
+<p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
+<em>[Errno 1] Operation not permitted</em></p>
+
+<p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+</code></pre></div></div>
+<p>就成功安裝了。<br />
+安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
+
+<h2 id="打包-py-檔">打包 .py 檔</h2>
+<p>假如現在要打包一個 test.py 檔<br /></p>
+
+<p><strong>Windows</strong></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>完成後會產生三個檔案，</p>
+<ol>
+  <li>build 資料夾</li>
+  <li>dist 資料夾</li>
+  <li>test.spec 檔</li>
+</ol>
+
+<p>而我們需要的 test.exe 會單獨在 dist 資料夾裡，如果要給其他 Windows 使用者執行 test.py 這支檔案，只需要給他們 .exe 就行了。<br />
+如果 test.py 這支程式是會產生一個檔案，例如 .csv 檔案，則這檔案會直接儲存在和 test.exe 同一個路徑底下。</p>
+
+<p><strong>Mac</strong><br />
+Mac的操作基本上和 Windows 指令一樣，</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+</code></pre></div></div>
+<p>打包完後產生出來的檔案也會一樣。<br />
+但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
+<br />
+可以試試看在 .py 檔裡增加一行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+</code></pre></div></div>
+<p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
+
+<p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+</code></pre></div></div>
+<p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
+
+<h2 id="常用參數">常用參數</h2>
+<ol>
+  <li>pyinstaller -h 查看參數</li>
+  <li>-F 打包成一個exe文件</li>
+  <li>–icon=圖標路徑</li>
+</ol>
+
+<p><br />
+關於 pyinstaller 套件，這個<a href="http://legendtkl.com/2015/11/06/pyinstaller/" target="_blank">部落格</a>我覺得說明蠻詳細的。</p>
+
+ -->
+    <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
+
+</div>
+    
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread';
+        this.page.identifier = '/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/#disqus_thread" data-disqus-identifier="/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">0 Comments</a>
+      </span>
+
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">
         [Python]下載與安裝 Python2.7 及 pip 套件
       </a>
@@ -1161,109 +1301,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 
         <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
-      </span>
-
-    </div>
-    
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
-        [Tutorial]Computer Networking筆記(16-21)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 24, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 24, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="osi-model"><strong>OSI Model</strong></h2>
-<p><a href="https://zh.wikipedia.org/wiki/OSI模型" target="_blank">OSI Model- Open System Interconnection Reference Model</a><br />
-總之，這是一個試圖使各種電腦在世界範圍內互連為網路的標準框架，總共有七層。</p>
-
-<p><a href="https://tw.voicetube.com/videos/20018" target="_blank">這有另外一個我覺得還不錯的影片</a></p>
-
-<h2 id="modem"><strong>Modem</strong></h2>
-<p>Modem就是我們說的<a href="https://zh.wikipedia.org/wiki/调制解调器" target="_blank">數據機</a>。<br />
-It’s device that connects the network to the Internet.<br />
-It converges digital signals from router(or any other devices) to analog signals.<br />
-簡單來說，數據機可以將數位訊號變成類比訊號(訊號轉換器的感覺)，<br />
-電話、網路等等會透過數據機來轉換訊號而獲得另一方的訊號。<br /></p>
-
-<h2 id="router"><strong>Router</strong></h2>
-<p>Router是<a href="https://zh.wikipedia.org/wiki/路由器" target="_blank">路由器</a>。<br />
-Router joins network together.<br /></p>
-
-<h2 id="switch"><strong>Switch</strong></h2>
-<p>Switch是分享器。<br />
-假如今天路由器的網路插孔不夠，分享器可以增加網路插孔，讓更多的電腦使用。<br /></p>
-
-<p><a href="https://www.mobile01.com/topicdetail.php?f=507&amp;t=1631479" target="_blank">路由器和分享器差在哪</a></p>
-
-<h2 id="repeaterextender"><strong>Repeater/Extender</strong></h2>
-<p>Repeater/Extender是中繼器。<br />
-在一個比較大的空間裡，路由器的信號會因為距離而所差別，<br />
-這時候使用中繼器，就可以讓網路訊號放大，讓離路由器較遠的裝置也可以有良好的訊號。<br />
-即便是接網路線，如果網路線過長，訊號也會變差，<br />
-所以如果使用中繼器可以解決距離較遠的問題。<br />
-而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-</div>
-    
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">0 Comments</a>
       </span>
 
     </div>
