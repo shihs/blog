@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Github 新的 authentication 設定"
+title: "[Git]Github 新的 authentication 設定"
 date: 2021-08-15 15:03
 author: "Shihs"
 category: [Git]

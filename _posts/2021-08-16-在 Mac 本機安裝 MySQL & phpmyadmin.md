@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "在 Mac 本機安裝 MySQL & phpmyadmin"
+title: "[SQL]在 Mac 本機安裝 MySQL & phpmyadmin"
 date: 2021-08-16 01:34
 author: "Shihs"
 category: [SQL]
@@ -33,7 +33,7 @@ category: [SQL]
 
 -   下載 phpmyadmin：[https://www.phpmyadmin.net/downloads/](https://www.phpmyadmin.net/downloads/)
 -   瀏覽器打開 [http://localhost/phpmyadmin/index.php](http://localhost/phpmyadmin/index.php)
-    ![](https://i.imgur.com/orDEaCz.png){:width="70%" heigh="70%"}
+    ![](https://i.imgur.com/orDEaCz.png)
 
 #### 5. 設定 phpmyadmin 登入密碼
 
