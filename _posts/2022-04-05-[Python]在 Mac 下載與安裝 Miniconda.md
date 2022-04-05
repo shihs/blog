@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: "[Python]在 Mac 下載與安裝 Miniconda"
-date: 2022-04-05 17:41
+date: 2021-08-23 15:23
 author: "Shihs"
 category: [Python]
 ---
@@ -10,7 +10,7 @@ category: [Python]
 Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。
 
-
+---
 
 ## 刪除 Anaconda
 
@@ -20,7 +20,7 @@ Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的�
 
 直接刪除整個 `rm -rf ~/anaconda3` 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 `anaconda` 刪除所有相關的檔案。
 
-
+---
 
 ## 下載與安裝 Miniconda
 
@@ -45,6 +45,8 @@ Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的�
     ```
 3. 確認是否安裝成功
     - 打開 terminal，`conda --version` 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！
+
+---
 
 ## conda 常用指令
 
