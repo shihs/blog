@@ -4,13 +4,108 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-04-05T18:19:56+08:00</updated>
+ <updated>2022-04-05T18:21:53+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[Python]在 Mac 下載與安裝 Miniconda</title>
+   <link href="http://localhost:4000blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"/>
+   <updated>2022-04-05T17:41:00+08:00</updated>
+   <id>http://localhost:4000/python/2022/04/05/[Python]在 Mac 下載與安裝 Miniconda</id>
+   <content type="html">&lt;p&gt;Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
+之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;刪除-anaconda&quot;&gt;刪除 Anaconda&lt;/h2&gt;
+
+&lt;p&gt;參考官網的 &lt;a href=&quot;https://docs.anaconda.com/anaconda/install/uninstall/&quot;&gt;uninstall Anaconda&lt;/a&gt; 的方法。&lt;/p&gt;
+
+&lt;p&gt;原本想使用第二種方法 &lt;code class=&quot;highlighter-rouge&quot;&gt;conda install anaconda-clean&lt;/code&gt;，但在下載 &lt;code class=&quot;highlighter-rouge&quot;&gt;anaconda-clean&lt;/code&gt; 時一直碰到問題，所以最後決定使用第一種方法。&lt;/p&gt;
+
+&lt;p&gt;直接刪除整個 &lt;code class=&quot;highlighter-rouge&quot;&gt;rm -rf ~/anaconda3&lt;/code&gt; 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 &lt;code class=&quot;highlighter-rouge&quot;&gt;anaconda&lt;/code&gt; 刪除所有相關的檔案。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;下載與安裝-miniconda&quot;&gt;下載與安裝 Miniconda&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;到官網下載 &lt;a href=&quot;https://docs.conda.io/en/latest/miniconda.html&quot;&gt;Miniconda&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;根據步驟一直點選下一步就好&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;安裝完成後，Miniconda 會自動在 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zchrc&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 加上路徑
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# !! Contents within this block are managed by 'conda init' !!&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;__conda_setup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/Users/your_user_name/opt/miniconda3/bin/conda'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'shell.bash'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hook'&lt;/span&gt; 2&amp;gt; /dev/null&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-eq&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
+     &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$__conda_setup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;else
+     if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
+         &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh&quot;&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;else
+         &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;fi
+ fi
+ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;__conda_setup
+ &lt;span class=&quot;c&quot;&gt;# &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;確認是否安裝成功
+    &lt;ul&gt;
+      &lt;li&gt;打開 terminal，&lt;code class=&quot;highlighter-rouge&quot;&gt;conda --version&lt;/code&gt; 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;conda-常用指令&quot;&gt;conda 常用指令&lt;/h2&gt;
+
+&lt;h3 id=&quot;cheatsheet&quot;&gt;Cheatsheet&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf&quot;&gt;Document&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;conda 的資訊&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda --version&lt;/code&gt;：檢視 conda 版本&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda update conda&lt;/code&gt;：更新 conda 版本&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda env list&lt;/code&gt;：conda 所有的環境&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;conda basic&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda install PACKAGENAME&lt;/code&gt;：Install a package included in Anaconda&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda update PACKAGENAME&lt;/code&gt;：Update any installed program&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;環境&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda create --name ENV_NAME python=VERSION&lt;/code&gt;：建立特定版本，名稱為&lt;code class=&quot;highlighter-rouge&quot;&gt;ENV_NAME&lt;/code&gt;的環境
+    &lt;ul&gt;
+      &lt;li&gt;Ex. &lt;code class=&quot;highlighter-rouge&quot;&gt;conda create --name myenv python=3.6&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda activate ENVIRONMENT&lt;/code&gt;：切換至指定工作環境&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda deactivate&lt;/code&gt;：回到 base 工作環境&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda list&lt;/code&gt;：active 環境中的所有套件
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Build Channel&lt;/code&gt;&lt;/a&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;pypi&lt;/code&gt;表示是用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install PACKAGENAME&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;可以看到所有用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt;下載的套件
+&lt;img src=&quot;https://i.imgur.com/gnlRU35.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda env remove --name ENV_NAME&lt;/code&gt;：刪除名稱為&lt;code class=&quot;highlighter-rouge&quot;&gt;ENV_NAME&lt;/code&gt;的環境&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>[Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較</title>
@@ -212,101 +307,6 @@
   &lt;li&gt;&lt;a href=&quot;https://ithelp.ithome.com.tw/articles/10191216&quot;&gt;[Day 01] 什麼是 MVC？能吃嗎？ &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.ibest.tw/mvc-website.php&quot;&gt;什麼是 MVC 網頁設計? 做網站一定需要 MVC 嗎?&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=zW_tZR0Ir3Q&quot;&gt;Node.js Crash Course Tutorial #11 - Express Router &amp;amp; MVC&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>[Python]在 Mac 下載與安裝 Miniconda</title>
-   <link href="http://localhost:4000blog//python/2021/08/21/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"/>
-   <updated>2021-08-21T15:23:00+08:00</updated>
-   <id>http://localhost:4000/python/2021/08/21/[Python]在 Mac 下載與安裝 Miniconda</id>
-   <content type="html">&lt;p&gt;Conda 是除了能夠管理套件也能夠管理工作環境，是個好用的工具。
-之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;刪除-anaconda&quot;&gt;刪除 Anaconda&lt;/h2&gt;
-
-&lt;p&gt;參考官網的 &lt;a href=&quot;https://docs.anaconda.com/anaconda/install/uninstall/&quot;&gt;uninstall Anaconda&lt;/a&gt; 的方法。&lt;/p&gt;
-
-&lt;p&gt;原本想使用第二種方法 &lt;code class=&quot;highlighter-rouge&quot;&gt;conda install anaconda-clean&lt;/code&gt;，但在下載 &lt;code class=&quot;highlighter-rouge&quot;&gt;anaconda-clean&lt;/code&gt; 時一直碰到問題，所以最後決定使用第一種方法。&lt;/p&gt;
-
-&lt;p&gt;直接刪除整個 &lt;code class=&quot;highlighter-rouge&quot;&gt;rm -rf ~/anaconda3&lt;/code&gt; 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 &lt;code class=&quot;highlighter-rouge&quot;&gt;anaconda&lt;/code&gt; 刪除所有相關的檔案。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;下載與安裝-miniconda&quot;&gt;下載與安裝 Miniconda&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;到官網下載 &lt;a href=&quot;https://docs.conda.io/en/latest/miniconda.html&quot;&gt;Miniconda&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;根據步驟一直點選下一步就好&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;安裝完成後，Miniconda 會自動在 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zchrc&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 加上路徑
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;# &amp;gt;&amp;gt;&amp;gt; conda initialize &amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# !! Contents within this block are managed by 'conda init' !!&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;__conda_setup&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/Users/your_user_name/opt/miniconda3/bin/conda'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'shell.bash'&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hook'&lt;/span&gt; 2&amp;gt; /dev/null&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$?&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-eq&lt;/span&gt; 0 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then
-     &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$__conda_setup&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
- &lt;span class=&quot;k&quot;&gt;else
-     if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;then&lt;/span&gt;
-         &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/etc/profile.d/conda.sh&quot;&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;else
-         &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/Users/your_user_name/opt/miniconda3/bin:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-     &lt;span class=&quot;k&quot;&gt;fi
- fi
- &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;unset &lt;/span&gt;__conda_setup
- &lt;span class=&quot;c&quot;&gt;# &amp;lt;&amp;lt;&amp;lt; conda initialize &amp;lt;&amp;lt;&amp;lt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;確認是否安裝成功
-    &lt;ul&gt;
-      &lt;li&gt;打開 terminal，&lt;code class=&quot;highlighter-rouge&quot;&gt;conda --version&lt;/code&gt; 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;conda-常用指令&quot;&gt;conda 常用指令&lt;/h2&gt;
-
-&lt;h3 id=&quot;cheatsheet&quot;&gt;Cheatsheet&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf&quot;&gt;Document&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;conda 的資訊&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda --version&lt;/code&gt;：檢視 conda 版本&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda update conda&lt;/code&gt;：更新 conda 版本&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda env list&lt;/code&gt;：conda 所有的環境&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;conda basic&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda install PACKAGENAME&lt;/code&gt;：Install a package included in Anaconda&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda update PACKAGENAME&lt;/code&gt;：Update any installed program&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;環境&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda create --name ENV_NAME python=VERSION&lt;/code&gt;：建立特定版本，名稱為&lt;code class=&quot;highlighter-rouge&quot;&gt;ENV_NAME&lt;/code&gt;的環境
-    &lt;ul&gt;
-      &lt;li&gt;Ex. &lt;code class=&quot;highlighter-rouge&quot;&gt;conda create --name myenv python=3.6&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda activate ENVIRONMENT&lt;/code&gt;：切換至指定工作環境&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda deactivate&lt;/code&gt;：回到 base 工作環境&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda list&lt;/code&gt;：active 環境中的所有套件
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Build Channel&lt;/code&gt;&lt;/a&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;pypi&lt;/code&gt;表示是用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install PACKAGENAME&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;pip freeze&lt;/code&gt;可以看到所有用&lt;code class=&quot;highlighter-rouge&quot;&gt;pip install&lt;/code&gt;下載的套件
-&lt;img src=&quot;https://i.imgur.com/gnlRU35.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda env remove --name ENV_NAME&lt;/code&gt;：刪除名稱為&lt;code class=&quot;highlighter-rouge&quot;&gt;ENV_NAME&lt;/code&gt;的環境&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
