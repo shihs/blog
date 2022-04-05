@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: "[Python]在 Mac 下載與安裝 Miniconda"
-date: 2021-08-23 15:23
+date: 2021-08-21 15:23
 author: "Shihs"
 category: [Python]
 ---
