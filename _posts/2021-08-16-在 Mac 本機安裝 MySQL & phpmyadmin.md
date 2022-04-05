@@ -4,7 +4,7 @@ comments: true
 title: "在 Mac 本機安裝 MySQL & phpmyadmin"
 date: 2021-08-16 01:34
 author: "Shihs"
-category: []
+category: [SQL]
 ---
 
 #### 1. 啟動 Apache
