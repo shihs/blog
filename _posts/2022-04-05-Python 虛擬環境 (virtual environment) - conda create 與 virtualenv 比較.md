@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: "Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較"
+title: "[Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較"
 date: 2022-04-05 13:44
 author: "Shihs"
 category: [Python]
@@ -66,7 +66,7 @@ Conda 是一個開源的跨平台工具軟體，它被設計作為 Python、R、
 - `conda list`：active 環境中的所有套件
     - [`Build Channel`](https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply)的`pypi`表示是用`pip install PACKAGENAME`
     - `pip freeze`可以看到所有用`pip install`下載的套件
-![](https://i.imgur.com/yvuy4kT.png)
+![](https://i.imgur.com/yvuy4kT.png){:width="50%" heigh="50%"}
 - `conda env remove --name ENV_NAME`：刪除名稱為`ENV_NAME`的環境
 
 
