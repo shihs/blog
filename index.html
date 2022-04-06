@@ -25,6 +25,7 @@ title: Home
       {% else %}
         {% assign categories = page.categories %}
       {% endif %}
+
       {% for category in categories %}
         <a target="_blank" href="{{site.baseurl}}/category/#{{category|slugize}}">{{category}}</a>
         {% unless forloop.last %}&nbsp;{% endunless %}
