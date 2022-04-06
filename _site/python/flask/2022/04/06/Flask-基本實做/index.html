@@ -401,7 +401,7 @@ End
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">""</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"{{ url_for('static', filename='css/main.css') }}"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;title&gt;</span>{% block head %} {% endblock %}<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>

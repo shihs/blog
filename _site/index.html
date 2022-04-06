@@ -396,7 +396,7 @@ End
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">""</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"{{ url_for('static', filename='css/main.css') }}"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;title&gt;</span>{% block head %} {% endblock %}<span class="nt">&lt;/title&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;body&gt;</span>
@@ -505,7 +505,6 @@ End
     <div class="post-excerpt"><h2 id="flask-簡介">Flask 簡介</h2>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -661,7 +660,6 @@ s.setAttribute('data-timestamp', +new Date());
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。</p>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -825,7 +823,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><h2 id="virtualenv">Virtualenv</h2>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -987,7 +984,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><p>這篇簡單地介紹 MVC 架構，若是有任何錯誤觀念，歡迎留言。</p>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -1153,7 +1149,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><h4 id="1-啟動-apache">1. 啟動 Apache</h4>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -1309,7 +1304,6 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
     <div class="post-excerpt"><p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -1466,7 +1460,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
@@ -1571,7 +1564,6 @@ import time
 import asyncio</p>
 
 </div>
-    
 
     <div class="bookmark">
       <!-- <i class="far fa-comments"></i> -->
