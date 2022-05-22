@@ -63,7 +63,7 @@ $$m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) 
 
 斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。
 
-以兩個字變數為例， $$z = f(x, y)$$
+以兩個自變數為例， $$z = f(x, y)$$
 
 $$f_x(a, b)$$ 為對 $$x$$ 的偏導數，定義為 
 
@@ -114,7 +114,7 @@ $$\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac
 
 梯度 Gradient 的幾何意義，
 - $$\nabla f$$ 表示曲面 $$f(x, y, z) = C$$ 之垂直向量，如下圖所示。
-- $$\nabla f(P)$$ 表在 P 點增量最大的方向，也就是 the direction of steepest increase
+- $$\nabla f(P)$$ 表在 $$P$$ 點增量最大的方向，也就是 the direction of steepest increase
 
 
 ![]({{ "/img/posts/gradient.png" |absolute_url}})
