@@ -40,11 +40,11 @@ $$\nabla L(\theta) = \begin{bmatrix}
 
 ****
 
-前面我們舉的例子是手寫辨識，input 加上兩層的 hideen layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，
+前面我們舉的例子是手寫辨識，input 加上兩層的 hidden layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，
 
 ![]({{ "/img/posts/neural network 8.png" |absolute_url}})
 
-為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 outpu，中間是兩層的 hidden layer，所以 cost function 可以寫成，$$C(w_1, b_1, w_2, b_2, w_3, b_3)$$
+為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，$$C(w_1, b_1, w_2, b_2, w_3, b_3)$$
 
 ![]({{ "/img/posts/simple neural network.png" |absolute_url}})
 
@@ -83,9 +83,9 @@ $$z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)$$
 $$a^{(L)} = \sigma (z^{(L)}) .......... (3)$$
 
 
-那我們現在要如何計算權重 $$w^{(L)}$$ 對於 cost function 的影響程度呢？換句話說，我們想要知道 cost function 對 $$w^{(L)}$$ 的偏微分 $$\frac{\partial C_0}{\partial w^{(L)}}$$。
+那我們現在要如何**計算權重 $$w^{(L)}$$ 對於 cost function 的影響程度**呢？換句話說，我們想要知道 cost function 對 $$w^{(L)}$$ 的偏微分 $$\frac{\partial C_0}{\partial w^{(L)}}$$。
 
-根據 **chain rule**，我們可以再將上式改寫成，
+根據 **[Chain rule](https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction)**，我們可以再將上式改寫成，
 
 $$\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}$$
 
@@ -163,13 +163,6 @@ $$
 因為，一個神經元會向下影響其他所有與它連接的神經元，所以必須將它們全部加起來。
 
 根據以上，只要不斷往回算就可以了。
-
-***
-
-
-
-
-
 
 ***
 
