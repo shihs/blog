@@ -183,6 +183,116 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">
+        [Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 8, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 8, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>這次要爬的網址長得像這樣</p>
+<ul>
+  <li>hazyfairyland.blogspot.tw</li>
+  <li>cartersoshkosh.tw</li>
+  <li>yungmaun.com.tw</li>
+</ul>
+
+<p>沒有www也沒有<a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank">http/https</a>，<br />
+如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，<br />
+但如果是使用request就會產生錯誤訊息。<br /></p>
+
+<p>這時候該怎麼辦呢？</p>
+
+<p>其實只要在前方加上”http://”就行了，<br />
+若其實該網址是”https//”， request也會自動重新導向。<br /></p>
+
+<p>假如所有的網址都是沒有www，<br />
+就直接在所有url前方加上”http://”就好了。<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"cartersoshkosh.tw"</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>		
+        <span class="k">break</span>
+			
+    <span class="c"># catch requests.exceptions.MissingSchema error, add "http://" in the front</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">"http://"</span> <span class="o">+</span> <span class="n">url</span>
+       
+    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">url</span>  <span class="c"># print the final url</span>
+    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">history</span>  <span class="c"># print how many redirections it has gone throgh</span>
+</code></pre></div></div>
+
+ -->
+    
+    <div class="post-excerpt"><p>這次要爬的網址長得像這樣</p>
+<ul>
+  <li>hazyfairyland.blogspot.tw</li>
+  <li>cartersoshkosh.tw</li>
+  <li>yungmaun.com.tw</li>
+</ul>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread';
+        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2018/01/08/Python-Read-and-Write-CSV-file/">
         [Python]Read and Write CSV file
       </a>
@@ -222,6 +332,7 @@
 
 </code></pre></div></div>
  -->
+    
     <div class="post-excerpt"><p>```python
 import csv</p>
 
@@ -333,6 +444,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p><a href="https://github.com/shihs/crawlers/tree/master/2017%E5%B9%B4%E6%B1%BD%E8%BB%8A%E6%8A%80%E8%A1%93%E5%B1%95%E6%9C%83" target="_blank">完整程式碼</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>這次想要爬取的是<a href="http://www.automotiveworld.jp/en/To-Visit/Exhibitor/" target="_blank">2017年汽車技術展會</a>的參展廠商名單。</p>
 
 </div>
@@ -434,6 +546,7 @@ $ git add -u  #stages modified and deleted, without new
 <p><a href="https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html" target="_blank">參考</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>以下要介紹最基本的同步，
 檔案在本機被修改或是增加後push到github。</p>
 
@@ -530,6 +643,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><a href="https://dzone.com/articles/how-download-file-python" target="_blank">參考</a></p>
  -->
+    
     <div class="post-excerpt"><p>這裡要示範使用三個不同的package下載zip檔。</p>
 
 </div>
@@ -706,6 +820,7 @@ End Sub
 </code></pre>
 
  -->
+    
     <div class="post-excerpt"><p>這裡要介紹如何使用Excel VBA<br />
 在信件內容包含截取sheet中的特定欄位區塊，<br />
 並將此區塊變為圖檔包含在內文中寄出。<br /></p>
@@ -890,6 +1005,7 @@ Content-Disposition: form-data; name="awards[]"
 <p><a href="https://github.com/shihs/crawlers/blob/master/%E5%8F%B0%E7%81%A3%E7%B2%BE%E5%93%81%E7%8D%8E/taiwanexcellence.py" target="_blank">完整的程式碼</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>這次要爬的目標是<a href="http://www.taiwanexcellence.org/index.php/awards/now/cross/1" target="_blank">台灣精品獎得獎名單</a>。<br /></p>
 
 </div>
@@ -962,6 +1078,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>就可以改為顯示完整數字</p>
  -->
+    
     <div class="post-excerpt"><p>只要輸入，調整可顯示的位數</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -1007,99 +1124,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
-        [R]Error when saving xlsx workbook with package openxlsx
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on June 22, 2017</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">June 22, 2017</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
-
-<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
-
-<p>2.找到Rtools底下的zip.exe路徑，
-並設定rools的zip.exe路徑即可解決此問題</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
-</span></code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
-Try installr::install.rtools() on Windows.
-installr::install.rtools()
-No need to install Rtools - You've got the relevant version of Rtools installed
-saveWorkbook(wb, file = "dq", overwrite = TRUE)
-Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
-Try installr::install.rtools() on Windows.
-</code></pre></div></div>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread';
-        this.page.identifier = '/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread" data-disqus-identifier="/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   

@@ -183,6 +183,144 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
+        [Tutorial]Computer Networking筆記(22-26)
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 25, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 25, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+<h2 id="how-binary-code-works"><strong>How Binary Code Works?</strong></h2>
+<ul>
+  <li>bit = binary digit</li>
+  <li>8-bit system 最高到2^8</li>
+</ul>
+
+<p>舉例，如果今天我們要表示19這個數字，那就會是<br />
+2^8、2^7、2^6、2^5、2^4、2^3、2^2、2^1、2^0<br />
+ 0 、 0 、 0 、 0 、 1 、 0 、 0 、 1 、 1<br /></p>
+
+<p>在8 bits的系統裡，可以表示從0到255的數字。<br />
+也就是，111111111<br /></p>
+
+<p>所以如果今天有更多的bits就可以儲存更多的data，
+這也就是為什麼更大的bits功能較強大了。</p>
+
+<h2 id="ip-address"><strong>IP Address</strong></h2>
+<p>每個device都有ip address。</p>
+
+<p>IP是一個32 bits的2進位表示的數字，<br />
+中間以「.」隔開成四組號碼。<br />
+像這樣:xxx.xxx.xxx.xxx<br />
+每一組xxx都是8-bit，也就是一個八位數的0、1所組成的數字，<br />
+所以，每一組有2^8(256)個數字，總共就會有2^8<em>2^8</em>2^8*2^組IP。<br />
+而我們看到的IP則是再把這些2進位的數字轉換成10進位表示。<br /></p>
+
+<p>這樣的方式就可以讓每個device表達它的位置。</p>
+
+<h2 id="ip-addressing-issues"><strong>IP Addressing Issues</strong></h2>
+<p>The Internet is a network of networks.</p>
+
+<p>影片舉了一個例子：
+想像網路其實是聚集了所有的網絡。
+例如，社區網路是一個網絡，學校是一個網絡，公司是一個網絡，
+而這三個網絡又都可以連到網路上。</p>
+
+<p>當今天，公司裡有台電腦送了requests到網路另一端的server，
+這時候server收到訊息後，會再傳回response，
+可是它要如何透過IP知道到底找到這個送出requests的裝置呢？</p>
+
+<p>所以其實IP裡頭包含兩個訊息，</p>
+<ol>
+  <li>Newwork ID</li>
+  <li>Host ID</li>
+</ol>
+
+<p>但是，重點來了！<br />
+那一組32 bits的IP要怎麼表示Newwork ID和Host ID呢？<br />
+如果對分，讓16 bits表示Newwork ID，16 bits表示Host ID，<br />
+這樣就可以有65,536個Newwork ID配上Host ID的組合。<br />
+但這時候有人說，那萬一某個network的host很少，<br />
+那豈不是浪費了很多host的位址嗎！<br />
+但讓host多點bits或少點bits都有可能會遇到浪費或是不夠的問題，<br />
+這時候大家有點爭論不休，<br />
+到底該如何解決呢？<br /></p>
+
+<p>所以這時有人提出了一個辦法，<br />
+我們應該要用一個方法表示出Network ID和Host ID的長度。<br /></p>
+
+<p><a href="https://www.youtube.com/watch?v=D0a9hTEW48Y" target="_blank"><em>Subnet mask(子網路遮罩)</em></a><br />
+當今天在傳送訊息時，<br />
+device不只傳送自己的ip，也傳送subnet mask來表示network id和host id長度，<br /></p>
+
+<p>subnet mask一樣是一個32 bits的2進位數字，<br />
+1表示network id，0表示host id。<br />
+<a href="https://www.youtube.com/watch?v=FM169QUIQco&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO&amp;index=25" target="_blank">(這裡看影片應該會比較好理解)</a><br />
+<a href="https://www.youtube.com/watch?v=Upk5MU7vGAg&amp;index=26&amp;list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">詳細範例</a><br /></p>
+
+ -->
+    
+    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread';
+        this.page.identifier = '/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">
         [Tutorial]Computer Networking筆記(16-21)
       </a>
@@ -238,6 +376,7 @@ Router joins network together.<br /></p>
 而路由器本身就有中繼器的功能，所以只要選擇其一使用就好。<br /></p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
@@ -367,6 +506,7 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
 且每一次增加node可能都需要增加NIC。<br /></p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
@@ -451,6 +591,7 @@ s.setAttribute('data-timestamp', +new Date());
 </span></code></pre></div></div>
 
  -->
+    
     <div class="post-excerpt"><p>在讀取csv檔案時出現錯誤訊息</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">),</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w">
  
@@ -533,6 +674,7 @@ s.setAttribute('data-timestamp', +new Date());
 </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gsub</span><span class="p">(</span><span class="s2">"\U00A0"</span><span class="p">,</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
  -->
+    
     <div class="post-excerpt"><p>在資料中有些含有空白的文字讀進R後會變成</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
@@ -661,6 +803,7 @@ http:// www.thenewboston.org /index.php</p>
 </ul>
 
  -->
+    
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
@@ -756,6 +899,7 @@ sudo pip install googletrans
 但其實如果沒有要很大量的爬取我認為這個套件應該很好用了。</p>
 
  -->
+    
     <div class="post-excerpt"><p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
 <pre><code class="language-cmd"># windows
 pip install googletrans
@@ -875,6 +1019,7 @@ sever接受到request會回傳data，這些data會是程式碼，<br />
 PC就是client，sever就是host。<br /></p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
 
 </div>
@@ -918,116 +1063,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">
-        [Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 8, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 8, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#爬蟲">爬蟲</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>這次要爬的網址長得像這樣</p>
-<ul>
-  <li>hazyfairyland.blogspot.tw</li>
-  <li>cartersoshkosh.tw</li>
-  <li>yungmaun.com.tw</li>
-</ul>
-
-<p>沒有www也沒有<a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank">http/https</a>，<br />
-如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，<br />
-但如果是使用request就會產生錯誤訊息。<br /></p>
-
-<p>這時候該怎麼辦呢？</p>
-
-<p>其實只要在前方加上”http://”就行了，<br />
-若其實該網址是”https//”， request也會自動重新導向。<br /></p>
-
-<p>假如所有的網址都是沒有www，<br />
-就直接在所有url前方加上”http://”就好了。<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"cartersoshkosh.tw"</span>
-
-<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>		
-        <span class="k">break</span>
-			
-    <span class="c"># catch requests.exceptions.MissingSchema error, add "http://" in the front</span>
-    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">MissingSchema</span><span class="p">:</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s">"http://"</span> <span class="o">+</span> <span class="n">url</span>
-       
-    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">url</span>  <span class="c"># print the final url</span>
-    <span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">history</span>  <span class="c"># print how many redirections it has gone throgh</span>
-</code></pre></div></div>
-
- -->
-    <div class="post-excerpt"><p>這次要爬的網址長得像這樣</p>
-<ul>
-  <li>hazyfairyland.blogspot.tw</li>
-  <li>cartersoshkosh.tw</li>
-  <li>yungmaun.com.tw</li>
-</ul>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread';
-        this.page.identifier = '/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/#disqus_thread" data-disqus-identifier="/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   

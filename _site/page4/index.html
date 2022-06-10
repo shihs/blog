@@ -183,6 +183,446 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">
+        [Text Mining]Information Retrieval
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on November 5, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">November 5, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+<p>這門課教授的是英文的文字探勘，中文與英文本身在結構上有非常大的差異，所以有些解析和斷詞的方法中文可能並不適用，但在基本概念上還是有相同的地方。</p>
+
+<p>每個主題都有一個 Lab 附在文章最後。</p>
+
+<hr />
+
+<h2 id="information-retrieval-ir">Information Retrieval (IR)</h2>
+
+<p>Information Retrieval (IR) is finding material (usually documents) of an unstructured nature (usually text) that satisfies an information need from within large collections (usually stored on computers).</p>
+
+<p>中文稱為「資訊檢索」。從一堆的 unstructured 資料中（通常是文字）找出符合我們需要的條件的資料。</p>
+
+<p>例如，google 搜尋就是一個例子。我們在搜尋 bar 裡輸入我們想要找到的關鍵字，google 搜尋引擎會從它儲存的所有 database（網站們） 中找出符合我們關鍵字條件的網站給我們。</p>
+
+<hr />
+
+<p>那我們要如何找到包含這些關鍵字的文章呢？</p>
+
+<p>最直觀地想應該就是把有我們搜尋的關鍵字的文章抓出來吧！這就是 Boolean retrieval。</p>
+
+<p>在進入 Boolean retrieval 之前先來看一下 The classic search model。</p>
+
+<h3 id="the-classic-search-model">The classic search model</h3>
+
+<ul>
+  <li>To communicate her/his information need to an IR system, the user formulates a <em>search query</em>.</li>
+  <li>The objective of the IR system is to find documents in the collection that ‘match’ the search query.</li>
+  <li>A good IR system finds documents that are also relevant for the user’s information need.</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/The%20classic%20search%20model.png" alt="PMF_two coins.png" /></p>
+
+<hr />
+
+<h3 id="boolean-retrieval">Boolean retrieval</h3>
+
+<p>The Boolean retrieval model is a model for information retrieval in which we can pose any query which is in the form of a Boolean expression of terms, that is, in which terms are combined with the operators AND, OR, and NOT. The model views each document as just a set of words.</p>
+
+<p>很直覺的方法要找出包含關鍵字的可以使用 terms(通常是個單詞) 是否包含在 documents 裡。</p>
+
+<p>例如，現在有 Sherlock Holmes 小說文字。我想要找出哪些篇章符合出現 ‘Moriarty’ 和 ‘Lestrade’ 但不包含 ‘Adair’。那麼下的 query 就會是 <em>Moriarty AND Lestrade AND NOT Adair</em></p>
+
+<p>那個我們可以將上面的概念寫成一個 <strong>Term–document matrix</strong>。</p>
+
+<p><strong>Term–document matrix</strong></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Term%E2%80%93document%20matrix.png" alt="PMF_two coins.png" /></p>
+
+<p>每一行代表一個章節，每一列代表一個條件的單詞（term）。以列來看，0 表示該單詞沒有出現在那一章節中，1 表示該單詞有出現。
+<br />
+像是第一列，’Adair’ 只有出現在 ‘Empty house’ 這個章節。</p>
+
+<p>這樣的方法看似簡單，但以實務上來說並不是個好辦法。因為，</p>
+
+<ul>
+  <li>Term–document matrices are sparse. 可以從上面的 matrix 看到，有很多的 0 ，也就是說其實很多資訊並不需要，但卻還是需要儲存。</li>
+  <li>假如現在有 1,000,000 份 documents，有 500,000 不同的 terms ，這樣的條件下會產生 a matrix with 500,000,000,000 entries (62,5 GB)。</li>
+</ul>
+
+<p>所以我們必須得使用別的辦法減少不必要的資訊儲存。這時候就有了 Inverted index。</p>
+
+<p><strong>Inverted index</strong></p>
+
+<p>The inverted index is a key–value mapping, the basic idea is shown below.</p>
+
+<ul>
+  <li>the keys are search terms</li>
+  <li>the values are sorted lists of document identifiers (ids)</li>
+  <li>the list for terms identifies those documents that contain the terms</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Inverted%20index.png" alt="PMF_two coins.png" /></p>
+
+<p>從上圖我們可以看到，和 Term–document matrix 不一樣的是 Inverted index 只儲存了有包含該單詞的 document ids。</p>
+
+<hr />
+
+<p>現在我們知道我們要的是去看那些關鍵字是否包含在 documents 中，但我們並不會每一次找關鍵字的時候一篇一篇文章搜索，我們會先建立一個儲存好所有 term 的 matrix，
+但我們要怎麼決定是哪些 terms 要被儲存呢？</p>
+
+<h2 id="index-construction">Index construction</h2>
+
+<p>The major steps in index construction:</p>
+
+<ol>
+  <li>Collect the documents to be indexed.</li>
+  <li>Tokenize the text.</li>
+  <li>Do linguistic preprocessing of tokens.</li>
+  <li>Index the documents that each term occurs in.</li>
+</ol>
+
+<p><img src="http://localhost:4000/blog/img/posts/building%20an%20index%20by%20sorting%20and%20grouping.png" alt="PMF_two coins.png" /></p>
+
+<h3 id="tokenization">Tokenization</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">raw</span> <span class="o">=</span> <span class="s">"Apple is looking at buying U.K. startup for $1 billion."</span>
+<span class="c"># tokenize raw text based on whitespace</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
+	<span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+
+<span class="c"># tokenize using spaCy</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c"># 結果：</span>
+<span class="c"># Apple</span>
+<span class="c"># is</span>
+<span class="c"># looking</span>
+<span class="c"># at</span>
+<span class="c"># buying</span>
+<span class="c"># U.K.</span>
+<span class="c"># startup</span>
+<span class="c"># for</span>
+<span class="c"># $</span>
+<span class="c"># 1</span>
+<span class="c"># billion</span>
+<span class="c"># . </span>
+</code></pre></div></div>
+
+<p>英文每個單字可以很容易地使用空白（.split()）來分割出每個單字，但只使用
+split 無法排除標點符號的問題，python 的 spacy 可以將標點符號也區分出來。</p>
+
+<h3 id="stop-words">Stop words</h3>
+<p>A stop word is a word that is frequent but does not contribute much value for the application in question. For example: a, the, and…</p>
+
+<p>但根據分析的目的不同，會有不同的 stop words 的定義。以分析 Sherlock Holmes 的小說為例，資料裡面肯定會包含非常大量的 Sherlock Holmes，那這種時候我們或許可以根據分析的目的將 Sherlock Holmes 定義為 stop words。換句話說，並不存在一個所有分析通用的 stop words 資料集。</p>
+
+<p>既然 stop words 對於分析沒有價值貢獻，那麼在做分析前就必須把 stop words 刪除，以避免干擾分析結果。</p>
+
+<h3 id="lexemes-and-lemmas">Lexemes and lemmas</h3>
+
+<p>英文的文法有幾個規則，</p>
+<ol>
+  <li>動詞會根據人稱與時態有所變化</li>
+  <li>動詞有動名詞型態</li>
+  <li>名詞的單數與複數有變化</li>
+</ol>
+
+<p>但在分析前必須要將這些相同意義但不同型的單字修正為相同以便分析。</p>
+
+<ul>
+  <li>
+    <p>The term <em>lexeme</em> refers to a set of word forms that all share the same fundamental meaning. 
+<br />
+For example: word forms run, runs, ran, running – lexeme run</p>
+  </li>
+  <li>
+    <p>The term <em>lemma</em> refers to the particular word form that is chosen, by convention, to represent a given lexeme. 
+<br />
+For example: what you would put into a lexicon</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="ranked-retrieval排序檢索">Ranked retrieval（排序檢索）</h2>
+
+<p>進行到這裡我們已經知道如何要先建立一個有所有 term 的 matrix for 所有的 documents，然後使用 boolean retrieval 找出我們要的 documents，但這樣並沒有考慮到單詞的重要性。換句話說，一個很常出現的單詞有可能並沒有比一個出現次數較少但卻在某 document 出現還要重要，我們可能更想要抓出含有那個單詞的文章。所以我們必須要 rank 那些抓出來的 terms。</p>
+
+<p><strong>Problems with Boolean retrieval</strong></p>
+
+<ul>
+  <li>Not many users are capable of writing high-quality Boolean queries, and many find the process too time-consuming.</li>
+  <li>Feast or famine: Boolean queries tend to return either too many results, or no results at all.</li>
+  <li>Intuitively, whether or not a document ‘matches’ a search query is not a Boolean property, but is gradual in nature.</li>
+</ul>
+
+<p><strong>Ranked retrieval</strong></p>
+<ul>
+  <li>
+    <p>A ranked retrieval system assigns scores to documents based on how well they match a given search query. (There are many possible ways of scoring.)</p>
+  </li>
+  <li>
+    <p>Based on the score, a ranked retrieval system can return a list of the top documents in the collection with respect to the query.</p>
+  </li>
+</ul>
+
+<p>前面提到的 boolean retrieval 只考慮了文件是否包含或不包含要的詞彙，為了那個詞彙的「重要性」也考慮進去，我們要給予每個 term 不同的 weight。</p>
+
+<h3 id="term-weighting">Term weighting</h3>
+
+<ul>
+  <li>The score of a document d with respect to a query q is the sum of the weights of all terms t that occur in both d and q.</li>
+</ul>
+
+<script type="math/tex; mode=display">\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}</script>
+
+<ul>
+  <li>Any specific way to assign weights to terms is called a term weighting scheme.</li>
+</ul>
+
+<p>計算 weight 的方法有很多種，也可以自行定義，這邊介紹一種常用的方法。</p>
+
+<h3 id="tdidf-weight">TD–IDF weight</h3>
+
+<p>TD–IDF is Term frequency–inverse document frequency. This formula includes two parts: Term frequency &amp; Inverse document frequency.</p>
+
+<p><strong>Term frequency</strong></p>
+
+<p>The number of times a term t occurs in a document d is called the term frequency of t in d, and is denoted by tf(t, d).</p>
+
+<p>-<em>A problem with term frequency</em></p>
+
+<p>Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+weight(t, d) = \left\{ \begin{array}{rcl}
+1 + log_{10}tf(t, d), & if ~ tf(t, d) > 0 \\
+0, & others \\
+\end{array}\right. %]]></script>
+
+<p>稱作，<em>log-frequency weighting</em></p>
+
+<p>-<em>Another problem with term frequency</em></p>
+
+<p>時常重複出現的慣用詞彙對一個文件的影響很大。例如，現在想要考慮 Sherlock Holmes 裡包含 Moriarty 和 Holmes 的章節，但當我們下 query 去找時會發現，Holmes 出現最多的章節幾乎沒有 Moriarty，這是因為 Holmes 在這些文本裡出現的比例實在太高了，如果直接以它出現的頻率來分析肯定會造成很大的誤差，進而影響了出現次數少很多的 Moriarty。所以這時候 Inverse document frequency 就非常重要了！</p>
+
+<p><strong>Inverse document frequency</strong></p>
+
+<ul>
+  <li>Let N be the total number of documents in the collection.</li>
+  <li>The number of documents that contain a term t is called the
+document frequency of t, and is denoted by df(t).</li>
+</ul>
+
+<p>It denotes by idf(t):</p>
+
+<script type="math/tex; mode=display">\textrm{idf(t)} = log \frac{N}{df(t)}</script>
+
+<p>df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。</p>
+
+<p><strong>TD–IDF Weight</strong></p>
+
+<p>現在我們有了 td 和 idf，tf–idf weight 就是將這兩個數字相乘（出現次數乘以重要性），</p>
+
+<p>The <strong>tf–idf weight</strong> of a term t in a document d is defined as</p>
+
+<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}</script>
+
+<p>where N denotes the number of documents in the collection.</p>
+
+<p><strong>Variations of the tf–idf weighting scheme</strong></p>
+
+<p>因為 df(t) 可能是 0，所以我們改良一下上面的式子。</p>
+
+<p>In scikit-learn, the tf–idf weight is computed as</p>
+
+<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)</script>
+
+<p>where N denotes the number of documents in the collection.</p>
+
+<hr />
+
+<h2 id="the-vector-space-model">The vector space model</h2>
+
+<h3 id="document-representations">Document representations</h3>
+
+<ul>
+  <li>
+    <p>Documents as sets of terms
+<br />
+In Boolean retrieval, the only relevant information is whether or not a term is present in a document.</p>
+  </li>
+  <li>
+    <p>Documents as bags of terms
+<br />
+In ranked retrieval based on term frequency, the only relevant information is how often a term is present in a document.</p>
+  </li>
+</ul>
+
+<h3 id="the-vector-space-model--idea-1">The vector space model – idea 1</h3>
+<p>Represent documents as vectors in a high-dimensional space:</p>
+
+<ul>
+  <li>The dimensions (axes) of the space correspond to the terms in
+the vocabulary (potentially relevant terms). For example: could be set of all words in the collection, set of most frequent words, …</li>
+  <li>The values of the vector components depend on the term weighting scheme: Boolean values, counts, tf–idf values, … (in scikit-learn: CountVectorizer, TfidfVectorizer)</li>
+</ul>
+
+<h3 id="the-vector-space-model--idea-2">The vector space model – idea 2</h3>
+<p>To rank documents in the vector space model,</p>
+
+<ul>
+  <li>we represent the query as a vector in the same space as the documents in the collection</li>
+  <li>we compute the score of a candidate document as the similarity between its document vector and the query vector (similarity = proximity in the vector space)</li>
+</ul>
+
+<h3 id="cosine-similarity">Cosine similarity</h3>
+
+<p>以下舉一個從一篇<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">部落格</a>看到的例子，</p>
+
+<p>例如:
+Query = {“Hello”}
+Doc1 = {“Foo”, “Foo”}
+Doc2 = {“Hello”, “World”}</p>
+
+<p>在經過計算之後，我們知道其向量分別為（可以使用 tf-idf values, counts,… 等等）</p>
+
+<p>Query = (1, 0, 0)
+Doc1 = (0, 0, 2)
+Doc2 = (1, 1, 0)</p>
+
+<p>我們可以使用歐幾里德距離算出 query 和兩個 documents 的距離分別是，根號5和1。但計算歐幾里德距離忽略掉了單詞出現的頻率的影響。</p>
+
+<p>如果說今天把上面的向量改一下，</p>
+
+<p>Query = (2, 0, 0)
+Doc1 = (0, 0, 4)
+Doc2 = (2, 2, 0)</p>
+
+<p>這時候 所有的距離都變成了兩倍，但其實他們完全是平行的向量。</p>
+
+<p>那如果我們考慮向量之間的角度呢？也就是計算兩個向量的 dot，這時候會發現，長度還是影響了最後的數值。</p>
+
+<p>因此，使用 <strong>Cosine similarity</strong> 來將數值 normalized。使用 cosine 後，數值只會介於 -1 和 1 之間，並且只需要考慮非0的數值。</p>
+
+<hr />
+
+<h2 id="evaluation-of-information-retrieval-systems">Evaluation of information retrieval systems</h2>
+
+<p>To evaluate an IR system we need:</p>
+<ul>
+  <li>a document collection</li>
+  <li>a collection of queries</li>
+  <li>a gold-standard relevance judgement</li>
+</ul>
+
+<p><img src="http://localhost:4000/blog/img/posts/Precision%20and%20recall%20for%20Boolean%20retrieval.png" alt="PMF_two coins.png" /></p>
+
+<p><strong>Precision:</strong></p>
+
+<p>Precision (P) is the fraction of retrieved documents that are relevant</p>
+
+<script type="math/tex; mode=display">Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})</script>
+
+<p><strong>Recall:</strong></p>
+
+<p>Recall (R) is the fraction of relevant documents that are retrieved</p>
+
+<script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
+
+<p><strong>F1-measure</strong></p>
+
+<p>A good system should balance between precision and recall.   
+<br />
+The F1-measure is the harmonic mean of the two values:</p>
+
+<script type="math/tex; mode=display">F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}</script>
+
+<hr />
+
+<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L1.ipynb">Information Retrieval Lab</a></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<br />
+<a href="https://nlp.stanford.edu/IR-book/information-retrieval-book.html">Introduction to Information Retrieval</a>
+<br />
+<a href="https://taweihuang.hpd.io/2017/03/01/tfidf/">[文件探勘] TF-IDF 演算法：快速計算單字與文章的關聯</a>
+<br />
+<a href="https://raymondyangsite.wordpress.com/2017/05/03/retrieval-model-vector-space-model1/">Vector Space Model(1)</a>
+<br />
+<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a></p>
+ -->
+    
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//text%20mining/2019/11/05/Text-Mining-Information-Retrieval/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">
         [Machine Learning]Markov Chain Monte Carlo (MCMC)
       </a>
@@ -285,6 +725,7 @@ Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
 <br />
 <a href="http://www.cnblogs.com/pinard/p/6625739.html">MCMC(一)蒙特卡罗方法</a></p>
  -->
+    
     <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
 
 </div>
@@ -427,6 +868,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
  -->
+    
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
 
 </div>
@@ -598,6 +1040,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="https://www.youtube.com/watch?v=UE6YkRWBtZk">人工智慧系列之基因演算法</a></p>
  -->
+    
     <div class="post-excerpt"><p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
 
 </div>
@@ -747,6 +1190,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="https://www.cnblogs.com/longdouhzt/archive/2012/05/19/2508844.html">Python特殊语法：filter、map、reduce、lambda [转]</a></p>
  -->
+    
     <div class="post-excerpt"><ul>
   <li>lambda 可以直接定義一些簡單的 funciton。</li>
   <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
@@ -994,6 +1438,7 @@ Linköping University Neural Networks and Learning Systems TBMI26 / 732A55 2019 
 <a href="https://blog.csdn.net/itplus/article/details/9361915">A Painless Q-learning Tutorial (一个 Q-learning 算法的简明教程)</a></p>
 
  -->
+    
     <div class="post-excerpt"><h3 id="複習">複習</h3>
 
 </div>
@@ -1150,6 +1595,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Coursera - Convolutional Neural Networks(deeplearning.ai)</a></p>
  -->
+    
     <div class="post-excerpt"><p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
 
 </div>
@@ -1276,6 +1722,7 @@ Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一�
 <br />
 <a href="https://cs50.harvard.edu/x/2022/notes/0/">CS50 2022 - Lecture 0</a></p>
  -->
+    
     <div class="post-excerpt"><p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
 <br />
 2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
@@ -1321,101 +1768,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">
-        [Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 2, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 2, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
-<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
-
-<p>根據<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>的討論串，有人回答</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
-</code></pre></div></div>
-
-<p>我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。</p>
-
-<p>先檢查一下 pandas 版本</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
-</code></pre></div></div>
-
-<p>將版本降至 0.20.3</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
-</code></pre></div></div>
-
-<p>這時候打包完後執行應該就不會有問題了！</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>
-<br />
-<a href="https://blog.csdn.net/qq_41185868/article/details/80601983">成功解决pyinstaller打包AttributeError:type object pandas.<em>TSObject has no attribute _reduce_cython</em></a></p>
- -->
-    <div class="post-excerpt"><p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
-<img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread';
-        this.page.identifier = '/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/#disqus_thread" data-disqus-identifier="/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   

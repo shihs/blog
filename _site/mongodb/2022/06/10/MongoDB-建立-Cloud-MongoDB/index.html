@@ -180,16 +180,16 @@
 
     <div class="content container">
       <div class="post">
-  <h1 class="post-title">[Machine Learning]Random Forest</h1>
+  <h1 class="post-title">[MongoDB]建立 Cloud MongoDB</h1>
   <div class="post-info">
     <i class="fas fa-calendar-alt"></i>
-    <span class="post-date">December 3, 2018</span>
+    <span class="post-date">June 10, 2022</span>
     <span>
       <i class="fas fa-comments"></i>
       <a
         class="comment-count"
-        href="/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread"
-        data-disqus-identifier="/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/"
+        href="/blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread"
+        data-disqus-identifier="/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"
         >0 Comments</a
       >
     </span>
@@ -200,68 +200,97 @@
        
       <a
         target="_blank"
-        href="/blog/category/#Machine Learning"
-        >Machine Learning</a
+        href="/blog/category/#MongoDB"
+        >MongoDB</a
       >
        
     </span>
   </div>
-  <div><p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
-
-<p>Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 <a href="https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">bagging</a> 這篇提到的方法有點類似，但有些小差異。</p>
-
-<p>使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。</p>
-
-<hr />
-
-<p><strong>Random Forest步驟</strong></p>
-
-<p>假如有一 training data，有 N 個樣本，p 個features。
-<br />
-今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，</p>
-
-<ol>
-  <li>使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data</li>
-  <li>在這組 data 中隨機從 p 個 featrues 中選取 m (m &lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node</li>
-  <li>重複步驟 2，直到完成這個 model 為止</li>
-  <li>重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹</li>
-</ol>
-
-<p>最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。</p>
-
-<hr />
-
+  <div><h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
 <ul>
-  <li>因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。</li>
-  <li>Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。</li>
-  <li>因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。</li>
-  <li>
-    <p>Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。</p>
-  </li>
-  <li>優點：
-    <ol>
-      <li>不用做特徵（feature）選擇。</li>
-      <li>訓練完後可以知道哪些 feature 比較重要。</li>
-    </ol>
-  </li>
+  <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
+  <li>點選 <strong>Sign In</strong>
+<img src="https://i.imgur.com/ZCctWhc.png" alt="" /></li>
+  <li>登入
+<img src="https://i.imgur.com/PUYzmMY.png" alt="" /></li>
+  <li>Accept Privacy Policy &amp; Terms of Service
+<img src="https://i.imgur.com/vf9T7rH.png" alt="" /></li>
+  <li>問卷填寫
+<img src="https://i.imgur.com/S7BKKOI.png" alt="" /></li>
+  <li>選擇 deploy 的方案
+<img src="https://i.imgur.com/uVWJMux.png" alt="" /></li>
+  <li>選擇免費的方案 Create a Shared Cluster，這裡我是選擇 Google Cloud 在台灣的 Sever（要選擇其他 server 也可以），因為使用免費版本，所以其他設定都不調整，使用預設值，完成後選擇 <strong>Create Cluster</strong>
+<img src="https://i.imgur.com/Eru5JEv.png" alt="" />
+<img src="https://i.imgur.com/MSDxbvm.png" alt="" /></li>
+  <li>建立 Cluster 中
+<img src="https://i.imgur.com/FaLtNCA.png" alt="" /></li>
+  <li>設定 MongoDB 的 Username 和 Password
+<img src="https://i.imgur.com/XILIeIx.png" alt="" /></li>
+  <li>設定可連線 MongoDB 的 IP
+<img src="https://i.imgur.com/P0TGWsz.png" alt="" /></li>
+  <li>Database Deployments
+<img src="https://i.imgur.com/RHC7cAy.png" alt="" /></li>
+  <li>載入 Sample Data 測試，點選 <strong>Load Sample Data</strong>，需要花點時間等待
+<img src="https://i.imgur.com/OC9QQZV.png" alt="" />
+<img src="https://i.imgur.com/15nlBTB.png" alt="" /></li>
+  <li>Sample Data Loaded</li>
+  <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
+  <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
+<img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
+  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
+<img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
+  <li>使用 Python 測試連線
+接下來要示範連線至 listingsAndReviews 這個 Collection</li>
 </ul>
 
+<h2 id="connect-mongodb-with-python">Connect MongoDB with Python</h2>
+<p>示範如何使用 Python 連剛剛建立的 Cloud MongoDB</p>
+
+<h3 id="install-pymongo--dnspython">Install pymongo &amp; dnspython</h3>
+<ul>
+  <li><code class="highlighter-rouge">conda install pymongo</code></li>
+  <li><code class="highlighter-rouge">conda install dnspython</code></li>
+</ul>
+
+<h3 id="查看連線的-uri">查看連線的 URI</h3>
+<ul>
+  <li>點選 <strong>Connect</strong>
+<img src="https://i.imgur.com/WENwjPR.png" alt="" /></li>
+  <li>點選 <strong>Connect your application</strong>
+<img src="https://i.imgur.com/6D025EI.png" alt="" /></li>
+  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
+<img src="https://i.imgur.com/FMvaQcd.png" alt="" /></li>
+  <li>Python 程式碼示範
+```python=
+from pymongo import MongoClient
+import pprint</li>
+</ul>
+
+<p>DB = ‘sample_airbnb’
+COLLECTION = ‘listingsAndReviews’
+URI = ‘mongodb+srv://test:<password>@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</password></p>
+
+<p>client = MongoClient(URI)
+db = client[DB]
+pprint.pprint(db[COLLECTION].find_one())
+client.close()
+```</p>
+
+<p><img src="https://i.imgur.com/Wgs8Gjb.png" alt="" /></p>
+
 <hr />
 
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ">StatQuest: Random Forests Part 1 - Building, Using and Evaluating</a>
-<br />
-<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
-<br />
-<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a></p>
+<p><strong>Reference:</strong></p>
+<ul>
+  <li><a href="https://ithelp.ithome.com.tw/articles/10236244?sc=iThelpR">Day13 — 架起MongoDB囉!</a></li>
+</ul>
 </div>
 </div>
 
 <div class="likecoin">
   
   <iframe
-    src="https://button.like.co/in/embed/shihs_tw/button?referrer=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fmachine%2520learning%2F2018%2F12%2F03%2FMachine-LearningDecision-Tree%2F" height="200" width="560" allowfullscreen="" frameborder="0"
+    src="https://button.like.co/in/embed/shihs_tw/button?referrer=http%3A%2F%2Flocalhost%3A4000%2Fblog%2Fmongodb%2F2022%2F06%2F10%2FMongoDB-%25E5%25BB%25BA%25E7%25AB%258B-Cloud-MongoDB%2F" height="200" width="560" allowfullscreen="" frameborder="0"
   >
   </iframe>
   
@@ -283,7 +312,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 */
 var disqus_config = function () {
         // this.page.url = '/blog/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/';
+        this.page.identifier = '/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -303,13 +332,6 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
-          <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
-          <small>Jun 10, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
         </h3>
@@ -318,6 +340,13 @@ s.setAttribute('data-timestamp', +new Date());
       <li>
         <h3>
           <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
+          <small>Apr 5, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
+          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
           <small>Apr 5, 2022</small>
         </h3>
       </li>

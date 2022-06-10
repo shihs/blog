@@ -4,13 +4,99 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-04-06T11:10:58+08:00</updated>
+ <updated>2022-06-10T12:29:27+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>[MongoDB]建立 Cloud MongoDB</title>
+   <link href="http://localhost:4000blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"/>
+   <updated>2022-06-10T12:13:00+08:00</updated>
+   <id>http://localhost:4000/mongodb/2022/06/10/[MongoDB]建立 Cloud MongoDB</id>
+   <content type="html">&lt;h2 id=&quot;使用-mongodb-atlas-建立-cloud-mongodb&quot;&gt;使用 MongoDB Atlas 建立 Cloud MongoDB&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;註冊 &lt;a href=&quot;https://www.mongodb.com/atlas/database&quot;&gt;MongoDB Atlas&lt;/a&gt; 帳號&lt;/li&gt;
+  &lt;li&gt;點選 &lt;strong&gt;Sign In&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/ZCctWhc.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;登入
+&lt;img src=&quot;https://i.imgur.com/PUYzmMY.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Accept Privacy Policy &amp;amp; Terms of Service
+&lt;img src=&quot;https://i.imgur.com/vf9T7rH.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;問卷填寫
+&lt;img src=&quot;https://i.imgur.com/S7BKKOI.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;選擇 deploy 的方案
+&lt;img src=&quot;https://i.imgur.com/uVWJMux.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;選擇免費的方案 Create a Shared Cluster，這裡我是選擇 Google Cloud 在台灣的 Sever（要選擇其他 server 也可以），因為使用免費版本，所以其他設定都不調整，使用預設值，完成後選擇 &lt;strong&gt;Create Cluster&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/Eru5JEv.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://i.imgur.com/MSDxbvm.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;建立 Cluster 中
+&lt;img src=&quot;https://i.imgur.com/FaLtNCA.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;設定 MongoDB 的 Username 和 Password
+&lt;img src=&quot;https://i.imgur.com/XILIeIx.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;設定可連線 MongoDB 的 IP
+&lt;img src=&quot;https://i.imgur.com/P0TGWsz.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Database Deployments
+&lt;img src=&quot;https://i.imgur.com/RHC7cAy.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;載入 Sample Data 測試，點選 &lt;strong&gt;Load Sample Data&lt;/strong&gt;，需要花點時間等待
+&lt;img src=&quot;https://i.imgur.com/OC9QQZV.png&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;https://i.imgur.com/15nlBTB.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Sample Data Loaded&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;https://i.imgur.com/OhUElwy.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;查看資料，點選 &lt;strong&gt;Browse Collection&lt;/strong&gt;，可以看到測試資料已經進到 MongoDB
+&lt;img src=&quot;https://i.imgur.com/7DBRFix.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;DB &amp;amp; Collection，以下圖為例，&lt;code class=&quot;highlighter-rouge&quot;&gt;sample_airbnb&lt;/code&gt; 是 DB，&lt;code class=&quot;highlighter-rouge&quot;&gt;listingsAndReviews&lt;/code&gt; 為 Collection
+&lt;img src=&quot;https://i.imgur.com/VlOC1Yf.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;使用 Python 測試連線
+接下來要示範連線至 listingsAndReviews 這個 Collection&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;connect-mongodb-with-python&quot;&gt;Connect MongoDB with Python&lt;/h2&gt;
+&lt;p&gt;示範如何使用 Python 連剛剛建立的 Cloud MongoDB&lt;/p&gt;
+
+&lt;h3 id=&quot;install-pymongo--dnspython&quot;&gt;Install pymongo &amp;amp; dnspython&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda install pymongo&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;conda install dnspython&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;查看連線的-uri&quot;&gt;查看連線的 URI&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;點選 &lt;strong&gt;Connect&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/WENwjPR.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;點選 &lt;strong&gt;Connect your application&lt;/strong&gt;
+&lt;img src=&quot;https://i.imgur.com/6D025EI.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;password&amp;gt;&lt;/code&gt; 改成剛剛設定的使用者的密碼
+&lt;img src=&quot;https://i.imgur.com/FMvaQcd.png&quot; alt=&quot;&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Python 程式碼示範
+```python=
+from pymongo import MongoClient
+import pprint&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;DB = ‘sample_airbnb’
+COLLECTION = ‘listingsAndReviews’
+URI = ‘mongodb+srv://test:&lt;password&gt;@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;amp;w=majority'&lt;/password&gt;&lt;/p&gt;
+
+&lt;p&gt;client = MongoClient(URI)
+db = client[DB]
+pprint.pprint(db[COLLECTION].find_one())
+client.close()
+```&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Wgs8Gjb.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ithelp.ithome.com.tw/articles/10236244?sc=iThelpR&quot;&gt;Day13 — 架起MongoDB囉!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>[Python][Flask]Flask 基本實做</title>
@@ -1636,11 +1722,11 @@ Timer is done!
 
 &lt;hr /&gt;
 
-&lt;p&gt;前面我們舉的例子是手寫辨識，input 加上兩層的 hideen layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，&lt;/p&gt;
+&lt;p&gt;前面我們舉的例子是手寫辨識，input 加上兩層的 hidden layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/neural%20network%208.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 outpu，中間是兩層的 hidden layer，所以 cost function 可以寫成，&lt;script type=&quot;math/tex&quot;&gt;C(w_1, b_1, w_2, b_2, w_3, b_3)&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，&lt;script type=&quot;math/tex&quot;&gt;C(w_1, b_1, w_2, b_2, w_3, b_3)&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/simple%20neural%20network.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -1678,9 +1764,9 @@ Timer is done!
 &lt;br /&gt;
 &lt;script type=&quot;math/tex&quot;&gt;a^{(L)} = \sigma (z^{(L)}) .......... (3)&lt;/script&gt;&lt;/p&gt;
 
-&lt;p&gt;那我們現在要如何計算權重 &lt;script type=&quot;math/tex&quot;&gt;w^{(L)}&lt;/script&gt; 對於 cost function 的影響程度呢？換句話說，我們想要知道 cost function 對 &lt;script type=&quot;math/tex&quot;&gt;w^{(L)}&lt;/script&gt; 的偏微分 &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial C_0}{\partial w^{(L)}}&lt;/script&gt;。&lt;/p&gt;
+&lt;p&gt;那我們現在要如何&lt;strong&gt;計算權重 &lt;script type=&quot;math/tex&quot;&gt;w^{(L)}&lt;/script&gt; 對於 cost function 的影響程度&lt;/strong&gt;呢？換句話說，我們想要知道 cost function 對 &lt;script type=&quot;math/tex&quot;&gt;w^{(L)}&lt;/script&gt; 的偏微分 &lt;script type=&quot;math/tex&quot;&gt;\frac{\partial C_0}{\partial w^{(L)}}&lt;/script&gt;。&lt;/p&gt;
 
-&lt;p&gt;根據 &lt;strong&gt;chain rule&lt;/strong&gt;，我們可以再將上式改寫成，&lt;/p&gt;
+&lt;p&gt;根據 &lt;strong&gt;&lt;a href=&quot;https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction&quot;&gt;Chain rule&lt;/a&gt;&lt;/strong&gt;，我們可以再將上式改寫成，&lt;/p&gt;
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}&lt;/script&gt;
 
@@ -1749,8 +1835,6 @@ Timer is done!
 &lt;p&gt;因為，一個神經元會向下影響其他所有與它連接的神經元，所以必須將它們全部加起來。&lt;/p&gt;
 
 &lt;p&gt;根據以上，只要不斷往回算就可以了。&lt;/p&gt;
-
-&lt;hr /&gt;
 
 &lt;hr /&gt;
 
@@ -1977,7 +2061,7 @@ Timer is done!
 
 &lt;p&gt;斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。&lt;/p&gt;
 
-&lt;p&gt;以兩個字變數為例， &lt;script type=&quot;math/tex&quot;&gt;z = f(x, y)&lt;/script&gt;&lt;/p&gt;
+&lt;p&gt;以兩個自變數為例， &lt;script type=&quot;math/tex&quot;&gt;z = f(x, y)&lt;/script&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;script type=&quot;math/tex&quot;&gt;f_x(a, b)&lt;/script&gt; 為對 &lt;script type=&quot;math/tex&quot;&gt;x&lt;/script&gt; 的偏導數，定義為&lt;/p&gt;
 
@@ -2018,7 +2102,7 @@ Timer is done!
 &lt;p&gt;梯度 Gradient 的幾何意義，&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\nabla f&lt;/script&gt; 表示曲面 &lt;script type=&quot;math/tex&quot;&gt;f(x, y, z) = C&lt;/script&gt; 之垂直向量，如下圖所示。&lt;/li&gt;
-  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\nabla f(P)&lt;/script&gt; 表在 P 點增量最大的方向，也就是 the direction of steepest increase&lt;/li&gt;
+  &lt;li&gt;&lt;script type=&quot;math/tex&quot;&gt;\nabla f(P)&lt;/script&gt; 表在 &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt; 點增量最大的方向，也就是 the direction of steepest increase&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/blog/img/posts/gradient.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;

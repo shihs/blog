@@ -2,6 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://localhost:4000blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/</loc>
+    </url>
+
+    <url>
         <loc>http://localhost:4000blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/</loc>
     </url>
 

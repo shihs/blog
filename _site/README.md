@@ -27,7 +27,6 @@ Hyde is a theme built on top of [Poole](https://github.com/poole/poole), which p
 
 Hyde includes some customizable options, typically applied via classes on the `<body>` element.
 
-
 ### Sidebar menu
 
 Create a list of nav links in the sidebar by assigning each Jekyll page the correct layout in the page's [front-matter](http://jekyllrb.com/docs/frontmatter/). 

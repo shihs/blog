@@ -183,6 +183,99 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
+        [R]Error when saving xlsx workbook with package openxlsx
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 22, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 22, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
+
+<p>2.找到Rtools底下的zip.exe路徑，
+並設定rools的zip.exe路徑即可解決此問題</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
+</span></code></pre></div></div>
+
+ -->
+    
+    <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread';
+        this.page.identifier = '/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/#disqus_thread" data-disqus-identifier="/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">
         [Python][爬蟲]利用python下載zip檔並解壓縮
       </a>
@@ -235,6 +328,7 @@
 </code></pre></div></div>
 
  -->
+    
     <div class="post-excerpt"><p>下載檔案是使用package urllib2<br />
 解壓縮檔案則是使用package zipfile<br /></p>
 
@@ -337,6 +431,7 @@ s.setAttribute('data-timestamp', +new Date());
 再使用replace取代就可以刪除空白了。<br /></p>
 
  -->
+    
     <div class="post-excerpt"><p>在爬取網頁時偶爾會碰到<br /></p>
 
 </div>
@@ -452,6 +547,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 </code></pre></div></div>
  -->
+    
     <div class="post-excerpt"><p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
 所有的行業代碼與中文名稱。</p>
 
@@ -557,6 +653,7 @@ s.setAttribute('data-timestamp', +new Date());
 在使用system()必須要先setwd將路徑設成python_script.py所在位置。</p>
 
  -->
+    
     <div class="post-excerpt"><p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
@@ -663,6 +760,7 @@ s.setAttribute('data-timestamp', +new Date());
 便不需要一再地打上那麼長的名稱，
 如此以來便也適用mac。</p>
  -->
+    
     <div class="post-excerpt"><p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
 以下的解法是針對windows方能使用。</p>
 
@@ -745,6 +843,7 @@ s.setAttribute('data-timestamp', +new Date());
 再將記事本副檔名存成.bat 就完成了。</p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
 
 </div>
@@ -818,6 +917,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
 
 </div>
@@ -861,108 +961,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
-        [R]使用 R 發送gmail Email
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#R">R</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>使用mailR package寫一個R的script，自動發信。</p>
-
-<p>以下幾個步驟，<br />
-1.<a href="https://www.google.com/settings/security/lesssecureapps" target="_blank">啟用安全性較低的應用程式存取</a><br />
-2.<a href="https://github.com/rpremraj/mailR" target="_blank">使用mailR package</a></p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">mailR</span><span class="p">)</span><span class="w">
-
-</span><span class="n">send.mail</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 寄件者</span><span class="w">
-          </span><span class="c1">#收件者</span><span class="w">
-          </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"receive1@gmail.com"</span><span class="p">,</span><span class="w"> 
-                 </span><span class="s2">"receive2@gmail.com"</span><span class="p">),</span><span class="w">
-          </span><span class="c1">#標題</span><span class="w">
-          </span><span class="n">subject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"測試"</span><span class="p">,</span><span class="w">
-          </span><span class="c1">#內文</span><span class="w">
-          </span><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"這是一個測試"</span><span class="p">,</span><span class="w"> 
-          </span><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"utf-8"</span><span class="p">,</span><span class="w">  </span><span class="c1"># 編碼</span><span class="w">
-          </span><span class="c1">#夾帶檔案</span><span class="w">
-          </span><span class="n">attach.files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"attach.xlsx"</span><span class="p">),</span><span class="w">
-          </span><span class="n">smtp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span><span class="n">host.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"smtp.gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">465</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">user.name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mymail@gmail.com"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">passwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"mypasswd"</span><span class="p">,</span><span class="w"> 
-                      </span><span class="n">ssl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w">
-          </span><span class="n">authenticate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w">
-          </span><span class="n">send</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
-
-</span></code></pre></div></div>
-
-<p>另外，
-我其實還有查到gmailr這個package，
-但它有些bug，
-無法同時有信件內文又有夾帶檔案，
-所以目前找到最好的方式還是使用mailR。</p>
- -->
-    <div class="post-excerpt"><p>使用mailR package寫一個R的script，自動發信。</p>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread';
-        this.page.identifier = '/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/#disqus_thread" data-disqus-identifier="/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   

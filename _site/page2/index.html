@@ -183,6 +183,110 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">
+        [Python]asyncio 和 await
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 22, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.google.com.tw/'</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Send a request at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Receive a response at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
+
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+
+<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://ithelp.ithome.com.tw/articles/10199385">python的asyncio模組(一)：異步執行的好處</a>
+<br /></p>
+ -->
+    
+    <div class="post-excerpt"><p>```python
+import requests
+import time
+import asyncio</p>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread';
+        this.page.identifier = '/python/2021/01/22/Python-asyncio-%E5%92%8C-await/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread" data-disqus-identifier="/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/">
         [javascript]同步 v.s. 非同步與callback, promise, async, and await
       </a>
@@ -430,6 +534,7 @@ a
 <a href="https://yu-jack.github.io/2018/07/22/promise/">callback, promise, async/await 使用方式教學以及介紹 Part I</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
 
 </div>
@@ -641,6 +746,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>選取該 element 的第一個或最後一個 child。同樣的，firstElementChild &amp; lastElementChild 選取的會是 element。</p>
 
  -->
+    
     <div class="post-excerpt"><p>整理 Treehouse 前端課程中 <a href="https://teamtreehouse.com/library/javascript-and-the-dom-2">JavaScript and the DOM</a> 的最後一節 Traversing the DOM 內容。</p>
 
 </div>
@@ -819,6 +925,7 @@ s.setAttribute('data-timestamp', +new Date());
 <a href="https://www.zhihu.com/question/33453164">DOM, DOCUMENT, BOM, WINDOW 有什么区别?</a></p>
 
  -->
+    
     <div class="post-excerpt"><h3 id="dom-是什麼">DOM 是什麼？</h3>
 
 </div>
@@ -1030,6 +1137,7 @@ Timer is done!
 <a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">JavaScript 核心篇 學習筆記: Chap.15–執行緒與同步/非同步</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>簡單介紹 node.js 裡重要的「非同步（Asynchronous）」概念，那既然有「非同步（Asynchronous）」當然就會有「同步（Synchronous）」，以及因為「非同步（Asynchronous）」而衍伸出的重要 callback 概念。</p>
 
 </div>
@@ -1125,11 +1233,11 @@ s.setAttribute('data-timestamp', +new Date());
 
 <hr />
 
-<p>前面我們舉的例子是手寫辨識，input 加上兩層的 hideen layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，</p>
+<p>前面我們舉的例子是手寫辨識，input 加上兩層的 hidden layers，總共的 weight 和 bias 加起來有 13,002 個參數。如下圖，</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
 
-<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 outpu，中間是兩層的 hidden layer，所以 cost function 可以寫成，<script type="math/tex">C(w_1, b_1, w_2, b_2, w_3, b_3)</script></p>
+<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，<script type="math/tex">C(w_1, b_1, w_2, b_2, w_3, b_3)</script></p>
 
 <p><img src="http://localhost:4000/blog/img/posts/simple%20neural%20network.png" alt="" /></p>
 
@@ -1167,9 +1275,9 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <script type="math/tex">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script></p>
 
-<p>那我們現在要如何計算權重 <script type="math/tex">w^{(L)}</script> 對於 cost function 的影響程度呢？換句話說，我們想要知道 cost function 對 <script type="math/tex">w^{(L)}</script> 的偏微分 <script type="math/tex">\frac{\partial C_0}{\partial w^{(L)}}</script>。</p>
+<p>那我們現在要如何<strong>計算權重 <script type="math/tex">w^{(L)}</script> 對於 cost function 的影響程度</strong>呢？換句話說，我們想要知道 cost function 對 <script type="math/tex">w^{(L)}</script> 的偏微分 <script type="math/tex">\frac{\partial C_0}{\partial w^{(L)}}</script>。</p>
 
-<p>根據 <strong>chain rule</strong>，我們可以再將上式改寫成，</p>
+<p>根據 <strong><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction">Chain rule</a></strong>，我們可以再將上式改寫成，</p>
 
 <script type="math/tex; mode=display">\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}</script>
 
@@ -1241,8 +1349,6 @@ s.setAttribute('data-timestamp', +new Date());
 
 <hr />
 
-<hr />
-
 <p><strong>Reference:</strong>
 <br />
 <a href="https://www.youtube.com/watch?v=ibJpTrp5mcE">ML Lecture 7: Backpropagation</a>
@@ -1250,6 +1356,7 @@ s.setAttribute('data-timestamp', +new Date());
 <a href="https://medium.com/ai-academy-taiwan/back-propagation-3946e8ed8c55">Back-propagation</a></p>
 
  -->
+    
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">前面</a>介紹了 neural network 使用 Gradient descent 來找 cost function 的最小值，那這篇要來介紹 neural network 如何使用 <strong>Backpropagation</strong> 這個演算法讓 neural network 訓練過程中更有效率。</p>
 
 </div>
@@ -1365,6 +1472,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="https://blog.goodaudience.com/introduction-to-1d-convolutional-neural-networks-in-keras-for-time-sequences-3a7ff801a2cf">Introduction to 1D Convolutional Neural Networks in Keras for Time Sequences</a></p>
  -->
+    
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N卷積神經網路/">前一篇</a>介紹了 CNN 的概念，這篇要來介紹 CNN 如何運用在 NLP 中。</p>
 
 </div>
@@ -1533,6 +1641,7 @@ s.setAttribute('data-timestamp', +new Date());
 <br />
 <a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">Convolutional Neural Networks’ (CNN) Backward Propagation</a></p>
  -->
+    
     <div class="post-excerpt"><p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
 <br />
 <a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
@@ -1580,193 +1689,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">
-        [Neural Network]Neural Network 2 - Gradient descent
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 23, 2020</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 23, 2020</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p><a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">上一篇</a>說明了神經網路的基本原理，這篇我們要講解神經網路是如何學習的 - Gradient descent。</p>
-
-<p>這篇是<a href="https://www.youtube.com/watch?v=IHZwWFHWa-w&amp;list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi&amp;index=2">Neural networks</a>的課程筆記。</p>
-
-<hr />
-
-<p>在 Machine Learning 裡我們使用 training data 訓練得到一個 model，但這「訓練」到底是怎麼訓練的呢？訓練的過程，通常是要找到最小的 cost，也就是最後的結果與真實值差距越小越好。</p>
-
-<p>在 Neural Network 我們要訓練的變數就是<a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">前面一篇</a>提到的 weight 和 bias。一開始我們隨機的給予這些數字，然後在一次次的學習中去改進 weight 和 bias 的值，找到最小的成本函數。</p>
-
-<p>在課程的例子裡，Neural Network function 的 input 是 784 個 pixel 的數字，output 是 10 個數字，0 到 9 的機率，parameters 是 weight 和 bias。但在cost function 中，weight 和 bias 變成了 input，而 output 就是 cost 的值，parameters 則是很多的 training pairs。</p>
-
-<p>我們可以把 cost function 這樣表示，</p>
-
-<script type="math/tex; mode=display">C(w_1, w_2,..., b_1, b_2, ....) = cost</script>
-
-<p>cost 的算法是 Neural Network 算出來的值，扣掉正確值然後平方相加。學習過程中，我們將所有 training data 的 cost 相加平均（average cost of all training data），希望這個值越小越好。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/cost.png" alt="" /></p>
-
-<p>那我們要如何找到最小的 cost 值？</p>
-
-<p>如果 cost function 是一個像下圖的函數圖形，我們知道微分等於 0 可以找到最小值，但這並非一件容易的事，尤其是當我們有很多變數時。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/local%20minima.png" alt="" /></p>
-
-<p>所以我們可以用的方法是，先隨機到函數圖形上的一點，然後根據該點的切線斜率來決定該往哪個方向移動可以找到最低點。這樣的方法，可以讓我們到 local minimum，我們無法確認找到的最小是否是 global minimum，因為這取決與一開始的 initial value。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/local%20minima%202.png" alt="" /></p>
-
-<hr />
-
-<p>在進入 Gradient descent 之前，我想要先介紹一下基礎觀念。以下將會講解，</p>
-
-<ol>
-  <li>導函數 Derivative function 與導數 Derivative</li>
-  <li>方向導數 Directional derivative</li>
-  <li>偏導數 Partial derivative</li>
-  <li>梯度 Gradient</li>
-</ol>
-
-<h3 id="導數-derivative">導數 Derivative</h3>
-
-<p>切線的斜率稱為「導數」（Derivative），也就是微分。</p>
-
-<p>定義成，</p>
-
-<script type="math/tex; mode=display">m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}</script>
-
-<h3 id="偏導數-partial-derivative">偏導數 Partial derivative</h3>
-
-<p>斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。</p>
-
-<p>以兩個字變數為例， <script type="math/tex">z = f(x, y)</script></p>
-
-<p><script type="math/tex">f_x(a, b)</script> 為對 <script type="math/tex">x</script> 的偏導數，定義為</p>
-
-<script type="math/tex; mode=display">f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}</script>
-
-<p><script type="math/tex">f_y(a, b)</script> 為對 <script type="math/tex">y</script> 的偏導數，定義為</p>
-
-<script type="math/tex; mode=display">f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}</script>
-
-<p>也就是對 x 或 y 方向做偏微分。</p>
-
-<h3 id="方向導數-directional-derivative">方向導數 Directional derivative</h3>
-
-<p>斜率求的是單變數的微分，在多變數中要求斜率必須要看是哪個方向的斜率，因為各個方向的斜率都不相同，這時要求的就是方向導數。</p>
-
-<p>假設函數 <script type="math/tex">z = f(x, y)</script>，在定義域 <script type="math/tex">xy</script> 平面上有一點 <script type="math/tex">(x, y)</script> 及單位向量 <script type="math/tex">\overset{\rightharpoonup}{u} = (u_1, u_2)</script>。則曲面 <script type="math/tex">z = f(x, y)</script> 在 <script type="math/tex">(a, b)</script> 處，沿 <script type="math/tex">\overset{\rightharpoonup}{u}</script> 的方向的斜率定義為，</p>
-
-<script type="math/tex; mode=display">\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}</script>
-
-<p>方向導數的意義在於，有助於計算出空間中某一場量 <script type="math/tex">f(x, y, z)</script> 在某一特定方向 <script type="math/tex">\boldsymbol{u}</script> 之變化率。</p>
-
-<h3 id="梯度-gradient">梯度 Gradient</h3>
-
-<p>梯度的定義就是對各個分量做偏微分。</p>
-
-<p>例如，現在是兩變數函數 <script type="math/tex">f(x, y)</script>，其梯度 <script type="math/tex">\nabla f(x, y)</script> 定義為</p>
-
-<script type="math/tex; mode=display">\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)</script>
-
-<p>若是變數有三個，則 <script type="math/tex">\nabla f(x, y, y)</script> 定義為</p>
-
-<script type="math/tex; mode=display">\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)</script>
-
-<p>Gernal 來看，有 n 個變數的函數 <script type="math/tex">f(x_1, x_2, \cdots, x_n)</script>，我們可以寫成</p>
-
-<script type="math/tex; mode=display">\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)</script>
-
-<p>梯度 Gradient 的幾何意義，</p>
-<ul>
-  <li><script type="math/tex">\nabla f</script> 表示曲面 <script type="math/tex">f(x, y, z) = C</script> 之垂直向量，如下圖所示。</li>
-  <li><script type="math/tex">\nabla f(P)</script> 表在 P 點增量最大的方向，也就是 the direction of steepest increase</li>
-</ul>
-
-<p><img src="http://localhost:4000/blog/img/posts/gradient.png" alt="" /></p>
-
-<hr />
-
-<h3 id="梯度下降法-gradient-descent">梯度下降法 Gradient descent</h3>
-
-<p>Gradient descent 是一種最佳化方法。</p>
-
-<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 <script type="math/tex">-\nabla f(P)</script> 是找尋 minimum cost 的方向。</p>
-
-<p>總的來說，梯度下降法 Gradient descent 就是不斷的在某個點 P 算它的 Gradient，然後往 Gradient 的反方向一定，直到找到 local minimum 為止（無法知道是否找到 glocal minimum，會根據 initial values 而定）。</p>
-
-<p>在 neural netword 中，讓這個梯度計算更有效率的方法叫做 <strong>Backpropagation</strong>，而這正是 neural netword 的重點！下一篇繼續介紹 :)</p>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://ocw.chu.edu.tw/pluginfile.php/827/mod_resource/content/33/Summary_227.pdf">方向導數(Directional Derivative)之定義與意義</a>
-<br />
-<a href="https://ocw.chu.edu.tw/pluginfile.php/826/mod_resource/content/31/Summary_226.pdf">純量函數之梯度(Gradient)</a></p>
-
- -->
-    <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">上一篇</a>說明了神經網路的基本原理，這篇我們要講解神經網路是如何學習的 - Gradient descent。</p>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//neural%20network/2020/01/23/Neural-Network-Neural-Network-2/#disqus_thread';
-        this.page.identifier = '/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//neural%20network/2020/01/23/Neural-Network-Neural-Network-2/#disqus_thread" data-disqus-identifier="/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   

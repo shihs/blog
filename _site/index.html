@@ -183,6 +183,187 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">
+        [MongoDB]建立 Cloud MongoDB
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 10, 2022</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 10, 2022</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#MongoDB">MongoDB</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
+<ul>
+  <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
+  <li>點選 <strong>Sign In</strong>
+<img src="https://i.imgur.com/ZCctWhc.png" alt="" /></li>
+  <li>登入
+<img src="https://i.imgur.com/PUYzmMY.png" alt="" /></li>
+  <li>Accept Privacy Policy &amp; Terms of Service
+<img src="https://i.imgur.com/vf9T7rH.png" alt="" /></li>
+  <li>問卷填寫
+<img src="https://i.imgur.com/S7BKKOI.png" alt="" /></li>
+  <li>選擇 deploy 的方案
+<img src="https://i.imgur.com/uVWJMux.png" alt="" /></li>
+  <li>選擇免費的方案 Create a Shared Cluster，這裡我是選擇 Google Cloud 在台灣的 Sever（要選擇其他 server 也可以），因為使用免費版本，所以其他設定都不調整，使用預設值，完成後選擇 <strong>Create Cluster</strong>
+<img src="https://i.imgur.com/Eru5JEv.png" alt="" />
+<img src="https://i.imgur.com/MSDxbvm.png" alt="" /></li>
+  <li>建立 Cluster 中
+<img src="https://i.imgur.com/FaLtNCA.png" alt="" /></li>
+  <li>設定 MongoDB 的 Username 和 Password
+<img src="https://i.imgur.com/XILIeIx.png" alt="" /></li>
+  <li>設定可連線 MongoDB 的 IP
+<img src="https://i.imgur.com/P0TGWsz.png" alt="" /></li>
+  <li>Database Deployments
+<img src="https://i.imgur.com/RHC7cAy.png" alt="" /></li>
+  <li>載入 Sample Data 測試，點選 <strong>Load Sample Data</strong>，需要花點時間等待
+<img src="https://i.imgur.com/OC9QQZV.png" alt="" />
+<img src="https://i.imgur.com/15nlBTB.png" alt="" /></li>
+  <li>Sample Data Loaded</li>
+  <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
+  <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
+<img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
+  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
+<img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
+  <li>使用 Python 測試連線
+接下來要示範連線至 listingsAndReviews 這個 Collection</li>
+</ul>
+
+<h2 id="connect-mongodb-with-python">Connect MongoDB with Python</h2>
+<p>示範如何使用 Python 連剛剛建立的 Cloud MongoDB</p>
+
+<h3 id="install-pymongo--dnspython">Install pymongo &amp; dnspython</h3>
+<ul>
+  <li><code class="highlighter-rouge">conda install pymongo</code></li>
+  <li><code class="highlighter-rouge">conda install dnspython</code></li>
+</ul>
+
+<h3 id="查看連線的-uri">查看連線的 URI</h3>
+<ul>
+  <li>點選 <strong>Connect</strong>
+<img src="https://i.imgur.com/WENwjPR.png" alt="" /></li>
+  <li>點選 <strong>Connect your application</strong>
+<img src="https://i.imgur.com/6D025EI.png" alt="" /></li>
+  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
+<img src="https://i.imgur.com/FMvaQcd.png" alt="" /></li>
+  <li>Python 程式碼示範
+```python=
+from pymongo import MongoClient
+import pprint</li>
+</ul>
+
+<p>DB = ‘sample_airbnb’
+COLLECTION = ‘listingsAndReviews’
+URI = ‘mongodb+srv://test:<password>@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</password></p>
+
+<p>client = MongoClient(URI)
+db = client[DB]
+pprint.pprint(db[COLLECTION].find_one())
+client.close()
+```</p>
+
+<p><img src="https://i.imgur.com/Wgs8Gjb.png" alt="" /></p>
+
+<hr />
+
+<p><strong>Reference:</strong></p>
+<ul>
+  <li><a href="https://ithelp.ithome.com.tw/articles/10236244?sc=iThelpR">Day13 — 架起MongoDB囉!</a></li>
+</ul>
+ -->
+    
+    <div class="post-excerpt"><h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
+<ul>
+  <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
+  <li>點選 <strong>Sign In</strong>
+<img src="https://i.imgur.com/ZCctWhc.png" alt="" /></li>
+  <li>登入
+<img src="https://i.imgur.com/PUYzmMY.png" alt="" /></li>
+  <li>Accept Privacy Policy &amp; Terms of Service
+<img src="https://i.imgur.com/vf9T7rH.png" alt="" /></li>
+  <li>問卷填寫
+<img src="https://i.imgur.com/S7BKKOI.png" alt="" /></li>
+  <li>選擇 deploy 的方案
+<img src="https://i.imgur.com/uVWJMux.png" alt="" /></li>
+  <li>選擇免費的方案 Create a Shared Cluster，這裡我是選擇 Google Cloud 在台灣的 Sever（要選擇其他 server 也可以），因為使用免費版本，所以其他設定都不調整，使用預設值，完成後選擇 <strong>Create Cluster</strong>
+<img src="https://i.imgur.com/Eru5JEv.png" alt="" />
+<img src="https://i.imgur.com/MSDxbvm.png" alt="" /></li>
+  <li>建立 Cluster 中
+<img src="https://i.imgur.com/FaLtNCA.png" alt="" /></li>
+  <li>設定 MongoDB 的 Username 和 Password
+<img src="https://i.imgur.com/XILIeIx.png" alt="" /></li>
+  <li>設定可連線 MongoDB 的 IP
+<img src="https://i.imgur.com/P0TGWsz.png" alt="" /></li>
+  <li>Database Deployments
+<img src="https://i.imgur.com/RHC7cAy.png" alt="" /></li>
+  <li>載入 Sample Data 測試，點選 <strong>Load Sample Data</strong>，需要花點時間等待
+<img src="https://i.imgur.com/OC9QQZV.png" alt="" />
+<img src="https://i.imgur.com/15nlBTB.png" alt="" /></li>
+  <li>Sample Data Loaded</li>
+  <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
+  <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
+<img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
+  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
+<img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
+  <li>使用 Python 測試連線
+接下來要示範連線至 listingsAndReviews 這個 Collection</li>
+</ul>
+
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread';
+        this.page.identifier = '/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread" data-disqus-identifier="/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/">
         [Python][Flask]Flask 基本實做
       </a>
@@ -502,6 +683,7 @@ End
   <li><a href="https://www.youtube.com/watch?v=MwZwr5Tvyxo&amp;list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH">Python Flask Tutorial: Full-Featured Web App Part 1 - Getting Started</a></li>
 </ul>
  -->
+    
     <div class="post-excerpt"><h2 id="flask-簡介">Flask 簡介</h2>
 
 </div>
@@ -655,6 +837,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
 </ul>
  -->
+    
     <div class="post-excerpt"><p>Conda 除了能夠管理套件也能夠管理工作環境，是個好用的工具。
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。</p>
 
@@ -818,6 +1001,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li><a href="https://medium.com/python4u/python-virtualenv虛擬環境安裝-9d6be2d45db9">Python — Virtualenv虛擬環境安裝</a></li>
 </ul>
  -->
+    
     <div class="post-excerpt"><h2 id="virtualenv">Virtualenv</h2>
 
 </div>
@@ -978,6 +1162,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li><a href="https://www.youtube.com/watch?v=zW_tZR0Ir3Q">Node.js Crash Course Tutorial #11 - Express Router &amp; MVC</a></li>
 </ul>
  -->
+    
     <div class="post-excerpt"><p>這篇簡單地介紹 MVC 架構，若是有任何錯誤觀念，歡迎留言。</p>
 
 </div>
@@ -1142,6 +1327,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li><a href="https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql">How To Create a New User and Grant Permissions in MySQL</a></li>
 </ul>
  -->
+    
     <div class="post-excerpt"><h4 id="1-啟動-apache">1. 啟動 Apache</h4>
 
 </div>
@@ -1296,6 +1482,7 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 <p><strong>Reference</strong>:
 <a href="https://www.youtube.com/watch?v=aKaYpl-ZpGg">Solved - Support for password authentication was removed - Github - Mac and Windows</a></p>
  -->
+    
     <div class="post-excerpt"><p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
 
 </div>
@@ -1451,6 +1638,7 @@ s.setAttribute('data-timestamp', +new Date());
 <a href="https://medium.com/@vicxu/authentication-那些小事上集-cookie-與-session-介紹-1da2d413afa2">淺談 Authentication 上集：Cookie 與 Session 介紹</a></p>
 
  -->
+    
     <div class="post-excerpt"><p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
 
 </div>
@@ -1494,110 +1682,8 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">
-        [Python]asyncio 和 await
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 22, 2021</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 22, 2021</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">asyncio</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.google.com.tw/'</span>
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
-
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"Send a request at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
-
-    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">"Receive a response at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
-
-<span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
-
-<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
-</code></pre></div></div>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://ithelp.ithome.com.tw/articles/10199385">python的asyncio模組(一)：異步執行的好處</a>
-<br /></p>
- -->
-    <div class="post-excerpt"><p>```python
-import requests
-import time
-import asyncio</p>
-
 </div>
 
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread';
-        this.page.identifier = '/python/2021/01/22/Python-asyncio-%E5%92%8C-await/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2021/01/22/Python-asyncio-%E5%92%8C-await/#disqus_thread" data-disqus-identifier="/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
 
 <div class="pagination">
   
