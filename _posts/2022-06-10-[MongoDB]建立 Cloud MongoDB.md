@@ -8,6 +8,7 @@ category: [MongoDB]
 ---
 
 ## 使用 MongoDB Atlas 建立 Cloud MongoDB
+
 - 註冊 [MongoDB Atlas](https://www.mongodb.com/atlas/database) 帳號
 - 點選 **Sign In**
 ![](https://i.imgur.com/ZCctWhc.png)
@@ -57,7 +58,8 @@ category: [MongoDB]
 - 選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 `<password>` 改成剛剛設定的使用者的密碼
 ![](https://i.imgur.com/FMvaQcd.png)
 - Python 程式碼示範
-```python=
+
+```python
 from pymongo import MongoClient
 import pprint
 
