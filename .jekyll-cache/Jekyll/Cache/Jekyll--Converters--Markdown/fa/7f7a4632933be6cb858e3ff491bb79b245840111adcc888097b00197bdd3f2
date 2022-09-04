@@ -1,0 +1,18 @@
+I"(<p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+
+<p>1.<a href="https://cran.r-project.org/bin/windows/Rtools/" target="_blank">安裝Rtools.exe</a></p>
+
+<p>2.找到Rtools底下的zip.exe路徑，
+並設定rools的zip.exe路徑即可解決此問題</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Sys.setenv</span><span class="p">(</span><span class="s2">"R_ZIPCMD"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:/Rtools/bin/zip.exe"</span><span class="p">)</span><span class="w"> </span><span class="c1">## path to zip.exe</span><span class="w">
+</span></code></pre></div></div>
+
+:ET

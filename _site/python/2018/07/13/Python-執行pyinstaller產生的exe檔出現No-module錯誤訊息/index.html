@@ -208,7 +208,7 @@
   </div>
   <div><p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
 
-<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
+<p>我在 mac 終端機輸入 <code class="language-plaintext highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
 執行在 dist 資料夾底下的檔案，卻出現
 `
 no module named ‘somepackagename’
@@ -222,19 +222,19 @@ no module named ‘somepackagename’
 <p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
 所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
 
-<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
+<p>假如缺少的套件在 <code class="language-plaintext highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
 
 <p>只要將原本的 <br />
-<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
+<code class="language-plaintext highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
 
 <p>改成 <br />
-<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
+<code class="language-plaintext highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
 
 <p>就好了。 <br /></p>
 
 <p>可以用， <br /></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="k">print</span> <span class="n">sys</span><span class="p">.</span><span class="n">path</span>
 </code></pre></div></div>
 <p>查看系統路徑，就可以知道套件可能的位置。</p>
 
@@ -286,6 +286,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -295,13 +302,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -1,0 +1,19 @@
+I";<p>常見的 NLP package 有 NLTK、spaCy、Scikit-learn 等等，參考下面的功能比較圖。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/NLPlibraresPython.png" alt="" /></p>
+
+<p>這裡則要分別介紹 NLTK 和 spaCy 的一些用法。從上面的比較圖我們知道，這兩個 package 基本上功能相似，在 preprocessing 時一定會使用到，但兩者有各自的優缺點。</p>
+
+<h3 id="nltk">NLTK</h3>
+
+<p>主要用於處理斷詞、詞頻、 pos 等等，更多用法請參照下面連結。</p>
+
+<p><a href="https://github.com/shihs/732A92-TextMining/blob/master/note/NLTK.ipynb">NLTK</a></p>
+
+<h3 id="spacy">spaCy</h3>
+
+<p>spaCy 是 NLTK 的主要競爭者，它們的功能類似。</p>
+
+<p><a href="https://github.com/shihs/732A92-TextMining/blob/master/note/spaCy.ipynb">spaCy</a></p>
+
+:ET

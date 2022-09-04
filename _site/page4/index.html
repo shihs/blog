@@ -183,6 +183,218 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">
+        [Text Mining]Text classification
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on November 13, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">November 13, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+
+<hr />
+
+<h2 id="text-classification">Text classification</h2>
+
+<ul>
+  <li>Text classification is the task of categorising text documents into predefined classes.</li>
+</ul>
+
+<h2 id="evaluation-of-text-classifiers">Evaluation of text classifiers</h2>
+
+<p>最簡單的檢視預測結果好壞的方法就是將 predict 出來的類別與真實的類別做比較。（預測必須要在 test data，換句話說之前並沒有參與任何 training 的過程。這點在做所有 Machine Learning 的方法都很重要，在做 model 測試前不要碰 test data。）</p>
+
+<h3 id="accuracy">Accuracy</h3>
+<p>The accuracy of a classifier is the proportion of documents for which the classifier predicts the gold-standard class:</p>
+
+\[\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}\]
+
+<h3 id="accuracy-and-imbalanced-data-sets">Accuracy and imbalanced data sets</h3>
+
+<p>上面的 accuracy 看起來非常合理啊，去計算分類正確的比例來判斷這個分類器是否預測準確。但，如果其實資料本身的類別並不平均呢？</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/imbalanced%20data%20sets.png" alt="PMF_two coins.png" /></p>
+
+<p>根據上圖，我們只要把所有資料都猜綠色的 class，這樣 accuracy 就能有 80%。從這個例子可以知道，</p>
+
+<ul>
+  <li>
+    <p>Evaluation measures are no absolute measures of performance. 如果今天得到 accuracy 是 80% 我們並無法確定這樣的準確率的好壞，要根據每個問題去判斷。</p>
+  </li>
+  <li>
+    <p>Instead, we should ask for a classifier’s performance relative to other classifiers, or other points of comparison. E.g.’Logistic Regression has a higher accuracy than Naive Bayes.’</p>
+  </li>
+  <li>
+    <p>When other classifiers are not available, a simple baseline is to always predict the most frequent class in the training data.</p>
+  </li>
+</ul>
+
+<h2 id="precision-and-recall">Precision and recall</h2>
+
+<ul>
+  <li>
+    <p>Precision and recall ‘zoom in’ on how good a system is at identifying documents of a specific class.</p>
+  </li>
+  <li>
+    <p>Precision is the proportion of correctly classified documents among all documents for which the system predicts class.</p>
+  </li>
+</ul>
+
+\[\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}\]
+
+<ul>
+  <li>Recall is the proportion of correctly classified documents among all documents with gold-standard class.</li>
+</ul>
+
+\[\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}\]
+
+<h2 id="f1-measure">F1-measure</h2>
+<p>A good classifier should balance between precision and recall.  </p>
+
+\[\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}\]
+
+<hr />
+
+<h2 id="naive-bayes-classifier">Naive Bayes classifier</h2>
+
+<h3 id="bayes-theorem">Bayes’ theorem</h3>
+
+<p>We know that \(C\) is classes, \(x_i, i = 1, \cdots,n\) is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
+
+\[p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}\]
+
+<p>也就是，</p>
+
+\[\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}\]
+
+<p>根據上式，我們可以將分母視為常數，因為 features \(x_i, i = 1, \cdots,n\) 的值是給定的，且與 \(C\) 無關，所以可以得到</p>
+
+\[\begin{align}
+p(C, x_1, \cdots,x_n) &amp; = p(C)~p(x_1,\cdots,x_n|C) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
+&amp; \propto \cdots\\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
+\end{align}\]
+
+<h3 id="naive-bayes-assumption">Naive Bayes assumption</h3>
+
+<p>Naive Bayes 假設 
+\(p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j\)</p>
+
+<p>根據 Naive Bayes 的假設，前面的式子我們可以寫成，</p>
+
+\[\begin{align}
+p(C|x_1,..., x_n) &amp; \propto p(C, x_1, \cdots,x_n) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
+&amp; \propto p(C)~\prod_{i=1}^n p(x_i|C)
+\end{align}\]
+
+<p>根據上面的推導過程，我們可以得到，</p>
+
+\[p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)\]
+
+<h3 id="naive-bayes-classifer">Naive Bayes classifer</h3>
+
+<p>而 Naive Bayes classifer 就是取各個分類 \(C_m, m = 1, \cdots, k\) 
+中 \(p(C|x_1,..., x_n)\) 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
+
+\[C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)\]
+
+<p>而 \(C_m\) 就是最後的分類結果。</p>
+
+<h3 id="two-classic-naive-bayes-variants-for-text">Two Classic Naive Bayes Variants for Text</h3>
+
+<ol>
+  <li>Multinomial Naive Bayes
+    <ul>
+      <li>Data follows a multinomial distribution (多項分布)</li>
+      <li>Each feature values is a count (word occurrence counts, TF-IDF weighting, …)</li>
+    </ul>
+  </li>
+  <li>Bernoulli Naive Bayes
+    <ul>
+      <li>Data follows a multivariate Bernoulli distribution</li>
+      <li>Each feature is binary (word is present / absent)</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L2.ipynb">Text classification Lab</a></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
+<br />
+<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/朴素贝叶斯分类器">wikipeida - 單純貝氏分類器</a></p>
+
+ -->
+    
+    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread';
+        this.page.identifier = '/text%20mining/2019/11/13/Text-Mining-Text-classification/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/13/Text-Mining-Text-classification/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">
         [Text Mining]Information Retrieval
       </a>
@@ -302,32 +514,32 @@
 <h3 id="tokenization">Tokenization</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">raw</span> <span class="o">=</span> <span class="s">"Apple is looking at buying U.K. startup for $1 billion."</span>
-<span class="c"># tokenize raw text based on whitespace</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
+<span class="c1"># tokenize raw text based on whitespace
+</span><span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">.</span><span class="n">split</span><span class="p">():</span> 
 	<span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
 
-<span class="c"># tokenize using spaCy</span>
-<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="c1"># tokenize using spaCy
+</span><span class="kn">import</span> <span class="nn">spacy</span>
 
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="c"># 結果：</span>
-<span class="c"># Apple</span>
-<span class="c"># is</span>
-<span class="c"># looking</span>
-<span class="c"># at</span>
-<span class="c"># buying</span>
-<span class="c"># U.K.</span>
-<span class="c"># startup</span>
-<span class="c"># for</span>
-<span class="c"># $</span>
-<span class="c"># 1</span>
-<span class="c"># billion</span>
-<span class="c"># . </span>
-</code></pre></div></div>
+<span class="c1"># 結果：
+# Apple
+# is
+# looking
+# at
+# buying
+# U.K.
+# startup
+# for
+# $
+# 1
+# billion
+# . 
+</span></code></pre></div></div>
 
 <p>英文每個單字可以很容易地使用空白（.split()）來分割出每個單字，但只使用
 split 無法排除標點符號的問題，python 的 spacy 可以將標點符號也區分出來。</p>
@@ -395,7 +607,7 @@ For example: what you would put into a lexicon</p>
   <li>The score of a document d with respect to a query q is the sum of the weights of all terms t that occur in both d and q.</li>
 </ul>
 
-<script type="math/tex; mode=display">\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}</script>
+\[\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}\]
 
 <ul>
   <li>Any specific way to assign weights to terms is called a term weighting scheme.</li>
@@ -415,11 +627,10 @@ For example: what you would put into a lexicon</p>
 
 <p>Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-weight(t, d) = \left\{ \begin{array}{rcl}
-1 + log_{10}tf(t, d), & if ~ tf(t, d) > 0 \\
-0, & others \\
-\end{array}\right. %]]></script>
+\[weight(t, d) = \left\{ \begin{array}{rcl}
+1 + log_{10}tf(t, d), &amp; if ~ tf(t, d) &gt; 0 \\
+0, &amp; others \\
+\end{array}\right.\]
 
 <p>稱作，<em>log-frequency weighting</em></p>
 
@@ -437,7 +648,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>It denotes by idf(t):</p>
 
-<script type="math/tex; mode=display">\textrm{idf(t)} = log \frac{N}{df(t)}</script>
+\[\textrm{idf(t)} = log \frac{N}{df(t)}\]
 
 <p>df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。</p>
 
@@ -447,7 +658,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>The <strong>tf–idf weight</strong> of a term t in a document d is defined as</p>
 
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}</script>
+\[\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}\]
 
 <p>where N denotes the number of documents in the collection.</p>
 
@@ -457,7 +668,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>In scikit-learn, the tf–idf weight is computed as</p>
 
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)</script>
+\[\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)\]
 
 <p>where N denotes the number of documents in the collection.</p>
 
@@ -543,13 +754,13 @@ Doc2 = (2, 2, 0)</p>
 
 <p>Precision (P) is the fraction of retrieved documents that are relevant</p>
 
-<script type="math/tex; mode=display">Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})</script>
+\[Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})\]
 
 <p><strong>Recall:</strong></p>
 
 <p>Recall (R) is the fraction of relevant documents that are retrieved</p>
 
-<script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
+\[Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})\]
 
 <p><strong>F1-measure</strong></p>
 
@@ -557,7 +768,7 @@ Doc2 = (2, 2, 0)</p>
 <br />
 The F1-measure is the harmonic mean of the two values:</p>
 
-<script type="math/tex; mode=display">F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}</script>
+\[F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}\]
 
 <hr />
 
@@ -579,7 +790,6 @@ The F1-measure is the harmonic mean of the two values:</p>
  -->
     
     <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
 </div>
 
     <div class="bookmark">
@@ -650,7 +860,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>The Goal of MCMC</strong></p>
 
-<p>We want to sample from some distribution p, or approximate an <script type="math/tex">E[f(x)] ~ where ~ (X \sim p)</script>
+<p>We want to sample from some distribution p, or approximate an \(E[f(x)] ~ where ~ (X \sim p)\)
 <br />
 通常 p 是一個很複雜的 distribution，要從這個分佈取 sample 根本不可能，所以這時候就會需要 MCMC。</p>
 
@@ -660,13 +870,13 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>在 Baysian Inference 中常使用到這個公式</p>
 
-<script type="math/tex; mode=display">p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
+\[p(\theta\mid y) = \frac{p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}\]
 
-<p>或是，它的參數 <script type="math/tex">\theta</script> 的貝式估計</p>
+<p>或是，它的參數 \(\theta\) 的貝式估計</p>
 
-<script type="math/tex; mode=display">\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}</script>
+\[\hat \theta = E[\theta \mid y] = \int \theta p(y \mid \theta) d \theta = \frac{\int \theta p(y \mid \theta) p(\theta)}{\int p(y \mid \theta) p(\theta)d\theta}\]
 
-<p>其中的 <script type="math/tex">p(\theta)</script> 為先驗機率 (prior probability)，基本上我們無法獲得 <script type="math/tex">p(\theta)</script> 的值，這時候就需要 MCMC。</p>
+<p>其中的 \(p(\theta)\) 為先驗機率 (prior probability)，基本上我們無法獲得 \(p(\theta)\) 的值，這時候就需要 MCMC。</p>
 
 <hr />
 
@@ -678,11 +888,11 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>Monte Carlo Integration 可以以抽樣平均的方式計算上面的期望值式子</p>
 
-<script type="math/tex; mode=display">E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)</script>
+\[E[\theta \mid y] \approx \frac{1}{n}\sum_{i=1}^{t}{(\theta_i \mid y)}, ~ \theta_i \stackrel{iid}{\sim} p(\theta \mid y)\]
 
 <p>也就是說，使用樣本平均數來估計期望值。這件事情可以成立是因為，根據大數法則，當樣本數 n 夠大時，樣本的平均數將趨近於母體平均數。</p>
 
-<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 <script type="math/tex">p(\theta \mid y)</script> 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
+<p>這樣看起來 Monte Carlo Integration 讓我們省去了上面那個看起來複雜的積分式子。但是，現實生活中很多時候並無法從 \(p(\theta \mid y)\) 這個 distribution 抽樣，要不就是不知道這個 distribution，要不就是這個 distribution 爆炸複雜啊。</p>
 
 <p>所以說，哪有這麼好的事？</p>
 
@@ -694,16 +904,16 @@ s.setAttribute('data-timestamp', +new Date());
 
 <ul>
   <li>
-    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence <script type="math/tex">X_0, X_1, ...</script> of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 <script type="math/tex">X_0, X_1, ...</script>，且每一個變數只和前一個變數有關，也就是 <script type="math/tex">X_{t+1}</script> 來自 <script type="math/tex">p(X_{t+1} \mid X_t)</script>，像這樣的數列我們就稱為馬可夫鍊。</p>
+    <p>Markov Chain (馬可夫鍊)：A Markov chain is a sequence \(X_0, X_1, ...\) of random variables such that the distribution of the next value depends only on the current on (and parameters). 現在有一隨機變數數列 \(X_0, X_1, ...\)，且每一個變數只和前一個變數有關，也就是 \(X_{t+1}\) 來自 \(p(X_{t+1} \mid X_t)\)，像這樣的數列我們就稱為馬可夫鍊。</p>
   </li>
   <li>
-    <p><script type="math/tex">p(X_{t+1} \mid X_t)</script> 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
+    <p>\(p(X_{t+1} \mid X_t)\) 被稱為這個馬可夫鍊的轉換核心 (transition kernel)</p>
   </li>
   <li>
-    <p>A Markov chain is stationary, with stationary distribution <script type="math/tex">Φ, if ~\forall k ~ X_k  \sim Φ</script></p>
+    <p>A Markov chain is stationary, with stationary distribution \(Φ, if ~\forall k ~ X_k  \sim Φ\)</p>
   </li>
   <li>
-    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 <script type="math/tex">\pi(·)</script> 並且與 <script type="math/tex">X_0</script> 的選擇無關。</p>
+    <p>One shows (not trivial in general) that under <em>certain</em> conditions a Markov chain will converge to the stationary distribution in the limit. 在一般條件假設底下，馬可夫鍊的變數分配將收斂到目標機率函數 \(\pi(·)\) 並且與 \(X_0\) 的選擇無關。</p>
   </li>
 </ul>
 
@@ -727,7 +937,6 @@ Linköping University - 732A90 Computational Statistics 2019 Lecture 4 slide
  -->
     
     <div class="post-excerpt"><p><strong>MCMC 是什麼？</strong></p>
-
 </div>
 
     <div class="bookmark">
@@ -870,7 +1079,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">前面</a>介紹了 Convolution operation。</p>
-
 </div>
 
     <div class="bookmark">
@@ -964,7 +1172,7 @@ s.setAttribute('data-timestamp', +new Date());
 [初始化]
 一開始先隨便弄出幾個x。本例是四個。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101010
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101010
 1011001011
 1110101011
 0010101000
@@ -974,14 +1182,14 @@ s.setAttribute('data-timestamp', +new Date());
 [fitness function]
 根據問題特性，定義好壞程度。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(1010101010) = 678
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>f(1010101010) = 678
 </code></pre></div></div>
 
 <p>3.
 [selection]
 隨便找個位置切一刀，每個x都被分成兩段。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101  010
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101  010
 1011001  011
 1110101  011
 0010101  000
@@ -992,7 +1200,7 @@ s.setAttribute('data-timestamp', +new Date());
 隨便找兩組你覺得夠優良的x，交叉相接變成新答案。
 重複一直做，直到x數目跟原先一樣多。本例是四個。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101 \/ 010  -&gt;  1010101 -- 011
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010101 \/ 010  -&gt;  1010101 -- 011
 1011001 /\ 011      1011001 -- 010 
 
 
@@ -1006,7 +1214,7 @@ s.setAttribute('data-timestamp', +new Date());
 [mutation]
 每個x都隨便找一個地方把數字改掉，也可以不改。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010111011
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1010111011
 1011001000
 1110101010
 1010101001
@@ -1042,7 +1250,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>基因演算法（Genetic Algorithm）是一種求函數極值的最佳化（函數的最大或最小值）的方法。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1117,21 +1324,21 @@ s.setAttribute('data-timestamp', +new Date());
 <p><strong>lambda</strong></p>
 
 <p>我其實覺得就是定義 funciton，只是是定義一些簡單，可以一行完成的 funciton。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳輸入的變數 + 1</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 回傳輸入的變數 + 1
+</span><span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<span class="c"># 上面的 func 其實就等於</span>
-<span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="c1"># 上面的 func 其實就等於
+</span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span>
 
 
-<span class="c"># 輸入兩個變數</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
+<span class="c1"># 輸入兩個變數
+</span><span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 
-<span class="c"># 含 if</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">False</span>
+<span class="c1"># 含 if
+</span><span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">False</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">fun</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </code></pre></div></div>
 <hr />
@@ -1141,16 +1348,16 @@ s.setAttribute('data-timestamp', +new Date());
 <p>對 sequence 中的 item 依序執行 function(item)，然後將執行結果為 True 的 item 組成一個 list/string/tuple（與 sequence 類型相同）回傳。
 這時候 function 可以使用 lambda 定義或是平常的 def 定義。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 回傳是數字，除 0 外都是 True</span>
-<span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 回傳是數字，除 0 外都是 True
+</span><span class="n">fun</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span>
 <span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
 
-<span class="c"># function 為 def</span>
-<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
+<span class="c1"># function 為 def
+</span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
 <span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
 
-<span class="c"># function 為 lambda</span>
-<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
+<span class="c1"># function 為 lambda
+</span><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span> 
 <span class="k">print</span> <span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span> <span class="p">)</span>
 
 </code></pre></div></div>
@@ -1160,16 +1367,16 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>對 sequence 中的 item 依序執行 function(item)，執行結果以 list 回傳。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># funciton 只有一個參數</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># funciton 只有一個參數
+</span><span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<span class="c"># 每次都回傳 1</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="c1"># 每次都回傳 1
+</span><span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
 
-<span class="c"># function 有兩個參數</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="c1"># function 有兩個參數
+</span><span class="n">res</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div></div>
 <hr />
@@ -1178,10 +1385,10 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>對 sequence 中的 item 順序迭代調用 function，最後回傳一個值。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span> <span class="c"># 在 python3 是必須的</span>
-
-<span class="c"># 求 list 的和</span>
-<span class="n">res</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span> <span class="c1"># 在 python3 是必須的
+</span>
+<span class="c1"># 求 list 的和
+</span><span class="n">res</span> <span class="o">=</span> <span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1195,7 +1402,6 @@ s.setAttribute('data-timestamp', +new Date());
   <li>lambda 可以直接定義一些簡單的 funciton。</li>
   <li>filter、map和reduce這三個函數有點像 R 裡頭的 apply 家族系列。</li>
 </ul>
-
 </div>
 
     <div class="bookmark">
@@ -1335,22 +1541,22 @@ Generate policies/strategies that lead to a (possibly delayed) reward. Learn by 
 
 <p><strong>Policy</strong></p>
 
-<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 <script type="math/tex">\pi</script>，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
+<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 \(\pi\)，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
 
 <ul>
-  <li>stochastic policy: <script type="math/tex">\pi(a\mid s),~ and \sum\pi(a\mid s) = 1</script></li>
-  <li>deterministic policy: <script type="math/tex">\pi(s)</script></li>
+  <li>stochastic policy: \(\pi(a\mid s),~ and \sum\pi(a\mid s) = 1\)</li>
+  <li>deterministic policy: \(\pi(s)\)</li>
 </ul>
 
 <p><strong>Reward</strong></p>
 
-<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 <script type="math/tex">s_0</script>，agent 做了 <script type="math/tex">a_0</script> 的 action，這時候產生了一個 reward <script type="math/tex">r_1</script>，然後因為剛剛的 <script type="math/tex">a_0</script> 這時候 state 來到 <script type="math/tex">s_1</script>，而 agent 要採取下一步 <script type="math/tex">a_1</script> 的時候就會根據剛剛的 <script type="math/tex">r_1</script> 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
+<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 \(s_0\)，agent 做了 \(a_0\) 的 action，這時候產生了一個 reward \(r_1\)，然後因為剛剛的 \(a_0\) 這時候 state 來到 \(s_1\)，而 agent 要採取下一步 \(a_1\) 的時候就會根據剛剛的 \(r_1\) 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/reward.jpg" alt="reward.jpg" height="120px" width="800px" /></p>
 
 <p>但其實並不是所有的學習都會像這個例子一樣立即獲得 reward，像下棋就會是整局結束後才得到 reward。</p>
 
-<p>另外，需要注意的是，Reward <script type="math/tex">\ne</script> Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
+<p>另外，需要注意的是，Reward \(\ne\) Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
 
 <hr />
 
@@ -1366,18 +1572,17 @@ Generate policies/strategies that lead to a (possibly delayed) reward. Learn by 
 
 <p>定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。</p>
 
-<p><script type="math/tex">V_\pi(s)</script> 表示的是策略 <script type="math/tex">\pi</script>，狀態 s 的長期期望收益。<script type="math/tex">Q_\pi(s, a)</script> 是策略 <script type="math/tex">\pi</script> 在狀態 s 下，採取動作 a 的長期期望收益。</p>
+<p>\(V_\pi(s)\) 表示的是策略 \(\pi\)，狀態 s 的長期期望收益。\(Q_\pi(s, a)\) 是策略 \(\pi\) 在狀態 s 下，採取動作 a 的長期期望收益。</p>
 
 <ul>
   <li>
-    <p>長期回報期望：<script type="math/tex">% <![CDATA[
-G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （因為 <script type="math/tex">\gamma</script> 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
+    <p>長期回報期望：\(G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 &lt; \gamma &lt; 1\) （因為 \(\gamma\) 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
   </li>
   <li>
-    <p>Value function：<script type="math/tex">V_\pi(s) = E_\pi[G_t\mid S_t = s]</script></p>
+    <p>Value function：\(V_\pi(s) = E_\pi[G_t\mid S_t = s]\)</p>
   </li>
   <li>
-    <p>Q function：<script type="math/tex">Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]</script></p>
+    <p>Q function：\(Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]\)</p>
   </li>
 </ul>
 
@@ -1408,12 +1613,12 @@ G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （�
 <p>上面介紹了 V(s) 是狀態 s 的長期期望收益，那 agent 要如何決定根據它來決定要做什麼 action 採取什麼 policies 呢？這時候我們就會加上 action 這個變數來看，也就是上面提到的 Q(s, a)。</p>
 
 <ul>
-  <li><script type="math/tex">V^*(s) = \max_{a} Q(s_{k+1}, a)</script> denote the value function for the optimal policy</li>
-  <li><script type="math/tex">Q(s, a)</script> is expected future reward of doing action a in state s and then following the optimal policy <script type="math/tex">Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})</script></li>
-  <li><script type="math/tex">Q(s, a)</script> 未知，必須透過學習得到。</li>
+  <li>\(V^*(s) = \max_{a} Q(s_{k+1}, a)\) denote the value function for the optimal policy</li>
+  <li>\(Q(s, a)\) is expected future reward of doing action a in state s and then following the optimal policy \(Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})\)</li>
+  <li>\(Q(s, a)\) 未知，必須透過學習得到。</li>
 </ul>
 
-<p><script type="math/tex">Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))</script>, <script type="math/tex">\eta</script> is learning rate</p>
+<p>\(Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))\), \(\eta\) is learning rate</p>
 
 <p><a href="https://blog.csdn.net/itplus/article/details/9361915">這篇文章</a>翻譯了這個<a href="http://mnemstudio.org/path-finding-q-learning-tutorial.htm">原文</a>，我覺得非常好理解。但要整篇整理在這裡太麻煩了，所以自己看吧。</p>
 
@@ -1440,7 +1645,6 @@ Linköping University Neural Networks and Learning Systems TBMI26 / 732A55 2019 
  -->
     
     <div class="post-excerpt"><h3 id="複習">複習</h3>
-
 </div>
 
     <div class="bookmark">
@@ -1597,7 +1801,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>這篇為 Coursera 上 <a href="https://www.coursera.org/learn/convolutional-neural-networks/home/welcome">Convolutional Neural Networks</a> 這門課第一週的 Computer Vision、Edge Detection Example 和 More Edge Detection 筆記。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1639,137 +1842,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">
-        字元編碼，ASCII、Unicode、UTF-8
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 22, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 22, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Others">Others</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
-<br />
-2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
-
-<hr />
-
-<h2 id="字元編碼">字元編碼</h2>
-
-<ul>
-  <li>在電腦的世界是使用二進位（binary）的方式來進行運算，也就是 0 與 1 兩個 digits（each binary digit called bit）。</li>
-  <li>而電腦是使用「關」與「開」來表示二進位中的 0 與 1。</li>
-  <li>在現代電腦中是由上百萬的電晶體（transistors）來控制這樣的「關」與「開」（0 與 1）。</li>
-</ul>
-
-<hr />
-
-<h2 id="ascii">ASCII</h2>
-<p><a href="https://zh.wikipedia.org/wiki/ASCII">ASCII</a> 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。它的目的是用來統一規範，規定數字與字母大小寫、符號等等的對應關係，而每一個數字由 8 個 bits 表示。最後一次更新是在1986年，至今為止共定義了 128 個字元。</p>
-
-<p>像是 <code class="highlighter-rouge">HI!</code> 就是由數字 72、73 和 33 所組成的。由二進位表示就是，<code class="highlighter-rouge">01001000</code>、<code class="highlighter-rouge">01001001</code>、<code class="highlighter-rouge">00100001</code>。</p>
-
-<p><strong>Extended ASCII</strong>
-<br />
-但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。（<a href="https://zh.wikipedia.org/zh-tw/EASCII">Wikipedia</a>）</p>
-
-<hr />
-
-<h2 id="unicode">Unicode</h2>
-<p>隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。</p>
-
-<p>Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為 Code point。U+ 的意思是 Unicode，
-數字則是用十六進位表示。</p>
-
-<p>但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。</p>
-
-<hr />
-
-<h2 id="utf-8">UTF-8</h2>
-<p>有人發明了 UTF-8 這種儲存方式。</p>
-
-<p>UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用 UTF-8 編碼就能省下空間。</p>
-
-<p><strong>比較</strong>
-<br />
-Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式</p>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode 和 UTF-8</a>
-<br />
-<a href="http://blog.chunnorris.cc/2015/04/unicode.html">淺談電腦編碼與 Unicode (一) 基礎概念篇</a>
-<br />
-<a href="https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118">常見三種字符編碼的區別：ASCII、Unicode、UTF-8</a>
-<br />
-<a href="https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F">[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知</a>
-<br />
-<a href="https://cs50.harvard.edu/x/2022/notes/0/">CS50 2022 - Lecture 0</a></p>
- -->
-    
-    <div class="post-excerpt"><p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
-<br />
-2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread';
-        this.page.identifier = '/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread" data-disqus-identifier="/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

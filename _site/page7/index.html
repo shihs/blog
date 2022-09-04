@@ -183,6 +183,120 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/r/2018/09/27/R-scale-%E8%88%87-dist-function/">
+        [R]scale 與 dist function
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 27, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 27, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
+
+<p>在做資料分析前會需要先標準化</p>
+
+<hr />
+
+<h3 id="scale">scale</h3>
+<p>scale 的主要作用在標準化數據，共有三個 arguments，</p>
+<ul>
+  <li>x: 必須要是 matrix，以「行」為每組數據計算</li>
+  <li>center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值</li>
+  <li>scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差</li>
+</ul>
+
+<p>預設 center 和 scale 都是 TRUE，也就是算出來的值是 <a href="https://zh.wikipedia.org/wiki/標準分數">z-score</a>。</p>
+
+<blockquote>
+
+  <p>\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)</p>
+</blockquote>
+
+<p>其中：<br />
+\(x\)：數據<br />
+\(\mu\)：平均值<br />
+\(\sigma\)：標準差</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="dist">dist</h3>
+<p>dist 是在算數據間的距離，主要的 arguments有</p>
+<ul>
+  <li>x: 可以是 matrix, data.frame ，但必須要是 numeric。</li>
+  <li>methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。</li>
+</ul>
+
+<p>以「列」為數據，兩兩計算，</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+ -->
+    
+    <div class="post-excerpt"><p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread';
+        this.page.identifier = '/r/2018/09/27/R-scale-%E8%88%87-dist-function/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2018/09/27/R-scale-%E8%88%87-dist-function/#disqus_thread" data-disqus-identifier="/r/2018/09/27/R-scale-%E8%88%87-dist-function/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">
         [R]如何在R Package加上code coverage (codecov)?
       </a>
@@ -235,7 +349,7 @@
 
 <p>跑完後會出現以下的步驟提示，</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Creating `codecov.yml` from template.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Creating `codecov.yml` from template.
 * Adding `codecov.yml` to `.Rbuildignore`.
 * Add to `README.md`: 
 [![Coverage Status](https://img.shields.io/codecov/c/github/shihs/LiUAdRLab3/master.svg)](https://codecov.io/github/shihs/LiUAdRLab3?branch=master)
@@ -279,7 +393,6 @@ after_success:
  -->
     
     <div class="post-excerpt"><p><a href="https://zh.wikipedia.org/wiki/代碼覆蓋率">code coverage</a>(代碼覆蓋率)?</p>
-
 </div>
 
     <div class="bookmark">
@@ -410,7 +523,7 @@ git push -u origin master
 
 <p><strong>補充</strong></p>
 
-<p>移除 project 與該 repository 的 connection <code class="highlighter-rouge">rm -rf .git</code></p>
+<p>移除 project 與該 repository 的 connection <code class="language-plaintext highlighter-rouge">rm -rf .git</code></p>
 
 <hr />
 <p>參考：</p>
@@ -422,7 +535,6 @@ git push -u origin master
  -->
     
     <div class="post-excerpt"><p>本篇介紹如何將 Rstudio 中的 R project 與 Github 連結，讓每次專案在進行中都可以簡單快速的 commit 與 push。</p>
-
 </div>
 
     <div class="bookmark">
@@ -498,7 +610,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li>The cumulative distribution function (CDF) of random variable \(X\) is defined as</li>
 </ul>
 
-<script type="math/tex; mode=display">F_X(x) = P(X \leq x), \forall x \in {\Bbb R}</script>
+\[F_X(x) = P(X \leq x), \forall x \in {\Bbb R}\]
 
 <p><a href="https://www.probabilitycourse.com/chapter3/3_2_1_cdf.php">Source</a></p>
 
@@ -516,25 +628,23 @@ s.setAttribute('data-timestamp', +new Date());
 <p>以擲兩枚硬幣為例，出現 head 為 1，tail 為 0，<br />
 其隨機變數 \(X\) 的 PMF 函數為</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-1/4,& \;for\; x = 0 \\
-1/2,& \;for\; x = 1 \\
-1/4,& \;for\; x = 2 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+1/4,&amp; \;for\; x = 0 \\
+1/2,&amp; \;for\; x = 1 \\
+1/4,&amp; \;for\; x = 2 \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <p>PMF 函數圖為，
 <img src="http://localhost:4000/blog/img/posts/PMF_two%20coins.png" alt="PMF_two coins.png" /></p>
 
 <p>則它的 CDF 累積分佈函數為
-<script type="math/tex">% <![CDATA[
-F_X(x) = \left\{ \begin{array}{rcl}
-0,& &for\; x < 0 \\
-1/4,& &for\; 0 \leq x < 1 \\
-3/4,& &for\; 1 \leq x < 2 \\
-1,&  &for\; x \geq 2\\
-\end{array}\right. %]]></script></p>
+\(F_X(x) = \left\{ \begin{array}{rcl}
+0,&amp; &amp;for\; x &lt; 0 \\
+1/4,&amp; &amp;for\; 0 \leq x &lt; 1 \\
+3/4,&amp; &amp;for\; 1 \leq x &lt; 2 \\
+1,&amp;  &amp;for\; x \geq 2\\
+\end{array}\right.\)</p>
 
 <p>CDF 函數圖為，
 <img src="http://localhost:4000/blog/img/posts/CDF_two%20coins.png" alt="CDF_two coins.png" /></p>
@@ -564,7 +674,6 @@ F_X(x) = \left\{ \begin{array}{rcl}
  -->
     
     <div class="post-excerpt"><p>在進入連續型隨機變數（Continuous Random Variable）前先插播介紹何謂 CDF。</p>
-
 </div>
 
     <div class="bookmark">
@@ -644,12 +753,11 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <li>A random variable \(X\) is said to be a <em>bernoulli</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Bernoulli(p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p,& \;for\; x = 1 \\
-1-p,& \;for\; x = 0 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+p,&amp; \;for\; x = 1 \\
+1-p,&amp; \;for\; x = 0 \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -674,11 +782,10 @@ p,& \;for\; x = 1 \\
   <li>A random variable \(X\) is said to be a <em>geometric</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Geometric(p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+p(1-p)^{k-1},&amp; \;for\; k = 1, 2, 3,...... \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -701,11 +808,10 @@ p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
   <li>A random variable \(X\) is said to be a <em>binomial</em> random variable with peremeter \(n\) and \(p\), shown as <strong>\(X \sim Binomial(n, p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},& \;for\; k = 0, 1, 2,..., n \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},&amp; \;for\; k = 0, 1, 2,..., n \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -713,7 +819,7 @@ P_X(x) = \left\{ \begin{array}{rcl}
 
 <p>Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。</p>
 
-<p>所以它的 PMF 會有 <script type="math/tex">\left( \begin{array}{c} n \\ k \end{array} \right)</script>，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
+<p>所以它的 PMF 會有 \(\left( \begin{array}{c} n \\ k \end{array} \right)\)，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
 
 <p>可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。</p>
 
@@ -737,11 +843,10 @@ P_X(x) = \left\{ \begin{array}{rcl}
   <li>A random variable \(X\) is said to be a <em>poisson</em> random variable with peremeter \(\lambda\), shown as <strong>\(X \sim Poisson(\lambda)\)</strong>, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\frac{e^{-\lambda} \lambda^k}{k!} ,& k \in R_X \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+\frac{e^{-\lambda} \lambda^k}{k!} ,&amp; k \in R_X \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <p>Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。</p>
 
@@ -749,22 +854,20 @@ P_X(x) = \left\{ \begin{array}{rcl}
 <strong>\(\sum_{k \in R_X}{P_k(x)} = 1\)</strong>
 是否正確。</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\sum_{k \in R_X}{P_k(x)} &= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
-&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
-\end{align} %]]></script>
+\[\begin{align}
+\sum_{k \in R_X}{P_k(x)} &amp;= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&amp;= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+\end{align}\]
 
 <blockquote>
 
   <p>Note: 根據 Taylor Series(泰勒展開式) <strong>\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)</strong>，上列式子可以寫成，</p>
 </blockquote>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-&= e^{-\lambda} e^{\lambda} \\
-&= 1 \\
-\end{align} %]]></script>
+\[\begin{align}
+&amp;= e^{-\lambda} e^{\lambda} \\
+&amp;= 1 \\
+\end{align}\]
 
 <p><strong>Example:</strong></p>
 
@@ -782,7 +885,7 @@ P_X(x) = \left\{ \begin{array}{rcl}
   <li>Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have</li>
 </ul>
 
-<script type="math/tex; mode=display">\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}</script>
+\[\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}\]
 
 <p>\(X \sim Poisson(\lambda = 5)\) 的函數圖形，</p>
 
@@ -802,7 +905,6 @@ P_X(x) = \left\{ \begin{array}{rcl}
 Wackerley, Mendenhall and Scheaffer 的 <br />
 Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
 有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
 </div>
 
     <div class="bookmark">
@@ -882,11 +984,11 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \)(finite or countably infinite). The expectation of \(X\) is defined as</li>
 </ul>
 
-<script type="math/tex; mode=display">E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)</script>
+\[E(X) = \sum_{\substack{x_k \in R_X}}x_kP(X=x_k)=\sum_{\substack{x_k \in R_X}}x_kP_X(x_k)\]
 
 <p>且期望值 \(E(X)\) 會等於平均數 \(\mu\)</p>
 
-<script type="math/tex; mode=display">E(X) = \mu</script>
+\[E(X) = \mu\]
 
 <p>說明：</p>
 
@@ -895,30 +997,29 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <p>There is a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \). Suppose that we repeat this experiment a very large number of times \(N\), and that the trials are independent. Let \(N_1\) be the number of times we observe \(x_1\), \(N_2\) be the number of times we observe \(x_2, ….\), \(N_k\) be the number of times we observe \(x_k\).</p>
 </blockquote>
 
-<script type="math/tex; mode=display">P_X(x_1) \approx\frac{N_1}{N} \\
+\[P_X(x_1) \approx\frac{N_1}{N} \\
 P_X(x_2) \approx\frac{N_2}{N} \\
 \cdots\\
 P_X(x_k) \approx\frac{N_k}{N} \\
-\cdots</script>
+\cdots\]
 
 <blockquote>
 
   <p>從以上式子我們可以得到 \(N_k = NP_X(x_k)\)</p>
 </blockquote>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\mu & = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
-& \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
-& = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
-& = E(X)
-\end{align} %]]></script>
+\[\begin{align}
+\mu &amp; = \frac{N_1x_1 + N_2x_2 + N_3x_3 + ...}{N} \\
+&amp; \approx \frac{x_1NP_X(x_1) + x_2NP_X(x_2) + x_3NP_X(x_3) + ...}{N} \\
+&amp; = x_1P_X(x_1) + x_2P_X(x_2) + x_3P_X(x_3) + ... \\
+&amp; = E(X)
+\end{align}\]
 
 <p>以上就是 \(E(X) = \mu\) 的說明。</p>
 
 <p>另外，可能會看到一些不同的寫法表示期望值</p>
 
-<script type="math/tex; mode=display">E(X)=E[X]=EX=\mu=\mu_X</script>
+\[E(X)=E[X]=EX=\mu=\mu_X\]
 
 <p>這部分內容主要來源為 <a href="https://www.probabilitycourse.com/chapter3/3_2_2_expectation.php">Source</a></p>
 
@@ -929,7 +1030,7 @@ P_X(x_k) \approx\frac{N_k}{N} \\
   <li>Let \(X\) be a discrete random variable with probability function \(P(x)\) and \(g(X)\) be a real-valued function of \(Y\). Then the expected value of \(g(X)\) is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)</script>
+\[E[g(X)] = \sum_{\substack{x \in R_X}}g(x)P(x)\]
 
 <p><strong>Example:</strong> <br />
 <a href="https://www.probabilitycourse.com/chapter3/3_2_3_functions_random_var.php">Source</a></p>
@@ -943,13 +1044,12 @@ P_X(x_k) \approx\frac{N_k}{N} \\
 <blockquote>
 
   <p>根據 LOTUS，
-<script type="math/tex">% <![CDATA[
-\begin{align}
-E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
-& = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
-& = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
-& = \frac{\sqrt{2} + 1}{2}
-\end{align} %]]></script></p>
+\(\begin{align}
+E[\sin(X)] &amp; = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
+&amp; = \sin(0)P_X(0) +  \sin(\frac{\pi}{4})P_X(\frac{\pi}{4}) + \sin(\frac{\pi}{2})P_X(\frac{\pi}{2}) + \sin(\frac{3\pi}{4})P_X(\frac{3\pi}{4}) + \sin(\pi)P_X(\pi)\\
+&amp; = 0 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 1 \times \frac{1}{5} + \frac{\sqrt{2}}{2} \times \frac{1}{5} + 0 \times \frac{1}{5} \\
+&amp; = \frac{\sqrt{2} + 1}{2}
+\end{align}\)</p>
 </blockquote>
 
 <hr />
@@ -960,13 +1060,13 @@ E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
   <li>If \(X\) is a random variable with mean \(E[X] = \mu\), the variance of \(X\) is defined as</li>
 </ul>
 
-<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2]</script>
+\[Var(X) = E[(X - \mu)^2]\]
 
 <ul>
   <li>且根據 LOTUS，這個式子可以再寫成</li>
 </ul>
 
-<script type="math/tex; mode=display">Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)</script>
+\[Var(X) = E[(X - \mu)^2] = \sum_{\substack{x \in R_X}}(x - \mu)^2P(x)\]
 
 <hr />
 <h3 id="期望值的運算">期望值的運算</h3>
@@ -976,21 +1076,21 @@ E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
   <li>Let X be a discrete random variable with probability function \(p(x)\) and \(c\) be a constant. Then</li>
 </ul>
 
-<script type="math/tex; mode=display">E(c) = c.</script>
+\[E(c) = c.\]
 
 <p><strong>THEOREM 3.4</strong></p>
 <ul>
   <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g(X)\) be a function of X, and c be as constant. Then</li>
 </ul>
 
-<script type="math/tex; mode=display">E[cg(X)] = cE[g(X)].</script>
+\[E[cg(X)] = cE[g(X)].\]
 
 <p><strong>THEOREM 3.5</strong></p>
 <ul>
   <li>Let X be a discrete random variable with probability function \(p(x)\) and \(g_1(X), g_2(X), …, g_k(X)\) be \(k\) functions of \(X\). Then</li>
 </ul>
 
-<script type="math/tex; mode=display">E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]</script>
+\[E[g_1(X)+g_2(X)+...+g_k(X)] = E[g_1(X)] + E[g_2(X)] + ... + E[g_k(X)]\]
 
 <p>根據以上定理，可以再產生</p>
 
@@ -999,27 +1099,25 @@ E[\sin(X)] & = \sum_{\substack{x \in R_X}}\sin(x)P(x) \\
   <li>Let X be a discrete random variable with probability function \(p(x)\) and mean \(E(X) = \mu\). Then</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-V(X) = \sigma^2 & = E[(X - \mu)^2] \\
-& = E(X^2) - \mu^2 \\
-& = E(X^2) - E^2(X) \\
-\end{align} %]]></script>
+\[\begin{align}
+V(X) = \sigma^2 &amp; = E[(X - \mu)^2] \\
+&amp; = E(X^2) - \mu^2 \\
+&amp; = E(X^2) - E^2(X) \\
+\end{align}\]
 
 <p>證明：</p>
 
 <blockquote>
 
-  <script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\sigma^2 & = E[(X - \mu)^2] & \\
-& = E[(X^2 - 2\mu X + \mu^2] \\
-& = E(X^2) - E(2\mu X) + E(\mu^2) \\
-& = E(X^2) - 2\mu E(X) + \mu^2 \\
-& = E(X^2) - 2\mu^2 + \mu^2 \\
-& = E(X^2) - \mu^2 \\
-& = E(X^2) - E^2(X) \\
-\end{align} %]]></script>
+\[\begin{align}
+\sigma^2 &amp; = E[(X - \mu)^2] &amp; \\
+&amp; = E[(X^2 - 2\mu X + \mu^2] \\
+&amp; = E(X^2) - E(2\mu X) + E(\mu^2) \\
+&amp; = E(X^2) - 2\mu E(X) + \mu^2 \\
+&amp; = E(X^2) - 2\mu^2 + \mu^2 \\
+&amp; = E(X^2) - \mu^2 \\
+&amp; = E(X^2) - E^2(X) \\
+\end{align}\]
 </blockquote>
 
 <hr />
@@ -1037,7 +1135,6 @@ V(X) = \sigma^2 & = E[(X - \mu)^2] \\
 Wackerley, Mendenhall and Scheaffer 的 <br />
 Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
 有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1167,7 +1264,7 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <li>Let \(X\) be a discrete random variable with range \(R_X = \{ x_1, x_2, x_3,… \} \) (finite or countably infinite). The function</li>
 </ul>
 
-<script type="math/tex; mode=display">P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...</script>
+\[P_X(x_k) = P(X=x_k),\; for \; k = 1, 2, 3,...\]
 
 <ul>
   <li>is called the probability mass function (PMF) of \(X\). <a href="https://www.probabilitycourse.com/chapter3/3_1_3_pmf.php">Source</a></li>
@@ -1201,13 +1298,12 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
 
 <blockquote>
 
-  <script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-1/4,& \;for\; x = 0 \\
-1/2,& \;for\; x = 1 \\
-1/4,& \;for\; x = 2 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+1/4,&amp; \;for\; x = 0 \\
+1/2,&amp; \;for\; x = 1 \\
+1/4,&amp; \;for\; x = 2 \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 </blockquote>
 
 <p>函數圖為，</p>
@@ -1229,7 +1325,6 @@ P_X(x) = \left\{ \begin{array}{rcl}
 Wackerley, Mendenhall and Scheaffer 的 <br />
 Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
 有些名詞與定理解釋會再參考其他書籍與網路作為輔助（下方有參考連結）。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1305,7 +1400,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
-
 </div>
 
     <div class="bookmark">
@@ -1347,108 +1441,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">
-        [Python]執行pyinstaller產生的執行檔出現No module錯誤訊息
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 13, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 13, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
-
-<p>我在 mac 終端機輸入 <code class="highlighter-rouge">pyinstaller -F pyscript.py</code> 後， <br />
-執行在 dist 資料夾底下的檔案，卻出現
-`
-no module named ‘somepackagename’
-`
-的錯誤訊息。</p>
-
-<p>這表示，在打包這支程式時，並未把需要的套件打包進去？ <br />
-但是我使用 .py 執行時並沒有這樣的問題啊？ <br />
-表示我的電腦確實是有安裝該套件才是。</p>
-
-<p>原來是因為在打包時 pyinstaller 並不知道這個套件的路徑， <br />
-所以只要加上套件的路徑位置，讓 pyinstaller 執行打包時可以找得到就好。 <br /></p>
-
-<p>假如缺少的套件在 <code class="highlighter-rouge">/usr/local/lib/python2.7/site-packages</code>， <br /></p>
-
-<p>只要將原本的 <br />
-<code class="highlighter-rouge">pyinstaller -F pyscript.py</code> <br /></p>
-
-<p>改成 <br />
-<code class="highlighter-rouge">pyinstaller -F -p /usr/local/lib/python2.7/site-packages pyscript.py</code> <br /></p>
-
-<p>就好了。 <br /></p>
-
-<p>可以用， <br /></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
-</code></pre></div></div>
-<p>查看系統路徑，就可以知道套件可能的位置。</p>
-
- -->
-    
-    <div class="post-excerpt"><p>前面介紹過使用 <a href="https://shihs.github.io/blog/python/2018/05/24/Python-使用pyinstaller套件打包.py檔/">pyinstaller 將 .py 打包成執行檔</a>，方便使用者執行程式。</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread';
-        this.page.identifier = '/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/#disqus_thread" data-disqus-identifier="/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

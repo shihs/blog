@@ -324,23 +324,23 @@
   <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA(特徵值分解) 也是一個降維的方法，但它的矩陣就必須要是方陣。)</li>
 </ul>
 
-<p>SVD 的概念就是，任一一個矩陣 <script type="math/tex">A_{m \times n}</script>，它都可以拆解成三個矩陣（<script type="math/tex">U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}</script>）的相乘。</p>
+<p>SVD 的概念就是，任一一個矩陣 \(A_{m \times n}\)，它都可以拆解成三個矩陣（\(U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}\)）的相乘。</p>
 
-<p>其中，<script type="math/tex">U_{m \times n}</script> 的 columns 是 <em>Orthonormal</em>，而 <script type="math/tex">V^T_{n \times n}</script> 的 rows 是 <em>Orthonormal</em>，<script type="math/tex">\Sigma_{m \times n}</script> 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
+<p>其中，\(U_{m \times n}\) 的 columns 是 <em>Orthonormal</em>，而 \(V^T_{n \times n}\) 的 rows 是 <em>Orthonormal</em>，\(\Sigma_{m \times n}\) 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
 
 <p><em>(在線性代數中，一個內積空間的正交基（orthogonal basis）是元素兩兩正交的基。稱基中的元素為基向量。 假若，一個正交基的基向量的模長都是單位長度1，則稱這正交基為標準正交基或”規範正交基”（Orthonormal basis）。)</em></p>
 
 <p><img src="http://localhost:4000/blog/img/posts/SVD.png" alt="" /></p>
 
 <ul>
-  <li><script type="math/tex">\Sigma_{m \times n}</script> 會是一個長得像這樣的矩陣，且 <script type="math/tex">\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k</script></li>
+  <li>\(\Sigma_{m \times n}\) 會是一個長得像這樣的矩陣，且 \(\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k\)</li>
 </ul>
 
 <p><img src="http://localhost:4000/blog/img/posts/Sigma.png" alt="" /></p>
 
-<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。用較小的儲存空間就可以得到接近原始的矩陣 <script type="math/tex">A</script>。</p>
+<p>而 \(\sigma_r, ~~where~~1 \le r \le k\) 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 \(\Sigma\) 較重要的前面幾行得到一個相似的矩陣 \(A\)。用較小的儲存空間就可以得到接近原始的矩陣 \(A\)。</p>
 
-<script type="math/tex; mode=display">A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
+\[A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}\]
 
 <p>參考<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>的圖，</p>
 
@@ -357,11 +357,11 @@
 
 <p>這邊看一個<a href="https://www.itread01.com/content/1569742263.html">例子</a>，</p>
 
-<p>下圖是一個 Co-occurrence matrix <script type="math/tex">~A_{m \times n}</script></p>
+<p>下圖是一個 Co-occurrence matrix \(~A_{m \times n}\)</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/term-document.png" alt="" /></p>
 
-<p>將上面的矩陣 <script type="math/tex">A</script> 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
+<p>將上面的矩陣 \(A\) 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/SVD%20example.png" alt="" /></p>
 
@@ -391,19 +391,19 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   </li>
 </ul>
 
-<script type="math/tex; mode=display">PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}</script>
+\[PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}\]
 
 <p>簡單來說，我們可以用 PMI 公式來看兩個字之間的關係。</p>
 
-<p>現在我們把 <script type="math/tex">x</script> 看成我們的 target word，<script type="math/tex">y</script> 看成我們的 context word，</p>
+<p>現在我們把 \(x\) 看成我們的 target word，\(y\) 看成我們的 context word，</p>
 
 <ul>
-  <li>We want to use PMI to measure the associative strength between a word <script type="math/tex">w</script> and a context <script type="math/tex">c</script> in a data set <script type="math/tex">D</script>:</li>
+  <li>We want to use PMI to measure the associative strength between a word \(w\) and a context \(c\) in a data set \(D\):</li>
 </ul>
 
-<script type="math/tex; mode=display">PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}</script>
+\[PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}\]
 
-<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 <script type="math/tex">w</script> 和 <script type="math/tex">c</script> 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
+<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 \(w\) 和 \(c\) 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
 
 <p>所以這時候就有了 <strong>Positive Pointwise mutual information(PPMI)</strong>。</p>
 
@@ -411,7 +411,7 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   <li>In positive pointwise mutual information (PPMI), all negative and undefined values are replaced by zero:</li>
 </ul>
 
-<script type="math/tex; mode=display">􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)</script>
+\[􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)\]
 
 <ul>
   <li>PPMI assigns high values to rare events, it is advisable to apply a count threshold or smooth the probabilities.</li>
@@ -439,13 +439,13 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   <li>By the chain rule, the probability of a sequence of 𝑁 words can be computed using conditional probabilities as</li>
 </ul>
 
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})</script>
+\[p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})\]
 
 <ul>
-  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words (馬可夫鍊):</li>
+  <li>To make probability estimates more robust, we can approximate the full history \(w_1 \ldots w_N\) by the last few words (馬可夫鍊):</li>
 </ul>
 
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})</script>
+\[p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})\]
 
 <hr />
 
@@ -468,10 +468,10 @@ E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</p>
 <p><strong>Formal definition of an n-gram model</strong></p>
 
 <ul>
-  <li><script type="math/tex">n</script>: the model’s order (1 = unigram, 2 = bigram, …)</li>
-  <li><script type="math/tex">V</script>: a set of possible words (character); the vocabulary</li>
-  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe the word <script type="math/tex">w</script> after the context 
-<br />(n − 1)-gram <script type="math/tex">u</script></li>
+  <li>\(n\): the model’s order (1 = unigram, 2 = bigram, …)</li>
+  <li>\(V\): a set of possible words (character); the vocabulary</li>
+  <li>\(P(w\mid u)\): a probability that specifies how likely it is to observe the word \(w\) after the context 
+<br />(n − 1)-gram \(u\)</li>
 </ul>
 
 <p><strong>Unigram model</strong></p>
@@ -635,6 +635,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -644,13 +651,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

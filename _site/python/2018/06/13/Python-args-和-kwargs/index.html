@@ -206,9 +206,9 @@
        
     </span>
   </div>
-  <div><p>簡單來說，<code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
+  <div><p>簡單來說，<code class="language-plaintext highlighter-rouge">*args</code>和<code class="language-plaintext highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
 args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
-如果 <code class="highlighter-rouge">*args</code>和<code class="highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="highlighter-rouge">*args</code>必需在<code class="highlighter-rouge">**kwargs</code>之前</strong>。</p>
+如果 <code class="language-plaintext highlighter-rouge">*args</code>和<code class="language-plaintext highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="language-plaintext highlighter-rouge">*args</code>必需在<code class="language-plaintext highlighter-rouge">**kwargs</code>之前</strong>。</p>
 
 <p>先簡單看以下的例子</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -221,7 +221,7 @@ args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是，
 <span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">first</span> <span class="o">=</span> <span class="s">"a"</span><span class="p">,</span> <span class="n">second</span> <span class="o">=</span> <span class="s">"b"</span><span class="p">,</span> <span class="n">third</span> <span class="o">=</span> <span class="s">"c"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>結果</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agrs=1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>agrs=1
 agrs=2
 agrs=3
 agrs=4
@@ -234,8 +234,8 @@ kwargs=first
 
 <h3 id="args-和-kwargs-不是重點-才是">args 和 kwargs 不是重點，* 才是</h3>
 
-<p>args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 <code class="highlighter-rouge">*</code>。<br />
-所以，if you like 其實參數也可以寫成 <code class="highlighter-rouge">*var</code> 和 <code class="highlighter-rouge">**vars</code>，<code class="highlighter-rouge">*args</code> 和 <code class="highlighter-rouge">**kwargs</code> 只是一個大家使用的習慣。</p>
+<p>args 和 kwargs 這兩個參數名稱並不是重點，重點是前面的星號 <code class="language-plaintext highlighter-rouge">*</code>。<br />
+所以，if you like 其實參數也可以寫成 <code class="language-plaintext highlighter-rouge">*var</code> 和 <code class="language-plaintext highlighter-rouge">**vars</code>，<code class="language-plaintext highlighter-rouge">*args</code> 和 <code class="language-plaintext highlighter-rouge">**kwargs</code> 只是一個大家使用的習慣。</p>
 
 <h3 id="args-的用法">*args 的用法</h3>
 
@@ -253,7 +253,7 @@ kwargs=first
 
 </code></pre></div></div>
 <p>結果</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first_arg=this is first arguments
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first_arg=this is first arguments
 other *args...
 agrs=1
 agrs=2
@@ -264,12 +264,12 @@ agrs=4
 <h3 id="kwargs-的用法">*kwargs 的用法</h3>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">kwargs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
-            <span class="k">print</span> <span class="s">"</span><span class="si">%</span><span class="s">s == </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="k">print</span> <span class="s">"%s == %s"</span> <span class="o">%</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
  
 <span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"yasoob"</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name == yasoob
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name == yasoob
 </code></pre></div></div>
 <p>從以上兩個範例可以看出 args 和 kwargs 用法的差異。</p>
 
@@ -281,17 +281,17 @@ agrs=4
     <span class="k">print</span> <span class="n">arg3</span>
 
 
-<span class="c">#===args===========</span>
-<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="c1">#===args===========
+</span><span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="n">test_arg</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
-<span class="c"># result</span>
-<span class="n">arg1</span><span class="o">=</span><span class="mi">1</span>
+<span class="c1"># result
+</span><span class="n">arg1</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
 <span class="n">arg3</span><span class="o">=</span><span class="mi">3</span>
 
-<span class="c">#===kwargs===========</span>
-<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">#===kwargs===========
+</span><span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">"arg3"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
     <span class="s">"arg2"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span>
     <span class="s">"arg1"</span><span class="p">:</span><span class="mi">3</span>
@@ -299,13 +299,13 @@ agrs=4
 
 <span class="n">test_arg</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="c"># result</span>
-<span class="n">arg1</span><span class="o">=</span><span class="mi">3</span>
+<span class="c1"># result
+</span><span class="n">arg1</span><span class="o">=</span><span class="mi">3</span>
 <span class="n">arg2</span><span class="o">=</span><span class="mi">2</span>
 <span class="n">arg3</span><span class="o">=</span><span class="mi">1</span>
 </code></pre></div></div>
 
-<p>根據以上範例，可以發現<code class="highlighter-rouge">*arg</code> print 的順序就是 list 的順序，但 <code class="highlighter-rouge">**kwargs</code> 會根據 dictionary 的 key 來賦予 value。</p>
+<p>根據以上範例，可以發現<code class="language-plaintext highlighter-rouge">*arg</code> print 的順序就是 list 的順序，但 <code class="language-plaintext highlighter-rouge">**kwargs</code> 會根據 dictionary 的 key 來賦予 value。</p>
 
 <p><br /></p>
 
@@ -359,6 +359,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -368,13 +375,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -1,0 +1,88 @@
+I"�<p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
+
+<ul>
+  <li><a href="https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#1-%E4%BD%BF%E7%94%A8-ssh">使用 ssh</a></li>
+  <li><a href="https://shihs.github.io/blog/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#2-%E4%BD%BF%E7%94%A8-personal-access-token">使用 personal access token</a></li>
+</ul>
+
+<hr />
+
+<h3 id="1-使用-ssh">1. 使用 ssh</h3>
+
+<p>情況：</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/git%20push.png" alt="" /></p>
+
+<ul>
+  <li>之前已 clone 下來的 repo</li>
+  <li>修改後要 push 碰到下面的錯誤訊息</li>
+</ul>
+
+<pre><code class="language-bash=">remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requested URL returned error: 403
+</code></pre>
+
+<p><strong>Step 1:</strong> Enabling two-factor authentication</p>
+
+<ul>
+  <li>根據錯誤訊息提供的<a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">網址</a>，先去 <strong>Enabling two-factor authentication</strong>，照著 <a href="https://docs.github.com/en/github/authenticating-to-github/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication-recovery-methods">Configuring two-factor authentication recovery methods</a> 的步驟做（裡面提到的 TOTP app 我是用 <a href="https://www.salesforce.com/solutions/mobile/app-suite/security/">Salesforce Authenticator</a>）。</li>
+</ul>
+
+<p><strong>Step 2:</strong> 加 ssh key</p>
+
+<ul>
+  <li>確認 github 是否已經加了 ssh key <code class="language-plaintext highlighter-rouge">ssh -t git@github.com</code>，如果沒加會出現像這樣的訊息<img src="http://localhost:4000/blog/img/posts/ssh%20test.png" alt="" /></li>
+  <li>在本機 gen ssh key，並在 github 頁面新增 ssh key。我主要是參考下面兩個網址：
+    <ul>
+      <li><a href="https://blog.jaycetyle.com/2018/02/github-ssh/">Git 版本控制筆記 - 使用 github 及 ssh 金鑰設定</a></li>
+      <li><a href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">生成新 SSH 密钥并添加到 ssh-agent</a></li>
+    </ul>
+  </li>
+  <li>完成之後在 terminal 打上 <code class="language-plaintext highlighter-rouge">ssh -t git@github.com</code> 會是
+<img src="http://localhost:4000/blog/img/posts/ssh%20success.png" alt="" /></li>
+</ul>
+
+<p><strong>Step 3:</strong> 重新 push</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git remote set-url origin git@github.com:[your-github-name]/[repo-name].git</code></li>
+  <li>重新 add 和 commit 修改，就可以 push 了</li>
+</ul>
+
+<p>但這樣的方法還是很麻煩……每一支 reop 都要重新 <code class="language-plaintext highlighter-rouge">git remote set-url origin ...</code> 所以另一個方法是使用 <strong>personal access token</strong>。</p>
+
+<p><strong>Reference</strong>:
+<a href="https://www.youtube.com/watch?v=5Jz0wVmYUUE">GitHub Support for password authentication was removed (August 13, 2021) - Solution</a></p>
+
+<hr />
+
+<h2 id="2-使用-personal-access-token">2. 使用 personal access token</h2>
+
+<p>這裡的方法是在 Mac 的操作。</p>
+
+<p><strong>Step 1:</strong></p>
+
+<ul>
+  <li>參照 github 提供的方法，<a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">Creating a personal access token</a>。
+    <ul>
+      <li><strong>Settings</strong> -&gt; <strong>Developer settings</strong> -&gt; <strong>Personal access tokens</strong> -&gt; <strong>Generate new token</strong></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Step 2:</strong> 將 create 出來的 token 加到「鑰匙圈」裡</p>
+
+<ul>
+  <li>使用 spotlight 搜尋「keychain」</li>
+  <li>在 keychain 上搜尋「github」，找到 github
+<img src="http://localhost:4000/blog/img/posts/keychain.png" alt="" width="70%" heigh="70%" /></li>
+  <li>點選下方「顯示密碼」，並將密碼改成剛剛在 github 上 create 的 token
+<img src="http://localhost:4000/blog/img/posts/add%20token.png" alt="" width="70%" heigh="70%" /></li>
+</ul>
+
+<p>現在可以任意地使用之前 clone 下來的 repo 了，不過如果剛剛 create token 有時間限制，之後必須要再重新建立新的密碼並修改。</p>
+
+<p><strong>Reference</strong>:
+<a href="https://www.youtube.com/watch?v=aKaYpl-ZpGg">Solved - Support for password authentication was removed - Github - Mac and Windows</a></p>
+:ET

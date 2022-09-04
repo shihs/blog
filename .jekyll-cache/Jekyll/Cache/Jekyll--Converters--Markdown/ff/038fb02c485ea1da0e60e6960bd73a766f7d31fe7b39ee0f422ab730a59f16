@@ -1,0 +1,4 @@
+I"�<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+</code></pre></div></div>
+<p><strong>rep.content ： bytes 型別</strong></p>
+:ET

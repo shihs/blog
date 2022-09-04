@@ -320,9 +320,9 @@
 
 <p>所以為了讓 model 不要 overfitting，我們可以使用 pruning 的方式，砍掉底下的樹枝。</p>
 
-<p>在 R 可以使用，<code class="highlighter-rouge">prune.tree()</code>，並且可以使用 <code class="highlighter-rouge">best</code> 這個參數來決定最後要保留多少 leaves。</p>
+<p>在 R 可以使用，<code class="language-plaintext highlighter-rouge">prune.tree()</code>，並且可以使用 <code class="language-plaintext highlighter-rouge">best</code> 這個參數來決定最後要保留多少 leaves。</p>
 
-<p>使用剛剛最後的 <code class="highlighter-rouge">fit</code>示範</p>
+<p>使用剛剛最後的 <code class="language-plaintext highlighter-rouge">fit</code>示範</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prune_fit</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">prune.tree</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
 </span><span class="n">plot</span><span class="p">(</span><span class="n">prune_fit</span><span class="p">)</span><span class="w">
@@ -391,6 +391,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -400,13 +407,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

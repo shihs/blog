@@ -210,16 +210,16 @@
 
 <p>例如，半形的驚嘆號（!）是 unicode 編碼是 33，則全形的驚嘆號（！）unicode 就會編碼是 33 + 65248 = 65281</p>
 
-<p>但要將數字解析成半形時是使用 <code class="highlighter-rouge">chr()</code> function，而全形則是使用 <code class="highlighter-rouge">unichr()</code> function。</p>
+<p>但要將數字解析成半形時是使用 <code class="language-plaintext highlighter-rouge">chr()</code> function，而全形則是使用 <code class="language-plaintext highlighter-rouge">unichr()</code> function。</p>
 
 <p>以下將 33~126 全部列出來，並轉換成全形。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">127</span><span class="p">):</span>
-	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
 
 </code></pre></div></div>
 
 <p>結果，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
 34 " 65282 ＂
 35 # 65283 ＃
 36 $ 65284 ＄
@@ -369,6 +369,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -378,13 +385,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

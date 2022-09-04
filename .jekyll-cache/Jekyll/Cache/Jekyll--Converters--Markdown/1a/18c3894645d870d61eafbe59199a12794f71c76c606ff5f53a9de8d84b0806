@@ -1,0 +1,49 @@
+I"2
+<p>這篇文章會介紹 R 中的 scale 與 dist 兩個 function。</p>
+
+<p>在做資料分析前會需要先標準化</p>
+
+<hr />
+
+<h3 id="scale">scale</h3>
+<p>scale 的主要作用在標準化數據，共有三個 arguments，</p>
+<ul>
+  <li>x: 必須要是 matrix，以「行」為每組數據計算</li>
+  <li>center: TRUE or FALSE。中心化，TRUE 會減去數據的平均值</li>
+  <li>scale: TRUE or FALSE。 TRUE 會將數據中的每個值除以數據的標準差</li>
+</ul>
+
+<p>預設 center 和 scale 都是 TRUE，也就是算出來的值是 <a href="https://zh.wikipedia.org/wiki/標準分數">z-score</a>。</p>
+
+<blockquote>
+
+  <p>\(z = \frac{x - \mu}{\sigma}, \sigma \neq 0\)</p>
+</blockquote>
+
+<p>其中：<br />
+\(x\)：數據<br />
+\(\mu\)：平均值<br />
+\(\sigma\)：標準差</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">scale</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<h3 id="dist">dist</h3>
+<p>dist 是在算數據間的距離，主要的 arguments有</p>
+<ul>
+  <li>x: 可以是 matrix, data.frame ，但必須要是 numeric。</li>
+  <li>methods: 共有六種計算距離的方法，”euclidean”, “maximum”, “manhattan”, “canberra”, “binary” 和 “minkowski”，預設是使用 euclidean 距離。</li>
+</ul>
+
+<p>以「列」為數據，兩兩計算，</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">)</span><span class="w">
+
+</span><span class="n">dist</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+:ET

@@ -1,0 +1,36 @@
+I"�
+<p>這篇是整理一些 psql 的基本觀念，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程與我自己整理的資訊。</p>
+
+<h3 id="normalized-design">Normalized Design</h3>
+<p><strong>What is Normalized Design?</strong></p>
+<ol>
+  <li>Every row has the same number of columns. <br />
+每一列都必須有同樣的行數。</li>
+  <li>There is a <strong>unique key</strong>, and everything in a row says something about the key. <br />
+每個 table 會有一個 unique key，且 table 中的每一行的資訊都必須要和 unique key 有關。</li>
+  <li>Facts that don’t relate to the key belong in different tables. <br />
+與 unique key 無關的訊息要放在另一個 table。</li>
+  <li>Table shouldn’t imply relationships that don’t exist. <br />
+行之間不存在關係的資料不能產生會讓人誤會訊息。</li>
+</ol>
+
+<p>More about Normalization:<br />
+William Kent’s paper <a href="http://www.bkent.net/Doc/simple5.htm">A Simple Guide to Five Normal Forms in Relational Database Theory</a><br />
+Wikipedia’s article on <a href="https://en.wikipedia.org/wiki/Database_normalization">database normalization</a></p>
+
+<h3 id="unique-key-vs-foreign-key">Unique Key v.s. Foreign Key</h3>
+<p><strong>What is Unique Key?</strong><br />
+唯一值不能重複。譬如像是，學號、身分證字號等等，只存在唯一的值，但像名字這種可能會重複的值就不能當 unique key。<br />
+另外還有一個和 unique key 很像的東西，叫 <strong>primary key</strong>。它同樣必需要是唯一值不能重複，但他們的差別在於，<strong>unique key 可以有 null，但 primary key 不能有 null</strong>。<br />
+譬如，在一間公司裡，公司有台灣人和外國人。公司的每位員工都有職編，但只有台灣人會有身分證字號，這時候職編可以作為 primary key 或是 unique key，但身分證字號只能是 unique key。<br />
+詳細說明可以看<a href="https://www.youtube.com/watch?v=7_9Jb9Fi9nI">這裡</a>。</p>
+
+<p><strong>What is Foreign Key?</strong><br />
+對照到另一個資料表的 primary key。<br />
+譬如，有一份資料表是學生資料，欄位包含「學號」和「姓名」，另一份是學生的數學成績，包含「學號」、「分數」。
+<img src="http://localhost:4000/blog/img/posts/primary%20key%20vs%20unique%20key.png" alt="primary key vs unique key.png" /></p>
+
+<p>右邊的表格對照到左邊姓名那份表格，學號在左邊的表格是 primary key，所以右邊表格中「學號」那個欄位就會是 foreign key。</p>
+
+:ET

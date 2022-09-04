@@ -233,27 +233,27 @@
 
 <p>程式碼如下，</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding:utf-8 -*-</span>
-<span class="c"># 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding:utf-8 -*-
+# 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)
+</span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 
-<span class="c"># payload for requests</span>
-<span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
+<span class="c1"># payload for requests
+</span><span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">,</span> 
 		  <span class="s">"Referer"</span><span class="p">:</span><span class="s">"http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp"</span><span class="p">}</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation"</span>
 
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
-<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">js</span><span class="p">[</span><span class="s">"d"</span><span class="p">][</span><span class="s">"Result"</span><span class="p">]:</span>
 	<span class="n">code</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Code"</span><span class="p">]</span>
-	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
+	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">].</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
 	<span class="k">print</span> <span class="n">code</span>
 
 </code></pre></div></div>
@@ -305,6 +305,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -314,13 +321,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

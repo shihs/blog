@@ -1,0 +1,103 @@
+I"�/<p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
+
+<p>上圖是一個 x, y 的分佈圖，紅線是這些點分部的方程式。但現實中，我們並無法真的知道紅線的方程式，我們可能使用一次方程式、二次方程式甚至更高次方的方程式去嘗試（如下圖
+）。
+<img src="http://localhost:4000/blog/img/posts/splines%20line.png" alt="splines line.png" height="380px" width="600px" /></p>
+
+<p>我們可以將擬合的多項式方程式（polynomial function）寫成，</p>
+
+<p>\(y = \beta_0 + \beta_1 x^1 + \beta_2 x^2 + … + \beta_n x^n + \epsilon\)</p>
+
+<p>但只是一味的提高多項式的次方只是增加模型的複雜度會導致 overfitting 的問題，在 testing data 上的結果也不會太好。</p>
+
+<p>這時候我們可以使用 Piecewise 將 data 劃分成多個區間，根據每個區間的 data 給予一個模型去擬合。</p>
+
+<hr />
+
+<p><strong>Basis function</strong></p>
+
+<p>\(y_i = \beta_0 + \beta_1 b_1(x_i) + \beta_2 b_2(x_i) + … + \beta_n b_n(x_i) + \epsilon_i\)</p>
+
+<p>透過 \(b_1(X)\)、\(b_2(X)\)、……、\(b_n(X)\) 可以將非線性的自變量轉換成線性。</p>
+
+<hr />
+
+<p><strong>Piecewise Function</strong></p>
+
+<p>將 data 劃分多個區段後，每個區段再各自找到可以擬合的 model，model 可以是一次方程式、二次方程式或是三次方程式等等，不過三次方最常使用。</p>
+
+<p>如下圖每個區段都是用一次方程式去擬合。\(\xi\) 為區段的分隔點，稱為 knot，每個分段函數稱為 piecewise function。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20linear.png" alt="piecewise linear.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>但這些 piecewise function 是有條件的。
+<br />
+雖然 piecewise function 是每個區段各自擬合出來的 function，但所有區段 function 必須整個為連續，也就是在 \(\xi\) 的交界處的值必須相同。</p>
+
+<hr />
+
+<p><strong>Cubic Spline</strong></p>
+
+<p>這裡則是使用三次方程式。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/piecewise%20cubic%20polynomials.png" alt="piecewise cubic polynomials.png" height="600px" width="500px" />
+From: 《Elements of Statistical Learning》</p>
+
+<p>cubic spline 除了邊界的值相同外，還必須要一階和二階倒數相同。</p>
+
+<p>看上圖左上的圖加上邊界連續後成為右上，雖然看起來是連續的函數，但並不是完美的曲線，如果再加上一階導數相同就變成左下，再加上二階導數就可以畫出右下的圖。</p>
+
+<hr />
+
+<p>這個 R code 是畫出最上面圖的程式碼，使用 <a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a> 裡頭的範例。</p>
+
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set.seed</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># function</span><span class="w">
+</span><span class="n">f</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.2</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="m">11</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">^</span><span class="m">6</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">10</span><span class="o">*</span><span class="p">(</span><span class="m">10</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">3</span><span class="o">*</span><span class="p">(</span><span class="m">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">10</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seq</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">)</span><span class="w">
+</span><span class="n">f_x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
+</span><span class="n">eps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">500</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># epsilon</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">f_x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="w">
+
+</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">data.frame</span><span class="p">(</span><span class="w">
+  </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+  </span><span class="n">f_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">,</span><span class="w">
+  </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w">
+</span><span class="p">)</span><span class="w">
+
+</span><span class="c1"># plot</span><span class="w">
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f_x</span><span class="p">),</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.8</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+
+</span><span class="n">ggplot</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">geom_point</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+  </span><span class="n">geom_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="n">stat_smooth</span><span class="p">(</span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"lm"</span><span class="p">,</span><span class="w"> </span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">I</span><span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = "lm", formula = y ~ x + I(x^2) + I(x^3), se = FALSE, colour = "gold1") +</span><span class="w">
+  </span><span class="c1"># stat_smooth(method = 'loess', se = FALSE, colour = "red") +</span><span class="w">
+  </span><span class="n">theme_bw</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://zhuanlan.zhihu.com/p/34825299">一文读懂回归样条（regression splines），附Python代码</a>
+<br />
+<a href="https://www.youtube.com/watch?v=bESJ81dyYro">Introduction to Splines</a>
+<br />
+<a href="https://www.youtube.com/watch?v=V1JRs6AP1AI">Spline Regression | Non Linear Model | Polynomial Regression</a>
+<br />
+<a href="https://zh.wikipedia.org/wiki/样条函数">wikipedia - 樣條函數</a>
+<br />
+<a href="https://datascienceplus.com/cubic-and-smoothing-splines-in-r/">Cubic and Smoothing Splines in R</a>
+<br />
+<a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf">《An Introduction to Statistical Learning with Applications in R》</a></p>
+:ET

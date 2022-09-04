@@ -232,53 +232,53 @@
 <p>所以只要能下載這個圖片並解析它，就能將解析出來的結果帶進 post 的參數裡，就能完成一個 post requests 。</p>
 
 <h3 id="解析驗證碼完整程式碼">解析驗證碼完整程式碼</h3>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
 
-<span class="c"># 1. 找到圖片的來源網址</span>
-<span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<span class="c1"># 1. 找到圖片的來源網址
+</span><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
 
-<span class="c"># 2. 下載圖片</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="c1"># 2. 下載圖片
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
 
-<span class="c"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="c1"># 3. 調整圖片、解析圖片，獲得圖片上的數字與英文
+</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<span class="c1"># adjust pitcure size, it would read more correctly
+</span><span class="n">image</span><span class="p">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="p">.</span><span class="n">ANTIALIAS</span><span class="p">).</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
 
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="p">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="程式碼步驟解析">程式碼步驟解析</h3>
 
 <h4 id="session">session()</h4>
 <p>這裡使是 session 是因為要記錄載入頁面的 cookies，以確保讓網站覺得和等下要送出 requests 時事同時載入的。</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">Session</span><span class="p">()</span>
 </code></pre></div></div>
 
 <h4 id="找到圖片的來源網址與存檔">找到圖片的來源網址與存檔</h4>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_url</span> <span class="o">=</span> <span class="s">"https://serv.gcis.nat.gov.tw/pub/kaptcha.jpg"</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">img_url</span><span class="p">,</span> <span class="n">stream</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">verify</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">,</span><span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre></div></div>
 <p>這前面兩行很簡單，就是送出驗證碼來源網址的 requests，接著下載該圖檔，會發現這時候產生了一個 pic.jpg 的檔案。</p>
 
 <h4 id="調整圖片解析圖片獲得圖片上的數字與英文">調整圖片、解析圖片，獲得圖片上的數字與英文</h4>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.jpg'</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">image</span>
 
-<span class="c"># adjust pitcure size, it would read more correctly</span>
-<span class="n">image</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="o">.</span><span class="n">ANTIALIAS</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="c1"># adjust pitcure size, it would read more correctly
+</span><span class="n">image</span><span class="p">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span><span class="n">Image</span><span class="p">.</span><span class="n">ANTIALIAS</span><span class="p">).</span><span class="n">save</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">"pic.jpg"</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">image</span>
 
-<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
+<span class="n">captcha</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="p">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">image</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">" "</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"-"</span><span class="p">,</span> <span class="s">""</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">"$"</span><span class="p">,</span> <span class="s">""</span><span class="p">)</span>
 <span class="k">print</span> <span class="n">captcha</span>
 </code></pre></div></div>
 
@@ -289,14 +289,14 @@
 <p><br /></p>
 <h4 id="圖片的-mode-必須要為-rgb">圖片的 mode 必須要為 RGB</h4>
 
-<p>另外，可以使用<code class="highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
+<p>另外，可以使用<code class="language-plaintext highlighter-rouge">print image</code>看 open() 後的圖片的資訊。
 像是被調整過後的圖片變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.JpegImagePlugin.JpegImageFile image mode=RGB size=150x50 at 0x109355D90&gt;
 </code></pre></div></div>
-<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
+<p>圖片的尺寸(size)變成 150x50，mode 為 <strong>RGB</strong>。這點很重要，因為如果 mode 不是 RGB 就會無法 使用 <code class="language-plaintext highlighter-rouge">pytesseract.image_to_string()</code>解析圖片。</p>
 
 <p>會碰到錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/lib/python2.7/site-packages/PIL/Image.py:971: UserWarning: Couldn't allocate palette entry for transparency
   "for transparency")
 
 ---省略--
@@ -305,15 +305,15 @@ TypeError: int() argument must be a string or a number, not 'tuple'
 </code></pre></div></div>
 
 <p>譬如我曾經抓到一個圖片，print 出來的圖片資訊是</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;PIL.GifImagePlugin.GifImageFile image mode=P size=60x20 at 0x10F1DCD10&gt;
 </code></pre></div></div>
 
 <p>這時候必須要把 mode 由 P 轉為 RGB，只要在 open() 後加上一行，</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
-<span class="c"># print image</span>
-</code></pre></div></div>
-<p>這是後<code class="highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'pic.gif'</span><span class="p">)</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="n">convert</span><span class="p">(</span><span class="s">'RGB'</span><span class="p">)</span>
+<span class="c1"># print image
+</span></code></pre></div></div>
+<p>這是後<code class="language-plaintext highlighter-rouge">print image</code>會發現 mode 已被改為 RGB，且可以正確執行了。</p>
 
 <p><br /></p>
 
@@ -373,6 +373,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -382,13 +389,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

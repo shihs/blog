@@ -221,12 +221,11 @@ Mathematical Statistics with Applications, 7th edition 這本書為主，<br />
   <li>A random variable \(X\) is said to be a <em>bernoulli</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Bernoulli(p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p,& \;for\; x = 1 \\
-1-p,& \;for\; x = 0 \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+p,&amp; \;for\; x = 1 \\
+1-p,&amp; \;for\; x = 0 \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -251,11 +250,10 @@ p,& \;for\; x = 1 \\
   <li>A random variable \(X\) is said to be a <em>geometric</em> random variable with peremeter \(p\), shown as <strong>\(X \sim Geometric(p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+p(1-p)^{k-1},&amp; \;for\; k = 1, 2, 3,...... \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -278,11 +276,10 @@ p(1-p)^{k-1},& \;for\; k = 1, 2, 3,...... \\
   <li>A random variable \(X\) is said to be a <em>binomial</em> random variable with peremeter \(n\) and \(p\), shown as <strong>\(X \sim Binomial(n, p)\)</strong>, if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},& \;for\; k = 0, 1, 2,..., n \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+\left( \begin{array}{c} n \\ k \end{array} \right) p^k(1-p)^{n-k},&amp; \;for\; k = 0, 1, 2,..., n \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <ul>
   <li>where \(0 &lt; p &lt; 1\)</li>
@@ -290,7 +287,7 @@ P_X(x) = \left\{ \begin{array}{rcl}
 
 <p>Binomial Distribution 也是很多次獨立 Bernoulli 試驗的結果，但和 Geometric Distribution 不一樣的是，Binomial Distribution 會執行 \(n\) 次的 Bernoulli 試驗，且成功了 \(k\) 次。</p>
 
-<p>所以它的 PMF 會有 <script type="math/tex">\left( \begin{array}{c} n \\ k \end{array} \right)</script>，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
+<p>所以它的 PMF 會有 \(\left( \begin{array}{c} n \\ k \end{array} \right)\)，表示執行了\(n\) 次，其中有 \(k\) 次成功，且這 \(k\) 次並沒有限定在哪個位置。</p>
 
 <p>可以以丟擲 \(n\) 枚銅板來想，其中 \(k\) 枚硬幣為 Head，\((n-k)\) 為 Tail。</p>
 
@@ -314,11 +311,10 @@ P_X(x) = \left\{ \begin{array}{rcl}
   <li>A random variable \(X\) is said to be a <em>poisson</em> random variable with peremeter \(\lambda\), shown as <strong>\(X \sim Poisson(\lambda)\)</strong>, if its range is \(R_X = \{ 0, 1, 2, 3,… \} \), and if its PMF is given by</li>
 </ul>
 
-<script type="math/tex; mode=display">% <![CDATA[
-P_X(x) = \left\{ \begin{array}{rcl}
-\frac{e^{-\lambda} \lambda^k}{k!} ,& k \in R_X \\
-0,& otherwise \\
-\end{array}\right. %]]></script>
+\[P_X(x) = \left\{ \begin{array}{rcl}
+\frac{e^{-\lambda} \lambda^k}{k!} ,&amp; k \in R_X \\
+0,&amp; otherwise \\
+\end{array}\right.\]
 
 <p>Poisson Distribution 的意義為：單位時間內，事件出現平均 \(lambda\) 次的機率分布。</p>
 
@@ -326,22 +322,20 @@ P_X(x) = \left\{ \begin{array}{rcl}
 <strong>\(\sum_{k \in R_X}{P_k(x)} = 1\)</strong>
 是否正確。</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\sum_{k \in R_X}{P_k(x)} &= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
-&= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
-\end{align} %]]></script>
+\[\begin{align}
+\sum_{k \in R_X}{P_k(x)} &amp;= \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} \\
+&amp;= e^{-\lambda} \sum_{k=0}^{\infty} \frac{\lambda^k}{k!} \\
+\end{align}\]
 
 <blockquote>
 
   <p>Note: 根據 Taylor Series(泰勒展開式) <strong>\(\; e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}\)</strong>，上列式子可以寫成，</p>
 </blockquote>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-&= e^{-\lambda} e^{\lambda} \\
-&= 1 \\
-\end{align} %]]></script>
+\[\begin{align}
+&amp;= e^{-\lambda} e^{\lambda} \\
+&amp;= 1 \\
+\end{align}\]
 
 <p><strong>Example:</strong></p>
 
@@ -359,7 +353,7 @@ P_X(x) = \left\{ \begin{array}{rcl}
   <li>Let \(X \sim Binomial(n, p = \frac{\lambda}{n})\), where \(\lambda &gt; 0\) is fixed. Then for any \(k \in {0, 1, 2,…} \), we have</li>
 </ul>
 
-<script type="math/tex; mode=display">\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}</script>
+\[\lim_{n \rightarrow \infty} P_X(k) = \frac{e^{-\lambda} \lambda^k}{k!}\]
 
 <p>\(X \sim Poisson(\lambda = 5)\) 的函數圖形，</p>
 
@@ -421,6 +415,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -430,13 +431,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -1,0 +1,71 @@
+I"�<p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
+
+<p>在開始前請先安裝 pandas 套件，</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>讀取檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="c1"># 獲取列數
+</span><span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 獲取儲存格內容
+</span><span class="n">df</span><span class="p">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># 修改儲存格內容
+</span><span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
+<span class="c1"># 但修改後必須要儲存才會修正檔案內容
+# df.to_excel('test_result.xlsx', sheet_name = 'sheet1')
+</span></code></pre></div></div>
+
+<p>若在執行以上程式碼時產生錯誤訊息：</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
+</code></pre></div></div>
+
+<p>這時候只要安裝 xlrd 套件就能解決問題。</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
+</code></pre></div></div>
+
+<hr />
+
+<p><strong>寫入檔案</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c1"># Create a Pandas dataframe from some data.
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
+
+<span class="c1"># Create a Pandas Excel writer using XlsxWriter as the engine.
+</span><span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
+
+<span class="c1"># Convert the dataframe to an XlsxWriter Excel object.
+</span><span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
+
+<span class="c1"># Close the Pandas Excel writer and output the Excel file.
+</span><span class="n">writer</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
+
+<p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
+</code></pre></div></div>
+<p>只要將 <code class="language-plaintext highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="language-plaintext highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="language-plaintext highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html">Example: Pandas Excel example</a>
+<br />
+<a href="https://stackoverflow.com/questions/48066517/python-pandas-pd-read-excel-giving-importerror-install-xlrd-0-9-0-for-excel">Python: Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support</a>
+<br />
+<a href="https://stackoverflow.com/questions/47698744/python-pandas-to-excel-unicodedecodeerror-ascii-codec-cant-decode-byte-0xe2">Python pandas to excel UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe2 in position 11</a>
+<br />
+<a href="https://ithelp.ithome.com.tw/articles/10197119">PYTHON pandas 操作Excel 基本介紹</a></p>
+
+:ET

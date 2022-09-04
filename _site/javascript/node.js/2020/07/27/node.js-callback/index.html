@@ -240,7 +240,7 @@
   <li>指程式必須等待前面的程式執行完才能執行。</li>
 </ul>
 
-<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
+<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="language-plaintext highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
 
 <h3 id="非同步asynchronous">非同步（Asynchronous）</h3>
 
@@ -251,15 +251,15 @@
 <p>下面舉一個常見的非同步 function，<strong>setTimeout()</strong>（第一個參數為時間到時要被執行的函式，第二個參數為要延遲的時間（毫秒）），setTimeout() 會在第二個參數的延遲時間後執行第一個參數的函式。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Timer is done!'</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Timer is done!</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>以上程式碼印出來的結果會是，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
 Hi
 Timer is done!
 </code></pre></div></div>
@@ -273,10 +273,10 @@ Timer is done!
 <p>callback 讓我們把一個函式丟進另一個函式當參數，讓我們可以控制程式碼的流程。先看一個簡單的範例，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callbackSleepWorker</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im wake up !'</span><span class="p">)</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK, Im wake up !</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im first.'</span><span class="p">)</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK, Im first.</span><span class="dl">'</span><span class="p">)</span>
   <span class="nx">callbackWorker</span><span class="p">()</span>
 <span class="p">}</span>
 <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackSleepWorker</span><span class="p">)</span>
@@ -294,7 +294,7 @@ Timer is done!
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">I have </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
   <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nx">slower</span><span class="p">()</span>
@@ -314,7 +314,7 @@ Timer is done!
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">I have </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
   <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nx">slower</span><span class="p">(</span><span class="nx">faster</span><span class="p">)</span>
@@ -324,17 +324,17 @@ Timer is done!
 
 <p>現在有個任務是，讀檔案並計算長度</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// fs.readFile(filename, callback(err, content))</span>
 
-<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">test.txt</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'finish'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">finish</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'not finish'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">not finish</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>本來 readFile() 這個 function 會先被放到 event queue 裡，然後接著印出 ‘not finish’，但我們現在把要讀檔案這個任務放在 callback 裡，所以變成只要讀完檔案就會立刻執行，’not finish’ 會等到檔案讀完才會進行。</p>
@@ -401,6 +401,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -410,13 +417,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

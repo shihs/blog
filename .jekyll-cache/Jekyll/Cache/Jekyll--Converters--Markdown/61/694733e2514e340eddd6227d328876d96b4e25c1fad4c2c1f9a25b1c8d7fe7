@@ -1,0 +1,1454 @@
+I"8�<ul class="category" id="group">
+
+<!-- 分類雲 -->
+<div id="cloud">
+  <!-- 分類雲字體大小設定 -->
+  
+  
+  
+
+  
+
+  
+
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#R" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#333'" style="font-size: 11pt; color: #333;">R (19)</a>
+    <!-- <a href="#R" style="font-size: 11pt; color: #333;">R (19)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Python" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#000'" style="font-size: 15pt; color: #000;">Python (29)</a>
+    <!-- <a href="#Python" style="font-size: 15pt; color: #000;">Python (29)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Others" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 7.5pt; color: #888;">Others (3)</a>
+    <!-- <a href="#Others" style="font-size: 7.5pt; color: #888;">Others (3)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#爬蟲" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#666'" style="font-size: 8pt; color: #666;">爬蟲 (10)</a>
+    <!-- <a href="#爬蟲" style="font-size: 8pt; color: #666;">爬蟲 (10)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Excel" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">Excel (1)</a>
+    <!-- <a href="#Excel" style="font-size: 7pt; color: #999;">Excel (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#VBA" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">VBA (1)</a>
+    <!-- <a href="#VBA" style="font-size: 7pt; color: #999;">VBA (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Git" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 7.5pt; color: #888;">Git (3)</a>
+    <!-- <a href="#Git" style="font-size: 7.5pt; color: #888;">Git (3)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Tutorial" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 8.5pt; color: #888;">Tutorial (5)</a>
+    <!-- <a href="#Tutorial" style="font-size: 8.5pt; color: #888;">Tutorial (5)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Web" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 7.5pt; color: #888;">Web (3)</a>
+    <!-- <a href="#Web" style="font-size: 7.5pt; color: #888;">Web (3)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#CSS" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7.5pt; color: #999;">CSS (2)</a>
+    <!-- <a href="#CSS" style="font-size: 7.5pt; color: #999;">CSS (2)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#SQL" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 6pt; color: #888;">SQL (4)</a>
+    <!-- <a href="#SQL" style="font-size: 6pt; color: #888;">SQL (4)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#psql" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7.5pt; color: #999;">psql (2)</a>
+    <!-- <a href="#psql" style="font-size: 7.5pt; color: #999;">psql (2)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#統計" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 6pt; color: #888;">統計 (4)</a>
+    <!-- <a href="#統計" style="font-size: 6pt; color: #888;">統計 (4)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Algorithm" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7.5pt; color: #999;">Algorithm (2)</a>
+    <!-- <a href="#Algorithm" style="font-size: 7.5pt; color: #999;">Algorithm (2)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Machine Learning" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#555'" style="font-size: 9pt; color: #555;">Machine Learning (13)</a>
+    <!-- <a href="#Machine Learning" style="font-size: 9pt; color: #555;">Machine Learning (13)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Text Mining" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 6pt; color: #888;">Text Mining (4)</a>
+    <!-- <a href="#Text Mining" style="font-size: 6pt; color: #888;">Text Mining (4)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#NLP" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7.5pt; color: #999;">NLP (2)</a>
+    <!-- <a href="#NLP" style="font-size: 7.5pt; color: #999;">NLP (2)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Database" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7.5pt; color: #999;">Database (2)</a>
+    <!-- <a href="#Database" style="font-size: 7.5pt; color: #999;">Database (2)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Neural Network" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 8.5pt; color: #888;">Neural Network (5)</a>
+    <!-- <a href="#Neural Network" style="font-size: 8.5pt; color: #888;">Neural Network (5)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#javascript" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#888'" style="font-size: 7.5pt; color: #888;">javascript (3)</a>
+    <!-- <a href="#javascript" style="font-size: 7.5pt; color: #888;">javascript (3)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#node.js" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">node.js (1)</a>
+    <!-- <a href="#node.js" style="font-size: 7pt; color: #999;">node.js (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#HTML" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">HTML (1)</a>
+    <!-- <a href="#HTML" style="font-size: 7pt; color: #999;">HTML (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#前端" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">前端 (1)</a>
+    <!-- <a href="#前端" style="font-size: 7pt; color: #999;">前端 (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#Flask" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">Flask (1)</a>
+    <!-- <a href="#Flask" style="font-size: 7pt; color: #999;">Flask (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#MongoDB" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">MongoDB (1)</a>
+    <!-- <a href="#MongoDB" style="font-size: 7pt; color: #999;">MongoDB (1)</a> -->
+  
+    
+    
+    
+
+    
+
+    
+    
+    <a href="#test" onmouseover="this.style.color='#bf4d28'" onmouseout="this.style.color='#999'" style="font-size: 7pt; color: #999;">test (1)</a>
+    <!-- <a href="#test" style="font-size: 7pt; color: #999;">test (1)</a> -->
+  
+</div>
+
+<!-- 依類別分類 -->
+
+  <h3 id="R">R</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Nov</div>
+          <div class="post-title"><a href="/blog/r/2018/11/10/R-%E5%A6%82%E4%BD%95%E5%9C%A8-ggplot2-%E5%9C%96%E5%BD%A2%E4%B8%8A%E5%B8%8C%E8%87%98%E5%AD%97%E6%AF%8D/">[R]如何在 ggplot2 圖形上希臘字母？</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Oct</div>
+          <div class="post-title"><a href="/blog/r/2018/10/20/R-Environment/">[R]Environments (1)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Oct</div>
+          <div class="post-title"><a href="/blog/r/2018/10/19/R-variable-types/">[R]variable types</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Oct</div>
+          <div class="post-title"><a href="/blog/r/2018/10/04/R-RStudtio%E7%B7%A8%E7%A2%BC%E5%95%8F%E9%A1%8C/">[R]RStudtio編碼問題</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/r/2018/09/27/R-scale-%E8%88%87-dist-function/">[R]scale 與 dist function</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/r/2018/09/14/R-%E5%A6%82%E4%BD%95%E5%9C%A8R-Package%E5%8A%A0%E4%B8%8Acode-coverage-(codecov)/">[R]如何在R Package加上code coverage (codecov)?</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">[R][Git]如何在 Rstudio 上連接 R project 與 Github</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Aug</div>
+          <div class="post-title"><a href="/blog/r/2018/08/27/R-%E5%A6%82%E4%BD%95%E4%BF%AE%E7%95%8C%E9%9D%A2%E8%AA%9E%E8%A8%80%E7%9A%84%E8%A8%AD%E5%AE%9A/">[R]如何更改R介面語言的設定</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/r/2018/02/26/R-%E5%A6%82%E4%BD%95%E8%AE%80%E5%8F%96Excel%E6%AA%94%E6%A1%88/">[R]如何使用R讀取Excel檔案</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/r/2018/02/26/R-%E4%BD%BF%E7%94%A8R%E5%AF%84Outlook-Email/">[R]使用 R 寄Outlook Email</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/r/2018/01/17/R-read.csv%E5%87%BA%E7%8F%BE%E7%B7%A8%E7%A2%BC%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">[R]read.csv出現編碼錯誤訊息</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/r/2018/01/17/R-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4-U+00A0/">[R]如何刪除 U+00A0</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jun</div>
+          <div class="post-title"><a href="/blog/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">[R]顯示完整數字，不顯示科學記號</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jun</div>
+          <div class="post-title"><a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">[R]Error when saving xlsx workbook with package openxlsx</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Apr</div>
+          <div class="post-title"><a href="/blog/r/2017/04/24/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython-%E7%B5%A6%E4%BA%88%E5%8F%83%E6%95%B8/">[R]在R中使用system呼叫python-給予參數</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Aug</div>
+          <div class="post-title"><a href="/blog/r/2016/08/24/R-%E8%A8%AD%E5%AE%9AR%E5%9C%96%E5%BD%A2%E5%AD%97%E9%AB%94/">[R]設定 R 圖形字體</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Jul</div>
+          <div class="post-title"><a href="/blog/r/2016/07/17/R-R-batch/">[R]R batch</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Jul</div>
+          <div class="post-title"><a href="/blog/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">[R]使用 R 發送gmail Email</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Jul</div>
+          <div class="post-title"><a href="/blog/r/2016/07/08/R-%E5%9C%A8R%E4%B8%AD%E4%BD%BF%E7%94%A8system%E5%91%BC%E5%8F%ABpython/">[R]在 R 中使用 system 呼叫 python</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Python">Python</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2022 Apr</div>
+          <div class="post-title"><a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/">[Python][Flask]Flask 基本實做</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2022 Apr</div>
+          <div class="post-title"><a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/">[Python]在 Mac 下載與安裝 Miniconda</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2022 Apr</div>
+          <div class="post-title"><a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/">[Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2021 Jan</div>
+          <div class="post-title"><a href="/blog/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">[Python]asyncio 和 await</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Feb</div>
+          <div class="post-title"><a href="/blog/python/2019/02/27/Python-filter-map-reduce-lambd/">[Python]filter、map、reduce、lambda</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Jan</div>
+          <div class="post-title"><a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">[Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Jan</div>
+          <div class="post-title"><a href="/blog/python/2019/01/02/Python-%E8%AE%80%E5%8F%96%E8%88%87%E5%AF%AB%E5%85%A5xlsx%E6%AA%94%E6%A1%88/">[Python]讀取與寫入xlsx檔案</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Jan</div>
+          <div class="post-title"><a href="/blog/python/2019/01/02/Python-%E5%85%A8%E5%BD%A2%E8%88%87%E5%8D%8A%E5%BD%A2%E8%BD%89%E6%8F%9B/">[Python]全形與半形轉換</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jul</div>
+          <div class="post-title"><a href="/blog/python/2018/07/13/Python-%E5%9F%B7%E8%A1%8Cpyinstaller%E7%94%A2%E7%94%9F%E7%9A%84exe%E6%AA%94%E5%87%BA%E7%8F%BENo-module%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AF/">[Python]執行pyinstaller產生的執行檔出現No module錯誤訊息</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jul</div>
+          <div class="post-title"><a href="/blog/python/2018/07/05/Python-%E5%BD%88%E5%87%BA%E8%A6%96%E7%AA%97alert-box/">[Python]彈出視窗 alert box</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jul</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">[Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">[Python][SQL]Python 連接 SQLite</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">Google Map API - Geocoding 地址經緯度</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/python/2018/06/13/Python-args-%E5%92%8C-kwargs/">[Python]Python 中的 *args 和 *kwargs</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 May</div>
+          <div class="post-title"><a href="/blog/python/2018/05/24/Python-%E4%BD%BF%E7%94%A8pyinstaller%E5%A5%97%E4%BB%B6%E6%89%93%E5%8C%85.py%E6%AA%94/">[Python]使用 pyinstaller 套件打包 .py 檔</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 May</div>
+          <div class="post-title"><a href="/blog/python/2018/05/23/Python-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9DPython%E5%8F%8Apip%E5%A5%97%E4%BB%B6/">[Python]下載與安裝 Python2.7 及 pip 套件</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">[Python][爬蟲]requests 的編碼</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">[Python][爬蟲]防止被ban，代理IP怎麼用?</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">[Python]呼叫其他.py的function</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/python/2018/01/15/Python-Google%E7%BF%BB%E8%AD%AFAPI%E6%8E%A5%E5%8F%A3-library-googletrnas/">[Python]Google 翻譯 API 接口 googletrnas</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/python/2018/01/08/Python-Read-and-Write-CSV-file/">[Python]Read and Write CSV file</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Aug</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/">[Python][爬蟲]如何爬取網頁中js生成的部分</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jul</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">[Python][爬蟲]如何下載 zip 檔</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jun</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">[Python][爬蟲]不同的 Content-Type (multipart/form-data)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">[Python][爬蟲]利用python下載zip檔並解壓縮</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/">[Python][爬蟲]如何刪除網頁中的 &amp; nbsp;</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/">[Python][爬蟲]不同的 Content-Type (application/json)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Jul</div>
+          <div class="post-title"><a href="/blog/python/2016/07/08/Python-%E4%BD%BF%E7%94%A8python%E4%B8%8B%E8%BC%89gmail%E9%99%84%E4%BB%B6/">[Python]使用 python 下載 gmail 附件</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Others">Others</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2019 Jan</div>
+          <div class="post-title"><a href="/blog/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">字元編碼，ASCII、Unicode、UTF-8</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/others/python/2018/06/28/Google-Map-API-Geocoding-%E5%9C%B0%E5%9D%80%E7%B6%93%E7%B7%AF%E5%BA%A6/">Google Map API - Geocoding 地址經緯度</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2016 Jul</div>
+          <div class="post-title"><a href="/blog/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">Windows7 自動排程</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="爬蟲">爬蟲</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Jul</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/07/03/Python-%E8%AE%80%E5%8F%96%E9%A9%97%E8%AD%89%E7%A2%BC/">[Python][爬蟲]使用 pytesseract 與 Image 套件解析驗證碼</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/17/Python-%E7%88%AC%E8%9F%B2-requests-%E7%9A%84%E7%B7%A8%E7%A2%BC/">[Python][爬蟲]requests 的編碼</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Feb</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/02/07/Python-%E7%88%AC%E8%9F%B2-%E9%98%B2%E6%AD%A2%E8%A2%ABban-%E4%BB%A3%E7%90%86IP%E6%80%8E%E9%BA%BC%E7%94%A8/">[Python][爬蟲]防止被ban，代理IP怎麼用?</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2018/01/08/Python-%E7%88%AC%E8%9F%B2-URL%E6%B2%92%E6%9C%89HTTP-HTTPS%E8%88%87%E7%B6%B2%E5%9D%80%E9%87%8D%E6%96%B0%E5%B0%8E%E5%90%91/">[Python][爬蟲]URL沒有 HTTP/HTTPS 與網址重新導向</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Aug</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/08/18/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E7%88%AC%E5%8F%96%E7%B6%B2%E9%A0%81%E4%B8%ADjs%E7%94%9F%E6%88%90%E7%9A%84%E9%83%A8%E5%88%86/">[Python][爬蟲]如何爬取網頁中js生成的部分</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jul</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/07/25/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BC%89zip%E6%AA%94/">[Python][爬蟲]如何下載 zip 檔</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jun</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/06/30/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-multipart-form-data/">[Python][爬蟲]不同的 Content-Type (multipart/form-data)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/18/Python-%E7%88%AC%E8%9F%B2-%E5%88%A9%E7%94%A8python%E4%B8%8B%E8%BC%89zip%E6%AA%94%E4%B8%A6%E8%A7%A3%E5%A3%93%E7%B8%AE/">[Python][爬蟲]利用python下載zip檔並解壓縮</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/17/Python-%E7%88%AC%E8%9F%B2-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4%E7%B6%B2%E9%A0%81%E4%B8%AD%E7%9A%84/">[Python][爬蟲]如何刪除網頁中的 &amp; nbsp;</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 May</div>
+          <div class="post-title"><a href="/blog/python/%E7%88%AC%E8%9F%B2/2017/05/05/Python-%E7%88%AC%E8%9F%B2-%E4%B8%8D%E5%90%8C%E7%9A%84Content-Type-application-json/">[Python][爬蟲]不同的 Content-Type (application/json)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Excel">Excel</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2017 Jul</div>
+          <div class="post-title"><a href="/blog/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">[Excel][VBA]寄出內文含圖檔的outlook信件</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="VBA">VBA</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2017 Jul</div>
+          <div class="post-title"><a href="/blog/excel/vba/2017/07/05/Excel-VBA-outlook%E4%BF%A1%E4%BB%B6%E5%85%A7%E6%96%87%E5%90%AB%E5%9C%96%E6%AA%94/">[Excel][VBA]寄出內文含圖檔的outlook信件</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Git">Git</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2021 Aug</div>
+          <div class="post-title"><a href="/blog/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/">[Git]Github 新的 authentication 設定</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/r/git/2018/09/08/R-Git-%E5%A6%82%E4%BD%95%E9%80%A3%E6%8E%A5Rstudio%E8%88%87githu/">[R][Git]如何在 Rstudio 上連接 R project 與 Github</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2017 Jul</div>
+          <div class="post-title"><a href="/blog/git/2017/07/26/Git-%E6%8F%90%E4%BA%A4%E4%B8%80%E5%80%8B%E6%9B%B4%E6%96%B0/">[Git] 提交一個更新</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Tutorial">Tutorial</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">[Tutorial]Computer Networking筆記(22-26)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/tutorial/2018/01/24/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(16-21)/">[Tutorial]Computer Networking筆記(16-21)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/tutorial/2018/01/20/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(12-15)/">[Tutorial]Computer Networking筆記(12-15)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/tutorial/2018/01/15/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(9-11)/">[Tutorial]Computer Networking筆記(9-11)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jan</div>
+          <div class="post-title"><a href="/blog/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">[Tutorial]Computer Networking筆記(1-8)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Web">Web</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2021 Aug</div>
+          <div class="post-title"><a href="/blog/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/">[Web]MVC 架構</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">[Web][CSS]如何刪除 nav tag 底色兩邊的空白？</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 May</div>
+          <div class="post-title"><a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">[Web][CSS]在不同螢幕解析度下調整css</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="CSS">CSS</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">[Web][CSS]如何刪除 nav tag 底色兩邊的空白？</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 May</div>
+          <div class="post-title"><a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">[Web][CSS]在不同螢幕解析度下調整css</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="SQL">SQL</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2021 Aug</div>
+          <div class="post-title"><a href="/blog/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&amp;-phpmyadmin/">[SQL]在 Mac 本機安裝 MySQL &amp; phpmyadmin</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/python/sql/2018/06/30/Python-SQL-Pytho%E6%8E%A5-SQLite/">[Python][SQL]Python 連接 SQLite</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">[SQL][psql]基本觀念(2)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">[SQL][psql]基本指令(1)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="psql">psql</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/sql/psql/2018/06/29/SQL-psql-%E5%9F%BA%E6%9C%AC%E4%BB%A4%E8%88%87(2)/">[SQL][psql]基本觀念(2)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Jun</div>
+          <div class="post-title"><a href="/blog/sql/psql/2018/06/15/psql-%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4/">[SQL][psql]基本指令(1)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="統計">統計</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E4%BB%80%E9%BA%BC%E6%98%AFCDF/">[統計]什麼是 CDF (Cumulative Distribution Function)?</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/04/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(3)/">[統計]離散型(Discrete)隨機變數與其機率分佈(3)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/02/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(2)/">[統計]離散型(Discrete)隨機變數與其機率分佈(2)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/%E7%B5%B1%E8%A8%88/2018/09/01/%E7%B5%B1%E8%A8%88-%E9%9B%A2%E6%95%A3%E5%9E%8B(Discrete)%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E8%88%87%E5%85%B6%E6%A9%9F%E7%8E%87%E5%88%86%E4%BD%88(1)/">[統計]離散型(Discrete)隨機變數與其機率分佈(1)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Algorithm">Algorithm</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2019 Mar</div>
+          <div class="post-title"><a href="/blog/algorithm/2019/03/02/Algorithm-%E5%9F%BA%E5%9B%A0%E6%BC%94%E7%AE%97%E6%B3%95Genetic-Algorithm/">[Algorithm]基因演算法Genetic Algorithm</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Sep</div>
+          <div class="post-title"><a href="/blog/algorithm/2018/09/28/Algorithm-Hamiltonian-path-and-Travelling-Salesman-Problem(TSP)/">[Algorithm]Hamiltonian path and Travelling Salesman Problem(TSP)</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Machine Learning">Machine Learning</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">[NLP]CNN in NLP</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">[Neural Network]Convolution Neural Network 卷積神經網路</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Mar</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2019/03/12/Machine-Learning-Markov-chain-Monte-Carlo-(MCMC)/">[Machine Learning]Markov Chain Monte Carlo (MCMC)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Mar</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Feb</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Reinforcement-Learning/">[Machine Learning]Reinforcement Learning</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Feb</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/27/Machine-Learning-Linear-Regression/">[Machine Learning]Linear Regression</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/09/Machine-Learning-Regression-splines/">[Machine Learning]Regression splines</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/08/Machine-Learning-Principal-Component-Analysis(PCA)/">[Machine Learning]Principal Component Analysis(PCA)</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Boosting-and-Adaboost/">[Machine Learning]Boosting and Adaboost</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">[Machine Learning]Random Forest</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">[Machine Learning]Bagging</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2018 Dec</div>
+          <div class="post-title"><a href="/blog/machine%20learning/2018/12/03/Machine-Learning-Decision-Tree-%E5%92%8C-bagging/">[Machine Learning]Decision Tree</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Text Mining">Text Mining</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2019 Nov</div>
+          <div class="post-title"><a href="/blog/text%20mining/2019/11/26/Text-Mining-Word-embeddings/">[Text Mining]Word embeddings</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Nov</div>
+          <div class="post-title"><a href="/blog/text%20mining/2019/11/21/Text-Mining-Text-clustering-and-topic-modelling/">[Text Mining]Text clustering and topic modelling</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Nov</div>
+          <div class="post-title"><a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">[Text Mining]Text classification</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Nov</div>
+          <div class="post-title"><a href="/blog/text%20mining/2019/11/05/Text-Mining-Information-Retrieval/">[Text Mining]Information Retrieval</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="NLP">NLP</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">[NLP]CNN in NLP</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Dec</div>
+          <div class="post-title"><a href="/blog/nlp/2019/12/17/NLP-NLTK-%E7%AD%86%E8%A8%98/">[NLP]NLTK &amp; spaCy 筆記</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Database">Database</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Jan</div>
+          <div class="post-title"><a href="/blog/database/2020/01/01/Database-ER-Model%E5%AF%A6%E9%AB%94%E9%97%9C%E4%BF%82%E5%9C%96/">[Database]ER Model 實體關聯模型</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2019 Dec</div>
+          <div class="post-title"><a href="/blog/database/2019/12/31/Database-Database-%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5/">[Database]Database 基礎概念</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Neural Network">Neural Network</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/neural%20network/2020/02/13/Neural-Network-Neural-Network-3/">[Neural Network]Neural Network 3 - Backpropagation</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/nlp/machine%20learning/neural%20network/2020/02/02/NLP-CNN-in-NLP/">[NLP]CNN in NLP</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Feb</div>
+          <div class="post-title"><a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">[Neural Network]Convolution Neural Network 卷積神經網路</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Jan</div>
+          <div class="post-title"><a href="/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">[Neural Network]Neural Network 2 - Gradient descent</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Jan</div>
+          <div class="post-title"><a href="/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">[Neural Network]Neural Network 1 - The idea</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="javascript">javascript</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2021 Jan</div>
+          <div class="post-title"><a href="/blog/javascript/2021/01/16/javascript-callbac,-promise,-async,-and-await/">[javascript]同步 v.s. 非同步與callback, promise, async, and await</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Dec</div>
+          <div class="post-title"><a href="/blog/javascript/2020/12/03/javascript-Traversing-the-DOM/">[javascript]Traversing the DOM</a></div>
+        </li>
+        
+      
+      	
+        <li>    
+          <div class="month">2020 Jul</div>
+          <div class="post-title"><a href="/blog/javascript/node.js/2020/07/27/node.js-callback/">[node.js]非同步（Asynchronous）、同步（Synchronous）、callback</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="node.js">node.js</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Jul</div>
+          <div class="post-title"><a href="/blog/javascript/node.js/2020/07/27/node.js-callback/">[node.js]非同步（Asynchronous）、同步（Synchronous）、callback</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="HTML">HTML</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2020 Nov</div>
+          <div class="post-title"><a href="/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">[HTML]文件物件模型（Document Object Model）</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="前端">前端</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2021 Mar</div>
+          <div class="post-title"><a href="/blog/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&amp;-Session/">[前端]Cookie &amp; Session</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="Flask">Flask</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2022 Apr</div>
+          <div class="post-title"><a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/">[Python][Flask]Flask 基本實做</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="MongoDB">MongoDB</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2022 Jun</div>
+          <div class="post-title"><a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">[MongoDB]建立 Cloud MongoDB</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+  <h3 id="test">test</h3> 
+    
+      
+      	
+      
+    
+      
+      	
+        <li>    
+          <div class="month">2022 Sep</div>
+          <div class="post-title"><a href="/blog/test/2022/09/04/test/">test</a></div>
+        </li>
+        
+      
+    
+    
+  
+
+</ul>
+
+:ET

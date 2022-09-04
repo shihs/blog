@@ -281,22 +281,22 @@ Generate policies/strategies that lead to a (possibly delayed) reward. Learn by 
 
 <p><strong>Policy</strong></p>
 
-<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 <script type="math/tex">\pi</script>，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
+<p>Policy 就是 agent 根據每個 state 所做出的不同的 action，也就是根據不同的狀態 agent 會採取不同的「策略」。定義為 \(\pi\)，是 RL（Reinforcement Learning） 最核心的問題。可以將 policy 看成是當 agent 感知到 state(S) 採取 action(A) 的 mapping。policy 可以分為隨機的（stochastic policy）和確定性的（deterministic policy）。</p>
 
 <ul>
-  <li>stochastic policy: <script type="math/tex">\pi(a\mid s),~ and \sum\pi(a\mid s) = 1</script></li>
-  <li>deterministic policy: <script type="math/tex">\pi(s)</script></li>
+  <li>stochastic policy: \(\pi(a\mid s),~ and \sum\pi(a\mid s) = 1\)</li>
+  <li>deterministic policy: \(\pi(s)\)</li>
 </ul>
 
 <p><strong>Reward</strong></p>
 
-<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 <script type="math/tex">s_0</script>，agent 做了 <script type="math/tex">a_0</script> 的 action，這時候產生了一個 reward <script type="math/tex">r_1</script>，然後因為剛剛的 <script type="math/tex">a_0</script> 這時候 state 來到 <script type="math/tex">s_1</script>，而 agent 要採取下一步 <script type="math/tex">a_1</script> 的時候就會根據剛剛的 <script type="math/tex">r_1</script> 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
+<p>Reward 是 RL 非常重要的一環，沒有 reward，agent 就不會知道到底學習正確還是錯誤。透過 reward，agent 才知道剛剛採取的 action 好不好。以下圖（<a href="https://zhuanlan.zhihu.com/p/25239682">Source</a>）為例，最一開始的 state 是 \(s_0\)，agent 做了 \(a_0\) 的 action，這時候產生了一個 reward \(r_1\)，然後因為剛剛的 \(a_0\) 這時候 state 來到 \(s_1\)，而 agent 要採取下一步 \(a_1\) 的時候就會根據剛剛的 \(r_1\) 來反應。agent 就這樣一步一步根據 reward 的結果來學習。</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/reward.jpg" alt="reward.jpg" height="120px" width="800px" /></p>
 
 <p>但其實並不是所有的學習都會像這個例子一樣立即獲得 reward，像下棋就會是整局結束後才得到 reward。</p>
 
-<p>另外，需要注意的是，Reward <script type="math/tex">\ne</script> Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
+<p>另外，需要注意的是，Reward \(\ne\) Goal。也就是說，agent 的目標並不是「當前」reward 最大，而是「平均累計」回報最大。</p>
 
 <hr />
 
@@ -312,18 +312,17 @@ Generate policies/strategies that lead to a (possibly delayed) reward. Learn by 
 
 <p>定義從長期來看 action 平均回報的好壞。例如，象棋中吃掉對方的車看起來即時收益很大，但如果因為吃掉對方的車自己的將卻被吃了，那麼從長期看這個 action 就不是一個好的選擇。</p>
 
-<p><script type="math/tex">V_\pi(s)</script> 表示的是策略 <script type="math/tex">\pi</script>，狀態 s 的長期期望收益。<script type="math/tex">Q_\pi(s, a)</script> 是策略 <script type="math/tex">\pi</script> 在狀態 s 下，採取動作 a 的長期期望收益。</p>
+<p>\(V_\pi(s)\) 表示的是策略 \(\pi\)，狀態 s 的長期期望收益。\(Q_\pi(s, a)\) 是策略 \(\pi\) 在狀態 s 下，採取動作 a 的長期期望收益。</p>
 
 <ul>
   <li>
-    <p>長期回報期望：<script type="math/tex">% <![CDATA[
-G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （因為 <script type="math/tex">\gamma</script> 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
+    <p>長期回報期望：\(G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 &lt; \gamma &lt; 1\) （因為 \(\gamma\) 介於 0 和 1 之間，所以 makes immediate rewards more important than distant rewards）</p>
   </li>
   <li>
-    <p>Value function：<script type="math/tex">V_\pi(s) = E_\pi[G_t\mid S_t = s]</script></p>
+    <p>Value function：\(V_\pi(s) = E_\pi[G_t\mid S_t = s]\)</p>
   </li>
   <li>
-    <p>Q function：<script type="math/tex">Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]</script></p>
+    <p>Q function：\(Q_\pi(s, a) = E_\pi[G_t\mid S_t = s, A_t = a]\)</p>
   </li>
 </ul>
 
@@ -354,12 +353,12 @@ G_t = \sum_{n=0}^{N}\gamma^nr_{t+n}, ~ where ~ 0 < \gamma < 1 %]]></script> （�
 <p>上面介紹了 V(s) 是狀態 s 的長期期望收益，那 agent 要如何決定根據它來決定要做什麼 action 採取什麼 policies 呢？這時候我們就會加上 action 這個變數來看，也就是上面提到的 Q(s, a)。</p>
 
 <ul>
-  <li><script type="math/tex">V^*(s) = \max_{a} Q(s_{k+1}, a)</script> denote the value function for the optimal policy</li>
-  <li><script type="math/tex">Q(s, a)</script> is expected future reward of doing action a in state s and then following the optimal policy <script type="math/tex">Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})</script></li>
-  <li><script type="math/tex">Q(s, a)</script> 未知，必須透過學習得到。</li>
+  <li>\(V^*(s) = \max_{a} Q(s_{k+1}, a)\) denote the value function for the optimal policy</li>
+  <li>\(Q(s, a)\) is expected future reward of doing action a in state s and then following the optimal policy \(Q(s_k, a) = r(s_k, a) + \gamma V^*(s_{k+1})\)</li>
+  <li>\(Q(s, a)\) 未知，必須透過學習得到。</li>
 </ul>
 
-<p><script type="math/tex">Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))</script>, <script type="math/tex">\eta</script> is learning rate</p>
+<p>\(Q(s_k, a_j) \leftarrow (1 - \eta) Q(s_k, a_j) + \eta (r + \gamma \max_{a} Q(s_{k+1}, a))\), \(\eta\) is learning rate</p>
 
 <p><a href="https://blog.csdn.net/itplus/article/details/9361915">這篇文章</a>翻譯了這個<a href="http://mnemstudio.org/path-finding-q-learning-tutorial.htm">原文</a>，我覺得非常好理解。但要整篇整理在這裡太麻煩了，所以自己看吧。</p>
 
@@ -431,6 +430,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -440,13 +446,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

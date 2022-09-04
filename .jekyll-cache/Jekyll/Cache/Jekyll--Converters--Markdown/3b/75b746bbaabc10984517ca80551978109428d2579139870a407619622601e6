@@ -1,0 +1,54 @@
+I"a<h3 id="nav的作用"><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 為 HTML 文件的區域元素 (element)，<code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 除了全域屬性外，沒有定義其他屬性 (attribute) 。
+<a href="https://pydoing.blogspot.com/2012/01/html-5-nav.html">參考</a></li>
+</ol>
+
+<p>像我的<a href="https://shihs.github.io/">網頁</a>上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 <code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>裡。</p>
+
+<p><br /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- html --&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"wrapper-nav"</span> <span class="na">id=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>    
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span><span class="nt">&gt;</span>Contact Me<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>           
+  <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">nav</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="如何刪除-nav-背景的空白-how-to-remove-the-space-on-both-sides-of-navbar">如何刪除 <code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 背景的空白 How to remove the space on both sides of navbar</h3>
+<p>若使用上面的程式碼會發現 <code class="language-plaintext highlighter-rouge">nav</code> 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>這個 tag 上面做些調整</p>
+
+<ol>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">margin-left</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+:ET

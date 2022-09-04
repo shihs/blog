@@ -219,7 +219,7 @@
 </ul>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 id 為 myParagraph 的 node</span>
-<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="s1">'myParagraph'</span><span class="p">);</span> 
+<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="dl">'</span><span class="s1">myParagraph</span><span class="dl">'</span><span class="p">);</span> 
 
 <span class="c1">// 使用 paragraph 選取它的 parent node</span>
 <span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">paragraph</span><span class="p">.</span><span class="nx">parenNode</span><span class="p">;</span> 
@@ -234,12 +234,12 @@
 
 <ul>
   <li><strong>previousElementSibling</strong>：選取被選取的 element 前一個的 sibling。</li>
-  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
+  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="language-plaintext highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
 </ul>
 
 <p><strong>previousSibling v.s. previousSibling</strong></p>
 
-<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
+<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="language-plaintext highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="language-plaintext highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
 
 <p>在課程的範例中，現在想要按了 Up 按鈕之後，該 &lt;li&gt; 就會上移。</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
@@ -263,12 +263,12 @@
 </code></pre></div></div>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
-<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
-<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'up'</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">up</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
   	<span class="c1">// 被 click 的 button 的 parent node 就是 li</span>
     <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
     <span class="c1">// 被選取的 li tag 的 previous element sibiling，也就是前一個 li tag</span>
@@ -316,12 +316,12 @@
 </code></pre></div></div>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
-<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
-<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'down'</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">down</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
     <span class="kd">let</span> <span class="nx">nextLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
     <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
@@ -336,10 +336,10 @@
 
 <h2 id="children">children</h2>
 
-<p><code class="highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
+<p><code class="language-plaintext highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// lisUl 底下的 child，也就是 li tag</span>
 <span class="kd">const</span> <span class="nx">lis</span> <span class="o">=</span> <span class="nx">listUl</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
@@ -398,6 +398,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -407,13 +414,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

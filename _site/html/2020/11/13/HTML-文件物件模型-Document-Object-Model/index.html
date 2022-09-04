@@ -261,13 +261,13 @@
     <p><strong>Document</strong>：Document 就是指這整份文件，就是這份 HTML 檔的開端，所有的 nodes 都會從 Document 開始往下。</p>
   </li>
   <li>
-    <p><strong>Element</strong>：Element 是指文件內的各個標籤，像是 <code class="highlighter-rouge"><span class="nt">&lt;html&gt;</span></code>、<code class="highlighter-rouge">&lt;body&gt;</code>、<code class="highlighter-rouge">&lt;div&gt;</code>、<code class="highlighter-rouge">&lt;p&gt;</code> 等等各種 HTML Tag 都被歸類在 Element。</p>
+    <p><strong>Element</strong>：Element 是指文件內的各個標籤，像是 <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> 等等各種 HTML Tag 都被歸類在 Element。</p>
   </li>
   <li>
-    <p><strong>Attribute</strong>：Attribute 是指各個標籤內的相關屬性，像是 <code class="highlighter-rouge">name</code>、<code class="highlighter-rouge">class</code>、<code class="highlighter-rouge">href</code> 等等都是被歸類在 Attribute。</p>
+    <p><strong>Attribute</strong>：Attribute 是指各個標籤內的相關屬性，像是 <code class="language-plaintext highlighter-rouge">name</code>、<code class="language-plaintext highlighter-rouge">class</code>、<code class="language-plaintext highlighter-rouge">href</code> 等等都是被歸類在 Attribute。</p>
   </li>
   <li>
-    <p><strong>Text</strong>：Text 是指被各個標籤包起來的文字，像是 <code class="highlighter-rouge">&lt;h1&gt;Hi&lt;/h1&gt;</code> 中， Hi 被 <code class="highlighter-rouge">&lt;h1&gt;</code> 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。</p>
+    <p><strong>Text</strong>：Text 是指被各個標籤包起來的文字，像是 <code class="language-plaintext highlighter-rouge">&lt;h1&gt;Hi&lt;/h1&gt;</code> 中， Hi 被 <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。</p>
   </li>
 </ul>
 
@@ -278,13 +278,13 @@
 <p>這邊介紹一些常見的 DOM API，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'idName'</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'tagName'</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'className'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">idName</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">tagName</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">'</span><span class="s1">className</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// selector 可以是 id:#idName, class:.className, tag:tagName, or CSS pseudo-class</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span> 
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">selector</span><span class="dl">'</span><span class="p">);</span> 
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">selector</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <hr />
@@ -293,9 +293,9 @@
 
 <p><strong>BOM</strong> 是 Browser Object Model（瀏覽器物件模型）的縮寫。DOM 是文件和程式溝通的接口，BOM 則是和瀏覽器溝通的接口。像是跳轉到其他頁面、螢幕大小的參數等等可以操作的方法或屬性。</p>
 
-<p>同樣的 BOM 也有很多屬於它的 object，像是 <code class="highlighter-rouge">location</code>，下面這個程式碼可以讓瀏覽器跳轉到另一個頁面：</p>
+<p>同樣的 BOM 也有很多屬於它的 object，像是 <code class="language-plaintext highlighter-rouge">location</code>，下面這個程式碼可以讓瀏覽器跳轉到另一個頁面：</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"http://www.xxxx.com"</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">http://www.xxxx.com</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>而 <strong>windows</strong> 也是 <strong>BOM</strong> 的一個 object。「關閉視窗」可以這樣寫，</p>
@@ -365,6 +365,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -374,13 +381,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

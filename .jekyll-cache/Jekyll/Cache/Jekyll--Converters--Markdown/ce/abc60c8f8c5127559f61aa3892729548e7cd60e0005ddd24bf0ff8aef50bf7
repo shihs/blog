@@ -1,0 +1,61 @@
+I"�<p>每天都會收到信並且要利用信中的附件整理資料，
+但這樣我在跑程式前還要手動去下載檔案，
+覺得實在太麻煩，
+所以找到了這個辦法！</p>
+
+<p>因為我的mail是gamil，
+所以以下的程式碼是針對gmail，
+在執行前要先<a href="http://mobileai.net/2011/03/19/教您如何開啟-gmail-的-imap-功能/" target="_blank">打開imap</a>
+我主要是參考<a href="https://gist.github.com/jasonrdsouza/1674794" target="_blank">這裡</a></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">imaplib</span><span class="p">,</span> <span class="n">inspect</span>
+<span class="kn">import</span> <span class="nn">email</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">decode_header</span>
+
+<span class="n">inspect</span><span class="p">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="p">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
+<span class="c1">#與IMAP4 server連線，gmail要開啟IMAP
+</span><span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="p">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
+<span class="c1">#登入
+</span><span class="n">imap</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
+<span class="c1">#選擇信箱標籤
+</span><span class="n">imap</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
+<span class="c1">#找所有mail
+</span><span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
+
+<span class="c1">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)
+</span><span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
+
+<span class="n">emailbody</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
+
+<span class="c1">#找出含有附件的部分
+</span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="p">.</span><span class="n">walk</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">part</span><span class="p">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
+		<span class="k">continue</span>
+	<span class="k">if</span> <span class="n">part</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+		<span class="k">continue</span>
+
+	<span class="c1">#附件檔名
+</span>	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="p">.</span><span class="n">get_filename</span><span class="p">()</span>  
+	<span class="c1">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;
+</span>	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]).</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+	<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
+		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
+			<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
+			<span class="n">fp</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="p">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+			<span class="n">fp</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+			<span class="k">print</span> <span class="s">"attachement is downloaded!"</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="k">print</span> <span class="s">"file is already exist!"</span>
+			
+<span class="c1">#關閉連線與登出
+</span><span class="n">imap</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">imap</span><span class="p">.</span><span class="n">logout</span><span class="p">()</span>
+
+
+</code></pre></div></div>
+:ET

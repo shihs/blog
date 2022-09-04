@@ -209,7 +209,7 @@
   <div><h4 id="1-啟動-apache">1. 啟動 Apache</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">sudo apachectl start</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sudo apachectl start</code></li>
   <li>打開瀏覽器 <a href="http://localhost/">http://localhost/</a> 可以看到 <strong>It works!</strong></li>
 </ul>
 
@@ -217,7 +217,7 @@
 
 <ul>
   <li><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></li>
-  <li>選擇下載 <code class="highlighter-rouge">.dmg</code> 檔</li>
+  <li>選擇下載 <code class="language-plaintext highlighter-rouge">.dmg</code> 檔</li>
   <li>下載完後安裝，安裝過程需要<strong>設定 root 的密碼</strong></li>
   <li>打開系統偏好設定會看到出現 MySQL 的圖示，點選後啟動 MySQL
 <img src="https://i.imgur.com/tusQ0GN.png" alt="" width="70%" heigh="70%" />
@@ -227,8 +227,8 @@
 <h4 id="3-使用-terminal-開啟-mysql">3. 使用 terminal 開啟 MySQL</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">mysql -u root -p</code>（<code class="highlighter-rouge">-u</code>: user, <code class="highlighter-rouge">-p</code>: password）</li>
-  <li>出現 <code class="highlighter-rouge">Enter password:</code> 後輸入剛剛安裝時設定的 root 密碼
+  <li><code class="language-plaintext highlighter-rouge">mysql -u root -p</code>（<code class="language-plaintext highlighter-rouge">-u</code>: user, <code class="language-plaintext highlighter-rouge">-p</code>: password）</li>
+  <li>出現 <code class="language-plaintext highlighter-rouge">Enter password:</code> 後輸入剛剛安裝時設定的 root 密碼
 <img src="https://i.imgur.com/dsXdFmP.png" alt="" width="90%" heigh="90%" /></li>
 </ul>
 
@@ -244,15 +244,15 @@
 
 <h4 id="5-設定-phpmyadmin-登入密碼">5. 設定 phpmyadmin 登入密碼</h4>
 
-<p>因為 phpmyadmin 的密碼身份驗證是 <code class="highlighter-rouge">caching_sha2_password</code> 所以會無法使用一開始設定的 root 與密碼登入，這時候需要先修改 db 的資料。</p>
+<p>因為 phpmyadmin 的密碼身份驗證是 <code class="language-plaintext highlighter-rouge">caching_sha2_password</code> 所以會無法使用一開始設定的 root 與密碼登入，這時候需要先修改 db 的資料。</p>
 
 <ul>
   <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
-  <li>將 root 的密碼身份驗證由 <code class="highlighter-rouge">caching_sha2_password</code> 改成 <code class="highlighter-rouge">mysql_native_password</code>
+  <li>將 root 的密碼身份驗證由 <code class="language-plaintext highlighter-rouge">caching_sha2_password</code> 改成 <code class="language-plaintext highlighter-rouge">mysql_native_password</code>
     <ul>
-      <li><code class="highlighter-rouge">use mysql；</code>（使用 <code class="highlighter-rouge">mysql</code> 這個 db）</li>
-      <li><code class="highlighter-rouge">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密碼';</code></li>
-      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+      <li><code class="language-plaintext highlighter-rouge">use mysql；</code>（使用 <code class="language-plaintext highlighter-rouge">mysql</code> 這個 db）</li>
+      <li><code class="language-plaintext highlighter-rouge">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密碼';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
     </ul>
   </li>
   <li>這時候 phpmyadmin 就可以使用設定好的 root 的密碼登入了</li>
@@ -268,15 +268,15 @@
   <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
   <li>新增 User
     <ul>
-      <li><code class="highlighter-rouge">use mysql；</code></li>
-      <li><code class="highlighter-rouge">CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'PASSWORD';</code></li>
-      <li><code class="highlighter-rouge">ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';</code></li>
-      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+      <li><code class="language-plaintext highlighter-rouge">use mysql；</code></li>
+      <li><code class="language-plaintext highlighter-rouge">CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'PASSWORD';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
     </ul>
   </li>
   <li>設定完成後 phpmyadmin 和 terminal 都可以使用設定好的帳號密碼登入
     <ul>
-      <li><code class="highlighter-rouge">mysql -u USERNAME -p</code> / <code class="highlighter-rouge">PASSWORD</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mysql -u USERNAME -p</code> / <code class="language-plaintext highlighter-rouge">PASSWORD</code></li>
     </ul>
   </li>
 </ul>
@@ -285,12 +285,12 @@
 
 <ul>
   <li>查看某 user 的權限：
-<code class="highlighter-rouge">SHOW GRANTS FOR 'username'@'localhost';</code></li>
+<code class="language-plaintext highlighter-rouge">SHOW GRANTS FOR 'username'@'localhost';</code></li>
   <li>GRANT 權限：
-<code class="highlighter-rouge">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></li>
+<code class="language-plaintext highlighter-rouge">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></li>
   <li>REVOKE 權限：
-<code class="highlighter-rouge">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></li>
-  <li>reload all the privileges：<code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+<code class="language-plaintext highlighter-rouge">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></li>
+  <li>reload all the privileges：<code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
 </ul>
 
 <hr />
@@ -351,6 +351,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -360,13 +367,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -254,7 +254,7 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/cookie.png" alt="進入 googlec.com 後得到的 cookie" width="80%" heigh="80%" /></p>
 
-<p>而這個 cookie 在 Client 端第一次發送 request 後，Server 會以 <code class="highlighter-rouge">Set-Cookie</code> 的方式寫在 response header，回應給 Client，而 Client 瀏覽器就會將這個 Cookie 存在本機端，下一次要再次送 request 時，會把這個已儲存的 Cookie 已 <code class="highlighter-rouge">Cookie</code> 的方式存在 resquest header 和 request 一起送出，讓 Sever 知道這個 Client 目前的狀態。（可以用 Chrome 的開法者模式看 network 中網頁的 Response Headers 和 Request Headers 找到 <code class="highlighter-rouge">Set-Cookie</code> 和 <code class="highlighter-rouge">Cookie</code>）</p>
+<p>而這個 cookie 在 Client 端第一次發送 request 後，Server 會以 <code class="language-plaintext highlighter-rouge">Set-Cookie</code> 的方式寫在 response header，回應給 Client，而 Client 瀏覽器就會將這個 Cookie 存在本機端，下一次要再次送 request 時，會把這個已儲存的 Cookie 已 <code class="language-plaintext highlighter-rouge">Cookie</code> 的方式存在 resquest header 和 request 一起送出，讓 Sever 知道這個 Client 目前的狀態。（可以用 Chrome 的開法者模式看 network 中網頁的 Response Headers 和 Request Headers 找到 <code class="language-plaintext highlighter-rouge">Set-Cookie</code> 和 <code class="language-plaintext highlighter-rouge">Cookie</code>）</p>
 
 <p>但這樣儲存 Cookie 又會有什麼問題呢？</p>
 
@@ -342,6 +342,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -351,13 +358,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -223,7 +223,7 @@
 <h3 id="accuracy">Accuracy</h3>
 <p>The accuracy of a classifier is the proportion of documents for which the classifier predicts the gold-standard class:</p>
 
-<script type="math/tex; mode=display">\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}</script>
+\[\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}\]
 
 <h3 id="accuracy-and-imbalanced-data-sets">Accuracy and imbalanced data sets</h3>
 
@@ -256,18 +256,18 @@
   </li>
 </ul>
 
-<script type="math/tex; mode=display">\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}</script>
+\[\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}\]
 
 <ul>
   <li>Recall is the proportion of correctly classified documents among all documents with gold-standard class.</li>
 </ul>
 
-<script type="math/tex; mode=display">\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}</script>
+\[\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}\]
 
 <h2 id="f1-measure">F1-measure</h2>
 <p>A good classifier should balance between precision and recall.  </p>
 
-<script type="math/tex; mode=display">\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}</script>
+\[\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}\]
 
 <hr />
 
@@ -275,52 +275,50 @@
 
 <h3 id="bayes-theorem">Bayes’ theorem</h3>
 
-<p>We know that <script type="math/tex">C</script> is classes, <script type="math/tex">x_i, i = 1, \cdots,n</script> is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
+<p>We know that \(C\) is classes, \(x_i, i = 1, \cdots,n\) is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
 
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}</script>
+\[p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}\]
 
 <p>也就是，</p>
 
-<script type="math/tex; mode=display">\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}</script>
+\[\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}\]
 
-<p>根據上式，我們可以將分母視為常數，因為 features <script type="math/tex">x_i, i = 1, \cdots,n</script> 的值是給定的，且與 <script type="math/tex">C</script> 無關，所以可以得到</p>
+<p>根據上式，我們可以將分母視為常數，因為 features \(x_i, i = 1, \cdots,n\) 的值是給定的，且與 \(C\) 無關，所以可以得到</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C, x_1, \cdots,x_n) & = p(C)~p(x_1,\cdots,x_n|C) \\
-& \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
-& \propto \cdots\\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
-\end{align} %]]></script>
+\[\begin{align}
+p(C, x_1, \cdots,x_n) &amp; = p(C)~p(x_1,\cdots,x_n|C) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
+&amp; \propto \cdots\\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
+\end{align}\]
 
 <h3 id="naive-bayes-assumption">Naive Bayes assumption</h3>
 
 <p>Naive Bayes 假設 
-<script type="math/tex">p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j</script></p>
+\(p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j\)</p>
 
 <p>根據 Naive Bayes 的假設，前面的式子我們可以寫成，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C|x_1,..., x_n) & \propto p(C, x_1, \cdots,x_n) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
-& \propto p(C)~\prod_{i=1}^n p(x_i|C)
-\end{align} %]]></script>
+\[\begin{align}
+p(C|x_1,..., x_n) &amp; \propto p(C, x_1, \cdots,x_n) \\
+&amp; \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
+&amp; \propto p(C)~\prod_{i=1}^n p(x_i|C)
+\end{align}\]
 
 <p>根據上面的推導過程，我們可以得到，</p>
 
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)</script>
+\[p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)\]
 
 <h3 id="naive-bayes-classifer">Naive Bayes classifer</h3>
 
-<p>而 Naive Bayes classifer 就是取各個分類 <script type="math/tex">C_m, m = 1, \cdots, k</script> 
-中 <script type="math/tex">p(C|x_1,..., x_n)</script> 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
+<p>而 Naive Bayes classifer 就是取各個分類 \(C_m, m = 1, \cdots, k\) 
+中 \(p(C|x_1,..., x_n)\) 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
 
-<script type="math/tex; mode=display">C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)</script>
+\[C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)\]
 
-<p>而 <script type="math/tex">C_m</script> 就是最後的分類結果。</p>
+<p>而 \(C_m\) 就是最後的分類結果。</p>
 
 <h3 id="two-classic-naive-bayes-variants-for-text">Two Classic Naive Bayes Variants for Text</h3>
 
@@ -401,6 +399,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -410,13 +415,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

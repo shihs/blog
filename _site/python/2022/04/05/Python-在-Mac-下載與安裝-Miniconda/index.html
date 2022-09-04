@@ -215,9 +215,9 @@
 
 <p>參考官網的 <a href="https://docs.anaconda.com/anaconda/install/uninstall/">uninstall Anaconda</a> 的方法。</p>
 
-<p>原本想使用第二種方法 <code class="highlighter-rouge">conda install anaconda-clean</code>，但在下載 <code class="highlighter-rouge">anaconda-clean</code> 時一直碰到問題，所以最後決定使用第一種方法。</p>
+<p>原本想使用第二種方法 <code class="language-plaintext highlighter-rouge">conda install anaconda-clean</code>，但在下載 <code class="language-plaintext highlighter-rouge">anaconda-clean</code> 時一直碰到問題，所以最後決定使用第一種方法。</p>
 
-<p>直接刪除整個 <code class="highlighter-rouge">rm -rf ~/anaconda3</code> 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 <code class="highlighter-rouge">anaconda</code> 刪除所有相關的檔案。</p>
+<p>直接刪除整個 <code class="language-plaintext highlighter-rouge">rm -rf ~/anaconda3</code> 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 <code class="language-plaintext highlighter-rouge">anaconda</code> 刪除所有相關的檔案。</p>
 
 <hr />
 
@@ -229,10 +229,10 @@
       <li>根據步驟一直點選下一步就好</li>
     </ul>
   </li>
-  <li>安裝完成後，Miniconda 會自動在 <code class="highlighter-rouge">.zchrc</code> 和 <code class="highlighter-rouge">.bash_profile</code> 加上路徑
+  <li>安裝完成後，Miniconda 會自動在 <code class="language-plaintext highlighter-rouge">.zchrc</code> 和 <code class="language-plaintext highlighter-rouge">.bash_profile</code> 加上路徑
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
  <span class="c"># !! Contents within this block are managed by 'conda init' !!</span>
- <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="s1">'/Users/your_user_name/opt/miniconda3/bin/conda'</span> <span class="s1">'shell.bash'</span> <span class="s1">'hook'</span> 2&gt; /dev/null<span class="k">)</span><span class="s2">"</span>
+ <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="s1">'/Users/your_user_name/opt/miniconda3/bin/conda'</span> <span class="s1">'shell.bash'</span> <span class="s1">'hook'</span> 2&gt; /dev/null<span class="si">)</span><span class="s2">"</span>
  <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-eq</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
      </span><span class="nb">eval</span> <span class="s2">"</span><span class="nv">$__conda_setup</span><span class="s2">"</span>
  <span class="k">else
@@ -248,7 +248,7 @@
   </li>
   <li>確認是否安裝成功
     <ul>
-      <li>打開 terminal，<code class="highlighter-rouge">conda --version</code> 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！</li>
+      <li>打開 terminal，<code class="language-plaintext highlighter-rouge">conda --version</code> 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！</li>
     </ul>
   </li>
 </ol>
@@ -264,33 +264,33 @@
 
 <p><strong>conda 的資訊</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
-  <li><code class="highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
-  <li><code class="highlighter-rouge">conda env list</code>：conda 所有的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env list</code>：conda 所有的環境</li>
 </ul>
 
 <p><strong>conda basic</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
-  <li><code class="highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
+  <li><code class="language-plaintext highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
 </ul>
 
 <p><strong>環境</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境
+  <li><code class="language-plaintext highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境
     <ul>
-      <li>Ex. <code class="highlighter-rouge">conda create --name myenv python=3.6</code></li>
+      <li>Ex. <code class="language-plaintext highlighter-rouge">conda create --name myenv python=3.6</code></li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
-  <li><code class="highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
-  <li><code class="highlighter-rouge">conda list</code>：active 環境中的所有套件
+  <li><code class="language-plaintext highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda list</code>：active 環境中的所有套件
     <ul>
-      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="highlighter-rouge">Build Channel</code></a>的<code class="highlighter-rouge">pypi</code>表示是用<code class="highlighter-rouge">pip install PACKAGENAME</code></li>
-      <li><code class="highlighter-rouge">pip freeze</code>可以看到所有用<code class="highlighter-rouge">pip install</code>下載的套件</li>
+      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="language-plaintext highlighter-rouge">Build Channel</code></a>的<code class="language-plaintext highlighter-rouge">pypi</code>表示是用<code class="language-plaintext highlighter-rouge">pip install PACKAGENAME</code></li>
+      <li><code class="language-plaintext highlighter-rouge">pip freeze</code>可以看到所有用<code class="language-plaintext highlighter-rouge">pip install</code>下載的套件</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境</li>
 </ul>
 </div>
 </div>
@@ -340,6 +340,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -349,13 +356,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

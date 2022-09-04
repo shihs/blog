@@ -183,6 +183,143 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
+        [Python]呼叫其他.py的function
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 2, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Python">Python</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是fun.py
+</span><span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
+	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
+
+</code></pre></div></div>
+
+<p>有兩種情況，<br />
+<strong>1. 這兩個檔案在同一個folder底下</strong><br />
+—main.py<br />
+—fun.py<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是 main.py
+</span><span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c1"># 使用fun.py的itsafunction()
+</span><span class="n">itsafunction</span><span class="p">()</span>
+
+</code></pre></div></div>
+
+<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
+想要呼叫的fun.py在function這個folder底下<br />
+—main.py<br />
+—function—fun.py<br /></p>
+
+<p>這時候main.py可以有兩種寫法</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是main1.py
+</span><span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c1"># 使用fun.py的itsafunction()
+</span><span class="n">fun</span><span class="p">.</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是main2.py
+</span><span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c1"># 使用fun.py的itsafunction()
+</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是__init___.py
+# 什麼都不用寫，沒錯，就是一個空白的.py檔
+# it's true, it's empty. But it's still important!
+</span></code></pre></div></div>
+
+<p>那如果今天fun.py在function的下一層folder呢?<br />
+—main.py<br />
+—function—another—fun.py<br />
+只要把main.py改成<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### 這是main.py
+</span><span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
+
+<span class="c1"># 使用fun.py的itsafunction()
+</span><span class="n">fun</span><span class="p">.</span><span class="n">itsafunction</span><span class="p">()</span>
+
+<span class="c1">#或者也可以這樣寫
+</span>
+<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
+
+<span class="c1"># 使用fun.py的itsafunction()
+</span><span class="n">itsafunction</span><span class="p">()</span>
+</code></pre></div></div>
+<p>但最重要的是，<br />
+<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
+
+ -->
+    
+    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
+要怎麼做呢？</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
+        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/tutorial/2018/01/25/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(22-26)/">
         [Tutorial]Computer Networking筆記(22-26)
       </a>
@@ -277,7 +414,6 @@ device不只傳送自己的ip，也傳送subnet mask來表示network id和host i
  -->
     
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
 </div>
 
     <div class="bookmark">
@@ -378,7 +514,6 @@ Router joins network together.<br /></p>
  -->
     
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
 </div>
 
     <div class="bookmark">
@@ -508,7 +643,6 @@ Star Topology會有許多nodes連結中的device(譬如rounter)，就像是星�
  -->
     
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
 </div>
 
     <div class="bookmark">
@@ -597,7 +731,6 @@ s.setAttribute('data-timestamp', +new Date());
  
 </span><span class="c1"># Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'</span><span class="w">
 </span></code></pre></div></div>
-
 </div>
 
     <div class="bookmark">
@@ -663,7 +796,7 @@ s.setAttribute('data-timestamp', +new Date());
 
     </div>
     <!-- <p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
 <p>而且不管用什麼方式都取代不了這個符號，
 這時候該怎麼辦呢？</p>
@@ -676,11 +809,10 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
 </code></pre></div></div>
 <p>而且不管用什麼方式都取代不了這個符號，
 這時候該怎麼辦呢？</p>
-
 </div>
 
     <div class="bookmark">
@@ -805,7 +937,6 @@ http:// www.thenewboston.org /index.php</p>
  -->
     
     <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
 </div>
 
     <div class="bookmark">
@@ -874,23 +1005,23 @@ s.setAttribute('data-timestamp', +new Date());
 <pre><code class="language-cmd"># windows
 pip install googletrans
 </code></pre>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
 sudo pip install googletrans
 </code></pre></div></div>
 
 <p>程式碼</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span>
 <span class="kn">from</span> <span class="nn">googletrans</span> <span class="kn">import</span> <span class="n">Translator</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="c"># 這兩行很重要，不然會有編碼問題</span>
-<span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">setdefaultencoding</span><span class="p">(</span> <span class="s">"utf-8"</span> <span class="p">)</span>
+<span class="c1"># 這兩行很重要，不然會有編碼問題
+</span><span class="nb">reload</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">setdefaultencoding</span><span class="p">(</span> <span class="s">"utf-8"</span> <span class="p">)</span>
 
 <span class="n">translator</span> <span class="o">=</span> <span class="n">Translator</span><span class="p">()</span>
-<span class="c"># src來源語言，dest要翻譯語言，如果要找其他語言可以參考說明文件</span>
-<span class="k">print</span> <span class="n">translator</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="s">'고마워'</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s">"ko"</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="s">"zh-TW"</span><span class="p">)</span>
+<span class="c1"># src來源語言，dest要翻譯語言，如果要找其他語言可以參考說明文件
+</span><span class="k">print</span> <span class="n">translator</span><span class="p">.</span><span class="n">translate</span><span class="p">(</span><span class="s">'고마워'</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s">"ko"</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="s">"zh-TW"</span><span class="p">)</span>
 
 </code></pre></div></div>
 
@@ -904,10 +1035,9 @@ sudo pip install googletrans
 <pre><code class="language-cmd"># windows
 pip install googletrans
 </code></pre>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
 sudo pip install googletrans
 </code></pre></div></div>
-
 </div>
 
     <div class="bookmark">
@@ -949,122 +1079,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">
-        [Tutorial]Computer Networking筆記(1-8)
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on January 9, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">January 9, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Tutorial">Tutorial</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
-<h2 id="1what-is-computer-networking"><strong>1.What is Computer Networking?</strong></h2>
-<p>各裝置(<em>devices</em>)之間的連結<br />
-裝置：PC、laptop、printer、rounter等等(不限於電腦)，每一個device都是一個<strong><em>Node</em></strong>。<br />
-連結：可以使用cable、wireless、copper wire等等，可以稱為<strong><em>communications media</em></strong>。<br />
-Internet(網路)就是一種computer network<br /></p>
-
-<p>computer nework的目的是為了要資料傳輸、資料交換，<br />
-這裡的資料可以是，documents、pictures、videos等等。</p>
-
-<p>computer newworking的兩個重點就是，<strong><em>Nodes</em></strong>和<strong><em>Communications Media</em></strong></p>
-
-<h2 id="2types-of-networks"><strong>2.Types of Networks</strong></h2>
-<p><strong><em>LAN</em></strong>(Local Area Network)：一個building的網絡連結，可能是一棟建築、一所學校，小範圍的區域網絡<br />
-<strong><em>MAN</em></strong>(Metorpolitan Area Network)：多個建築之間的網絡連結，可能是一個城市<br />
-<strong><em>WAN</em></strong>(Wide Area Network)：&gt;30 miles的網絡連結，整個國家之間、跨國之間的連結<br /></p>
-
-<h2 id="3how-the-internet-works"><strong>3.How the Internet works?</strong></h2>
-<p>以網站為例，假如我今天有一個個人網站，別人是如何透過internet看到我的網站的呢？<br />
-如果以上面computer network的邏輯來看，<br />
-其他電腦可以連結到我的電腦，看到我的個人網站。<br />
-但，如果所有人都可以連到我的個人電腦這樣會有網路安全的疑慮，<br />
-所以實際上，要連到個人網站是透過<strong><em>server</em></strong>。<br />
-server is a special computer that everyone can access it.<br /></p>
-
-<p>我將個人網站建置(store)在server，<br />
-其他人要看到我的網站，<br />
-會在browser上打上網址，<br />
-這時候就會向server提出request，<br />
-sever接受到request會回傳data，這些data會是程式碼，<br />
-而browser會將這些程式碼轉成我們看得懂的網站。<br /></p>
-
-<p>通常建置網頁這樣的server我們稱為，<strong><em>web server</em></strong>。<br />
-像google這麼大的網站，一次總是要接收非常大量來自世界各地的request，<br />
-所以這個server就必須要有很大的memory，<br />
-才能負荷這樣的使用流量。<br /></p>
-
-<h2 id="4client-and-host"><strong>4.Client and Host</strong></h2>
-<p>根據上面提到的例子，<br />
-使用PC的browser向sever提出request，<br />
-然後server會提供給data給PC的browser。<br /></p>
-
-<p>PC接收資料，而server提供資料，<br />
-PC就是client，sever就是host。<br /></p>
-
- -->
-    
-    <div class="post-excerpt"><p><a href="https://www.youtube.com/playlist?list=PL6gx4Cwl9DGBpuvPW0aHa7mKdn_k9SPKO" target="_blank">Computer Networking Tutorial</a></p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread';
-        this.page.identifier = '/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/#disqus_thread" data-disqus-identifier="/tutorial/2018/01/09/Tutorial-Computer-Networking%E7%AD%86%E8%A8%98(1-8)/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

@@ -1,0 +1,35 @@
+I"�<p>以下要介紹最基本的同步，
+檔案在本機被修改或是增加後push到github。</p>
+
+<p><b>1.檢視所有檔案狀態</b></p>
+<pre><code class="language-git">$ git status  #修改或是增加的檔案會呈現紅字
+</code></pre>
+<p><br /></p>
+
+<p><b>2.告知git需要commit的檔案</b></p>
+<pre><code class="language-git">$ git add &lt;file&gt;  #提交一個新增加的檔案
+$ git add -A  #stages All
+$ git add .  #stages new and modified, without deleted
+$ git add -u  #stages modified and deleted, without new
+</code></pre>
+<p>add完後用 <code class="language-plaintext highlighter-rouge">git status</code> 會發現原本的紅字變成綠字
+<br /></p>
+
+<p><b>3.commit變化</b></p>
+<pre><code class="language-git">$ git commit
+</code></pre>
+<p>這時候需要記錄提交的訊息
+<br /></p>
+
+<p><b>4.push同步</b></p>
+<pre><code class="language-git">$ git push
+</code></pre>
+<p><br /></p>
+
+<p>主要流程，
+<code class="language-plaintext highlighter-rouge">增加、修改檔案</code> &gt; <code class="language-plaintext highlighter-rouge">git add</code> &gt; <code class="language-plaintext highlighter-rouge">git commit</code> &gt; <code class="language-plaintext highlighter-rouge">git push</code>
+透過<code class="language-plaintext highlighter-rouge">git status</code>可以查看目前的狀態</p>
+
+<p><a href="https://zlargon.gitbooks.io/git-tutorial/content/startup/commit_a_patch.html" target="_blank">參考</a></p>
+
+:ET

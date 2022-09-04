@@ -1,0 +1,10 @@
+I"�<p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+Try installr::install.rtools() on Windows.
+installr::install.rtools()
+No need to install Rtools - You've got the relevant version of Rtools installed
+saveWorkbook(wb, file = "dq", overwrite = TRUE)
+Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
+Try installr::install.rtools() on Windows.
+</code></pre></div></div>
+:ET

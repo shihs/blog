@@ -1,0 +1,2 @@
+I"^<p><a href="https://shihs.github.io/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">前面</a>介紹了 neural network 使用 Gradient descent 來找 cost function 的最小值，那這篇要來介紹 neural network 如何使用 <strong>Backpropagation</strong> 這個演算法讓 neural network 訓練過程中更有效率。</p>
+:ET

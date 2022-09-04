@@ -207,6 +207,7 @@
     </span>
   </div>
   <div><h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
+
 <ul>
   <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
   <li>點選 <strong>Sign In</strong>
@@ -237,7 +238,7 @@
   <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
   <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
 <img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
-  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
+  <li>DB &amp; Collection，以下圖為例，<code class="language-plaintext highlighter-rouge">sample_airbnb</code> 是 DB，<code class="language-plaintext highlighter-rouge">listingsAndReviews</code> 為 Collection
 <img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
   <li>使用 Python 測試連線
 接下來要示範連線至 listingsAndReviews 這個 Collection</li>
@@ -248,8 +249,8 @@
 
 <h3 id="install-pymongo--dnspython">Install pymongo &amp; dnspython</h3>
 <ul>
-  <li><code class="highlighter-rouge">conda install pymongo</code></li>
-  <li><code class="highlighter-rouge">conda install dnspython</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conda install pymongo</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conda install dnspython</code></li>
 </ul>
 
 <h3 id="查看連線的-uri">查看連線的 URI</h3>
@@ -258,23 +259,23 @@
 <img src="https://i.imgur.com/WENwjPR.png" alt="" /></li>
   <li>點選 <strong>Connect your application</strong>
 <img src="https://i.imgur.com/6D025EI.png" alt="" /></li>
-  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
+  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="language-plaintext highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
 <img src="https://i.imgur.com/FMvaQcd.png" alt="" /></li>
-  <li>Python 程式碼示範
-```python=
-from pymongo import MongoClient
-import pprint</li>
+  <li>Python 程式碼示範</li>
 </ul>
 
-<p>DB = ‘sample_airbnb’
-COLLECTION = ‘listingsAndReviews’
-URI = ‘mongodb+srv://test:<password>@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</password></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
 
-<p>client = MongoClient(URI)
-db = client[DB]
-pprint.pprint(db[COLLECTION].find_one())
-client.close()
-```</p>
+<span class="n">DB</span> <span class="o">=</span> <span class="s">'sample_airbnb'</span>
+<span class="n">COLLECTION</span> <span class="o">=</span> <span class="s">'listingsAndReviews'</span>
+<span class="n">URI</span> <span class="o">=</span> <span class="s">'mongodb+srv://test:&lt;password&gt;@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">URI</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="n">COLLECTION</span><span class="p">].</span><span class="n">find_one</span><span class="p">())</span>
+<span class="n">client</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
 
 <p><img src="https://i.imgur.com/Wgs8Gjb.png" alt="" /></p>
 
@@ -332,6 +333,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
         </h3>
@@ -340,13 +348,6 @@ s.setAttribute('data-timestamp', +new Date());
       <li>
         <h3>
           <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
           <small>Apr 5, 2022</small>
         </h3>
       </li>

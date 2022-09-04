@@ -217,20 +217,20 @@
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sqlite3</span>
 
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c"># 連接 SQLite 資料庫</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c"># 獲得連接的游標</span>
-
-<span class="c"># 要下的 SQL 指令</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span><span class="s">"Cookies"</span><span class="p">)</span> <span class="c1"># 連接 SQLite 資料庫
+</span><span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span> <span class="c1"># 獲得連接的游標
+</span>
+<span class="c1"># 要下的 SQL 指令
+</span><span class="n">cursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span>
     <span class="s">"select host_key from cookies limit 10;"</span>
 <span class="p">)</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-<span class="k">print</span> <span class="n">resutls</span> <span class="c"># 結果為 turple</span>
-
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c"># 每次都要記得 close 連線</span>
-</code></pre></div></div>
+<span class="k">print</span> <span class="n">resutls</span> <span class="c1"># 結果為 turple
+</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># 每次都要記得 close 連線
+</span></code></pre></div></div>
 </div>
 </div>
 
@@ -279,6 +279,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -288,13 +295,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

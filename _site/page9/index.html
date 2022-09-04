@@ -183,6 +183,129 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">
+        [Web][CSS]如何刪除 nav tag 底色兩邊的空白？
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 11, 2018</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 11, 2018</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Web">Web</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#CSS">CSS</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <h3 id="nav的作用"><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 為 HTML 文件的區域元素 (element)，<code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>用來規劃網頁的導覽區域，通常裡頭會放網站其他網頁的連結。</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 除了全域屬性外，沒有定義其他屬性 (attribute) 。
+<a href="https://pydoing.blogspot.com/2012/01/html-5-nav.html">參考</a></li>
+</ol>
+
+<p>像我的<a href="https://shihs.github.io/">網頁</a>上面黑色那條有 “About” 和 “Contact Me” 連結的區域就是在 <code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>裡。</p>
+
+<p><br /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- html --&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"wrapper-nav"</span> <span class="na">id=</span><span class="s">"nav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>    
+      <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span><span class="nt">&gt;</span>Contact Me<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>           
+  <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">nav</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h3 id="如何刪除-nav-背景的空白-how-to-remove-the-space-on-both-sides-of-navbar">如何刪除 <code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code> 背景的空白 How to remove the space on both sides of navbar</h3>
+<p>若使用上面的程式碼會發現 <code class="language-plaintext highlighter-rouge">nav</code> 底色變成黑色，但兩邊會有無法移除的空白，這時候有兩種解決方法。皆是在<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>這個 tag 上面做些調整</p>
+
+<ol>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">margin-left</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span><span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span><span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="nb">auto</span><span class="p">;</span>
+<span class="p">}</span> 
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+ -->
+    
+    <div class="post-excerpt"><h3 id="nav的作用"><code class="language-plaintext highlighter-rouge">&lt;nav&gt;</code>的作用</h3>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread';
+        this.page.identifier = '/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/#disqus_thread" data-disqus-identifier="/web/css/2018/06/11/Web-CSS-%E5%A6%82%E4%BD%95%E5%88%AA%E9%99%A4nav-ta%E5%BA%95%E8%89%B2%E5%85%A9%E9%82%8A%E7%9A%84%E7%A9%BA%E7%99%BD/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/web/css/2018/05/24/Web-CSS-%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%9E%A2%E5%B9%95%E8%A7%A3%E6%9E%90%E5%BA%A6%E4%B8%8B%E8%AA%BF%E6%95%B4css/">
         [Web][CSS]在不同螢幕解析度下調整css
       </a>
@@ -256,7 +379,6 @@
  -->
     
     <div class="post-excerpt"><p>除了電腦外手機、平板都可以瀏覽網頁，這篇要介紹如何依據不同裝置的螢幕寬度來調整 CSS。</p>
-
 </div>
 
     <div class="bookmark">
@@ -333,17 +455,17 @@ s.setAttribute('data-timestamp', +new Date());
 
 <h2 id="安裝">安裝</h2>
 <p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
 </code></pre></div></div>
 
 <p><strong>Mac</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
 </code></pre></div></div>
 <p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
 <em>[Errno 1] Operation not permitted</em></p>
 
 <p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
 </code></pre></div></div>
 <p>就成功安裝了。<br />
 安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
@@ -352,7 +474,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>假如現在要打包一個 test.py 檔<br /></p>
 
 <p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>完成後會產生三個檔案，</p>
 <ol>
@@ -366,18 +488,18 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>Mac</strong><br />
 Mac的操作基本上和 Windows 指令一樣，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>打包完後產生出來的檔案也會一樣。<br />
 但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
 <br />
 可以試試看在 .py 檔裡增加一行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
 </code></pre></div></div>
 <p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
 
 <p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
 </code></pre></div></div>
 <p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
 
@@ -394,7 +516,6 @@ Mac的操作基本上和 Windows 指令一樣，</p>
  -->
     
     <div class="post-excerpt"><p>當我們今天寫好一個 .py 檔，要給使用者執行時當然可以幫使用者在他們的電腦下載 Python 等執行程式時需要的套件，但是，<strong>很麻煩！！！</strong> <br /></p>
-
 </div>
 
     <div class="bookmark">
@@ -507,7 +628,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>當我們下載完 pip 後，
 未來下載套件只需要在 cmd 輸入指令就能搞定。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install packagename
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install packagename
 </code></pre></div></div>
 
 <p>也許現在還是會有點困惑，但未來真正開始寫 Python 就會明白為什麼大家下載完 Python 都會接著安裝 pip 了。</p>
@@ -516,7 +637,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>先下載 <a href="http://localhost:4000/blog/downloads/get-pip.py">get-pip.py</a></p>
 
 <p>接著開啟 cmd，使用 cd 將目前位置移到 get-pip.py 的路徑底下，並輸入</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python get-pip.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python get-pip.py
 </code></pre></div></div>
 <p><img src="http://localhost:4000/blog/img/posts/run%20pip_get.jpg" alt="run pip_get.jpg" /></p>
 
@@ -529,14 +650,13 @@ s.setAttribute('data-timestamp', +new Date());
 <p><br />
 <br />
 接著使用 pip install 安裝看看套件，例如可以安裝寫爬蟲程式必備的 requests 套件</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install requests
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install requests
 </code></pre></div></div>
 <p>如果沒有問題，一切就大功告成！<br /></p>
 
  -->
     
     <div class="post-excerpt"><p>安裝前可以先認識 <a href="https://zh.wikipedia.org/wiki/Python" target="_blank">Python</a>。</p>
-
 </div>
 
     <div class="bookmark">
@@ -615,7 +735,7 @@ s.setAttribute('data-timestamp', +new Date());
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">stringsAsFactors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> 
 </span></code></pre></div></div>
 <p>假如很不幸，上面的程式碼讀取後你碰到長得像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in type.convert(data[[i]], as.is = as.is[i], dec = dec, numerals = numerals,  : invalid multibyte string at '&lt;e8&gt;&lt;8a&gt;&lt;b1&gt;?&lt;ae&gt;'
 </code></pre></div></div>
 <p>那就是碰上了<a href="https://shihs.github.io/blog/r/2018/01/17/R-read.csv出現編碼錯誤訊息/" target="_blank">編碼錯誤</a>，<br />
 這時候別緊張，只要加上<strong>fileEncoding</strong>這個參數就好，<br /></p>
@@ -688,7 +808,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>另外一個碰到的狀況是我也是要使用一份 template 的樣式，<br />
 使用openxlsx和XLConnect的loadWorkbook時都遇到像這樣的錯誤</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in substring(x[ind], so, eo) : 
   invalid multibyte string at '&lt;e6&gt;&lt;96&gt;&lt;b0&gt;蝝唳&lt;98&gt;&lt;ab&gt;&lt;94&gt;"/&gt;'
 </code></pre></div></div>
 
@@ -747,7 +867,6 @@ openxlsx的 loadWorkbook function 還是有同樣的 error，<br />
   <li>xlsx</li>
   <li>xls</li>
 </ol>
-
 </div>
 
     <div class="bookmark">
@@ -858,7 +977,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>之前有介紹過使用mailR這個套件夾帶檔案<a href="https://shihs.github.io/blog/r/2016/07/17/R-使用R發送email/" target="_blank">使用gmail信箱發送信件</a>。<br /></p>
-
 </div>
 
     <div class="bookmark">
@@ -926,7 +1044,7 @@ s.setAttribute('data-timestamp', +new Date());
     </span>
 
     </div>
-    <!-- <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+    <!-- <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
 </code></pre></div></div>
 <p><strong>rep.content ： bytes 型別</strong></p>
 
@@ -936,10 +1054,9 @@ s.setAttribute('data-timestamp', +new Date());
 
  -->
     
-    <div class="post-excerpt"><div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
+    <div class="post-excerpt"><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rep = requests.get(url)
 </code></pre></div></div>
 <p><strong>rep.content ： bytes 型別</strong></p>
-
 </div>
 
     <div class="bookmark">
@@ -1057,21 +1174,21 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
 <h2 id="如何確定真的使用代理ip了"><strong>如何確定真的使用代理IP了？</strong></h2>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="c"># 隨便google可以找到可以查詢自己IP的網站</span>
-
-<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c"># 這個網站可以知道目前瀏覽的IP</span>
-<span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1"># 隨便google可以找到可以查詢自己IP的網站
+</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://icanhazip.com/"</span>  <span class="c1"># 這個網站可以知道目前瀏覽的IP
+</span><span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span>
 	<span class="s">"http"</span><span class="p">:</span><span class="s">"http://xx.xx.xxx:xxxx"</span><span class="p">,</span>
 	<span class="s">"https"</span><span class="p">:</span><span class="s">"https://xx.xx.xxx:xxxx"</span><span class="p">,</span>
 
 <span class="p">}</span>
-<span class="c">###注意</span>
-<span class="c">#要爬取的網站是使用什麼協定？http？https？</span>
-<span class="c">#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
-<span class="k">print</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span>  <span class="c"># 如果這個網站print出來的和proxies一樣，那就表示成功了</span>
-
+<span class="c1">###注意
+#要爬取的網站是使用什麼協定？http？https？
+#網址可能會有轉址的情況，最後轉的那個網址才是真正的協定喔
+</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">proxies</span> <span class="o">=</span> <span class="n">proxies</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">res</span><span class="p">.</span><span class="n">text</span>  <span class="c1"># 如果這個網站print出來的和proxies一樣，那就表示成功了
+</span>
 
 </code></pre></div></div>
 
@@ -1090,7 +1207,6 @@ HTTP_X_FORWARDED_FOR = not determined<br /></p>
   <li>動態設置user agent</li>
   <li>使用代理IP</li>
 </ol>
-
 </div>
 
     <div class="bookmark">
@@ -1132,146 +1248,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">
-        [Python]呼叫其他.py的function
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 2, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 2, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Python">Python</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是fun.py</span>
-<span class="k">def</span> <span class="nf">itsafunction</span><span class="p">():</span>
-	<span class="k">print</span> <span class="s">"This is a function that I want to call."</span>
-
-</code></pre></div></div>
-
-<p>有兩種情況，<br />
-<strong>1. 這兩個檔案在同一個folder底下</strong><br />
-—main.py<br />
-—fun.py<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是 main.py</span>
-<span class="kn">from</span> <span class="nn">fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-
-</code></pre></div></div>
-
-<p><strong>2. 這兩個檔案在不同folder底下</strong><br />
-想要呼叫的fun.py在function這個folder底下<br />
-—main.py<br />
-—function—fun.py<br /></p>
-
-<p>這時候main.py可以有兩種寫法</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main1.py</span>
-<span class="kn">from</span> <span class="nn">function</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main2.py</span>
-<span class="kn">from</span> <span class="nn">function.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-
-<p>但還有一件很重要的事，要<strong>在function這個folder裡加”__init__.py”這個檔案</strong></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是__init___.py</span>
-<span class="c"># 什麼都不用寫，沒錯，就是一個空白的.py檔</span>
-<span class="c"># it's true, it's empty. But it's still important!</span>
-</code></pre></div></div>
-
-<p>那如果今天fun.py在function的下一層folder呢?<br />
-—main.py<br />
-—function—another—fun.py<br />
-只要把main.py改成<br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">### 這是main.py</span>
-<span class="kn">from</span> <span class="nn">function.another</span> <span class="kn">import</span> <span class="n">fun</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">fun</span><span class="o">.</span><span class="n">itsafunction</span><span class="p">()</span>
-
-<span class="c">#或者也可以這樣寫</span>
-
-<span class="kn">from</span> <span class="nn">function.another.fun</span> <span class="kn">import</span> <span class="n">itsafunction</span>
-
-<span class="c"># 使用fun.py的itsafunction()</span>
-<span class="n">itsafunction</span><span class="p">()</span>
-</code></pre></div></div>
-<p>但最重要的是，<br />
-<strong>function和another這兩個folder裡面都要加上”__init__.py”這個檔案!</strong></p>
-
- -->
-    
-    <div class="post-excerpt"><p>假如現在正在寫的檔案是main.py，而你想要呼叫fun.py這裡面的function，
-要怎麼做呢？</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread';
-        this.page.identifier = '/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/#disqus_thread" data-disqus-identifier="/python/2018/02/02/Python-%E5%91%BC%E5%8F%AB%E5%85%B6%E4%BB%96py%E7%9A%84function/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

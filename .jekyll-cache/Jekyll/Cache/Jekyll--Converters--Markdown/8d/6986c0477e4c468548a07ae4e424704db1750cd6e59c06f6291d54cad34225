@@ -1,0 +1,78 @@
+I"�<p>這篇是整理一些 psql 的基本指令，<br />
+內容來自 Udacity 上 <a href="https://www.udacity.com/course/intro-to-relational-databases--ud197">Intro to Relational Databases</a> 的免費課程。</p>
+
+<h3 id="basic-commands">BASIC COMMANDS</h3>
+<p><strong>Connect to psql</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
+</code></pre></div></div>
+<p><strong>Quit psql</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
+</code></pre></div></div>
+<p><strong>List all databases</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
+# or
+$ \l
+
+#  exit from query result viewer
+$ q
+</code></pre></div></div>
+<p><strong>List all datatables in current database</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
+$ \connect dbname
+# or
+$ \c dbname
+
+# list all tables 
+$ \dt
+</code></pre></div></div>
+<p><br />
+<br /></p>
+<h3 id="sql-commands">SQL COMMANDS</h3>
+<p><strong>Create and Drop DATABASE</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
+DROP DATABASE dbname;
+</code></pre></div></div>
+<p><strong>Create and Drop TABLE</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
+CREATE TABLE dtname (
+	id serial,
+	name text
+);
+
+# drop table dtname
+DROP TABLE dtname;
+</code></pre></div></div>
+<p><strong>Insert values</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
+</code></pre></div></div>
+<p><strong>Show all data in a table</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
+# or
+SELECT * FROM dtname
+</code></pre></div></div>
+<p><strong>Set primary key</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
+CREATE TABLE dtname (
+	id serial primary key,
+	name text,
+	birthday date
+);
+
+# multiple columns primary key
+CREATE TABLE postal_places (
+	postal_code text,
+	country text,
+	name text,
+	primary key (postal_code, country)
+);
+</code></pre></div></div>
+<p><strong>Declaring relationships</strong>
+<img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
+	sku text references products (sku),
+	sale_date date,
+	count integer
+);
+</code></pre></div></div>
+
+:ET

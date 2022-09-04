@@ -218,17 +218,17 @@
 
 <h2 id="安裝">安裝</h2>
 <p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pyinstaller
 </code></pre></div></div>
 
 <p><strong>Mac</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller
 </code></pre></div></div>
 <p>但我這邊在安裝時出現了一大串的錯誤，其中內容包括<br /> 
 <em>[Errno 1] Operation not permitted</em></p>
 
 <p>後來我參考<a href="https://blog.csdn.net/helloxiaozhe/article/details/78603183" target="_blank">這裡</a>把指令改成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install pyinstaller --upgrade --ignore-installed
 </code></pre></div></div>
 <p>就成功安裝了。<br />
 安裝好後，可以在 cmd 或是 terminal 上輸入 pyinstaller 確認。<br /></p>
@@ -237,7 +237,7 @@
 <p>假如現在要打包一個 test.py 檔<br /></p>
 
 <p><strong>Windows</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>完成後會產生三個檔案，</p>
 <ol>
@@ -251,18 +251,18 @@
 
 <p><strong>Mac</strong><br />
 Mac的操作基本上和 Windows 指令一樣，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyinstaller -F test.py
 </code></pre></div></div>
 <p>打包完後產生出來的檔案也會一樣。<br />
 但如果執行 .exe 檔會產生檔案，這時候會發現檔案沒有出現在和 .exe 同一個路徑底下。而是會在 /Users/<em>yourusername</em> 底下。<br />
 <br />
 可以試試看在 .py 檔裡增加一行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print os.getcwd()
 </code></pre></div></div>
 <p>會發現使用 .exe 執行的結果就會是 /Users/<em>yourusername</em>，所以檔案才會直接產生在這路徑底下。<br /></p>
 
 <p>但我想要讓檔案直接產生在桌面，因此我的方法是加上這行</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>os.chdir('/Users/'+os.getlogin()+'/Desktop')
 </code></pre></div></div>
 <p>讓路徑直接換到桌面，這樣儲存檔案就會產生在桌面上了。<br /></p>
 
@@ -324,6 +324,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -333,13 +340,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

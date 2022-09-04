@@ -1,0 +1,258 @@
+I">"<h2 id="實體關聯模型entity-relationship-model">實體關聯模型（Entity-Relationship Model）</h2>
+
+<p>是Conceptual model（概念塑模）的一環，用來描述<strong>實體</strong>與<strong>實體</strong>之間<strong>關係</strong>的工具。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/ER%20Model.png" alt="ER Model.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://www.csie.sju.edu.tw/cm/course/db/ch03.pdf">ER Model</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>實體（Entity）：是指用以描述真實世界的物件，在關聯式資料庫中為一個「資料表」
+    <ul>
+      <li>實體至少擁有一個不是鍵（主鍵）的屬性</li>
+      <li>一個實體可以含有多個「屬性」(Attribute)用以描述該實體，在關聯式資料庫中，以資料表的「欄位」來表示</li>
+      <li>例如：學生、員工、產品等等都是屬於實體</li>
+    </ul>
+  </li>
+  <li>關係（Relationship）：指用來表示「一個實體」與「另一個實體」關聯的方式
+    <ul>
+      <li>例如：一對一關係、一對多關係、多對多關係</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="實體entity">實體（Entity）</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>a ”thing” in the real world with an independent existence</li>
+  <li>用來描述實際存在的事物（如:學生），也可以是邏輯抽象的概念（如:課程）</li>
+  <li>必須可以被識別，亦即能夠清楚分辨出兩個不同的實體(an independent existence)</li>
+  <li>以「名詞」的來命名，不可以是「形容詞」或「動詞」</li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>實體(entity)</li>
+  <li>弱實體(weak entity)：必須依靠其他實體才能存在，若其依靠的實體消失，則該實體的存在也沒有意義了
+    <ul>
+      <li>例如：學生家長就是依附在學生實體的弱實體，若學生不存在，則家長也沒有存在的意義</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/entity%20diagram.png" alt="entity diagram.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Entity diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="屬性attribute">屬性(Attribute)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>用來描述實體的性質（Property）（就是關聯式表格的行）
+    <ul>
+      <li>例如：學生的學號、名字、班級等等</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>多值屬性 vs 單值屬性
+    <ul>
+      <li>多值屬性（Multivalued attributes）：屬性值不只一個時，我們稱該屬性為<em>多值屬性</em>
+        <ul>
+          <li>例如：學生有多個專長，珠算、程式…</li>
+          <li>關係圖中以「雙橢圓形」來表示</li>
+        </ul>
+      </li>
+      <li>單值屬性（Single-valued attribute）：非多值屬性稱為<em>單值屬性</em></li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Multivalued%20attributes.png" alt="Multivalued attributes.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">多值屬性 Multivalued attributes diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>複合屬性 vs 簡單屬性
+    <ul>
+      <li>複合屬性（Composite attributes）：屬性由數個屬性所組成時，我們稱該屬性為<em>複合屬性</em>
+        <ul>
+          <li>例如：姓名由姓、名組成</li>
+          <li>關係圖如下</li>
+        </ul>
+      </li>
+      <li>簡單屬性（Simple attribute）：非複合屬性則稱為<em>簡單屬性</em></li>
+    </ul>
+  </li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Composite%20attributes.png" alt="Composite attributes.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">複合屬性 Composite attributes diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>衍生屬性（Derived Attribute）
+    <ul>
+      <li>它的值可以由其它屬性之值經由某種方式的計算或推論而獲得</li>
+      <li>例如：年齡和星座可由生日推算出來</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="鍵屬性key-attribute">鍵屬性(Key attribute)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>是指該屬性的值在某個環境下具有唯一性（primary key）</li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/attribute.png" alt="attribute.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Attribute diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="關係relationship">關係(Relationship)</h2>
+
+<p><strong>定義</strong></p>
+<ul>
+  <li>是指用來表達兩個實體之間所隱含的關聯性</li>
+  <li>使用足以說明關聯性質的「動詞」或「動詞片語」命名
+    <ul>
+      <li>例如：『學生』與『系所』兩個實體型態間存在著一種關係─「就讀於」</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>分類</strong></p>
+<ul>
+  <li>關聯強度 Strength
+    <ul>
+      <li>強關聯（strong relationship）：a relationship where entity is existence-independent of other entities, and PK of Child doesn’t contain PK component of Parent Entity</li>
+      <li>弱關聯（weak (identifying) relationship）：a relationship where Child entity is existence-dependent on parent, and PK of Child Entity contains PK component of Parent Entity，也就是說，此關聯是連結<em>實體</em>與<em>弱實體</em></li>
+    </ul>
+  </li>
+  <li>Cardinality
+    <ul>
+      <li>1:1 一對一</li>
+      <li>1:N 一對多</li>
+      <li>M:1 多對一</li>
+      <li>M:N 多對多</li>
+    </ul>
+  </li>
+  <li>Participation constraints
+    <ul>
+      <li>全部參與（Total participation）：every entity in the set is involved in the relationship</li>
+      <li>部分參與（Partial participation）：not all entities in the set are involved in the relationship</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>圖示</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/Relationship.png" alt="Relationship.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://images.app.goo.gl/auQ9MAQCKttsdFGEA">Relationship diagram</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<p><strong>弱實體例子</strong></p>
+
+<p>為了區分和一般實體的關係, 我們會以雙菱形來表示實體與弱實體之間的關係, 而弱實體和關係之間以雙直線連接</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><img src="http://localhost:4000/blog/img/posts/books.png" alt="books.png" /></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.vertabelo.com/blog/chen-erd-notation/">Example</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>以上圖為例，CHAPTER 必須依靠 BOOK 才能存在，所以 CHAPTER 是一個弱實體，兩者間用雙菱形（弱關聯）來連結。CHAPTER 用雙直線（Total participation）連接關係，因為 CHAPTER 是依靠 BOOK 而存在，表示每一個 CHAPTER 必定屬於某本 BOOK。而 CHAPTER 的 primary key 由 BOOK 的 primary key（BOOK ID） 與 CHAPTER ID 組成。</p>
+
+<p>如果將上圖關係轉換成表格，CHAPTER 表格會有 {TITLE, CHAPTER ID, BOOK ID} 三個欄位，而 (CHAPTER ID, BOOK ID) 合併為 primary key。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="http://cc.cust.edu.tw/~ccchen/doc/db_03.pdf">ER Model 實體關係圖</a>
+<br />
+<a href="http://www.csie.sju.edu.tw/cm/course/db/ch04.pdf">第4章 資料庫設計與實體關聯模型</a>
+<br />
+<a href="http://spaces.isu.edu.tw/upload/19225/0/news/postfile_308.pdf">利用實體-關係模型 (E-R Model) 規劃資料庫</a>
+<br />
+<a href="https://www.vertabelo.com/blog/chen-erd-notation/">Chen notation</a>
+<br />
+<a href="http://snowlin.cmu.edu.tw/mis/MIS_Lec01.pdf">資料庫基礎概念</a></p>
+:ET

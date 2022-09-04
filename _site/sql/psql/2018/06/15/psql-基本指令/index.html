@@ -217,13 +217,13 @@
 
 <h3 id="basic-commands">BASIC COMMANDS</h3>
 <p><strong>Connect to psql</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ psql
 </code></pre></div></div>
 <p><strong>Quit psql</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \q
 </code></pre></div></div>
 <p><strong>List all databases</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ \list
 # or
 $ \l
 
@@ -231,7 +231,7 @@ $ \l
 $ q
 </code></pre></div></div>
 <p><strong>List all datatables in current database</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># connect to the database
 $ \connect dbname
 # or
 $ \c dbname
@@ -243,11 +243,11 @@ $ \dt
 <br /></p>
 <h3 id="sql-commands">SQL COMMANDS</h3>
 <p><strong>Create and Drop DATABASE</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE dbname;
 DROP DATABASE dbname;
 </code></pre></div></div>
 <p><strong>Create and Drop TABLE</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Example: Create a table with a text column and a serial column
 CREATE TABLE dtname (
 	id serial,
 	name text
@@ -257,15 +257,15 @@ CREATE TABLE dtname (
 DROP TABLE dtname;
 </code></pre></div></div>
 <p><strong>Insert values</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INSERT INTO dtname VALUES('This is a test');
 </code></pre></div></div>
 <p><strong>Show all data in a table</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TABLE dtname
 # or
 SELECT * FROM dtname
 </code></pre></div></div>
 <p><strong>Set primary key</strong></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># single column primary key
 CREATE TABLE dtname (
 	id serial primary key,
 	name text,
@@ -282,7 +282,7 @@ CREATE TABLE postal_places (
 </code></pre></div></div>
 <p><strong>Declaring relationships</strong>
 <img src="http://localhost:4000/blog/img/posts/Declaring%20relationships.jpg" alt="Declaring relationships.jpg" /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE sales (
 	sku text references products (sku),
 	sale_date date,
 	count integer
@@ -337,6 +337,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -346,13 +353,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

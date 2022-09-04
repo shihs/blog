@@ -183,6 +183,79 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
+        Windows7 自動排程
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">July 17, 2016</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
+
+<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
+
+<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
+
+ -->
+    
+    <div class="post-excerpt"><p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread';
+        this.page.identifier = '/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread" data-disqus-identifier="/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/r/2016/07/17/R-%E4%BD%BF%E7%94%A8R%E7%99%BC%E9%80%81email/">
         [R]使用 R 發送gmail Email
       </a>
@@ -241,7 +314,6 @@
  -->
     
     <div class="post-excerpt"><p>使用mailR package寫一個R的script，自動發信。</p>
-
 </div>
 
     <div class="bookmark">
@@ -322,47 +394,47 @@ s.setAttribute('data-timestamp', +new Date());
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">email.header</span> <span class="kn">import</span> <span class="n">decode_header</span>
 
-<span class="n">inspect</span><span class="o">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
-<span class="c">#與IMAP4 server連線，gmail要開啟IMAP</span>
-<span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="o">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
-<span class="c">#登入</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
-<span class="c">#選擇信箱標籤</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
-<span class="c">#找所有mail</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
+<span class="n">inspect</span><span class="p">.</span><span class="n">getmro</span><span class="p">(</span><span class="n">imaplib</span><span class="p">.</span><span class="n">IMAP4_SSL</span><span class="p">)</span>
+<span class="c1">#與IMAP4 server連線，gmail要開啟IMAP
+</span><span class="n">imap</span> <span class="o">=</span> <span class="n">imaplib</span><span class="p">.</span><span class="n">IMAP4_SSL</span><span class="p">(</span><span class="s">'imap.gmail.com'</span><span class="p">)</span> 
+<span class="c1">#登入
+</span><span class="n">imap</span><span class="p">.</span><span class="n">login</span><span class="p">(</span><span class="s">'mymailaddress@gmail.com'</span><span class="p">,</span> <span class="s">'mypasswd'</span><span class="p">)</span>
+<span class="c1">#選擇信箱標籤
+</span><span class="n">imap</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">"label"</span><span class="p">)</span>
+<span class="c1">#找所有mail
+</span><span class="n">resp</span><span class="p">,</span> <span class="n">mails</span> <span class="o">=</span> <span class="n">imap</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="s">"ALL"</span><span class="p">)</span>
 
-<span class="c">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)</span>
-<span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
+<span class="c1">#讀取信件內容，只抓取最新一封信件(len(mails[0].split())-1)
+</span><span class="n">resp</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">imap</span><span class="p">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">()[</span><span class="nb">len</span><span class="p">(</span><span class="n">mails</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s">'(RFC822)'</span><span class="p">)</span>
 
 <span class="n">emailbody</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
+<span class="n">mail</span> <span class="o">=</span> <span class="n">email</span><span class="p">.</span><span class="n">message_from_string</span><span class="p">(</span><span class="n">emailbody</span><span class="p">)</span>
 
-<span class="c">#找出含有附件的部分</span>
-<span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="o">.</span><span class="n">walk</span><span class="p">():</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
+<span class="c1">#找出含有附件的部分
+</span><span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="n">mail</span><span class="p">.</span><span class="n">walk</span><span class="p">():</span>
+	<span class="k">if</span> <span class="n">part</span><span class="p">.</span><span class="n">get_content_maintype</span><span class="p">()</span> <span class="o">==</span> <span class="s">'multipart'</span><span class="p">:</span>
 		<span class="k">continue</span>
-	<span class="k">if</span> <span class="n">part</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">part</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'Content-Disposition'</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
 		<span class="k">continue</span>
 
-	<span class="c">#附件檔名</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="o">.</span><span class="n">get_filename</span><span class="p">()</span>  
-	<span class="c">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;</span>
-	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+	<span class="c1">#附件檔名
+</span>	<span class="n">fileName</span> <span class="o">=</span> <span class="n">part</span><span class="p">.</span><span class="n">get_filename</span><span class="p">()</span>  
+	<span class="c1">#修改檔名編碼&lt;http://stackoverflow.com/questions/11206489/how-to-print-next-year-from-current-year-in-python&gt;
+</span>	<span class="n">fileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">year</span> <span class="o">-</span> <span class="mi">1911</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]).</span><span class="n">decode</span><span class="p">(</span><span class="n">decode_header</span><span class="p">(</span><span class="n">fileName</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 	<span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">fileName</span><span class="p">):</span>
-		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
+		<span class="n">filePath</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">"C:</span><span class="se">\\</span><span class="s">Users</span><span class="se">\\</span><span class="s">mypc</span><span class="se">\\</span><span class="s">Desktop</span><span class="se">\\</span><span class="s">data"</span><span class="p">,</span> <span class="n">fileName</span><span class="p">)</span>
 
-		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">:</span>
 			<span class="n">fp</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
-			<span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+			<span class="n">fp</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">part</span><span class="p">.</span><span class="n">get_payload</span><span class="p">(</span><span class="n">decode</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+			<span class="n">fp</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
 			<span class="k">print</span> <span class="s">"attachement is downloaded!"</span>
 		<span class="k">else</span><span class="p">:</span>
 			<span class="k">print</span> <span class="s">"file is already exist!"</span>
 			
-<span class="c">#關閉連線與登出</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-<span class="n">imap</span><span class="o">.</span><span class="n">logout</span><span class="p">()</span>
+<span class="c1">#關閉連線與登出
+</span><span class="n">imap</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">imap</span><span class="p">.</span><span class="n">logout</span><span class="p">()</span>
 
 
 </code></pre></div></div>
@@ -372,7 +444,6 @@ s.setAttribute('data-timestamp', +new Date());
 但這樣我在跑程式前還要手動去下載檔案，
 覺得實在太麻煩，
 所以找到了這個辦法！</p>
-
 </div>
 
     <div class="bookmark">
@@ -457,7 +528,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><p>我個人比較偏好使用R做所有的事情，
 但某些時候還是需要使用到python，
 所以希望可以在R上呼叫python程式碼。</p>
-
 </div>
 
     <div class="bookmark">
@@ -500,7 +570,6 @@ s.setAttribute('data-timestamp', +new Date());
   </div>
   
 </div>
-
 
 <div class="pagination">
   

@@ -183,6 +183,74 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/test/2022/09/04/test/">
+        test
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on September 4, 2022</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">September 4, 2022</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#test">test</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>this is a post test.</p>
+ -->
+    
+    <div class="post-excerpt"><p>this is a post test.</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//test/2022/09/04/test/#disqus_thread';
+        this.page.identifier = '/test/2022/09/04/test/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//test/2022/09/04/test/#disqus_thread" data-disqus-identifier="/test/2022/09/04/test/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">
         [MongoDB]建立 Cloud MongoDB
       </a>
@@ -205,6 +273,7 @@
 
     </div>
     <!-- <h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
+
 <ul>
   <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
   <li>點選 <strong>Sign In</strong>
@@ -235,7 +304,7 @@
   <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
   <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
 <img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
-  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
+  <li>DB &amp; Collection，以下圖為例，<code class="language-plaintext highlighter-rouge">sample_airbnb</code> 是 DB，<code class="language-plaintext highlighter-rouge">listingsAndReviews</code> 為 Collection
 <img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
   <li>使用 Python 測試連線
 接下來要示範連線至 listingsAndReviews 這個 Collection</li>
@@ -246,8 +315,8 @@
 
 <h3 id="install-pymongo--dnspython">Install pymongo &amp; dnspython</h3>
 <ul>
-  <li><code class="highlighter-rouge">conda install pymongo</code></li>
-  <li><code class="highlighter-rouge">conda install dnspython</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conda install pymongo</code></li>
+  <li><code class="language-plaintext highlighter-rouge">conda install dnspython</code></li>
 </ul>
 
 <h3 id="查看連線的-uri">查看連線的 URI</h3>
@@ -256,23 +325,23 @@
 <img src="https://i.imgur.com/WENwjPR.png" alt="" /></li>
   <li>點選 <strong>Connect your application</strong>
 <img src="https://i.imgur.com/6D025EI.png" alt="" /></li>
-  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
+  <li>選擇 driver 的版本，這邊選擇 Python 3.6 含以上的版本，複製下方產生的程式碼，並將程式碼中的 <code class="language-plaintext highlighter-rouge">&lt;password&gt;</code> 改成剛剛設定的使用者的密碼
 <img src="https://i.imgur.com/FMvaQcd.png" alt="" /></li>
-  <li>Python 程式碼示範
-```python=
-from pymongo import MongoClient
-import pprint</li>
+  <li>Python 程式碼示範</li>
 </ul>
 
-<p>DB = ‘sample_airbnb’
-COLLECTION = ‘listingsAndReviews’
-URI = ‘mongodb+srv://test:<password>@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</password></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
 
-<p>client = MongoClient(URI)
-db = client[DB]
-pprint.pprint(db[COLLECTION].find_one())
-client.close()
-```</p>
+<span class="n">DB</span> <span class="o">=</span> <span class="s">'sample_airbnb'</span>
+<span class="n">COLLECTION</span> <span class="o">=</span> <span class="s">'listingsAndReviews'</span>
+<span class="n">URI</span> <span class="o">=</span> <span class="s">'mongodb+srv://test:&lt;password&gt;@cluster0.uvf5k.mongodb.net/myFirstDatabase?retryWrites=true&amp;w=majority'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">URI</span><span class="p">)</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="n">COLLECTION</span><span class="p">].</span><span class="n">find_one</span><span class="p">())</span>
+<span class="n">client</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
 
 <p><img src="https://i.imgur.com/Wgs8Gjb.png" alt="" /></p>
 
@@ -285,42 +354,6 @@ client.close()
  -->
     
     <div class="post-excerpt"><h2 id="使用-mongodb-atlas-建立-cloud-mongodb">使用 MongoDB Atlas 建立 Cloud MongoDB</h2>
-<ul>
-  <li>註冊 <a href="https://www.mongodb.com/atlas/database">MongoDB Atlas</a> 帳號</li>
-  <li>點選 <strong>Sign In</strong>
-<img src="https://i.imgur.com/ZCctWhc.png" alt="" /></li>
-  <li>登入
-<img src="https://i.imgur.com/PUYzmMY.png" alt="" /></li>
-  <li>Accept Privacy Policy &amp; Terms of Service
-<img src="https://i.imgur.com/vf9T7rH.png" alt="" /></li>
-  <li>問卷填寫
-<img src="https://i.imgur.com/S7BKKOI.png" alt="" /></li>
-  <li>選擇 deploy 的方案
-<img src="https://i.imgur.com/uVWJMux.png" alt="" /></li>
-  <li>選擇免費的方案 Create a Shared Cluster，這裡我是選擇 Google Cloud 在台灣的 Sever（要選擇其他 server 也可以），因為使用免費版本，所以其他設定都不調整，使用預設值，完成後選擇 <strong>Create Cluster</strong>
-<img src="https://i.imgur.com/Eru5JEv.png" alt="" />
-<img src="https://i.imgur.com/MSDxbvm.png" alt="" /></li>
-  <li>建立 Cluster 中
-<img src="https://i.imgur.com/FaLtNCA.png" alt="" /></li>
-  <li>設定 MongoDB 的 Username 和 Password
-<img src="https://i.imgur.com/XILIeIx.png" alt="" /></li>
-  <li>設定可連線 MongoDB 的 IP
-<img src="https://i.imgur.com/P0TGWsz.png" alt="" /></li>
-  <li>Database Deployments
-<img src="https://i.imgur.com/RHC7cAy.png" alt="" /></li>
-  <li>載入 Sample Data 測試，點選 <strong>Load Sample Data</strong>，需要花點時間等待
-<img src="https://i.imgur.com/OC9QQZV.png" alt="" />
-<img src="https://i.imgur.com/15nlBTB.png" alt="" /></li>
-  <li>Sample Data Loaded</li>
-  <li><img src="https://i.imgur.com/OhUElwy.png" alt="" /></li>
-  <li>查看資料，點選 <strong>Browse Collection</strong>，可以看到測試資料已經進到 MongoDB
-<img src="https://i.imgur.com/7DBRFix.png" alt="" /></li>
-  <li>DB &amp; Collection，以下圖為例，<code class="highlighter-rouge">sample_airbnb</code> 是 DB，<code class="highlighter-rouge">listingsAndReviews</code> 為 Collection
-<img src="https://i.imgur.com/VlOC1Yf.png" alt="" /></li>
-  <li>使用 Python 測試連線
-接下來要示範連線至 listingsAndReviews 這個 Collection</li>
-</ul>
-
 </div>
 
     <div class="bookmark">
@@ -404,38 +437,38 @@ s.setAttribute('data-timestamp', +new Date());
 
 <h2 id="基本樣板">基本樣板</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- webapp.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># webapp.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># webapp.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span> <span class="c"># __name__ 代表目前執行的模組</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span> <span class="c1"># __name__ 代表目前執行的模組
+</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Index page'</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!'</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-     <span class="c"># app.run(host='127.0.0.1', port=8000)</span>
-</code></pre></div></div>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="c1"># app.run(host='127.0.0.1', port=8000)
+</span></code></pre></div></div>
 <p><img src="https://i.imgur.com/Fmq8bFT.png" alt="" /></p>
 
-<p>在開發的時候加上 <code class="highlighter-rouge">app.run(debug=True)</code> 讓程式調整的時候不需要每次重啟，所以在正式環境時不會設置。也可以寫成，<code class="highlighter-rouge">app.debug=True</code>、<code class="highlighter-rouge">app.run()</code>。</p>
+<p>在開發的時候加上 <code class="language-plaintext highlighter-rouge">app.run(debug=True)</code> 讓程式調整的時候不需要每次重啟，所以在正式環境時不會設置。也可以寫成，<code class="language-plaintext highlighter-rouge">app.debug=True</code>、<code class="language-plaintext highlighter-rouge">app.run()</code>。</p>
 
 <hr />
 
 <h3 id="approute">@app.route()</h3>
 
-<p>介紹<code class="highlighter-rouge">@app.route()</code>前先了解 Python 的裝飾器（Decorator）<code class="highlighter-rouge">@</code>。</p>
+<p>介紹<code class="language-plaintext highlighter-rouge">@app.route()</code>前先了解 Python 的裝飾器（Decorator）<code class="language-plaintext highlighter-rouge">@</code>。</p>
 
 <p><strong>Python 的 Decorator</strong></p>
 
@@ -446,18 +479,18 @@ s.setAttribute('data-timestamp', +new Date());
   <li>A decorator is just a function which takes in a function (the one which you decorated with the “@” symbol) and returns a new function.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This is our decorator</span>
-<span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="c"># This is the new function we're going to return</span>
-    <span class="c"># This function will be used in place of our original definition</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is our decorator
+</span><span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="c1"># This is the new function we're going to return
+</span>    <span class="c1"># This function will be used in place of our original definition
+</span>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">print</span> <span class="s">"Entering Function"</span>
         <span class="n">f</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">"Exited Function"</span>
 
     <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nd">@simple_decorator</span> 
+<span class="o">@</span><span class="n">simple_decorator</span> 
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">"Hello World"</span>
 
@@ -465,14 +498,14 @@ s.setAttribute('data-timestamp', +new Date());
 </code></pre></div></div>
 
 <p>結果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entering Function
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entering Function
 Hello World
 Exited Function
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decorator_factory</span><span class="p">(</span><span class="n">enter_message</span><span class="p">,</span> <span class="n">exit_message</span><span class="p">):</span>
-    <span class="c"># We're going to return this decorator</span>
-    <span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="c1"># We're going to return this decorator
+</span>    <span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
             <span class="k">print</span> <span class="n">enter_message</span>
             <span class="n">f</span><span class="p">()</span>
@@ -482,14 +515,14 @@ Exited Function
 
     <span class="k">return</span> <span class="n">simple_decorator</span>
 
-<span class="nd">@decorator_factory</span><span class="p">(</span><span class="s">"Start"</span><span class="p">,</span> <span class="s">"End"</span><span class="p">)</span>
+<span class="o">@</span><span class="n">decorator_factory</span><span class="p">(</span><span class="s">"Start"</span><span class="p">,</span> <span class="s">"End"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">"Hello World"</span>
 
 <span class="n">hello</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start
 Hello World
 End
 </code></pre></div></div>
@@ -499,44 +532,44 @@ End
 <h3 id="route">route</h3>
 <p>route 的意思是「路；路線；路程；航線；路由」，在這裡則是指定網址的路徑。</p>
 
-<p>因此，要將網址的路徑指定為<code class="highlighter-rouge">hello</code>則可以寫成</p>
+<p>因此，要將網址的路徑指定為<code class="language-plaintext highlighter-rouge">hello</code>則可以寫成</p>
 <pre><code class="language-python=">@app.route('/hello')
 </code></pre>
 
 <ul>
-  <li>更多<code class="highlighter-rouge">@app.route()</code>的用法：<a href="https://pythonbasics.org/flask-tutorial-routes/">Flask Tutorial: Routes</a></li>
+  <li>更多<code class="language-plaintext highlighter-rouge">@app.route()</code>的用法：<a href="https://pythonbasics.org/flask-tutorial-routes/">Flask Tutorial: Routes</a></li>
 </ul>
 
 <hr />
 
 <h2 id="將-html-獨立出來">將 html 獨立出來</h2>
 
-<p>將 html 獨立出來撰寫，並使用 <code class="highlighter-rouge">render_template()</code> 讀取。flask 會從 <strong>templates</strong> 資料夾搜尋這個 html 檔案，並回傳。所以檔案的結構會是</p>
+<p>將 html 獨立出來撰寫，並使用 <code class="language-plaintext highlighter-rouge">render_template()</code> 讀取。flask 會從 <strong>templates</strong> 資料夾搜尋這個 html 檔案，並回傳。所以檔案的結構會是</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- templates
 |   |_ index.html
 |_ webapp.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># webapp.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># webapp.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="c"># return 'Index page'</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
+    <span class="c1"># return 'Index page'
+</span>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!!'</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- index.html --&gt;</span>
@@ -555,7 +588,7 @@ End
 <hr />
 <h3 id="增加-html-layout-與-css">增加 html layout 與 css</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- static
 |   |_ css
 |       |_main.css 
@@ -609,15 +642,15 @@ End
   </li>
   <li>常用語法
     <ul>
-      <li>comments: <code class="highlighter-rouge">{# comments #}</code></li>
+      <li>comments: <code class="language-plaintext highlighter-rouge">{# comments #}</code></li>
       <li>variables
         <ul>
-          <li><code class="highlighter-rouge">{{ post.title }}</code></li>
-          <li>dictionary: <code class="highlighter-rouge">{{your_dict['key']}}</code></li>
-          <li>list: <code class="highlighter-rouge">{{your_list[0]}}</code></li>
+          <li><code class="language-plaintext highlighter-rouge">{{ post.title }}</code></li>
+          <li>dictionary: <code class="language-plaintext highlighter-rouge">{{your_dict['key']}}</code></li>
+          <li>list: <code class="language-plaintext highlighter-rouge">{{your_list[0]}}</code></li>
         </ul>
       </li>
-      <li>多行代碼：<code class="highlighter-rouge">{% 開始 %} HTML標籤 {% 結束 %}</code></li>
+      <li>多行代碼：<code class="language-plaintext highlighter-rouge">{% 開始 %} HTML標籤 {% 結束 %}</code></li>
     </ul>
   </li>
   <li><a href="https://segmentfault.com/a/1190000018002480">一篇文章搞懂Jinja2 Template Engine 模版引擎</a></li>
@@ -627,7 +660,7 @@ End
 <hr />
 
 <h3 id="將-webapppy-分解">將 webapp.py 分解</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- run.py
 |_ plotlyapp
     |- static
@@ -640,31 +673,31 @@ End
     |_ routes.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># run.py</span>
-<span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># run.py
+</span><span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># __init__.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># __init__.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">routes</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># routes.py</span>
-<span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># routes.py
+</span><span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">url_for</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!!'</span>
 </code></pre></div></div>
@@ -685,7 +718,6 @@ End
  -->
     
     <div class="post-excerpt"><h2 id="flask-簡介">Flask 簡介</h2>
-
 </div>
 
     <div class="bookmark">
@@ -759,9 +791,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>參考官網的 <a href="https://docs.anaconda.com/anaconda/install/uninstall/">uninstall Anaconda</a> 的方法。</p>
 
-<p>原本想使用第二種方法 <code class="highlighter-rouge">conda install anaconda-clean</code>，但在下載 <code class="highlighter-rouge">anaconda-clean</code> 時一直碰到問題，所以最後決定使用第一種方法。</p>
+<p>原本想使用第二種方法 <code class="language-plaintext highlighter-rouge">conda install anaconda-clean</code>，但在下載 <code class="language-plaintext highlighter-rouge">anaconda-clean</code> 時一直碰到問題，所以最後決定使用第一種方法。</p>
 
-<p>直接刪除整個 <code class="highlighter-rouge">rm -rf ~/anaconda3</code> 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 <code class="highlighter-rouge">anaconda</code> 刪除所有相關的檔案。</p>
+<p>直接刪除整個 <code class="language-plaintext highlighter-rouge">rm -rf ~/anaconda3</code> 資料夾，為避免這種刪法沒有刪乾淨，再手動搜尋 <code class="language-plaintext highlighter-rouge">anaconda</code> 刪除所有相關的檔案。</p>
 
 <hr />
 
@@ -773,10 +805,10 @@ s.setAttribute('data-timestamp', +new Date());
       <li>根據步驟一直點選下一步就好</li>
     </ul>
   </li>
-  <li>安裝完成後，Miniconda 會自動在 <code class="highlighter-rouge">.zchrc</code> 和 <code class="highlighter-rouge">.bash_profile</code> 加上路徑
+  <li>安裝完成後，Miniconda 會自動在 <code class="language-plaintext highlighter-rouge">.zchrc</code> 和 <code class="language-plaintext highlighter-rouge">.bash_profile</code> 加上路徑
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c"># &gt;&gt;&gt; conda initialize &gt;&gt;&gt;</span>
  <span class="c"># !! Contents within this block are managed by 'conda init' !!</span>
- <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="s1">'/Users/your_user_name/opt/miniconda3/bin/conda'</span> <span class="s1">'shell.bash'</span> <span class="s1">'hook'</span> 2&gt; /dev/null<span class="k">)</span><span class="s2">"</span>
+ <span class="nv">__conda_setup</span><span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="s1">'/Users/your_user_name/opt/miniconda3/bin/conda'</span> <span class="s1">'shell.bash'</span> <span class="s1">'hook'</span> 2&gt; /dev/null<span class="si">)</span><span class="s2">"</span>
  <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> <span class="nt">-eq</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
      </span><span class="nb">eval</span> <span class="s2">"</span><span class="nv">$__conda_setup</span><span class="s2">"</span>
  <span class="k">else
@@ -792,7 +824,7 @@ s.setAttribute('data-timestamp', +new Date());
   </li>
   <li>確認是否安裝成功
     <ul>
-      <li>打開 terminal，<code class="highlighter-rouge">conda --version</code> 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！</li>
+      <li>打開 terminal，<code class="language-plaintext highlighter-rouge">conda --version</code> 如果能正確顯示 conda 版本，就表示 conda 順利安裝完成！</li>
     </ul>
   </li>
 </ol>
@@ -808,39 +840,38 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>conda 的資訊</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
-  <li><code class="highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
-  <li><code class="highlighter-rouge">conda env list</code>：conda 所有的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env list</code>：conda 所有的環境</li>
 </ul>
 
 <p><strong>conda basic</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
-  <li><code class="highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
+  <li><code class="language-plaintext highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
 </ul>
 
 <p><strong>環境</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境
+  <li><code class="language-plaintext highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境
     <ul>
-      <li>Ex. <code class="highlighter-rouge">conda create --name myenv python=3.6</code></li>
+      <li>Ex. <code class="language-plaintext highlighter-rouge">conda create --name myenv python=3.6</code></li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
-  <li><code class="highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
-  <li><code class="highlighter-rouge">conda list</code>：active 環境中的所有套件
+  <li><code class="language-plaintext highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda list</code>：active 環境中的所有套件
     <ul>
-      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="highlighter-rouge">Build Channel</code></a>的<code class="highlighter-rouge">pypi</code>表示是用<code class="highlighter-rouge">pip install PACKAGENAME</code></li>
-      <li><code class="highlighter-rouge">pip freeze</code>可以看到所有用<code class="highlighter-rouge">pip install</code>下載的套件</li>
+      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="language-plaintext highlighter-rouge">Build Channel</code></a>的<code class="language-plaintext highlighter-rouge">pypi</code>表示是用<code class="language-plaintext highlighter-rouge">pip install PACKAGENAME</code></li>
+      <li><code class="language-plaintext highlighter-rouge">pip freeze</code>可以看到所有用<code class="language-plaintext highlighter-rouge">pip install</code>下載的套件</li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境</li>
 </ul>
  -->
     
     <div class="post-excerpt"><p>Conda 除了能夠管理套件也能夠管理工作環境，是個好用的工具。
 之前是下載 Anaconda 來使用 Conda，但 Anaconda 在最一開始下載時就會下載很多套件，可是大多數的套件其實都用不到，卻又佔用了大量的空間（Anaconda 在刪除前在我的電腦佔用了十幾 GB），因此決定轉換使用 Miniconda 來使用 conda。</p>
-
 </div>
 
     <div class="bookmark">
@@ -907,20 +938,20 @@ s.setAttribute('data-timestamp', +new Date());
     </div>
     <!-- <h2 id="virtualenv">Virtualenv</h2>
 
-<p><code class="highlighter-rouge">virtualenv</code>是用來建立一個獨立的<code class="highlighter-rouge">Python</code>環境的工具，支援 Python2 和 Python3。</p>
+<p><code class="language-plaintext highlighter-rouge">virtualenv</code>是用來建立一個獨立的<code class="language-plaintext highlighter-rouge">Python</code>環境的工具，支援 Python2 和 Python3。</p>
 
 <ol>
-  <li>安裝 virtualenv：<code class="highlighter-rouge">pip install virtualenv</code></li>
+  <li>安裝 virtualenv：<code class="language-plaintext highlighter-rouge">pip install virtualenv</code></li>
   <li>建立虛擬環境：
     <ul>
-      <li>先建立一個資料夾：<code class="highlighter-rouge">mkdir myenv</code></li>
-      <li>路徑移到該資料夾：<code class="highlighter-rouge">cd myenv</code></li>
-      <li>建立虛擬環境：<code class="highlighter-rouge">virtualenv venv</code></li>
+      <li>先建立一個資料夾：<code class="language-plaintext highlighter-rouge">mkdir myenv</code></li>
+      <li>路徑移到該資料夾：<code class="language-plaintext highlighter-rouge">cd myenv</code></li>
+      <li>建立虛擬環境：<code class="language-plaintext highlighter-rouge">virtualenv venv</code></li>
     </ul>
   </li>
-  <li>啟動虛擬環境：<code class="highlighter-rouge">source env/bin/activate</code></li>
-  <li>在該環境下載套件：<code class="highlighter-rouge">pip install PACKAGE_NAME</code></li>
-  <li>停用虛擬環境：<code class="highlighter-rouge">deactivate</code></li>
+  <li>啟動虛擬環境：<code class="language-plaintext highlighter-rouge">source env/bin/activate</code></li>
+  <li>在該環境下載套件：<code class="language-plaintext highlighter-rouge">pip install PACKAGE_NAME</code></li>
+  <li>停用虛擬環境：<code class="language-plaintext highlighter-rouge">deactivate</code></li>
 </ol>
 
 <hr />
@@ -935,19 +966,19 @@ s.setAttribute('data-timestamp', +new Date());
 
 <h3 id="在-python-使用-conda">在 Python 使用 conda</h3>
 <ul>
-  <li>可以下載 <code class="highlighter-rouge">Anaconda</code>（3 GB 以上）或 <code class="highlighter-rouge">Miniconda</code>（400 MB 左右）
+  <li>可以下載 <code class="language-plaintext highlighter-rouge">Anaconda</code>（3 GB 以上）或 <code class="language-plaintext highlighter-rouge">Miniconda</code>（400 MB 左右）
     <ul>
-      <li><code class="highlighter-rouge">Miniconda</code> installer = Python + conda</li>
-      <li><code class="highlighter-rouge">Anaconda</code> installer = Python + conda + meta package anaconda = <code class="highlighter-rouge">Miniconda</code> installer + conda install anaconda</li>
+      <li><code class="language-plaintext highlighter-rouge">Miniconda</code> installer = Python + conda</li>
+      <li><code class="language-plaintext highlighter-rouge">Anaconda</code> installer = Python + conda + meta package anaconda = <code class="language-plaintext highlighter-rouge">Miniconda</code> installer + conda install anaconda</li>
     </ul>
   </li>
 </ul>
 
 <p><strong><a href="https://stackoverflow.com/questions/30034840/what-are-the-differences-between-conda-and-anaconda/30057885#30057885">What are the differences between Conda and Anaconda?</a></strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda</code> is the package manager. <code class="highlighter-rouge">Anaconda</code> is a set of about a hundred packages including conda, numpy, scipy, ipython notebook, and so on.</li>
-  <li><code class="highlighter-rouge">Miniconda</code> is a smaller alternative to Anaconda that is just conda and its dependencies, not those listed above.</li>
-  <li>Once you have Miniconda, you can easily install Anaconda into it with <code class="highlighter-rouge">conda install anaconda</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">conda</code> is the package manager. <code class="language-plaintext highlighter-rouge">Anaconda</code> is a set of about a hundred packages including conda, numpy, scipy, ipython notebook, and so on.</li>
+  <li><code class="language-plaintext highlighter-rouge">Miniconda</code> is a smaller alternative to Anaconda that is just conda and its dependencies, not those listed above.</li>
+  <li>Once you have Miniconda, you can easily install Anaconda into it with <code class="language-plaintext highlighter-rouge">conda install anaconda</code>.</li>
 </ul>
 
 <h3 id="下載">下載</h3>
@@ -963,34 +994,34 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>conda 的資訊</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
-  <li><code class="highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
-  <li><code class="highlighter-rouge">conda env list</code>：conda 所有的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda --version</code>：檢視 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update conda</code>：更新 conda 版本</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env list</code>：conda 所有的環境</li>
 </ul>
 
 <p><strong>conda basic</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
-  <li><code class="highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
+  <li><code class="language-plaintext highlighter-rouge">conda install PACKAGENAME</code>：Install a package included in Anaconda</li>
+  <li><code class="language-plaintext highlighter-rouge">conda update PACKAGENAME</code>：Update any installed program</li>
 </ul>
 
 <p><strong>環境</strong></p>
 <ul>
-  <li><code class="highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境
+  <li><code class="language-plaintext highlighter-rouge">conda create --name ENV_NAME python=VERSION</code>：建立特定版本，名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境
     <ul>
-      <li>Ex. <code class="highlighter-rouge">conda create --name myenv python=3.6</code></li>
+      <li>Ex. <code class="language-plaintext highlighter-rouge">conda create --name myenv python=3.6</code></li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
-  <li><code class="highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
-  <li><code class="highlighter-rouge">conda list</code>：active 環境中的所有套件
+  <li><code class="language-plaintext highlighter-rouge">conda activate ENVIRONMENT</code>：切換至指定工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda deactivate</code>：回到 base 工作環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda list</code>：active 環境中的所有套件
     <ul>
-      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="highlighter-rouge">Build Channel</code></a>的<code class="highlighter-rouge">pypi</code>表示是用<code class="highlighter-rouge">pip install PACKAGENAME</code></li>
-      <li><code class="highlighter-rouge">pip freeze</code>可以看到所有用<code class="highlighter-rouge">pip install</code>下載的套件
+      <li><a href="https://stackoverflow.com/questions/62412898/what-does-pypi-in-the-channel-column-of-conda-list-output-imply"><code class="language-plaintext highlighter-rouge">Build Channel</code></a>的<code class="language-plaintext highlighter-rouge">pypi</code>表示是用<code class="language-plaintext highlighter-rouge">pip install PACKAGENAME</code></li>
+      <li><code class="language-plaintext highlighter-rouge">pip freeze</code>可以看到所有用<code class="language-plaintext highlighter-rouge">pip install</code>下載的套件
 <img src="https://i.imgur.com/yvuy4kT.png" alt="" width="50%" heigh="50%" /></li>
     </ul>
   </li>
-  <li><code class="highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="highlighter-rouge">ENV_NAME</code>的環境</li>
+  <li><code class="language-plaintext highlighter-rouge">conda env remove --name ENV_NAME</code>：刪除名稱為<code class="language-plaintext highlighter-rouge">ENV_NAME</code>的環境</li>
 </ul>
 
 <hr />
@@ -1003,7 +1034,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><h2 id="virtualenv">Virtualenv</h2>
-
 </div>
 
     <div class="bookmark">
@@ -1164,7 +1194,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>這篇簡單地介紹 MVC 架構，若是有任何錯誤觀念，歡迎留言。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1232,7 +1261,7 @@ s.setAttribute('data-timestamp', +new Date());
     <!-- <h4 id="1-啟動-apache">1. 啟動 Apache</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">sudo apachectl start</code></li>
+  <li><code class="language-plaintext highlighter-rouge">sudo apachectl start</code></li>
   <li>打開瀏覽器 <a href="http://localhost/">http://localhost/</a> 可以看到 <strong>It works!</strong></li>
 </ul>
 
@@ -1240,7 +1269,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <ul>
   <li><a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a></li>
-  <li>選擇下載 <code class="highlighter-rouge">.dmg</code> 檔</li>
+  <li>選擇下載 <code class="language-plaintext highlighter-rouge">.dmg</code> 檔</li>
   <li>下載完後安裝，安裝過程需要<strong>設定 root 的密碼</strong></li>
   <li>打開系統偏好設定會看到出現 MySQL 的圖示，點選後啟動 MySQL
 <img src="https://i.imgur.com/tusQ0GN.png" alt="" width="70%" heigh="70%" />
@@ -1250,8 +1279,8 @@ s.setAttribute('data-timestamp', +new Date());
 <h4 id="3-使用-terminal-開啟-mysql">3. 使用 terminal 開啟 MySQL</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">mysql -u root -p</code>（<code class="highlighter-rouge">-u</code>: user, <code class="highlighter-rouge">-p</code>: password）</li>
-  <li>出現 <code class="highlighter-rouge">Enter password:</code> 後輸入剛剛安裝時設定的 root 密碼
+  <li><code class="language-plaintext highlighter-rouge">mysql -u root -p</code>（<code class="language-plaintext highlighter-rouge">-u</code>: user, <code class="language-plaintext highlighter-rouge">-p</code>: password）</li>
+  <li>出現 <code class="language-plaintext highlighter-rouge">Enter password:</code> 後輸入剛剛安裝時設定的 root 密碼
 <img src="https://i.imgur.com/dsXdFmP.png" alt="" width="90%" heigh="90%" /></li>
 </ul>
 
@@ -1267,15 +1296,15 @@ s.setAttribute('data-timestamp', +new Date());
 
 <h4 id="5-設定-phpmyadmin-登入密碼">5. 設定 phpmyadmin 登入密碼</h4>
 
-<p>因為 phpmyadmin 的密碼身份驗證是 <code class="highlighter-rouge">caching_sha2_password</code> 所以會無法使用一開始設定的 root 與密碼登入，這時候需要先修改 db 的資料。</p>
+<p>因為 phpmyadmin 的密碼身份驗證是 <code class="language-plaintext highlighter-rouge">caching_sha2_password</code> 所以會無法使用一開始設定的 root 與密碼登入，這時候需要先修改 db 的資料。</p>
 
 <ul>
   <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
-  <li>將 root 的密碼身份驗證由 <code class="highlighter-rouge">caching_sha2_password</code> 改成 <code class="highlighter-rouge">mysql_native_password</code>
+  <li>將 root 的密碼身份驗證由 <code class="language-plaintext highlighter-rouge">caching_sha2_password</code> 改成 <code class="language-plaintext highlighter-rouge">mysql_native_password</code>
     <ul>
-      <li><code class="highlighter-rouge">use mysql；</code>（使用 <code class="highlighter-rouge">mysql</code> 這個 db）</li>
-      <li><code class="highlighter-rouge">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密碼';</code></li>
-      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+      <li><code class="language-plaintext highlighter-rouge">use mysql；</code>（使用 <code class="language-plaintext highlighter-rouge">mysql</code> 這個 db）</li>
+      <li><code class="language-plaintext highlighter-rouge">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密碼';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
     </ul>
   </li>
   <li>這時候 phpmyadmin 就可以使用設定好的 root 的密碼登入了</li>
@@ -1291,15 +1320,15 @@ s.setAttribute('data-timestamp', +new Date());
   <li>terminal 登入 MySQL（<a href="https://hackmd.io/xwgJ-FoRSsSVk6WCrgRXlA?view#3-%E4%BD%BF%E7%94%A8-terminal-%E9%96%8B%E5%95%9F-MySQL">step 3</a>）</li>
   <li>新增 User
     <ul>
-      <li><code class="highlighter-rouge">use mysql；</code></li>
-      <li><code class="highlighter-rouge">CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'PASSWORD';</code></li>
-      <li><code class="highlighter-rouge">ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';</code></li>
-      <li><code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+      <li><code class="language-plaintext highlighter-rouge">use mysql；</code></li>
+      <li><code class="language-plaintext highlighter-rouge">CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'PASSWORD';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">ALTER USER 'username'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';</code></li>
+      <li><code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
     </ul>
   </li>
   <li>設定完成後 phpmyadmin 和 terminal 都可以使用設定好的帳號密碼登入
     <ul>
-      <li><code class="highlighter-rouge">mysql -u USERNAME -p</code> / <code class="highlighter-rouge">PASSWORD</code></li>
+      <li><code class="language-plaintext highlighter-rouge">mysql -u USERNAME -p</code> / <code class="language-plaintext highlighter-rouge">PASSWORD</code></li>
     </ul>
   </li>
 </ul>
@@ -1308,12 +1337,12 @@ s.setAttribute('data-timestamp', +new Date());
 
 <ul>
   <li>查看某 user 的權限：
-<code class="highlighter-rouge">SHOW GRANTS FOR 'username'@'localhost';</code></li>
+<code class="language-plaintext highlighter-rouge">SHOW GRANTS FOR 'username'@'localhost';</code></li>
   <li>GRANT 權限：
-<code class="highlighter-rouge">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></li>
+<code class="language-plaintext highlighter-rouge">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></li>
   <li>REVOKE 權限：
-<code class="highlighter-rouge">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></li>
-  <li>reload all the privileges：<code class="highlighter-rouge">FLUSH PRIVILEGES;</code></li>
+<code class="language-plaintext highlighter-rouge">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></li>
+  <li>reload all the privileges：<code class="language-plaintext highlighter-rouge">FLUSH PRIVILEGES;</code></li>
 </ul>
 
 <hr />
@@ -1329,7 +1358,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><h4 id="1-啟動-apache">1. 啟動 Apache</h4>
-
 </div>
 
     <div class="bookmark">
@@ -1428,25 +1456,25 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
 <p><strong>Step 2:</strong> 加 ssh key</p>
 
 <ul>
-  <li>確認 github 是否已經加了 ssh key <code class="highlighter-rouge">ssh -t git@github.com</code>，如果沒加會出現像這樣的訊息<img src="http://localhost:4000/blog/img/posts/ssh%20test.png" alt="" /></li>
+  <li>確認 github 是否已經加了 ssh key <code class="language-plaintext highlighter-rouge">ssh -t git@github.com</code>，如果沒加會出現像這樣的訊息<img src="http://localhost:4000/blog/img/posts/ssh%20test.png" alt="" /></li>
   <li>在本機 gen ssh key，並在 github 頁面新增 ssh key。我主要是參考下面兩個網址：
     <ul>
       <li><a href="https://blog.jaycetyle.com/2018/02/github-ssh/">Git 版本控制筆記 - 使用 github 及 ssh 金鑰設定</a></li>
       <li><a href="https://docs.github.com/cn/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#adding-your-ssh-key-to-the-ssh-agent">生成新 SSH 密钥并添加到 ssh-agent</a></li>
     </ul>
   </li>
-  <li>完成之後在 terminal 打上 <code class="highlighter-rouge">ssh -t git@github.com</code> 會是
+  <li>完成之後在 terminal 打上 <code class="language-plaintext highlighter-rouge">ssh -t git@github.com</code> 會是
 <img src="http://localhost:4000/blog/img/posts/ssh%20success.png" alt="" /></li>
 </ul>
 
 <p><strong>Step 3:</strong> 重新 push</p>
 
 <ul>
-  <li><code class="highlighter-rouge">git remote set-url origin git@github.com:[your-github-name]/[repo-name].git</code></li>
+  <li><code class="language-plaintext highlighter-rouge">git remote set-url origin git@github.com:[your-github-name]/[repo-name].git</code></li>
   <li>重新 add 和 commit 修改，就可以 push 了</li>
 </ul>
 
-<p>但這樣的方法還是很麻煩……每一支 reop 都要重新 <code class="highlighter-rouge">git remote set-url origin ...</code> 所以另一個方法是使用 <strong>personal access token</strong>。</p>
+<p>但這樣的方法還是很麻煩……每一支 reop 都要重新 <code class="language-plaintext highlighter-rouge">git remote set-url origin ...</code> 所以另一個方法是使用 <strong>personal access token</strong>。</p>
 
 <p><strong>Reference</strong>:
 <a href="https://www.youtube.com/watch?v=5Jz0wVmYUUE">GitHub Support for password authentication was removed (August 13, 2021) - Solution</a></p>
@@ -1484,7 +1512,6 @@ fatal: unable to access 'https://github.com/shihs/to-do-list-app.git/': The requ
  -->
     
     <div class="post-excerpt"><p>Github 從 8/13 開始將以前的 password 認證方式刪除了，這裡記錄我解決的方法。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1526,164 +1553,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">
-        [前端]Cookie & Session
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on March 7, 2021</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">March 7, 2021</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#前端">前端</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
-
-<hr />
-
-<h3 id="重點">重點</h3>
-
-<p>Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態，而 Cookie 是將狀態資料存在 Client 端（Browser），而 Session 則是將資料存在 Server 端（e.g Redis）</p>
-
-<hr />
-
-<h3 id="http-的-stateless無狀態">HTTP 的 stateless（無狀態）</h3>
-
-<p>前面說到「Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態」，但</p>
-
-<ol>
-  <li>為什麼 Server 不知道 Client 的狀態呢？</li>
-  <li>為什麼需要讓 Sever 知道 Client 的狀態呢？</li>
-</ol>
-
-<p><img src="http://wiki.hashphp.org/images/6/67/HTTP_Model.jpg" alt="HTTP Model" width="50%" heigh="50%" /></p>
-
-<p>要回答第一個問題，就要先知道「<strong>HTTP 是 stateless（無狀態）</strong>」，而 stateless（無狀態）的定義是</p>
-
-<ul>
-  <li>Server 和 Client 不會記住（retain）之前的連線</li>
-  <li>每個 Client 送出的 request 都被視為是唯一且獨立的 connection</li>
-</ul>
-
-<p>舉個例子，</p>
-
-<p><a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless</a></p>
-
-<p>上面這個網址是我在搜尋「無狀態」時找到覺得解釋得不錯的部落格，而我從我的瀏覽器打開這個網頁，和你從你的瀏覽器輸入這個網址打開，基本是上一樣的，並不需要先連到其他網頁，像這樣子的情況就稱為 stateless（無狀態）。</p>
-
-<p>解決第一個問題後，那 stateless 就 stateless 啊，為什麼要讓 Server 知道 Client 的狀態呢？</p>
-
-<p>想想看，我們在使用 facebook 或是 instagram 等等很多網站都必須要先登入後才能觀看到想看到的頁面；或是，在網拍網站上如果我們把東西加到購物車，當下次登入時打開，還能夠看到上次加入的商品。但以剛剛 stateless（無狀態）的邏輯來思考，這件事情是不可能可以達成的，因為假如每次的 request 都是獨立且唯一的，那這樣每一次重新點選網頁都會是一個新的事件，Server 就像是失憶一樣，根本不會記得曾經發生過什麼事情，所以當 Client 端做了改變（ex. 登入、商品加入購物車…等等），Sever 端並不會知道，當我們想要做任何事情，每一次都必須要重新來一遍才行。</p>
-
-<p>這就是為什麼我們會想要讓 Server 知道 Client 的狀態了（Stateful）。</p>
-
-<hr />
-
-<h3 id="cookie-是什麼">Cookie 是什麼？</h3>
-
-<p>Cookie 是用來記錄 Client 與 Server 目前的溝通狀態，會以 name-value 的形式呈現，並且存在 Client 端。</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/cookie.png" alt="進入 googlec.com 後得到的 cookie" width="80%" heigh="80%" /></p>
-
-<p>而這個 cookie 在 Client 端第一次發送 request 後，Server 會以 <code class="highlighter-rouge">Set-Cookie</code> 的方式寫在 response header，回應給 Client，而 Client 瀏覽器就會將這個 Cookie 存在本機端，下一次要再次送 request 時，會把這個已儲存的 Cookie 已 <code class="highlighter-rouge">Cookie</code> 的方式存在 resquest header 和 request 一起送出，讓 Sever 知道這個 Client 目前的狀態。（可以用 Chrome 的開法者模式看 network 中網頁的 Response Headers 和 Request Headers 找到 <code class="highlighter-rouge">Set-Cookie</code> 和 <code class="highlighter-rouge">Cookie</code>）</p>
-
-<p>但這樣儲存 Cookie 又會有什麼問題呢？</p>
-
-<ol>
-  <li>
-    <p>Cookie size 的限制：根據 RFC-2965 的規定，一個 Cookie 最大只能是 4096 bytes。</p>
-  </li>
-  <li>
-    <p>佔據網路流量：由於每次 request 都會傳送 Cookie 資料，所以當 Cookie 資料越來越大，request 傳輸的資訊也會更著變大，這樣就會影響網路傳輸的速度。</p>
-  </li>
-  <li>
-    <p>Cookie 可能被 Client 竄改：由於 Cookie 存在 Client 端，所以 Client 是可以完整的看到 Cookie 資料的，那如果 Cookie 竄改或者是外洩，這樣就存在著資安的風險。</p>
-  </li>
-</ol>
-
-<p>根據以上的問題，我們可以知道，Cookie 中不能存放有資安疑慮的資料，也不能存放太大的資訊量。所以為了彌補這些不足，就有了 Session 的出現。</p>
-
-<hr />
-
-<h3 id="session-是什麼">Session 是什麼？</h3>
-
-<p>Session 是一種比 Cookie 更安全的狀態管理機制。</p>
-
-<p>既然 Session 是為了彌補 Cookie 的不足，它就必須要解決上面提到的 Cookie 可能會有的問題。所以 Session 會將狀態資訊存在 Sever 端，以避免 Client 端可以任意修改資訊，此方法也能避免儲存與傳輸的資料過大的問題。</p>
-
-<p>而為了要讓 Client 端知道 Session 儲存的資訊，Server 端會在 response 的 Cookie 中回傳一組 SessionID 讓 Client 儲存在 Cookie 裡，當下次 Client 送出 request 時，就在 Cookie 裡一起送出這組 SessionID，而 Server 就可以透過這組 SessionID 去驗證這個 Client 身份，並知道上一次儲存的狀態，然後回傳內容。</p>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">前端三十｜27. [WEB] Cookie &amp; Session 是什麼？</a>
-<br />
-<a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">[ASP.NET]Stateful與Stateless</a>
-<br />
-<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">白話 Session 與 Cookie：從經營雜貨店開始</a>
-<br />
-<a href="https://medium.com/@vicxu/authentication-那些小事上集-cookie-與-session-介紹-1da2d413afa2">淺談 Authentication 上集：Cookie 與 Session 介紹</a></p>
-
- -->
-    
-    <div class="post-excerpt"><p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread';
-        this.page.identifier = '/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread" data-disqus-identifier="/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

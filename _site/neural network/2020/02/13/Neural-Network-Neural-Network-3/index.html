@@ -217,19 +217,19 @@
 <p>Gradient descent 的目的是要找到 neural network 的 parameters 的最佳解。</p>
 
 <p>Network parameters: 
-<script type="math/tex">\theta = {\{w_1, w_2,..., b_1, b_2,...\}}</script></p>
+\(\theta = {\{w_1, w_2,..., b_1, b_2,...\}}\)</p>
 
 <p>Gradient: 
-<script type="math/tex">\nabla L(\theta) = \begin{bmatrix}
+\(\nabla L(\theta) = \begin{bmatrix}
     \partial L(\theta)/\partial w_1 \\
     \partial L(\theta)/\partial w_2 \\
     \vdots \\
     \partial L(\theta)/\partial b_1 \\
     \partial L(\theta)/\partial b_2 \\
     \vdots 
-\end{bmatrix}</script></p>
+\end{bmatrix}\)</p>
 
-<p>初始 parameters: <script type="math/tex">\theta^0</script>，計算 <script type="math/tex">\nabla L(\theta^0)</script>，則 <script type="math/tex">\theta^1 = \theta^0 - \eta \nabla L(\theta^0)</script>，接著可以再繼續算出 <script type="math/tex">\theta_2, \theta_3...</script></p>
+<p>初始 parameters: \(\theta^0\)，計算 \(\nabla L(\theta^0)\)，則 \(\theta^1 = \theta^0 - \eta \nabla L(\theta^0)\)，接著可以再繼續算出 \(\theta_2, \theta_3...\)</p>
 
 <p>在 neural network 裡 Gradient 的最大問題就是，neural network 有太多的參數，所以這裡我們要介紹的 Backpropagation 就是一個比較有效的計算 Gradient 的演算法。也就是說，Backpropagation 基本上就是 Gradient Descent，但是是一個有效率的演算法。</p>
 
@@ -239,7 +239,7 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
 
-<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，<script type="math/tex">C(w_1, b_1, w_2, b_2, w_3, b_3)</script></p>
+<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，\(C(w_1, b_1, w_2, b_2, w_3, b_3)\)</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/simple%20neural%20network.png" alt="" /></p>
 
@@ -247,67 +247,66 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/Backpropagation.png" alt="" /></p>
 
-<p>我們令最後的 output 為 <script type="math/tex">a^{(L)}</script> 表示它是在第 L 層，而 hidden layer 為  <script type="math/tex">a^{(L-1)}</script> 表示在第 L-1 層，所以上標就只是用來表達它們各自在哪一層而已。</p>
+<p>我們令最後的 output 為 \(a^{(L)}\) 表示它是在第 L 層，而 hidden layer 為  \(a^{(L-1)}\) 表示在第 L-1 層，所以上標就只是用來表達它們各自在哪一層而已。</p>
 
-<p>在 <script type="math/tex">a^{(L-1)}</script> 後的 <script type="math/tex">y</script> 是我們期望的輸出結果，我們希望 <script type="math/tex">y=1</script>，也就是說，這裡的 cost 值會是，</p>
+<p>在 \(a^{(L-1)}\) 後的 \(y\) 是我們期望的輸出結果，我們希望 \(y=1\)，也就是說，這裡的 cost 值會是，</p>
 
-<script type="math/tex; mode=display">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+\[C_0(...) = (a^{(L)} - y)^ 2 .......... (1)\]
 
-<p>以上圖的例子就會是，<script type="math/tex">(0.66 - 1)^2</script></p>
+<p>以上圖的例子就會是，\((0.66 - 1)^2\)</p>
 
 <p>接著我們來看每一個神經元的值。根據前面學過的，我們知道每一個神經元都是由前面的 weight 和 bias 算出來了，也就是說</p>
 
-<script type="math/tex; mode=display">a^{(L)} = \sigma (w^{(L)} a^{(L-1)} + b^{(L)})</script>
+\[a^{(L)} = \sigma (w^{(L)} a^{(L-1)} + b^{(L)})\]
 
 <p>那為了方便，我們把 sigmoid function 裡的式子用一個符號表示，</p>
 
-<script type="math/tex; mode=display">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+\[z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)\]
 
-<p>而 <script type="math/tex">a^{(L)}</script> 就可以寫成，</p>
+<p>而 \(a^{(L)}\) 就可以寫成，</p>
 
-<script type="math/tex; mode=display">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script>
+\[a^{(L)} = \sigma (z^{(L)}) .......... (3)\]
 
 <hr />
 
 <p>我們現在有了上面三個式子，</p>
 
-<p><script type="math/tex">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+<p>\(C_0(...) = (a^{(L)} - y)^ 2 .......... (1)\)
 <br />
-<script type="math/tex">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+\(z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)\)
 <br />
-<script type="math/tex">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script></p>
+\(a^{(L)} = \sigma (z^{(L)}) .......... (3)\)</p>
 
-<p>那我們現在要如何<strong>計算權重 <script type="math/tex">w^{(L)}</script> 對於 cost function 的影響程度</strong>呢？換句話說，我們想要知道 cost function 對 <script type="math/tex">w^{(L)}</script> 的偏微分 <script type="math/tex">\frac{\partial C_0}{\partial w^{(L)}}</script>。</p>
+<p>那我們現在要如何<strong>計算權重 \(w^{(L)}\) 對於 cost function 的影響程度</strong>呢？換句話說，我們想要知道 cost function 對 \(w^{(L)}\) 的偏微分 \(\frac{\partial C_0}{\partial w^{(L)}}\)。</p>
 
 <p>根據 <strong><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction">Chain rule</a></strong>，我們可以再將上式改寫成，</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}</script>
+\[\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}\]
 
 <p>下一個步驟要來計算每一個值，我們可以根據上面式子得到的 (1)(2)(3) 得到，</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - y)</script>
+\[\frac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - y)\]
 
-<script type="math/tex; mode=display">\frac{\partial a^{(L)}}{\partial z^{(L)}} = \sigma' (z^{(L)})</script>
+\[\frac{\partial a^{(L)}}{\partial z^{(L)}} = \sigma' (z^{(L)})\]
 
-<script type="math/tex; mode=display">\frac{\partial z^{(L)}}{\partial w^{(L)}} = a^{(L-1)}</script>
+\[\frac{\partial z^{(L)}}{\partial w^{(L)}} = a^{(L-1)}\]
 
 <p>所以可以將式子整理成，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial w^{(L)}} & = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = a^{(L-1)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial w^{(L)}} &amp; = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = a^{(L-1)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <p>而這只是其中一個 training sample 算出來的 cost，而總代價函數應該是所有 training data 的平均，也就是</p>
 
-<script type="math/tex; mode=display">\frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{\partial C_k}{\partial w^{(L)}}</script>
+\[\frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{\partial C_k}{\partial w^{(L)}}\]
 
 <p>而這其實只是 gradient 裡其中的一個 compenent，</p>
 
 <p>Gradient:</p>
 
-<script type="math/tex; mode=display">\nabla C = \begin{bmatrix}
+\[\nabla C = \begin{bmatrix}
     \frac{\partial C}{\partial w^{(1)}} \\
     \frac{\partial C}{\partial b^{(1)}} \\
     \frac{\partial C}{\partial w^{(2)}} \\
@@ -315,23 +314,21 @@
     \vdots \\
     \frac{\partial C}{\partial w^{(L)}} \\
     \frac{\partial C}{\partial b^{(L)}} \\
-\end{bmatrix}</script>
+\end{bmatrix}\]
 
 <p>如果要計算的是 bias 的偏微分，式子就會是，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial b^{(L)}} & = \frac{\partial z^{(L)}}{\partial b^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = 1 \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial b^{(L)}} &amp; = \frac{\partial z^{(L)}}{\partial b^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = 1 \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <p>接下來，我們來看這個 cost function 對上一層 activation 的敏感度，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial a^{(L-1)}} & = \frac{\partial z^{(L)}}{\partial a^{(L-1)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = w^{(L)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial a^{(L-1)}} &amp; = \frac{\partial z^{(L)}}{\partial a^{(L-1)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = w^{(L)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <hr />
 
@@ -341,9 +338,9 @@
 
 <p><img src="http://localhost:4000/blog/img/posts/Backpropagation%202.png" alt="" /></p>
 
-<p>基本上，所有的式子都和只有一個神經元是一樣的，唯一有變化的是，<script type="math/tex">\frac{\partial C_0}{\partial a_k^{(L-1)}}</script></p>
+<p>基本上，所有的式子都和只有一個神經元是一樣的，唯一有變化的是，\(\frac{\partial C_0}{\partial a_k^{(L-1)}}\)</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}} \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \frac{\partial C_0}{\partial a_j^{(L)}}</script>
+\[\frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}} \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \frac{\partial C_0}{\partial a_j^{(L)}}\]
 
 <p>因為，一個神經元會向下影響其他所有與它連接的神經元，所以必須將它們全部加起來。</p>
 
@@ -405,6 +402,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -414,13 +418,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

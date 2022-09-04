@@ -183,6 +183,178 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">
+        [Neural Network]Convolution Neural Network 卷積神經網路
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on February 1, 2020</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">February 1, 2020</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
+        &nbsp;
+      
+        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
+
+<p>卷積神經網絡(Convolutional Neural Network)簡稱 CNN，主要應用在影像辨識，這篇想要簡單的說明 CNN 的概念。</p>
+
+<hr />
+
+<p>先看下面兩張 CNN 概念圖</p>
+
+<p><a href="https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html/3">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%201.png" alt="" /></p>
+
+<p><a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%202.png" alt="" /></p>
+
+<p>從上圖可以看到整個流程各經過兩次的 Convolution、Pooling 和 Fully Connected，所以其實只要搞懂 <strong>Convolution</strong>、<strong>Pooling</strong> 和 <strong>Fully Connected</strong> 分別在做什麼就可以掌握 CNN 了。</p>
+
+<p>整個流程是，前面的 Convolution 和 Pooling (又稱為 subsampling) 在做的是 feature extraction (特徵擷取)，而 Fully connection 在做的是 classification (分類辨識)。</p>
+
+<hr />
+
+<h2 id="1-convolution-layer-卷積層">1. Convolution Layer 卷積層</h2>
+
+<p>Convolution Layer 由 filter 和激活函數 (ex. Relu) 所構成。</p>
+
+<p>下圖是常見的美圖效果，其實就是使用 filter 達成的
+<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">圖片來源</a>
+<img src="http://localhost:4000/blog/img/posts/%E7%BE%8E%E5%9C%96.png" alt="" /></p>
+
+<p>卷積 (Convolution) 做的是特徵擷取，而不同的效果在做的就是對不同的特徵做擷取。例如，銳化效果在做的就是強化邊緣的特徵，也就是加強擷取出邊緣的特徵。</p>
+
+<p>那所以卷積到底是如何擷取不同的特徵的呢？
+<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Convolution.gif" alt="" /></p>
+
+<p>特徵擷取的方式是使用 Filter (或稱作 Kernel) 來萃取圖片中的特徵，上圖是一個 3x3 window 的 filter，而算法就是像圖那樣移動 (移動的步數是 stride)，將數字相乘後再相加 (詳情可以看之前的<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">筆記1</a>、<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">筆記2</a>，包括 padding 和 stride 的概念)。美圖的不同效果就是使用不同的 Filter (Kernel) 做出來的。</p>
+
+<p>下圖是不同的 filter 做出來的效果
+<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/kernels.png" alt="" /></p>
+
+<p>現在明白了 filter，但再回去看最一開始的流程圖，為什麼 converlution 有三個呢？這是因為使用了三個 filter 去擷取不同的特徵。</p>
+
+<p>看完 filter 再看 Relu。可以看到最上圖圖中有個 Relu，也就是將所有計算出來結果的負值都變為 0。
+<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/Relu.png" alt="" /></p>
+
+<p>如果是彩色的圖，通常會有三個 channel (RGB)，也就是一開始輸入的 image 有三個，可以看下圖
+<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
+
+<p><img src="http://localhost:4000/blog/img/posts/three%20images%20convolution.jpg" alt="" /></p>
+
+<h2 id="2-pooling-layer-池化層">2. Pooling Layer 池化層</h2>
+
+<p>pooling 又稱為 subsampling，是為了提取特定區域主要特徵，但又想要減少參數的數量，以防止模型過擬合，常用的是 max pooling，也就是取該區域最大的值，也有 average pooling，也就是取該區域的平均值。
+<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
+
+<p>下圖是取 max pooling，使用 2x2 的 window，且 stride 為 2</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/pooling.jpg" alt="" /></p>
+
+<h2 id="3-fully-connected-layer-全連接層">3. Fully Connected Layer 全連接層</h2>
+
+<p>Fully Connected Layer 主要是進行 Flattening 平坦化，將最後的矩陣轉換成一維，然後再使用傳統的 neural network + softmax()。</p>
+
+<p>參考我之前的<a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">[Neural Network]Neural Network 1</a></p>
+
+<hr />
+
+<p>以上就是 CNN 的流程。</p>
+
+<p>最後提一下，從上面的過程我們可以知道，CNN 整個過程中需要求解的參數是</p>
+
+<ol>
+  <li>Convolution layer filters</li>
+  <li>Full Connected Layer filters</li>
+</ol>
+
+<p><a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">來源</a></p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">[資料分析&amp;機器學習] 第5.1講: 卷積神經網絡介紹(Convolutional Neural Network)
+</a>
+<br />
+<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">[機器學習 ML NOTE]Convolution Neural Network 卷積神經網路</a>
+<br />
+<a href="https://zhuanlan.zhihu.com/p/42559190">【DL笔记6】从此明白了卷积神经网络（CNN）</a>
+<br />
+<a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">Convolutional Neural Networks’ (CNN) Backward Propagation</a></p>
+ -->
+    
+    <div class="post-excerpt"><p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
+<br />
+<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread';
+        this.page.identifier = '/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread" data-disqus-identifier="/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">
         [Neural Network]Neural Network 2 - Gradient descent
       </a>
@@ -218,7 +390,7 @@
 
 <p>我們可以把 cost function 這樣表示，</p>
 
-<script type="math/tex; mode=display">C(w_1, w_2,..., b_1, b_2, ....) = cost</script>
+\[C(w_1, w_2,..., b_1, b_2, ....) = cost\]
 
 <p>cost 的算法是 Neural Network 算出來的值，扣掉正確值然後平方相加。學習過程中，我們將所有 training data 的 cost 相加平均（average cost of all training data），希望這個值越小越好。</p>
 
@@ -251,21 +423,21 @@
 
 <p>定義成，</p>
 
-<script type="math/tex; mode=display">m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}</script>
+\[m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}\]
 
 <h3 id="偏導數-partial-derivative">偏導數 Partial derivative</h3>
 
 <p>斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。</p>
 
-<p>以兩個自變數為例， <script type="math/tex">z = f(x, y)</script></p>
+<p>以兩個自變數為例， \(z = f(x, y)\)</p>
 
-<p><script type="math/tex">f_x(a, b)</script> 為對 <script type="math/tex">x</script> 的偏導數，定義為</p>
+<p>\(f_x(a, b)\) 為對 \(x\) 的偏導數，定義為</p>
 
-<script type="math/tex; mode=display">f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}</script>
+\[f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}\]
 
-<p><script type="math/tex">f_y(a, b)</script> 為對 <script type="math/tex">y</script> 的偏導數，定義為</p>
+<p>\(f_y(a, b)\) 為對 \(y\) 的偏導數，定義為</p>
 
-<script type="math/tex; mode=display">f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}</script>
+\[f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}\]
 
 <p>也就是對 x 或 y 方向做偏微分。</p>
 
@@ -273,32 +445,32 @@
 
 <p>斜率求的是單變數的微分，在多變數中要求斜率必須要看是哪個方向的斜率，因為各個方向的斜率都不相同，這時要求的就是方向導數。</p>
 
-<p>假設函數 <script type="math/tex">z = f(x, y)</script>，在定義域 <script type="math/tex">xy</script> 平面上有一點 <script type="math/tex">(x, y)</script> 及單位向量 <script type="math/tex">\overset{\rightharpoonup}{u} = (u_1, u_2)</script>。則曲面 <script type="math/tex">z = f(x, y)</script> 在 <script type="math/tex">(a, b)</script> 處，沿 <script type="math/tex">\overset{\rightharpoonup}{u}</script> 的方向的斜率定義為，</p>
+<p>假設函數 \(z = f(x, y)\)，在定義域 \(xy\) 平面上有一點 \((x, y)\) 及單位向量 \(\overset{\rightharpoonup}{u} = (u_1, u_2)\)。則曲面 \(z = f(x, y)\) 在 \((a, b)\) 處，沿 \(\overset{\rightharpoonup}{u}\) 的方向的斜率定義為，</p>
 
-<script type="math/tex; mode=display">\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}</script>
+\[\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}\]
 
-<p>方向導數的意義在於，有助於計算出空間中某一場量 <script type="math/tex">f(x, y, z)</script> 在某一特定方向 <script type="math/tex">\boldsymbol{u}</script> 之變化率。</p>
+<p>方向導數的意義在於，有助於計算出空間中某一場量 \(f(x, y, z)\) 在某一特定方向 \(\boldsymbol{u}\) 之變化率。</p>
 
 <h3 id="梯度-gradient">梯度 Gradient</h3>
 
 <p>梯度的定義就是對各個分量做偏微分。</p>
 
-<p>例如，現在是兩變數函數 <script type="math/tex">f(x, y)</script>，其梯度 <script type="math/tex">\nabla f(x, y)</script> 定義為</p>
+<p>例如，現在是兩變數函數 \(f(x, y)\)，其梯度 \(\nabla f(x, y)\) 定義為</p>
 
-<script type="math/tex; mode=display">\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)</script>
+\[\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)\]
 
-<p>若是變數有三個，則 <script type="math/tex">\nabla f(x, y, y)</script> 定義為</p>
+<p>若是變數有三個，則 \(\nabla f(x, y, y)\) 定義為</p>
 
-<script type="math/tex; mode=display">\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)</script>
+\[\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)\]
 
-<p>Gernal 來看，有 n 個變數的函數 <script type="math/tex">f(x_1, x_2, \cdots, x_n)</script>，我們可以寫成</p>
+<p>Gernal 來看，有 n 個變數的函數 \(f(x_1, x_2, \cdots, x_n)\)，我們可以寫成</p>
 
-<script type="math/tex; mode=display">\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)</script>
+\[\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)\]
 
 <p>梯度 Gradient 的幾何意義，</p>
 <ul>
-  <li><script type="math/tex">\nabla f</script> 表示曲面 <script type="math/tex">f(x, y, z) = C</script> 之垂直向量，如下圖所示。</li>
-  <li><script type="math/tex">\nabla f(P)</script> 表在 <script type="math/tex">P</script> 點增量最大的方向，也就是 the direction of steepest increase</li>
+  <li>\(\nabla f\) 表示曲面 \(f(x, y, z) = C\) 之垂直向量，如下圖所示。</li>
+  <li>\(\nabla f(P)\) 表在 \(P\) 點增量最大的方向，也就是 the direction of steepest increase</li>
 </ul>
 
 <p><img src="http://localhost:4000/blog/img/posts/gradient.png" alt="" /></p>
@@ -309,7 +481,7 @@
 
 <p>Gradient descent 是一種最佳化方法。</p>
 
-<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 <script type="math/tex">-\nabla f(P)</script> 是找尋 minimum cost 的方向。</p>
+<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 \(-\nabla f(P)\) 是找尋 minimum cost 的方向。</p>
 
 <p>總的來說，梯度下降法 Gradient descent 就是不斷的在某個點 P 算它的 Gradient，然後往 Gradient 的反方向一定，直到找到 local minimum 為止（無法知道是否找到 glocal minimum，會根據 initial values 而定）。</p>
 
@@ -326,7 +498,6 @@
  -->
     
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">上一篇</a>說明了神經網路的基本原理，這篇我們要講解神經網路是如何學習的 - Gradient descent。</p>
-
 </div>
 
     <div class="bookmark">
@@ -429,7 +600,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>我們會給這個神經元與輸入層的神經元之間每個連線一個權重（weight），然後將輸入層的神經元乘上每個權重再加總，權重可以是正或負值。</p>
 
-<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function <script type="math/tex">\sigma(x) = \frac{1}{1+e^x}</script> 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
+<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function \(\sigma(x) = \frac{1}{1+e^x}\) 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
 
 <p>但也許並不是每次加總大於零我們就希望給正的灰階值，因此，權重最後再加上個 bias，來調整我們想要給灰階值的值。</p>
 
@@ -447,15 +618,15 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>總的來說，我們可以將整個 neural network 看成一個 function。</p>
 
-<script type="math/tex; mode=display">f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
+\[f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
    y_0 \\
    \vdots \\
    y_9
-  \end{bmatrix}</script>
+  \end{bmatrix}\]
 
 <p>最後，其實現在已經不使用 sigmoid function 了，現在主流的 function 用的是 <strong>ReLU</strong>。</p>
 
-<script type="math/tex; mode=display">ReLU(a) = max(0, a)</script>
+\[ReLU(a) = max(0, a)\]
 
 <p><img src="http://localhost:4000/blog/img/posts/neural%20network%2010.png" alt="" /></p>
 
@@ -467,7 +638,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>在了解 CNN (卷積神經網路, Convolutional neural network) 與 RNN (循環神經網絡, Recurrent neural network) 前，先來認識最簡單的 NN (神經網路, Neural network) Multilayer perceptron。</p>
-
 </div>
 
     <div class="bookmark">
@@ -792,7 +962,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><h2 id="實體關聯模型entity-relationship-model">實體關聯模型（Entity-Relationship Model）</h2>
-
 </div>
 
     <div class="bookmark">
@@ -1109,7 +1278,7 @@ s.setAttribute('data-timestamp', +new Date());
     <ul>
       <li>Domain is a set of <em>atomic values</em>. 
 <br />
-e.g., <script type="math/tex">\{ 0, 1, 2, ... \}</script>, <script type="math/tex">\{\text{Jo Smith}, \text{Dana Jones}, \text{Ashley Wong}, \text{Y. K. Lee}, ...\}</script></li>
+e.g., \(\{ 0, 1, 2, ... \}\), \(\{\text{Jo Smith}, \text{Dana Jones}, \text{Ashley Wong}, \text{Y. K. Lee}, ...\}\)</li>
       <li><em>atomic values</em>: Each value indivisible（不可分割）</li>
       <li>Domains specified by <em>data type</em>(integer, string, date, real, etc.)</li>
     </ul>
@@ -1117,15 +1286,15 @@ e.g., <script type="math/tex">\{ 0, 1, 2, ... \}</script>, <script type="math/te
   <li><strong>Relation Schema</strong>
     <ul>
       <li>Schema describes the relation（關聯表）</li>
-      <li>關聯表綱要（relation schema）是由關聯表名稱 R（relation name）和一連串屬性 <script type="math/tex">(A_1,A_2,….,A_n)</script>清單（list）還有定義域（domain）所組成</li>
+      <li>關聯表綱要（relation schema）是由關聯表名稱 R（relation name）和一連串屬性 \((A_1,A_2,….,A_n)\)清單（list）還有定義域（domain）所組成</li>
       <li><strong>integrity constraints</strong>（完整性限制）</li>
-      <li>Denoted by <script type="math/tex">R(A_1, A_2, ..., A_n)</script></li>
+      <li>Denoted by \(R(A_1, A_2, ..., A_n)\)</li>
     </ul>
   </li>
-  <li><strong>Attribute</strong> <script type="math/tex">A_i</script>
+  <li><strong>Attribute</strong> \(A_i\)
     <ul>
       <li>Name of a role in the relation schema R</li>
-      <li>使用 <script type="math/tex">dom(A_i)</script> 的符號來說明屬性 <script type="math/tex">A_i</script> 的定義域的範圍是什麼</li>
+      <li>使用 \(dom(A_i)\) 的符號來說明屬性 \(A_i\) 的定義域的範圍是什麼</li>
       <li>屬性名稱不可重複，但 domain 可以重複</li>
     </ul>
   </li>
@@ -1295,7 +1464,6 @@ e.g., <script type="math/tex">\{ 0, 1, 2, ... \}</script>, <script type="math/te
  -->
     
     <div class="post-excerpt"><h2 id="資料data與資訊information">資料(Data)與資訊(Information)</h2>
-
 </div>
 
     <div class="bookmark">
@@ -1381,7 +1549,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>常見的 NLP package 有 NLTK、spaCy、Scikit-learn 等等，參考下面的功能比較圖。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1564,23 +1731,23 @@ s.setAttribute('data-timestamp', +new Date());
   <li><em>Singular value decomposition(SVD)</em> can be applied on any matrix. (不需要是方陣。比較：PCA(特徵值分解) 也是一個降維的方法，但它的矩陣就必須要是方陣。)</li>
 </ul>
 
-<p>SVD 的概念就是，任一一個矩陣 <script type="math/tex">A_{m \times n}</script>，它都可以拆解成三個矩陣（<script type="math/tex">U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}</script>）的相乘。</p>
+<p>SVD 的概念就是，任一一個矩陣 \(A_{m \times n}\)，它都可以拆解成三個矩陣（\(U_{m \times n}, \Sigma_{m \times n}, V^T_{n \times n}\)）的相乘。</p>
 
-<p>其中，<script type="math/tex">U_{m \times n}</script> 的 columns 是 <em>Orthonormal</em>，而 <script type="math/tex">V^T_{n \times n}</script> 的 rows 是 <em>Orthonormal</em>，<script type="math/tex">\Sigma_{m \times n}</script> 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
+<p>其中，\(U_{m \times n}\) 的 columns 是 <em>Orthonormal</em>，而 \(V^T_{n \times n}\) 的 rows 是 <em>Orthonormal</em>，\(\Sigma_{m \times n}\) 是 <em>Diagonal</em>(只有對角線有非負的值，且由大到小)。</p>
 
 <p><em>(在線性代數中，一個內積空間的正交基（orthogonal basis）是元素兩兩正交的基。稱基中的元素為基向量。 假若，一個正交基的基向量的模長都是單位長度1，則稱這正交基為標準正交基或”規範正交基”（Orthonormal basis）。)</em></p>
 
 <p><img src="http://localhost:4000/blog/img/posts/SVD.png" alt="" /></p>
 
 <ul>
-  <li><script type="math/tex">\Sigma_{m \times n}</script> 會是一個長得像這樣的矩陣，且 <script type="math/tex">\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k</script></li>
+  <li>\(\Sigma_{m \times n}\) 會是一個長得像這樣的矩陣，且 \(\sigma_1 \ge \sigma_1 \ge \ldots \ge \sigma_k\)</li>
 </ul>
 
 <p><img src="http://localhost:4000/blog/img/posts/Sigma.png" alt="" /></p>
 
-<p>而 <script type="math/tex">\sigma_r, ~~where~~1 \le r \le k</script> 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 <script type="math/tex">\Sigma</script> 較重要的前面幾行得到一個相似的矩陣 <script type="math/tex">A</script>。用較小的儲存空間就可以得到接近原始的矩陣 <script type="math/tex">A</script>。</p>
+<p>而 \(\sigma_r, ~~where~~1 \le r \le k\) 是奇異值（singular value），而 r 越小也代表了該值越重要，換句話說，含有越多訊息，因此我們可以只保留 \(\Sigma\) 較重要的前面幾行得到一個相似的矩陣 \(A\)。用較小的儲存空間就可以得到接近原始的矩陣 \(A\)。</p>
 
-<script type="math/tex; mode=display">A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}</script>
+\[A_{m \times n} \approx U_{m \times r} \times \Sigma_{r \times r} \times V^T_{r \times n}\]
 
 <p>參考<a href="https://ccjou.wordpress.com/2009/09/01/奇異值分解-svd/">線代啟示錄-奇異值分解 (SVD)</a>的圖，</p>
 
@@ -1597,11 +1764,11 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>這邊看一個<a href="https://www.itread01.com/content/1569742263.html">例子</a>，</p>
 
-<p>下圖是一個 Co-occurrence matrix <script type="math/tex">~A_{m \times n}</script></p>
+<p>下圖是一個 Co-occurrence matrix \(~A_{m \times n}\)</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/term-document.png" alt="" /></p>
 
-<p>將上面的矩陣 <script type="math/tex">A</script> 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
+<p>將上面的矩陣 \(A\) 使用 SVD 分解、降維，只留下前三個特徵值。每個特徵值的大小表示對應位置的屬性值的重要性大小，左奇異矩陣的每一列即代表每個詞的特徵向量，右奇異矩陣的每一行表示每個文件的特徵向量。</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/SVD%20example.png" alt="" /></p>
 
@@ -1631,19 +1798,19 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   </li>
 </ul>
 
-<script type="math/tex; mode=display">PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}</script>
+\[PMI(x, y) = log \frac{P(x, y)}{P(x) \times P(y)}\]
 
 <p>簡單來說，我們可以用 PMI 公式來看兩個字之間的關係。</p>
 
-<p>現在我們把 <script type="math/tex">x</script> 看成我們的 target word，<script type="math/tex">y</script> 看成我們的 context word，</p>
+<p>現在我們把 \(x\) 看成我們的 target word，\(y\) 看成我們的 context word，</p>
 
 <ul>
-  <li>We want to use PMI to measure the associative strength between a word <script type="math/tex">w</script> and a context <script type="math/tex">c</script> in a data set <script type="math/tex">D</script>:</li>
+  <li>We want to use PMI to measure the associative strength between a word \(w\) and a context \(c\) in a data set \(D\):</li>
 </ul>
 
-<script type="math/tex; mode=display">PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}</script>
+\[PMI(w, c) = log \frac{P(w, c)}{P(w) \times P(c)} = log \frac{\#(w, c)/|D|}{\#(w)/|D| \cdot \#(c)/|D|} = log \frac{\#(w,c) \cdot |D|}{\#(w) \cdot \#(c)}\]
 
-<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 <script type="math/tex">w</script> 和 <script type="math/tex">c</script> 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
+<p>但根據上面的公式，會發現一個問題，PMI is infinitely small for unseen word–context pairs, and undefined for unseen target words. (如果 \(w\) 和 \(c\) 並沒有共同出現過，再取 log，整個值會變成 -Inf)</p>
 
 <p>所以這時候就有了 <strong>Positive Pointwise mutual information(PPMI)</strong>。</p>
 
@@ -1651,7 +1818,7 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   <li>In positive pointwise mutual information (PPMI), all negative and undefined values are replaced by zero:</li>
 </ul>
 
-<script type="math/tex; mode=display">􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)</script>
+\[􏰜􏰜􏰝􏰞􏰍􏰂􏰠PPMI(w, c) = max(PMI(w, c), 0)\]
 
 <ul>
   <li>PPMI assigns high values to rare events, it is advisable to apply a count threshold or smooth the probabilities.</li>
@@ -1679,13 +1846,13 @@ E.g. the cat, a cat will receive higher weight than cute cat, small cat.</p>
   <li>By the chain rule, the probability of a sequence of 𝑁 words can be computed using conditional probabilities as</li>
 </ul>
 
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})</script>
+\[p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_1 \ldots w_{k-1})\]
 
 <ul>
-  <li>To make probability estimates more robust, we can approximate the full history <script type="math/tex">w_1 \ldots w_N</script> by the last few words (馬可夫鍊):</li>
+  <li>To make probability estimates more robust, we can approximate the full history \(w_1 \ldots w_N\) by the last few words (馬可夫鍊):</li>
 </ul>
 
-<script type="math/tex; mode=display">p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})</script>
+\[p(w_1, w_2,\ldots, w_N) = \prod_{k=1}^N P(w_k|w_{k-n+1} \ldots w_{k-1})\]
 
 <hr />
 
@@ -1708,10 +1875,10 @@ E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</p>
 <p><strong>Formal definition of an n-gram model</strong></p>
 
 <ul>
-  <li><script type="math/tex">n</script>: the model’s order (1 = unigram, 2 = bigram, …)</li>
-  <li><script type="math/tex">V</script>: a set of possible words (character); the vocabulary</li>
-  <li><script type="math/tex">P(w\mid u)</script>: a probability that specifies how likely it is to observe the word <script type="math/tex">w</script> after the context 
-<br />(n − 1)-gram <script type="math/tex">u</script></li>
+  <li>\(n\): the model’s order (1 = unigram, 2 = bigram, …)</li>
+  <li>\(V\): a set of possible words (character); the vocabulary</li>
+  <li>\(P(w\mid u)\): a probability that specifies how likely it is to observe the word \(w\) after the context 
+<br />(n − 1)-gram \(u\)</li>
 </ul>
 
 <p><strong>Unigram model</strong></p>
@@ -1830,7 +1997,6 @@ E.g. unigram (Text), bigram (Text Mining), trigram (Text Mining course)</p>
  -->
     
     <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
 </div>
 
     <div class="bookmark">
@@ -1928,15 +2094,15 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>Distances 可以有很多種定義方式，但不管怎麼定義，都一定要符合以下的 properties。</p>
 <ul>
-  <li><script type="math/tex">d(i, j) \ge 0</script> (non-negativity)</li>
-  <li><script type="math/tex">d(i, i) = 0</script> (identity of indiscernibles)</li>
-  <li><script type="math/tex">d(i, j) = d(j, i)</script> (symmetry)</li>
-  <li><script type="math/tex">d(i, j) \le d(i, k) + d(k, j)</script> (triangle inequality)</li>
+  <li>\(d(i, j) \ge 0\) (non-negativity)</li>
+  <li>\(d(i, i) = 0\) (identity of indiscernibles)</li>
+  <li>\(d(i, j) = d(j, i)\) (symmetry)</li>
+  <li>\(d(i, j) \le d(i, k) + d(k, j)\) (triangle inequality)</li>
 </ul>
 
 <p><strong>Minkowski distance</strong></p>
 
-<p><script type="math/tex">d(i, j) = \sqrt[q]{(|x_{i_1} - x_{j_1}|^q + |x_{i_2} - x_{j2}|^q + \ldots + |x_{i_p} - x_{j_p}|^q)}</script>
+<p>\(d(i, j) = \sqrt[q]{(|x_{i_1} - x_{j_1}|^q + |x_{i_2} - x_{j2}|^q + \ldots + |x_{i_p} - x_{j_p}|^q)}\)
 , q is a positive integer</p>
 
 <ul>
@@ -1957,13 +2123,13 @@ s.setAttribute('data-timestamp', +new Date());
   <li>Accuracy for symmetric binary variables</li>
 </ul>
 
-<script type="math/tex; mode=display">sim(i, j) = \frac{a+d}{a+b+c+d}</script>
+\[sim(i, j) = \frac{a+d}{a+b+c+d}\]
 
 <ul>
   <li>Jaccard similarity for asymmetric binary variables</li>
 </ul>
 
-<script type="math/tex; mode=display">sim(i, j) = \frac{a}{a+b+c}</script>
+\[sim(i, j) = \frac{a}{a+b+c}\]
 
 <hr />
 
@@ -2125,7 +2291,6 @@ RI = （TP+TN）/（TP+FP+FN+TN）</p>
  -->
     
     <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
 </div>
 
     <div class="bookmark">
@@ -2167,223 +2332,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/text%20mining/2019/11/13/Text-Mining-Text-classification/">
-        [Text Mining]Text classification
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on November 13, 2019</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">November 13, 2019</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Text Mining">Text Mining</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
-<hr />
-
-<h2 id="text-classification">Text classification</h2>
-
-<ul>
-  <li>Text classification is the task of categorising text documents into predefined classes.</li>
-</ul>
-
-<h2 id="evaluation-of-text-classifiers">Evaluation of text classifiers</h2>
-
-<p>最簡單的檢視預測結果好壞的方法就是將 predict 出來的類別與真實的類別做比較。（預測必須要在 test data，換句話說之前並沒有參與任何 training 的過程。這點在做所有 Machine Learning 的方法都很重要，在做 model 測試前不要碰 test data。）</p>
-
-<h3 id="accuracy">Accuracy</h3>
-<p>The accuracy of a classifier is the proportion of documents for which the classifier predicts the gold-standard class:</p>
-
-<script type="math/tex; mode=display">\textrm{accuarcy} = \frac{\textrm{number of correctly classified documents}}{\textrm{number of all documents}}</script>
-
-<h3 id="accuracy-and-imbalanced-data-sets">Accuracy and imbalanced data sets</h3>
-
-<p>上面的 accuracy 看起來非常合理啊，去計算分類正確的比例來判斷這個分類器是否預測準確。但，如果其實資料本身的類別並不平均呢？</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/imbalanced%20data%20sets.png" alt="PMF_two coins.png" /></p>
-
-<p>根據上圖，我們只要把所有資料都猜綠色的 class，這樣 accuracy 就能有 80%。從這個例子可以知道，</p>
-
-<ul>
-  <li>
-    <p>Evaluation measures are no absolute measures of performance. 如果今天得到 accuracy 是 80% 我們並無法確定這樣的準確率的好壞，要根據每個問題去判斷。</p>
-  </li>
-  <li>
-    <p>Instead, we should ask for a classifier’s performance relative to other classifiers, or other points of comparison. E.g.’Logistic Regression has a higher accuracy than Naive Bayes.’</p>
-  </li>
-  <li>
-    <p>When other classifiers are not available, a simple baseline is to always predict the most frequent class in the training data.</p>
-  </li>
-</ul>
-
-<h2 id="precision-and-recall">Precision and recall</h2>
-
-<ul>
-  <li>
-    <p>Precision and recall ‘zoom in’ on how good a system is at identifying documents of a specific class.</p>
-  </li>
-  <li>
-    <p>Precision is the proportion of correctly classified documents among all documents for which the system predicts class.</p>
-  </li>
-</ul>
-
-<script type="math/tex; mode=display">\textrm{precision} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false positives}}</script>
-
-<ul>
-  <li>Recall is the proportion of correctly classified documents among all documents with gold-standard class.</li>
-</ul>
-
-<script type="math/tex; mode=display">\textrm{recall} = \frac{\textrm{# true positives}}{\textrm{# true positives + # false negatives}}</script>
-
-<h2 id="f1-measure">F1-measure</h2>
-<p>A good classifier should balance between precision and recall.  </p>
-
-<script type="math/tex; mode=display">\textrm{F1} = \frac{2 \cdot \textrm{precision} \cdot \textrm{recall}}{\textrm{precision + recall}}</script>
-
-<hr />
-
-<h2 id="naive-bayes-classifier">Naive Bayes classifier</h2>
-
-<h3 id="bayes-theorem">Bayes’ theorem</h3>
-
-<p>We know that <script type="math/tex">C</script> is classes, <script type="math/tex">x_i, i = 1, \cdots,n</script> is features. Using Bayes’ theorem, the conditional probability can be decomposed as</p>
-
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{p(C)~p(x_1, \cdots,x_n|C)}{p(x_1, \cdots,x_n)}</script>
-
-<p>也就是，</p>
-
-<script type="math/tex; mode=display">\textrm{posterior} = \frac{\textrm{prior} \times \textrm{likelihood}}{\textrm{evidence}}</script>
-
-<p>根據上式，我們可以將分母視為常數，因為 features <script type="math/tex">x_i, i = 1, \cdots,n</script> 的值是給定的，且與 <script type="math/tex">C</script> 無關，所以可以得到</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C, x_1, \cdots,x_n) & = p(C)~p(x_1,\cdots,x_n|C) \\
-& \propto p(C)~p(x_1|C)~p(x_2,\cdots,x_n|C,x_1) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3,\cdots,x_n|C,x_1,x_2) \\ 
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2)~p(x_4,\cdots,x_n|C,x_1,x_2,x_3) \\
-& \propto \cdots\\
-& \propto p(C)~p(x_1|C)~p(x_2|C, x_1)~p(x_3|C, x_1, x_2) \cdots p(x_n|C,x_1,x_2,\cdots ,x_n) \\
-\end{align} %]]></script>
-
-<h3 id="naive-bayes-assumption">Naive Bayes assumption</h3>
-
-<p>Naive Bayes 假設 
-<script type="math/tex">p(x_i|C, x_j) = p(x_i|C), \textrm{for} ~ i \ne j</script></p>
-
-<p>根據 Naive Bayes 的假設，前面的式子我們可以寫成，</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-p(C|x_1,..., x_n) & \propto p(C, x_1, \cdots,x_n) \\
-& \propto p(C)~p(x_1|C)~p(x_2|C)~p(x_3|C) \cdots p(x_n|C) \\
-& \propto p(C)~\prod_{i=1}^n p(x_i|C)
-\end{align} %]]></script>
-
-<p>根據上面的推導過程，我們可以得到，</p>
-
-<script type="math/tex; mode=display">p(C|x_1,..., x_n) = \frac{1}{Z}~p(C)~\prod_{i=1}^n p(x_i|C)</script>
-
-<h3 id="naive-bayes-classifer">Naive Bayes classifer</h3>
-
-<p>而 Naive Bayes classifer 就是取各個分類 <script type="math/tex">C_m, m = 1, \cdots, k</script> 
-中 <script type="math/tex">p(C|x_1,..., x_n)</script> 值最大的為最後的分類結果。換句話說，我們可用這樣的式子表示</p>
-
-<script type="math/tex; mode=display">C_m = \mathop{\arg\max}_C p(C|x_1,..., x_n) =  \mathop{\arg\max}_C p(C)~\prod_{i=1}^n p(x_i|C)</script>
-
-<p>而 <script type="math/tex">C_m</script> 就是最後的分類結果。</p>
-
-<h3 id="two-classic-naive-bayes-variants-for-text">Two Classic Naive Bayes Variants for Text</h3>
-
-<ol>
-  <li>Multinomial Naive Bayes
-    <ul>
-      <li>Data follows a multinomial distribution (多項分布)</li>
-      <li>Each feature values is a count (word occurrence counts, TF-IDF weighting, …)</li>
-    </ul>
-  </li>
-  <li>Bernoulli Naive Bayes
-    <ul>
-      <li>Data follows a multivariate Bernoulli distribution</li>
-      <li>Each feature is binary (word is present / absent)</li>
-    </ul>
-  </li>
-</ol>
-
-<hr />
-
-<p><strong>Lab:</strong> <a href="https://github.com/shihs/732A92-TextMining/blob/master/Lab1/TM-L2.ipynb">Text classification Lab</a></p>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a>
-<br />
-<a href="https://www.ycc.idv.tw/confusion-matrix.html">如何辨別機器學習模型的好壞？秒懂Confusion Matrix</a>
-<br />
-<a href="https://zh.wikipedia.org/wiki/朴素贝叶斯分类器">wikipeida - 單純貝氏分類器</a></p>
-
- -->
-    
-    <div class="post-excerpt"><p>This post is based on the <a href="https://www.ida.liu.se/~732A92/index.en.shtml">732A92 Texting Mining</a> course, given by Marco Kuhlmann at LiU in 2019.</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread';
-        this.page.identifier = '/text%20mining/2019/11/13/Text-Mining-Text-classification/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//text%20mining/2019/11/13/Text-Mining-Text-classification/#disqus_thread" data-disqus-identifier="/text%20mining/2019/11/13/Text-Mining-Text-classification/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

@@ -1,0 +1,60 @@
+I"�<p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
+<br />
+2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
+
+<hr />
+
+<h2 id="字元編碼">字元編碼</h2>
+
+<ul>
+  <li>在電腦的世界是使用二進位（binary）的方式來進行運算，也就是 0 與 1 兩個 digits（each binary digit called bit）。</li>
+  <li>而電腦是使用「關」與「開」來表示二進位中的 0 與 1。</li>
+  <li>在現代電腦中是由上百萬的電晶體（transistors）來控制這樣的「關」與「開」（0 與 1）。</li>
+</ul>
+
+<hr />
+
+<h2 id="ascii">ASCII</h2>
+<p><a href="https://zh.wikipedia.org/wiki/ASCII">ASCII</a> 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。它的目的是用來統一規範，規定數字與字母大小寫、符號等等的對應關係，而每一個數字由 8 個 bits 表示。最後一次更新是在1986年，至今為止共定義了 128 個字元。</p>
+
+<p>像是 <code class="language-plaintext highlighter-rouge">HI!</code> 就是由數字 72、73 和 33 所組成的。由二進位表示就是，<code class="language-plaintext highlighter-rouge">01001000</code>、<code class="language-plaintext highlighter-rouge">01001001</code>、<code class="language-plaintext highlighter-rouge">00100001</code>。</p>
+
+<p><strong>Extended ASCII</strong>
+<br />
+但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。（<a href="https://zh.wikipedia.org/zh-tw/EASCII">Wikipedia</a>）</p>
+
+<hr />
+
+<h2 id="unicode">Unicode</h2>
+<p>隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。</p>
+
+<p>Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為 Code point。U+ 的意思是 Unicode，
+數字則是用十六進位表示。</p>
+
+<p>但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。</p>
+
+<hr />
+
+<h2 id="utf-8">UTF-8</h2>
+<p>有人發明了 UTF-8 這種儲存方式。</p>
+
+<p>UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用 UTF-8 編碼就能省下空間。</p>
+
+<p><strong>比較</strong>
+<br />
+Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode 和 UTF-8</a>
+<br />
+<a href="http://blog.chunnorris.cc/2015/04/unicode.html">淺談電腦編碼與 Unicode (一) 基礎概念篇</a>
+<br />
+<a href="https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118">常見三種字符編碼的區別：ASCII、Unicode、UTF-8</a>
+<br />
+<a href="https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F">[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知</a>
+<br />
+<a href="https://cs50.harvard.edu/x/2022/notes/0/">CS50 2022 - Lecture 0</a></p>
+:ET

@@ -214,14 +214,14 @@
   </div>
   <div><p>Google Map 提供了很多 <a href="https://developers.google.com/maps/documentation/">API</a>，方便開發者根據自己的需求使用。不過大部分的 API 都需要使用 Google 帳號申請一個 API KEY 。 API KEY 申請時要填上信用卡資訊，有一年的免費使用時間，過了一年以後會自動扣款，但隨時都可以停用，而且時間快到時 Google 也會寄信通知你。</p>
 
-<p>這次要介紹<code class="highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
+<p>這次要介紹<code class="language-plaintext highlighter-rouge">Geocoding</code>這個 API 。 根據<a href="https://developers.google.com/maps/documentation/geocoding/intro">說明文件</a>上的介紹</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers on a map, or position the map.
 </code></pre></div></div>
 <p>簡單來說，你可以<strong>根據地址找到該地址在地理上的座標（經緯度）</strong>，方便應用在地圖上標記位置。</p>
 
-<p>根據<code class="highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
+<p>根據<code class="language-plaintext highlighter-rouge">Geocoding</code>說明文件，這個 API 的 format 有 json 和 xml 兩種格式。
 來看文件上給的一個輸出 json 格式的範例，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&amp;key=YOUR_API_KEY
 </code></pre></div></div>
 <p>看起來這個 API 是需要 API KEY 。</p>
 
@@ -229,10 +229,10 @@
 而且使用 API key 反而還會被限制一天可以搜尋的數量……</p>
 
 <p>所以其實上面的例子只要這樣就好，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA
 </code></pre></div></div>
 <p>當然也可以搜尋中文地址，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://maps.googleapis.com/maps/api/geocode/json?address=台北市中正區重慶南路一段122號
 </code></pre></div></div>
 <p>就可以獲取該地址完整的地址資訊（包括郵遞區號）與經緯度。
 其實只要搜尋「重慶南路一段122號」就可以找到該地址完整的資訊了。</p>
@@ -245,16 +245,16 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="k">def</span> <span class="nf">get_latitude_longtitude</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
-    <span class="c"># decode url</span>
-    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+    <span class="c1"># decode url
+</span>    <span class="n">address</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
     <span class="n">url</span> <span class="o">=</span> <span class="s">"https://maps.googleapis.com/maps/api/geocode/json?address="</span> <span class="o">+</span> <span class="n">address</span>
     
     <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">js</span><span class="p">[</span><span class="s">"status"</span><span class="p">]</span> <span class="o">!=</span> <span class="s">"OVER_QUERY_LIMIT"</span><span class="p">:</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">break</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">js</span><span class="p">[</span><span class="s">"results"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">"geometry"</span><span class="p">][</span><span class="s">"location"</span><span class="p">]</span>
@@ -318,6 +318,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -327,13 +334,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

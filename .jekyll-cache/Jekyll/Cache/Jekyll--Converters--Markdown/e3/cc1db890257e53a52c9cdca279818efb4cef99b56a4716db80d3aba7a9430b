@@ -1,0 +1,32 @@
+I"E<p>在爬取網頁時偶爾會碰到<br /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ni">&amp;nbsp;</span>
+</code></pre></div></div>
+
+<p>而且怎麼樣都刪不掉也取代不掉，<br />
+使用strip()仍然會有空白。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
+</code></pre></div></div>
+
+<p>假如現在有一個網頁內容包含</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;td&gt;</span>
+	E601010<span class="ni">&amp;nbsp;</span>
+	電器承裝業
+	<span class="nt">&lt;br&gt;</span>
+	E601020<span class="ni">&amp;nbsp;</span>
+	電器安裝業
+	<span class="nt">&lt;br&gt;</span>													
+<span class="nt">&lt;/td&gt;</span>
+</code></pre></div></div>
+
+<p>已經抓出td tag，<br />
+接著可以使用</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>這時候td type會變成str，<br />
+再使用replace取代就可以刪除空白了。<br /></p>
+
+:ET

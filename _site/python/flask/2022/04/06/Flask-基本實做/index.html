@@ -228,38 +228,38 @@
 
 <h2 id="基本樣板">基本樣板</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- webapp.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># webapp.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># webapp.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span> <span class="c"># __name__ 代表目前執行的模組</span>
-
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span> <span class="c1"># __name__ 代表目前執行的模組
+</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Index page'</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!'</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-     <span class="c"># app.run(host='127.0.0.1', port=8000)</span>
-</code></pre></div></div>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="c1"># app.run(host='127.0.0.1', port=8000)
+</span></code></pre></div></div>
 <p><img src="https://i.imgur.com/Fmq8bFT.png" alt="" /></p>
 
-<p>在開發的時候加上 <code class="highlighter-rouge">app.run(debug=True)</code> 讓程式調整的時候不需要每次重啟，所以在正式環境時不會設置。也可以寫成，<code class="highlighter-rouge">app.debug=True</code>、<code class="highlighter-rouge">app.run()</code>。</p>
+<p>在開發的時候加上 <code class="language-plaintext highlighter-rouge">app.run(debug=True)</code> 讓程式調整的時候不需要每次重啟，所以在正式環境時不會設置。也可以寫成，<code class="language-plaintext highlighter-rouge">app.debug=True</code>、<code class="language-plaintext highlighter-rouge">app.run()</code>。</p>
 
 <hr />
 
 <h3 id="approute">@app.route()</h3>
 
-<p>介紹<code class="highlighter-rouge">@app.route()</code>前先了解 Python 的裝飾器（Decorator）<code class="highlighter-rouge">@</code>。</p>
+<p>介紹<code class="language-plaintext highlighter-rouge">@app.route()</code>前先了解 Python 的裝飾器（Decorator）<code class="language-plaintext highlighter-rouge">@</code>。</p>
 
 <p><strong>Python 的 Decorator</strong></p>
 
@@ -270,18 +270,18 @@
   <li>A decorator is just a function which takes in a function (the one which you decorated with the “@” symbol) and returns a new function.</li>
 </ul>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This is our decorator</span>
-<span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="c"># This is the new function we're going to return</span>
-    <span class="c"># This function will be used in place of our original definition</span>
-    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is our decorator
+</span><span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="c1"># This is the new function we're going to return
+</span>    <span class="c1"># This function will be used in place of our original definition
+</span>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
         <span class="k">print</span> <span class="s">"Entering Function"</span>
         <span class="n">f</span><span class="p">()</span>
         <span class="k">print</span> <span class="s">"Exited Function"</span>
 
     <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nd">@simple_decorator</span> 
+<span class="o">@</span><span class="n">simple_decorator</span> 
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">"Hello World"</span>
 
@@ -289,14 +289,14 @@
 </code></pre></div></div>
 
 <p>結果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entering Function
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entering Function
 Hello World
 Exited Function
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">decorator_factory</span><span class="p">(</span><span class="n">enter_message</span><span class="p">,</span> <span class="n">exit_message</span><span class="p">):</span>
-    <span class="c"># We're going to return this decorator</span>
-    <span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="c1"># We're going to return this decorator
+</span>    <span class="k">def</span> <span class="nf">simple_decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
             <span class="k">print</span> <span class="n">enter_message</span>
             <span class="n">f</span><span class="p">()</span>
@@ -306,14 +306,14 @@ Exited Function
 
     <span class="k">return</span> <span class="n">simple_decorator</span>
 
-<span class="nd">@decorator_factory</span><span class="p">(</span><span class="s">"Start"</span><span class="p">,</span> <span class="s">"End"</span><span class="p">)</span>
+<span class="o">@</span><span class="n">decorator_factory</span><span class="p">(</span><span class="s">"Start"</span><span class="p">,</span> <span class="s">"End"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">print</span> <span class="s">"Hello World"</span>
 
 <span class="n">hello</span><span class="p">()</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Start
 Hello World
 End
 </code></pre></div></div>
@@ -323,44 +323,44 @@ End
 <h3 id="route">route</h3>
 <p>route 的意思是「路；路線；路程；航線；路由」，在這裡則是指定網址的路徑。</p>
 
-<p>因此，要將網址的路徑指定為<code class="highlighter-rouge">hello</code>則可以寫成</p>
+<p>因此，要將網址的路徑指定為<code class="language-plaintext highlighter-rouge">hello</code>則可以寫成</p>
 <pre><code class="language-python=">@app.route('/hello')
 </code></pre>
 
 <ul>
-  <li>更多<code class="highlighter-rouge">@app.route()</code>的用法：<a href="https://pythonbasics.org/flask-tutorial-routes/">Flask Tutorial: Routes</a></li>
+  <li>更多<code class="language-plaintext highlighter-rouge">@app.route()</code>的用法：<a href="https://pythonbasics.org/flask-tutorial-routes/">Flask Tutorial: Routes</a></li>
 </ul>
 
 <hr />
 
 <h2 id="將-html-獨立出來">將 html 獨立出來</h2>
 
-<p>將 html 獨立出來撰寫，並使用 <code class="highlighter-rouge">render_template()</code> 讀取。flask 會從 <strong>templates</strong> 資料夾搜尋這個 html 檔案，並回傳。所以檔案的結構會是</p>
+<p>將 html 獨立出來撰寫，並使用 <code class="language-plaintext highlighter-rouge">render_template()</code> 讀取。flask 會從 <strong>templates</strong> 資料夾搜尋這個 html 檔案，並回傳。所以檔案的結構會是</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- templates
 |   |_ index.html
 |_ webapp.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># webapp.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># webapp.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="c"># return 'Index page'</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
+    <span class="c1"># return 'Index page'
+</span>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!!'</span>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- index.html --&gt;</span>
@@ -379,7 +379,7 @@ End
 <hr />
 <h3 id="增加-html-layout-與-css">增加 html layout 與 css</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- static
 |   |_ css
 |       |_main.css 
@@ -433,15 +433,15 @@ End
   </li>
   <li>常用語法
     <ul>
-      <li>comments: <code class="highlighter-rouge">{# comments #}</code></li>
+      <li>comments: <code class="language-plaintext highlighter-rouge">{# comments #}</code></li>
       <li>variables
         <ul>
-          <li><code class="highlighter-rouge">{{ post.title }}</code></li>
-          <li>dictionary: <code class="highlighter-rouge">{{your_dict['key']}}</code></li>
-          <li>list: <code class="highlighter-rouge">{{your_list[0]}}</code></li>
+          <li><code class="language-plaintext highlighter-rouge">{{ post.title }}</code></li>
+          <li>dictionary: <code class="language-plaintext highlighter-rouge">{{your_dict['key']}}</code></li>
+          <li>list: <code class="language-plaintext highlighter-rouge">{{your_list[0]}}</code></li>
         </ul>
       </li>
-      <li>多行代碼：<code class="highlighter-rouge">{% 開始 %} HTML標籤 {% 結束 %}</code></li>
+      <li>多行代碼：<code class="language-plaintext highlighter-rouge">{% 開始 %} HTML標籤 {% 結束 %}</code></li>
     </ul>
   </li>
   <li><a href="https://segmentfault.com/a/1190000018002480">一篇文章搞懂Jinja2 Template Engine 模版引擎</a></li>
@@ -451,7 +451,7 @@ End
 <hr />
 
 <h3 id="將-webapppy-分解">將 webapp.py 分解</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 檔案結構
 |- run.py
 |_ plotlyapp
     |- static
@@ -464,31 +464,31 @@ End
     |_ routes.py
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># run.py</span>
-<span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># run.py
+</span><span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+     <span class="n">app</span><span class="p">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># __init__.py</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># __init__.py
+</span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">routes</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># routes.py</span>
-<span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># routes.py
+</span><span class="kn">from</span> <span class="nn">plotlyapp</span> <span class="kn">import</span> <span class="n">app</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">url_for</span>
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s">'index.html'</span><span class="p">)</span>
 
 
-<span class="nd">@app.route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
+<span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">route</span><span class="p">(</span><span class="s">'/hello'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s">'Hello World!!'</span>
 </code></pre></div></div>
@@ -554,6 +554,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -562,13 +569,6 @@ s.setAttribute('data-timestamp', +new Date());
       <li>
         <h3>
           <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/"> [Python]Python 虛擬環境 (virtual environment) - conda create 與 virtualenv 比較 </a>
           <small>Apr 5, 2022</small>
         </h3>
       </li>

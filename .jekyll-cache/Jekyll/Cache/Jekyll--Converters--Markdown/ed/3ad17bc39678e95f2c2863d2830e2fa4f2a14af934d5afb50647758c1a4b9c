@@ -1,0 +1,31 @@
+I"�<p>以下簡單地整理網路上查到的 Hamiltonian path 與 Travelling Salesman Problem 介紹。</p>
+
+<hr />
+
+<h3 id="hamiltonian-path">Hamiltonian path</h3>
+
+<p><strong>What is Hamiltonian path?</strong><br />
+<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Hamiltonian path</a> is a path that visit every node only once. It can be an undirected or directed graph. Also it</p>
+
+<p><strong>Hamiltonian cycle</strong><br />
+If a Hamiltonian path is a cycle then we call it A Hamiltonian cycle (or Hamiltonian circuit).</p>
+
+<p><strong>Hamiltonian path problem</strong><br />
+Determining whether such paths and cycles exist in graphs is the Hamiltonian path problem, which is NP-complete</p>
+
+<hr />
+
+<h3 id="travelling-salesman-problem">Travelling Salesman Problem</h3>
+
+<p><strong>What is Travelling Salesman Problem(TSP)?</strong><br />
+There is a man traveling. He departures from a city and he wants to visit every cities(nods) with the shortest distance. In the end, he will go back to the origin city, and he can only stop in each city once.</p>
+
+<p>Which means, TSP is looking for the shortest distance of <em>Hamiltonian cycle</em>.</p>
+
+<hr />
+
+<p>reference:<br />
+<a href="http://www.csie.ntnu.edu.tw/~u91029/Circuit.html">演算法筆記</a><br />
+<a href="https://en.wikipedia.org/wiki/Travelling_salesman_problem">Wikipedia - TSP</a><br />
+<a href="https://en.wikipedia.org/wiki/Hamiltonian_path">Wikipedia - Hamiltonian path</a><br /></p>
+:ET

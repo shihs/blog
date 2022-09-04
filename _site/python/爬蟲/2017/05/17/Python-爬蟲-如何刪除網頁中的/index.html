@@ -220,7 +220,7 @@
 <p>而且怎麼樣都刪不掉也取代不掉，<br />
 使用strip()仍然會有空白。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
 </code></pre></div></div>
 
 <p>假如現在有一個網頁內容包含</p>
@@ -238,7 +238,7 @@
 <p>已經抓出td tag，<br />
 接著可以使用</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>這時候td type會變成str，<br />
 再使用replace取代就可以刪除空白了。<br /></p>
@@ -291,6 +291,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -300,13 +307,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

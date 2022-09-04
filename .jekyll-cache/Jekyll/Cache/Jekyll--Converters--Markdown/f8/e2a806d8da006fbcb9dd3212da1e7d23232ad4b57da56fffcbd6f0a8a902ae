@@ -1,0 +1,18 @@
+I"&<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># read csv file
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.csv"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">row</span>
+    
+
+
+
+<span class="c1"># write csv file
+</span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="s">"data1"</span><span class="p">,</span> <span class="s">"data2"</span><span class="p">],</span> <span class="p">[</span><span class="s">"data3"</span><span class="p">,</span> <span class="s">"data4"</span><span class="p">]]</span>  <span class="c1"># list 
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"file.csv"</span><span class="p">,</span> <span class="s">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">w</span><span class="p">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+</code></pre></div></div>
+:ET

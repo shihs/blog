@@ -1,0 +1,3 @@
+I"�<p>當爬網站碰到需要讀取驗證碼的網站時可以使用
+<strong>pytesseract</strong> 與 <strong>Image</strong> 套件來讀取圖片上的數字與英文。</p>
+:ET

@@ -1,0 +1,46 @@
+I"m<p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
+所有的行業代碼與中文名稱。</p>
+
+<p>按下一頁發現會load一個post的網址<br />
+<img src="http://user-image.logdown.io/user/13067/blog/12306/post/1792968/fSvGMaRQRCfVLL1T7SMz_%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-10%20%E4%B8%8B%E5%8D%883.47.28.png" alt="螢幕快照 2017-05-10 下午3.47.28.png" /></p>
+
+<p>接著想要在headers裡找到 “Form Data”，<br />
+這裡面應會藏著post需要的參數。<br /></p>
+
+<p>可是，這時候卻只有找到 “Requests Payload”，<br />
+這個看起來很像payload的東西，<br />
+它看起來是個json，<br />
+且Response Headers的Content-Type正是application/json。</p>
+
+<p><img src="http://user-image.logdown.io/user/13067/blog/12306/post/1792968/qomn6tsmQcaYV27GsYea_content%20type.png" alt="content type.png" /></p>
+
+<p>所以我將 “Requests Payload”按下view source後的結果直接複製，<br />
+然後requests結果再用json.loads就可以得到想要的結果了。<br /></p>
+
+<p>程式碼如下，</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding:utf-8 -*-
+# 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)
+</span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="c1"># payload for requests
+</span><span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
+
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">,</span> 
+		  <span class="s">"Referer"</span><span class="p">:</span><span class="s">"http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp"</span><span class="p">}</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation"</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">js</span><span class="p">[</span><span class="s">"d"</span><span class="p">][</span><span class="s">"Result"</span><span class="p">]:</span>
+	<span class="n">code</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Code"</span><span class="p">]</span>
+	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">].</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
+	<span class="k">print</span> <span class="n">code</span>
+
+</code></pre></div></div>
+:ET

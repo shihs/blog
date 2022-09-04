@@ -183,6 +183,134 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">
+        字元編碼，ASCII、Unicode、UTF-8
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on January 22, 2019</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">January 22, 2019</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#Others">Others</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
+<br />
+2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
+
+<hr />
+
+<h2 id="字元編碼">字元編碼</h2>
+
+<ul>
+  <li>在電腦的世界是使用二進位（binary）的方式來進行運算，也就是 0 與 1 兩個 digits（each binary digit called bit）。</li>
+  <li>而電腦是使用「關」與「開」來表示二進位中的 0 與 1。</li>
+  <li>在現代電腦中是由上百萬的電晶體（transistors）來控制這樣的「關」與「開」（0 與 1）。</li>
+</ul>
+
+<hr />
+
+<h2 id="ascii">ASCII</h2>
+<p><a href="https://zh.wikipedia.org/wiki/ASCII">ASCII</a> 是電腦早期發展時由美國制定的一套編碼規則，且沿用至今。它的目的是用來統一規範，規定數字與字母大小寫、符號等等的對應關係，而每一個數字由 8 個 bits 表示。最後一次更新是在1986年，至今為止共定義了 128 個字元。</p>
+
+<p>像是 <code class="language-plaintext highlighter-rouge">HI!</code> 就是由數字 72、73 和 33 所組成的。由二進位表示就是，<code class="language-plaintext highlighter-rouge">01001000</code>、<code class="language-plaintext highlighter-rouge">01001001</code>、<code class="language-plaintext highlighter-rouge">00100001</code>。</p>
+
+<p><strong>Extended ASCII</strong>
+<br />
+但因為一個 byte 共有 8 個 bits，也就是說還有很多個位元並未使用到，所以後來又產生了 Extended ASCII。很多歐洲國家有一些字母並未在 ASCII 中，所以除了 ASCII 為固定的字元外，每個國家根據自己所需給與字元，但也造成每個國家並未統一編碼。（<a href="https://zh.wikipedia.org/zh-tw/EASCII">Wikipedia</a>）</p>
+
+<hr />
+
+<h2 id="unicode">Unicode</h2>
+<p>隨著網際網路的發展，世界各國交換訊息，未統一的編碼便造成了很大的問題。這時候有了 Unicode 的誕生。</p>
+
+<p>Unicode 協會將所有的文字與符號都分配一個數字，這個數字的寫起來像是，U+0645，而這個數字就稱為 Code point。U+ 的意思是 Unicode，
+數字則是用十六進位表示。</p>
+
+<p>但 Unicode 編碼使用至少兩個位元儲存字元，若是今天只有英文，仍舊是每個字元使用兩個位元儲存，這表示浪費了很多的資源。所以這時候有有人想出了更好的辦法。</p>
+
+<hr />
+
+<h2 id="utf-8">UTF-8</h2>
+<p>有人發明了 UTF-8 這種儲存方式。</p>
+
+<p>UTF-8 編碼把一個 Unicode 字元根據不同的數字大小編碼成 1-6 個字節，常用的英文本母被編碼成 1 個字節，漢字通常是 3 個字節。如果今天要傳輸的內容都是英文，這時使用 UTF-8 編碼就能省下空間。</p>
+
+<p><strong>比較</strong>
+<br />
+Unicode 是一種編碼方式，和 ASCII 是同一個概念，而 UTF-8 是一種存儲方式，在存儲和傳輸上節約空間、提高性能的一種編碼形式</p>
+
+<hr />
+
+<p>Reference:
+<br />
+<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html">字符编码笔记：ASCII，Unicode 和 UTF-8</a>
+<br />
+<a href="http://blog.chunnorris.cc/2015/04/unicode.html">淺談電腦編碼與 Unicode (一) 基礎概念篇</a>
+<br />
+<a href="https://hk.saowen.com/a/6615242f89d424bc28e35ea8efc115707b2ec7dcf43bb52491bca9805f99a118">常見三種字符編碼的區別：ASCII、Unicode、UTF-8</a>
+<br />
+<a href="https://www.pttweb.cc/bbs/ISU_CSIE94B/M.1152573430.A.88F">[轉錄] [doc] 每個軟體開發者都絕對一定要會的Unicode及字元集必備知</a>
+<br />
+<a href="https://cs50.harvard.edu/x/2022/notes/0/">CS50 2022 - Lecture 0</a></p>
+ -->
+    
+    <div class="post-excerpt"><p>關於編碼，相信大家很常聽到 ASCII、Unicode、UTF-8 這幾個名詞，這篇要根據我的理解來介紹這三個名詞。若有錯歡迎指正:)
+<br />
+2022/03/15 上完 Harvard CS50 的 Lecture 0 後做了一些新增與修改。</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread';
+        this.page.identifier = '/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/#disqus_thread" data-disqus-identifier="/others/2019/01/22/ASCII-Unicode-%E5%92%8C-UTF-8/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2019/01/02/Python-pyinstaller%E5%87%BA%E7%8F%BE%E9%8C%AF%E8%AA%A4%E8%A8%8A%E6%81%AFAttributeError-type-object-pandas._TSObject-has-no-attribute-_reduce_cython_/">
         [Python]pyinstaller出現錯誤訊息AttributeError:type object pandas._TSObject has no attribute _reduce_cython_
       </a>
@@ -208,17 +336,17 @@
 <img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
 
 <p>根據<a href="https://github.com/pyinstaller/pyinstaller/pull/2998">Hooks: Add hook-pandas.py to fix issue #2978. #2998</a>的討論串，有人回答</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>when run pyinstaller -F xxx.py in windows10 , I get error AttributeError: type object 'pandas._libs.tslib._TSObject' has no attribute '__reduce_cython__', and solve it by degrade pandas version to 0.20.0.
 </code></pre></div></div>
 
 <p>我將 pandas 套件的版本降至 0.20.3 也確實解決問題了。</p>
 
 <p>先檢查一下 pandas 版本</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip show pandas
 </code></pre></div></div>
 
 <p>將版本降至 0.20.3</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas==0.20.3
 </code></pre></div></div>
 
 <p>這時候打包完後執行應該就不會有問題了！</p>
@@ -234,7 +362,6 @@
     
     <div class="post-excerpt"><p>在打包含有 pandas 套件的程式碼時產生了以下的錯誤訊息，
 <img src="http://localhost:4000/blog/img/posts/pyinstaller%20pandas.png" alt="pyinstaller pandas.png" height="400px" width="580px" /></p>
-
 </div>
 
     <div class="bookmark">
@@ -302,33 +429,33 @@ s.setAttribute('data-timestamp', +new Date());
     <!-- <p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
 
 <p>在開始前請先安裝 pandas 套件，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install pandas
 </code></pre></div></div>
 
 <hr />
 
 <p><strong>讀取檔案</strong></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">"filename.xlsx"</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span>
 
-<span class="c"># 獲取列數</span>
-<span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 獲取列數
+</span><span class="n">rows</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="c"># 獲取儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="c1"># 獲取儲存格內容
+</span><span class="n">df</span><span class="p">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
-<span class="c"># 修改儲存格內容</span>
-<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
-<span class="c"># 但修改後必須要儲存才會修正檔案內容</span>
-<span class="c"># df.to_excel('test_result.xlsx', sheet_name = 'sheet1')</span>
-</code></pre></div></div>
+<span class="c1"># 修改儲存格內容
+</span><span class="n">df</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">"test"</span>
+<span class="c1"># 但修改後必須要儲存才會修正檔案內容
+# df.to_excel('test_result.xlsx', sheet_name = 'sheet1')
+</span></code></pre></div></div>
 
 <p>若在執行以上程式碼時產生錯誤訊息：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pandas pd.read_excel giving ImportError: Install xlrd &gt;= 0.9.0 for Excel support
 </code></pre></div></div>
 
 <p>這時候只要安裝 xlrd 套件就能解決問題。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install xlrd
 </code></pre></div></div>
 
 <hr />
@@ -337,25 +464,25 @@ s.setAttribute('data-timestamp', +new Date());
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
 
-<span class="c"># Create a Pandas dataframe from some data.</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
+<span class="c1"># Create a Pandas dataframe from some data.
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'Data'</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">]})</span>
 
-<span class="c"># Create a Pandas Excel writer using XlsxWriter as the engine.</span>
-<span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
+<span class="c1"># Create a Pandas Excel writer using XlsxWriter as the engine.
+</span><span class="n">writer</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s">'pandas_simple.xlsx'</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s">'xlsxwriter'</span><span class="p">)</span>
 
-<span class="c"># Convert the dataframe to an XlsxWriter Excel object.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
+<span class="c1"># Convert the dataframe to an XlsxWriter Excel object.
+</span><span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
 
-<span class="c"># Close the Pandas Excel writer and output the Excel file.</span>
-<span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="c1"># Close the Pandas Excel writer and output the Excel file.
+</span><span class="n">writer</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>以上的程式碼是參考<a href="https://xlsxwriter.readthedocs.io/example_pandas_simple.html#">這裡</a>。</p>
 
 <p>我存的檔案內容是中文，這時候產生了像這樣的錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python pandas to excel UnicodeDecodeError: 'ascii' codec can't decode byte 0xe2 in position 11
 </code></pre></div></div>
-<p>只要將 <code class="highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
+<p>只要將 <code class="language-plaintext highlighter-rouge">pd.ExcelWriter</code> 裡的參數 <code class="language-plaintext highlighter-rouge">engine='xlsxwriter'</code> 改成 <code class="language-plaintext highlighter-rouge">engine='openpyxl'</code> 就可以了。</p>
 
 <hr />
 
@@ -372,7 +499,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>這裡要介紹使用 pandas 套件讀取與寫入 xlsx 檔案。</p>
-
 </div>
 
     <div class="bookmark">
@@ -441,16 +567,16 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>例如，半形的驚嘆號（!）是 unicode 編碼是 33，則全形的驚嘆號（！）unicode 就會編碼是 33 + 65248 = 65281</p>
 
-<p>但要將數字解析成半形時是使用 <code class="highlighter-rouge">chr()</code> function，而全形則是使用 <code class="highlighter-rouge">unichr()</code> function。</p>
+<p>但要將數字解析成半形時是使用 <code class="language-plaintext highlighter-rouge">chr()</code> function，而全形則是使用 <code class="language-plaintext highlighter-rouge">unichr()</code> function。</p>
 
 <p>以下將 33~126 全部列出來，並轉換成全形。</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">33</span><span class="p">,</span><span class="mi">127</span><span class="p">):</span>
-	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
+	<span class="k">print</span> <span class="n">i</span><span class="p">,</span> <span class="nb">chr</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">,</span> <span class="nb">unichr</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">65248</span><span class="p">).</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">)</span>
 
 </code></pre></div></div>
 
 <p>結果，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>33 ! 65281 ！
 34 " 65282 ＂
 35 # 65283 ＃
 36 $ 65284 ＄
@@ -555,7 +681,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>因為全形字元的 unicode 編碼從 65281~65374，而半形字元的 unicode 編碼從 33~126，也就是同樣的字在全形與半形數字會差 65248。</p>
-
 </div>
 
     <div class="bookmark">
@@ -630,14 +755,14 @@ s.setAttribute('data-timestamp', +new Date());
 
 <blockquote>
 
-  <script type="math/tex; mode=display">Y \approx \beta_0 + \beta_1 X</script>
+\[Y \approx \beta_0 + \beta_1 X\]
 </blockquote>
 
 <p>而現實中我們無法知道參數 \(\beta_0, \beta_1\)，這時候我們會使用 train data 找出估計參數 \(\hat{\beta_0}, \hat{\beta_1}\)。簡單線性回歸的估計式可以寫成，</p>
 
 <blockquote>
 
-  <script type="math/tex; mode=display">\hat{y} = \hat{\beta_0} + \hat{\beta_1} x</script>
+\[\hat{y} = \hat{\beta_0} + \hat{\beta_1} x\]
 </blockquote>
 
 <p>其中，\(\hat{y}\) 是當 \(X = x\) 時 \(Y\)的預測值。</p>
@@ -648,7 +773,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>現在有一堆 data， \((x_i, y_i), \thinspace i = 1, 2, 3, …, n\)，根據上面的迴歸式可以將這些 data 表示成，</p>
 
-<script type="math/tex; mode=display">y_i \approx \hat{\beta_0} + \hat{\beta_1} x_i, \thinspace for \thinspace i = 1, 2, 3, ..., n</script>
+\[y_i \approx \hat{\beta_0} + \hat{\beta_1} x_i, \thinspace for \thinspace i = 1, 2, 3, ..., n\]
 
 <p>已經知道迴歸模型可以用上面的式子表示，那現在的任務是要找到 \(\hat{\beta_0}\) 和 \(\hat{\beta_1}\)，只要找到這兩個參數就可以預測 \(y\) 了。</p>
 
@@ -679,7 +804,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>Linear Regression 屬於 Supervised Learning(監督式學習)，用來預測連續型(continuous)的變數。</p>
-
 </div>
 
     <div class="bookmark">
@@ -849,7 +973,6 @@ From: 《Elements of Statistical Learning》</p>
  -->
     
     <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/splines%20scatter%20plot.png" alt="splines scatter plot.png" height="380px" width="600px" /></p>
-
 </div>
 
     <div class="bookmark">
@@ -1024,7 +1147,6 @@ Pattern Recognition and Machine Learning</p>
  -->
     
     <div class="post-excerpt"><p><img src="http://localhost:4000/blog/img/posts/PCA.png" alt="PCA.png" height="260px" width="600px" /></p>
-
 </div>
 
     <div class="bookmark">
@@ -1169,7 +1291,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><h2 id="boosting">Boosting</h2>
-
 </div>
 
     <div class="bookmark">
@@ -1211,125 +1332,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">
-        [Machine Learning]Random Forest
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on December 3, 2018</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">December 3, 2018</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
-
-<p>Random Forest 是建立很多顆決策樹，再利用多數決選出最好的選項，和 <a href="https://shihs.github.io/blog/machine%20learning/2018/12/03/Machine-Learning-Bagging/">bagging</a> 這篇提到的方法有點類似，但有些小差異。</p>
-
-<p>使用的方法是 bagging（結合多個 model），所以這也是 Ensemble learning。</p>
-
-<hr />
-
-<p><strong>Random Forest步驟</strong></p>
-
-<p>假如有一 training data，有 N 個樣本，p 個features。
-<br />
-今天要利用這個 training data 建立一個 Random Forest model，裡頭共有 B 棵決策樹，</p>
-
-<ol>
-  <li>使用 boostrap 從 training data 中抽出 N 個樣本產生一組 data</li>
-  <li>在這組 data 中隨機從 p 個 featrues 中選取 m (m &lt; p) 個 features，再從這 m 個 features 找出最好的一個分割結果，如此產生一個 node</li>
-  <li>重複步驟 2，直到完成這個 model 為止</li>
-  <li>重複步驟 1~3 B 次，共會產生 B 棵擁有不同 feature 的決策樹</li>
-</ol>
-
-<p>最後要進行 predict 時，分類問題使用多數決，回歸問題使用平均數決定。</p>
-
-<hr />
-
-<ul>
-  <li>因為每一棵樹的隨機選取的樣本與 feature 都不同，所以每棵樹的結果都不會相同。</li>
-  <li>Random Frost 建立的 decision tree 不需要 pruning。在 decision tree 剪枝是爲了避免 overfitting，但在 Random Frost 使用 bagging 的方式就已經避免 overfitting 了。</li>
-  <li>因為每一棵決策樹都是隨機篩選 feature 的結果，所以可以想像每棵樹就像是精通某個領域的專家。當有個新的數據近來，經由各個領域的專家投票表決，做出最後的選擇。</li>
-  <li>
-    <p>Random Forest 中有兩個參數需要人為控制，一個是樹的數量（B），一般建議取很大。另一個是 feature 的大小（m）。</p>
-  </li>
-  <li>優點：
-    <ol>
-      <li>不用做特徵（feature）選擇。</li>
-      <li>訓練完後可以知道哪些 feature 比較重要。</li>
-    </ol>
-  </li>
-</ul>
-
-<hr />
-
-<p>Reference:
-<br />
-<a href="https://www.youtube.com/watch?v=J4Wdy0Wc_xQ">StatQuest: Random Forests Part 1 - Building, Using and Evaluating</a>
-<br />
-<a href="https://blog.csdn.net/edogawachia/article/details/79357844">随机森林（Random Forest）算法原理</a>
-<br />
-<a href="https://blog.csdn.net/niuniuyuh/article/details/54346930">AdaBoost和随机森林的区别</a></p>
- -->
-    
-    <div class="post-excerpt"><p>基本上 Random Frost 是要改善 Decision Tree 容易 overfitting 的問題，它結合了 Decision Tree 和 bagging 的方法。</p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread';
-        this.page.identifier = '/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/2018/12/03/Machine-LearningDecision-Tree/#disqus_thread" data-disqus-identifier="/machine%20learning/2018/12/03/Machine-LearningDecision-Tree/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

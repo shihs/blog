@@ -244,7 +244,7 @@
 
 <p>我們會給這個神經元與輸入層的神經元之間每個連線一個權重（weight），然後將輸入層的神經元乘上每個權重再加總，權重可以是正或負值。</p>
 
-<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function <script type="math/tex">\sigma(x) = \frac{1}{1+e^x}</script> 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
+<p>但因為，我們希望神經元的激勵值（activation）是在 0 和 1 之間，所以使用 sigmoid function \(\sigma(x) = \frac{1}{1+e^x}\) 。經過 <a href="https://zh.wikipedia.org/wiki/S函数">sigmoid function</a> 計算，越小的值會越接近 0，越大的值會越接近 1。</p>
 
 <p>但也許並不是每次加總大於零我們就希望給正的灰階值，因此，權重最後再加上個 bias，來調整我們想要給灰階值的值。</p>
 
@@ -262,15 +262,15 @@
 
 <p>總的來說，我們可以將整個 neural network 看成一個 function。</p>
 
-<script type="math/tex; mode=display">f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
+\[f(a_0, a_1,..., a_{783}) =  \begin{bmatrix}
    y_0 \\
    \vdots \\
    y_9
-  \end{bmatrix}</script>
+  \end{bmatrix}\]
 
 <p>最後，其實現在已經不使用 sigmoid function 了，現在主流的 function 用的是 <strong>ReLU</strong>。</p>
 
-<script type="math/tex; mode=display">ReLU(a) = max(0, a)</script>
+\[ReLU(a) = max(0, a)\]
 
 <p><img src="http://localhost:4000/blog/img/posts/neural%20network%2010.png" alt="" /></p>
 
@@ -327,6 +327,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -336,13 +343,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

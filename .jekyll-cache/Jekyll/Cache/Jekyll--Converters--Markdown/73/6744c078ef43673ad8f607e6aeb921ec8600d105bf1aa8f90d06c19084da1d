@@ -1,0 +1,35 @@
+I"	<p>這次要爬的網址長得像這樣</p>
+<ul>
+  <li>hazyfairyland.blogspot.tw</li>
+  <li>cartersoshkosh.tw</li>
+  <li>yungmaun.com.tw</li>
+</ul>
+
+<p>沒有www也沒有<a href="https://zh.wikipedia.org/wiki/%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E5%8D%8F%E8%AE%AE" target="_blank">http/https</a>，<br />
+如果直接將這樣的網址丟到瀏覽器的網址列它會自動重新導向，<br />
+但如果是使用request就會產生錯誤訊息。<br /></p>
+
+<p>這時候該怎麼辦呢？</p>
+
+<p>其實只要在前方加上”http://”就行了，<br />
+若其實該網址是”https//”， request也會自動重新導向。<br /></p>
+
+<p>假如所有的網址都是沒有www，<br />
+就直接在所有url前方加上”http://”就好了。<br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"cartersoshkosh.tw"</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mi">30</span><span class="p">)</span>		
+        <span class="k">break</span>
+			
+    <span class="c1"># catch requests.exceptions.MissingSchema error, add "http://" in the front
+</span>    <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">MissingSchema</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">"http://"</span> <span class="o">+</span> <span class="n">url</span>
+       
+    <span class="k">print</span> <span class="n">res</span><span class="p">.</span><span class="n">url</span>  <span class="c1"># print the final url
+</span>    <span class="k">print</span> <span class="n">res</span><span class="p">.</span><span class="n">history</span>  <span class="c1"># print how many redirections it has gone throgh
+</span></code></pre></div></div>
+
+:ET

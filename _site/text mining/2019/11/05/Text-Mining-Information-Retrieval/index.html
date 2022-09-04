@@ -304,32 +304,32 @@
 <h3 id="tokenization">Tokenization</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">raw</span> <span class="o">=</span> <span class="s">"Apple is looking at buying U.K. startup for $1 billion."</span>
-<span class="c"># tokenize raw text based on whitespace</span>
-<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="o">.</span><span class="n">split</span><span class="p">():</span> 
+<span class="c1"># tokenize raw text based on whitespace
+</span><span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">.</span><span class="n">split</span><span class="p">():</span> 
 	<span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
 
 
-<span class="c"># tokenize using spaCy</span>
-<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="c1"># tokenize using spaCy
+</span><span class="kn">import</span> <span class="nn">spacy</span>
 
-<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span> 
 <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nlp</span><span class="p">(</span><span class="n">raw</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">token</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 
-<span class="c"># 結果：</span>
-<span class="c"># Apple</span>
-<span class="c"># is</span>
-<span class="c"># looking</span>
-<span class="c"># at</span>
-<span class="c"># buying</span>
-<span class="c"># U.K.</span>
-<span class="c"># startup</span>
-<span class="c"># for</span>
-<span class="c"># $</span>
-<span class="c"># 1</span>
-<span class="c"># billion</span>
-<span class="c"># . </span>
-</code></pre></div></div>
+<span class="c1"># 結果：
+# Apple
+# is
+# looking
+# at
+# buying
+# U.K.
+# startup
+# for
+# $
+# 1
+# billion
+# . 
+</span></code></pre></div></div>
 
 <p>英文每個單字可以很容易地使用空白（.split()）來分割出每個單字，但只使用
 split 無法排除標點符號的問題，python 的 spacy 可以將標點符號也區分出來。</p>
@@ -397,7 +397,7 @@ For example: what you would put into a lexicon</p>
   <li>The score of a document d with respect to a query q is the sum of the weights of all terms t that occur in both d and q.</li>
 </ul>
 
-<script type="math/tex; mode=display">\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}</script>
+\[\textrm{score(d, q)} = \sum_{t \in (d \bigcap q)} \textrm{weight(d, q)}\]
 
 <ul>
   <li>Any specific way to assign weights to terms is called a term weighting scheme.</li>
@@ -417,11 +417,10 @@ For example: what you would put into a lexicon</p>
 
 <p>Relevance is not a linear function of term frequency. 例如，一個出現20次的單詞難道就代表它比一個只出現1次的單詞重要20倍嗎？為了要降低出現頻率造成太大的影響，所以我們將 frequency 取 log，這時候 weight(t, d) 定義成，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-weight(t, d) = \left\{ \begin{array}{rcl}
-1 + log_{10}tf(t, d), & if ~ tf(t, d) > 0 \\
-0, & others \\
-\end{array}\right. %]]></script>
+\[weight(t, d) = \left\{ \begin{array}{rcl}
+1 + log_{10}tf(t, d), &amp; if ~ tf(t, d) &gt; 0 \\
+0, &amp; others \\
+\end{array}\right.\]
 
 <p>稱作，<em>log-frequency weighting</em></p>
 
@@ -439,7 +438,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>It denotes by idf(t):</p>
 
-<script type="math/tex; mode=display">\textrm{idf(t)} = log \frac{N}{df(t)}</script>
+\[\textrm{idf(t)} = log \frac{N}{df(t)}\]
 
 <p>df(t) 越大代表該詞彙出現在越多文章中，也就是說，如果 df(t) 越常出現，則 idf(t) 就會越小，換句話說，該詞彙的重要性越小。</p>
 
@@ -449,7 +448,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>The <strong>tf–idf weight</strong> of a term t in a document d is defined as</p>
 
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}</script>
+\[\textrm{tf–idf(t, d)} = tf(t, d) \cdot log \frac{N}{df(t)}\]
 
 <p>where N denotes the number of documents in the collection.</p>
 
@@ -459,7 +458,7 @@ document frequency of t, and is denoted by df(t).</li>
 
 <p>In scikit-learn, the tf–idf weight is computed as</p>
 
-<script type="math/tex; mode=display">\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)</script>
+\[\textrm{tf–idf(t, d)} = tf(t, d) \cdot (log \frac{1 + N}{1 + df(t)} + 1)\]
 
 <p>where N denotes the number of documents in the collection.</p>
 
@@ -545,13 +544,13 @@ Doc2 = (2, 2, 0)</p>
 
 <p>Precision (P) is the fraction of retrieved documents that are relevant</p>
 
-<script type="math/tex; mode=display">Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})</script>
+\[Precision = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(retrieved items)}} = P(\textrm{relevant|retrieved})\]
 
 <p><strong>Recall:</strong></p>
 
 <p>Recall (R) is the fraction of relevant documents that are retrieved</p>
 
-<script type="math/tex; mode=display">Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})</script>
+\[Recall = \frac{\textrm{#(relevant items retrieved)}}{\textrm{#(relevant items)}} = P(\textrm{retrieved|relevant})\]
 
 <p><strong>F1-measure</strong></p>
 
@@ -559,7 +558,7 @@ Doc2 = (2, 2, 0)</p>
 <br />
 The F1-measure is the harmonic mean of the two values:</p>
 
-<script type="math/tex; mode=display">F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}</script>
+\[F1 = \frac{2}{\frac{1}{Precision} + \frac{1}{Recall}}\]
 
 <hr />
 
@@ -626,6 +625,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -635,13 +641,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

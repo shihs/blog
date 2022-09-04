@@ -183,6 +183,80 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">
+        [R]顯示完整數字，不顯示科學記號
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on June 27, 2017</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">June 27, 2017</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#R">R</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>只要輸入，調整可顯示的位數</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>就可以改為顯示完整數字</p>
+ -->
+    
+    <div class="post-excerpt"><p>只要輸入，調整可顯示的位數</p>
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread';
+        this.page.identifier = '/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/#disqus_thread" data-disqus-identifier="/r/2017/06/27/R-%E9%A1%AF%E7%A4%BA%E5%AE%8C%E6%95%B4%E6%95%B8%E5%AD%97-%E4%B8%8D%E9%A1%AF%E7%A4%BA%E7%A7%91%E5%AD%B8%E8%A8%98%E8%99%9F/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/r/2017/06/22/R-Error-when-saving-xlsx-workbook-with-package-openxlsx/">
         [R]Error when saving xlsx workbook with package openxlsx
       </a>
@@ -205,7 +279,7 @@
 
     </div>
     <!-- <p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
 Try installr::install.rtools() on Windows.
 installr::install.rtools()
 No need to install Rtools - You've got the relevant version of Rtools installed
@@ -224,7 +298,7 @@ Try installr::install.rtools() on Windows.
  -->
     
     <div class="post-excerpt"><p>如果在windows系統使用saveWorkbook()出現以下錯誤訊息</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is     available to R.
 Try installr::install.rtools() on Windows.
 installr::install.rtools()
 No need to install Rtools - You've got the relevant version of Rtools installed
@@ -232,7 +306,6 @@ saveWorkbook(wb, file = "dq", overwrite = TRUE)
 Error: zipping up workbook failed. Please make sure Rtools is installed or a zip application is available to R.
 Try installr::install.rtools() on Windows.
 </code></pre></div></div>
-
 </div>
 
     <div class="bookmark">
@@ -303,24 +376,24 @@ s.setAttribute('data-timestamp', +new Date());
     <!-- <p>下載檔案是使用package urllib2<br />
 解壓縮檔案則是使用package zipfile<br /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400</span>
-<span class="kn">import</span> <span class="nn">urllib2</span> <span class="c">#urllib2.urlopen </span>
-<span class="kn">import</span> <span class="nn">zipfile</span> <span class="c">#zipfile.ZipFile</span>
-
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 下載與解壓縮 財政部財政資訊中心-全國營業(稅籍)登記資料集 http://data.gov.tw/node/9400
+</span><span class="kn">import</span> <span class="nn">urllib2</span> <span class="c1">#urllib2.urlopen 
+</span><span class="kn">import</span> <span class="nn">zipfile</span> <span class="c1">#zipfile.ZipFile
+</span>
 <span class="k">def</span> <span class="nf">DownloadTWCompany</span><span class="p">():</span>
-	<span class="c"># 檔案下載</span>
-	<span class="k">print</span> <span class="s">"下載全國營業(稅籍)登記資料集壓縮擋..."</span>
-	<span class="n">downloadurl</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://www.fia.gov.tw/opendata/bgmopen1.zip'</span><span class="p">)</span>
-	<span class="n">zipcontent</span><span class="o">=</span> <span class="n">downloadurl</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+	<span class="c1"># 檔案下載
+</span>	<span class="k">print</span> <span class="s">"下載全國營業(稅籍)登記資料集壓縮擋..."</span>
+	<span class="n">downloadurl</span> <span class="o">=</span> <span class="n">urllib2</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">'http://www.fia.gov.tw/opendata/bgmopen1.zip'</span><span class="p">)</span>
+	<span class="n">zipcontent</span><span class="o">=</span> <span class="n">downloadurl</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 	<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"TWRAW.zip"</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-	    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipcontent</span><span class="p">)</span>
+	    <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipcontent</span><span class="p">)</span>
 	<span class="k">print</span> <span class="s">"下載完成!"</span>
 	
-	<span class="c"># 解壓縮檔案</span>
-	<span class="k">print</span> <span class="s">"資料解壓縮..."</span>
-	<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'TWRAW.zip'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-		<span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s">"."</span><span class="p">,</span> <span class="n">pwd</span> <span class="o">=</span> <span class="s">"1234"</span><span class="p">)</span>  <span class="c"># 解壓縮密碼1234</span>
-	
+	<span class="c1"># 解壓縮檔案
+</span>	<span class="k">print</span> <span class="s">"資料解壓縮..."</span>
+	<span class="k">with</span> <span class="n">zipfile</span><span class="p">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">'TWRAW.zip'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+		<span class="n">f</span><span class="p">.</span><span class="n">extractall</span><span class="p">(</span><span class="s">"."</span><span class="p">,</span> <span class="n">pwd</span> <span class="o">=</span> <span class="s">"1234"</span><span class="p">)</span>  <span class="c1"># 解壓縮密碼1234
+</span>	
 	<span class="k">print</span> <span class="s">"解壓縮完成!"</span>
 
 <span class="n">DownloadTWCompany</span><span class="p">()</span>
@@ -331,7 +404,6 @@ s.setAttribute('data-timestamp', +new Date());
     
     <div class="post-excerpt"><p>下載檔案是使用package urllib2<br />
 解壓縮檔案則是使用package zipfile<br /></p>
-
 </div>
 
     <div class="bookmark">
@@ -407,7 +479,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>而且怎麼樣都刪不掉也取代不掉，<br />
 使用strip()仍然會有空白。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>「&amp;nbsp;」 是屬於 HTML 的特殊符號之一「空格符號」，其 nbsp 取自於英文 a non-breaking space 的英文簡稱，其原意是「不會被間斷的空白」
 </code></pre></div></div>
 
 <p>假如現在有一個網頁內容包含</p>
@@ -425,7 +497,7 @@ s.setAttribute('data-timestamp', +new Date());
 <p>已經抓出td tag，<br />
 接著可以使用</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">td</span> <span class="o">=</span> <span class="n">td</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="n">formatter</span><span class="o">=</span><span class="s">"html"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>這時候td type會變成str，<br />
 再使用replace取代就可以刪除空白了。<br /></p>
@@ -433,7 +505,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>在爬取網頁時偶爾會碰到<br /></p>
-
 </div>
 
     <div class="bookmark">
@@ -522,27 +593,27 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p>程式碼如下，</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding:utf-8 -*-</span>
-<span class="c"># 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding:utf-8 -*-
+# 爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp 行業代碼(4碼)
+</span><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
 
-<span class="c"># payload for requests</span>
-<span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
+<span class="c1"># payload for requests
+</span><span class="n">payload</span> <span class="o">=</span> <span class="s">'{"Cond":{"KeyWord":"","Paging":{"Size":519,"Current":1,"Count":52,"RecordCount":519,"CanPrev":false,"CanNext":true}}}'</span>
 
 <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span><span class="s">"application/json"</span><span class="p">,</span> 
 		  <span class="s">"Referer"</span><span class="p">:</span><span class="s">"http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp"</span><span class="p">}</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">"http://waste.epa.gov.tw/NRS40/_ws/JsApI/CodeQuery.asmx/Vocation"</span>
 
-<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">payload</span><span class="p">,</span> <span class="n">headers</span> <span class="o">=</span> <span class="n">headers</span><span class="p">)</span>
 
-<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">js</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">js</span><span class="p">[</span><span class="s">"d"</span><span class="p">][</span><span class="s">"Result"</span><span class="p">]:</span>
 	<span class="n">code</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Code"</span><span class="p">]</span>
-	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
+	<span class="n">name</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s">"Name"</span><span class="p">].</span><span class="n">encode</span><span class="p">(</span><span class="s">"utf-8"</span><span class="p">,</span> <span class="s">"ignore"</span><span class="p">)</span>
 	<span class="k">print</span> <span class="n">code</span>
 
 </code></pre></div></div>
@@ -550,7 +621,6 @@ s.setAttribute('data-timestamp', +new Date());
     
     <div class="post-excerpt"><p>目標是爬取 http://waste.epa.gov.tw/WasteConfigure/VocationCode.asp<br />
 所有的行業代碼與中文名稱。</p>
-
 </div>
 
     <div class="bookmark">
@@ -629,15 +699,15 @@ s.setAttribute('data-timestamp', +new Date());
 所以要使用 <strong>sys.arg[1]</strong> 才是表示要讀取的第一個參數。</p>
 
 <p>假如今天有支 <em>python_script.py</em></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># -*- coding: utf-8 -*-
+</span><span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="n">string</span> <span class="o">=</span> <span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">string</span> <span class="o">=</span> <span class="s">"Hello, "</span> <span class="o">+</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="k">print</span> <span class="n">string</span>
 </code></pre></div></div>
 
 <p>在cmf中呼叫這支python程式</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python python_script.py world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python python_script.py world
 </code></pre></div></div>
 
 <p>R裡的system()要打的指令就是cmf中打的指令。<br />
@@ -646,7 +716,7 @@ s.setAttribute('data-timestamp', +new Date());
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py world"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
 <p>結果就會變成</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, world
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, world
 </code></pre></div></div>
 
 <p>最後，<br />
@@ -657,7 +727,6 @@ s.setAttribute('data-timestamp', +new Date());
     <div class="post-excerpt"><p>之前介紹過<a href="https://shihs.github.io/blog/2016/07/08/R-在R中使用system呼叫python/" target="_blank">在R中使用system呼叫python</a>。</p>
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"python python_script.py"</span><span class="p">)</span><span class="w">
 </span></code></pre></div></div>
-
 </div>
 
     <div class="bookmark">
@@ -763,7 +832,6 @@ s.setAttribute('data-timestamp', +new Date());
     
     <div class="post-excerpt"><p>一開始碰到需要調整圖形字體是在使用windows的自動排程時字體變成框框，
 以下的解法是針對windows方能使用。</p>
-
 </div>
 
     <div class="bookmark">
@@ -845,7 +913,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p><a href="http://www.statmethods.net/interface/batch.html" target="_blank">R batch</a></p>
-
 </div>
 
     <div class="bookmark">
@@ -887,82 +954,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">
-        Windows7 自動排程
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on July 17, 2016</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">July 17, 2016</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Others">Others</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
-<p>開始 =&gt; 附屬應用程式 =&gt; 系統工具 =&gt; 工作排程器</p>
-
-<p>建立基本工作 =&gt; 建立基本工作、觸發程序、執行、完成</p>
-
- -->
-    
-    <div class="post-excerpt"><p><a href="http://isvincent.pixnet.net/blog/post/38936955-windows-7-%E5%96%84%E7%94%A8%E5%B7%A5%E4%BD%9C%E6%8E%92%E7%A8%8B%E5%99%A8" target="_blank">工作排程，讓程式自動執行</a></p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread';
-        this.page.identifier = '/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/#disqus_thread" data-disqus-identifier="/others/2016/07/17/windows7%E8%87%AA%E5%8B%95%E6%8E%92%E7%A8%8B/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   

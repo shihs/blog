@@ -1,0 +1,226 @@
+I"T<p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
+
+<hr />
+
+<p>JavaScript Engine 是以單執行緒（單線程/Single Thread）且同步（Synchronous）的方式執行。</p>
+
+<h2 id="同步synchronous">同步（Synchronous）</h2>
+
+<ul>
+  <li>指程式必須等待前面的程式執行完才能執行。</li>
+</ul>
+
+<h2 id="非同步asynchronous">非同步（Asynchronous）</h2>
+
+<ul>
+  <li>指程式不須等待前面的程式執行完就能執行。</li>
+</ul>
+
+<p><strong>note</strong></p>
+<ul>
+  <li>
+    <p>執行緒（thread）：執行緒是比程序（process）更小的單元，它是 CPU 的最小執行單元。是作業系統能夠進行運算排程的最小單位。一個程序（process），至少包含一個或多個執行緒。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+  <li>
+    <p>單執行緒：單執行的特性是<strong>順序執行</strong>，當遇到比較耗時的任務時，還未執行的任務就會處於等待狀態，一定要等到前面的任務完成了，才會往後執行。<a href="https://medium.com/@yining1204/javascript-核心篇-學習筆記-chap-15-執行緒與同步-非同步-107802469752">(source)</a></p>
+  </li>
+</ul>
+
+<p>因為 JavaScript 是以單執行緒且同步的方式去執行，它在執行程式碼的時候會按照順序將程式碼片段在堆疊中（stack）執行，而且一次只會執行一個程式碼片段（one thing at a time），只是當碰到非同步（Asynchronous）的任務時，會把它往後放，放到事件佇列(Event Queue)中，等所有的任務完成後才會回來執行。以下面程式碼為例，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// setTimeout(callbackFunction, timeToDelay)</span>
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>印出來的結果會是</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b
+a
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">setTimeout</code> 是一個非同步的 Web API，JavaScript 執行到這段的時候會將 <code class="language-plaintext highlighter-rouge">setTimeout</code> 放到 Event Queue 中等待，等 stack 中的任務都執行完才回來執行，所以會先印出<code class="language-plaintext highlighter-rouge">b</code>再印<code class="language-plaintext highlighter-rouge">a</code>。</p>
+
+<hr />
+
+<h2 id="callback">Callback</h2>
+
+<p>callback 是 javascript 中很常見的一種使用方式，它讓函式可以當成參數傳進另一個參數中使用，讓我們可以控制程式碼的流程。看以下範例，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This test function is done.</span>
+<span class="c1">// This is main end.</span>
+</code></pre></div></div>
+
+<p>但其實更多時候 callback 會牽扯到非同步 API 的狀況，像是下面的例子，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
+    <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This is main end.</span>
+<span class="c1">// This test function is done.</span>
+</code></pre></div></div>
+
+<p>這次<code class="language-plaintext highlighter-rouge">callback()</code>因為會有等待的情況，所以後面的 “This is main end.” 先被執行完。那假如想要<code class="language-plaintext highlighter-rouge">callback()</code>執行完才執行下一行該怎麼做呢？（譬如說，這個<code class="language-plaintext highlighter-rouge">callback()</code>在做的是使用<code class="language-plaintext highlighter-rouge">XMLHttpRequest()</code>送 request 給某個網頁，而下面的程式碼必須等待網頁的 response 才可以執行下面的程式碼。）這時候只要把，執行 “This is main end.” 這行程式碼也當成 callback() 傳進去就行了。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">callback2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
+    <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">callback2</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">callback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
+<span class="c1">// This is main start.</span>
+<span class="c1">// This test function is done.</span>
+<span class="c1">// This is main end.</span>
+</code></pre></div></div>
+
+<p>所以 callback 可以用來解決非同步的問題，但是當 callback 越來越多，就會形成 <code class="language-plaintext highlighter-rouge">callback hell</code>，就像是下面這樣，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">api1</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Done with api1</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">callback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">api2</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Done with api2</span><span class="dl">"</span><span class="p">);</span>
+        <span class="nx">callback</span><span class="p">();</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">api1</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">api2</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">callback</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">main</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">All function is done.</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// "Done with api1"</span>
+<span class="c1">// "Done with api2"</span>
+<span class="c1">// "All function is done."</span>
+</code></pre></div></div>
+
+<p>甚至變成</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">api1</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">api2</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">api3</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">api4</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="c1">// bla bla bla</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="promise">Promise</h2>
+
+<p>Promise 也是一個可以用來處理非同步操作的東西。Promise 通常包括三種狀態：<code class="language-plaintext highlighter-rouge">resolve</code>、<code class="language-plaintext highlighter-rouge">reject</code>和<code class="language-plaintext highlighter-rouge">pending</code>。<code class="language-plaintext highlighter-rouge">resolve</code>代表成功，<code class="language-plaintext highlighter-rouge">rejetc</code>代表失敗，<code class="language-plaintext highlighter-rouge">pending</code>代表還在處理中, 結束狀態未知。<code class="language-plaintext highlighter-rouge">then()</code>方法可以回傳<code class="language-plaintext highlighter-rouge">Promise</code>物件。</p>
+
+<p>例如，現在想要使用<code class="language-plaintext highlighter-rouge">XMLHttpRequest()</code> API傳送 request，我們需要等待 response 後才有後續動作。</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://www.google.com/</span><span class="dl">"</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">document</span><span class="dl">"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+
+	<span class="c1">// 如果沒等待 response，status 和 response 會是 0 和 null</span>
+	<span class="c1">// console.log(xhr.status);</span>
+	<span class="c1">// console.log(xhr.response);</span>
+
+	<span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">).</span><span class="nx">then</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+	<span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">sendHttp</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">then()</code> 其實是可以一直往後加，就是像<code class="language-plaintext highlighter-rouge">callback</code>，想要前面的事情做完，才做下面，形成 Promise Chain，但這樣就又會變成 then hell。所以這時候出現了 async 和 await，讓程式碼看起來更容易閱讀。</p>
+
+<hr />
+
+<h2 id="asyncawait">Async/Await</h2>
+
+<p>async/await 還是會用到 promise，但不使用 then 去啟動。像剛剛上面的例子，可以改寫成下面這樣，</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://www.google.com/</span><span class="dl">"</span><span class="p">;</span>
+	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">document</span><span class="dl">"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+
+	<span class="k">await</span> <span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+	<span class="c1">// 如果需要更多 sleep(2000)</span>
+	<span class="c1">// await sleep(2000);</span>
+		
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">sendHttp</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>在<code class="language-plaintext highlighter-rouge">sendHttp()</code>這個 function 前加上 async，並在<code class="language-plaintext highlighter-rouge">sleep(2000)</code>前加上 await 就好，整體畫面看起來是不是容易閱讀很多？如果需要更多的<code class="language-plaintext highlighter-rouge">sleep(2000)</code>，只需要多加 await 往下寫就好，整個畫面看起來容易閱讀很多。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://medium.com/@hyWang/%E9%9D%9E%E5%90%8C%E6%AD%A5-asynchronous-%E8%88%87%E5%90%8C%E6%AD%A5-synchronous-%E7%9A%84%E5%B7%AE%E7%95%B0-c7f99b9a298a">非同步(Asynchronous)與同步(Synchronous)的差異</a>
+<br />
+<a href="https://hsiangfeng.github.io/javascript/20191209/1271823341/">世界上誤解最大的語言 JavaScript 之 JS 到底是同步與非同步語言?!</a>
+<br />
+<a href="https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html">[筆記] 理解 JavaScript 中的事件循環、堆疊、佇列和併發模式（Learn event loop, stack, queue, and concurrency mode of JavaScript in depth）</a>
+<br />
+<a href="https://yu-jack.github.io/2018/07/22/promise/">callback, promise, async/await 使用方式教學以及介紹 Part I</a></p>
+
+:ET

@@ -220,7 +220,7 @@
 
 <p>我們可以把 cost function 這樣表示，</p>
 
-<script type="math/tex; mode=display">C(w_1, w_2,..., b_1, b_2, ....) = cost</script>
+\[C(w_1, w_2,..., b_1, b_2, ....) = cost\]
 
 <p>cost 的算法是 Neural Network 算出來的值，扣掉正確值然後平方相加。學習過程中，我們將所有 training data 的 cost 相加平均（average cost of all training data），希望這個值越小越好。</p>
 
@@ -253,21 +253,21 @@
 
 <p>定義成，</p>
 
-<script type="math/tex; mode=display">m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}</script>
+\[m = \text{lim}_{\Delta x \to 0}\frac{f(x+\Delta x) - f(x) }{\Delta x} = f'(x) = \frac{\text{d} f(x)}{\text{d}x}\]
 
 <h3 id="偏導數-partial-derivative">偏導數 Partial derivative</h3>
 
 <p>斜率求的是單變數的微分，而偏導數是在多變數中的某個變數方向的斜率。</p>
 
-<p>以兩個自變數為例， <script type="math/tex">z = f(x, y)</script></p>
+<p>以兩個自變數為例， \(z = f(x, y)\)</p>
 
-<p><script type="math/tex">f_x(a, b)</script> 為對 <script type="math/tex">x</script> 的偏導數，定義為</p>
+<p>\(f_x(a, b)\) 為對 \(x\) 的偏導數，定義為</p>
 
-<script type="math/tex; mode=display">f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}</script>
+\[f_x(a, b) = \text{lim}_{h \to 0} \frac{f(a + h, b) - f(a, b)}{h}\]
 
-<p><script type="math/tex">f_y(a, b)</script> 為對 <script type="math/tex">y</script> 的偏導數，定義為</p>
+<p>\(f_y(a, b)\) 為對 \(y\) 的偏導數，定義為</p>
 
-<script type="math/tex; mode=display">f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}</script>
+\[f_y(a, b) = \text{lim}_{k \to 0} \frac{f(a, b + k) - f(a, b)}{k}\]
 
 <p>也就是對 x 或 y 方向做偏微分。</p>
 
@@ -275,32 +275,32 @@
 
 <p>斜率求的是單變數的微分，在多變數中要求斜率必須要看是哪個方向的斜率，因為各個方向的斜率都不相同，這時要求的就是方向導數。</p>
 
-<p>假設函數 <script type="math/tex">z = f(x, y)</script>，在定義域 <script type="math/tex">xy</script> 平面上有一點 <script type="math/tex">(x, y)</script> 及單位向量 <script type="math/tex">\overset{\rightharpoonup}{u} = (u_1, u_2)</script>。則曲面 <script type="math/tex">z = f(x, y)</script> 在 <script type="math/tex">(a, b)</script> 處，沿 <script type="math/tex">\overset{\rightharpoonup}{u}</script> 的方向的斜率定義為，</p>
+<p>假設函數 \(z = f(x, y)\)，在定義域 \(xy\) 平面上有一點 \((x, y)\) 及單位向量 \(\overset{\rightharpoonup}{u} = (u_1, u_2)\)。則曲面 \(z = f(x, y)\) 在 \((a, b)\) 處，沿 \(\overset{\rightharpoonup}{u}\) 的方向的斜率定義為，</p>
 
-<script type="math/tex; mode=display">\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}</script>
+\[\text{D}_u f(x_0, y_0)= \text{lim}_{h \to 0} \frac{f(x_0 + h u_1, y_0 + h u_2) - f(x_0, y_0)}{h} = \nabla f \boldsymbol{u}\]
 
-<p>方向導數的意義在於，有助於計算出空間中某一場量 <script type="math/tex">f(x, y, z)</script> 在某一特定方向 <script type="math/tex">\boldsymbol{u}</script> 之變化率。</p>
+<p>方向導數的意義在於，有助於計算出空間中某一場量 \(f(x, y, z)\) 在某一特定方向 \(\boldsymbol{u}\) 之變化率。</p>
 
 <h3 id="梯度-gradient">梯度 Gradient</h3>
 
 <p>梯度的定義就是對各個分量做偏微分。</p>
 
-<p>例如，現在是兩變數函數 <script type="math/tex">f(x, y)</script>，其梯度 <script type="math/tex">\nabla f(x, y)</script> 定義為</p>
+<p>例如，現在是兩變數函數 \(f(x, y)\)，其梯度 \(\nabla f(x, y)\) 定義為</p>
 
-<script type="math/tex; mode=display">\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)</script>
+\[\nabla f(x, y) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)\]
 
-<p>若是變數有三個，則 <script type="math/tex">\nabla f(x, y, y)</script> 定義為</p>
+<p>若是變數有三個，則 \(\nabla f(x, y, y)\) 定義為</p>
 
-<script type="math/tex; mode=display">\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)</script>
+\[\nabla f(x, y, z) = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z}\right)\]
 
-<p>Gernal 來看，有 n 個變數的函數 <script type="math/tex">f(x_1, x_2, \cdots, x_n)</script>，我們可以寫成</p>
+<p>Gernal 來看，有 n 個變數的函數 \(f(x_1, x_2, \cdots, x_n)\)，我們可以寫成</p>
 
-<script type="math/tex; mode=display">\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)</script>
+\[\nabla f(x_1, x_2, \cdots, x_n) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots, \frac{\partial f}{\partial x_n}\right)\]
 
 <p>梯度 Gradient 的幾何意義，</p>
 <ul>
-  <li><script type="math/tex">\nabla f</script> 表示曲面 <script type="math/tex">f(x, y, z) = C</script> 之垂直向量，如下圖所示。</li>
-  <li><script type="math/tex">\nabla f(P)</script> 表在 <script type="math/tex">P</script> 點增量最大的方向，也就是 the direction of steepest increase</li>
+  <li>\(\nabla f\) 表示曲面 \(f(x, y, z) = C\) 之垂直向量，如下圖所示。</li>
+  <li>\(\nabla f(P)\) 表在 \(P\) 點增量最大的方向，也就是 the direction of steepest increase</li>
 </ul>
 
 <p><img src="http://localhost:4000/blog/img/posts/gradient.png" alt="" /></p>
@@ -311,7 +311,7 @@
 
 <p>Gradient descent 是一種最佳化方法。</p>
 
-<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 <script type="math/tex">-\nabla f(P)</script> 是找尋 minimum cost 的方向。</p>
+<p>從上一部分，我們知道 P 點 gradeint 表示該點增量最大的方向。現在我們要找 cost function 的最小值，也就是該 function 斜率為 0 的點，當我們今天在 P 點知道哪個方向是會增加最快速的點，那就只要往反方向就會是減少最快速的方向了。也就是 \(-\nabla f(P)\) 是找尋 minimum cost 的方向。</p>
 
 <p>總的來說，梯度下降法 Gradient descent 就是不斷的在某個點 P 算它的 Gradient，然後往 Gradient 的反方向一定，直到找到 local minimum 為止（無法知道是否找到 glocal minimum，會根據 initial values 而定）。</p>
 
@@ -373,6 +373,13 @@ s.setAttribute('data-timestamp', +new Date());
       
       <li>
         <h3>
+          <a href="/blog/test/2022/09/04/test/"> test </a>
+          <small>Sep 4, 2022</small>
+        </h3>
+      </li>
+      
+      <li>
+        <h3>
           <a href="/blog/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/"> [MongoDB]建立 Cloud MongoDB </a>
           <small>Jun 10, 2022</small>
         </h3>
@@ -382,13 +389,6 @@ s.setAttribute('data-timestamp', +new Date());
         <h3>
           <a href="/blog/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/"> [Python][Flask]Flask 基本實做 </a>
           <small>Apr 6, 2022</small>
-        </h3>
-      </li>
-      
-      <li>
-        <h3>
-          <a href="/blog/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/"> [Python]在 Mac 下載與安裝 Miniconda </a>
-          <small>Apr 5, 2022</small>
         </h3>
       </li>
       

@@ -183,6 +183,161 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="/blog/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">
+        [前端]Cookie & Session
+      </a>
+    </h1>
+
+    <div class="post-info">
+      <!-- <span class="post-date">Posted by Shihs on March 7, 2021</span> -->
+      <i class="fas fa-calendar-alt"></i>
+      <span class="post-date">March 7, 2021</span>
+      <span class="post-categories">
+      <!-- <i class="fas fa-tag"></i> -->
+      <!-- <i class="far fa-book"></i> -->
+      <i class="fas fa-box"></i>
+      
+      
+        <a target="_blank" href="/blog/category/#前端">前端</a>
+        
+      
+    </span>
+
+    </div>
+    <!-- <p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
+
+<hr />
+
+<h3 id="重點">重點</h3>
+
+<p>Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態，而 Cookie 是將狀態資料存在 Client 端（Browser），而 Session 則是將資料存在 Server 端（e.g Redis）</p>
+
+<hr />
+
+<h3 id="http-的-stateless無狀態">HTTP 的 stateless（無狀態）</h3>
+
+<p>前面說到「Session 和 Cookie 的目的是用來讓 Sever 知道 Client 的狀態」，但</p>
+
+<ol>
+  <li>為什麼 Server 不知道 Client 的狀態呢？</li>
+  <li>為什麼需要讓 Sever 知道 Client 的狀態呢？</li>
+</ol>
+
+<p><img src="http://wiki.hashphp.org/images/6/67/HTTP_Model.jpg" alt="HTTP Model" width="50%" heigh="50%" /></p>
+
+<p>要回答第一個問題，就要先知道「<strong>HTTP 是 stateless（無狀態）</strong>」，而 stateless（無狀態）的定義是</p>
+
+<ul>
+  <li>Server 和 Client 不會記住（retain）之前的連線</li>
+  <li>每個 Client 送出的 request 都被視為是唯一且獨立的 connection</li>
+</ul>
+
+<p>舉個例子，</p>
+
+<p><a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless</a></p>
+
+<p>上面這個網址是我在搜尋「無狀態」時找到覺得解釋得不錯的部落格，而我從我的瀏覽器打開這個網頁，和你從你的瀏覽器輸入這個網址打開，基本是上一樣的，並不需要先連到其他網頁，像這樣子的情況就稱為 stateless（無狀態）。</p>
+
+<p>解決第一個問題後，那 stateless 就 stateless 啊，為什麼要讓 Server 知道 Client 的狀態呢？</p>
+
+<p>想想看，我們在使用 facebook 或是 instagram 等等很多網站都必須要先登入後才能觀看到想看到的頁面；或是，在網拍網站上如果我們把東西加到購物車，當下次登入時打開，還能夠看到上次加入的商品。但以剛剛 stateless（無狀態）的邏輯來思考，這件事情是不可能可以達成的，因為假如每次的 request 都是獨立且唯一的，那這樣每一次重新點選網頁都會是一個新的事件，Server 就像是失憶一樣，根本不會記得曾經發生過什麼事情，所以當 Client 端做了改變（ex. 登入、商品加入購物車…等等），Sever 端並不會知道，當我們想要做任何事情，每一次都必須要重新來一遍才行。</p>
+
+<p>這就是為什麼我們會想要讓 Server 知道 Client 的狀態了（Stateful）。</p>
+
+<hr />
+
+<h3 id="cookie-是什麼">Cookie 是什麼？</h3>
+
+<p>Cookie 是用來記錄 Client 與 Server 目前的溝通狀態，會以 name-value 的形式呈現，並且存在 Client 端。</p>
+
+<p><img src="http://localhost:4000/blog/img/posts/cookie.png" alt="進入 googlec.com 後得到的 cookie" width="80%" heigh="80%" /></p>
+
+<p>而這個 cookie 在 Client 端第一次發送 request 後，Server 會以 <code class="language-plaintext highlighter-rouge">Set-Cookie</code> 的方式寫在 response header，回應給 Client，而 Client 瀏覽器就會將這個 Cookie 存在本機端，下一次要再次送 request 時，會把這個已儲存的 Cookie 已 <code class="language-plaintext highlighter-rouge">Cookie</code> 的方式存在 resquest header 和 request 一起送出，讓 Sever 知道這個 Client 目前的狀態。（可以用 Chrome 的開法者模式看 network 中網頁的 Response Headers 和 Request Headers 找到 <code class="language-plaintext highlighter-rouge">Set-Cookie</code> 和 <code class="language-plaintext highlighter-rouge">Cookie</code>）</p>
+
+<p>但這樣儲存 Cookie 又會有什麼問題呢？</p>
+
+<ol>
+  <li>
+    <p>Cookie size 的限制：根據 RFC-2965 的規定，一個 Cookie 最大只能是 4096 bytes。</p>
+  </li>
+  <li>
+    <p>佔據網路流量：由於每次 request 都會傳送 Cookie 資料，所以當 Cookie 資料越來越大，request 傳輸的資訊也會更著變大，這樣就會影響網路傳輸的速度。</p>
+  </li>
+  <li>
+    <p>Cookie 可能被 Client 竄改：由於 Cookie 存在 Client 端，所以 Client 是可以完整的看到 Cookie 資料的，那如果 Cookie 竄改或者是外洩，這樣就存在著資安的風險。</p>
+  </li>
+</ol>
+
+<p>根據以上的問題，我們可以知道，Cookie 中不能存放有資安疑慮的資料，也不能存放太大的資訊量。所以為了彌補這些不足，就有了 Session 的出現。</p>
+
+<hr />
+
+<h3 id="session-是什麼">Session 是什麼？</h3>
+
+<p>Session 是一種比 Cookie 更安全的狀態管理機制。</p>
+
+<p>既然 Session 是為了彌補 Cookie 的不足，它就必須要解決上面提到的 Cookie 可能會有的問題。所以 Session 會將狀態資訊存在 Sever 端，以避免 Client 端可以任意修改資訊，此方法也能避免儲存與傳輸的資料過大的問題。</p>
+
+<p>而為了要讓 Client 端知道 Session 儲存的資訊，Server 端會在 response 的 Cookie 中回傳一組 SessionID 讓 Client 儲存在 Cookie 裡，當下次 Client 送出 request 時，就在 Cookie 裡一起送出這組 SessionID，而 Server 就可以透過這組 SessionID 去驗證這個 Client 身份，並知道上一次儲存的狀態，然後回傳內容。</p>
+
+<hr />
+
+<p><strong>Reference:</strong>
+<br />
+<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">前端三十｜27. [WEB] Cookie &amp; Session 是什麼？</a>
+<br />
+<a href="https://dotblogs.com.tw/jimmyyu/2010/10/16/difference-between-stateful-and-stateless">[ASP.NET]Stateful與Stateless</a>
+<br />
+<a href="https://hulitw.medium.com/session-and-cookie-15e47ed838bc">白話 Session 與 Cookie：從經營雜貨店開始</a>
+<br />
+<a href="https://medium.com/@vicxu/authentication-那些小事上集-cookie-與-session-介紹-1da2d413afa2">淺談 Authentication 上集：Cookie 與 Session 介紹</a></p>
+
+ -->
+    
+    <div class="post-excerpt"><p>在邊閱讀網路資訊的時候，我對於 cookie 和 session 從覺得理解到感到困惑，到後來又覺得好像懂了，但也許不是百分之百正確。我盡量把理解的東西寫下來，但如果有任何錯誤，歡迎指正。</p>
+</div>
+
+    <div class="bookmark">
+      <!-- <i class="far fa-comments"></i> -->
+      <i class="fas fa-comments"></i>
+      <span>
+        
+
+
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+var disqus_config = function () {
+        // this.page.url = '/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread';
+        this.page.identifier = '/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/';
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://mcshihs.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+
+
+
+        <a href="/blog//%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/#disqus_thread" data-disqus-identifier="/%E5%89%8D%E7%AB%AF/2021/03/07/%E5%89%8D%E7%AB%AF-Cookie-&-Session/">0 Comments</a>
+      </span>
+    </div>
+    
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="/blog/python/2021/01/22/Python-asyncio-%E5%92%8C-await/">
         [Python]asyncio 和 await
       </a>
@@ -209,26 +364,26 @@
 <span class="kn">import</span> <span class="nn">asyncio</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.google.com.tw/'</span>
-<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="p">.</span><span class="n">get_event_loop</span><span class="p">()</span>
 
-<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="s">"Send a request at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
 
-    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="k">await</span> <span class="n">loop</span><span class="p">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span><span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">,</span><span class="n">url</span><span class="p">)</span>
 
-    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">print</span><span class="p">(</span><span class="s">"Receive a response at"</span><span class="p">,</span><span class="n">t</span><span class="o">-</span><span class="n">start_time</span><span class="p">,</span><span class="s">"seconds."</span><span class="p">)</span>
 
 <span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
-    <span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">loop</span><span class="p">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">send_req</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+    <span class="n">tasks</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
 
-<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
+<span class="n">loop</span><span class="p">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">asyncio</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">tasks</span><span class="p">))</span>
 </code></pre></div></div>
 
 <hr />
@@ -243,7 +398,6 @@
 import requests
 import time
 import asyncio</p>
-
 </div>
 
     <div class="bookmark">
@@ -340,18 +494,18 @@ s.setAttribute('data-timestamp', +new Date());
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// setTimeout(callbackFunction, timeToDelay)</span>
 <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">a</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'b'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>印出來的結果會是</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b
 a
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">setTimeout</code> 是一個非同步的 Web API，JavaScript 執行到這段的時候會將 <code class="highlighter-rouge">setTimeout</code> 放到 Event Queue 中等待，等 stack 中的任務都執行完才回來執行，所以會先印出<code class="highlighter-rouge">b</code>再印<code class="highlighter-rouge">a</code>。</p>
+<p><code class="language-plaintext highlighter-rouge">setTimeout</code> 是一個非同步的 Web API，JavaScript 執行到這段的時候會將 <code class="language-plaintext highlighter-rouge">setTimeout</code> 放到 Event Queue 中等待，等 stack 中的任務都執行完才回來執行，所以會先印出<code class="language-plaintext highlighter-rouge">b</code>再印<code class="language-plaintext highlighter-rouge">a</code>。</p>
 
 <hr />
 
@@ -360,12 +514,12 @@ a
 <p>callback 是 javascript 中很常見的一種使用方式，它讓函式可以當成參數傳進另一個參數中使用，讓我們可以控制程式碼的流程。看以下範例，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
     <span class="nx">callback</span><span class="p">();</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
 <span class="c1">// This is main start.</span>
@@ -379,13 +533,13 @@ a
     <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
     <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
     <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
     <span class="nx">callback</span><span class="p">();</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
 <span class="c1">// This is main start.</span>
@@ -393,20 +547,20 @@ a
 <span class="c1">// This test function is done.</span>
 </code></pre></div></div>
 
-<p>這次<code class="highlighter-rouge">callback()</code>因為會有等待的情況，所以後面的 “This is main end.” 先被執行完。那假如想要<code class="highlighter-rouge">callback()</code>執行完才執行下一行該怎麼做呢？（譬如說，這個<code class="highlighter-rouge">callback()</code>在做的是使用<code class="highlighter-rouge">XMLHttpRequest()</code>送 request 給某個網頁，而下面的程式碼必須等待網頁的 response 才可以執行下面的程式碼。）這時候只要把，執行 “This is main end.” 這行程式碼也當成 callback() 傳進去就行了。</p>
+<p>這次<code class="language-plaintext highlighter-rouge">callback()</code>因為會有等待的情況，所以後面的 “This is main end.” 先被執行完。那假如想要<code class="language-plaintext highlighter-rouge">callback()</code>執行完才執行下一行該怎麼做呢？（譬如說，這個<code class="language-plaintext highlighter-rouge">callback()</code>在做的是使用<code class="language-plaintext highlighter-rouge">XMLHttpRequest()</code>送 request 給某個網頁，而下面的程式碼必須等待網頁的 response 才可以執行下面的程式碼。）這時候只要把，執行 “This is main end.” 這行程式碼也當成 callback() 傳進去就行了。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">callback2</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// 這邊模擬 test 這個 function 去 call 其他 API 要等待的情況</span>
     <span class="c1">// 等了一秒後才會執行 console.log 這個函式</span>
     <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This test function is done."</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This test function is done.</span><span class="dl">"</span><span class="p">);</span>
         <span class="nx">callback2</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">main</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main start."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main start.</span><span class="dl">"</span><span class="p">);</span>
     <span class="nx">callback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"This is main end."</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is main end.</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">});</span>
 <span class="p">}</span>
 <span class="nx">main</span><span class="p">(</span><span class="nx">test</span><span class="p">);</span>
@@ -415,17 +569,17 @@ a
 <span class="c1">// This is main end.</span>
 </code></pre></div></div>
 
-<p>所以 callback 可以用來解決非同步的問題，但是當 callback 越來越多，就會形成 <code class="highlighter-rouge">callback hell</code>，就像是下面這樣，</p>
+<p>所以 callback 可以用來解決非同步的問題，但是當 callback 越來越多，就會形成 <code class="language-plaintext highlighter-rouge">callback hell</code>，就像是下面這樣，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">api1</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Done with api1"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Done with api1</span><span class="dl">"</span><span class="p">);</span>
         <span class="nx">callback</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">api2</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Done with api2"</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Done with api2</span><span class="dl">"</span><span class="p">);</span>
         <span class="nx">callback</span><span class="p">();</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
 <span class="p">}</span>
@@ -437,7 +591,7 @@ a
     <span class="p">});</span>
 <span class="p">}</span>
 <span class="nx">main</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"All function is done."</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">All function is done.</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">});</span>
 <span class="c1">// "Done with api1"</span>
 <span class="c1">// "Done with api2"</span>
@@ -461,19 +615,19 @@ a
 
 <h2 id="promise">Promise</h2>
 
-<p>Promise 也是一個可以用來處理非同步操作的東西。Promise 通常包括三種狀態：<code class="highlighter-rouge">resolve</code>、<code class="highlighter-rouge">reject</code>和<code class="highlighter-rouge">pending</code>。<code class="highlighter-rouge">resolve</code>代表成功，<code class="highlighter-rouge">rejetc</code>代表失敗，<code class="highlighter-rouge">pending</code>代表還在處理中, 結束狀態未知。<code class="highlighter-rouge">then()</code>方法可以回傳<code class="highlighter-rouge">Promise</code>物件。</p>
+<p>Promise 也是一個可以用來處理非同步操作的東西。Promise 通常包括三種狀態：<code class="language-plaintext highlighter-rouge">resolve</code>、<code class="language-plaintext highlighter-rouge">reject</code>和<code class="language-plaintext highlighter-rouge">pending</code>。<code class="language-plaintext highlighter-rouge">resolve</code>代表成功，<code class="language-plaintext highlighter-rouge">rejetc</code>代表失敗，<code class="language-plaintext highlighter-rouge">pending</code>代表還在處理中, 結束狀態未知。<code class="language-plaintext highlighter-rouge">then()</code>方法可以回傳<code class="language-plaintext highlighter-rouge">Promise</code>物件。</p>
 
-<p>例如，現在想要使用<code class="highlighter-rouge">XMLHttpRequest()</code> API傳送 request，我們需要等待 response 後才有後續動作。</p>
+<p>例如，現在想要使用<code class="language-plaintext highlighter-rouge">XMLHttpRequest()</code> API傳送 request，我們需要等待 response 後才有後續動作。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sleep</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">(</span><span class="nx">resolve</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">ms</span><span class="p">));</span>
 <span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">url</span> <span class="o">=</span> <span class="s2">"https://www.google.com/"</span><span class="p">;</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://www.google.com/</span><span class="dl">"</span><span class="p">;</span>
 	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s2">"document"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">document</span><span class="dl">"</span><span class="p">;</span>
 	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 
 	<span class="c1">// 如果沒等待 response，status 和 response 會是 0 和 null</span>
@@ -489,7 +643,7 @@ a
 <span class="nx">sendHttp</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">then()</code> 其實是可以一直往後加，就是像<code class="highlighter-rouge">callback</code>，想要前面的事情做完，才做下面，形成 Promise Chain，但這樣就又會變成 then hell。所以這時候出現了 async 和 await，讓程式碼看起來更容易閱讀。</p>
+<p><code class="language-plaintext highlighter-rouge">then()</code> 其實是可以一直往後加，就是像<code class="language-plaintext highlighter-rouge">callback</code>，想要前面的事情做完，才做下面，形成 Promise Chain，但這樣就又會變成 then hell。所以這時候出現了 async 和 await，讓程式碼看起來更容易閱讀。</p>
 
 <hr />
 
@@ -502,13 +656,13 @@ a
 <span class="p">}</span>
 
 <span class="k">async</span> <span class="kd">function</span> <span class="nx">sendHttp</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">url</span> <span class="o">=</span> <span class="s2">"https://www.google.com/"</span><span class="p">;</span>
+	<span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://www.google.com/</span><span class="dl">"</span><span class="p">;</span>
 	<span class="kd">var</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="s2">"document"</span><span class="p">;</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+	<span class="nx">xhr</span><span class="p">.</span><span class="nx">responseType</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">document</span><span class="dl">"</span><span class="p">;</span>
 	<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 
-	<span class="kr">await</span> <span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+	<span class="k">await</span> <span class="nx">sleep</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
 	<span class="c1">// 如果需要更多 sleep(2000)</span>
 	<span class="c1">// await sleep(2000);</span>
 		
@@ -519,7 +673,7 @@ a
 <span class="nx">sendHttp</span><span class="p">();</span>
 </code></pre></div></div>
 
-<p>在<code class="highlighter-rouge">sendHttp()</code>這個 function 前加上 async，並在<code class="highlighter-rouge">sleep(2000)</code>前加上 await 就好，整體畫面看起來是不是容易閱讀很多？如果需要更多的<code class="highlighter-rouge">sleep(2000)</code>，只需要多加 await 往下寫就好，整個畫面看起來容易閱讀很多。</p>
+<p>在<code class="language-plaintext highlighter-rouge">sendHttp()</code>這個 function 前加上 async，並在<code class="language-plaintext highlighter-rouge">sleep(2000)</code>前加上 await 就好，整體畫面看起來是不是容易閱讀很多？如果需要更多的<code class="language-plaintext highlighter-rouge">sleep(2000)</code>，只需要多加 await 往下寫就好，整個畫面看起來容易閱讀很多。</p>
 
 <hr />
 
@@ -536,7 +690,6 @@ a
  -->
     
     <div class="post-excerpt"><p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
-
 </div>
 
     <div class="bookmark">
@@ -614,7 +767,7 @@ s.setAttribute('data-timestamp', +new Date());
 </ul>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 id 為 myParagraph 的 node</span>
-<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="s1">'myParagraph'</span><span class="p">);</span> 
+<span class="kd">let</span> <span class="nx">paragraph</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementbyId</span><span class="p">(</span><span class="dl">'</span><span class="s1">myParagraph</span><span class="dl">'</span><span class="p">);</span> 
 
 <span class="c1">// 使用 paragraph 選取它的 parent node</span>
 <span class="kd">let</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">paragraph</span><span class="p">.</span><span class="nx">parenNode</span><span class="p">;</span> 
@@ -629,12 +782,12 @@ s.setAttribute('data-timestamp', +new Date());
 
 <ul>
   <li><strong>previousElementSibling</strong>：選取被選取的 element 前一個的 sibling。</li>
-  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
+  <li><strong>insertBefore</strong>：將被選取的 element 插入在某一個 element 之前， <code class="language-plaintext highlighter-rouge">let insertedNode = parentNode.insertBefore(newNode, referenceNode)</code></li>
 </ul>
 
 <p><strong>previousSibling v.s. previousSibling</strong></p>
 
-<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
+<p>為什麼 sibling 要特別加上 ‘Element’ 呢？因為如果使用 <code class="language-plaintext highlighter-rouge">previousSibling</code> 他會抓取前一個 sibling node，不管它是什麼。而我們<a href="https://shihs.github.io/blog/html/2020/11/13/HTML-%E6%96%87%E4%BB%B6%E7%89%A9%E4%BB%B6%E6%A8%A1%E5%9E%8B-Document-Object-Model/">前一篇</a>講過， node 包含 document、element、attribute 和 text。所以使用 <code class="language-plaintext highlighter-rouge">previousElementSibling</code> 我們就只會抓前面的 element sibling。</p>
 
 <p>在課程的範例中，現在想要按了 Up 按鈕之後，該 &lt;li&gt; 就會上移。</p>
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
@@ -658,12 +811,12 @@ s.setAttribute('data-timestamp', +new Date());
 </code></pre></div></div>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
-<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
-<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'up'</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">up</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
   	<span class="c1">// 被 click 的 button 的 parent node 就是 li</span>
     <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span> 
     <span class="c1">// 被選取的 li tag 的 previous element sibiling，也就是前一個 li tag</span>
@@ -711,12 +864,12 @@ s.setAttribute('data-timestamp', +new Date());
 </code></pre></div></div>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 選取 ul 的 tag</span>
-<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// 按下 up 按鈕之後，該 li tag 會往上移</span>
-<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="s1">'down'</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">listUl</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">className</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">down</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">li</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
     <span class="kd">let</span> <span class="nx">nextLi</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">nextElementSibling</span><span class="p">;</span>
     <span class="kd">let</span> <span class="nx">ul</span> <span class="o">=</span> <span class="nx">li</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">;</span>
@@ -731,10 +884,10 @@ s.setAttribute('data-timestamp', +new Date());
 
 <h2 id="children">children</h2>
 
-<p><code class="highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
+<p><code class="language-plaintext highlighter-rouge">.children</code> 可以選取該 element 底下所有的 child element。</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.list'</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'ul'</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">listDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">.list</span><span class="dl">'</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">listUl</span> <span class="o">=</span> <span class="nx">listDiv</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">ul</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// lisUl 底下的 child，也就是 li tag</span>
 <span class="kd">const</span> <span class="nx">lis</span> <span class="o">=</span> <span class="nx">listUl</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
@@ -748,7 +901,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p>整理 Treehouse 前端課程中 <a href="https://teamtreehouse.com/library/javascript-and-the-dom-2">JavaScript and the DOM</a> 的最後一節 Traversing the DOM 內容。</p>
-
 </div>
 
     <div class="bookmark">
@@ -868,13 +1020,13 @@ s.setAttribute('data-timestamp', +new Date());
     <p><strong>Document</strong>：Document 就是指這整份文件，就是這份 HTML 檔的開端，所有的 nodes 都會從 Document 開始往下。</p>
   </li>
   <li>
-    <p><strong>Element</strong>：Element 是指文件內的各個標籤，像是 <code class="highlighter-rouge"><span class="nt">&lt;html&gt;</span></code>、<code class="highlighter-rouge">&lt;body&gt;</code>、<code class="highlighter-rouge">&lt;div&gt;</code>、<code class="highlighter-rouge">&lt;p&gt;</code> 等等各種 HTML Tag 都被歸類在 Element。</p>
+    <p><strong>Element</strong>：Element 是指文件內的各個標籤，像是 <code class="language-plaintext highlighter-rouge">&lt;html&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;body&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>、<code class="language-plaintext highlighter-rouge">&lt;p&gt;</code> 等等各種 HTML Tag 都被歸類在 Element。</p>
   </li>
   <li>
-    <p><strong>Attribute</strong>：Attribute 是指各個標籤內的相關屬性，像是 <code class="highlighter-rouge">name</code>、<code class="highlighter-rouge">class</code>、<code class="highlighter-rouge">href</code> 等等都是被歸類在 Attribute。</p>
+    <p><strong>Attribute</strong>：Attribute 是指各個標籤內的相關屬性，像是 <code class="language-plaintext highlighter-rouge">name</code>、<code class="language-plaintext highlighter-rouge">class</code>、<code class="language-plaintext highlighter-rouge">href</code> 等等都是被歸類在 Attribute。</p>
   </li>
   <li>
-    <p><strong>Text</strong>：Text 是指被各個標籤包起來的文字，像是 <code class="highlighter-rouge">&lt;h1&gt;Hi&lt;/h1&gt;</code> 中， Hi 被 <code class="highlighter-rouge">&lt;h1&gt;</code> 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。</p>
+    <p><strong>Text</strong>：Text 是指被各個標籤包起來的文字，像是 <code class="language-plaintext highlighter-rouge">&lt;h1&gt;Hi&lt;/h1&gt;</code> 中， Hi 被 <code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code> 這個 Element 包起來，因此 Hi 就是此 Element 的 Text。</p>
   </li>
 </ul>
 
@@ -885,13 +1037,13 @@ s.setAttribute('data-timestamp', +new Date());
 <p>這邊介紹一些常見的 DOM API，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'idName'</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">'tagName'</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="s1">'className'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">idName</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">'</span><span class="s1">tagName</span><span class="dl">'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">'</span><span class="s1">className</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// selector 可以是 id:#idName, class:.className, tag:tagName, or CSS pseudo-class</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span> 
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'selector'</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">'</span><span class="s1">selector</span><span class="dl">'</span><span class="p">);</span> 
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="dl">'</span><span class="s1">selector</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <hr />
@@ -900,9 +1052,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><strong>BOM</strong> 是 Browser Object Model（瀏覽器物件模型）的縮寫。DOM 是文件和程式溝通的接口，BOM 則是和瀏覽器溝通的接口。像是跳轉到其他頁面、螢幕大小的參數等等可以操作的方法或屬性。</p>
 
-<p>同樣的 BOM 也有很多屬於它的 object，像是 <code class="highlighter-rouge">location</code>，下面這個程式碼可以讓瀏覽器跳轉到另一個頁面：</p>
+<p>同樣的 BOM 也有很多屬於它的 object，像是 <code class="language-plaintext highlighter-rouge">location</code>，下面這個程式碼可以讓瀏覽器跳轉到另一個頁面：</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="s2">"http://www.xxxx.com"</span><span class="p">;</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">http://www.xxxx.com</span><span class="dl">"</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>而 <strong>windows</strong> 也是 <strong>BOM</strong> 的一個 object。「關閉視窗」可以這樣寫，</p>
@@ -927,7 +1079,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><h3 id="dom-是什麼">DOM 是什麼？</h3>
-
 </div>
 
     <div class="bookmark">
@@ -1023,7 +1174,7 @@ s.setAttribute('data-timestamp', +new Date());
   <li>指程式必須等待前面的程式執行完才能執行。</li>
 </ul>
 
-<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
+<p>如果 function 是<strong>同步(Synchronous)</strong>，那就不管如何都會等這行執行完才執行下一行程式碼。例如，<code class="language-plaintext highlighter-rouge">writeFileSync()</code>就是同步(Synchronous) function。但先等這行程式碼執行完再執行下一行有什麼問題呢？假如今天要寫的檔案內容超級大，那麼所有工作就會全部停擺，等到這行程式碼完成才能進行，而<strong>非同步（Asynchronous）</strong>function 便能解決這個問題。</p>
 
 <h3 id="非同步asynchronous">非同步（Asynchronous）</h3>
 
@@ -1034,15 +1185,15 @@ s.setAttribute('data-timestamp', +new Date());
 <p>下面舉一個常見的非同步 function，<strong>setTimeout()</strong>（第一個參數為時間到時要被執行的函式，第二個參數為要延遲的時間（毫秒）），setTimeout() 會在第二個參數的延遲時間後執行第一個參數的函式。</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Timer is done!'</span><span class="p">)</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Timer is done!</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">},</span> <span class="mi">1</span><span class="p">);</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hi</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>以上程式碼印出來的結果會是，</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello
 Hi
 Timer is done!
 </code></pre></div></div>
@@ -1056,10 +1207,10 @@ Timer is done!
 <p>callback 讓我們把一個函式丟進另一個函式當參數，讓我們可以控制程式碼的流程。先看一個簡單的範例，</p>
 
 <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">callbackSleepWorker</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im wake up !'</span><span class="p">)</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK, Im wake up !</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackWorker</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">alert</span><span class="p">(</span><span class="s1">'OK, Im first.'</span><span class="p">)</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">'</span><span class="s1">OK, Im first.</span><span class="dl">'</span><span class="p">)</span>
   <span class="nx">callbackWorker</span><span class="p">()</span>
 <span class="p">}</span>
 <span class="nx">ICallYouWhenIDone</span><span class="p">(</span><span class="nx">callbackSleepWorker</span><span class="p">)</span>
@@ -1077,7 +1228,7 @@ Timer is done!
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">I have </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
   <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nx">slower</span><span class="p">()</span>
@@ -1097,7 +1248,7 @@ Timer is done!
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">faster</span><span class="p">()</span> <span class="p">{</span>
   <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I have '</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">I have </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">money</span><span class="p">)</span>
   <span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
 <span class="p">}</span>
 <span class="nx">slower</span><span class="p">(</span><span class="nx">faster</span><span class="p">)</span>
@@ -1107,17 +1258,17 @@ Timer is done!
 
 <p>現在有個任務是，讀檔案並計算長度</p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'fs'</span><span class="p">);</span>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">);</span>
 
 <span class="c1">// fs.readFile(filename, callback(err, content))</span>
 
-<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'test.txt'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="dl">'</span><span class="s1">test.txt</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'finish'</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">finish</span><span class="dl">'</span><span class="p">);</span>
 <span class="p">});</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'not finish'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">not finish</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>本來 readFile() 這個 function 會先被放到 event queue 裡，然後接著印出 ‘not finish’，但我們現在把要讀檔案這個任務放在 callback 裡，所以變成只要讀完檔案就會立刻執行，’not finish’ 會等到檔案讀完才會進行。</p>
@@ -1139,7 +1290,6 @@ Timer is done!
  -->
     
     <div class="post-excerpt"><p>簡單介紹 node.js 裡重要的「非同步（Asynchronous）」概念，那既然有「非同步（Asynchronous）」當然就會有「同步（Synchronous）」，以及因為「非同步（Asynchronous）」而衍伸出的重要 callback 概念。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1215,19 +1365,19 @@ s.setAttribute('data-timestamp', +new Date());
 <p>Gradient descent 的目的是要找到 neural network 的 parameters 的最佳解。</p>
 
 <p>Network parameters: 
-<script type="math/tex">\theta = {\{w_1, w_2,..., b_1, b_2,...\}}</script></p>
+\(\theta = {\{w_1, w_2,..., b_1, b_2,...\}}\)</p>
 
 <p>Gradient: 
-<script type="math/tex">\nabla L(\theta) = \begin{bmatrix}
+\(\nabla L(\theta) = \begin{bmatrix}
     \partial L(\theta)/\partial w_1 \\
     \partial L(\theta)/\partial w_2 \\
     \vdots \\
     \partial L(\theta)/\partial b_1 \\
     \partial L(\theta)/\partial b_2 \\
     \vdots 
-\end{bmatrix}</script></p>
+\end{bmatrix}\)</p>
 
-<p>初始 parameters: <script type="math/tex">\theta^0</script>，計算 <script type="math/tex">\nabla L(\theta^0)</script>，則 <script type="math/tex">\theta^1 = \theta^0 - \eta \nabla L(\theta^0)</script>，接著可以再繼續算出 <script type="math/tex">\theta_2, \theta_3...</script></p>
+<p>初始 parameters: \(\theta^0\)，計算 \(\nabla L(\theta^0)\)，則 \(\theta^1 = \theta^0 - \eta \nabla L(\theta^0)\)，接著可以再繼續算出 \(\theta_2, \theta_3...\)</p>
 
 <p>在 neural network 裡 Gradient 的最大問題就是，neural network 有太多的參數，所以這裡我們要介紹的 Backpropagation 就是一個比較有效的計算 Gradient 的演算法。也就是說，Backpropagation 基本上就是 Gradient Descent，但是是一個有效率的演算法。</p>
 
@@ -1237,7 +1387,7 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><img src="http://localhost:4000/blog/img/posts/neural%20network%208.png" alt="" /></p>
 
-<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，<script type="math/tex">C(w_1, b_1, w_2, b_2, w_3, b_3)</script></p>
+<p>為了講解方便，我們現在把整個 nerual network 簡化成每層只有一個神經元。如下圖，第一個神經元是 input，最後一個神經元是 output，中間是兩層的 hidden layer，所以 cost function 可以寫成，\(C(w_1, b_1, w_2, b_2, w_3, b_3)\)</p>
 
 <p><img src="http://localhost:4000/blog/img/posts/simple%20neural%20network.png" alt="" /></p>
 
@@ -1245,67 +1395,66 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><img src="http://localhost:4000/blog/img/posts/Backpropagation.png" alt="" /></p>
 
-<p>我們令最後的 output 為 <script type="math/tex">a^{(L)}</script> 表示它是在第 L 層，而 hidden layer 為  <script type="math/tex">a^{(L-1)}</script> 表示在第 L-1 層，所以上標就只是用來表達它們各自在哪一層而已。</p>
+<p>我們令最後的 output 為 \(a^{(L)}\) 表示它是在第 L 層，而 hidden layer 為  \(a^{(L-1)}\) 表示在第 L-1 層，所以上標就只是用來表達它們各自在哪一層而已。</p>
 
-<p>在 <script type="math/tex">a^{(L-1)}</script> 後的 <script type="math/tex">y</script> 是我們期望的輸出結果，我們希望 <script type="math/tex">y=1</script>，也就是說，這裡的 cost 值會是，</p>
+<p>在 \(a^{(L-1)}\) 後的 \(y\) 是我們期望的輸出結果，我們希望 \(y=1\)，也就是說，這裡的 cost 值會是，</p>
 
-<script type="math/tex; mode=display">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+\[C_0(...) = (a^{(L)} - y)^ 2 .......... (1)\]
 
-<p>以上圖的例子就會是，<script type="math/tex">(0.66 - 1)^2</script></p>
+<p>以上圖的例子就會是，\((0.66 - 1)^2\)</p>
 
 <p>接著我們來看每一個神經元的值。根據前面學過的，我們知道每一個神經元都是由前面的 weight 和 bias 算出來了，也就是說</p>
 
-<script type="math/tex; mode=display">a^{(L)} = \sigma (w^{(L)} a^{(L-1)} + b^{(L)})</script>
+\[a^{(L)} = \sigma (w^{(L)} a^{(L-1)} + b^{(L)})\]
 
 <p>那為了方便，我們把 sigmoid function 裡的式子用一個符號表示，</p>
 
-<script type="math/tex; mode=display">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+\[z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)\]
 
-<p>而 <script type="math/tex">a^{(L)}</script> 就可以寫成，</p>
+<p>而 \(a^{(L)}\) 就可以寫成，</p>
 
-<script type="math/tex; mode=display">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script>
+\[a^{(L)} = \sigma (z^{(L)}) .......... (3)\]
 
 <hr />
 
 <p>我們現在有了上面三個式子，</p>
 
-<p><script type="math/tex">C_0(...) = (a^{(L)} - y)^ 2 .......... (1)</script>
+<p>\(C_0(...) = (a^{(L)} - y)^ 2 .......... (1)\)
 <br />
-<script type="math/tex">z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)</script>
+\(z^{(L)} = w^{(L)} a^{(L-1)} + b^{(L)} .......... (2)\)
 <br />
-<script type="math/tex">a^{(L)} = \sigma (z^{(L)}) .......... (3)</script></p>
+\(a^{(L)} = \sigma (z^{(L)}) .......... (3)\)</p>
 
-<p>那我們現在要如何<strong>計算權重 <script type="math/tex">w^{(L)}</script> 對於 cost function 的影響程度</strong>呢？換句話說，我們想要知道 cost function 對 <script type="math/tex">w^{(L)}</script> 的偏微分 <script type="math/tex">\frac{\partial C_0}{\partial w^{(L)}}</script>。</p>
+<p>那我們現在要如何<strong>計算權重 \(w^{(L)}\) 對於 cost function 的影響程度</strong>呢？換句話說，我們想要知道 cost function 對 \(w^{(L)}\) 的偏微分 \(\frac{\partial C_0}{\partial w^{(L)}}\)。</p>
 
 <p>根據 <strong><a href="https://www.khanacademy.org/math/ap-calculus-ab/ab-differentiation-2-new/ab-3-1a/v/chain-rule-introduction">Chain rule</a></strong>，我們可以再將上式改寫成，</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}</script>
+\[\frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}}\]
 
 <p>下一個步驟要來計算每一個值，我們可以根據上面式子得到的 (1)(2)(3) 得到，</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - y)</script>
+\[\frac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - y)\]
 
-<script type="math/tex; mode=display">\frac{\partial a^{(L)}}{\partial z^{(L)}} = \sigma' (z^{(L)})</script>
+\[\frac{\partial a^{(L)}}{\partial z^{(L)}} = \sigma' (z^{(L)})\]
 
-<script type="math/tex; mode=display">\frac{\partial z^{(L)}}{\partial w^{(L)}} = a^{(L-1)}</script>
+\[\frac{\partial z^{(L)}}{\partial w^{(L)}} = a^{(L-1)}\]
 
 <p>所以可以將式子整理成，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial w^{(L)}} & = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = a^{(L-1)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial w^{(L)}} &amp; = \frac{\partial z^{(L)}}{\partial w^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = a^{(L-1)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <p>而這只是其中一個 training sample 算出來的 cost，而總代價函數應該是所有 training data 的平均，也就是</p>
 
-<script type="math/tex; mode=display">\frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{\partial C_k}{\partial w^{(L)}}</script>
+\[\frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k=0}^{n-1} \frac{\partial C_k}{\partial w^{(L)}}\]
 
 <p>而這其實只是 gradient 裡其中的一個 compenent，</p>
 
 <p>Gradient:</p>
 
-<script type="math/tex; mode=display">\nabla C = \begin{bmatrix}
+\[\nabla C = \begin{bmatrix}
     \frac{\partial C}{\partial w^{(1)}} \\
     \frac{\partial C}{\partial b^{(1)}} \\
     \frac{\partial C}{\partial w^{(2)}} \\
@@ -1313,23 +1462,21 @@ s.setAttribute('data-timestamp', +new Date());
     \vdots \\
     \frac{\partial C}{\partial w^{(L)}} \\
     \frac{\partial C}{\partial b^{(L)}} \\
-\end{bmatrix}</script>
+\end{bmatrix}\]
 
 <p>如果要計算的是 bias 的偏微分，式子就會是，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial b^{(L)}} & = \frac{\partial z^{(L)}}{\partial b^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = 1 \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial b^{(L)}} &amp; = \frac{\partial z^{(L)}}{\partial b^{(L)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = 1 \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <p>接下來，我們來看這個 cost function 對上一層 activation 的敏感度，</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{align}
-\frac{\partial C_0}{\partial a^{(L-1)}} & = \frac{\partial z^{(L)}}{\partial a^{(L-1)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
-& = w^{(L)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
-\end{align} %]]></script>
+\[\begin{align}
+\frac{\partial C_0}{\partial a^{(L-1)}} &amp; = \frac{\partial z^{(L)}}{\partial a^{(L-1)}} \frac{\partial a^{(L)}}{\partial z^{(L)}} \frac{\partial C_0}{\partial a^{(L)}} \\
+&amp; = w^{(L)} \times \sigma' (z^{(L)}) \times 2(a^{(L)} - y)
+\end{align}\]
 
 <hr />
 
@@ -1339,9 +1486,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 <p><img src="http://localhost:4000/blog/img/posts/Backpropagation%202.png" alt="" /></p>
 
-<p>基本上，所有的式子都和只有一個神經元是一樣的，唯一有變化的是，<script type="math/tex">\frac{\partial C_0}{\partial a_k^{(L-1)}}</script></p>
+<p>基本上，所有的式子都和只有一個神經元是一樣的，唯一有變化的是，\(\frac{\partial C_0}{\partial a_k^{(L-1)}}\)</p>
 
-<script type="math/tex; mode=display">\frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}} \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \frac{\partial C_0}{\partial a_j^{(L)}}</script>
+\[\frac{\partial C_0}{\partial a_k^{(L-1)}} = \sum_{j=0}^{n_L-1}\frac{\partial z_j^{(L)}}{\partial a_k^{(L-1)}} \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \frac{\partial C_0}{\partial a_j^{(L)}}\]
 
 <p>因為，一個神經元會向下影響其他所有與它連接的神經元，所以必須將它們全部加起來。</p>
 
@@ -1358,7 +1505,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/neural%20network/2020/01/23/Neural-Network-Neural-Network-2/">前面</a>介紹了 neural network 使用 Gradient descent 來找 cost function 的最小值，那這篇要來介紹 neural network 如何使用 <strong>Backpropagation</strong> 這個演算法讓 neural network 訓練過程中更有效率。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1474,7 +1620,6 @@ s.setAttribute('data-timestamp', +new Date());
  -->
     
     <div class="post-excerpt"><p><a href="https://shihs.github.io/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N卷積神經網路/">前一篇</a>介紹了 CNN 的概念，這篇要來介紹 CNN 如何運用在 NLP 中。</p>
-
 </div>
 
     <div class="bookmark">
@@ -1516,181 +1661,7 @@ s.setAttribute('data-timestamp', +new Date());
     
   </div>
   
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/blog/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">
-        [Neural Network]Convolution Neural Network 卷積神經網路
-      </a>
-    </h1>
-
-    <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on February 1, 2020</span> -->
-      <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">February 1, 2020</span>
-      <span class="post-categories">
-      <!-- <i class="fas fa-tag"></i> -->
-      <!-- <i class="far fa-book"></i> -->
-      <i class="fas fa-box"></i>
-      
-      
-        <a target="_blank" href="/blog/category/#Machine Learning">Machine Learning</a>
-        &nbsp;
-      
-        <a target="_blank" href="/blog/category/#Neural Network">Neural Network</a>
-        
-      
-    </span>
-
-    </div>
-    <!-- <p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
-<br />
-<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
-<br />
-<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
-
-<p>卷積神經網絡(Convolutional Neural Network)簡稱 CNN，主要應用在影像辨識，這篇想要簡單的說明 CNN 的概念。</p>
-
-<hr />
-
-<p>先看下面兩張 CNN 概念圖</p>
-
-<p><a href="https://www.kdnuggets.com/2016/11/intuitive-explanation-convolutional-neural-networks.html/3">圖片來源</a>
-<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%201.png" alt="" /></p>
-
-<p><a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a>
-<img src="http://localhost:4000/blog/img/posts/CNN%20%E6%A6%82%E5%BF%B5%E5%9C%96%202.png" alt="" /></p>
-
-<p>從上圖可以看到整個流程各經過兩次的 Convolution、Pooling 和 Fully Connected，所以其實只要搞懂 <strong>Convolution</strong>、<strong>Pooling</strong> 和 <strong>Fully Connected</strong> 分別在做什麼就可以掌握 CNN 了。</p>
-
-<p>整個流程是，前面的 Convolution 和 Pooling (又稱為 subsampling) 在做的是 feature extraction (特徵擷取)，而 Fully connection 在做的是 classification (分類辨識)。</p>
-
-<hr />
-
-<h2 id="1-convolution-layer-卷積層">1. Convolution Layer 卷積層</h2>
-
-<p>Convolution Layer 由 filter 和激活函數 (ex. Relu) 所構成。</p>
-
-<p>下圖是常見的美圖效果，其實就是使用 filter 達成的
-<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">圖片來源</a>
-<img src="http://localhost:4000/blog/img/posts/%E7%BE%8E%E5%9C%96.png" alt="" /></p>
-
-<p>卷積 (Convolution) 做的是特徵擷取，而不同的效果在做的就是對不同的特徵做擷取。例如，銳化效果在做的就是強化邊緣的特徵，也就是加強擷取出邊緣的特徵。</p>
-
-<p>那所以卷積到底是如何擷取不同的特徵的呢？
-<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Convolution.gif" alt="" /></p>
-
-<p>特徵擷取的方式是使用 Filter (或稱作 Kernel) 來萃取圖片中的特徵，上圖是一個 3x3 window 的 filter，而算法就是像圖那樣移動 (移動的步數是 stride)，將數字相乘後再相加 (詳情可以看之前的<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">筆記1</a>、<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">筆記2</a>，包括 padding 和 stride 的概念)。美圖的不同效果就是使用不同的 Filter (Kernel) 做出來的。</p>
-
-<p>下圖是不同的 filter 做出來的效果
-<a href="https://icecreamlabs.com/2018/08/19/3x3-convolution-filters%E2%80%8A-%E2%80%8Aa-popular-choice/">圖片來源</a></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/kernels.png" alt="" /></p>
-
-<p>現在明白了 filter，但再回去看最一開始的流程圖，為什麼 converlution 有三個呢？這是因為使用了三個 filter 去擷取不同的特徵。</p>
-
-<p>看完 filter 再看 Relu。可以看到最上圖圖中有個 Relu，也就是將所有計算出來結果的負值都變為 0。
-<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">圖片來源</a></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/Relu.png" alt="" /></p>
-
-<p>如果是彩色的圖，通常會有三個 channel (RGB)，也就是一開始輸入的 image 有三個，可以看下圖
-<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
-
-<p><img src="http://localhost:4000/blog/img/posts/three%20images%20convolution.jpg" alt="" /></p>
-
-<h2 id="2-pooling-layer-池化層">2. Pooling Layer 池化層</h2>
-
-<p>pooling 又稱為 subsampling，是為了提取特定區域主要特徵，但又想要減少參數的數量，以防止模型過擬合，常用的是 max pooling，也就是取該區域最大的值，也有 average pooling，也就是取該區域的平均值。
-<a href="https://zhuanlan.zhihu.com/p/42559190">圖片來源</a></p>
-
-<p>下圖是取 max pooling，使用 2x2 的 window，且 stride 為 2</p>
-
-<p><img src="http://localhost:4000/blog/img/posts/pooling.jpg" alt="" /></p>
-
-<h2 id="3-fully-connected-layer-全連接層">3. Fully Connected Layer 全連接層</h2>
-
-<p>Fully Connected Layer 主要是進行 Flattening 平坦化，將最後的矩陣轉換成一維，然後再使用傳統的 neural network + softmax()。</p>
-
-<p>參考我之前的<a href="https://shihs.github.io/blog/neural%20network/2020/01/22/Neural-Network-Neural-Network/">[Neural Network]Neural Network 1</a></p>
-
-<hr />
-
-<p>以上就是 CNN 的流程。</p>
-
-<p>最後提一下，從上面的過程我們可以知道，CNN 整個過程中需要求解的參數是</p>
-
-<ol>
-  <li>Convolution layer filters</li>
-  <li>Full Connected Layer filters</li>
-</ol>
-
-<p><a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">來源</a></p>
-
-<hr />
-
-<p><strong>Reference:</strong>
-<br />
-<a href="https://medium.com/jameslearningnote/資料分析-機器學習-第5-1講-卷積神經網絡介紹-convolutional-neural-network-4f8249d65d4f">[資料分析&amp;機器學習] 第5.1講: 卷積神經網絡介紹(Convolutional Neural Network)
-</a>
-<br />
-<a href="https://medium.com/雞雞與兔兔的工程世界/機器學習-ml-note-convolution-neural-network-卷積神經網路-bfa8566744e9">[機器學習 ML NOTE]Convolution Neural Network 卷積神經網路</a>
-<br />
-<a href="https://zhuanlan.zhihu.com/p/42559190">【DL笔记6】从此明白了卷积神经网络（CNN）</a>
-<br />
-<a href="http://doremi2016.logdown.com/posts/2017/01/25/convolutional-neural-networks-cnn">Convolutional Neural Networks’ (CNN) Backward Propagation</a></p>
- -->
-    
-    <div class="post-excerpt"><p>之前寫了兩篇的 CNN 課程筆記，但後來因為太忙沒有繼續看完課程就中斷了 T_T。
-<br />
-<a href="https://shihs.github.io/blog/machine%20learning/2019/02/25/Machine-Learning-Covolutional-Neural-Networks(CNN)/">[Machine Learning]Covolutional Neural Networks(CNN)(1)</a>
-<br />
-<a href="https://shihs.github.io/blog/machine%20learning/2019/03/02/Machine-Learning-Covolutional-Neural-Networks(CNN)(2)/">[Machine Learning]Covolutional Neural Networks(CNN)(2)</a></p>
-
 </div>
-
-    <div class="bookmark">
-      <!-- <i class="far fa-comments"></i> -->
-      <i class="fas fa-comments"></i>
-      <span>
-        
-
-
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-var disqus_config = function () {
-        // this.page.url = '/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread';
-        this.page.identifier = '/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/';
-};
-
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://mcshihs.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-
-
-
-        <a href="/blog//machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/#disqus_thread" data-disqus-identifier="/machine%20learning/neural%20network/2020/02/01/Machine-Learning-Convolution-Neural-N%E5%8D%B7%E7%A9%8D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF/">0 Comments</a>
-      </span>
-    </div>
-    
-  </div>
-  
-</div>
-
 
 <div class="pagination">
   
