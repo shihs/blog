@@ -77,6 +77,7 @@ class Dog:
 
 上面的 `mydog` 是 Dog class 的 instance，也是一個 class 的 object，當 `mydog` 這個 instance 建立的時候就會有 **legs** 和 **has_tail** 這兩個屬性（attributions），並且還有一個定義的 **bark** method。
 
+---
 
 **Reference**
 - [那個OOP裡頭class、object、instance間複雜的三角關係](https://vocus.cc/article/640bde92fd8978000138c9fa)
