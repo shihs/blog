@@ -1,9 +1,0 @@
-I"<p>當安裝完 R 後，原本設定的語言為中文，但現在想要將中文改為英文該如何操作？</p>
-
-<p>以下為 mac 的 ios 系統解法，</p>
-
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">system</span><span class="p">(</span><span class="s2">"defaults write org.R-project.R force.LANG en_US.UTF-8"</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-
-<p>然後關閉 R 再重新打開就會改為英文介面囉！</p>
-:ET

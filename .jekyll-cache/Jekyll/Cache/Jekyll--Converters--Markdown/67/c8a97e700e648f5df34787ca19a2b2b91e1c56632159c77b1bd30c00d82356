@@ -1,4 +1,0 @@
-I"�<p>簡單來說，<code class="language-plaintext highlighter-rouge">*args</code>和<code class="language-plaintext highlighter-rouge">**kwargs</code>是 function 的參數，在不確定會有多少參數時使用。<br />
-args 是 arguments 縮寫，kwargs 是 keyword argments 的縮寫。也就是， args 是沒有 keyword 的變數， kwargs 有 keyword。<br />
-如果 <code class="language-plaintext highlighter-rouge">*args</code>和<code class="language-plaintext highlighter-rouge">**kwargs</code> 同時使用，<strong><code class="language-plaintext highlighter-rouge">*args</code>必需在<code class="language-plaintext highlighter-rouge">**kwargs</code>之前</strong>。</p>
-:ET

@@ -1,8 +1,0 @@
-I"j<p>使用前，先安裝<a href="https://py-googletrans.readthedocs.io/en/latest/" target="_blank">googletrans</a></p>
-<pre><code class="language-cmd"># windows
-pip install googletrans
-</code></pre>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># mac
-sudo pip install googletrans
-</code></pre></div></div>
-:ET

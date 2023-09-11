@@ -1,2 +1,0 @@
-I"k<p>之前因為在學 node.js 寫過<a href="https://shihs.github.io/blog/javascript/node.js/2020/07/27/node.js-callback/">一篇文章</a>介紹同步非同步以及 callback，但之前沒有實際使用的經驗，有點懵懵懂懂，現在有了一些實際的應用的範例，所以想要再重新整理一次，並加上 promise、async, 與 await。</p>
-:ET

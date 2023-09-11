@@ -1,4 +1,0 @@
-I"�<p>只要輸入，調整可顯示的位數</p>
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">options</span><span class="p">(</span><span class="n">scipen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999</span><span class="p">)</span><span class="w">
-</span></code></pre></div></div>
-:ET

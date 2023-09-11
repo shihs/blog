@@ -1,6 +1,0 @@
-I".<p>在資料中有些含有空白的文字讀進R後會變成</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;U+00A0&gt;
-</code></pre></div></div>
-<p>而且不管用什麼方式都取代不了這個符號，
-這時候該怎麼辦呢？</p>
-:ET
