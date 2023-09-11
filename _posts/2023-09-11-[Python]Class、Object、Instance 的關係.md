@@ -53,7 +53,7 @@ class Dog:
 
 在 Python 中，可以使用以下的方式建立一個 Object，或是說 Instance。
 
-```python=
+```python
 同學 = Dog()
 ```
 
@@ -61,7 +61,7 @@ class Dog:
 
 **Class 的 method**
 
-```python=
+```python
 class Dog:
     def __init__(self):
         self.legs = 4
