@@ -3,7 +3,8 @@ markdown: kramdown
 highlighter: rouge
 
 # Permalinks
-permalink: pretty
+# permalink: pretty
+permalink: /:year/:month/:title.html
 
 # Setup
 title: M.C. Shih
@@ -17,7 +18,16 @@ author:
   name: "Min-Chun Shih"
   url:
 
-paginate: 8
+# paginate: 8
+# paginate_path: "blog/page:num/"
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page:num/'
+  title: ' - page :num'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
 encoding: UTF-8
 
 # Custom vars
@@ -28,5 +38,5 @@ github:
 
 plugins:
   - jekyll-sitemap
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jemoji
