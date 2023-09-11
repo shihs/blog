@@ -18,16 +18,8 @@ author:
   name: "Min-Chun Shih"
   url:
 
-# paginate: 8
-# paginate_path: "blog/page:num/"
-pagination:
-  enabled: true
-  per_page: 5
-  permalink: '/page:num/'
-  title: ' - page :num'
-  limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+paginate: 8
+paginate_path: "/page:num/"
 encoding: UTF-8
 
 # Custom vars
@@ -38,5 +30,5 @@ github:
 
 plugins:
   - jekyll-sitemap
-  - jekyll-paginate-v2
+  - jekyll-paginate
   - jemoji
