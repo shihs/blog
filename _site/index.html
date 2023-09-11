@@ -40,7 +40,7 @@
   <link rel="shortcut icon" href="/blog/public/favicon.ico">
 
   <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blogblog/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/blog/atom.xml">
   <!-- 數學符號 -->
   <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
   </script>
@@ -173,7 +173,7 @@
     </div>
     
 
-    <p class = "rights">&copy; 2022. All rights reserved.</p>
+    <p class = "rights">&copy; 2023. All rights reserved.</p>
   </div>
 </div>
 
@@ -183,31 +183,109 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/blog/test/2022/09/04/test/">
-        test
+      <a href="/blog/python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/">
+        [Python]Class、Object、Instance 的關係
       </a>
     </h1>
 
     <div class="post-info">
-      <!-- <span class="post-date">Posted by Shihs on September 4, 2022</span> -->
+      <!-- <span class="post-date">Posted by Shihs on September 11, 2023</span> -->
       <i class="fas fa-calendar-alt"></i>
-      <span class="post-date">September 4, 2022</span>
+      <span class="post-date">September 11, 2023</span>
       <span class="post-categories">
       <!-- <i class="fas fa-tag"></i> -->
       <!-- <i class="far fa-book"></i> -->
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#test">test</a>
+        <a target="_blank" href="/blog//category/#Python">Python</a>
         
       
     </span>
 
     </div>
-    <!-- <p>this is a post test.</p>
+    <!-- <p>Python 是一個物件導向（Object Oriented Programming, OOP）的程式語言，在物件導向中最重要的就是 Class、Object、Instance 的關係，以下將用 Python 說明舉例這三者的關係。</p>
+
+<p><img src="https://hackmd.io/_uploads/Hk-kHQn0n.png" alt="" /></p>
+
+<blockquote>
+  <p>A <strong>Class</strong> is the template/blueprint for building actual <strong>instances</strong> of <strong>Object</strong>.</p>
+</blockquote>
+
+<blockquote>
+  <p>An <strong>Object</strong> is an <strong>instance</strong> of a <strong>Class</strong>. A class is like a blueprint while an instance is a copy of the class with actual values.</p>
+</blockquote>
+
+<p><strong>Class</strong></p>
+<ul>
+  <li>Classes are blueprint for creating objects.</li>
+  <li>Classes define properties (attributes) and behaviours (methods) that every <strong>instance</strong> of the class should have.</li>
+</ul>
+
+<p><strong>Object</strong></p>
+<ul>
+  <li>An <strong>Object</strong> is an <strong>instance</strong> of a <strong>Class</strong>, carrying its own set of attributes and methods defined by the Class.</li>
+</ul>
+
+<p><strong>Instance</strong></p>
+<ul>
+  <li>A instance is an individual object of a certain Class.</li>
+</ul>
+
+<p>舉一個例子解釋：我們把有四條腿、有尾巴、會汪汪叫的動物都歸類（class）為「狗」，所以當我們看到有四條腿、有尾巴、會汪汪叫的動物就會知道這些 objects 屬於「狗」這個類別（class）。今天我養了一隻叫做「同學」的狗，「同學」這個 obejct 就會是「狗」這個類別（class）的一個實際的例子（instance）。</p>
+
+<p>我的理解是，instance 是ㄧ個「特定」的 object，而某個 class 的 objects 則是表示所有由該 class 建立出來的 instances；因此，有些時候 object 和 instance 是可以替換的。</p>
+
+<p>因為我的狗「同學」是屬於「狗」的類別（class）的實際的例子（instance），他就一定會有所有「狗」該有的特性，像是有四條腿、有尾巴、會汪汪叫，所以他是「狗」這個類別的 object。</p>
+
+<h3 id="範例狗">範例：狗</h3>
+<p>以下將用上述的「狗」來說明 Class、Object、Instance 的觀念</p>
+
+<p><strong>建立一個「狗」Class</strong></p>
+<pre><code class="language-python=">class Dog:
+    def __init__(self):
+        self.legs = 4
+        self.has_tail = True
+</code></pre>
+
+<p>上面的程式碼是 <code class="language-plaintext highlighter-rouge">Dog</code> 的 <strong>class</strong>，<code class="language-plaintext highlighter-rouge">__init__</code> 則是一個新的 instance 被建立（或是說 object 被建立）時這個 <code class="language-plaintext highlighter-rouge">__init__</code> method 會自動執行。（It’s often referred to as a <strong>constructor</strong> because it’s used to set up or initialize attributes for a new object.）。</p>
+
+<p>通常用來給定這個新的 instance 的狀態，上面程式碼的範例則是給予 <code class="language-plaintext highlighter-rouge">legs</code> 和 <code class="language-plaintext highlighter-rouge">has_tail</code> 兩個 attribute，並且定義為 4 和 True。</p>
+
+<p><strong>建立一個 Object</strong></p>
+
+<p>在 Python 中，可以使用以下的方式建立一個 Object，或是說 Instance。</p>
+
+<pre><code class="language-python=">同學 = Dog()
+</code></pre>
+
+<p>上面的 <code class="language-plaintext highlighter-rouge">同學</code> 就是一個 <code class="language-plaintext highlighter-rouge">Dog</code> Class 的 Object，或是說一個 Instance。</p>
+
+<p><strong>Class 的 method</strong></p>
+
+<pre><code class="language-python=">class Dog:
+    def __init__(self):
+        self.legs = 4
+        self.has_tail = True
+    def bark(self):
+        print("汪汪！")
+</code></pre>
+
+<p><code class="language-plaintext highlighter-rouge">bark</code> method 會發出「汪汪」的叫聲。</p>
+
+<p>以下是程式碼實際的結果：
+<img src="https://hackmd.io/_uploads/rJMI1q2R3.png =200x" alt="" /></p>
+
+<p>上面的 <code class="language-plaintext highlighter-rouge">mydog</code> 是 Dog class 的 instance，也是一個 class 的 object，當 <code class="language-plaintext highlighter-rouge">mydog</code> 這個 instance 建立的時候就會有 <strong>legs</strong> 和 <strong>has_tail</strong> 這兩個屬性（attributions），並且還有一個定義的 <strong>bark</strong> method。</p>
+
+<p><strong>Reference</strong></p>
+<ul>
+  <li><a href="https://vocus.cc/article/640bde92fd8978000138c9fa">那個OOP裡頭class、object、instance間複雜的三角關係</a></li>
+  <li><a href="https://www.packetswitch.co.uk/python-object-oriented-programming/">Python Object Oriented Programming (OOP) - with examples</a></li>
+</ul>
  -->
     
-    <div class="post-excerpt"><p>this is a post test.</p>
+    <div class="post-excerpt"><p>Python 是一個物件導向（Object Oriented Programming, OOP）的程式語言，在物件導向中最重要的就是 Class、Object、Instance 的關係，以下將用 Python 說明舉例這三者的關係。</p>
 </div>
 
     <div class="bookmark">
@@ -229,8 +307,8 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//test/2022/09/04/test/#disqus_thread';
-        this.page.identifier = '/test/2022/09/04/test/';
+        // this.page.url = '/blog///python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/#disqus_thread';
+        this.page.identifier = '/python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/';
 };
 
 (function() { // DON'T EDIT BELOW THIS LINE
@@ -243,10 +321,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//test/2022/09/04/test/#disqus_thread" data-disqus-identifier="/test/2022/09/04/test/">0 Comments</a>
+        <a href="/blog///python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/#disqus_thread" data-disqus-identifier="/python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -266,7 +343,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#MongoDB">MongoDB</a>
+        <a target="_blank" href="/blog//category/#MongoDB">MongoDB</a>
         
       
     </span>
@@ -375,7 +452,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread';
+        // this.page.url = '/blog///mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread';
         this.page.identifier = '/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/';
 };
 
@@ -389,10 +466,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread" data-disqus-identifier="/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">0 Comments</a>
+        <a href="/blog///mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/#disqus_thread" data-disqus-identifier="/mongodb/2022/06/10/MongoDB-%E5%BB%BA%E7%AB%8B-Cloud-MongoDB/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -412,10 +488,10 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog//category/#Python">Python</a>
         &nbsp;
       
-        <a target="_blank" href="/blog/category/#Flask">Flask</a>
+        <a target="_blank" href="/blog//category/#Flask">Flask</a>
         
       
     </span>
@@ -739,7 +815,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/#disqus_thread';
+        // this.page.url = '/blog///python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/#disqus_thread';
         this.page.identifier = '/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/';
 };
 
@@ -753,10 +829,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/#disqus_thread" data-disqus-identifier="/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/">0 Comments</a>
+        <a href="/blog///python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/#disqus_thread" data-disqus-identifier="/python/flask/2022/04/06/Flask-%E5%9F%BA%E6%9C%AC%E5%AF%A6%E5%81%9A/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -776,7 +851,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog//category/#Python">Python</a>
         
       
     </span>
@@ -893,7 +968,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread';
+        // this.page.url = '/blog///python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread';
         this.page.identifier = '/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/';
 };
 
@@ -907,10 +982,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/">0 Comments</a>
+        <a href="/blog///python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E5%9C%A8-Mac-%E4%B8%8B%E8%BC%89%E8%88%87%E5%AE%89%E8%A3%9D-Miniconda/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -930,7 +1004,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Python">Python</a>
+        <a target="_blank" href="/blog//category/#Python">Python</a>
         
       
     </span>
@@ -1055,7 +1129,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread';
+        // this.page.url = '/blog///python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread';
         this.page.identifier = '/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/';
 };
 
@@ -1069,10 +1143,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/">0 Comments</a>
+        <a href="/blog///python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/#disqus_thread" data-disqus-identifier="/python/2022/04/05/Python-%E8%99%9B%E6%93%AC%E7%92%B0%E5%A2%83-(virtual-environment)-conda-create-%E8%88%87-virtualenv-%E6%AF%94%E8%BC%83/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -1092,7 +1165,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Web">Web</a>
+        <a target="_blank" href="/blog//category/#Web">Web</a>
         
       
     </span>
@@ -1215,7 +1288,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread';
+        // this.page.url = '/blog///web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread';
         this.page.identifier = '/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/';
 };
 
@@ -1229,10 +1302,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread" data-disqus-identifier="/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/">0 Comments</a>
+        <a href="/blog///web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/#disqus_thread" data-disqus-identifier="/web/2021/08/22/Web-MVC-%E6%9E%B6%E6%A7%8B/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -1252,7 +1324,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#SQL">SQL</a>
+        <a target="_blank" href="/blog//category/#SQL">SQL</a>
         
       
     </span>
@@ -1379,7 +1451,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread';
+        // this.page.url = '/blog///sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread';
         this.page.identifier = '/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/';
 };
 
@@ -1393,10 +1465,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread" data-disqus-identifier="/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/">0 Comments</a>
+        <a href="/blog///sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/#disqus_thread" data-disqus-identifier="/sql/2021/08/16/%E5%9C%A8-Mac-%E6%9C%AC%E6%A9%9F%E5%AE%89%E8%A3%9D-MySQL-&-phpmyadmin/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
   <div class="post">
@@ -1416,7 +1487,7 @@ s.setAttribute('data-timestamp', +new Date());
       <i class="fas fa-box"></i>
       
       
-        <a target="_blank" href="/blog/category/#Git">Git</a>
+        <a target="_blank" href="/blog//category/#Git">Git</a>
         
       
     </span>
@@ -1533,7 +1604,7 @@ this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your pag
 };
 */
 var disqus_config = function () {
-        // this.page.url = '/blog//git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread';
+        // this.page.url = '/blog///git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread';
         this.page.identifier = '/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/';
 };
 
@@ -1547,10 +1618,9 @@ s.setAttribute('data-timestamp', +new Date());
 
 
 
-        <a href="/blog//git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/">0 Comments</a>
+        <a href="/blog///git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/#disqus_thread" data-disqus-identifier="/git/2021/08/15/Github-%E6%96%B0%E7%9A%84-authentication-%E8%A8%AD%E5%AE%9A/">0 Comments</a>
       </span>
     </div>
-    
   </div>
   
 </div>

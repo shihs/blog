@@ -4,7 +4,7 @@
  <title>M.C. Shih</title>
  <link href="http://localhost:4000blog/atom.xml" rel="self"/>
  <link href="http://localhost:4000blog/"/>
- <updated>2022-09-04T22:17:43+08:00</updated>
+ <updated>2023-09-11T23:19:08+08:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Min-Chun Shih</name>
@@ -13,11 +13,89 @@
 
  
  <entry>
-   <title>test</title>
-   <link href="http://localhost:4000blog//test/2022/09/04/test/"/>
-   <updated>2022-09-04T22:15:00+08:00</updated>
-   <id>http://localhost:4000/test/2022/09/04/test</id>
-   <content type="html">&lt;p&gt;this is a post test.&lt;/p&gt;
+   <title>[Python]Class、Object、Instance 的關係</title>
+   <link href="http://localhost:4000blog//python/2023/09/11/Python-Class-Object-Instance-%E7%9A%84%E9%97%9C%E4%BF%82/"/>
+   <updated>2023-09-11T21:06:00+08:00</updated>
+   <id>http://localhost:4000/python/2023/09/11/[Python]Class、Object、Instance 的關係</id>
+   <content type="html">&lt;p&gt;Python 是一個物件導向（Object Oriented Programming, OOP）的程式語言，在物件導向中最重要的就是 Class、Object、Instance 的關係，以下將用 Python 說明舉例這三者的關係。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://hackmd.io/_uploads/Hk-kHQn0n.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A &lt;strong&gt;Class&lt;/strong&gt; is the template/blueprint for building actual &lt;strong&gt;instances&lt;/strong&gt; of &lt;strong&gt;Object&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;An &lt;strong&gt;Object&lt;/strong&gt; is an &lt;strong&gt;instance&lt;/strong&gt; of a &lt;strong&gt;Class&lt;/strong&gt;. A class is like a blueprint while an instance is a copy of the class with actual values.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Class&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Classes are blueprint for creating objects.&lt;/li&gt;
+  &lt;li&gt;Classes define properties (attributes) and behaviours (methods) that every &lt;strong&gt;instance&lt;/strong&gt; of the class should have.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Object&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;An &lt;strong&gt;Object&lt;/strong&gt; is an &lt;strong&gt;instance&lt;/strong&gt; of a &lt;strong&gt;Class&lt;/strong&gt;, carrying its own set of attributes and methods defined by the Class.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Instance&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A instance is an individual object of a certain Class.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;舉一個例子解釋：我們把有四條腿、有尾巴、會汪汪叫的動物都歸類（class）為「狗」，所以當我們看到有四條腿、有尾巴、會汪汪叫的動物就會知道這些 objects 屬於「狗」這個類別（class）。今天我養了一隻叫做「同學」的狗，「同學」這個 obejct 就會是「狗」這個類別（class）的一個實際的例子（instance）。&lt;/p&gt;
+
+&lt;p&gt;我的理解是，instance 是ㄧ個「特定」的 object，而某個 class 的 objects 則是表示所有由該 class 建立出來的 instances；因此，有些時候 object 和 instance 是可以替換的。&lt;/p&gt;
+
+&lt;p&gt;因為我的狗「同學」是屬於「狗」的類別（class）的實際的例子（instance），他就一定會有所有「狗」該有的特性，像是有四條腿、有尾巴、會汪汪叫，所以他是「狗」這個類別的 object。&lt;/p&gt;
+
+&lt;h3 id=&quot;範例狗&quot;&gt;範例：狗&lt;/h3&gt;
+&lt;p&gt;以下將用上述的「狗」來說明 Class、Object、Instance 的觀念&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;建立一個「狗」Class&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-python=&quot;&gt;class Dog:
+    def __init__(self):
+        self.legs = 4
+        self.has_tail = True
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的程式碼是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dog&lt;/code&gt; 的 &lt;strong&gt;class&lt;/strong&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__init__&lt;/code&gt; 則是一個新的 instance 被建立（或是說 object 被建立）時這個 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__init__&lt;/code&gt; method 會自動執行。（It’s often referred to as a &lt;strong&gt;constructor&lt;/strong&gt; because it’s used to set up or initialize attributes for a new object.）。&lt;/p&gt;
+
+&lt;p&gt;通常用來給定這個新的 instance 的狀態，上面程式碼的範例則是給予 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;legs&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;has_tail&lt;/code&gt; 兩個 attribute，並且定義為 4 和 True。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;建立一個 Object&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在 Python 中，可以使用以下的方式建立一個 Object，或是說 Instance。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-python=&quot;&gt;同學 = Dog()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;同學&lt;/code&gt; 就是一個 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Dog&lt;/code&gt; Class 的 Object，或是說一個 Instance。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Class 的 method&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-python=&quot;&gt;class Dog:
+    def __init__(self):
+        self.legs = 4
+        self.has_tail = True
+    def bark(self):
+        print(&quot;汪汪！&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bark&lt;/code&gt; method 會發出「汪汪」的叫聲。&lt;/p&gt;
+
+&lt;p&gt;以下是程式碼實際的結果：
+&lt;img src=&quot;https://hackmd.io/_uploads/rJMI1q2R3.png =200x&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上面的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mydog&lt;/code&gt; 是 Dog class 的 instance，也是一個 class 的 object，當 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mydog&lt;/code&gt; 這個 instance 建立的時候就會有 &lt;strong&gt;legs&lt;/strong&gt; 和 &lt;strong&gt;has_tail&lt;/strong&gt; 這兩個屬性（attributions），並且還有一個定義的 &lt;strong&gt;bark&lt;/strong&gt; method。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://vocus.cc/article/640bde92fd8978000138c9fa&quot;&gt;那個OOP裡頭class、object、instance間複雜的三角關係&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.packetswitch.co.uk/python-object-oriented-programming/&quot;&gt;Python Object Oriented Programming (OOP) - with examples&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </content>
  </entry>
  
