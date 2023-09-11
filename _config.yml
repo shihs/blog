@@ -25,6 +25,8 @@ encoding: UTF-8
 # Custom vars
 version: 2.1.0
 
+future: true
+
 github:
   repo: https://github.com/shihs/blog
 
