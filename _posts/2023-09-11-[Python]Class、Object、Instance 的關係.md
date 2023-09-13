@@ -9,7 +9,7 @@ category: [Python]
 
 Python 是一個物件導向（Object Oriented Programming, OOP）的程式語言，在物件導向中最重要的就是 Class、Object、Instance 的關係，以下將用 Python 說明舉例這三者的關係。
 
-![](https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_9e90f720f902522104f2bb6de3440fee.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1694624187&Signature=PXuzpk3ngOOF%2FukTmVNOf3sujiQ%3D)
+![]({{ "/img/posts/oop.png" |absolute_url}})
 圖片來源：[[Python 基礎教學] 一切皆為物件，到底什麼是物件 Object ?](https://www.maxlist.xyz/2021/01/11/python-object/)
 
 先用兩段話來說明三者的關係：
@@ -77,7 +77,7 @@ class Dog:
 `bark` method 會發出「汪汪」的叫聲。
 
 以下是程式碼實際的結果：
-![](https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_d7b06b9b166ffecfc050f81f82044241.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1694624324&Signature=ZBrQflNYFWYs5TxUaQeLMwXlFQQ%3D){:width="30%" heigh="30%"}
+![]({{ "/img/posts/class.png" |absolute_url}}){:width="30%" heigh="30%"}
 
 上面的 `mydog` 是 Dog class 的 instance，也是一個 class 的 object，當 `mydog` 這個 instance 建立的時候就會有 **legs** 和 **has_tail** 這兩個屬性（attributions），並且還有一個定義的 **bark** method。
 
