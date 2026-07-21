@@ -1,0 +1,23 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import PostLayout from '../../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => {
+    const d = post.data.date;
+    const year = String(d.getUTCFullYear());
+    const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+    return {
+      params: { year, month, slug: post.data.slug },
+      props: { post },
+    };
+  });
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+const { post } = Astro.props;
+---
+<PostLayout post={post} />

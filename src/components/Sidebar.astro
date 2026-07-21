@@ -1,0 +1,48 @@
+---
+---
+<div class="sidebar">
+  <h1><a href="/blog">M.C. Shih</a></h1>
+  <p>Just for learning.</p>
+  <nav>
+    <a href="/blog/about.html">About</a><br />
+    <a href="/blog/archive.html">Archives</a><br />
+    <a href="/blog/category.html">Category</a><br />
+    <a href="/blog/search.html">Search</a>
+  </nav>
+  <p class="socials">
+    <a href="https://shihs.github.io" target="_blank" aria-label="Home"><i class="fas fa-home"></i></a>
+    <a href="https://github.com/shihs" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/min-chun-shih-6647779a/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.instagram.com/itakephotos_tw/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  </p>
+  <p>&copy; <span id="year"></span>. All rights reserved.</p>
+  <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+</div>
+
+<script>
+  document.getElementById('year')!.textContent = String(new Date().getFullYear());
+
+  const toggle = document.getElementById('theme-toggle')!;
+  const icon = toggle.querySelector('i')!;
+
+  function currentTheme(): 'light' | 'dark' {
+    const attr = document.documentElement.getAttribute('data-theme');
+    if (attr === 'dark' || attr === 'light') return attr;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function updateIcon(theme: 'light' | 'dark') {
+    icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  updateIcon(currentTheme());
+
+  toggle.addEventListener('click', () => {
+    const next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateIcon(next);
+  });
+</script>

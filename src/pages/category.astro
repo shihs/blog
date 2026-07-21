@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const all = await getCollection('posts');
+
+const byCategory = new Map<string, typeof all>();
+for (const post of all) {
+  for (const cat of post.data.categories) {
+    if (!byCategory.has(cat)) byCategory.set(cat, []);
+    byCategory.get(cat)!.push(post);
+  }
+}
+const sortedCategories = [...byCategory.entries()].sort((a, b) =>
+  a[0].localeCompare(b[0])
+);
+
+function hrefFor(p: (typeof all)[number]) {
+  const d = p.data.date;
+  const year = String(d.getUTCFullYear());
+  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+  return `/blog/${year}/${month}/${p.data.slug}.html`;
+}
+
+// HTML5 ids can't contain spaces; category names like "Machine Learning" do.
+function anchorFor(cat: string) {
+  return cat.replace(/\s+/g, '-');
+}
+---
+<BaseLayout title="Category · M.C. Shih">
+  <h1>Category</h1>
+  <ul class="tag-list">
+    {sortedCategories.map(([cat]) => (
+      <li><a class="tag" href={`#${anchorFor(cat)}`}>{cat} ({byCategory.get(cat)!.length})</a></li>
+    ))}
+  </ul>
+  {sortedCategories.map(([cat, posts]) => (
+    <section id={anchorFor(cat)}>
+      <h2>{cat}</h2>
+      <ul>
+        {posts
+          .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+          .map((p) => (
+            <li><a href={hrefFor(p)}>{p.data.title}</a></li>
+          ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

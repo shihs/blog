@@ -1,6 +1,19 @@
 ---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+const PAGE_SIZE = 8;
+const all = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const page1 = all.slice(0, PAGE_SIZE);
+const hasNext = all.length > PAGE_SIZE;
 ---
-<html>
-  <head><title>M.C. Shih &middot; BLOG</title></head>
-  <body><p>Scaffold OK</p></body>
-</html>
+<BaseLayout title="M.C. Shih · BLOG">
+  {page1.map((post) => <PostCard post={post} />)}
+  <div class="pagination">
+    <span></span>
+    {hasNext && <a href="/blog/2">Older →</a>}
+  </div>
+</BaseLayout>

@@ -1,0 +1,32 @@
+---
+title: '[R]如何在 ggplot2 圖形上希臘字母？'
+date: '2018-11-10'
+categories:
+  - R
+slug: R-如何在-ggplot2-圖形上希臘字母
+---
+
+
+
+**1. 圖形文字**
+<br>
+Text Labels: Use parse = T inside geom_text or annotate.
+
+**2. 座標軸標籤**
+<br>
+Axis Labels: Use expression(alpha) to get greek alpha.
+
+**3. Legend**
+<br>
+Legend Labels: Use bquote(alpha == .(value)) in legend label.
+
+**4. Fecet圖形**
+<br>
+Facet 圖形比較特殊，要將 `labeller = label_parsed`
+<br>
+Facet Labels: Use labeller = label_parsed inside facet.
+
+
+
+
+[來源](https://stackoverflow.com/questions/5293715/how-to-use-greek-symbols-in-ggplot2)

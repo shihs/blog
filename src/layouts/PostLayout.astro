@@ -1,0 +1,45 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Comments from '../components/Comments.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const all = await getCollection('posts');
+const related = all
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+function hrefFor(p: CollectionEntry<'posts'>) {
+  const d = p.data.date;
+  const year = String(d.getUTCFullYear());
+  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+  return `/blog/${year}/${month}/${p.data.slug}.html`;
+}
+---
+<BaseLayout title={`${post.data.title} · M.C. Shih`}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <div class="post-meta">
+      {post.data.date.toISOString().slice(0, 10)}
+      {post.data.categories.map((c) => <span> · {c}</span>)}
+    </div>
+    <Content />
+  </article>
+
+  <Comments />
+
+  <section class="related">
+    <h2>Latest Posts</h2>
+    <ul>
+      {related.map((p) => (
+        <li><a href={hrefFor(p)}>{p.data.title}</a></li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

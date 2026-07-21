@@ -1,0 +1,18 @@
+---
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+const { post } = Astro.props;
+const d = post.data.date;
+const year = String(d.getUTCFullYear());
+const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+const href = `/blog/${year}/${month}/${post.data.slug}.html`;
+---
+<article class="post-card">
+  <h2><a href={href}>{post.data.title}</a></h2>
+  <div class="post-meta">
+    {d.toISOString().slice(0, 10)}
+    {post.data.categories.map((c) => <span> · {c}</span>)}
+  </div>
+</article>
