@@ -1,0 +1,280 @@
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f5f5f5;
+  --primary: #151515;
+  --secondary: #6b6b6b;
+  --accent: #1b7c71;
+  --accent-dark: #145f56;
+  --accent-bg: #e3f5f3;
+  --on-accent: #ffffff;
+  --border: #e2e2e2;
+  --radius: 6px;
+  --font-mono: 'MesloLGS NF', 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-sans: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #212121;
+    --bg-alt: #2b2b2b;
+    --primary: #d0d0d0;
+    --secondary: #9a9a9a;
+    --accent: #7dd6cf;
+    --accent-dark: #9fe4de;
+    --accent-bg: rgba(125, 214, 207, 0.15);
+    --on-accent: #12302b;
+    --border: #3a3a3a;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #212121;
+  --bg-alt: #2b2b2b;
+  --primary: #d0d0d0;
+  --secondary: #9a9a9a;
+  --accent: #7dd6cf;
+  --accent-dark: #9fe4de;
+  --accent-bg: rgba(125, 214, 207, 0.15);
+  --on-accent: #12302b;
+  --border: #3a3a3a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  line-height: 1.3;
+}
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 18rem;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+}
+
+.content {
+  flex: 1;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 48rem) {
+  .layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--primary);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.socials a:hover {
+  background: var(--bg);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  padding: 1.6rem 1.8rem;
+  margin-bottom: 1.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+.post-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.post-card h2 {
+  margin: 0 0 0.5rem;
+}
+
+.post-card h2 a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.post-card .post-meta {
+  margin: 0;
+}
+
+.post-meta {
+  color: var(--secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  border-radius: 4px;
+  padding: 0.15em 0.6em;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  font-family: var(--font-mono);
+}
+
+/* Raw HTML block wrapper used in post content around $$...$$ math lines that
+   contain markdown-significant characters (_, ~) — keeps the same rhythm as
+   the surrounding <p> equations, which get the default UA paragraph margin. */
+.math-block {
+  margin: 1em 0;
+}
+
+pre, code {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+code {
+  background: var(--bg-alt);
+  padding: 0.15em 0.4em;
+  color: var(--accent-dark);
+}
+pre {
+  background: var(--bg-alt);
+  padding: 1rem;
+  overflow-x: auto;
+}
+pre code {
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+/* Vertical rhythm for the rendered article body — the markdown output is a
+   flat run of sibling elements directly under <article>, distinct from the
+   post title (h1) and .post-meta above it. */
+article > :where(p, ul, ol, blockquote, pre, table) {
+  margin: 0 0 1.25em;
+}
+
+article > :where(h2, h3, h4, h5, h6) {
+  margin: 2em 0 0.75em;
+}
+
+article ul,
+article ol {
+  padding-left: 1.4em;
+}
+
+article li + li {
+  margin-top: 0.4em;
+}
+
+article img {
+  margin: 0.5em 0;
+}
+
+article blockquote {
+  margin: 1.5em 0;
+  padding: 0.5em 1.25em;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-alt);
+  color: var(--secondary);
+}
+
+article blockquote > :first-child {
+  margin-top: 0;
+}
+
+article blockquote > :last-child {
+  margin-bottom: 0;
+}
