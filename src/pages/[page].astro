@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const PAGE_SIZE = 8;
+  const all = (await getCollection('posts')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  const pageCount = Math.ceil(all.length / PAGE_SIZE);
+  const paths = [];
+  for (let p = 2; p <= pageCount; p++) {
+    paths.push({
+      params: { page: String(p) },
+      props: {
+        posts: all.slice((p - 1) * PAGE_SIZE, p * PAGE_SIZE),
+        hasPrev: true,
+        hasNext: p < pageCount,
+        page: p,
+      },
+    });
+  }
+  return paths;
+}
+
+interface Props {
+  posts: Awaited<ReturnType<typeof getCollection<'posts'>>>;
+  hasPrev: boolean;
+  hasNext: boolean;
+  page: number;
+}
+const { posts, hasPrev, hasNext, page } = Astro.props;
+---
+<BaseLayout title={`M.C. Shih · BLOG (page ${page})`}>
+  {posts.map((post) => <PostCard post={post} />)}
+  <div class="pagination">
+    {hasPrev && <a href={page === 2 ? '/blog/' : `/blog/${page - 1}`}>← Newer</a>}
+    {hasNext && <a href={`/blog/${page + 1}`}>Older →</a>}
+  </div>
+</BaseLayout>

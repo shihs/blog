@@ -1,0 +1,20 @@
+{
+  "name": "mcshih-blog",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist",
+    "build:site": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.1"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2"
+  }
+}

@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const all = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const byYear = new Map<string, typeof all>();
+for (const post of all) {
+  const year = String(post.data.date.getUTCFullYear());
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+
+function hrefFor(p: (typeof all)[number]) {
+  const d = p.data.date;
+  const year = String(d.getUTCFullYear());
+  const month = String(d.getUTCMonth() + 1).padStart(2, '0');
+  return `/blog/${year}/${month}/${p.data.slug}.html`;
+}
+---
+<BaseLayout title="Archives · M.C. Shih">
+  <h1>Archives</h1>
+  {[...byYear.entries()].map(([year, posts]) => (
+    <section>
+      <h2>{year}</h2>
+      <ul>
+        {posts.map((p) => (
+          <li>
+            <span class="post-meta">{p.data.date.toISOString().slice(5, 10)}</span>
+            <a href={hrefFor(p)}>{p.data.title}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</BaseLayout>

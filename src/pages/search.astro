@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Search · M.C. Shih">
+  <h1>Search</h1>
+  <div id="search"></div>
+  <link href="/blog/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script src="/blog/pagefind/pagefind-ui.js" is:inline></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      new PagefindUI({ element: '#search', showSubResults: true });
+    });
+  </script>
+</BaseLayout>
