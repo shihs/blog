@@ -27,13 +27,13 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700|Noto+Sans+TC:400,500,700&display=swap"
       rel="stylesheet"
     />
-    <!-- Pinned version (5.0.8), content is static — SRI hash verified against
-         the actual file served at this URL. -->
+    <!-- No SRI here: use.fontawesome.com sends no Access-Control-Allow-Origin
+         header, so a crossorigin attribute (required for integrity checks)
+         makes the browser's CORS-mode fetch fail outright, silently dropping
+         the stylesheet and every icon with it. Pinned version (5.0.8) instead. -->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
-      integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S"
-      crossorigin="anonymous"
     />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/rss.xml" />
     <!-- No SRI here: this URL is a server-generated config endpoint (the
